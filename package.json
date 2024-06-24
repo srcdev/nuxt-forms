@@ -1,18 +1,17 @@
 {
-  "name": "nuxt-forms",
+  "name": "srcdev-nuxt-forms",
   "type": "module",
   "version": "0.0.1",
   "main": "./nuxt.config.ts",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "lint": "eslint ."
+    "dev": "nuxi dev .playground",
+    "build": "nuxt build .playground",
+    "generate": "nuxt generate .playground",
+    "preview": "nuxt preview .playground",
+    "lint": "eslint .",
+    "postinstall": "nuxt prepare .playground"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^1.3.6",
     "@nuxt/eslint-config": "^0.3.13",
     "eslint": "^9.5.0",
     "nuxt": "^3.12.2",
