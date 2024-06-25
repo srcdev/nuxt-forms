@@ -7,17 +7,19 @@
     "components"
   ],
   "scripts": {
-    "dev": "nuxi dev .playground",
-    "build": "nuxt build .playground",
-    "generate": "nuxt generate .playground",
-    "preview": "nuxt preview .playground",
+    "dev": "nuxi dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
     "lint": "eslint .",
-    "postinstall": "nuxt prepare .playground"
+    "postinstall": "nuxt prepare",
+    "release": "release-it"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.3.13",
     "eslint": "^9.5.0",
     "nuxt": "^3.12.2",
+    "release-it": "^17.4.0",
     "typescript": "^5.5.2"
   }
 }

@@ -1,4 +1,4 @@
-# Nuxt Layer Starter
+# Nuxt Forms Layer
 
 Create Nuxt extendable layer with this GitHub template.
 
@@ -19,6 +19,13 @@ The `.playground` directory should help you on trying your theme during developm
 Running `pnpm dev` will prepare and boot `.playground` directory, which imports your theme itself.
 
 ## Distributing your theme
+
+### Release it
+CLI Prompt assisted release and versioning
+
+```bash
+npm run release
+```
 
 Your Nuxt layer is shaped exactly the same as any other Nuxt project, except you can publish it on NPM.
 

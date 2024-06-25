@@ -13,3 +13,11 @@
     });
 
 </script>
+
+<style lang="css">
+    .input-text {
+        border: var(--input-border-width-thin) solid var(--input-border);
+        border-radius: var(--input-border-radius);
+        padding: 10px;
+    }
+</style>

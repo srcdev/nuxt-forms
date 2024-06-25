@@ -1,0 +1,25 @@
+:root {
+    --form-bg-color: #f9f9f9; /* Background color for form */
+    --form-border-color: #cccccc; /* Border color for form elements */
+    --form-text-color: #333333; /* Text color for form elements */
+    --form-placeholder-color: #888888; /* Placeholder text color */
+    --form-focus-border-color: #0076c6; /* Border color on focus */
+    --form-button-bg-color: #0076c6; /* Button background color */
+    --form-button-text-color: #ffffff; /* Button text color */
+    --form-error-color: #ce0606; /* Error message color */
+    --form-success-color: #008000; /* Success message color */
+    --form-warning-color: #ffcc00; /* Warning message color */
+    --form-info-color: #0076c6; /* Info message color */
+    --form-required-color: #ce0606; /* Required field color */
+    --form-disabled-color: #cccccc; /* Disabled field color */
+    --form-disabled-bg-color: #f9f9f9; /* Disabled field background color */
+    --form-disabled-border-color: #cccccc; /* Disabled field border color */
+    --form-disabled-text-color: #999999; /* Disabled field text color */
+
+    --input-border: #121212;
+
+    --input-border-radius: 4px;
+
+    --input-border-width-thin: 1px;
+    --input-border-width-thick: 2px;
+}
