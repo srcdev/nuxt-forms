@@ -1,8 +1,11 @@
 {
   "name": "srcdev-nuxt-forms",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "main": "./nuxt.config.ts",
+  "files": [
+    "components"
+  ],
   "scripts": {
     "dev": "nuxi dev .playground",
     "build": "nuxt build .playground",

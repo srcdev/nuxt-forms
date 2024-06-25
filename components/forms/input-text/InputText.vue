@@ -1,16 +1,15 @@
 <template>
     <div>
-        <input type="text" class="input-text" />
+        <input type="text" class="input-text" v-model="formValue" />
     </div>
 </template>
+<script setup lang="ts">
+    console.log("InputText component loaded");
 
-<script lang="ts" setup>
-    console.log('InputText Loaded');
+    const formValue = ref("");
+
+    watchEffect(() => {
+        console.log("Form value changed to: ", formValue.value);
+    });
+
 </script>
-
-<style lang="css" scoped>
-    .input-text {
-        border: 1px solid #ccc;
-        padding: 10px;
-    }
-</style>
