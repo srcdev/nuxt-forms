@@ -1,7 +1,7 @@
 {
   "name": "srcdev-nuxt-forms",
   "type": "module",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "./nuxt.config.ts",
   "files": [
     "components"
