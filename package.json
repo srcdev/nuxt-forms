@@ -5,7 +5,8 @@
   "main": "./nuxt.config.ts",
   "files": [
     "assets",
-    "components"
+    "components",
+    "nuxt.config.ts"
   ],
   "scripts": {
     "dev": "nuxi dev",
