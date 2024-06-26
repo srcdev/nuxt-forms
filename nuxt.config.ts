@@ -4,7 +4,11 @@ const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  css: [
-    resolve('./assets/styles/main.css')
+  css: [resolve('./assets/styles/main.css')],
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
   ],
 })
