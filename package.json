@@ -6,6 +6,8 @@
   "files": [
     "assets",
     "components",
+    "layouts",
+    "pages",
     "nuxt.config.ts"
   ],
   "scripts": {
