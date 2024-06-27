@@ -5,19 +5,19 @@
         <div>
           <h1>Sample form page</h1>
 
-          <FormWrapper width="medium">
+          <NuxtFormsScaffoldingFormWrapper width="medium">
             <template #default>
               <form>
                 <p>Form content</p>
-                <FormField width="wide" :has-gutter="true">
+                <NuxtFormsScaffoldingFormField width="wide" :has-gutter="true">
                   <template #default>
                     <p>Input text</p>
-                    <InputText />
+                    <NuxtFormsInputText />
                   </template>
-                </FormField>
+                </NuxtFormsScaffoldingFormField>
               </form>
             </template>
-          </FormWrapper>
+          </NuxtFormsScaffoldingFormWrapper>
         </div>
       </template>
     </NuxtLayout>
