@@ -3,13 +3,6 @@
   "type": "module",
   "version": "0.0.12",
   "main": "./nuxt.config.ts",
-  "files": [
-    "assets",
-    "components",
-    "layouts",
-    "pages",
-    "nuxt.config.ts"
-  ],
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxt build",
