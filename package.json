@@ -4,6 +4,7 @@
   "version": "0.0.15",
   "main": "./nuxt.config.ts",
   "scripts": {
+    "reinstall": "rm -rf node_modules && npm install",
     "dev": "nuxi dev",
     "build": "nuxt build",
     "generate": "nuxt generate",

@@ -13,6 +13,7 @@
                   <template #default>
                     <p>Input text</p>
                     <FormsInputTextCore />
+                    <InputTextCore />
                   </template>
                 </FormsUiField>
               </form>
