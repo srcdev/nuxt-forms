@@ -9,12 +9,12 @@
             <template #default>
               <form>
                 <p>Form content</p>
-                <FormField width="wide" :has-gutter="true">
+                <InputField width="wide" :has-gutter="true">
                   <template #default>
                     <p>Input text</p>
                     <InputText />
                   </template>
-                </FormField>
+                </InputField>
               </form>
             </template>
           </FormWrapper>
