@@ -9,13 +9,12 @@
             <template #default>
               <form>
                 <p>Form content</p>
-                <FormsUiField width="wide" :has-gutter="true">
+                <FormsUiFormField width="wide" :has-gutter="true">
                   <template #default>
                     <p>Input text</p>
                     <FormsInputTextCore />
-                    <InputTextCore />
                   </template>
-                </FormsUiField>
+                </FormsUiFormField>
               </form>
             </template>
           </FormsUiFormWrapper>
