@@ -5,19 +5,19 @@
         <div>
           <h1>Sample form page</h1>
 
-          <FormWrapper width="medium">
+          <FormsUiFormWrapper width="medium">
             <template #default>
               <form>
                 <p>Form content</p>
-                <InputField width="wide" :has-gutter="true">
+                <FormsUiField width="wide" :has-gutter="true">
                   <template #default>
                     <p>Input text</p>
-                    <InputText />
+                    <FormsInputTextCore />
                   </template>
-                </InputField>
+                </FormsUiField>
               </form>
             </template>
-          </FormWrapper>
+          </FormsUiFormWrapper>
         </div>
       </template>
     </NuxtLayout>
