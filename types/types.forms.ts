@@ -17,7 +17,14 @@ export interface IOptionsValueArr {
 }
 
 export interface IFieldsInitialState {
-  [key: string]: null | string | boolean | number | URL | object | IOptionsValueArr[];
+  [key: string]:
+    | null
+    | string
+    | boolean
+    | number
+    | URL
+    | object
+    | IOptionsValueArr[];
 }
 
 export interface IValidityState {
@@ -57,6 +64,12 @@ export interface IValidityStateArrShort {
 export interface ICustomErrorMessage {
   useCustomError: boolean;
   message: string;
+}
+
+export interface InpuTextC12 {
+  label: string;
+  placeholder: string;
+  errorMessage: string;
 }
 
 export interface ICustomErrorMessagesArr {
