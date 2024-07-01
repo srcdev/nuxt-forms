@@ -1,7 +1,7 @@
 {
   "name": "srcdev-nuxt-forms",
   "type": "module",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "main": "./nuxt.config.ts",
   "scripts": {
     "reinstall": "rm -rf node_modules && npm install",
