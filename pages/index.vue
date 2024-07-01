@@ -12,17 +12,18 @@
                 <FormField width="wide" :has-gutter="true">
                   <template #default>
                     <p>Input text</p>
-                    <InputTextCore
+                    <InputTextMaterial
                       id="username"
+                      name="username"
                       type="text"
                       validation="username"
                       :required="true"
-                      v-model="formData"
                       :c12="{
                         label: 'Choose Username',
                         placeholder: 'eg. YourUserName',
                         errorMessage: 'Please enter a valid username',
                       }"
+                      v-model="formData"
                     />
                   </template>
                 </FormField>

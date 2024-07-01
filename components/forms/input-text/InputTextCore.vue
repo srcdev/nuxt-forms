@@ -85,9 +85,12 @@ const fieldHasError = () => {
   return false;
 };
 
-// watchEffect(() => {
-//   console.log('Form value changed to: ', modelValue.value.data[name.value]);
-// });
+watchEffect(() => {
+  console.log(
+    'InputTextCore >> Form value changed to: ',
+    modelValue.value.data[name.value]
+  );
+});
 
 const isValid = () => {
   setTimeout(() => {
@@ -115,9 +118,7 @@ onMounted(() => {
 </script>
 
 <style lang="css">
-.input-text {
+/* .input-text {
   transition: all linear 200ms;
-  padding-left: 4px;
-  width: 100%;
-}
+} */
 </style>
