@@ -1,16 +1,21 @@
 <template>
   <div class="input-text-material">
-    <label :for="id">{{ c12.label }}</label>
-    <InputTextCore
-      :id
-      :name
-      :type
-      :validation
-      :required
-      v-model="modelValue"
-      v-model:isFocused="isFocused"
-      :c12
-    />
+    <label class="label" :class="[{ active: isFocused }]" :for="id"
+      >{{ c12.label }} - isFocused({{ isFocused }})</label
+    >
+    <div class="input-placeholder">
+      <InputTextCore
+        :id
+        :name
+        :type
+        :validation
+        :required
+        v-model="modelValue"
+        v-model:isFocused="isFocused"
+        :c12
+        :style-class-passthrough="styleClassPassthrough"
+      />
+    </div>
   </div>
 </template>
 
@@ -59,30 +64,80 @@ const name = computed(() => {
   return props.name !== null ? props.name : props.id;
 });
 
+const styleClassPassthrough = computed(() => {
+  return isFocused.value ? 'is-active' : '';
+});
+
 const modelValue = defineModel() as Ref<IFormData>;
 const isFocused = ref(false);
 </script>
 
 <style lang="css">
 .input-text-material {
-  display: flex;
-  flex-direction: column;
+  --_gutter: 12px;
 
-  border: 1px solid black;
+  display: grid;
+  grid-template-columns: 1fr;
+  /* grid-template-rows: var(--_gutter) 1fr var(--_gutter); */
+  grid-template-rows: var(--_gutter) 1fr var(--_gutter);
+  gap: calc(var(--_gutter) / 2);
+
+  border: 1px solid red;
   border-radius: 2px;
 
   margin-bottom: 20px;
+  /* padding: calc(2 * var(--_gutter)); */
 
-  .input-text {
-    border: 1px solid red;
-    margin: 5px;
+  .label {
+    grid-row: 2;
+    grid-column: 1;
 
-    /* &::placeholder,
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 700;
+    padding: var(--_gutter);
+    /* transform: translateY(12px); */
+
+    z-index: 2;
+
+    transition: all linear 0.2s;
+
+    &.active {
+      grid-row: 1;
+      grid-column: 1;
+      /* padding: 0; */
+      transform: translateY(-10px);
+    }
+  }
+
+  .input-placeholder {
+    grid-row: 2;
+    grid-column: 1;
+    align-content: center;
+    padding-inline: var(--_gutter);
+    transform: translateY(12px);
+
+    .input-text {
+      font-family: var(--font-family);
+      border: 0px solid green;
+      padding: var(--_gutter);
+      font-size: 16px;
+
+      /* &::placeholder,
     &:-ms-input-placeholder,
     &::-moz-placeholder, */
-    &::-webkit-input-placeholder {
-      color: rgb(128, 0, 117);
-      font-size: 30px;
+      &::-webkit-input-placeholder {
+        font-family: var(--font-family);
+        color: var(--gray-5);
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 700;
+        opacity: 0;
+
+        &.is-active {
+          opacity: 1;
+        }
+      }
     }
   }
 }

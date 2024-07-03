@@ -1,1 +1,2 @@
-@import "./forms/index.css";
+@import './variables';
+@import './forms';

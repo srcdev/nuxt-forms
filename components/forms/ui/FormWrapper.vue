@@ -12,12 +12,12 @@ defineProps({
     default: 'narrow',
     validator: (val: string) => ['narrow', 'medium', 'wide'].includes(val),
   },
-})
+});
 </script>
 
 <style lang="css">
 .form-wrapper {
-  outline: 1px solid #000;
+  outline: 1px solid var(--gray-12);
 
   &.narrow {
     max-width: 400px;

@@ -7,7 +7,12 @@
     :pattern="componentValidation.pattern"
     :maxlength="componentValidation.maxlength"
     :required
-    :class="['input-text', 'text-normal', { error: fieldHasError() }]"
+    :class="[
+      'input-text',
+      'text-normal',
+      styleClassPassthrough,
+      { error: fieldHasError() },
+    ]"
     v-model="modelValue.data[name]"
     ref="inputField"
     @focusin="isFocused = true"
@@ -53,6 +58,10 @@ const props = defineProps({
   c12: {
     type: Object as PropType<InpuTextC12>,
     required: true,
+  },
+  styleClassPassthrough: {
+    type: String,
+    default: '',
   },
 });
 
