@@ -26,7 +26,7 @@ defineProps({
 
   margin-inline: auto;
   width: min(100% - calc(2 * var(--_gutter-width)), var(--_max-width));
-  outline: 1px solid var(--gray-5);
+  outline: 0px solid var(--gray-5);
 
   &.has-gutter {
     --_gutter-width: 16px;

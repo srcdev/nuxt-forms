@@ -1,0 +1,3 @@
+:where(html) {
+  --primary-border-default: var(--blue-8);
+}

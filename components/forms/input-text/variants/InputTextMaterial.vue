@@ -1,9 +1,12 @@
 <template>
   <div class="input-text-material">
-    <label class="label" :class="[{ active: isFocused }]" :for="id"
-      >{{ c12.label }} - isFocused({{ isFocused }})</label
+    <label
+      class="label"
+      :class="[{ active: isFocused }, { dirty: isDirty }]"
+      :for="id"
+      >{{ c12.label }}</label
     >
-    <div class="input-placeholder">
+    <div class="input-text-container">
       <InputTextCore
         :id
         :name
@@ -70,58 +73,70 @@ const styleClassPassthrough = computed(() => {
 
 const modelValue = defineModel() as Ref<IFormData>;
 const isFocused = ref(false);
+const isDirty = computed(() => {
+  return modelValue.value.data[name.value] !== '';
+});
 </script>
 
 <style lang="css">
 .input-text-material {
-  --_gutter: 12px;
-
-  display: grid;
-  grid-template-columns: 1fr;
-  /* grid-template-rows: var(--_gutter) 1fr var(--_gutter); */
-  grid-template-rows: var(--_gutter) 1fr var(--_gutter);
-  gap: calc(var(--_gutter) / 2);
-
-  border: 1px solid red;
-  border-radius: 2px;
-
-  margin-bottom: 20px;
-  /* padding: calc(2 * var(--_gutter)); */
-
-  .label {
-    grid-row: 2;
-    grid-column: 1;
-
-    font-family: var(--font-family);
-    font-size: 16px;
-    font-weight: 700;
-    padding: var(--_gutter);
-    /* transform: translateY(12px); */
-
-    z-index: 2;
-
-    transition: all linear 0.2s;
-
-    &.active {
-      grid-row: 1;
-      grid-column: 1;
-      /* padding: 0; */
-      transform: translateY(-10px);
+  input {
+    background-color: transparent;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+      border: none;
     }
   }
 
-  .input-placeholder {
-    grid-row: 2;
+  --_gutter: 12px;
+  --_border-default: var(--primary-border-default);
+  --_border-width: var(--input-border-width-default);
+
+  display: grid;
+  border-radius: 2px;
+  outline: var(--_border-width) solid var(--_border-default);
+
+  margin-bottom: 20px;
+  overflow: hidden;
+
+  &:focus-within {
+    outline: calc(var(--_border-width) * 2) solid var(--_border-default);
+    background-color: hsl(from var(--_border-default) h s 95%);
+  }
+
+  .label {
+    grid-row: 1;
     grid-column: 1;
-    align-content: center;
-    padding-inline: var(--_gutter);
-    transform: translateY(12px);
+
+    font-family: var(--font-family);
+    font-size: 20px;
+    font-weight: 700;
+    padding: var(--_gutter);
+    transform: translateY(10px);
+    transition: all linear 0.2s;
+    background-color: transparent;
+
+    &.active,
+    &.dirty {
+      font-size: 14px;
+      transform: translateY(0);
+    }
+  }
+
+  .input-text-container {
+    display: grid;
+    grid-row: 1;
+    grid-column: 1;
+    margin-top: 2rem;
+    background-color: transparent;
 
     .input-text {
       font-family: var(--font-family);
       border: 0px solid green;
-      padding: var(--_gutter);
+      padding: calc(var(--_gutter) / 2) var(--_gutter);
       font-size: 16px;
+      margin: 0;
 
       /* &::placeholder,
     &:-ms-input-placeholder,
