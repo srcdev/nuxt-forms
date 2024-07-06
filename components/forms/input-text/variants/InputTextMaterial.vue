@@ -4,7 +4,7 @@
       class="label"
       :class="[{ active: isFocused }, { dirty: isDirty }]"
       :for="id"
-      >{{ c12.label }}</label
+      >{{ labelText }}</label
     >
     <div class="input-text-container">
       <InputTextCore
@@ -72,18 +72,16 @@ const name = computed(() => {
   return props.name !== null ? props.name : props.id;
 });
 
+const labelText = computed(() => {
+  return fieldHasError.value ? errorMessage.value : props.c12.label;
+});
+
 const { styleClassPassthroughRef, updateClasses } =
   useUpdateStyleClassPassthrough(props.styleClassPassthrough);
 
 const modelValue = defineModel() as Ref<IFormData>;
 const isFocused = ref(false);
 const isDirty = ref(false);
-
-// const isDirty = computed(() => {
-//   const temp = modelValue.value.data[name.value] !== '';
-//   updateClasses(temp, 'dirty');
-//   return temp;
-// });
 
 const { errorMessage, setDefaultError, fieldHasError } = useErrorMessage(
   name.value,
@@ -106,7 +104,9 @@ setDefaultError(props.c12.errorMessage);
   }
 
   label {
+    margin: initial;
     line-height: var(--line-height);
+    padding: initial;
   }
 
   --_gutter: 12px;
