@@ -1,5 +1,5 @@
 <template>
-  <div class="input-text-material">
+  <div class="input-text-material" :class="[{ error: fieldHasError }]">
     <label
       class="label"
       :class="[{ active: isFocused }, { dirty: isDirty }]"
@@ -15,8 +15,9 @@
         :required
         v-model="modelValue"
         v-model:isFocused="isFocused"
+        v-model:isDirty="isDirty"
         :c12
-        :style-class-passthrough="styleClassPassthrough"
+        :style-class-passthrough="styleClassPassthroughRef"
       />
     </div>
   </div>
@@ -61,27 +62,42 @@ const props = defineProps({
     type: Object as PropType<InpuTextC12>,
     required: true,
   },
+  styleClassPassthrough: {
+    type: String,
+    default: '',
+  },
 });
 
 const name = computed(() => {
   return props.name !== null ? props.name : props.id;
 });
 
-const styleClassPassthrough = computed(() => {
-  return isFocused.value ? 'is-active' : '';
-});
+const { styleClassPassthroughRef, updateClasses } =
+  useUpdateStyleClassPassthrough(props.styleClassPassthrough);
 
 const modelValue = defineModel() as Ref<IFormData>;
 const isFocused = ref(false);
-const isDirty = computed(() => {
-  return modelValue.value.data[name.value] !== '';
-});
+const isDirty = ref(false);
+
+// const isDirty = computed(() => {
+//   const temp = modelValue.value.data[name.value] !== '';
+//   updateClasses(temp, 'dirty');
+//   return temp;
+// });
+
+const { errorMessage, setDefaultError, fieldHasError } = useErrorMessage(
+  name.value,
+  modelValue
+);
+setDefaultError(props.c12.errorMessage);
 </script>
 
 <style lang="css">
 .input-text-material {
   input {
     background-color: transparent;
+    line-height: var(--line-height);
+
     &:focus {
       outline: none;
       box-shadow: none;
@@ -89,20 +105,34 @@ const isDirty = computed(() => {
     }
   }
 
+  label {
+    line-height: var(--line-height);
+  }
+
   --_gutter: 12px;
-  --_border-default: var(--primary-border-default);
+  --_form-theme: var(--theme-primary);
   --_border-width: var(--input-border-width-default);
 
   display: grid;
   border-radius: 2px;
-  outline: var(--_border-width) solid var(--_border-default);
+  outline: var(--_border-width) solid var(--_form-theme);
 
   margin-bottom: 20px;
   overflow: hidden;
+  /* transition: all linear 0.2s; */
 
   &:focus-within {
-    outline: calc(var(--_border-width) * 2) solid var(--_border-default);
-    background-color: hsl(from var(--_border-default) h s 95%);
+    outline: calc(var(--_border-width) * 2) solid var(--_form-theme);
+    background-color: hsl(from var(--_form-theme) h s 95%);
+  }
+
+  &.error {
+    outline: calc(var(--_border-width) * 2) solid var(--theme-error);
+    background-color: hsl(from var(--theme-error) h s 95%);
+
+    /* .label {
+      color: var(--theme-error);
+    } */
   }
 
   .label {
@@ -113,7 +143,7 @@ const isDirty = computed(() => {
     font-size: 20px;
     font-weight: 700;
     padding: var(--_gutter);
-    transform: translateY(10px);
+    transform: translateY(12px);
     transition: all linear 0.2s;
     background-color: transparent;
 
@@ -135,23 +165,26 @@ const isDirty = computed(() => {
       font-family: var(--font-family);
       border: 0px solid green;
       padding: calc(var(--_gutter) / 2) var(--_gutter);
-      font-size: 16px;
+      font-size: var(--font-size);
       margin: 0;
+      opacity: 0;
+      transition: opacity linear 0.2s;
 
-      /* &::placeholder,
-    &:-ms-input-placeholder,
-    &::-moz-placeholder, */
+      &.active,
+      &.dirty {
+        opacity: 1;
+      }
+      /*
+      &::placeholder,
+      &:-ms-input-placeholder,
+      &::-moz-placeholder, */
       &::-webkit-input-placeholder {
         font-family: var(--font-family);
-        color: var(--gray-5);
-        font-size: 14px;
+        /* color: var(--gray-5); */
+        color: hsl(from var(--_form-theme) h s 50%);
+        font-size: var(--font-size);
         font-style: italic;
-        font-weight: 700;
-        opacity: 0;
-
-        &.is-active {
-          opacity: 1;
-        }
+        font-weight: 500;
       }
     }
   }

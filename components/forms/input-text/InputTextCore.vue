@@ -11,6 +11,8 @@
       'input-text',
       'text-normal',
       styleClassPassthrough,
+      { active: isFocused },
+      { dirty: isDirty },
       { error: fieldHasError() },
     ]"
     v-model="modelValue.data[name]"
@@ -67,10 +69,12 @@ const props = defineProps({
 
 const modelValue = defineModel() as Ref<IFormData>;
 const isFocused = defineModel('isFocused') as Ref<boolean>;
+const isDirty = defineModel('isDirty') as Ref<boolean>;
 
 const name = computed(() => {
   return props.name !== null ? props.name : props.id;
 });
+
 const validatorLocale = toRef(useRuntimeConfig().public.validatorLocale);
 
 const componentValidation =
@@ -99,6 +103,14 @@ watchEffect(() => {
     'InputTextCore >> Form value changed to: ',
     modelValue.value.data[name.value]
   );
+
+  isDirty.value = modelValue.value.data[name.value] !== '';
+
+  modelValue.value!.validityState[name.value] =
+    inputField.value?.validity.valid ?? false;
+  if (hasCustomError()) {
+    removeCustomError(inputField.value?.validity.valid);
+  }
 });
 
 const isValid = () => {
@@ -109,17 +121,17 @@ const isValid = () => {
 };
 
 // Keep an eye on this for performance issue
-watch(
-  () => modelValue.value.data[name.value],
-  () => {
-    modelValue.value!.validityState[name.value] =
-      inputField.value?.validity.valid ?? false;
-    if (hasCustomError()) {
-      removeCustomError(inputField.value?.validity.valid);
-    }
-  },
-  { deep: true }
-);
+// watch(
+//   () => modelValue.value.data[name.value],
+//   () => {
+//     modelValue.value!.validityState[name.value] =
+//       inputField.value?.validity.valid ?? false;
+//     if (hasCustomError()) {
+//       removeCustomError(inputField.value?.validity.valid);
+//     }
+//   },
+//   { deep: true }
+// );
 
 onMounted(() => {
   isValid();
