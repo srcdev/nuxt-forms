@@ -24,7 +24,7 @@
                         errorMessage: 'Please enter a valid username',
                       }"
                       v-model="formData"
-                      theme="secondary"
+                      theme="primary"
                     />
                   </template>
                 </FormField>
@@ -32,10 +32,10 @@
                 <FormField width="wide" :has-gutter="true">
                   <template #default>
                     <InputButtonSubmit
-                      theme="secondary"
                       @click.stop.prevent="isPending"
                       :is-pending="false"
                       button-text="Submit"
+                      theme="primary"
                     />
                   </template>
                 </FormField>
