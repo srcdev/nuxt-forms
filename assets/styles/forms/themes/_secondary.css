@@ -1,0 +1,3 @@
+:where(html) {
+  --theme-secondary: var(--gray-8);
+}

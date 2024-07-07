@@ -24,14 +24,21 @@
                         errorMessage: 'Please enter a valid username',
                       }"
                       v-model="formData"
+                      theme="secondary"
                     />
                   </template>
                 </FormField>
-                <input
-                  type="submit"
-                  @click.prevent="isPending"
-                  value="Submit"
-                />
+
+                <FormField width="wide" :has-gutter="true">
+                  <template #default>
+                    <InputButtonSubmit
+                      theme="secondary"
+                      @click.stop.prevent="isPending"
+                      :is-pending="false"
+                      button-text="Submit"
+                    />
+                  </template>
+                </FormField>
               </form>
             </template>
           </FormWrapper>

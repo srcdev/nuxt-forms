@@ -1,5 +1,8 @@
 <template>
-  <div class="input-text-material" :class="[{ error: fieldHasError }]">
+  <div
+    class="input-text-material"
+    :class="[`theme-${theme}`, { error: fieldHasError }]"
+  >
     <label
       class="label"
       :class="[{ active: isFocused }, { dirty: isDirty }]"
@@ -17,7 +20,7 @@
         v-model:isFocused="isFocused"
         v-model:isDirty="isDirty"
         :c12
-        :style-class-passthrough="styleClassPassthroughRef"
+        :style-class-passthrough="styleClassPassthrough"
       />
     </div>
   </div>
@@ -25,7 +28,6 @@
 
 <script setup lang="ts">
 import type { InpuTextC12, IFormData } from '@/types/types.forms';
-import { validationConfig } from '@/components/forms/c12/validation-patterns';
 
 const props = defineProps({
   type: {
@@ -66,6 +68,25 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  theme: {
+    type: String as PropType<string>,
+    default: 'primary',
+    validator(value: string) {
+      return [
+        'primary',
+        'secondary',
+        'tertiary',
+        'text',
+        'link',
+        'icon-only',
+        'ghost',
+        'cancel',
+        'confirm',
+        'warning',
+        'navigate-btn',
+      ].includes(value);
+    },
+  },
 });
 
 const name = computed(() => {
@@ -75,9 +96,6 @@ const name = computed(() => {
 const labelText = computed(() => {
   return fieldHasError.value ? errorMessage.value : props.c12.label;
 });
-
-const { styleClassPassthroughRef, updateClasses } =
-  useUpdateStyleClassPassthrough(props.styleClassPassthrough);
 
 const modelValue = defineModel() as Ref<IFormData>;
 const isFocused = ref(false);
@@ -120,6 +138,10 @@ setDefaultError(props.c12.errorMessage);
   margin-bottom: 20px;
   overflow: hidden;
   /* transition: all linear 0.2s; */
+
+  &.theme-secondary {
+    --_form-theme: var(--theme-secondary);
+  }
 
   &:focus-within {
     outline: calc(var(--_border-width) * 2) solid var(--_form-theme);

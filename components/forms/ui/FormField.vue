@@ -1,6 +1,5 @@
 <template>
   <div class="form-field" :class="[width, { 'has-gutter': hasGutter }]">
-    <h1>FormField.vue</h1>
     <slot name="default"></slot>
   </div>
 </template>
