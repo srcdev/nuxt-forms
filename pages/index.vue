@@ -98,6 +98,22 @@
                     />
                   </template>
                 </FormField>
+
+                <FormField width="wide" :has-gutter="true">
+                  <template #default>
+                    <InputButtonCore
+                      @click.stop.prevent="isPending"
+                      :is-pending="false"
+                      button-text="Submit"
+                      theme="tertiary"
+                      size="small"
+                    >
+                      <template #iconOnly>
+                        <Icon name="radix-icons:eye-none" class="icon" />
+                      </template>
+                    </InputButtonCore>
+                  </template>
+                </FormField>
               </form>
             </template>
           </FormWrapper>

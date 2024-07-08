@@ -161,11 +161,13 @@ setDefaultError(props.c12.errorMessage);
     transform: translateY(12px);
     transition: all linear 0.2s;
     background-color: transparent;
+    z-index: 2;
 
     &.active,
     &.dirty {
       font-size: 14px;
       transform: translateY(0);
+      z-index: auto;
     }
   }
 

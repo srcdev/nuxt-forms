@@ -17,7 +17,7 @@
       <InputTextCore
         :id
         :name
-        type="password"
+        :type
         :validation
         :required
         v-model="modelValue"
@@ -27,7 +27,22 @@
         :style-class-passthrough="styleClassPassthrough"
       >
         <template #right>
-          <Icon name="radix-icons:eye-none" class="icon" />
+          <InputButtonCore
+            @click.stop.prevent="toggleDisplayPassword"
+            :is-pending="false"
+            button-text="Submit"
+            theme="ghost"
+            size="tiny"
+          >
+            <template #iconOnly>
+              <Icon
+                v-if="displayPassword"
+                name="radix-icons:eye-none"
+                class="icon"
+              />
+              <Icon v-else name="radix-icons:eye-open" class="icon" />
+            </template>
+          </InputButtonCore>
         </template>
       </InputTextCore>
     </template>
@@ -38,15 +53,6 @@
 import type { InpuTextC12, IFormData } from '@/types/types.forms';
 
 const props = defineProps({
-  type: {
-    // type: String as PropType<"text" | "password" | "tel" | "number" | "email" | "url">, // This breaks props setup in unit tests
-    type: String,
-    validator(value: string) {
-      return ['text', 'password', 'tel', 'number', 'email', 'url'].includes(
-        value
-      );
-    },
-  },
   id: {
     // type: String as PropType<string>,
     type: String,
@@ -104,4 +110,15 @@ const name = computed(() => {
 const modelValue = defineModel() as Ref<IFormData>;
 const isFocused = ref(false);
 const isDirty = ref(false);
+
+const displayPassword = ref(false);
+
+const type = computed(() => {
+  // return displayPassword.value && !modelValue.value.isPending ? "text" : "password";
+  return displayPassword.value ? 'text' : 'password';
+});
+
+const toggleDisplayPassword = () => {
+  displayPassword.value = !displayPassword.value;
+};
 </script>

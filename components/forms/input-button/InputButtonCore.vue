@@ -12,19 +12,22 @@
     ]"
   >
     <span v-if="useEffect && effect == 'fancy'" class="fancy"></span>
-    <template v-if="hasLeftContent">
-      <span class="btn-icon" :class="[size, { left: theme !== 'icon-only' }]">
+    <template v-if="hasLeftContent && !isIconOnly">
+      <span class="btn-icon left" :class="[size]">
         <slot name="left"></slot>
       </span>
     </template>
-    <span
-      class="btn-text"
-      :class="[size, weight, { 'sr-only': buttonTextVisuallyHidden }]"
-      >{{ buttonText }}</span
-    >
-    <template v-if="hasRightContent">
-      <span class="btn-icon" :class="[size, { right: theme !== 'icon-only' }]">
+    <span class="btn-text" :class="[size, weight, { 'sr-only': isIconOnly }]">{{
+      buttonText
+    }}</span>
+    <template v-if="hasRightContent && !isIconOnly">
+      <span class="btn-icon right">
         <slot name="right"></slot>
+      </span>
+    </template>
+    <template v-if="isIconOnly">
+      <span class="btn-icon icon-only" :class="[size]">
+        <slot name="iconOnly"></slot>
       </span>
     </template>
   </button>
@@ -61,10 +64,6 @@ const props = defineProps({
   buttonText: {
     type: String,
     required: true,
-  },
-  buttonTextVisuallyHidden: {
-    type: Boolean,
-    default: false,
   },
   dataTestId: {
     type: String,
@@ -123,6 +122,7 @@ const effectClass = computed(() => {
 const slots = useSlots();
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
+const isIconOnly = computed(() => slots.iconOnly !== undefined);
 </script>
 
 <style lang="css">
@@ -142,6 +142,17 @@ const hasRightContent = computed(() => slots.right !== undefined);
 
   padding-inline: var(--_padding-inline);
   padding-block: var(--_padding-block);
+
+  &:hover,
+  &:focus-visible {
+    cursor: pointer;
+  }
+
+  &.tiny {
+    --_padding-block: 2px;
+    --_padding-inline: 2px;
+    gap: var(--theme-form-button-icon-gap-small);
+  }
 
   &.small {
     gap: var(--theme-form-button-icon-gap-small);
@@ -171,6 +182,16 @@ const hasRightContent = computed(() => slots.right !== undefined);
     &.large {
       font-size: var(--theme-form-button-font-size-large);
     }
+
+    &.sr-only {
+      position: absolute;
+      clip: rect(1px, 1px, 1px, 1px);
+      clip-path: inset(50%);
+      height: 1px;
+      width: 1px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
   }
 
   .btn-icon {
@@ -180,6 +201,12 @@ const hasRightContent = computed(() => slots.right !== undefined);
       display: inline-block;
     }
 
+    &.tiny {
+      .icon {
+        height: var(--theme-form-button-icon-size-small);
+        width: var(--theme-form-button-icon-size-small);
+      }
+    }
     &.small {
       .icon {
         height: var(--theme-form-button-icon-size-small);
@@ -249,6 +276,17 @@ const hasRightContent = computed(() => slots.right !== undefined);
     --_theme-form-bg-hover: var(--theme-form-tertiary-bg-hover);
     --_theme-form-color: var(--theme-form-tertiary-color);
     --_theme-form-color-hover: var(--theme-form-tertiary-color-hover);
+  }
+
+  &.theme-ghost {
+    --_theme-form-border: var(--theme-form-ghost-border);
+    --_theme-form-border-hover: var(--theme-form-ghost-border-hover);
+    --_theme-form-outline: var(--theme-form-ghost-outline);
+    --_theme-form-outline-hover: var(--theme-form-ghost-outline-hover);
+    --_theme-form-bg: var(--theme-form-ghost-bg);
+    --_theme-form-bg-hover: var(--theme-form-ghost-bg-hover);
+    --_theme-form-color: var(--theme-form-ghost-color);
+    --_theme-form-color-hover: var(--theme-form-ghost-color-hover);
   }
 
   /*
