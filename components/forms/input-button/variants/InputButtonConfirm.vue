@@ -86,35 +86,3 @@ const props = defineProps({
   },
 });
 </script>
-
-<style scoped lang="css">
-.btn {
-  &.btn-submit-OLD {
-    --_border-width: var(--input-border-width-default);
-
-    --_theme-form-border: var(--theme-form-primary-border);
-    --_theme-form-outline: transparent;
-    --_theme-form-bg: var(--theme-form-primary-bg);
-    --_theme-form-color: var(--theme-form-primary-color);
-
-    grid-template-columns: auto;
-
-    background-color: var(--_theme-form-bg);
-    border: var(--_border-width) solid var(--_theme-form-border);
-    color: var(--_theme-form-color);
-    outline: 1px solid var(--_theme-form-outline);
-
-    &:hover,
-    &:focus-visible {
-      --_theme-form-color: var(--theme-form-primary-color-hover);
-      --_theme-form-bg: var(--theme-form-primary-bg-hover);
-      --_theme-form-border: transparent;
-      --_theme-form-outline: var(--theme-form-primary-border);
-    }
-
-    &.theme-secondary {
-      --_btn-theme: var(--theme-secondary);
-    }
-  }
-}
-</style>

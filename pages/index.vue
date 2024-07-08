@@ -114,7 +114,7 @@ useHead({
  * Setup forms
  */
 const fieldsInitialState = ref<IFieldsInitialState>({
-  username: 'PreFilledUsername',
+  username: '',
 });
 
 // Setup formData
