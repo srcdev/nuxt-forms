@@ -23,7 +23,6 @@ import type { InpuTextC12, IFormData } from '@/types/types.forms';
 
 const props = defineProps({
   type: {
-    // type: String as PropType<"text" | "password" | "tel" | "number" | "email" | "url">, // This breaks props setup in unit tests
     type: String,
     validator(value: string) {
       return ['text', 'password', 'tel', 'number', 'email', 'url'].includes(
@@ -32,7 +31,6 @@ const props = defineProps({
     },
   },
   id: {
-    // type: String as PropType<string>,
     type: String,
     required: true,
   },
@@ -130,7 +128,6 @@ setDefaultError(props.c12.errorMessage);
 
   margin-bottom: 20px;
   overflow: hidden;
-  /* transition: all linear 0.2s; */
 
   &.theme-secondary {
     --_form-theme: var(--theme-form-secondary);
@@ -144,10 +141,6 @@ setDefaultError(props.c12.errorMessage);
   &.error {
     outline: calc(var(--_border-width) * 2) solid var(--theme-error);
     background-color: hsl(from var(--theme-error) h s 95%);
-
-    /* .label {
-      color: var(--theme-error);
-    } */
   }
 
   .label {
