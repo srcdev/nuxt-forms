@@ -165,8 +165,8 @@ setDefaultError(props.c12.errorMessage);
 
     &.active,
     &.dirty {
-      font-size: 14px;
-      transform: translateY(0);
+      font-size: 16px;
+      transform: translateY(-2px);
       z-index: auto;
     }
   }

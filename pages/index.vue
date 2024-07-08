@@ -8,17 +8,33 @@
           <FormWrapper width="medium">
             <template #default>
               <form @submit.prevent="isPending">
-                <p>Form content</p>
                 <FormField width="wide" :has-gutter="true">
                   <template #default>
-                    <p>Input text</p>
+                    <InputEmailMaterial
+                      id="emailAddress"
+                      name="emailAddress"
+                      validation="emailaddress"
+                      :required="true"
+                      :c12="{
+                        label: 'Your Email Address',
+                        placeholder: 'eg. joe@example.com',
+                        errorMessage: 'Please enter a valid email address',
+                      }"
+                      v-model="formData"
+                      theme="secondary"
+                    />
+                  </template>
+                </FormField>
+
+                <FormField width="wide" :has-gutter="true">
+                  <template #default>
                     <InputTextMaterial
                       id="username"
                       name="username"
                       validation="username"
                       :required="true"
                       :c12="{
-                        label: 'Choose Username',
+                        label: 'Your Username',
                         placeholder: 'eg. YourUserName',
                         errorMessage: 'Please enter a valid username',
                       }"
@@ -30,7 +46,6 @@
 
                 <FormField width="wide" :has-gutter="true">
                   <template #default>
-                    <p>Input text</p>
                     <InputPasswordMaterial
                       id="password"
                       name="password"
@@ -148,6 +163,7 @@ useHead({
  * Setup forms
  */
 const fieldsInitialState = ref<IFieldsInitialState>({
+  emailAddress: '',
   username: '',
   password: '',
 });

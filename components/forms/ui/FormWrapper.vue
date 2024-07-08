@@ -1,6 +1,5 @@
 <template>
   <div class="form-wrapper" :class="width">
-    <h1>FormWrapper.vue</h1>
     <slot name="default"></slot>
   </div>
 </template>

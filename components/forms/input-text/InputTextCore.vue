@@ -141,19 +141,6 @@ const isValid = () => {
   }, 0);
 };
 
-// Keep an eye on this for performance issue
-// watch(
-//   () => modelValue.value.data[name.value],
-//   () => {
-//     modelValue.value!.validityState[name.value] =
-//       inputField.value?.validity.valid ?? false;
-//     if (hasCustomError()) {
-//       removeCustomError(inputField.value?.validity.valid);
-//     }
-//   },
-//   { deep: true }
-// );
-
 onMounted(() => {
   isValid();
 });
@@ -166,6 +153,11 @@ onMounted(() => {
 
   &.has-left-content {
     margin-left: var(--_gutter);
+
+    .left-content {
+      display: flex;
+      align-items: center;
+    }
   }
 }
 </style>
