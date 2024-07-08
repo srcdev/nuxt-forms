@@ -6,6 +6,7 @@
     :class="[
       `btn-${type}`,
       `theme-${theme}`,
+      size,
       effectClass,
       styleClassPassthrough,
     ]"
@@ -130,16 +131,91 @@ const hasRightContent = computed(() => slots.right !== undefined);
   --_padding-inline: 12px;
   --_border-radius: 4px;
 
+  --_theme-form-border: var(--theme-form-primary-border);
+  --_theme-form-bg-light: var(--theme-form-primary-bg-light);
+  --_theme-form-bg-dark: var(--theme-form-primary-bg-dark);
+  --_theme-form-color-light: var(--theme-form-primary-color-light);
+  --_theme-form-color-dark: var(--theme-form-primary-color-dark);
+
   background-color: transparent;
-  display: grid;
-  grid-template-rows: 1fr;
+  align-items: center;
+  display: flex;
+  justify-content: center;
   border: none;
   border-radius: var(--_border-radius);
 
   font-family: var(--font-family);
-  font-size: var(--font-size);
 
   padding-inline: var(--_padding-inline);
   padding-block: var(--_padding-block);
+
+  &:hover,
+  &:focus-visible {
+    cursor: pointer;
+  }
+
+  &.small {
+    gap: var(--theme-form-button-icon-gap-small);
+  }
+  &.normal {
+    gap: var(--theme-form-button-icon-gap-normal);
+  }
+  &.medium {
+    gap: var(--theme-form-button-icon-gap-medium);
+  }
+
+  &.large {
+    gap: var(--theme-form-button-icon-gap-large);
+  }
+
+  .btn-text {
+    &.small {
+      font-size: var(--theme-form-button-font-size-small);
+    }
+    &.normal {
+      font-size: var(--theme-form-button-font-size-normal);
+    }
+    &.medium {
+      font-size: var(--theme-form-button-font-size-medium);
+    }
+
+    &.large {
+      font-size: var(--theme-form-button-font-size-large);
+    }
+  }
+
+  .btn-icon {
+    display: flex;
+    .icon {
+      aspect-ratio: 1;
+      display: inline-block;
+    }
+
+    &.small {
+      .icon {
+        height: var(--theme-form-button-icon-size-small);
+        width: var(--theme-form-button-icon-size-small);
+      }
+    }
+    &.normal {
+      .icon {
+        height: var(--theme-form-button-icon-size-normal);
+        width: var(--theme-form-button-icon-size-normal);
+      }
+    }
+    &.medium {
+      .icon {
+        height: var(--theme-form-button-icon-size-medium);
+        width: var(--theme-form-button-icon-size-medium);
+      }
+    }
+
+    &.large {
+      .icon {
+        height: var(--theme-form-button-icon-size-large);
+        width: var(--theme-form-button-icon-size-large);
+      }
+    }
+  }
 }
 </style>

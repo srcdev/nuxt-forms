@@ -9,4 +9,23 @@
 
   --font-family: futura-pt, Seravek, 'Gill Sans Nova', Ubuntu, Calibri,
     'DejaVu Sans', source-sans-pro, sans-serif;
+
+  --theme-form-button-font-size-small: 14px;
+  --theme-form-button-font-size-normal: 16px;
+  --theme-form-button-font-size-medium: 18px;
+  --theme-form-button-font-size-large: 20px;
+
+  /*
+  * Button Icon Sizes and Gap
+  */
+
+  --theme-form-button-icon-size-small: 18px;
+  --theme-form-button-icon-size-normal: 20px;
+  --theme-form-button-icon-size-medium: 22px;
+  --theme-form-button-icon-size-large: 32px;
+
+  --theme-form-button-icon-gap-small: 4px;
+  --theme-form-button-icon-gap-normal: 6px;
+  --theme-form-button-icon-gap-medium: 8px;
+  --theme-form-button-icon-gap-large: 10px;
 }

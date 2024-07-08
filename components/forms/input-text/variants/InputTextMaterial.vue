@@ -128,7 +128,7 @@ setDefaultError(props.c12.errorMessage);
   }
 
   --_gutter: 12px;
-  --_form-theme: var(--theme-primary);
+  --_form-theme: var(--theme-form-primary);
   --_border-width: var(--input-border-width-default);
 
   display: grid;

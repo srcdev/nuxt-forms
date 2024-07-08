@@ -29,13 +29,30 @@
                   </template>
                 </FormField>
 
+                <FormField
+                  width="wide"
+                  :has-gutter="true"
+                  style-class-passthrough="mb-20"
+                >
+                  <template #default>
+                    <InputButtonConfirm
+                      @click.stop.prevent="isPending"
+                      :is-pending="false"
+                      button-text="Confirm"
+                      theme="primary"
+                      size="medium"
+                    />
+                  </template>
+                </FormField>
+
                 <FormField width="wide" :has-gutter="true">
                   <template #default>
                     <InputButtonSubmit
                       @click.stop.prevent="isPending"
                       :is-pending="false"
                       button-text="Submit"
-                      theme="primary"
+                      theme="secondary"
+                      size="medium"
                     />
                   </template>
                 </FormField>

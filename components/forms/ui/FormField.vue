@@ -1,5 +1,8 @@
 <template>
-  <div class="form-field" :class="[width, { 'has-gutter': hasGutter }]">
+  <div
+    class="form-field"
+    :class="[width, styleClassPassthrough, { 'has-gutter': hasGutter }]"
+  >
     <slot name="default"></slot>
   </div>
 </template>
@@ -15,6 +18,10 @@ defineProps({
     type: Boolean as PropType<boolean>,
     default: true,
   },
+  styleClassPassthrough: {
+    type: String,
+    default: '',
+  },
 });
 </script>
 
@@ -24,6 +31,8 @@ defineProps({
   --_max-width: 400px;
 
   margin-inline: auto;
+  margin-bottom: 16px;
+
   width: min(100% - calc(2 * var(--_gutter-width)), var(--_max-width));
   outline: 0px solid var(--gray-5);
 
