@@ -1,0 +1,11 @@
+:where(html) {
+  --theme-form-tertiary: var(--gray-8);
+  --theme-form-tertiary-border: var(--gray-2);
+  --theme-form-tertiary-border-hover: var(--gray-2);
+  --theme-form-tertiary-outline: var(--gray-8);
+  --theme-form-tertiary-outline-hover: var(--gray-8);
+  --theme-form-tertiary-bg: var(--gray-1);
+  --theme-form-tertiary-bg-hover: var(--gray-11);
+  --theme-form-tertiary-color: var(--gray-9);
+  --theme-form-tertiary-color-hover: var(--gray-2);
+}

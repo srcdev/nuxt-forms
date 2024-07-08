@@ -85,8 +85,12 @@ const props = defineProps({
 
 <style scoped lang="css">
 .btn {
-  &.btn-submit {
+  &.btn-submit-OLD {
     --_border-width: var(--input-border-width-default);
+
+    /*
+    * Initial theme (primary)
+    **/
 
     --_theme-form-border: var(--theme-form-primary-border-hover);
     --_theme-form-border-hover: var(--theme-form-primary-border);

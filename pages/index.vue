@@ -39,6 +39,18 @@
                       @click.stop.prevent="isPending"
                       :is-pending="false"
                       button-text="Confirm"
+                      theme="secondary"
+                      size="medium"
+                    />
+                  </template>
+                </FormField>
+
+                <FormField width="wide" :has-gutter="true">
+                  <template #default>
+                    <InputButtonSubmit
+                      @click.stop.prevent="isPending"
+                      :is-pending="false"
+                      button-text="Submit"
                       theme="primary"
                       size="medium"
                     />
@@ -52,6 +64,18 @@
                       :is-pending="false"
                       button-text="Submit"
                       theme="secondary"
+                      size="medium"
+                    />
+                  </template>
+                </FormField>
+
+                <FormField width="wide" :has-gutter="true">
+                  <template #default>
+                    <InputButtonSubmit
+                      @click.stop.prevent="isPending"
+                      :is-pending="false"
+                      button-text="Submit"
+                      theme="tertiary"
                       size="medium"
                     />
                   </template>
@@ -90,7 +114,7 @@ useHead({
  * Setup forms
  */
 const fieldsInitialState = ref<IFieldsInitialState>({
-  username: '',
+  username: 'PreFilledUsername',
 });
 
 // Setup formData

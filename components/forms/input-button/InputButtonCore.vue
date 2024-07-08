@@ -131,15 +131,9 @@ const hasRightContent = computed(() => slots.right !== undefined);
   --_padding-inline: 12px;
   --_border-radius: 4px;
 
-  --_theme-form-border: var(--theme-form-primary-border);
-  --_theme-form-bg-light: var(--theme-form-primary-bg-light);
-  --_theme-form-bg-dark: var(--theme-form-primary-bg-dark);
-  --_theme-form-color-light: var(--theme-form-primary-color-light);
-  --_theme-form-color-dark: var(--theme-form-primary-color-dark);
-
-  background-color: transparent;
   align-items: center;
   display: flex;
+
   justify-content: center;
   border: none;
   border-radius: var(--_border-radius);
@@ -148,11 +142,6 @@ const hasRightContent = computed(() => slots.right !== undefined);
 
   padding-inline: var(--_padding-inline);
   padding-block: var(--_padding-block);
-
-  &:hover,
-  &:focus-visible {
-    cursor: pointer;
-  }
 
   &.small {
     gap: var(--theme-form-button-icon-gap-small);
@@ -216,6 +205,61 @@ const hasRightContent = computed(() => slots.right !== undefined);
         width: var(--theme-form-button-icon-size-large);
       }
     }
+  }
+
+  --_border-width: var(--input-border-width-default);
+
+  /*
+  * Initial theme (primary)
+  **/
+  --_theme-form-border: var(--theme-form-primary-border);
+  --_theme-form-border-hover: var(--theme-form-primary-border-hover);
+  --_theme-form-outline: var(--theme-form-primary-outline);
+  --_theme-form-outline-hover: var(--theme-form-primary-outline-hover);
+  --_theme-form-bg: var(--theme-form-primary-bg);
+  --_theme-form-bg-hover: var(--theme-form-primary-bg-hover);
+  --_theme-form-color: var(--theme-form-primary-color);
+  --_theme-form-color-hover: var(--theme-form-primary-color-hover);
+
+  background-color: var(--_theme-form-bg);
+  border: var(--_border-width) solid var(--_theme-form-border);
+  color: var(--_theme-form-color);
+  outline: 1px solid var(--_theme-form-outline);
+
+  /*
+  * Themes (alternate)
+  **/
+  &.theme-secondary {
+    --_theme-form-border: var(--theme-form-secondary-border);
+    --_theme-form-border-hover: var(--theme-form-secondary-border-hover);
+    --_theme-form-outline: var(--theme-form-secondary-outline);
+    --_theme-form-outline-hover: var(--theme-form-secondary-outline-hover);
+    --_theme-form-bg: var(--theme-form-secondary-bg);
+    --_theme-form-bg-hover: var(--theme-form-secondary-bg-hover);
+    --_theme-form-color: var(--theme-form-secondary-color);
+    --_theme-form-color-hover: var(--theme-form-secondary-color-hover);
+  }
+
+  &.theme-tertiary {
+    --_theme-form-border: var(--theme-form-tertiary-border);
+    --_theme-form-border-hover: var(--theme-form-tertiary-border-hover);
+    --_theme-form-outline: var(--theme-form-tertiary-outline);
+    --_theme-form-outline-hover: var(--theme-form-tertiary-outline-hover);
+    --_theme-form-bg: var(--theme-form-tertiary-bg);
+    --_theme-form-bg-hover: var(--theme-form-tertiary-bg-hover);
+    --_theme-form-color: var(--theme-form-tertiary-color);
+    --_theme-form-color-hover: var(--theme-form-tertiary-color-hover);
+  }
+
+  /*
+  * States
+  **/
+  &:hover,
+  &:focus-visible {
+    --_theme-form-color: var(--_theme-form-color-hover);
+    --_theme-form-bg: var(--_theme-form-bg-hover);
+    --_theme-form-border: var(--_theme-form-border-hover);
+    --_theme-form-outline: var(--_theme-form-outline-hover);
   }
 }
 </style>
