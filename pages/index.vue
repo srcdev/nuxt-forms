@@ -15,7 +15,6 @@
                     <InputTextMaterial
                       id="username"
                       name="username"
-                      type="text"
                       validation="username"
                       :required="true"
                       :c12="{
@@ -24,7 +23,26 @@
                         errorMessage: 'Please enter a valid username',
                       }"
                       v-model="formData"
-                      theme="primary"
+                      theme="secondary"
+                    />
+                  </template>
+                </FormField>
+
+                <FormField width="wide" :has-gutter="true">
+                  <template #default>
+                    <p>Input text</p>
+                    <InputPasswordMaterial
+                      id="password"
+                      name="password"
+                      validation="password"
+                      :required="true"
+                      :c12="{
+                        label: 'Password',
+                        placeholder: 'eg. Your5illYPa55w0rd',
+                        errorMessage: 'Please enter a valid password',
+                      }"
+                      v-model="formData"
+                      theme="secondary"
                     />
                   </template>
                 </FormField>
@@ -115,6 +133,7 @@ useHead({
  */
 const fieldsInitialState = ref<IFieldsInitialState>({
   username: '',
+  password: '',
 });
 
 // Setup formData

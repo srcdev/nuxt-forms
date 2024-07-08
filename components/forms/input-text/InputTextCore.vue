@@ -1,25 +1,42 @@
 <template>
-  <input
-    :type
-    :placeholder="c12.placeholder"
-    :id
-    :name
-    :pattern="componentValidation.pattern"
-    :maxlength="componentValidation.maxlength"
-    :required
-    :class="[
-      'input-text',
-      'text-normal',
-      styleClassPassthrough,
-      { active: isFocused },
-      { dirty: isDirty },
-      { error: fieldHasError() },
-    ]"
-    v-model="modelValue.data[name]"
-    ref="inputField"
-    @focusin="isFocused = true"
-    @focusout="isFocused = false"
-  />
+  <div
+    class="input-text-wrapper"
+    :class="[{ 'has-left-content': hasLeftContent }]"
+  >
+    <template v-if="hasLeftContent">
+      <span class="left-content">
+        <slot name="left"></slot>
+      </span>
+    </template>
+
+    <input
+      :type
+      :placeholder="c12.placeholder"
+      :id
+      :name
+      :pattern="componentValidation.pattern"
+      :maxlength="componentValidation.maxlength"
+      :required
+      :class="[
+        'input-text',
+        'text-normal',
+        styleClassPassthrough,
+        { active: isFocused },
+        { dirty: isDirty },
+        { error: fieldHasError() },
+      ]"
+      v-model="modelValue.data[name]"
+      ref="inputField"
+      @focusin="isFocused = true"
+      @focusout="isFocused = false"
+    />
+
+    <template v-if="hasRightContent">
+      <span class="right-content">
+        <slot name="right"></slot>
+      </span>
+    </template>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -43,7 +60,7 @@ const props = defineProps({
   },
   name: {
     type: String,
-    default: null,
+    required: true,
   },
   validation: {
     type: String,
@@ -66,6 +83,10 @@ const props = defineProps({
     default: '',
   },
 });
+
+const slots = useSlots();
+const hasLeftContent = computed(() => slots.left !== undefined);
+const hasRightContent = computed(() => slots.right !== undefined);
 
 const modelValue = defineModel() as Ref<IFormData>;
 const isFocused = defineModel('isFocused') as Ref<boolean>;
@@ -139,7 +160,12 @@ onMounted(() => {
 </script>
 
 <style lang="css">
-/* .input-text {
-  transition: all linear 200ms;
-} */
+.input-text-wrapper {
+  display: flex;
+  align-items: center;
+
+  &.has-left-content {
+    margin-left: var(--_gutter);
+  }
+}
 </style>

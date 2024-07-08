@@ -14,6 +14,7 @@
     "release": "release-it"
   },
   "devDependencies": {
+    "@iconify-json/material-symbols": "^1.1.83",
     "@nuxt/eslint-config": "^0.3.13",
     "@nuxt/icon": "^1.0.0",
     "eslint": "^9.5.0",

@@ -9,19 +9,11 @@
       :for="id"
       >{{ labelText }}</label
     >
-    <div class="input-text-container">
-      <InputTextCore
-        :id
-        :name
-        :type
-        :validation
-        :required
-        v-model="modelValue"
-        v-model:isFocused="isFocused"
-        v-model:isDirty="isDirty"
-        :c12
-        :style-class-passthrough="styleClassPassthrough"
-      />
+    <div
+      class="input-text-container"
+      :class="[{ active: isFocused }, { dirty: isDirty }]"
+    >
+      <slot name="input"></slot>
     </div>
   </div>
 </template>
@@ -89,20 +81,16 @@ const props = defineProps({
   },
 });
 
-const name = computed(() => {
-  return props.name !== null ? props.name : props.id;
-});
-
 const labelText = computed(() => {
   return fieldHasError.value ? errorMessage.value : props.c12.label;
 });
 
 const modelValue = defineModel() as Ref<IFormData>;
-const isFocused = ref(false);
-const isDirty = ref(false);
+const isFocused = defineModel('isFocused') as Ref<boolean>;
+const isDirty = defineModel('isDirty') as Ref<boolean>;
 
 const { errorMessage, setDefaultError, fieldHasError } = useErrorMessage(
-  name.value,
+  props.name,
   modelValue
 );
 setDefaultError(props.c12.errorMessage);
@@ -118,6 +106,11 @@ setDefaultError(props.c12.errorMessage);
       outline: none;
       box-shadow: none;
       border: none;
+    }
+
+    &:-internal-autofill-selected,
+    &:autofill {
+      background-color: transparent !important;
     }
   }
 
@@ -140,7 +133,7 @@ setDefaultError(props.c12.errorMessage);
   /* transition: all linear 0.2s; */
 
   &.theme-secondary {
-    --_form-theme: var(--theme-secondary);
+    --_form-theme: var(--theme-form-secondary);
   }
 
   &:focus-within {
@@ -182,6 +175,13 @@ setDefaultError(props.c12.errorMessage);
     grid-column: 1;
     margin-top: 2rem;
     background-color: transparent;
+    opacity: 0;
+    transition: opacity linear 0.2s;
+
+    &.active,
+    &.dirty {
+      opacity: 1;
+    }
 
     .input-text {
       font-family: var(--font-family);
@@ -189,13 +189,13 @@ setDefaultError(props.c12.errorMessage);
       padding: calc(var(--_gutter) / 2) var(--_gutter);
       font-size: var(--font-size);
       margin: 0;
-      opacity: 0;
+      /* opacity: 0;
       transition: opacity linear 0.2s;
 
       &.active,
       &.dirty {
         opacity: 1;
-      }
+      } */
       /*
       &::placeholder,
       &:-ms-input-placeholder,
