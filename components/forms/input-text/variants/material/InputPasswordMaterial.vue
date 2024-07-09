@@ -32,7 +32,7 @@
             :is-pending="false"
             button-text="Submit"
             theme="ghost"
-            size="tiny"
+            size="x-small"
           >
             <template #iconOnly>
               <Icon

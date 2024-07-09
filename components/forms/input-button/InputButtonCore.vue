@@ -88,7 +88,7 @@ const props = defineProps({
     type: String as PropType<string>,
     default: 'normal',
     validator(value: string) {
-      return ['small', 'normal', 'medium', 'large'].includes(value);
+      return ['x-small', 'small', 'normal', 'medium', 'large'].includes(value);
     },
   },
   weight: {
@@ -148,7 +148,7 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
     cursor: pointer;
   }
 
-  &.tiny {
+  &.x-small {
     --_padding-block: 2px;
     --_padding-inline: 2px;
     gap: var(--theme-form-button-icon-gap-small);

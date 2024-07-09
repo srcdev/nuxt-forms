@@ -1,17 +1,18 @@
 <template>
   <div
     class="input-text-material"
-    :class="[`theme-${theme}`, { error: fieldHasError }]"
+    :class="[`theme-${theme}`, { error: fieldHasError }, { compact: compact }]"
   >
     <label
       class="label"
-      :class="[{ active: isFocused }, { dirty: isDirty }]"
+      :class="[{ active: isFocused }, { dirty: isDirty }, { compact: compact }]"
       :for="id"
-      >{{ labelText }}</label
     >
+      <span>{{ labelText }}</span>
+    </label>
     <div
       class="input-text-container"
-      :class="[{ active: isFocused }, { dirty: isDirty }]"
+      :class="[{ active: isFocused }, { dirty: isDirty }, { compact: compact }]"
     >
       <slot name="input"></slot>
     </div>
@@ -79,6 +80,8 @@ const props = defineProps({
   },
 });
 
+const compact = ref(false);
+
 const labelText = computed(() => {
   return fieldHasError.value ? errorMessage.value : props.c12.label;
 });
@@ -129,6 +132,10 @@ setDefaultError(props.c12.errorMessage);
   margin-bottom: 20px;
   overflow: hidden;
 
+  &.compact {
+    overflow: initial;
+  }
+
   &.theme-secondary {
     --_form-theme: var(--theme-form-secondary);
   }
@@ -162,6 +169,29 @@ setDefaultError(props.c12.errorMessage);
       transform: translateY(-2px);
       z-index: auto;
     }
+
+    &.compact {
+      align-content: center;
+      font-size: 16px;
+      padding: 0 12px;
+      transform: translateY(0);
+
+      span {
+        padding: 0 8px;
+      }
+
+      &.active,
+      &.dirty {
+        font-size: 16px;
+        font-weight: 500;
+        transform: translateY(-26px);
+        z-index: auto;
+
+        span {
+          background-color: white;
+        }
+      }
+    }
   }
 
   .input-text-container {
@@ -176,6 +206,10 @@ setDefaultError(props.c12.errorMessage);
     &.active,
     &.dirty {
       opacity: 1;
+    }
+
+    &.compact {
+      margin: 8px;
     }
 
     .input-text {
