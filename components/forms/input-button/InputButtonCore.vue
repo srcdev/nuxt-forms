@@ -9,6 +9,7 @@
       size,
       effectClass,
       styleClassPassthrough,
+      { 'icon-only': isIconOnly },
     ]"
   >
     <span v-if="useEffect && effect == 'fancy'" class="fancy"></span>
@@ -127,13 +128,14 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
 
 <style lang="css">
 .btn {
-  --_padding-block: 8px;
-  --_padding-inline: 12px;
+  --_padding-block: var(--theme-form-button-padding-block-normal);
+  --_padding-inline: var(--theme-form-button-padding-inline-normal);
   --_border-radius: 4px;
+  --_icon-gap: var(--theme-form-button-icon-gap-normal);
 
   align-items: center;
   display: flex;
-
+  gap: var(--_icon-gap);
   justify-content: center;
   border: none;
   border-radius: var(--_border-radius);
@@ -149,23 +151,41 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
   }
 
   &.x-small {
-    --_padding-block: 2px;
-    --_padding-inline: 2px;
-    gap: var(--theme-form-button-icon-gap-small);
+    &:not(.icon-only) {
+      --_padding-block: var(--theme-form-button-padding-block-x-small);
+      --_padding-inline: var(--theme-form-button-padding-inline-x-small);
+      --_icon-gap: var(--theme-form-button-icon-gap-x-small);
+    }
   }
 
   &.small {
-    gap: var(--theme-form-button-icon-gap-small);
+    &:not(.icon-only) {
+      --_padding-block: var(--theme-form-button-padding-block-x-small);
+      --_padding-inline: var(--theme-form-button-padding-inline-small);
+      --_icon-gap: var(--theme-form-button-icon-gap-small);
+    }
   }
   &.normal {
-    gap: var(--theme-form-button-icon-gap-normal);
+    &:not(.icon-only) {
+      --_padding-block: var(--theme-form-button-padding-block-x-small);
+      --_padding-inline: var(--theme-form-button-padding-inline-normal);
+      --_icon-gap: var(--theme-form-button-icon-gap-normal);
+    }
   }
   &.medium {
-    gap: var(--theme-form-button-icon-gap-medium);
+    &:not(.icon-only) {
+      --_padding-block: var(--theme-form-button-padding-block-x-small);
+      --_padding-inline: var(--theme-form-button-padding-inline-medium);
+      --_icon-gap: var(--theme-form-button-icon-gap-medium);
+    }
   }
 
   &.large {
-    gap: var(--theme-form-button-icon-gap-large);
+    &:not(.icon-only) {
+      --_padding-block: var(--theme-form-button-padding-block-x-small);
+      --_padding-inline: var(--theme-form-button-padding-inline-large);
+      --_icon-gap: var(--theme-form-button-icon-gap-large);
+    }
   }
 
   .btn-text {

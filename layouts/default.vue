@@ -15,6 +15,12 @@
         </li>
       </ul>
     </div>
+    <h2>Buttons</h2>
+    <ul>
+      <li>
+        <NuxtLink to="/forms/examples/buttons">Buttons</NuxtLink>
+      </li>
+    </ul>
 
     <div>
       <slot name="layout-content"></slot>
