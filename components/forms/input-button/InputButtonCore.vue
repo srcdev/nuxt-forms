@@ -35,27 +35,35 @@
 </template>
 
 <script setup lang="ts">
+import propValidators from '../c12/prop-validators';
+
 const props = defineProps({
-  type: {
-    type: String as PropType<'submit' | 'button' | 'reset'>,
-    default: 'submit',
+  size: {
+    type: String as PropType<string>,
+    default: 'normal',
     validator(value: string) {
-      return ['button', 'cancel', 'reset', 'submit'].includes(value);
+      return propValidators.size.includes(value);
+    },
+  },
+  weight: {
+    type: String as PropType<string>,
+    default: 'wght-400',
+    validator(value: string) {
+      return propValidators.weight.includes(value);
     },
   },
   theme: {
     type: String as PropType<string>,
     default: 'primary',
     validator(value: string) {
-      return [
-        'primary',
-        'secondary',
-        'tertiary',
-        'ghost',
-        'error',
-        'success',
-        'warning',
-      ].includes(value);
+      return propValidators.theme.includes(value);
+    },
+  },
+  type: {
+    type: String as PropType<'submit' | 'button' | 'reset'>,
+    default: 'submit',
+    validator(value: string) {
+      return ['button', 'cancel', 'reset', 'submit'].includes(value);
     },
   },
   buttonText: {
@@ -79,30 +87,6 @@ const props = defineProps({
     default: 'fancy',
     validator(value: string) {
       return ['fancy', 'pulse'].includes(value);
-    },
-  },
-  size: {
-    type: String as PropType<string>,
-    default: 'normal',
-    validator(value: string) {
-      return ['x-small', 'small', 'normal', 'medium', 'large'].includes(value);
-    },
-  },
-  weight: {
-    type: String as PropType<string>,
-    default: 'wght-400',
-    validator(value: string) {
-      return [
-        'wght-100',
-        'wght-200',
-        'wght-300',
-        'wght-400',
-        'wght-500',
-        'wght-600',
-        'wght-700',
-        'wght-800',
-        'wght-900',
-      ].includes(value);
     },
   },
 });

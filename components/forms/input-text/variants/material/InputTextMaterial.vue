@@ -33,7 +33,30 @@
 <script setup lang="ts">
 import type { InpuTextC12, IFormData } from '@/types/types.forms';
 
+import propValidators from '../../../c12/prop-validators';
+
 const props = defineProps({
+  size: {
+    type: String as PropType<string>,
+    default: 'normal',
+    validator(value: string) {
+      return propValidators.size.includes(value);
+    },
+  },
+  weight: {
+    type: String as PropType<string>,
+    default: 'wght-400',
+    validator(value: string) {
+      return propValidators.weight.includes(value);
+    },
+  },
+  theme: {
+    type: String as PropType<string>,
+    default: 'primary',
+    validator(value: string) {
+      return propValidators.theme.includes(value);
+    },
+  },
   type: {
     // type: String as PropType<"text" | "password" | "tel" | "number" | "email" | "url">, // This breaks props setup in unit tests
     type: String,
@@ -71,21 +94,6 @@ const props = defineProps({
   styleClassPassthrough: {
     type: String,
     default: '',
-  },
-  theme: {
-    type: String as PropType<string>,
-    default: 'primary',
-    validator(value: string) {
-      return [
-        'primary',
-        'secondary',
-        'tertiary',
-        'ghost',
-        'error',
-        'success',
-        'warning',
-      ].includes(value);
-    },
   },
 });
 

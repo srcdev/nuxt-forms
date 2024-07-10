@@ -17,44 +17,28 @@
 </template>
 
 <script setup lang="ts">
+import propValidators from '../../c12/prop-validators';
+
 const props = defineProps({
   size: {
     type: String as PropType<string>,
     default: 'normal',
     validator(value: string) {
-      return ['x-small', 'small', 'normal', 'medium', 'large'].includes(value);
+      return propValidators.size.includes(value);
     },
   },
   weight: {
     type: String as PropType<string>,
     default: 'wght-400',
     validator(value: string) {
-      return [
-        'wght-100',
-        'wght-200',
-        'wght-300',
-        'wght-400',
-        'wght-500',
-        'wght-600',
-        'wght-700',
-        'wght-800',
-        'wght-900',
-      ].includes(value);
+      return propValidators.weight.includes(value);
     },
   },
   theme: {
     type: String as PropType<string>,
     default: 'primary',
     validator(value: string) {
-      return [
-        'primary',
-        'secondary',
-        'tertiary',
-        'ghost',
-        'error',
-        'success',
-        'warning',
-      ].includes(value);
+      return propValidators.theme.includes(value);
     },
   },
   useEffect: {
