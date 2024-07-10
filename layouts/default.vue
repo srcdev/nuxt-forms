@@ -1,7 +1,19 @@
 <template>
   <div class="page-layout">
     <div>
-      <h1>Header</h1>
+      <h1><NuxtLink to="/">Home</NuxtLink></h1>
+      <ul>
+        <li>
+          <NuxtLink to="/forms/examples/material/text-fields"
+            >Material UI text fields</NuxtLink
+          >
+        </li>
+        <li>
+          <NuxtLink to="/forms/examples/material/text-fields-compact"
+            >Material UI text fields (compact)</NuxtLink
+          >
+        </li>
+      </ul>
     </div>
 
     <div>
@@ -20,7 +32,7 @@ useHead({
     class: 'body-default',
     id: 'body',
   },
-})
+});
 </script>
 
 <style lang="css">

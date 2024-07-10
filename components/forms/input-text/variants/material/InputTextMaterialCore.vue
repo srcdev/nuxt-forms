@@ -5,14 +5,24 @@
   >
     <label
       class="label"
-      :class="[{ active: isFocused }, { dirty: isDirty }, { compact: compact }]"
+      :class="[
+        { active: isFocused },
+        { error: fieldHasError },
+        { dirty: isDirty },
+        { compact: compact },
+      ]"
       :for="id"
     >
       <span>{{ labelText }}</span>
     </label>
     <div
       class="input-text-container"
-      :class="[{ active: isFocused }, { dirty: isDirty }, { compact: compact }]"
+      :class="[
+        { active: isFocused },
+        { error: fieldHasError },
+        { dirty: isDirty },
+        { compact: compact },
+      ]"
     >
       <slot name="input"></slot>
     </div>
@@ -78,9 +88,11 @@ const props = defineProps({
       ].includes(value);
     },
   },
+  compact: {
+    type: Boolean,
+    value: false,
+  },
 });
-
-const compact = ref(true);
 
 const labelText = computed(() => {
   return fieldHasError.value ? errorMessage.value : props.c12.label;
@@ -165,7 +177,8 @@ setDefaultError(props.c12.errorMessage);
     z-index: 2;
 
     &.active,
-    &.dirty {
+    &.dirty,
+    &.error {
       font-size: 16px;
       transform: translateY(-2px);
       z-index: auto;
@@ -182,7 +195,8 @@ setDefaultError(props.c12.errorMessage);
     transition: opacity linear 0.2s;
 
     &.active,
-    &.dirty {
+    &.dirty,
+    &.error {
       opacity: 1;
     }
 
@@ -244,7 +258,8 @@ setDefaultError(props.c12.errorMessage);
       }
 
       &.active,
-      &.dirty {
+      &.dirty,
+      &.error {
         font-size: 16px;
         font-weight: 500;
         transform: translateY(-26px);
