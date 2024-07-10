@@ -1,0 +1,12 @@
+:where(html) {
+  --theme-success: var(--green-7);
+  --theme-form-success: var(--green-8);
+  --theme-form-success-border: var(--green-2);
+  --theme-form-success-border-hover: var(--green-0);
+  --theme-form-success-outline: var(--green-9);
+  --theme-form-success-outline-hover: var(--green-9);
+  --theme-form-success-bg: var(--green-9);
+  --theme-form-success-bg-hover: var(--green-2);
+  --theme-form-success-color: var(--green-1);
+  --theme-form-success-color-hover: var(--green-9);
+}

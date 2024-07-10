@@ -22,7 +22,7 @@ const props = defineProps({
     type: String as PropType<string>,
     default: 'normal',
     validator(value: string) {
-      return ['small', 'normal', 'medium', 'large'].includes(value);
+      return ['x-small', 'small', 'normal', 'medium', 'large'].includes(value);
     },
   },
   weight: {
@@ -50,14 +50,10 @@ const props = defineProps({
         'primary',
         'secondary',
         'tertiary',
-        'text',
-        'link',
-        'icon-only',
         'ghost',
-        'cancel',
-        'confirm',
+        'error',
+        'success',
         'warning',
-        'navigate-btn',
       ].includes(value);
     },
   },

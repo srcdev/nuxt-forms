@@ -2,7 +2,7 @@
   <div class="page-layout">
     <div>
       <h1><NuxtLink to="/">Home</NuxtLink></h1>
-      <ul>
+      <ul class="flex-group">
         <li>
           <NuxtLink to="/forms/examples/material/text-fields"
             >Material UI text fields</NuxtLink
@@ -16,7 +16,7 @@
       </ul>
     </div>
     <h2>Buttons</h2>
-    <ul>
+    <ul class="flex-group">
       <li>
         <NuxtLink to="/forms/examples/buttons">Buttons</NuxtLink>
       </li>
@@ -45,5 +45,18 @@ useHead({
 .page-layout {
   display: grid;
   grid-template-rows: auto 1fr auto;
+}
+
+.flex-group {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+ul.flex-group {
+  list-style-type: none;
+  padding: 0;
 }
 </style>

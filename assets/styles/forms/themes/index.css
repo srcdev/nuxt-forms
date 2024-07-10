@@ -3,3 +3,5 @@
 @import './_tertiary.css';
 @import './_ghost.css';
 @import './_error.css';
+@import './_success.css';
+@import './_warning.css';

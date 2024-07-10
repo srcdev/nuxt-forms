@@ -1,7 +1,7 @@
 :where(html) {
   --theme-form-primary: var(--blue-8);
   --theme-form-primary-border: var(--blue-2);
-  --theme-form-primary-border-hover: var(--blue-2);
+  --theme-form-primary-border-hover: var(--blue-0);
   --theme-form-primary-outline: var(--blue-11);
   --theme-form-primary-outline-hover: var(--blue-11);
   --theme-form-primary-bg: var(--blue-6);

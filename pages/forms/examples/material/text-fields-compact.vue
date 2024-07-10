@@ -66,34 +66,6 @@
                   </template>
                 </FormField>
 
-                <FormField
-                  width="wide"
-                  :has-gutter="true"
-                  style-class-passthrough="mb-20"
-                >
-                  <template #default>
-                    <InputButtonConfirm
-                      @click.stop.prevent="isPending"
-                      :is-pending="false"
-                      button-text="Confirm"
-                      theme="secondary"
-                      size="medium"
-                    />
-                  </template>
-                </FormField>
-
-                <FormField width="wide" :has-gutter="true">
-                  <template #default>
-                    <InputButtonSubmit
-                      @click.stop.prevent="isPending"
-                      :is-pending="false"
-                      button-text="Submit"
-                      theme="primary"
-                      size="medium"
-                    />
-                  </template>
-                </FormField>
-
                 <FormField width="wide" :has-gutter="true">
                   <template #default>
                     <InputButtonSubmit
@@ -103,34 +75,6 @@
                       theme="secondary"
                       size="medium"
                     />
-                  </template>
-                </FormField>
-
-                <FormField width="wide" :has-gutter="true">
-                  <template #default>
-                    <InputButtonSubmit
-                      @click.stop.prevent="isPending"
-                      :is-pending="false"
-                      button-text="Submit"
-                      theme="tertiary"
-                      size="medium"
-                    />
-                  </template>
-                </FormField>
-
-                <FormField width="wide" :has-gutter="true">
-                  <template #default>
-                    <InputButtonCore
-                      @click.stop.prevent="isPending"
-                      :is-pending="false"
-                      button-text="Submit"
-                      theme="tertiary"
-                      size="small"
-                    >
-                      <template #iconOnly>
-                        <Icon name="radix-icons:eye-none" class="icon" />
-                      </template>
-                    </InputButtonCore>
                   </template>
                 </FormField>
               </form>

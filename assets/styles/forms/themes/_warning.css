@@ -1,0 +1,11 @@
+:where(html) {
+  --theme-form-warning: var(--orange-8);
+  --theme-form-warning-border: var(--orange-2);
+  --theme-form-warning-border-hover: var(--orange-0);
+  --theme-form-warning-outline: var(--orange-11);
+  --theme-form-warning-outline-hover: var(--orange-11);
+  --theme-form-warning-bg: var(--orange-6);
+  --theme-form-warning-bg-hover: var(--orange-2);
+  --theme-form-warning-color: var(--orange-1);
+  --theme-form-warning-color-hover: var(--orange-11);
+}

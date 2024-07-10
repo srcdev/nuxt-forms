@@ -51,14 +51,10 @@ const props = defineProps({
         'primary',
         'secondary',
         'tertiary',
-        'text',
-        'link',
-        'icon-only',
         'ghost',
-        'cancel',
-        'confirm',
+        'error',
+        'success',
         'warning',
-        'navigate-btn',
       ].includes(value);
     },
   },
@@ -144,6 +140,8 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
 
   padding-inline: var(--_padding-inline);
   padding-block: var(--_padding-block);
+
+  transition: all 0.2s ease-in-out;
 
   &:hover,
   &:focus-visible {
@@ -253,7 +251,7 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
       display: inline-block;
     }
 
-    &.tiny {
+    &.x-small {
       .icon {
         height: var(--theme-form-button-icon-size-small);
         width: var(--theme-form-button-icon-size-small);
@@ -328,6 +326,39 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
     --_theme-form-bg-hover: var(--theme-form-tertiary-bg-hover);
     --_theme-form-color: var(--theme-form-tertiary-color);
     --_theme-form-color-hover: var(--theme-form-tertiary-color-hover);
+  }
+
+  &.theme-warning {
+    --_theme-form-border: var(--theme-form-warning-border);
+    --_theme-form-border-hover: var(--theme-form-warning-border-hover);
+    --_theme-form-outline: var(--theme-form-warning-outline);
+    --_theme-form-outline-hover: var(--theme-form-warning-outline-hover);
+    --_theme-form-bg: var(--theme-form-warning-bg);
+    --_theme-form-bg-hover: var(--theme-form-warning-bg-hover);
+    --_theme-form-color: var(--theme-form-warning-color);
+    --_theme-form-color-hover: var(--theme-form-warning-color-hover);
+  }
+
+  &.theme-error {
+    --_theme-form-border: var(--theme-form-error-border);
+    --_theme-form-border-hover: var(--theme-form-error-border-hover);
+    --_theme-form-outline: var(--theme-form-error-outline);
+    --_theme-form-outline-hover: var(--theme-form-error-outline-hover);
+    --_theme-form-bg: var(--theme-form-error-bg);
+    --_theme-form-bg-hover: var(--theme-form-error-bg-hover);
+    --_theme-form-color: var(--theme-form-error-color);
+    --_theme-form-color-hover: var(--theme-form-error-color-hover);
+  }
+
+  &.theme-success {
+    --_theme-form-border: var(--theme-form-success-border);
+    --_theme-form-border-hover: var(--theme-form-success-border-hover);
+    --_theme-form-outline: var(--theme-form-success-outline);
+    --_theme-form-outline-hover: var(--theme-form-success-outline-hover);
+    --_theme-form-bg: var(--theme-form-success-bg);
+    --_theme-form-bg-hover: var(--theme-form-success-bg-hover);
+    --_theme-form-color: var(--theme-form-success-color);
+    --_theme-form-color-hover: var(--theme-form-success-color-hover);
   }
 
   &.theme-ghost {

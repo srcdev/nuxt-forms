@@ -37,6 +37,33 @@
             </li>
             <li>
               <InputButtonSubmit
+                @click.stop.prevent="swapTheme('warning')"
+                :is-pending="false"
+                button-text="Warning"
+                theme="warning"
+                size="normal"
+              />
+            </li>
+            <li>
+              <InputButtonSubmit
+                @click.stop.prevent="swapTheme('success')"
+                :is-pending="false"
+                button-text="Success"
+                theme="success"
+                size="normal"
+              />
+            </li>
+            <li>
+              <InputButtonSubmit
+                @click.stop.prevent="swapTheme('error')"
+                :is-pending="false"
+                button-text="Error"
+                theme="error"
+                size="normal"
+              />
+            </li>
+            <li>
+              <InputButtonSubmit
                 @click.stop.prevent="swapTheme('ghost')"
                 :is-pending="false"
                 button-text="Ghost"
