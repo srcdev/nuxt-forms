@@ -100,7 +100,10 @@ const labelText = computed(() => {
 
 const modelValue = defineModel() as Ref<IFormData>;
 const isFocused = defineModel('isFocused') as Ref<boolean>;
-const isDirty = defineModel('isDirty') as Ref<boolean>;
+
+const isDirty = computed(() => {
+  return modelValue.value.dirtyFields[props.name];
+});
 
 const { errorMessage, setDefaultError, fieldHasError } = useErrorMessage(
   props.name,

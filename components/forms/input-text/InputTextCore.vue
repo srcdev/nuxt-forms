@@ -90,7 +90,10 @@ const hasRightContent = computed(() => slots.right !== undefined);
 
 const modelValue = defineModel() as Ref<IFormData>;
 const isFocused = defineModel('isFocused') as Ref<boolean>;
-const isDirty = defineModel('isDirty') as Ref<boolean>;
+
+const isDirty = computed(() => {
+  return modelValue.value.dirtyFields[name.value];
+});
 
 const name = computed(() => {
   return props.name !== null ? props.name : props.id;
@@ -120,7 +123,8 @@ const fieldHasError = () => {
 };
 
 watchEffect(() => {
-  isDirty.value = modelValue.value.data[name.value] !== '';
+  modelValue.value.dirtyFields[name.value] =
+    modelValue.value.data[name.value] !== '';
 
   modelValue.value!.validityState[name.value] =
     inputField.value?.validity.valid ?? false;

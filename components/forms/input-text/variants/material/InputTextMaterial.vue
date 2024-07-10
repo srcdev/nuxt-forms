@@ -10,7 +10,6 @@
     :theme
     v-model="modelValue"
     v-model:isFocused="isFocused"
-    v-model:isDirty="isDirty"
   >
     <template #input>
       <InputTextCore
@@ -21,7 +20,6 @@
         :required
         v-model="modelValue"
         v-model:isFocused="isFocused"
-        v-model:isDirty="isDirty"
         :c12
         :style-class-passthrough="styleClassPassthrough"
       />
@@ -102,5 +100,4 @@ const name = computed(() => {
 
 const modelValue = defineModel() as Ref<IFormData>;
 const isFocused = ref(false);
-const isDirty = ref(false);
 </script>

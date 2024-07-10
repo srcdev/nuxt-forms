@@ -1,18 +1,26 @@
-import type { IFormData, IFieldsInitialState, ICustomErrorMessage, ICustomErrorMessagesArr } from "@/types/types.forms";
+import type {
+  IFormData,
+  IFieldsInitialState,
+  ICustomErrorMessage,
+  ICustomErrorMessagesArr,
+} from '@/types/types.forms';
 
-export function useFormControl(fieldsInitialState: IFieldsInitialState | Ref<IFieldsInitialState | null>) {
+export function useFormControl(
+  fieldsInitialState: IFieldsInitialState | Ref<IFieldsInitialState | null>
+) {
   let savedInitialState = {};
 
   const formData = ref<IFormData>({
     data: {} as IFieldsInitialState,
     validityState: {},
+    dirtyFields: {},
     isPending: false,
     errorCount: 0,
     customErrorMessages: {},
     hasCustomErrorMessages: false,
     formIsValid: false,
     showErrors: false,
-    submitSuccess: false
+    submitSuccess: false,
   });
 
   const initValidationState = async () => {
@@ -28,7 +36,9 @@ export function useFormControl(fieldsInitialState: IFieldsInitialState | Ref<IFi
     await initValidationState();
 
     if (fieldsInitialState !== null) {
-      savedInitialState = toRaw(fieldsInitialState.value) as IFieldsInitialState;
+      savedInitialState = toRaw(
+        fieldsInitialState.value
+      ) as IFieldsInitialState;
       formData.value.data = fieldsInitialState as IFieldsInitialState;
     }
     return;
@@ -37,7 +47,9 @@ export function useFormControl(fieldsInitialState: IFieldsInitialState | Ref<IFi
   const getErrorCount = async () => {
     await nextTick();
 
-    const errorCount = Object.values(formData.value.validityState).filter((value) => !value).length;
+    const errorCount = Object.values(formData.value.validityState).filter(
+      (value) => !value
+    ).length;
     formData.value.errorCount = errorCount;
     formData.value.formIsValid = errorCount === 0;
     return formData.value.errorCount;
@@ -68,19 +80,26 @@ export function useFormControl(fieldsInitialState: IFieldsInitialState | Ref<IFi
    *   };
    *   updateCustomErrors("email", sampleCustomErrorEmail);
    */
-  const updateCustomErrors = (name: string, message: null | string = null, valid: boolean = false) => {
+  const updateCustomErrors = (
+    name: string,
+    message: null | string = null,
+    valid: boolean = false
+  ) => {
     if (message !== null) {
       formData.value.validityState[name] = valid;
       formData.value.customErrorMessages[name] = {
         useCustomError: true,
-        message
+        message,
       };
     }
-    formData.value.hasCustomErrorMessages = countItemsWithCustomError(formData.value.customErrorMessages) > 0;
+    formData.value.hasCustomErrorMessages =
+      countItemsWithCustomError(formData.value.customErrorMessages) > 0;
   };
 
   const resetForm = () => {
-    formData.value.data = toRaw(fieldsInitialState.value) as IFieldsInitialState;
+    formData.value.data = toRaw(
+      fieldsInitialState.value
+    ) as IFieldsInitialState;
     formData.value.validityState = {};
     formData.value.errorCount = 0;
     formData.value.isPending = false;
@@ -112,5 +131,13 @@ export function useFormControl(fieldsInitialState: IFieldsInitialState | Ref<IFi
   //   }
   // );
 
-  return { formData, initFormData, getErrorCount, updateCustomErrors, resetForm, showErrors, formIsValid };
+  return {
+    formData,
+    initFormData,
+    getErrorCount,
+    updateCustomErrors,
+    resetForm,
+    showErrors,
+    formIsValid,
+  };
 }

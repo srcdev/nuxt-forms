@@ -57,7 +57,7 @@ export interface IValidityStateArr {
   };
 }
 
-export interface IValidityStateArrShort {
+export interface IFormFieldsState {
   [key: string]: boolean;
 }
 
@@ -79,7 +79,8 @@ export interface ICustomErrorMessagesArr {
 export interface IFormData {
   [x: string]: string | boolean | number | URL | object;
   data: IFieldsInitialState;
-  validityState: IValidityStateArrShort;
+  validityState: IFormFieldsState;
+  dirtyFields: IFormFieldsState;
   isPending: boolean;
   errorCount: number;
   customErrorMessages: ICustomErrorMessagesArr;
