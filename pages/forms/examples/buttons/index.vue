@@ -6,6 +6,46 @@
           <h1>Example buttons</h1>
           <p>Primary submit</p>
 
+          <p>Themes switcher</p>
+          <ul class="flex-group">
+            <li>
+              <InputButtonSubmit
+                @click.stop.prevent="swapTheme('primary')"
+                :is-pending="false"
+                button-text="Primary"
+                theme="primary"
+                size="normal"
+              />
+            </li>
+            <li>
+              <InputButtonSubmit
+                @click.stop.prevent="swapTheme('secondary')"
+                :is-pending="false"
+                button-text="Secondary"
+                theme="secondary"
+                size="normal"
+              />
+            </li>
+            <li>
+              <InputButtonSubmit
+                @click.stop.prevent="swapTheme('tertiary')"
+                :is-pending="false"
+                button-text="Tertiary"
+                theme="tertiary"
+                size="normal"
+              />
+            </li>
+            <li>
+              <InputButtonSubmit
+                @click.stop.prevent="swapTheme('ghost')"
+                :is-pending="false"
+                button-text="Ghost"
+                theme="ghost"
+                size="normal"
+              />
+            </li>
+          </ul>
+
           <FormWrapper width="medium">
             <template #default>
               <form @submit.prevent="isPending">
@@ -14,7 +54,7 @@
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Submit"
-                    theme="primary"
+                    :theme
                     size="x-small"
                   />
 
@@ -22,7 +62,7 @@
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Submit"
-                    theme="primary"
+                    :theme
                     size="small"
                   />
 
@@ -30,21 +70,21 @@
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Submit"
-                    theme="primary"
+                    :theme
                     size="normal"
                   />
                   <InputButtonSubmit
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Submit"
-                    theme="primary"
+                    :theme
                     size="medium"
                   />
                   <InputButtonSubmit
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Submit"
-                    theme="primary"
+                    :theme
                     size="large"
                   />
                 </div>
@@ -54,35 +94,35 @@
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Confirm"
-                    theme="primary"
+                    :theme
                     size="x-small"
                   />
                   <InputButtonConfirm
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Confirm"
-                    theme="primary"
+                    :theme
                     size="small"
                   />
                   <InputButtonConfirm
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Confirm"
-                    theme="primary"
+                    :theme
                     size="normal"
                   />
                   <InputButtonConfirm
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Confirm"
-                    theme="primary"
+                    :theme
                     size="medium"
                   />
                   <InputButtonConfirm
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Confirm"
-                    theme="primary"
+                    :theme
                     size="large"
                   />
                 </div>
@@ -91,7 +131,7 @@
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Submit"
-                    theme="primary"
+                    :theme
                     size="x-small"
                   >
                     <template #iconOnly>
@@ -103,7 +143,7 @@
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Submit"
-                    theme="primary"
+                    :theme
                     size="small"
                   >
                     <template #iconOnly>
@@ -115,7 +155,7 @@
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Submit"
-                    theme="primary"
+                    :theme
                     size="normal"
                   >
                     <template #iconOnly>
@@ -127,7 +167,7 @@
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Submit"
-                    theme="primary"
+                    :theme
                     size="medium"
                   >
                     <template #iconOnly>
@@ -139,69 +179,7 @@
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Submit"
-                    theme="primary"
-                    size="large"
-                  >
-                    <template #iconOnly>
-                      <Icon name="radix-icons:eye-none" class="icon" />
-                    </template>
-                  </InputButtonCore>
-                </div>
-
-                <div class="flex-group">
-                  <InputButtonCore
-                    @click.stop.prevent="isPending"
-                    :is-pending="false"
-                    button-text="Submit"
-                    theme="ghost"
-                    size="x-small"
-                  >
-                    <template #iconOnly>
-                      <Icon name="radix-icons:eye-none" class="icon" />
-                    </template>
-                  </InputButtonCore>
-
-                  <InputButtonCore
-                    @click.stop.prevent="isPending"
-                    :is-pending="false"
-                    button-text="Submit"
-                    theme="ghost"
-                    size="small"
-                  >
-                    <template #iconOnly>
-                      <Icon name="radix-icons:eye-none" class="icon" />
-                    </template>
-                  </InputButtonCore>
-
-                  <InputButtonCore
-                    @click.stop.prevent="isPending"
-                    :is-pending="false"
-                    button-text="Submit"
-                    theme="ghost"
-                    size="normal"
-                  >
-                    <template #iconOnly>
-                      <Icon name="radix-icons:eye-none" class="icon" />
-                    </template>
-                  </InputButtonCore>
-
-                  <InputButtonCore
-                    @click.stop.prevent="isPending"
-                    :is-pending="false"
-                    button-text="Submit"
-                    theme="ghost"
-                    size="medium"
-                  >
-                    <template #iconOnly>
-                      <Icon name="radix-icons:eye-none" class="icon" />
-                    </template>
-                  </InputButtonCore>
-
-                  <InputButtonCore
-                    @click.stop.prevent="isPending"
-                    :is-pending="false"
-                    button-text="Submit"
-                    theme="ghost"
+                    :theme
                     size="large"
                   >
                     <template #iconOnly>
@@ -232,6 +210,12 @@ useHead({
     class: '',
   },
 });
+
+const theme = ref('primary');
+
+const swapTheme = (newTheme: string) => {
+  theme.value = newTheme;
+};
 
 /*
  * Setup forms
@@ -274,5 +258,10 @@ const isPending = async () => {
   flex-wrap: wrap;
   gap: 24px;
   margin-bottom: 32px;
+}
+
+ul.flex-group {
+  list-style-type: none;
+  padding: 0;
 }
 </style>
