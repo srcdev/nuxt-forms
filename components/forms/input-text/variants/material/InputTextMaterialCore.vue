@@ -80,7 +80,7 @@ const props = defineProps({
   },
 });
 
-const compact = ref(false);
+const compact = ref(true);
 
 const labelText = computed(() => {
   return fieldHasError.value ? errorMessage.value : props.c12.label;
@@ -127,26 +127,27 @@ setDefaultError(props.c12.errorMessage);
 
   display: grid;
   border-radius: 2px;
-  outline: var(--_border-width) solid var(--_form-theme);
+  border: var(--_border-width) solid var(--_form-theme);
 
   margin-bottom: 20px;
   overflow: hidden;
-
-  &.compact {
-    overflow: initial;
-  }
 
   &.theme-secondary {
     --_form-theme: var(--theme-form-secondary);
   }
 
   &:focus-within {
-    outline: calc(var(--_border-width) * 2) solid var(--_form-theme);
+    border: var(--_border-width) solid var(--_form-theme);
+    outline: var(--_border-width) solid hsl(from var(--_form-theme) h s 50%);
     background-color: hsl(from var(--_form-theme) h s 95%);
   }
 
   &.error {
-    outline: calc(var(--_border-width) * 2) solid var(--theme-error);
+    /* outline: calc(var(--_border-width) * 2) solid var(--theme-error); */
+
+    border: var(--_border-width) solid var(--theme-error);
+    outline: var(--_border-width) solid hsl(from var(--theme-error) h s 75%);
+
     background-color: hsl(from var(--theme-error) h s 95%);
   }
 
@@ -169,29 +170,6 @@ setDefaultError(props.c12.errorMessage);
       transform: translateY(-2px);
       z-index: auto;
     }
-
-    &.compact {
-      align-content: center;
-      font-size: 16px;
-      padding: 0 12px;
-      transform: translateY(0);
-
-      span {
-        padding: 0 8px;
-      }
-
-      &.active,
-      &.dirty {
-        font-size: 16px;
-        font-weight: 500;
-        transform: translateY(-26px);
-        z-index: auto;
-
-        span {
-          background-color: white;
-        }
-      }
-    }
   }
 
   .input-text-container {
@@ -206,10 +184,6 @@ setDefaultError(props.c12.errorMessage);
     &.active,
     &.dirty {
       opacity: 1;
-    }
-
-    &.compact {
-      margin: 8px;
     }
 
     .input-text {
@@ -237,6 +211,55 @@ setDefaultError(props.c12.errorMessage);
         font-style: italic;
         font-weight: 500;
       }
+    }
+  }
+}
+
+/*
+* Compact UI
+**/
+
+.input-text-material {
+  &.compact {
+    overflow: initial;
+
+    &:focus-within {
+      background-color: initial;
+    }
+
+    &.error {
+      background-color: initial;
+    }
+  }
+
+  .label {
+    &.compact {
+      align-content: center;
+      font-size: 16px;
+      padding: 0 12px;
+      transform: translateY(0);
+
+      span {
+        padding: 0 8px;
+      }
+
+      &.active,
+      &.dirty {
+        font-size: 16px;
+        font-weight: 500;
+        transform: translateY(-26px);
+        z-index: auto;
+
+        span {
+          background-color: white;
+        }
+      }
+    }
+  }
+
+  .input-text-container {
+    &.compact {
+      margin: 8px;
     }
   }
 }
