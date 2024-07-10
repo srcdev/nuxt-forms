@@ -3,7 +3,6 @@
     type="email"
     :id
     :name
-    :validation
     :required
     :isPending
     :c12

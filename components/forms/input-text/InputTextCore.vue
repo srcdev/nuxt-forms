@@ -64,7 +64,7 @@ const props = defineProps({
   },
   validation: {
     type: String,
-    default: '',
+    default: null,
   },
   required: {
     type: Boolean,

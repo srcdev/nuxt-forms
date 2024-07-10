@@ -72,10 +72,6 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  validation: {
-    type: String,
-    default: '',
-  },
   required: {
     type: Boolean,
     value: false,

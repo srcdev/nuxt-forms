@@ -3,7 +3,6 @@
     :type
     :id
     :name
-    :validation
     :required
     :isPending
     :c12
