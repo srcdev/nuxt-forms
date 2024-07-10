@@ -81,6 +81,7 @@ export interface IFormData {
   data: IFieldsInitialState;
   validityState: IFormFieldsState;
   dirtyFields: IFormFieldsState;
+  focusedField: string;
   isPending: boolean;
   errorCount: number;
   customErrorMessages: ICustomErrorMessagesArr;

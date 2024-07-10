@@ -99,7 +99,10 @@ const labelText = computed(() => {
 });
 
 const modelValue = defineModel() as Ref<IFormData>;
-const isFocused = defineModel('isFocused') as Ref<boolean>;
+
+const isFocused = computed(() => {
+  return modelValue.value.focusedField == props.name;
+});
 
 const isDirty = computed(() => {
   return modelValue.value.dirtyFields[props.name];

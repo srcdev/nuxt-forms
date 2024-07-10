@@ -27,8 +27,8 @@
       ]"
       v-model="modelValue.data[name]"
       ref="inputField"
-      @focusin="isFocused = true"
-      @focusout="isFocused = false"
+      @focusin="updateFocus(name, true)"
+      @focusout="updateFocus(name, false)"
     />
 
     <template v-if="hasRightContent">
@@ -89,7 +89,14 @@ const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
 
 const modelValue = defineModel() as Ref<IFormData>;
-const isFocused = defineModel('isFocused') as Ref<boolean>;
+
+const updateFocus = (name: string, isFocused: boolean) => {
+  modelValue.value.focusedField = isFocused ? name : '';
+};
+
+const isFocused = computed(() => {
+  return modelValue.value.focusedField == name.value;
+});
 
 const isDirty = computed(() => {
   return modelValue.value.dirtyFields[name.value];

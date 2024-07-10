@@ -14,6 +14,7 @@ export function useFormControl(
     data: {} as IFieldsInitialState,
     validityState: {},
     dirtyFields: {},
+    focusedField: '',
     isPending: false,
     errorCount: 0,
     customErrorMessages: {},
