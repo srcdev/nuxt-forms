@@ -75,48 +75,72 @@
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Confirm"
-                    theme="tertiary"
+                    theme="primary"
                     size="medium"
                   />
                   <InputButtonConfirm
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Confirm"
-                    theme="tertiary"
+                    theme="primary"
                     size="large"
                   />
                 </div>
                 <div class="flex-group">
-                  <InputButtonSubmit
+                  <InputButtonCore
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Submit"
                     theme="primary"
-                    size="medium"
-                  />
-
-                  <InputButtonSubmit
-                    @click.stop.prevent="isPending"
-                    :is-pending="false"
-                    button-text="Submit"
-                    theme="secondary"
-                    size="medium"
-                  />
-
-                  <InputButtonSubmit
-                    @click.stop.prevent="isPending"
-                    :is-pending="false"
-                    button-text="Submit"
-                    theme="tertiary"
-                    size="medium"
-                  />
+                    size="x-small"
+                  >
+                    <template #iconOnly>
+                      <Icon name="radix-icons:eye-none" class="icon" />
+                    </template>
+                  </InputButtonCore>
 
                   <InputButtonCore
                     @click.stop.prevent="isPending"
                     :is-pending="false"
                     button-text="Submit"
-                    theme="tertiary"
+                    theme="primary"
                     size="small"
+                  >
+                    <template #iconOnly>
+                      <Icon name="radix-icons:eye-none" class="icon" />
+                    </template>
+                  </InputButtonCore>
+
+                  <InputButtonCore
+                    @click.stop.prevent="isPending"
+                    :is-pending="false"
+                    button-text="Submit"
+                    theme="primary"
+                    size="normal"
+                  >
+                    <template #iconOnly>
+                      <Icon name="radix-icons:eye-none" class="icon" />
+                    </template>
+                  </InputButtonCore>
+
+                  <InputButtonCore
+                    @click.stop.prevent="isPending"
+                    :is-pending="false"
+                    button-text="Submit"
+                    theme="primary"
+                    size="medium"
+                  >
+                    <template #iconOnly>
+                      <Icon name="radix-icons:eye-none" class="icon" />
+                    </template>
+                  </InputButtonCore>
+
+                  <InputButtonCore
+                    @click.stop.prevent="isPending"
+                    :is-pending="false"
+                    button-text="Submit"
+                    theme="primary"
+                    size="large"
                   >
                     <template #iconOnly>
                       <Icon name="radix-icons:eye-none" class="icon" />
@@ -131,6 +155,54 @@
                     button-text="Submit"
                     theme="ghost"
                     size="x-small"
+                  >
+                    <template #iconOnly>
+                      <Icon name="radix-icons:eye-none" class="icon" />
+                    </template>
+                  </InputButtonCore>
+
+                  <InputButtonCore
+                    @click.stop.prevent="isPending"
+                    :is-pending="false"
+                    button-text="Submit"
+                    theme="ghost"
+                    size="small"
+                  >
+                    <template #iconOnly>
+                      <Icon name="radix-icons:eye-none" class="icon" />
+                    </template>
+                  </InputButtonCore>
+
+                  <InputButtonCore
+                    @click.stop.prevent="isPending"
+                    :is-pending="false"
+                    button-text="Submit"
+                    theme="ghost"
+                    size="normal"
+                  >
+                    <template #iconOnly>
+                      <Icon name="radix-icons:eye-none" class="icon" />
+                    </template>
+                  </InputButtonCore>
+
+                  <InputButtonCore
+                    @click.stop.prevent="isPending"
+                    :is-pending="false"
+                    button-text="Submit"
+                    theme="ghost"
+                    size="medium"
+                  >
+                    <template #iconOnly>
+                      <Icon name="radix-icons:eye-none" class="icon" />
+                    </template>
+                  </InputButtonCore>
+
+                  <InputButtonCore
+                    @click.stop.prevent="isPending"
+                    :is-pending="false"
+                    button-text="Submit"
+                    theme="ghost"
+                    size="large"
                   >
                     <template #iconOnly>
                       <Icon name="radix-icons:eye-none" class="icon" />

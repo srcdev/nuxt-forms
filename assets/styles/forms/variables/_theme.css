@@ -36,6 +36,18 @@
   * Button Icon Sizes and Gap
   */
 
+  --theme-form-button-padding-inline-icon-only-x-small: 4px;
+  --theme-form-button-padding-inline-icon-only-small: 6px;
+  --theme-form-button-padding-inline-icon-only-normal: 8px;
+  --theme-form-button-padding-inline-icon-only-medium: 10px;
+  --theme-form-button-padding-inline-icon-only-large: 12px;
+
+  --theme-form-button-padding-block-icon-only-x-small: 4px;
+  --theme-form-button-padding-block-icon-only-small: 4px;
+  --theme-form-button-padding-block-icon-only-normal: 6px;
+  --theme-form-button-padding-block-icon-only-medium: 8px;
+  --theme-form-button-padding-block-icon-only-large: 10px;
+
   --theme-form-button-icon-size-x-small: 18px;
   --theme-form-button-icon-size-small: 18px;
   --theme-form-button-icon-size-normal: 18px;

@@ -156,6 +156,14 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
       --_padding-inline: var(--theme-form-button-padding-inline-x-small);
       --_icon-gap: var(--theme-form-button-icon-gap-x-small);
     }
+    &.icon-only {
+      --_padding-block: var(
+        --theme-form-button-padding-block-icon-only-x-small
+      );
+      --_padding-inline: var(
+        --theme-form-button-padding-inline-icon-only-x-small
+      );
+    }
   }
 
   &.small {
@@ -164,12 +172,24 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
       --_padding-inline: var(--theme-form-button-padding-inline-small);
       --_icon-gap: var(--theme-form-button-icon-gap-small);
     }
+    &.icon-only {
+      --_padding-block: var(--theme-form-button-padding-block-icon-only-small);
+      --_padding-inline: var(
+        --theme-form-button-padding-inline-icon-only-small
+      );
+    }
   }
   &.normal {
     &:not(.icon-only) {
       --_padding-block: var(--theme-form-button-padding-block-x-small);
       --_padding-inline: var(--theme-form-button-padding-inline-normal);
       --_icon-gap: var(--theme-form-button-icon-gap-normal);
+    }
+    &.icon-only {
+      --_padding-block: var(--theme-form-button-padding-block-icon-only-normal);
+      --_padding-inline: var(
+        --theme-form-button-padding-inline-icon-only-normal
+      );
     }
   }
   &.medium {
@@ -178,6 +198,12 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
       --_padding-inline: var(--theme-form-button-padding-inline-medium);
       --_icon-gap: var(--theme-form-button-icon-gap-medium);
     }
+    &.icon-only {
+      --_padding-block: var(--theme-form-button-padding-block-icon-only-medium);
+      --_padding-inline: var(
+        --theme-form-button-padding-inline-icon-only-medium
+      );
+    }
   }
 
   &.large {
@@ -185,6 +211,12 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
       --_padding-block: var(--theme-form-button-padding-block-x-small);
       --_padding-inline: var(--theme-form-button-padding-inline-large);
       --_icon-gap: var(--theme-form-button-icon-gap-large);
+    }
+    &.icon-only {
+      --_padding-block: var(--theme-form-button-padding-block-icon-only-large);
+      --_padding-inline: var(
+        --theme-form-button-padding-inline-icon-only-large
+      );
     }
   }
 
