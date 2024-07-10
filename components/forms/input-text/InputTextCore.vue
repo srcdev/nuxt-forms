@@ -120,11 +120,6 @@ const fieldHasError = () => {
 };
 
 watchEffect(() => {
-  console.log(
-    'InputTextCore >> Form value changed to: ',
-    modelValue.value.data[name.value]
-  );
-
   isDirty.value = modelValue.value.data[name.value] !== '';
 
   modelValue.value!.validityState[name.value] =
