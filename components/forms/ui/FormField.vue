@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="form-field"
-    :class="[width, styleClassPassthrough, { 'has-gutter': hasGutter }]"
-  >
+  <div class="form-field" :class="[width, styleClassPassthrough, { 'has-gutter': hasGutter }]">
     <slot name="default"></slot>
   </div>
 </template>

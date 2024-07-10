@@ -1,15 +1,5 @@
 <template>
-  <InputButtonCore
-    type="submit"
-    :use-effect="useEffect"
-    :effect="effect"
-    :data-test-id="dataTestId"
-    :size
-    :weight
-    :button-text="buttonText"
-    :style-class-passthrough="styleClassPassthrough"
-    :theme
-  >
+  <InputButtonCore type="submit" :use-effect="useEffect" :effect="effect" :data-test-id="dataTestId" :size :weight :button-text="buttonText" :style-class-passthrough="styleClassPassthrough" :theme>
     <template #left>
       <Icon name="material-symbols:check-circle-outline" class="icon" />
     </template>

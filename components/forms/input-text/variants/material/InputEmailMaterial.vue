@@ -1,26 +1,7 @@
 <template>
-  <InputTextMaterialCore
-    type="email"
-    :id
-    :name
-    :required
-    :isPending
-    :c12
-    :styleClassPassthrough
-    :theme
-    v-model="modelValue"
-  >
+  <InputTextMaterialCore type="email" :id :name :required :c12 :styleClassPassthrough :theme v-model="modelValue">
     <template #input>
-      <InputTextCore
-        :id
-        :name
-        type="email"
-        :validation
-        :required
-        v-model="modelValue"
-        :c12
-        :style-class-passthrough="styleClassPassthrough"
-      >
+      <InputTextCore :id :name type="email" :validation :required v-model="modelValue" :c12 :style-class-passthrough="styleClassPassthrough">
         <template #left>
           <Icon name="radix-icons:envelope-closed" class="icon" />
         </template>
@@ -70,10 +51,6 @@ const props = defineProps({
     default: '',
   },
   required: {
-    type: Boolean,
-    value: false,
-  },
-  isPending: {
     type: Boolean,
     value: false,
   },

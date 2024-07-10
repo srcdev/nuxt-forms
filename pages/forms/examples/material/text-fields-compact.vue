@@ -8,7 +8,7 @@
 
           <FormWrapper width="medium">
             <template #default>
-              <form @submit.prevent="isPending">
+              <form @submit.prevent="submitForm">
                 <FormField width="wide" :has-gutter="true">
                   <template #default>
                     <InputEmailMaterial
@@ -68,13 +68,7 @@
 
                 <FormField width="wide" :has-gutter="true">
                   <template #default>
-                    <InputButtonSubmit
-                      @click.stop.prevent="isPending"
-                      :is-pending="false"
-                      button-text="Submit"
-                      theme="secondary"
-                      size="medium"
-                    />
+                    <InputButtonSubmit @click.stop.prevent="submitForm" :is-pending="false" button-text="Submit" theme="secondary" size="medium" />
                   </template>
                 </FormField>
               </form>
@@ -119,19 +113,11 @@ const fieldsInitialState = ref<IFieldsInitialState>({
 });
 
 // Setup formData
-const {
-  formData,
-  initFormData,
-  getErrorCount,
-  updateCustomErrors,
-  resetForm,
-  formIsValid,
-  showErrors,
-} = useFormControl(fieldsInitialState);
+const { formData, initFormData, getErrorCount, updateCustomErrors, resetForm, formIsValid, showErrors } = useFormControl(fieldsInitialState);
 
 await initFormData();
 
-const isPending = async () => {
+const submitForm = async () => {
   formData.value.isPending = true;
   await getErrorCount();
 
@@ -140,6 +126,9 @@ const isPending = async () => {
   } else {
     console.warn('Form has errors');
   }
+
+  // await useSleep(2000);
+  // formData.value.isPending = false;
 };
 </script>
 

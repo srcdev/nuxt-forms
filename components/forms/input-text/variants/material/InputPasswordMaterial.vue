@@ -1,40 +1,11 @@
 <template>
-  <InputTextMaterialCore
-    :type
-    :id
-    :name
-    :required
-    :isPending
-    :c12
-    :styleClassPassthrough
-    :theme
-    v-model="modelValue"
-  >
+  <InputTextMaterialCore :type :id :name :required :c12 :styleClassPassthrough :theme v-model="modelValue">
     <template #input>
-      <InputTextCore
-        :id
-        :name
-        :type
-        :validation
-        :required
-        v-model="modelValue"
-        :c12
-        :style-class-passthrough="styleClassPassthrough"
-      >
+      <InputTextCore :id :name :type :validation :required v-model="modelValue" :c12 :style-class-passthrough="styleClassPassthrough">
         <template #right>
-          <InputButtonCore
-            @click.stop.prevent="toggleDisplayPassword"
-            :is-pending="false"
-            button-text="Submit"
-            theme="ghost"
-            size="x-small"
-          >
+          <InputButtonCore @click.stop.prevent="toggleDisplayPassword" :is-pending="false" button-text="Submit" theme="ghost" size="x-small">
             <template #iconOnly>
-              <Icon
-                v-if="displayPassword"
-                name="radix-icons:eye-none"
-                class="icon"
-              />
+              <Icon v-if="displayPassword" name="radix-icons:eye-none" class="icon" />
               <Icon v-else name="radix-icons:eye-open" class="icon" />
             </template>
           </InputButtonCore>
@@ -85,10 +56,6 @@ const props = defineProps({
     default: '',
   },
   required: {
-    type: Boolean,
-    value: false,
-  },
-  isPending: {
     type: Boolean,
     value: false,
   },

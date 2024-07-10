@@ -1,26 +1,7 @@
 <template>
-  <InputTextMaterialCore
-    :type
-    :id
-    :name
-    :required
-    :isPending
-    :c12
-    :styleClassPassthrough
-    :theme
-    v-model="modelValue"
-  >
+  <InputTextMaterialCore :type :id :name :required :c12 :styleClassPassthrough :theme v-model="modelValue">
     <template #input>
-      <InputTextCore
-        :id
-        :name
-        type="text"
-        :validation
-        :required
-        v-model="modelValue"
-        :c12
-        :style-class-passthrough="styleClassPassthrough"
-      />
+      <InputTextCore :id :name type="text" :validation :required v-model="modelValue" :c12 :style-class-passthrough="styleClassPassthrough" />
     </template>
   </InputTextMaterialCore>
 </template>
@@ -56,9 +37,7 @@ const props = defineProps({
     // type: String as PropType<"text" | "password" | "tel" | "number" | "email" | "url">, // This breaks props setup in unit tests
     type: String,
     validator(value: string) {
-      return ['text', 'password', 'tel', 'number', 'email', 'url'].includes(
-        value
-      );
+      return ['text', 'password', 'tel', 'number', 'email', 'url'].includes(value);
     },
   },
   id: {
@@ -75,10 +54,6 @@ const props = defineProps({
     default: '',
   },
   required: {
-    type: Boolean,
-    value: false,
-  },
-  isPending: {
     type: Boolean,
     value: false,
   },

@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="input-text-wrapper"
-    :class="[{ 'has-left-content': hasLeftContent }]"
-  >
+  <div class="input-text-wrapper" :class="[{ 'has-left-content': hasLeftContent }]">
     <template v-if="hasLeftContent">
       <span class="left-content">
         <slot name="left"></slot>
@@ -17,14 +14,7 @@
       :pattern="componentValidation.pattern"
       :maxlength="componentValidation.maxlength"
       :required
-      :class="[
-        'input-text',
-        'text-normal',
-        styleClassPassthrough,
-        { active: isFocused },
-        { dirty: isDirty },
-        { error: fieldHasError() },
-      ]"
+      :class="['input-text', 'text-normal', styleClassPassthrough, { active: isFocused }, { dirty: isDirty }, { error: fieldHasError() }]"
       v-model="modelValue.data[name]"
       ref="inputField"
       @focusin="updateFocus(name, true)"
@@ -48,9 +38,7 @@ const props = defineProps({
     // type: String as PropType<"text" | "password" | "tel" | "number" | "email" | "url">, // This breaks props setup in unit tests
     type: String,
     validator(value: string) {
-      return ['text', 'password', 'tel', 'number', 'email', 'url'].includes(
-        value
-      );
+      return ['text', 'password', 'tel', 'number', 'email', 'url'].includes(value);
     },
   },
   id: {
@@ -67,10 +55,6 @@ const props = defineProps({
     default: null,
   },
   required: {
-    type: Boolean,
-    value: false,
-  },
-  isPending: {
     type: Boolean,
     value: false,
   },
@@ -94,6 +78,10 @@ const updateFocus = (name: string, isFocused: boolean) => {
   modelValue.value.focusedField = isFocused ? name : '';
 };
 
+const isPending = computed(() => {
+  return modelValue.value.isPending;
+});
+
 const isFocused = computed(() => {
   return modelValue.value.focusedField == name.value;
 });
@@ -108,33 +96,26 @@ const name = computed(() => {
 
 const validatorLocale = toRef(useRuntimeConfig().public.validatorLocale);
 
-const componentValidation =
-  validationConfig[validatorLocale.value][props.validation];
+const componentValidation = validationConfig[validatorLocale.value][props.validation];
 const inputField = ref<HTMLInputElement | null>(null);
 
-const { hasCustomError, removeCustomError } = useErrorMessage(
-  name.value,
-  modelValue
-);
+const { hasCustomError, removeCustomError } = useErrorMessage(name.value, modelValue);
 
 const fieldHasError = () => {
   const hasApiErrorMessage = hasCustomError();
   const inputBad = !inputField.value?.validity.valid;
 
   if (modelValue.value.isPending) {
-    modelValue.value!.validityState[name.value] =
-      inputField.value?.validity.valid ?? false;
+    modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
     return hasApiErrorMessage ? hasApiErrorMessage : inputBad;
   }
   return false;
 };
 
 watchEffect(() => {
-  modelValue.value.dirtyFields[name.value] =
-    modelValue.value.data[name.value] !== '';
+  modelValue.value.dirtyFields[name.value] = modelValue.value.data[name.value] !== '';
 
-  modelValue.value!.validityState[name.value] =
-    inputField.value?.validity.valid ?? false;
+  modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
   if (hasCustomError()) {
     removeCustomError(inputField.value?.validity.valid);
   }
@@ -142,8 +123,7 @@ watchEffect(() => {
 
 const isValid = () => {
   setTimeout(() => {
-    modelValue.value!.validityState[name.value] =
-      inputField.value?.validity.valid ?? false;
+    modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
   }, 0);
 };
 

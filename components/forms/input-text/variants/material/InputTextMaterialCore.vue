@@ -1,29 +1,9 @@
 <template>
-  <div
-    class="input-text-material"
-    :class="[`theme-${theme}`, { error: fieldHasError }, { compact: compact }]"
-  >
-    <label
-      class="label"
-      :class="[
-        { active: isFocused },
-        { error: fieldHasError },
-        { dirty: isDirty },
-        { compact: compact },
-      ]"
-      :for="id"
-    >
+  <div class="input-text-material" :class="[`theme-${theme}`, { error: fieldHasError }, { compact: compact }]">
+    <label class="label" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: isDirty }, { compact: compact }]" :for="id">
       <span>{{ labelText }}</span>
     </label>
-    <div
-      class="input-text-container"
-      :class="[
-        { active: isFocused },
-        { error: fieldHasError },
-        { dirty: isDirty },
-        { compact: compact },
-      ]"
-    >
+    <div class="input-text-container" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: isDirty }, { compact: compact }]">
       <slot name="input"></slot>
     </div>
   </div>
@@ -59,9 +39,7 @@ const props = defineProps({
   type: {
     type: String,
     validator(value: string) {
-      return ['text', 'password', 'tel', 'number', 'email', 'url'].includes(
-        value
-      );
+      return ['text', 'password', 'tel', 'number', 'email', 'url'].includes(value);
     },
   },
   id: {
@@ -73,10 +51,6 @@ const props = defineProps({
     default: null,
   },
   required: {
-    type: Boolean,
-    value: false,
-  },
-  isPending: {
     type: Boolean,
     value: false,
   },
@@ -108,10 +82,7 @@ const isDirty = computed(() => {
   return modelValue.value.dirtyFields[props.name];
 });
 
-const { errorMessage, setDefaultError, fieldHasError } = useErrorMessage(
-  props.name,
-  modelValue
-);
+const { errorMessage, setDefaultError, fieldHasError } = useErrorMessage(props.name, modelValue);
 setDefaultError(props.c12.errorMessage);
 </script>
 
