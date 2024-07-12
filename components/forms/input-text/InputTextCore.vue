@@ -17,6 +17,7 @@
       :class="['input-text', 'text-normal', styleClassPassthrough, { active: isFocused }, { dirty: isDirty }, { error: fieldHasError() }]"
       v-model="modelValue.data[name]"
       ref="inputField"
+      :readonly="isPending"
       @focusin="updateFocus(name, true)"
       @focusout="updateFocus(name, false)"
     />
@@ -113,6 +114,7 @@ const fieldHasError = () => {
 };
 
 watchEffect(() => {
+  console.log('watchEffect()');
   modelValue.value.dirtyFields[name.value] = modelValue.value.data[name.value] !== '';
 
   modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;

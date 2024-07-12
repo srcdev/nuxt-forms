@@ -1,5 +1,17 @@
 <template>
-  <InputButtonCore type="submit" :use-effect="useEffect" :effect="effect" :data-test-id="dataTestId" :size :weight :button-text="buttonText" :style-class-passthrough="styleClassPassthrough" :theme>
+  <InputButtonCore
+    type="submit"
+    :use-effect="useEffect"
+    :isPending="isPending"
+    :readonly
+    :effect="effect"
+    :data-test-id="dataTestId"
+    :size
+    :weight
+    :button-text="buttonText"
+    :style-class-passthrough="styleClassPassthrough"
+    :theme
+  >
     <template #left>
       <Icon name="material-symbols:check-circle-outline" class="icon" />
     </template>
@@ -53,6 +65,14 @@ const props = defineProps({
   styleClassPassthrough: {
     type: String,
     default: '',
+  },
+  isPending: {
+    type: Boolean,
+    default: false,
+  },
+  readonly: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>

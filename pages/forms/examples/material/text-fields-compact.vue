@@ -68,7 +68,7 @@
 
                 <FormField width="wide" :has-gutter="true">
                   <template #default>
-                    <InputButtonSubmit @click.stop.prevent="submitForm" :is-pending="false" button-text="Submit" theme="secondary" size="medium" />
+                    <InputButtonSubmit @click.stop.prevent="submitForm" :is-pending="false" :readonly="false" button-text="Submit" theme="secondary" size="medium" />
                   </template>
                 </FormField>
               </form>
@@ -123,12 +123,11 @@ const submitForm = async () => {
 
   if (formIsValid.value) {
     console.log('Form is good - post it!');
+    await useSleep(2000);
+    formData.value.isPending = false;
   } else {
     console.warn('Form has errors');
   }
-
-  // await useSleep(2000);
-  // formData.value.isPending = false;
 };
 </script>
 

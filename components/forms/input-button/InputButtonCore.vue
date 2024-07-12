@@ -1,16 +1,11 @@
 <template>
   <button
     :type="type"
+    :readonly
+    :aria-disabled="readonly"
     :data-test-id="dataTestId"
     class="btn"
-    :class="[
-      `btn-${type}`,
-      `theme-${theme}`,
-      size,
-      effectClass,
-      styleClassPassthrough,
-      { 'icon-only': isIconOnly },
-    ]"
+    :class="[`btn-${type}`, `theme-${theme}`, size, effectClass, styleClassPassthrough, { 'icon-only': isIconOnly }]"
   >
     <span v-if="useEffect && effect == 'fancy'" class="fancy"></span>
     <template v-if="hasLeftContent && !isIconOnly">
@@ -18,9 +13,7 @@
         <slot name="left"></slot>
       </span>
     </template>
-    <span class="btn-text" :class="[size, weight, { 'sr-only': isIconOnly }]">{{
-      buttonText
-    }}</span>
+    <span class="btn-text" :class="[size, weight, { 'sr-only': isIconOnly }]">{{ buttonText }}</span>
     <template v-if="hasRightContent && !isIconOnly">
       <span class="btn-icon right">
         <slot name="right"></slot>
@@ -89,6 +82,14 @@ const props = defineProps({
       return ['fancy', 'pulse'].includes(value);
     },
   },
+  isPending: {
+    type: Boolean,
+    default: false,
+  },
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const type = toRef(() => props.type);
@@ -132,6 +133,14 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
     cursor: pointer;
   }
 
+  &[readonly] {
+    opacity: 0.5;
+    &:hover,
+    &:focus-visible {
+      cursor: not-allowed;
+    }
+  }
+
   &.x-small {
     &:not(.icon-only) {
       --_padding-block: var(--theme-form-button-padding-block-x-small);
@@ -139,12 +148,8 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
       --_icon-gap: var(--theme-form-button-icon-gap-x-small);
     }
     &.icon-only {
-      --_padding-block: var(
-        --theme-form-button-padding-block-icon-only-x-small
-      );
-      --_padding-inline: var(
-        --theme-form-button-padding-inline-icon-only-x-small
-      );
+      --_padding-block: var(--theme-form-button-padding-block-icon-only-x-small);
+      --_padding-inline: var(--theme-form-button-padding-inline-icon-only-x-small);
     }
   }
 
@@ -156,9 +161,7 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
     }
     &.icon-only {
       --_padding-block: var(--theme-form-button-padding-block-icon-only-small);
-      --_padding-inline: var(
-        --theme-form-button-padding-inline-icon-only-small
-      );
+      --_padding-inline: var(--theme-form-button-padding-inline-icon-only-small);
     }
   }
   &.normal {
@@ -169,9 +172,7 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
     }
     &.icon-only {
       --_padding-block: var(--theme-form-button-padding-block-icon-only-normal);
-      --_padding-inline: var(
-        --theme-form-button-padding-inline-icon-only-normal
-      );
+      --_padding-inline: var(--theme-form-button-padding-inline-icon-only-normal);
     }
   }
   &.medium {
@@ -182,9 +183,7 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
     }
     &.icon-only {
       --_padding-block: var(--theme-form-button-padding-block-icon-only-medium);
-      --_padding-inline: var(
-        --theme-form-button-padding-inline-icon-only-medium
-      );
+      --_padding-inline: var(--theme-form-button-padding-inline-icon-only-medium);
     }
   }
 
@@ -196,9 +195,7 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
     }
     &.icon-only {
       --_padding-block: var(--theme-form-button-padding-block-icon-only-large);
-      --_padding-inline: var(
-        --theme-form-button-padding-inline-icon-only-large
-      );
+      --_padding-inline: var(--theme-form-button-padding-inline-icon-only-large);
     }
   }
 
