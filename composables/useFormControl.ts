@@ -1,13 +1,6 @@
-import type {
-  IFormData,
-  IFieldsInitialState,
-  ICustomErrorMessage,
-  ICustomErrorMessagesArr,
-} from '@/types/types.forms';
+import type { IFormData, IFieldsInitialState, ICustomErrorMessage, ICustomErrorMessagesArr } from '@/types/types.forms';
 
-export function useFormControl(
-  fieldsInitialState: IFieldsInitialState | Ref<IFieldsInitialState | null>
-) {
+export function useFormControl(fieldsInitialState: IFieldsInitialState | Ref<IFieldsInitialState | null>) {
   let savedInitialState = {};
 
   const formData = ref<IFormData>({
@@ -20,8 +13,8 @@ export function useFormControl(
     customErrorMessages: {},
     hasCustomErrorMessages: false,
     formIsValid: false,
-    showErrors: false,
     submitSuccess: false,
+    submitDisabled: false,
   });
 
   const initValidationState = async () => {
@@ -37,22 +30,27 @@ export function useFormControl(
     await initValidationState();
 
     if (fieldsInitialState !== null) {
-      savedInitialState = toRaw(
-        fieldsInitialState.value
-      ) as IFieldsInitialState;
+      savedInitialState = toRaw(fieldsInitialState.value) as IFieldsInitialState;
       formData.value.data = fieldsInitialState as IFieldsInitialState;
     }
     return;
   };
 
-  const getErrorCount = async () => {
+  const getErrorCount = async (updateState: boolean = false) => {
     await nextTick();
 
-    const errorCount = Object.values(formData.value.validityState).filter(
-      (value) => !value
-    ).length;
+    const errorCount = Object.values(formData.value.validityState).filter((value) => !value).length;
     formData.value.errorCount = errorCount;
     formData.value.formIsValid = errorCount === 0;
+
+    if (updateState) {
+      formData.value.submitDisabled = true;
+    }
+
+    if (formData.value.submitDisabled) {
+      formData.value.submitDisabled = !formData.value.formIsValid;
+    }
+
     return formData.value.errorCount;
   };
 
@@ -81,11 +79,7 @@ export function useFormControl(
    *   };
    *   updateCustomErrors("email", sampleCustomErrorEmail);
    */
-  const updateCustomErrors = (
-    name: string,
-    message: null | string = null,
-    valid: boolean = false
-  ) => {
+  const updateCustomErrors = (name: string, message: null | string = null, valid: boolean = false) => {
     if (message !== null) {
       formData.value.validityState[name] = valid;
       formData.value.customErrorMessages[name] = {
@@ -93,14 +87,11 @@ export function useFormControl(
         message,
       };
     }
-    formData.value.hasCustomErrorMessages =
-      countItemsWithCustomError(formData.value.customErrorMessages) > 0;
+    formData.value.hasCustomErrorMessages = countItemsWithCustomError(formData.value.customErrorMessages) > 0;
   };
 
   const resetForm = () => {
-    formData.value.data = toRaw(
-      fieldsInitialState.value
-    ) as IFieldsInitialState;
+    formData.value.data = toRaw(fieldsInitialState.value) as IFieldsInitialState;
     formData.value.validityState = {};
     formData.value.errorCount = 0;
     formData.value.isPending = false;
@@ -108,15 +99,20 @@ export function useFormControl(
     formData.value.formIsValid = false;
   };
 
-  const showErrors = computed(() => {
-    return formData.value.errorCount > 0 && formData.value.isPending;
-  });
-
   const formIsValid = computed(() => {
     return formData.value.errorCount === 0;
   });
 
+  const submitDisabled = computed(() => {
+    return formData.value.submitDisabled;
+  });
+
   // Keep an eye on this for performance issue
+
+  watchEffect(() => {
+    console.log('watchEffect: formData.value', formData.value.validityState);
+  });
+
   watch(
     () => formData.value.validityState,
     () => {
@@ -125,20 +121,16 @@ export function useFormControl(
     { deep: true }
   );
 
-  // watch(
-  //   () => savedInitialState,
-  //   () => {
-  //     console.log("savedInitialState UPDATED", savedInitialState);
-  //   }
-  // );
+  onMounted(() => {
+    initFormData();
+  });
 
   return {
     formData,
-    initFormData,
     getErrorCount,
     updateCustomErrors,
     resetForm,
-    showErrors,
     formIsValid,
+    submitDisabled,
   };
 }

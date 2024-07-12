@@ -17,14 +17,7 @@ export interface IOptionsValueArr {
 }
 
 export interface IFieldsInitialState {
-  [key: string]:
-    | null
-    | string
-    | boolean
-    | number
-    | URL
-    | object
-    | IOptionsValueArr[];
+  [key: string]: null | string | boolean | number | URL | object | IOptionsValueArr[];
 }
 
 export interface IValidityState {
@@ -86,6 +79,6 @@ export interface IFormData {
   errorCount: number;
   customErrorMessages: ICustomErrorMessagesArr;
   formIsValid: boolean;
-  showErrors: boolean;
   submitSuccess: boolean;
+  submitDisabled: boolean;
 }

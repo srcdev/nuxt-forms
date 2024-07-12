@@ -68,7 +68,7 @@
 
                 <FormField width="wide" :has-gutter="true">
                   <template #default>
-                    <InputButtonSubmit @click.stop.prevent="submitForm" :is-pending="false" :readonly="false" button-text="Submit" theme="secondary" size="medium" />
+                    <InputButtonSubmit @click.stop.prevent="submitForm" :is-pending="false" :readonly="submitDisabled" button-text="Submit" theme="secondary" size="medium" />
                   </template>
                 </FormField>
               </form>
@@ -113,18 +113,16 @@ const fieldsInitialState = ref<IFieldsInitialState>({
 });
 
 // Setup formData
-const { formData, initFormData, getErrorCount, updateCustomErrors, resetForm, formIsValid, showErrors } = useFormControl(fieldsInitialState);
-
-await initFormData();
+const { formData, getErrorCount, updateCustomErrors, resetForm, formIsValid, submitDisabled } = useFormControl(fieldsInitialState);
 
 const submitForm = async () => {
-  formData.value.isPending = true;
-  await getErrorCount();
+  await getErrorCount(true);
 
   if (formIsValid.value) {
+    formData.value.isPending = true;
     console.log('Form is good - post it!');
-    await useSleep(2000);
-    formData.value.isPending = false;
+    // await useSleep(2000);
+    // formData.value.isPending = false;
   } else {
     console.warn('Form has errors');
   }

@@ -1,7 +1,7 @@
-import type { IFormData } from "@/types/types.forms";
+import type { IFormData } from '@/types/types.forms';
 
 export function useErrorMessage(name: string, formData: Ref<IFormData>) {
-  const defaultError = ref("");
+  const defaultError = ref('');
   const customErrorMessages = ref(toRaw(formData.value.customErrorMessages));
 
   const hasCustomError = () => {
@@ -21,7 +21,7 @@ export function useErrorMessage(name: string, formData: Ref<IFormData>) {
   };
 
   const fieldHasError = computed(() => {
-    if (formData.value.isPending) {
+    if (formData.value.submitDisabled) {
       if (hasCustomError()) {
         return true;
       } else if (Object.keys(formData.value.validityState).length > 0 && formData.value.validityState[name] !== undefined) {
@@ -42,6 +42,6 @@ export function useErrorMessage(name: string, formData: Ref<IFormData>) {
     errorMessage,
     setDefaultError,
     fieldHasError,
-    removeCustomError
+    removeCustomError,
   };
 }
