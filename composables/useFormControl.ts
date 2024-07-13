@@ -109,10 +109,6 @@ export function useFormControl(fieldsInitialState: IFieldsInitialState | Ref<IFi
 
   // Keep an eye on this for performance issue
 
-  watchEffect(() => {
-    console.log('watchEffect: formData.value', formData.value.validityState);
-  });
-
   watch(
     () => formData.value.validityState,
     () => {

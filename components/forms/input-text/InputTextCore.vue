@@ -114,7 +114,6 @@ const fieldHasError = () => {
 };
 
 watchEffect(() => {
-  console.log('watchEffect()');
   modelValue.value.dirtyFields[name.value] = modelValue.value.data[name.value] !== '';
 
   modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
