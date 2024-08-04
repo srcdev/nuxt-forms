@@ -2,15 +2,17 @@ import type { IFormData } from '@/types/types.forms';
 
 export function useErrorMessage(name: string, formData: Ref<IFormData>) {
   const defaultError = ref('');
-  const customErrorMessages = ref(toRaw(formData.value.customErrorMessages));
+  const errorMessages = ref(formData.value.errorMessages);
 
   const hasCustomError = () => {
-    return customErrorMessages.value[name] !== undefined && customErrorMessages.value[name].useCustomError;
+    return errorMessages.value[name] !== undefined && errorMessages.value[name].useCustomError;
   };
 
   const errorMessage = computed(() => {
+    console.log(`errorMessage()`);
     if (hasCustomError()) {
-      return customErrorMessages.value[name].message;
+      console.log(`errorMessage() | IF`);
+      return errorMessages.value[name].message;
     } else {
       return defaultError.value;
     }
@@ -21,20 +23,30 @@ export function useErrorMessage(name: string, formData: Ref<IFormData>) {
   };
 
   const fieldHasError = computed(() => {
+    // console.log(`fieldHasError() | name(${name})`);
+    nextTick();
     if (formData.value.submitDisabled) {
+      console.log(`fieldHasError() | name(${name}) | IF`);
       if (hasCustomError()) {
+        console.log(`fieldHasError() | name(${name}) | IF | IF`);
+
         return true;
       } else if (Object.keys(formData.value.validityState).length > 0 && formData.value.validityState[name] !== undefined) {
+        console.log(`fieldHasError() | name(${name}) | IF | ELSE IF`);
+
         return !formData.value.validityState[name];
       }
+      console.log(`fieldHasError() | name(${name}) | IF | ELSE`);
+
       return false;
     }
   });
 
   const removeCustomError = (valid: boolean = false) => {
-    formData.value.validityState[name] = valid;
+    console.log(`useErrorMessage | removeCustomError | name(${name}) | valid(${valid})`);
+    // formData.value.validityState[name] = valid;
     // await nextTick();
-    delete formData.value.customErrorMessages[name];
+    // delete formData.value.errorMessages[name];
   };
 
   return {

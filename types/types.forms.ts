@@ -65,8 +65,23 @@ export interface InpuTextC12 {
   errorMessage: string;
 }
 
-export interface ICustomErrorMessagesArr {
+export interface IErrorMessagesArr {
   [x: string]: ICustomErrorMessage;
+}
+
+export interface IFormFieldC12 {
+  label: string;
+  placeholder: string;
+  errorMessage: string;
+  useCustomError: boolean;
+  customErrors: null | string[];
+  isValid: boolean;
+  isDirty: boolean;
+  type: string;
+}
+
+export interface IFormFieldsC12 {
+  [x: string]: IFormFieldC12;
 }
 
 export interface IFormData {
@@ -77,8 +92,11 @@ export interface IFormData {
   focusedField: string;
   isPending: boolean;
   errorCount: number;
-  customErrorMessages: ICustomErrorMessagesArr;
+  errorMessages: IErrorMessagesArr;
+  formFieldsC12: IFormFieldsC12;
   formIsValid: boolean;
-  submitSuccess: boolean;
+  submitAttempted: boolean;
   submitDisabled: boolean;
+  submitSuccess: boolean;
+  displayErrorMessages: boolean;
 }

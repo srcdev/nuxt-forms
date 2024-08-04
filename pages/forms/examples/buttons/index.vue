@@ -122,7 +122,7 @@ const fieldsInitialState = ref<IFieldsInitialState>({
 });
 
 // Setup formData
-const { formData, getErrorCount, updateCustomErrors, resetForm, formIsValid, submitDisabled } = useFormControl(fieldsInitialState);
+const { formData, getErrorCount, updateErrorMessages, resetForm, formIsValid, submitDisabled } = useFormControl(fieldsInitialState);
 
 const submitForm = async () => {
   await getErrorCount(true);

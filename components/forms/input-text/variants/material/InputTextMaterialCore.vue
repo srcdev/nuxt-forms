@@ -1,9 +1,9 @@
 <template>
   <div class="input-text-material" :class="[`theme-${theme}`, { error: fieldHasError }, { compact: compact }]">
-    <label class="label" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: isDirty }, { compact: compact }]" :for="id">
+    <label class="label" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]" :for="id">
       <span>{{ labelText }}</span>
     </label>
-    <div class="input-text-container" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: isDirty }, { compact: compact }]">
+    <div class="input-text-container" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]">
       <slot name="input"></slot>
     </div>
   </div>
@@ -69,7 +69,17 @@ const props = defineProps({
 });
 
 const labelText = computed(() => {
-  return fieldHasError.value ? errorMessage.value : props.c12.label;
+  if (typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined') {
+    if (modelValue.value.submitAttempted && !modelValue.value.formFieldsC12[props.name].isValid) {
+      if (modelValue.value.formFieldsC12[props.name].useCustomError) {
+        return modelValue.value.formFieldsC12[props.name].customErrors;
+      } else {
+        return modelValue.value.formFieldsC12[props.name].errorMessage;
+      }
+    } else {
+      return props.c12.label;
+    }
+  }
 });
 
 const modelValue = defineModel() as Ref<IFormData>;
@@ -78,12 +88,25 @@ const isFocused = computed(() => {
   return modelValue.value.focusedField == props.name;
 });
 
-const isDirty = computed(() => {
-  return modelValue.value.dirtyFields[props.name];
+const fieldIsDirty = computed(() => {
+  if (typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined') {
+    return modelValue.value!.formFieldsC12[props.name].isDirty;
+  } else {
+    return false;
+  }
 });
 
-const { errorMessage, setDefaultError, fieldHasError } = useErrorMessage(props.name, modelValue);
-setDefaultError(props.c12.errorMessage);
+const fieldHasError = computed(() => {
+  if (typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined') {
+    return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
+  } else {
+    return false;
+  }
+});
+// const { errorMessage, setDefaultError, fieldHasError } = useErrorMessage(props.name, modelValue);
+// setDefaultError(props.c12.errorMessage);
+
+// const { fieldIsDirty } = useFormControl();
 </script>
 
 <style lang="css">
