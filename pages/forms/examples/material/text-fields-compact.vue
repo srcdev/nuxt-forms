@@ -4,7 +4,7 @@
       <template #layout-content>
         <div class="cols-2">
           <div class="col">
-            <h1>Material UI text fields (default)</h1>
+            <h1>Material UI text fields (compact)</h1>
             <p>Example test fields in default material UI</p>
 
             <FormWrapper width="medium">
@@ -113,11 +113,12 @@ const compact = ref(true);
  */
 const fieldsInitialState = ref<IFieldsInitialState>({
   // emailAddress: 'simon@simon.com',
-  emailAddress: '',
-  // username: 'SimonFromBath',
-  username: '',
-  // password: '!+Password123',
-  password: '',
+  emailAddress: 'test@test.com',
+  // emailAddress: '',
+  username: 'SimonFromBath',
+  // username: '',
+  password: '!+Password123',
+  // password: '',
 });
 
 // Setup formData
@@ -131,7 +132,14 @@ async function postFormData() {
       body: formData.value.data,
       onResponse({ response }) {
         if (response.status === 400) {
+          console.log('onResponse', response);
+          console.log(response.status);
+
           useApiErrors(response._data.data.errors);
+          // for (const [key, message] of Object.entries(response._data.data.errors)) {
+          //   console.log(`${key}: ${message}`);
+          //   updateErrorMessages(key, message);
+          // }
         }
         if (response.status === 200) {
           formData.value.isPending = false;
@@ -139,8 +147,9 @@ async function postFormData() {
         }
       },
     });
+    console.log('3: Finished data', data);
   } catch (error) {
-    console.warn('An error occured posting form data', error);
+    console.warn('2: An error occured posting form data', error);
   }
 
   // return data;

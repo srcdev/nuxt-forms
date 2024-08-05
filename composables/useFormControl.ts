@@ -99,7 +99,14 @@ export function useFormControl() {
       // };
 
       formData.value.formFieldsC12[name].useCustomError = true;
-      formData.value.formFieldsC12[name].customErrors = [message];
+
+      // if (typeof message === 'string') {
+      //   formData.value.formFieldsC12[name].customErrors = message;
+      // } else if (typeof message === 'object') {
+      //   formData.value.formFieldsC12[name].customErrors = message;
+      // }
+
+      formData.value.formFieldsC12[name].customErrors = message;
       formData.value.formFieldsC12[name].isValid = valid;
 
       // formData.value.errorMessages[name].useCustomError = true;
@@ -114,7 +121,7 @@ export function useFormControl() {
     // });
 
     for (const [key, message] of Object.entries(errors)) {
-      console.log(`${key}: ${message}`);
+      // console.log(`${key}: ${message}`);
       updateErrorMessages(key, message);
     }
   };

@@ -28,7 +28,7 @@ export default defineEventHandler(async (event: any) => {
         errors: {
           emailAddress: 'Email address already registered',
           username: 'Username already registered',
-          password: 'Password is too weak',
+          password: ['Password is too weak', 'Password is too short'],
         },
       },
     });

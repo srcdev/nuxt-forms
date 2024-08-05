@@ -72,6 +72,19 @@ const labelText = computed(() => {
   if (typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined') {
     if (modelValue.value.submitAttempted && !modelValue.value.formFieldsC12[props.name].isValid) {
       if (modelValue.value.formFieldsC12[props.name].useCustomError) {
+        if (typeof modelValue.value.formFieldsC12[props.name].customErrors === 'string') {
+          return modelValue.value.formFieldsC12[props.name].customErrors;
+        } else {
+          if (modelValue.value.formFieldsC12[props.name].customErrors !== null) {
+            let errorMessages = '';
+            modelValue.value.formFieldsC12[props.name].customErrors.forEach((message: string, index: number) => {
+              const join = index === 0 ? '' : ', ';
+              errorMessages += join + message;
+            });
+            return errorMessages;
+          }
+        }
+
         return modelValue.value.formFieldsC12[props.name].customErrors;
       } else {
         return modelValue.value.formFieldsC12[props.name].errorMessage;

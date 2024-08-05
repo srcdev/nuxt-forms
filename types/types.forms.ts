@@ -74,7 +74,7 @@ export interface IFormFieldC12 {
   placeholder: string;
   errorMessage: string;
   useCustomError: boolean;
-  customErrors: null | string[];
+  customErrors: null | string | string[];
   isValid: boolean;
   isDirty: boolean;
   type: string;
