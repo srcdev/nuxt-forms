@@ -1,4 +1,4 @@
-import type { IFormData, IFieldsInitialState, IFormFieldC12, ICustomErrorMessage, IErrorMessagesArr } from '@/types/types.forms';
+import type { IFormData, IFieldsInitialState, IFormFieldC12, IApiErrorMessages, ICustomErrorMessage, IErrorMessagesArr } from '@/types/types.forms';
 import { formFieldC12 } from '@/components/forms/c12/utils';
 
 export function useFormControl() {
@@ -108,10 +108,10 @@ export function useFormControl() {
     formData.value.hasCustomErrorMessages = countItemsWithCustomError(formData.value.errorMessages) > 0;
   };
 
-  const useApiErrors = async (errors: any) => {
-    Object.keys(errors).forEach((key: any) => {
-      updateErrorMessages(key, errors[key]);
-    });
+  const useApiErrors = async (errors: IApiErrorMessages) => {
+    // Object.keys(errors).forEach((key) => {
+    //   updateErrorMessages(key, errors[key]);
+    // });
 
     for (const [key, message] of Object.entries(errors)) {
       console.log(`${key}: ${message}`);

@@ -113,11 +113,12 @@ const compact = ref(false);
  */
 const fieldsInitialState = ref<IFieldsInitialState>({
   // emailAddress: 'simon@simon.com',
-  emailAddress: '',
-  // username: 'SimonFromBath',
-  username: '',
-  // password: '!+Password123',
-  password: '',
+  emailAddress: 'test@test.com',
+  // emailAddress: '',
+  username: 'SimonFromBath',
+  // username: '',
+  password: '!+Password123',
+  // password: '',
 });
 
 // Setup formData

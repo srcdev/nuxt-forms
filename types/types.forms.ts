@@ -100,3 +100,7 @@ export interface IFormData {
   submitSuccess: boolean;
   displayErrorMessages: boolean;
 }
+
+export interface IApiErrorMessages {
+  [x: string]: string;
+}
