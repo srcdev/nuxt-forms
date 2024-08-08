@@ -136,24 +136,53 @@ const formFieldC12 = <IFormFieldC12>{
   isValid: false,
   isDirty: false,
   type: 'string',
+  previousValue: null,
 };
 modelValue.value!.formFieldsC12[name.value] = formFieldC12;
 
 const { initFormFieldsC12 } = useFormControl();
 initFormFieldsC12(props.name, formFieldC12);
 
+const fieldValue = computed(() => {
+  return modelValue.value.data[name.value];
+});
+
 watch(
-  modelValue.value.data,
+  fieldValue,
   () => {
     if (!modelValue.value!.formFieldsC12[name.value].isDirty) {
       modelValue.value!.formFieldsC12[name.value].isDirty = modelValue.value.data[name.value] !== '';
     }
     modelValue.value!.formFieldsC12[name.value].isValid = inputField.value?.validity.valid ?? false;
     modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
-  },
-  {
-    deep: true,
+
+    if (
+      // modelValue.value!.validityState[name.value] &&
+      modelValue.value!.formFieldsC12[name.value].useCustomError &&
+      modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue
+    ) {
+      modelValue.value!.validityState[name.value] = false;
+      modelValue.value!.formFieldsC12[name.value].isValid = false;
+      modelValue.value.displayErrorMessages = true;
+    }
+    // else {
+    //   modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
+    // }
+
+    // if (modelValue.value.formFieldsC12[name.value].useCustomError) {
+    // modelValue.value!.validityState[name.value] = modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue;
+
+    // if (modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue) {
+    //   modelValue.value!.validityState[name.value] = false;
+    // }
+    // else {
+    //   modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
+    // }
+    // }
   }
+  // {
+  //   deep: true,
+  // }
 );
 
 const isValid = () => {

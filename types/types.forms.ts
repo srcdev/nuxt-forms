@@ -78,6 +78,7 @@ export interface IFormFieldC12 {
   isValid: boolean;
   isDirty: boolean;
   type: string;
+  previousValue: null | string | boolean | number | URL | object;
 }
 
 export interface IFormFieldsC12 {

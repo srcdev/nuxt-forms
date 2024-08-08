@@ -45,6 +45,12 @@ export function useFormControl() {
     return;
   };
 
+  const updatePreviousValues = () => {
+    Object.keys(formData.value.data).forEach((key) => {
+      formData.value.formFieldsC12[key].previousValue = formData.value.data[key];
+    });
+  };
+
   const getErrorCount = async (updateState: boolean = false) => {
     await nextTick();
 
@@ -179,17 +185,14 @@ export function useFormControl() {
     { deep: true }
   );
 
-  // watch(
-  //   () => formData.value.errorMessages,
-  //   () => {
-  //     console.log(formData.value.errorMessages);
-  //   },
-  //   { deep: true }
-  // );
-
-  // onMounted(async () => {
-  //   await initFormData(fieldsInitialState);
-  // });
+  watch(
+    () => formData.value.isPending,
+    (newValue, oldValue) => {
+      if (newValue) {
+        updatePreviousValues();
+      }
+    }
+  );
 
   return {
     formData,

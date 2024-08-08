@@ -68,30 +68,36 @@ const props = defineProps({
   },
 });
 
-const labelText = computed(() => {
-  if (typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined') {
-    if (modelValue.value.submitAttempted && !modelValue.value.formFieldsC12[props.name].isValid) {
-      if (modelValue.value.formFieldsC12[props.name].useCustomError) {
-        if (typeof modelValue.value.formFieldsC12[props.name].customErrors === 'string') {
-          return modelValue.value.formFieldsC12[props.name].customErrors;
-        } else {
-          if (modelValue.value.formFieldsC12[props.name].customErrors !== null) {
-            let errorMessages = '';
-            modelValue.value.formFieldsC12[props.name].customErrors.forEach((message: string, index: number) => {
-              const join = index === 0 ? '' : ', ';
-              errorMessages += join + message;
-            });
-            return errorMessages;
-          }
-        }
-
+const errorMessage = computed(() => {
+  if (typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined' && modelValue.value!.formFieldsC12[props.name].useCustomError) {
+    if (modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue) {
+      if (typeof modelValue.value.formFieldsC12[props.name].customErrors === 'string') {
         return modelValue.value.formFieldsC12[props.name].customErrors;
       } else {
-        return modelValue.value.formFieldsC12[props.name].errorMessage;
+        if (modelValue.value.formFieldsC12[props.name].customErrors !== null) {
+          let errorMessages = '';
+          modelValue.value.formFieldsC12[props.name].customErrors.forEach((message: string, index: number) => {
+            const join = index === 0 ? '' : ', ';
+            errorMessages += join + message;
+          });
+          return errorMessages;
+        }
       }
+
+      return modelValue.value.formFieldsC12[props.name].customErrors;
     } else {
-      return props.c12.label;
+      return props.c12.errorMessage;
     }
+  } else {
+    return props.c12.errorMessage;
+  }
+});
+
+const labelText = computed(() => {
+  if (modelValue.value.submitAttempted && !modelValue.value.formFieldsC12[props.name].isValid) {
+    return errorMessage.value;
+  } else {
+    return props.c12.label;
   }
 });
 
@@ -120,6 +126,17 @@ const fieldHasError = computed(() => {
 // setDefaultError(props.c12.errorMessage);
 
 // const { fieldIsDirty } = useFormControl();
+
+watch(
+  () => errorMessage.value,
+  (newValue, oldValue) => {
+    if (newValue !== oldValue) {
+      console.log(`${props.name} errorMessage "${errorMessage.value}"`);
+    }
+  }
+  // { deep: true }
+);
+errorMessage;
 </script>
 
 <style lang="css">
