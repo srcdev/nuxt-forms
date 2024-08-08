@@ -69,25 +69,24 @@ const props = defineProps({
 });
 
 const errorMessage = computed(() => {
-  if (typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined' && modelValue.value!.formFieldsC12[props.name].useCustomError) {
-    if (modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue) {
-      if (typeof modelValue.value.formFieldsC12[props.name].customErrors === 'string') {
-        return modelValue.value.formFieldsC12[props.name].customErrors;
-      } else {
-        if (modelValue.value.formFieldsC12[props.name].customErrors !== null) {
-          let errorMessages = '';
-          modelValue.value.formFieldsC12[props.name].customErrors.forEach((message: string, index: number) => {
-            const join = index === 0 ? '' : ', ';
-            errorMessages += join + message;
-          });
-          return errorMessages;
-        }
-      }
+  if (
+    typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined' &&
+    modelValue.value!.formFieldsC12[props.name].useCustomError &&
+    modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue
+  ) {
+    const customErrorsMessages = modelValue.value.formFieldsC12[props.name]?.customErrors || [];
+    let errorMessages = '';
 
-      return modelValue.value.formFieldsC12[props.name].customErrors;
+    if (Array.isArray(customErrorsMessages)) {
+      customErrorsMessages.forEach((message: string, index: number) => {
+        const join = index === 0 ? '' : ', ';
+        errorMessages += join + message;
+      });
     } else {
-      return props.c12.errorMessage;
+      errorMessages = modelValue.value.formFieldsC12[props.name].customErrors as string;
     }
+
+    return errorMessages;
   } else {
     return props.c12.errorMessage;
   }
@@ -122,10 +121,6 @@ const fieldHasError = computed(() => {
     return false;
   }
 });
-// const { errorMessage, setDefaultError, fieldHasError } = useErrorMessage(props.name, modelValue);
-// setDefaultError(props.c12.errorMessage);
-
-// const { fieldIsDirty } = useFormControl();
 
 watch(
   () => errorMessage.value,
@@ -134,7 +129,6 @@ watch(
       console.log(`${props.name} errorMessage "${errorMessage.value}"`);
     }
   }
-  // { deep: true }
 );
 errorMessage;
 </script>
