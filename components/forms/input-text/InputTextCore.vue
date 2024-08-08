@@ -78,17 +78,8 @@ const updateFocus = (name: string, isFocused: boolean) => {
   modelValue.value.focusedField = isFocused ? name : '';
 };
 
-const isPending = computed(() => {
-  return modelValue.value.isPending;
-});
-
 const isFocused = computed(() => {
   return modelValue.value.focusedField == name.value;
-});
-
-const isDirty = computed(() => {
-  // return modelValue.value.dirtyFields[name.value];
-  return modelValue.value!.formFieldsC12[props.name].isDirty;
 });
 
 const name = computed(() => {
@@ -100,32 +91,12 @@ const validatorLocale = toRef(useRuntimeConfig().public.validatorLocale);
 const componentValidation = validationConfig[validatorLocale.value][props.validation];
 const inputField = ref<HTMLInputElement | null>(null);
 
-const { hasCustomError, removeCustomError } = useErrorMessage(name.value, modelValue);
-
-// const fieldHasError = () => {
-//   const hasApiErrorMessage = hasCustomError();
-//   const inputBad = !inputField.value?.validity.valid;
-
-//   // console.log(`InputTextCore | fieldHasError |  hasApiErrorMessage(${hasApiErrorMessage}) | inputBad(${inputBad})`);
-
-//   if (modelValue.value.submitSuccess) {
-//     console.log(`IF: InputTextCore | fieldHasError`);
-//     // modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
-//     // return hasApiErrorMessage ? hasApiErrorMessage : inputBad;
-//     return (modelValue.value!.validityState[name.value] = !hasApiErrorMessage);
-//     // return hasApiErrorMessage ? hasApiErrorMessage : inputBad;
-//   }
-//   return false;
-// };
-
 const fieldIsDirty = computed(() => {
   return modelValue.value!.formFieldsC12[name.value].isDirty;
 });
 const fieldHasError = computed(() => {
   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
 });
-
-// const { fieldIsDirty, fieldHasError } = useFormControl();
 
 const formFieldC12 = <IFormFieldC12>{
   label: props.c12.label,
@@ -147,43 +118,19 @@ const fieldValue = computed(() => {
   return modelValue.value.data[name.value];
 });
 
-watch(
-  fieldValue,
-  () => {
-    if (!modelValue.value!.formFieldsC12[name.value].isDirty) {
-      modelValue.value!.formFieldsC12[name.value].isDirty = modelValue.value.data[name.value] !== '';
-    }
-    modelValue.value!.formFieldsC12[name.value].isValid = inputField.value?.validity.valid ?? false;
-    modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
-
-    if (
-      // modelValue.value!.validityState[name.value] &&
-      modelValue.value!.formFieldsC12[name.value].useCustomError &&
-      modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue
-    ) {
-      modelValue.value!.validityState[name.value] = false;
-      modelValue.value!.formFieldsC12[name.value].isValid = false;
-      modelValue.value.displayErrorMessages = true;
-    }
-    // else {
-    //   modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
-    // }
-
-    // if (modelValue.value.formFieldsC12[name.value].useCustomError) {
-    // modelValue.value!.validityState[name.value] = modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue;
-
-    // if (modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue) {
-    //   modelValue.value!.validityState[name.value] = false;
-    // }
-    // else {
-    //   modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
-    // }
-    // }
+watch(fieldValue, () => {
+  if (!modelValue.value!.formFieldsC12[name.value].isDirty) {
+    modelValue.value!.formFieldsC12[name.value].isDirty = modelValue.value.data[name.value] !== '';
   }
-  // {
-  //   deep: true,
-  // }
-);
+  modelValue.value!.formFieldsC12[name.value].isValid = inputField.value?.validity.valid ?? false;
+  modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
+
+  if (modelValue.value!.formFieldsC12[name.value].useCustomError && modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue) {
+    modelValue.value!.validityState[name.value] = false;
+    modelValue.value!.formFieldsC12[name.value].isValid = false;
+    modelValue.value.displayErrorMessages = true;
+  }
+});
 
 const isValid = () => {
   setTimeout(() => {
@@ -196,7 +143,6 @@ const isValid = () => {
 };
 
 onMounted(() => {
-  // initFormFieldsC12(props.name, formFieldC12);
   isValid();
 });
 </script>

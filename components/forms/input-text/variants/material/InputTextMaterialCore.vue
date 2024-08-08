@@ -130,7 +130,6 @@ watch(
     }
   }
 );
-errorMessage;
 </script>
 
 <style lang="css">
