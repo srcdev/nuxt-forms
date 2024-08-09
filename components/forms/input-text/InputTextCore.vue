@@ -150,9 +150,10 @@ onMounted(() => {
 <style lang="css">
 .input-text-wrapper {
   align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
 
   &.has-left-content {
-    display: grid;
     grid-template-columns: auto 1fr;
     margin-left: var(--_gutter);
 

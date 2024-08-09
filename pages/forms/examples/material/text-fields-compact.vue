@@ -113,12 +113,12 @@ const compact = ref(true);
  */
 const fieldsInitialState = ref<IFieldsInitialState>({
   // emailAddress: 'simon@simon.com',
-  // emailAddress: 'test@test.com',
-  emailAddress: '',
-  // username: 'RichardFromBath',
-  username: '',
-  // password: '!+Password123',
-  password: '',
+  emailAddress: 'test@test.com',
+  // emailAddress: '',
+  username: 'RichardFromBath',
+  // username: '',
+  password: '!+Password123',
+  // password: '',
 });
 
 // Setup formData
@@ -148,11 +148,10 @@ async function postFormData() {
       },
     });
     console.log('3: Finished data', data);
+    // return data;
   } catch (error) {
     console.warn('2: An error occured posting form data', error);
   }
-
-  // return data;
 }
 
 const submitForm = async () => {
