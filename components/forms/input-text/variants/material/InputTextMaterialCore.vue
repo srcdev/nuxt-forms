@@ -122,14 +122,14 @@ const fieldHasError = computed(() => {
   }
 });
 
-watch(
-  () => errorMessage.value,
-  (newValue, oldValue) => {
-    if (newValue !== oldValue) {
-      console.log(`${props.name} errorMessage "${errorMessage.value}"`);
-    }
-  }
-);
+// watch(
+//   () => errorMessage.value,
+//   (newValue, oldValue) => {
+//     if (newValue !== oldValue) {
+//       console.log(`${props.name} errorMessage "${errorMessage.value}"`);
+//     }
+//   }
+// );
 </script>
 
 <style lang="css">
