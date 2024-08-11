@@ -4,14 +4,10 @@
       <h1><NuxtLink to="/">Home</NuxtLink></h1>
       <ul class="flex-group">
         <li>
-          <NuxtLink to="/forms/examples/material/text-fields"
-            >Material UI text fields</NuxtLink
-          >
+          <NuxtLink to="/forms/examples/material/text-fields">Material UI text fields</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/forms/examples/material/text-fields-compact"
-            >Material UI text fields (compact)</NuxtLink
-          >
+          <NuxtLink to="/forms/examples/material/text-fields-compact">Material UI text fields (compact)</NuxtLink>
         </li>
       </ul>
     </div>
@@ -22,7 +18,7 @@
       </li>
     </ul>
 
-    <div>
+    <div class="page-layout-content">
       <slot name="layout-content"></slot>
     </div>
 
@@ -45,6 +41,10 @@ useHead({
 .page-layout {
   display: grid;
   grid-template-rows: auto 1fr auto;
+}
+
+.page-layout-content {
+  container: content / inline-size;
 }
 
 .flex-group {

@@ -6,10 +6,11 @@
           <div class="col">
             <h1>Material UI text fields (compact)</h1>
             <p>Example test fields in default material UI</p>
+            <p>Use 'test@test.com' to trigger server errors</p>
 
             <FormWrapper width="medium">
               <template #default>
-                <form @submit.stop.prevent="submitForm()">
+                <form class="form-wrapper" @submit.stop.prevent="submitForm()">
                   <FormField width="wide" :has-gutter="true">
                     <template #default>
                       <InputEmailMaterial
@@ -80,9 +81,8 @@
             <ClientOnly>
               <p>Client only content</p>
               <pre>
-            {{ formData }}
-          </pre
-              >
+                {{ formData }}
+              </pre>
             </ClientOnly>
           </div>
         </div>
@@ -113,12 +113,12 @@ const compact = ref(true);
  */
 const fieldsInitialState = ref<IFieldsInitialState>({
   // emailAddress: 'simon@simon.com',
-  emailAddress: 'test@test.com',
-  // emailAddress: '',
-  username: 'RichardFromBath',
-  // username: '',
-  password: '!+Password123',
-  // password: '',
+  // emailAddress: 'test@test.com',
+  emailAddress: '',
+  // username: 'RichardFromBath',
+  username: '',
+  // password: '!+Password123',
+  password: '',
 });
 
 // Setup formData
@@ -177,13 +177,53 @@ const submitForm = async () => {
 </script>
 
 <style lang="css">
+.form-wrapper {
+  container-type: inline-size;
+  container-name: form;
+}
+
 p {
   color: initial;
 }
 
 .cols-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 20px;
+
+  display: grid;
+  grid-auto-flow: row;
+
+  /* @media only screen and (min-width: 768px) {
+    gap: 20px;
+    grid-auto-flow: initial;
+    grid-template-columns: 1fr 1fr;
+  } */
+
+  @container content (min-width: 768px) {
+    gap: 20px;
+    grid-auto-flow: initial;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .col {
+    pre {
+      display: none;
+    }
+  }
 }
+
+/* @media only screen and (min-width: 768px) {
+  .cols-2 {
+    gap: 20px;
+    grid-auto-flow: initial;
+    grid-template-columns: 1fr 1fr;
+  }
+} */
+
+/* @container content (min-width: 768px) {
+  .cols-2 {
+    gap: 20px;
+    grid-auto-flow: initial;
+    grid-template-columns: 1fr 1fr;
+  }
+} */
 </style>
