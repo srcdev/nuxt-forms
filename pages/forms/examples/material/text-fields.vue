@@ -2,16 +2,17 @@
   <div>
     <NuxtLayout name="default">
       <template #layout-content>
-        <div class="cols-2">
-          <div class="col">
-            <h1>Material UI text fields (default)</h1>
-            <p>Example test fields in default material UI</p>
-            <p>Use 'test@test.com' to trigger server errors</p>
-
+        <div>
+          <h1>Material UI text fields ({{ compact ? 'compact' : 'default' }})</h1>
+          <p>Example test fields in default material UI</p>
+          <p>Use 'test@test.com' to trigger server errors</p>
+        </div>
+        <ContentGrid>
+          <template #slot1>
             <FormWrapper width="medium">
               <template #default>
                 <form class="form-wrapper" @submit.stop.prevent="submitForm()">
-                  <FormField width="wide" :has-gutter="true">
+                  <FormField width="wide" :has-gutter="false">
                     <template #default>
                       <InputEmailMaterial
                         id="emailAddress"
@@ -30,7 +31,7 @@
                     </template>
                   </FormField>
 
-                  <FormField width="wide" :has-gutter="true">
+                  <FormField width="wide" :has-gutter="false">
                     <template #default>
                       <InputTextMaterial
                         id="username"
@@ -49,7 +50,7 @@
                     </template>
                   </FormField>
 
-                  <FormField width="wide" :has-gutter="true">
+                  <FormField width="wide" :has-gutter="false">
                     <template #default>
                       <InputPasswordMaterial
                         id="password"
@@ -68,7 +69,7 @@
                     </template>
                   </FormField>
 
-                  <FormField width="wide" :has-gutter="true">
+                  <FormField width="wide" :has-gutter="false">
                     <template #default>
                       <InputButtonSubmit @click.stop.prevent="submitForm()" :is-pending="false" :readonly="submitDisabled" button-text="Submit" theme="secondary" size="medium" />
                     </template>
@@ -76,16 +77,16 @@
                 </form>
               </template>
             </FormWrapper>
-          </div>
-          <div class="col">
+          </template>
+          <template #slot2>
             <ClientOnly>
               <p>Client only content</p>
               <pre>
                 {{ formData }}
               </pre>
             </ClientOnly>
-          </div>
-        </div>
+          </template>
+        </ContentGrid>
       </template>
     </NuxtLayout>
   </div>
@@ -99,7 +100,7 @@ definePageMeta({
 });
 
 useHead({
-  title: 'Homepage',
+  title: 'Text Field Example',
   meta: [{ name: 'description', content: 'Homepage' }],
   bodyAttrs: {
     class: '',
@@ -175,55 +176,3 @@ const submitForm = async () => {
   }
 };
 </script>
-
-<style lang="css">
-.form-wrapper {
-  container-type: inline-size;
-  container-name: form;
-}
-
-p {
-  color: initial;
-}
-
-.cols-2 {
-  gap: 20px;
-
-  display: grid;
-  grid-auto-flow: row;
-
-  /* @media only screen and (min-width: 768px) {
-    gap: 20px;
-    grid-auto-flow: initial;
-    grid-template-columns: 1fr 1fr;
-  } */
-
-  @container content (min-width: 768px) {
-    gap: 20px;
-    grid-auto-flow: initial;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .col {
-    pre {
-      display: none;
-    }
-  }
-}
-
-/* @media only screen and (min-width: 768px) {
-  .cols-2 {
-    gap: 20px;
-    grid-auto-flow: initial;
-    grid-template-columns: 1fr 1fr;
-  }
-} */
-
-/* @container content (min-width: 768px) {
-  .cols-2 {
-    gap: 20px;
-    grid-auto-flow: initial;
-    grid-template-columns: 1fr 1fr;
-  }
-} */
-</style>
