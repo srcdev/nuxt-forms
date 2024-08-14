@@ -98,6 +98,8 @@ const fieldHasError = computed(() => {
   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
 });
 
+// const { fieldHasError } = useFormControl(name.value);
+
 const formFieldC12 = <IFormFieldC12>{
   label: props.c12.label,
   placeholder: props.c12.placeholder,

@@ -117,10 +117,11 @@ const fieldIsDirty = computed(() => {
 const fieldHasError = computed(() => {
   if (typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined') {
     return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
-  } else {
-    return false;
   }
+  return false;
 });
+
+// const { fieldHasError } = useFormControl(props.name);
 
 // watch(
 //   () => errorMessage.value,
@@ -203,6 +204,7 @@ const fieldHasError = computed(() => {
     &.dirty,
     &.error {
       font-size: 16px;
+      height: 1.5em;
       transform: translateY(-2px);
       z-index: auto;
     }

@@ -1,7 +1,8 @@
 import type { IFormData, IFieldsInitialState, IFormFieldC12, IApiErrorMessages, ICustomErrorMessage, IErrorMessagesArr } from '@/types/types.forms';
 import { formFieldC12 } from '@/components/forms/c12/utils';
 
-export function useFormControl() {
+// export function useFormControl(name: string = '') {
+export function useFormControl(name: string = '') {
   let savedInitialState = {};
 
   const formData = ref<IFormData>({
@@ -67,6 +68,13 @@ export function useFormControl() {
     if (formData.value.submitDisabled) {
       formData.value.submitDisabled = !formData.value.formIsValid;
     }
+
+    // update fieldHasError ref
+    // if (typeof formData.value!.formFieldsC12[name] !== 'undefined') {
+    //   fieldHasError.value = formData.value!.submitAttempted && !formData.value!.formFieldsC12[name].isValid;
+    // } else {
+    //   fieldHasError.value = false;
+    // }
 
     return formData.value.errorCount;
   };
@@ -150,14 +158,34 @@ export function useFormControl() {
     }
   };
 
-  const fieldHasError = (name: string) => {
-    const currentValidityState = formData.value.validityState[name];
+  // const fieldHasError = (name: string) => {
+  //   const currentValidityState = formData.value.validityState[name];
 
-    if (formData.value.submitAttempted) {
-      return currentValidityState;
-    }
-    return false;
-  };
+  //   if (formData.value.submitAttempted) {
+  //     return currentValidityState;
+  //   }
+  //   return false;
+  // };
+
+  // const fieldHasError = computed({
+  //   // getter
+  //   get() {
+  //     console.log(`fieldHasError getter: ${name}`);
+  //     if (typeof formData.value!.formFieldsC12[name] !== 'undefined') {
+  //       return !formData.value!.formFieldsC12[name].isValid;
+  //     }
+  //     return formData.value.validityState[name];
+  //   },
+  //   // setter
+  //   set(newValue) {
+  //     if (formData.value.submitAttempted) {
+  //       return newValue;
+  //     }
+  //     return false;
+  //   },
+  // });
+
+  // const fieldHasError = ref(false);
 
   const formIsValid = computed(() => {
     return formData.value.formIsValid;
@@ -204,7 +232,7 @@ export function useFormControl() {
     formIsValid,
     submitDisabled,
     useApiErrors,
-    fieldHasError,
+    // fieldHasError,
     fieldIsDirty,
   };
 }
