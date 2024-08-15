@@ -90,6 +90,23 @@
 
                   <FormField width="wide" :has-gutter="false">
                     <template #default>
+                      <InputCheckboxCore
+                        id="terms"
+                        name="terms"
+                        :required="true"
+                        :c12="{
+                          label: 'Accept terms and conditions',
+                          placeholder: 'eg. Type something here',
+                          errorMessage: 'Please accept our terms and conditions',
+                        }"
+                        v-model="formData"
+                        theme="secondary"
+                      />
+                    </template>
+                  </FormField>
+
+                  <FormField width="wide" :has-gutter="false">
+                    <template #default>
                       <InputButtonSubmit @click.stop.prevent="submitForm()" :is-pending="false" :readonly="submitDisabled" button-text="Submit" theme="secondary" size="medium" />
                     </template>
                   </FormField>
@@ -113,6 +130,7 @@
 
 <script setup lang="ts">
 import type { IFieldsInitialState, IOptionsConfig } from '@/types/types.forms';
+import type { IPlacesList } from '@/types/types.places';
 
 definePageMeta({
   layout: false,
@@ -129,6 +147,13 @@ useHead({
 const compact = ref(false);
 
 /*
+ * Fetch some sample data
+ **/
+const { data: citiesData } = await useFetch<IPlacesList>('/api/places/list?category=cities');
+const { data: countriesData } = await useFetch<IPlacesList>('/api/places/list?category=countries');
+const { data: titleData } = await useFetch<IPlacesList>('/api/utils?category=title');
+
+/*
  * Setup forms
  */
 const fieldsInitialState = ref<IFieldsInitialState>({
@@ -141,6 +166,10 @@ const fieldsInitialState = ref<IFieldsInitialState>({
   password: '',
   message: '',
   // message: 'This is test 1234567890,.<>?@;:',
+  cities: [],
+  countries: [],
+  title: [],
+  terms: false,
 });
 
 // Setup formData
