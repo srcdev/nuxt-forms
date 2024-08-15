@@ -6,20 +6,19 @@
       </span>
     </template>
 
-    <input
-      :type
-      :placeholder="c12.placeholder"
+    <textarea
       :id
       :name
       :pattern="componentValidation.pattern"
       :maxlength="componentValidation.maxlength"
       :required
-      :class="['input-text', 'text-normal', styleClassPassthrough, { active: isFocused }, { dirty: fieldIsDirty }, { error: fieldHasError }]"
-      v-model="modelValue.data[name]"
+      :class="['input-textarea', 'text-normal', styleClassPassthrough, { active: isFocused }, { dirty: fieldIsDirty }, { error: fieldHasError }]"
+      v-model="<string>modelValue.data[name]"
       ref="inputField"
+      :placeholder="c12.placeholder"
       @focusin="updateFocus(name, true)"
       @focusout="updateFocus(name, false)"
-    />
+    ></textarea>
 
     <template v-if="hasRightContent">
       <span class="right-content">

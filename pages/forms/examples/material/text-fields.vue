@@ -71,6 +71,25 @@
 
                   <FormField width="wide" :has-gutter="false">
                     <template #default>
+                      <InputTextareaMaterial
+                        id="message"
+                        name="message"
+                        validation="message"
+                        :required="true"
+                        :c12="{
+                          label: 'Message',
+                          placeholder: 'eg. Type something here',
+                          errorMessage: 'Bad characters in message',
+                        }"
+                        v-model="formData"
+                        theme="secondary"
+                        :compact
+                      />
+                    </template>
+                  </FormField>
+
+                  <FormField width="wide" :has-gutter="false">
+                    <template #default>
                       <InputButtonSubmit @click.stop.prevent="submitForm()" :is-pending="false" :readonly="submitDisabled" button-text="Submit" theme="secondary" size="medium" />
                     </template>
                   </FormField>
@@ -113,13 +132,15 @@ const compact = ref(false);
  * Setup forms
  */
 const fieldsInitialState = ref<IFieldsInitialState>({
-  // emailAddress: 'simon@simon.com',
-  // emailAddress: 'test@test.com',
+  // emailAddress: "simon@simon.com",
+  // emailAddress: "test@test.com",
   emailAddress: '',
-  // username: 'RichardFromBath',
+  // username: "",
   username: '',
-  // password: '!+Password123',
+  // password: "!+Password123",
   password: '',
+  message: '',
+  // message: 'This is test 1234567890,.<>?@;:',
 });
 
 // Setup formData

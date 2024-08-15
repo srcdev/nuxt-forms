@@ -1,9 +1,9 @@
 <template>
-  <div class="input-text-material" :class="[`theme-${theme}`, { error: fieldHasError }, { compact: compact }]">
+  <div class="input-textarea-material" :class="[`theme-${theme}`, { error: fieldHasError }, { compact: compact }]">
     <label class="label" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]" :for="id">
       <span>{{ labelText }}</span>
     </label>
-    <div class="input-text-container" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]">
+    <div class="input-textarea-container" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]">
       <slot name="input"></slot>
     </div>
   </div>
@@ -134,8 +134,8 @@ const fieldHasError = computed(() => {
 </script>
 
 <style lang="css">
-.input-text-material {
-  input {
+.input-textarea-material {
+  textarea {
     background-color: transparent;
     line-height: var(--line-height);
 
@@ -199,6 +199,7 @@ const fieldHasError = computed(() => {
     transition: all linear 0.2s;
     background-color: transparent;
     z-index: 2;
+    height: 3.5rem;
 
     &.active,
     &.dirty,
@@ -210,7 +211,7 @@ const fieldHasError = computed(() => {
     }
   }
 
-  .input-text-container {
+  .input-textarea-container {
     display: grid;
     grid-row: 1;
     grid-column: 1;
@@ -225,7 +226,7 @@ const fieldHasError = computed(() => {
       opacity: 1;
     }
 
-    .input-text {
+    .input-textarea {
       font-family: var(--font-family);
       border: 0px solid green;
       padding: calc(var(--_gutter) / 2) var(--_gutter);
@@ -258,7 +259,7 @@ const fieldHasError = computed(() => {
 * Compact UI
 **/
 
-.input-text-material {
+.input-textarea-material {
   &.compact {
     overflow: initial;
 
@@ -297,7 +298,7 @@ const fieldHasError = computed(() => {
     }
   }
 
-  .input-text-container {
+  .input-textarea-container {
     &.compact {
       margin: 10px 8px 6px 8px;
     }
