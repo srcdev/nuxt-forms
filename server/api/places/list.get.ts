@@ -1,5 +1,5 @@
-import cities from '../data/places/cities.json';
-import countries from '../data/places/countries.json';
+import cities from '../../data/places/cities.json';
+import countries from '../../data/places/countries.json';
 
 export default defineEventHandler(async (event) => {
   const sleep = async (ms: number) => {
