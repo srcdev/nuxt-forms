@@ -1,4 +1,4 @@
-import title from "../../data/utils/title.json";
+import title from '../../data/utils/title.json';
 
 export default defineEventHandler(async (event) => {
   const sleep = async (ms: number) => {
@@ -8,14 +8,13 @@ export default defineEventHandler(async (event) => {
   const query = getQuery(event);
 
   let timeout = 0;
-  if (typeof query.delay !== "undefined") {
+  if (typeof query.delay !== 'undefined') {
     timeout = Number(query.delay);
   }
 
   await sleep(timeout);
 
-  if (query.category === "title") {
-    console.log(title);
+  if (query.category === 'title') {
     return title;
   }
 });

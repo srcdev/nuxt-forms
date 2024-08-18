@@ -197,6 +197,13 @@ export function useFormControl(name: string = '') {
 
   // Keep an eye on this for performance issue
 
+  // const updateFieldValidity = (name: string, valid: boolean) => {
+  //   console.log(`updateFieldValidity: name:${name} - valid:${valid}`);
+  //   console.log(formData.value);
+  //   // formData.value.formFieldsC12[name].isValid = valid;
+  //   formData.value.validityState[name] = valid;
+  // };
+
   watch(
     () => formData.value.validityState,
     () => {
@@ -234,5 +241,6 @@ export function useFormControl(name: string = '') {
     useApiErrors,
     // fieldHasError,
     fieldIsDirty,
+    // updateFieldValidity,
   };
 }

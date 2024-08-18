@@ -12,6 +12,13 @@ export interface IOptionsConfig {
   label: string;
 }
 
+export interface IFormMultipleOptions {
+  data: IOptionsConfig[];
+  total: number;
+  skip: number;
+  limit: number;
+}
+
 export interface IOptionsValueArr {
   [key: string]: string | boolean | number | URL | object;
 }

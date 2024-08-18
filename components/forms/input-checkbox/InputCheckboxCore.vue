@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-wrapper" :class="[{ 'has-left-content': hasLeftContent }, { 'has-right-content': hasRightContent }]">
+  <div class="input-checkbox-wrapper">
     <input
       type="checkbox"
       :true-value="trueValue"
@@ -8,7 +8,7 @@
       :name
       :required="props.required && !props.multipleOptions"
       :value="trueValue"
-      :class="['input-checkbox']"
+      :class="['input-checkbox', `theme-${theme}`, size, { error: fieldHasError }]"
       v-model="modelValue.data[name]"
       ref="inputField"
     />
@@ -16,6 +16,8 @@
 </template>
 
 <script setup lang="ts">
+import propValidators from '../c12/prop-validators';
+
 import type { InpuTextC12, IFormFieldC12, IFormData } from '@/types/types.forms';
 // import { validationConfig } from '@/components/forms/c12/validation-patterns';
 
@@ -52,6 +54,20 @@ const props = defineProps({
   styleClassPassthrough: {
     type: String,
     default: '',
+  },
+  theme: {
+    type: String as PropType<string>,
+    default: 'primary',
+    validator(value: string) {
+      return propValidators.theme.includes(value);
+    },
+  },
+  size: {
+    type: String as PropType<string>,
+    default: 'medium',
+    validator(value: string) {
+      return propValidators.size.includes(value);
+    },
   },
 });
 
@@ -94,52 +110,70 @@ const isChecked = computed(() => {
     return isValid;
   }
 });
-watch(isChecked, () => {
-  console.log('inputField.value', inputField.value?.validity);
-});
+// watch(isChecked, () => {
+//   console.log('inputField.value', inputField.value?.validity);
+// });
 
 // const fieldIsDirty = computed(() => {
 //   return modelValue.value!.formFieldsC12[name.value].isDirty;
 // });
-// const fieldHasError = computed(() => {
-//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
-// });
+const fieldHasError = computed(() => {
+  return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
+});
 
-// // const { fieldHasError } = useFormControl(name.value);
+// const { updateFieldValidity } = useFormControl(name.value);
 
-// const formFieldC12 = <IFormFieldC12>{
-//   label: props.c12.label,
-//   placeholder: props.c12.placeholder,
-//   errorMessage: props.c12.errorMessage,
-//   useCustomError: false,
-//   customErrors: {},
-//   isValid: false,
-//   isDirty: false,
-//   type: 'string',
-//   previousValue: null,
-// };
-// modelValue.value!.formFieldsC12[name.value] = formFieldC12;
+if (
+  // !isArray &&
+  modelValue.value.formFieldsC12[name.value] === undefined
+) {
+  const formFieldC12 = <IFormFieldC12>{
+    label: props.c12.label,
+    placeholder: props.c12.placeholder,
+    errorMessage: props.c12.errorMessage,
+    useCustomError: false,
+    customErrors: {},
+    isValid: false,
+    isDirty: false,
+    type: isArray ? 'array' : 'string',
+    previousValue: null,
+  };
+  modelValue.value.formFieldsC12[name.value] = formFieldC12;
+}
 
 // const { initFormFieldsC12 } = useFormControl();
 // initFormFieldsC12(props.name, formFieldC12);
 
-// const fieldValue = computed(() => {
-//   return modelValue.value.data[name.value];
-// });
+const fieldValue = computed(() => {
+  return modelValue.value.data[name.value];
+});
 
-// watch(fieldValue, () => {
-//   if (!modelValue.value!.formFieldsC12[name.value].isDirty) {
-//     modelValue.value!.formFieldsC12[name.value].isDirty = modelValue.value.data[name.value] !== '';
-//   }
-//   modelValue.value!.formFieldsC12[name.value].isValid = inputField.value?.validity.valid ?? false;
-//   modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
+watch(fieldValue, () => {
+  if (isArray) {
+    // console.log(Object.values(modelValue.value.data[name.value] ?? []).length);
+    modelValue.value.validityState[name.value] = Object.values(modelValue.value.data[name.value] ?? []).length > 0;
+    modelValue.value!.formFieldsC12[name.value].isValid = modelValue.value.validityState[name.value];
+    // console.log(Object.keys(modelValue.value.data[name.value]).length);
+    // if (name.value in modelValue.value.data) {
+    //   const keyValue = modelValue.value.data[name.value] as any[];
+    //   const isValid = keyValue.indexOf(props.trueValue) > -1;
+    //   modelValue.value.validityState[name.value] = isValid;
+    // }
+  } else {
+    // updateFieldValidity(name.value, inputField.value?.validity.valid ?? false);
+    if (!modelValue.value!.formFieldsC12[name.value].isDirty) {
+      modelValue.value!.formFieldsC12[name.value].isDirty = modelValue.value.data[name.value] !== '';
+    }
+    modelValue.value!.formFieldsC12[name.value].isValid = inputField.value?.validity.valid ?? false;
+    modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
+  }
 
-//   if (modelValue.value!.formFieldsC12[name.value].useCustomError && modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue) {
-//     modelValue.value!.validityState[name.value] = false;
-//     modelValue.value!.formFieldsC12[name.value].isValid = false;
-//     modelValue.value.displayErrorMessages = true;
-//   }
-// });
+  // if (modelValue.value!.formFieldsC12[name.value].useCustomError && modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue) {
+  //   modelValue.value!.validityState[name.value] = false;
+  //   modelValue.value!.formFieldsC12[name.value].isValid = false;
+  //   modelValue.value.displayErrorMessages = true;
+  // }
+});
 
 // const isValid = () => {
 //   setTimeout(() => {
@@ -157,31 +191,73 @@ watch(isChecked, () => {
 </script>
 
 <style lang="css">
-.input-textarea-wrapper {
-  align-items: center;
-  display: grid;
-  grid-template-columns: 1fr;
+.input-checkbox-wrapper {
+  .input-checkbox {
+    --_form-theme: var(--theme-form-primary);
+    --_border-width: var(--input-border-width-default);
+    --_checkbox-size: 40px;
 
-  &.has-left-content {
-    grid-template-columns: auto 1fr;
-    margin-left: var(--_gutter);
-
-    .left-content {
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  &.has-right-content {
     display: grid;
-    grid-template-columns: 1fr auto;
-    /* display: flex; */
-    margin-right: var(--_gutter);
+    border-radius: 2px;
+    /* border: var(--_border-width) solid var(--_form-theme); */
 
-    .right-content {
-      display: flex;
-      align-items: center;
+    border: var(--_border-width) solid var(--_form-theme);
+    outline: var(--_border-width) solid hsl(from var(--_form-theme) h s 50%);
+
+    appearance: none;
+    aspect-ratio: 1;
+    overflow: hidden;
+    width: var(--_checkbox-size);
+
+    /* Sizes */
+    &.x-small {
+      --_checkbox-size: 24px;
     }
+    &.small {
+      --_checkbox-size: 30px;
+    }
+    &.normal {
+      --_checkbox-size: 36px;
+    }
+    &.medium {
+      --_checkbox-size: 40px;
+    }
+    &.large {
+      --_checkbox-size: 44px;
+    }
+
+    &:checked::after {
+      content: '✔';
+      display: grid;
+      font-family: var(--font-family);
+      place-content: center;
+      font-size: calc(var(--_checkbox-size) * 0.75);
+    }
+    &.error {
+      /* border-color: var(--theme-error); */
+
+      border: var(--_border-width) solid var(--theme-error);
+      outline: var(--_border-width) solid hsl(from var(--theme-error) h s 75%);
+
+      background-color: hsl(from var(--theme-error) h s 95%);
+    }
+
+    &.theme-secondary {
+      --_form-theme: var(--theme-form-secondary);
+    }
+
+    /* &:valid {
+      border-color: var(--theme-success);
+    }
+    &:invalid {
+      border-color: var(--theme-error);
+    }
+    &:not(:placeholder-shown):valid {
+      border-color: var(--theme-success);
+    }
+    &:not(:placeholder-shown):invalid {
+      border-color: var(--theme-error);
+    } */
   }
 }
 </style>

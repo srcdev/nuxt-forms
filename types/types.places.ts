@@ -1,6 +1,6 @@
-import type { IOptionsConfig } from "@/types/types.forms";
+import type { IOptionsConfig } from '@/types/types.forms';
 
-export interface IPlacesList {
+export interface IFormMultipleOptions {
   data: IOptionsConfig[];
   total: number;
   skip: number;
