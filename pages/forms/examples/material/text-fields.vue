@@ -94,6 +94,7 @@
                         <MultipleCheckboxes
                           id="cities"
                           name="cities"
+                          legend="Choose a location"
                           :required="true"
                           :c12="{
                             label: 'Check all Cities you like',
@@ -114,9 +115,10 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <InputCheckboxWithLabel
+                        <SingleCheckbox
                           id="terms"
                           name="terms"
+                          legend="Accept terms and conditions"
                           :required="true"
                           :c12="{
                             label: 'Accept terms and conditions',

@@ -1,6 +1,6 @@
 <template>
   <div class="multiple-checkboxes-fieldset">
-    <legend>This is the legend</legend>
+    <legend>{{ legend }}</legend>
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
