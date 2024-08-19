@@ -14,13 +14,13 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@iconify-json/material-symbols": "^1.1.87",
+    "@iconify-json/material-symbols": "^1.1.88",
     "@iconify-json/radix-icons": "^1.1.15",
-    "@nuxt/eslint-config": "^0.3.13",
+    "@nuxt/eslint-config": "^0.5.0",
     "@nuxt/icon": "^1.4.5",
-    "eslint": "^9.7.0",
+    "eslint": "^9.9.0",
     "nuxt": "^3.12.4",
     "release-it": "^17.6.0",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   }
 }

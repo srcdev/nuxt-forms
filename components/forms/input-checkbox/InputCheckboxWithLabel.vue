@@ -82,7 +82,7 @@ const name = computed(() => {
 
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 
   label {
     font-family: var(--font-family);

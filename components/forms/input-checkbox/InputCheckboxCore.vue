@@ -202,7 +202,7 @@ watch(fieldValue, () => {
     /* border: var(--_border-width) solid var(--_form-theme); */
 
     border: var(--_border-width) solid var(--_form-theme);
-    outline: var(--_border-width) solid hsl(from var(--_form-theme) h s 50%);
+    /* outline: var(--_border-width) solid hsl(from var(--_form-theme) h s 50%); */
 
     appearance: none;
     aspect-ratio: 1;
@@ -224,6 +224,10 @@ watch(fieldValue, () => {
     }
     &.large {
       --_checkbox-size: 44px;
+    }
+    &:focus {
+      border: var(--_border-width) solid var(--_form-theme);
+      outline: var(--_border-width) solid hsl(from var(--_form-theme) h s 50%);
     }
 
     &:checked::after {

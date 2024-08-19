@@ -1,5 +1,5 @@
 <template>
-  <div class="multiple-checkboxes-wrapper">
+  <div class="multiple-checkboxes-wrapper" :class="[{ 'equal-cols': equalCols }]">
     <template v-for="item in fieldData.data" :key="item.id">
       <InputCheckboxWithLabel
         :id="item.value"
@@ -60,6 +60,10 @@ const props = defineProps({
       return propValidators.size.includes(value);
     },
   },
+  equalCols: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const modelValue = defineModel() as Ref<IFormData>;
@@ -89,5 +93,10 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
   display: flex;
   /* flex-direction: column; */
   gap: 12px;
+
+  &.equal-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
 }
 </style>
