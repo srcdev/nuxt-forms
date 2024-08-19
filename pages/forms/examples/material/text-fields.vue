@@ -104,7 +104,11 @@
                           v-model:fieldData="citiesData"
                           theme="secondary"
                           size="x-small"
-                        />
+                        >
+                          <template #description>
+                            <p class="checkbox-description">This is a description of what the user is required to do</p>
+                          </template>
+                        </MultipleCheckboxes>
                       </template>
                     </FormField>
 
@@ -250,3 +254,12 @@ const submitForm = async () => {
   }
 };
 </script>
+
+<style lang="css">
+.checkbox-description {
+  font-family: var(--font-family);
+  font-size: 16px;
+  margin-top: 12px;
+  color: var(--theme-form-secondary);
+}
+</style>

@@ -1,21 +1,27 @@
 <template>
-  <div class="multiple-checkboxes-wrapper" :class="[{ 'equal-cols': equalCols }]">
-    <template v-for="item in fieldData.data" :key="item.id">
-      <InputCheckboxWithLabel
-        :id="item.value"
-        :name
-        :required
-        :c12="{
-          label: item.label,
-          placeholder: 'eg. Type something here',
-          errorMessage: 'Please accept our terms and conditions',
-        }"
-        v-model="modelValue"
-        :true-value="item.value"
-        theme="secondary"
-        size="x-small"
-      />
+  <div class="multiple-checkboxes-fieldset">
+    <legend>This is the legend</legend>
+    <template v-if="hasDescription">
+      <slot name="description"></slot>
     </template>
+    <div class="multiple-checkboxes-items" :class="[{ 'equal-cols': equalCols }]">
+      <template v-for="item in fieldData.data" :key="item.id">
+        <InputCheckboxWithLabel
+          :id="item.value"
+          :name
+          :required
+          :c12="{
+            label: item.label,
+            placeholder: 'eg. Type something here',
+            errorMessage: 'Please accept our terms and conditions',
+          }"
+          v-model="modelValue"
+          :true-value="item.value"
+          theme="secondary"
+          size="x-small"
+        />
+      </template>
+    </div>
   </div>
 </template>
 
@@ -27,6 +33,10 @@ import type { InpuTextC12, IFormFieldC12, IFormData } from '@/types/types.forms'
 
 const props = defineProps({
   name: {
+    type: String,
+    required: true,
+  },
+  legend: {
     type: String,
     required: true,
   },
@@ -66,6 +76,9 @@ const props = defineProps({
   },
 });
 
+const slots = useSlots();
+const hasDescription = computed(() => slots.description !== undefined);
+
 const modelValue = defineModel() as Ref<IFormData>;
 const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
@@ -89,10 +102,18 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 </script>
 
 <style lang="css">
-.multiple-checkboxes-wrapper {
+.multiple-checkboxes-fieldset {
+  legend {
+    font-family: var(--font-family);
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
+
+.multiple-checkboxes-items {
   display: flex;
-  /* flex-direction: column; */
   gap: 12px;
+  margin-top: 12px;
 
   &.equal-cols {
     display: grid;
