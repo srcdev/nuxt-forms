@@ -204,7 +204,7 @@ watch(fieldValue, () => {
     border: var(--_border-width) solid var(--_form-theme);
     /* outline: var(--_border-width) solid hsl(from var(--_form-theme) h s 50%); */
 
-    appearance: none;
+    /* appearance: none; */
     overflow: hidden;
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
@@ -231,7 +231,7 @@ watch(fieldValue, () => {
     }
 
     &:checked::after {
-      content: '✔';
+      /* content: '✔'; */
       display: grid;
       font-family: var(--font-family);
       place-content: center;
