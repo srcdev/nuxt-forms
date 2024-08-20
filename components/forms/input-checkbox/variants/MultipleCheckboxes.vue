@@ -1,6 +1,6 @@
 <template>
-  <div class="multiple-checkboxes-fieldset">
-    <legend>{{ legend }}</legend>
+  <fieldset class="multiple-checkboxes-fieldset">
+    <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
@@ -22,7 +22,7 @@
         />
       </template>
     </div>
-  </div>
+  </fieldset>
 </template>
 
 <script setup lang="ts">
@@ -103,10 +103,18 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
 <style lang="css">
 .multiple-checkboxes-fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+
   legend {
     font-family: var(--font-family);
     font-size: 18px;
     font-weight: 500;
+
+    &.has-description {
+      margin-bottom: 0;
+    }
   }
 }
 

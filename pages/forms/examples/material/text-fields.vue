@@ -128,7 +128,11 @@
                           v-model="formData"
                           theme="secondary"
                           size="x-small"
-                        />
+                        >
+                          <template #description>
+                            <p class="checkbox-description">This is a description of what the user is required to do</p>
+                          </template>
+                        </SingleCheckbox>
                       </template>
                     </FormField>
 

@@ -205,8 +205,8 @@ watch(fieldValue, () => {
     /* outline: var(--_border-width) solid hsl(from var(--_form-theme) h s 50%); */
 
     appearance: none;
-    aspect-ratio: 1;
     overflow: hidden;
+    height: var(--_checkbox-size);
     width: var(--_checkbox-size);
 
     /* Sizes */

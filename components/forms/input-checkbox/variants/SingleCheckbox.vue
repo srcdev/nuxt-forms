@@ -1,8 +1,11 @@
 <template>
-  <div class="single-checkbox-fieldset">
-    <legend>{{ legend }}</legend>
+  <fieldset class="single-checkbox-fieldset">
+    <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
+    <template v-if="hasDescription">
+      <slot name="description"></slot>
+    </template>
     <InputCheckboxWithLabel :id :name :required :c12 v-model="modelValue" :theme :size />
-  </div>
+  </fieldset>
 </template>
 
 <script setup lang="ts">
@@ -66,8 +69,7 @@ const props = defineProps({
 });
 
 const slots = useSlots();
-const hasLeftContent = computed(() => slots.left !== undefined);
-const hasRightContent = computed(() => slots.right !== undefined);
+const hasDescription = computed(() => slots.description !== undefined);
 
 const modelValue = defineModel() as Ref<IFormData>;
 const name = computed(() => {
@@ -80,11 +82,19 @@ const name = computed(() => {
 
 <style lang="css">
 .single-checkbox-fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+
   legend {
     font-family: var(--font-family);
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 12px;
+
+    &.has-description {
+      margin-bottom: 0;
+    }
   }
 }
 </style>
