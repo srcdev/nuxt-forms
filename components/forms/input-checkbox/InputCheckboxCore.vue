@@ -8,10 +8,13 @@
       :name
       :required="props.required && !props.multipleOptions"
       :value="trueValue"
-      :class="['input-checkbox', `theme-${theme}`, size, { error: fieldHasError }]"
+      :class="['input-checkbox', `theme-${theme}`, size, checkboxStyle, { error: fieldHasError }]"
       v-model="modelValue.data[name]"
       ref="inputField"
     />
+    <div v-if="checkboxStyle === 'styled' && isChecked" :class="[size]">
+      <Icon name="mdi-light:check-bold" class="icon-check" />
+    </div>
   </div>
 </template>
 
@@ -67,6 +70,13 @@ const props = defineProps({
     default: 'medium',
     validator(value: string) {
       return propValidators.size.includes(value);
+    },
+  },
+  checkboxStyle: {
+    type: String as PropType<string>,
+    default: 'styled',
+    validator(value: string) {
+      return propValidators.checkboxStyle.includes(value);
     },
   },
 });
@@ -192,22 +202,64 @@ watch(fieldValue, () => {
 
 <style lang="css">
 .input-checkbox-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  --_checkbox-size: 40px;
+
+  div {
+    display: grid;
+    grid-column: 1;
+    grid-row: 1;
+    height: var(--_checkbox-size);
+    width: var(--_checkbox-size);
+    transform: translate(calc(var(--_border-width) * 2), calc(var(--_border-width) * 2));
+    place-content: center;
+
+    /* Sizes */
+    &.x-small {
+      --_checkbox-size: 24px;
+    }
+    &.small {
+      --_checkbox-size: 30px;
+    }
+    &.normal {
+      --_checkbox-size: 36px;
+    }
+    &.medium {
+      --_checkbox-size: 40px;
+    }
+    &.large {
+      --_checkbox-size: 44px;
+    }
+
+    .icon-check {
+      height: calc(var(--_checkbox-size) * 0.8);
+      width: calc(var(--_checkbox-size) * 0.8);
+      transform: translateY(-1px);
+    }
+  }
+
   .input-checkbox {
     --_form-theme: var(--theme-form-primary);
     --_border-width: var(--input-border-width-default);
-    --_checkbox-size: 40px;
 
     display: grid;
+    grid-column: 1;
+    grid-row: 1;
     border-radius: 2px;
     /* border: var(--_border-width) solid var(--_form-theme); */
 
     border: var(--_border-width) solid var(--_form-theme);
     /* outline: var(--_border-width) solid hsl(from var(--_form-theme) h s 50%); */
 
-    /* appearance: none; */
-    overflow: hidden;
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
+
+    &.styled {
+      appearance: none;
+      overflow: hidden;
+    }
 
     /* Sizes */
     &.x-small {
