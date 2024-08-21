@@ -13,7 +13,7 @@
       ref="inputField"
     />
     <div v-if="checkboxStyle === 'styled' && isChecked" :class="[size]">
-      <Icon name="mdi-light:check-bold" class="icon-check" />
+      <Icon name="material-symbols:check" class="icon-check" />
     </div>
   </div>
 </template>
