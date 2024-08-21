@@ -266,6 +266,7 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
   }
 
   --_border-width: var(--input-border-width-default);
+  --_outline-width: var(--input-outline-width-thin);
 
   /*
   * Initial theme (primary)

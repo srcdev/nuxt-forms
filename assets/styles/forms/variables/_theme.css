@@ -7,8 +7,12 @@
   --input-border-width-default: 2px;
   --input-border-width-thick: 3px;
 
-  --font-family: futura-pt, Seravek, 'Gill Sans Nova', Ubuntu, Calibri,
-    'DejaVu Sans', source-sans-pro, sans-serif;
+  --input-outline-radius: 4px;
+  --input-outline-width-thin: 1px;
+  --input-outline-width-default: 2px;
+  --input-outline-width-thick: 3px;
+
+  --font-family: futura-pt, Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
 
   --theme-form-button-font-size-x-small: 14px;
   --theme-form-button-font-size-small: 14px;
@@ -54,19 +58,9 @@
   --theme-form-button-icon-size-medium: 20px;
   --theme-form-button-icon-size-large: 22px;
 
-  --theme-form-button-icon-gap-x-small: var(
-    --theme-form-button-padding-inline-x-small
-  );
-  --theme-form-button-icon-gap-small: var(
-    --theme-form-button-padding-inline-small
-  );
-  --theme-form-button-icon-gap-normal: var(
-    --theme-form-button-padding-inline-normal
-  );
-  --theme-form-button-icon-gap-medium: var(
-    --theme-form-button-padding-inline-medium
-  );
-  --theme-form-button-icon-gap-large: var(
-    --theme-form-button-padding-inline-large
-  );
+  --theme-form-button-icon-gap-x-small: var(--theme-form-button-padding-inline-x-small);
+  --theme-form-button-icon-gap-small: var(--theme-form-button-padding-inline-small);
+  --theme-form-button-icon-gap-normal: var(--theme-form-button-padding-inline-normal);
+  --theme-form-button-icon-gap-medium: var(--theme-form-button-padding-inline-medium);
+  --theme-form-button-icon-gap-large: var(--theme-form-button-padding-inline-large);
 }

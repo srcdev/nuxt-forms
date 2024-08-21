@@ -78,6 +78,7 @@ const name = computed(() => {
 .input-checkbox-with-label {
   --_form-theme: var(--theme-form-primary);
   --_border-width: var(--input-border-width-default);
+  --_outline-width: var(--input-outline-width-thin);
   --_checkbox-size: 40px;
 
   display: flex;

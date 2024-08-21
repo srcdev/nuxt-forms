@@ -245,6 +245,7 @@ watch(fieldValue, () => {
   .input-checkbox {
     --_form-theme: var(--theme-form-primary);
     --_border-width: var(--input-border-width-default);
+    --_outline-width: var(--input-outline-width-thin);
 
     display: grid;
     grid-column: 1;
@@ -253,7 +254,7 @@ watch(fieldValue, () => {
     /* border: var(--_border-width) solid var(--_form-theme); */
 
     border: var(--_border-width) solid var(--_form-theme);
-    /* outline: var(--_border-width) solid hsl(from var(--_form-theme) h s 50%); */
+    /* outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%); */
 
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
@@ -281,7 +282,7 @@ watch(fieldValue, () => {
     }
     &:focus {
       border: var(--_border-width) solid var(--_form-theme);
-      outline: var(--_border-width) solid hsl(from var(--_form-theme) h s 50%);
+      outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%);
     }
 
     &:checked::after {
@@ -295,7 +296,7 @@ watch(fieldValue, () => {
       /* border-color: var(--theme-error); */
 
       border: var(--_border-width) solid var(--theme-error);
-      outline: var(--_border-width) solid hsl(from var(--theme-error) h s 75%);
+      outline: var(--_outline-width) solid hsl(from var(--theme-error) h s 75%);
 
       background-color: hsl(from var(--theme-error) h s 95%);
     }

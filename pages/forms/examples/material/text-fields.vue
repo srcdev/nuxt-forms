@@ -107,7 +107,57 @@
                           size="x-small"
                         >
                           <template #description>
-                            <p class="checkbox-description">This is a description of what the user is required to do</p>
+                            <p class="checkbox-description">This is description: optionsLayout = 'equal-widths'</p>
+                          </template>
+                        </MultipleCheckboxes>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <MultipleCheckboxes
+                          id="countries"
+                          name="countries"
+                          legend="Choose a country"
+                          :required="true"
+                          :c12="{
+                            label: 'Check all countries you like',
+                            placeholder: 'eg. Choose some locations',
+                            errorMessage: 'Please select a country',
+                          }"
+                          v-model="formData"
+                          v-model:fieldData="countriesData"
+                          theme="secondary"
+                          size="x-small"
+                          options-layout="inline"
+                        >
+                          <template #description>
+                            <p class="checkbox-description">This is description: optionsLayout = 'inline'</p>
+                          </template>
+                        </MultipleCheckboxes>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <MultipleCheckboxes
+                          id="title"
+                          name="title"
+                          legend="Choose a title"
+                          :required="true"
+                          :c12="{
+                            label: 'Check all title you like',
+                            placeholder: 'eg. Choose some title',
+                            errorMessage: 'Please select a title',
+                          }"
+                          v-model="formData"
+                          v-model:fieldData="titleData"
+                          theme="secondary"
+                          size="x-small"
+                          options-layout="block"
+                        >
+                          <template #description>
+                            <p class="checkbox-description">This is description: optionsLayout = 'block'</p>
                           </template>
                         </MultipleCheckboxes>
                       </template>

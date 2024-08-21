@@ -160,6 +160,7 @@ const fieldHasError = computed(() => {
   --_gutter: 12px;
   --_form-theme: var(--theme-form-primary);
   --_border-width: var(--input-border-width-default);
+  --_outline-width: var(--input-outline-width-thin);
 
   display: grid;
   border-radius: 2px;
@@ -174,7 +175,7 @@ const fieldHasError = computed(() => {
 
   &:focus-within {
     border: var(--_border-width) solid var(--_form-theme);
-    outline: var(--_border-width) solid hsl(from var(--_form-theme) h s 50%);
+    outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%);
     background-color: hsl(from var(--_form-theme) h s 95%);
   }
 
@@ -182,7 +183,7 @@ const fieldHasError = computed(() => {
     /* outline: calc(var(--_border-width) * 2) solid var(--theme-error); */
 
     border: var(--_border-width) solid var(--theme-error);
-    outline: var(--_border-width) solid hsl(from var(--theme-error) h s 75%);
+    outline: var(--_outline-width) solid hsl(from var(--theme-error) h s 75%);
 
     background-color: hsl(from var(--theme-error) h s 95%);
   }

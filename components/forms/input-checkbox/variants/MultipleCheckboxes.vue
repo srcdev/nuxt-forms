@@ -4,7 +4,7 @@
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
-    <div class="multiple-checkboxes-items" :class="[{ 'equal-cols': equalCols }]">
+    <div class="multiple-checkboxes-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
         <InputCheckboxWithLabel
           :id="item.value"
@@ -70,6 +70,13 @@ const props = defineProps({
       return propValidators.size.includes(value);
     },
   },
+  optionsLayout: {
+    type: String as PropType<string>,
+    default: 'equal-widths',
+    validator(value: string) {
+      return propValidators.optionsLayout.includes(value);
+    },
+  },
   equalCols: {
     type: Boolean,
     default: true,
@@ -123,7 +130,16 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
   gap: 12px;
   margin-top: 12px;
 
-  &.equal-cols {
+  &.inline {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &.block {
+    flex-direction: column;
+  }
+
+  &.equal-widths {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
