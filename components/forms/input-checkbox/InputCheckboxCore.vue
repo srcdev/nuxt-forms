@@ -215,6 +215,8 @@ watch(fieldValue, () => {
     width: var(--_checkbox-size);
     transform: translate(calc(var(--_border-width) * 2), calc(var(--_border-width) * 2));
     place-content: center;
+    position: relative;
+    z-index: -1;
 
     /* Sizes */
     &.x-small {
