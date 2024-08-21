@@ -140,7 +140,7 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <MultipleCheckboxes
+                        <MultipleRadio
                           id="title"
                           name="title"
                           legend="Choose a title"
@@ -153,13 +153,13 @@
                           v-model="formData"
                           v-model:fieldData="titleData"
                           theme="secondary"
-                          size="x-small"
+                          size="normal"
                           options-layout="block"
                         >
                           <template #description>
                             <p class="checkbox-description">This is description: optionsLayout = 'block'</p>
                           </template>
-                        </MultipleCheckboxes>
+                        </MultipleRadio>
                       </template>
                     </FormField>
 
@@ -312,7 +312,8 @@ const submitForm = async () => {
 </script>
 
 <style lang="css">
-.checkbox-description {
+.checkbox-description,
+.radio-description {
   font-family: var(--font-family);
   font-size: 16px;
   margin-top: 12px;
