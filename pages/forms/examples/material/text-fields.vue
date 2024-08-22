@@ -89,7 +89,7 @@
                       </template>
                     </FormField>
 
-                    <FormField width="wide" :has-gutter="false">
+                    <FormField v-if="citiesData !== null" width="wide" :has-gutter="false">
                       <template #default>
                         <MultipleCheckboxes
                           id="cities"
@@ -113,7 +113,7 @@
                       </template>
                     </FormField>
 
-                    <FormField width="wide" :has-gutter="false">
+                    <FormField v-if="countriesData !== null" width="wide" :has-gutter="false">
                       <template #default>
                         <MultipleCheckboxes
                           id="countries"
@@ -138,7 +138,7 @@
                       </template>
                     </FormField>
 
-                    <FormField width="wide" :has-gutter="false">
+                    <FormField v-if="titleData !== null" width="wide" :has-gutter="false">
                       <template #default>
                         <MultipleRadio
                           id="title"
@@ -153,11 +153,11 @@
                           v-model="formData"
                           v-model:fieldData="titleData"
                           theme="secondary"
-                          size="small"
+                          size="normal"
                           options-layout="equal-widths"
                         >
                           <template #description>
-                            <p class="checkbox-description">This is description: optionsLayout = 'block'</p>
+                            <p class="checkbox-description">This is description: optionsLayout = 'equal-widths'</p>
                           </template>
                         </MultipleRadio>
                       </template>
@@ -230,7 +230,7 @@ const compact = ref(false);
 /*
  * Fetch some sample data
  **/
-const { data: citiesData } = await useFetch('/api/places/list?category=cities');
+const { data: citiesData } = await useFetch<IFormMultipleOptions>('/api/places/list?category=cities');
 const { data: countriesData } = await useFetch<IFormMultipleOptions>('/api/places/list?category=countries');
 const { data: titleData } = await useFetch<IFormMultipleOptions>('/api/utils?category=title');
 

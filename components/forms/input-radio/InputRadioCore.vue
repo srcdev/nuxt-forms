@@ -207,7 +207,7 @@ watch(fieldValue, () => {
   --_outline-color: var(--_form-theme);
   --_box-shadow-color: hsl(from var(--_form-theme) h s 50%);
   --_radio-size: 40px;
-  --_radio-fill-colour: var(--gray-0);
+  --_radio-fill-colour: hsl(from var(--_form-theme) h s 100%);
 
   display: grid;
   grid-template-columns: 1fr;
@@ -252,7 +252,7 @@ watch(fieldValue, () => {
     transition: all 0.2s ease-in-out;
 
     &.checked {
-      background-color: var(--_form-theme);
+      background-color: hsl(from var(--_form-theme) h s 50%);
     }
 
     .input-radio:focus + & {

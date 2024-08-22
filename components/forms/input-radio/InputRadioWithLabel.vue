@@ -89,6 +89,10 @@ const name = computed(() => {
     font-family: var(--font-family);
     font-size: 14px;
     font-weight: 500;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
   }
 }
 </style>
