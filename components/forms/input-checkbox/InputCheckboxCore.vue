@@ -259,6 +259,8 @@ watch(fieldValue, () => {
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
 
+    transition: all 0.2s ease-in-out;
+
     &.styled {
       appearance: none;
       overflow: hidden;

@@ -12,9 +12,7 @@
       v-model="modelValue.data[name]"
       ref="inputField"
     />
-    <div v-if="radioStyle === 'styled'" class="styled-radio">
-      <div v-if="isChecked" class="styled-radio-inner" :class="[size]"></div>
-    </div>
+    <div v-if="radioStyle === 'styled'" class="styled-radio" :class="[{ checked: isChecked }]"></div>
   </div>
 </template>
 
@@ -203,28 +201,32 @@ watch(fieldValue, () => {
 <style lang="css">
 .input-radio-wrapper {
   --_form-theme: var(--theme-form-primary);
-  --_border-width: var(--input-border-width-default);
-  --_border-color: var(--_form-theme);
-  --_outline-width: var(--input-outline-width-thin);
+  --_border-width: 3px;
+  --_border-color: var(--gray-0);
+  --_outline-width: var(--input-outline-width-default);
+  --_outline-color: var(--_form-theme);
+  --_box-shadow-color: hsl(from var(--_form-theme) h s 50%);
   --_radio-size: 40px;
+  --_radio-fill-colour: var(--gray-0);
+
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
 
   &.x-small {
-    --_radio-size: 14px;
+    --_radio-size: 12px;
   }
   &.small {
-    --_radio-size: 18px;
+    --_radio-size: 16px;
   }
   &.normal {
-    --_radio-size: 22px;
+    --_radio-size: 20px;
   }
   &.medium {
-    --_radio-size: 26px;
+    --_radio-size: 24px;
   }
   &.large {
-    --_radio-size: 30px;
+    --_radio-size: 28px;
   }
 
   &.theme-secondary {
@@ -232,48 +234,29 @@ watch(fieldValue, () => {
   }
 
   &.error {
-    --_border-color: var(--theme-error);
+    --_outline-color: var(--theme-error);
   }
 
   .styled-radio {
-    display: grid;
     grid-column: 1;
     grid-row: 1;
+    background-color: var(--_radio-fill-colour);
     border-radius: 50%;
-    /* border: var(--_border-width) solid var(--_form-theme); */
-
     border: var(--_border-width) solid var(--_border-color);
-    /* outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%); */
+    outline: var(--_outline-width) solid var(--_outline-color);
+    box-shadow: none;
 
     height: var(--_radio-size);
     width: var(--_radio-size);
 
-    .styled-radio-inner {
-      --_transform-translate: 1px, 1px;
+    transition: all 0.2s ease-in-out;
 
-      grid-column: 1;
-      grid-row: 1;
-      height: 80%;
-      width: 80%;
-      border-radius: 50%;
+    &.checked {
       background-color: var(--_form-theme);
-      transform: translate(var(--_transform-translate));
+    }
 
-      &.x-small {
-        /* --_radio-size: 14px; */
-      }
-      &.small {
-        /* --_radio-size: 18px; */
-      }
-      &.normal {
-        --_transform-translate: 2px, 2px;
-      }
-      &.medium {
-        /* --_radio-size: 26px; */
-      }
-      &.large {
-        /* --_radio-size: 30px; */
-      }
+    .input-radio:focus + & {
+      box-shadow: 0 0 2px 2px var(--_box-shadow-color);
     }
   }
 
@@ -284,17 +267,17 @@ watch(fieldValue, () => {
     grid-column: 1;
     grid-row: 1;
     border-radius: 50%;
-    /* border: var(--_border-width) solid var(--_form-theme); */
-
     border: var(--_border-width) solid var(--_form-theme);
-    /* outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%); */
-
     height: var(--_radio-size);
     width: var(--_radio-size);
+
+    margin: 0;
 
     &.styled {
       appearance: none;
       overflow: hidden;
+      height: initial;
+      width: initial;
     }
 
     &:focus {
@@ -302,13 +285,13 @@ watch(fieldValue, () => {
       outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%);
     }
 
-    &:checked::after {
-      /* content: '✔'; */
+    /* &:checked::after {
+      content: '';
       display: grid;
       font-family: var(--font-family);
       place-content: center;
       font-size: calc(var(--_radio-size) * 0.75);
-    }
+    } */
     &.error {
       /* border-color: var(--theme-error); */
 

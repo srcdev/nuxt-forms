@@ -153,7 +153,7 @@
                           v-model="formData"
                           v-model:fieldData="titleData"
                           theme="secondary"
-                          size="normal"
+                          size="small"
                           options-layout="block"
                         >
                           <template #description>
