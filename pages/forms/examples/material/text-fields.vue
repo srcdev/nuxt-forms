@@ -233,9 +233,6 @@ const compact = ref(false);
 const { data: citiesData } = await useFetch('/api/places/list?category=cities');
 const { data: countriesData } = await useFetch<IFormMultipleOptions>('/api/places/list?category=countries');
 const { data: titleData } = await useFetch<IFormMultipleOptions>('/api/utils?category=title');
-// console.log('citiesData', citiesData.value?.data);
-// console.log('countriesData', countriesData.value?.data);
-// console.log('titleData', titleData.value?.data);
 
 /*
  * Setup forms

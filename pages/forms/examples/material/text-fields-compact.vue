@@ -11,89 +11,188 @@
           <template #slot1>
             <FormWrapper width="medium">
               <template #default>
-                <form class="form-wrapper" @submit.stop.prevent="submitForm()">
-                  <FormField width="wide" :has-gutter="false">
-                    <template #default>
-                      <InputEmailMaterial
-                        id="emailAddress"
-                        name="emailAddress"
-                        validation="emailaddress"
-                        :required="true"
-                        :c12="{
-                          label: 'Your Email Address',
-                          placeholder: 'eg. joe@example.com',
-                          errorMessage: 'Please enter a valid email address',
-                        }"
-                        v-model="formData"
-                        theme="secondary"
-                        :compact
-                      />
-                    </template>
-                  </FormField>
+                <ClientOnly>
+                  <form class="form-wrapper" @submit.stop.prevent="submitForm()">
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <InputEmailMaterial
+                          id="emailAddress"
+                          name="emailAddress"
+                          validation="emailaddress"
+                          :required="true"
+                          :c12="{
+                            label: 'Your Email Address',
+                            placeholder: 'eg. joe@example.com',
+                            errorMessage: 'Please enter a valid email address',
+                          }"
+                          v-model="formData"
+                          theme="secondary"
+                          :compact
+                        />
+                      </template>
+                    </FormField>
 
-                  <FormField width="wide" :has-gutter="false">
-                    <template #default>
-                      <InputTextMaterial
-                        id="username"
-                        name="username"
-                        validation="username"
-                        :required="true"
-                        :c12="{
-                          label: 'Your Username',
-                          placeholder: 'eg. YourUserName',
-                          errorMessage: 'Please enter a valid username',
-                        }"
-                        v-model="formData"
-                        theme="secondary"
-                        :compact
-                      />
-                    </template>
-                  </FormField>
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <InputTextMaterial
+                          id="username"
+                          name="username"
+                          validation="username"
+                          :required="true"
+                          :c12="{
+                            label: 'Your Username',
+                            placeholder: 'eg. YourUserName',
+                            errorMessage: 'Please enter a valid username',
+                          }"
+                          v-model="formData"
+                          theme="secondary"
+                          :compact
+                        />
+                      </template>
+                    </FormField>
 
-                  <FormField width="wide" :has-gutter="false">
-                    <template #default>
-                      <InputPasswordMaterial
-                        id="password"
-                        name="password"
-                        validation="password"
-                        :required="true"
-                        :c12="{
-                          label: 'Password',
-                          placeholder: 'eg. Your5illYPa55w0rd',
-                          errorMessage: 'Please enter a valid password',
-                        }"
-                        v-model="formData"
-                        theme="secondary"
-                        :compact
-                      />
-                    </template>
-                  </FormField>
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <InputPasswordMaterial
+                          id="password"
+                          name="password"
+                          validation="password"
+                          :required="true"
+                          :c12="{
+                            label: 'Password',
+                            placeholder: 'eg. Your5illYPa55w0rd',
+                            errorMessage: 'Please enter a valid password',
+                          }"
+                          v-model="formData"
+                          theme="secondary"
+                          :compact
+                        />
+                      </template>
+                    </FormField>
 
-                  <FormField width="wide" :has-gutter="false">
-                    <template #default>
-                      <InputTextareaMaterial
-                        id="message"
-                        name="message"
-                        validation="message"
-                        :required="true"
-                        :c12="{
-                          label: 'Message',
-                          placeholder: 'eg. Type something here',
-                          errorMessage: 'Bad characters in message',
-                        }"
-                        v-model="formData"
-                        theme="secondary"
-                        :compact
-                      />
-                    </template>
-                  </FormField>
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <InputTextareaMaterial
+                          id="message"
+                          name="message"
+                          validation="message"
+                          :required="true"
+                          :c12="{
+                            label: 'Message',
+                            placeholder: 'eg. Type something here',
+                            errorMessage: 'Bad characters in message',
+                          }"
+                          v-model="formData"
+                          theme="secondary"
+                          :compact
+                        />
+                      </template>
+                    </FormField>
 
-                  <FormField width="wide" :has-gutter="false">
-                    <template #default>
-                      <InputButtonSubmit @click.stop.prevent="submitForm()" :is-pending="false" :readonly="submitDisabled" button-text="Submit" theme="secondary" size="medium" />
-                    </template>
-                  </FormField>
-                </form>
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <MultipleCheckboxes
+                          id="cities"
+                          name="cities"
+                          legend="Choose a location"
+                          :required="true"
+                          :c12="{
+                            label: 'Check all Cities you like',
+                            placeholder: 'eg. Type something here',
+                            errorMessage: 'Please accept our terms and conditions',
+                          }"
+                          v-model="formData"
+                          v-model:fieldData="citiesData"
+                          theme="secondary"
+                          size="x-small"
+                        >
+                          <template #description>
+                            <p class="checkbox-description">This is description: optionsLayout = 'equal-widths'</p>
+                          </template>
+                        </MultipleCheckboxes>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <MultipleCheckboxes
+                          id="countries"
+                          name="countries"
+                          legend="Choose a country"
+                          :required="true"
+                          :c12="{
+                            label: 'Check all countries you like',
+                            placeholder: 'eg. Choose some locations',
+                            errorMessage: 'Please select a country',
+                          }"
+                          v-model="formData"
+                          v-model:fieldData="countriesData"
+                          theme="secondary"
+                          size="x-small"
+                          options-layout="inline"
+                        >
+                          <template #description>
+                            <p class="checkbox-description">This is description: optionsLayout = 'inline'</p>
+                          </template>
+                        </MultipleCheckboxes>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <MultipleRadio
+                          id="title"
+                          name="title"
+                          legend="Choose a title"
+                          :required="true"
+                          :c12="{
+                            label: 'Check all title you like',
+                            placeholder: 'eg. Choose some title',
+                            errorMessage: 'Please select a title',
+                          }"
+                          v-model="formData"
+                          v-model:fieldData="titleData"
+                          theme="secondary"
+                          size="normal"
+                          options-layout="block"
+                        >
+                          <template #description>
+                            <p class="checkbox-description">This is description: optionsLayout = 'block'</p>
+                          </template>
+                        </MultipleRadio>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <SingleCheckbox
+                          id="terms"
+                          name="terms"
+                          legend="Accept terms and conditions"
+                          :required="true"
+                          :c12="{
+                            label: 'Accept terms and conditions',
+                            placeholder: 'eg. Type something here',
+                            errorMessage: 'Please accept our terms and conditions',
+                          }"
+                          v-model="formData"
+                          theme="secondary"
+                          size="x-small"
+                        >
+                          <template #description>
+                            <p class="checkbox-description">This is a description of what the user is required to do</p>
+                          </template>
+                        </SingleCheckbox>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <InputButtonSubmit @click.stop.prevent="submitForm()" :is-pending="false" :readonly="submitDisabled" button-text="Submit" theme="secondary" size="medium" />
+                      </template>
+                    </FormField>
+                  </form>
+                </ClientOnly>
               </template>
             </FormWrapper>
           </template>
@@ -112,7 +211,7 @@
 </template>
 
 <script setup lang="ts">
-import type { IFieldsInitialState, IOptionsConfig } from '@/types/types.forms';
+import type { IFieldsInitialState, IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
 
 definePageMeta({
   layout: false,
@@ -129,6 +228,13 @@ useHead({
 const compact = ref(true);
 
 /*
+ * Fetch some sample data
+ **/
+const { data: citiesData } = await useFetch('/api/places/list?category=cities');
+const { data: countriesData } = await useFetch<IFormMultipleOptions>('/api/places/list?category=countries');
+const { data: titleData } = await useFetch<IFormMultipleOptions>('/api/utils?category=title');
+
+/*
  * Setup forms
  */
 const fieldsInitialState = ref<IFieldsInitialState>({
@@ -141,6 +247,10 @@ const fieldsInitialState = ref<IFieldsInitialState>({
   password: '',
   message: '',
   // message: 'This is test 1234567890,.<>?@;:',
+  cities: [],
+  countries: [],
+  title: [],
+  terms: false,
 });
 
 // Setup formData
@@ -197,3 +307,13 @@ const submitForm = async () => {
   }
 };
 </script>
+
+<style lang="css">
+.checkbox-description,
+.radio-description {
+  font-family: var(--font-family);
+  font-size: 16px;
+  margin-top: 12px;
+  color: var(--theme-form-secondary);
+}
+</style>

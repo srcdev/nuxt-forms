@@ -9,14 +9,11 @@
         <li>
           <NuxtLink to="/forms/examples/material/text-fields-compact">Material UI text fields (compact)</NuxtLink>
         </li>
+        <li>
+          <NuxtLink to="/forms/examples/buttons">Buttons</NuxtLink>
+        </li>
       </ul>
     </div>
-    <h2>Buttons</h2>
-    <ul class="flex-group">
-      <li>
-        <NuxtLink to="/forms/examples/buttons">Buttons</NuxtLink>
-      </li>
-    </ul>
 
     <div class="page-layout-content">
       <slot name="layout-content"></slot>
