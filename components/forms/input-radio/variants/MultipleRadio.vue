@@ -127,7 +127,7 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
 .multiple-radio-items {
   display: flex;
-  gap: 14px;
+  gap: 18px;
   margin-top: 12px;
 
   &.inline {

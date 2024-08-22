@@ -154,7 +154,7 @@
                           v-model:fieldData="titleData"
                           theme="secondary"
                           size="small"
-                          options-layout="block"
+                          options-layout="equal-widths"
                         >
                           <template #description>
                             <p class="checkbox-description">This is description: optionsLayout = 'block'</p>
