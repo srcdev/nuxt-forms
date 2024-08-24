@@ -79,11 +79,10 @@ const name = computed(() => {
   --_form-theme: var(--theme-form-primary);
   --_border-width: var(--input-border-width-default);
   --_outline-width: var(--input-outline-width-thin);
-  --_checkbox-size: 40px;
+  --_label-padding-inline: 10px;
 
   display: flex;
   align-items: center;
-  gap: 10px;
 
   label {
     font-family: var(--font-family);
@@ -93,6 +92,7 @@ const name = computed(() => {
     width: 100%;
     height: 100%;
     align-items: center;
+    padding-inline: var(--_label-padding-inline);
   }
 }
 </style>

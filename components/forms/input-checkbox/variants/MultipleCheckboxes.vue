@@ -17,8 +17,8 @@
           }"
           v-model="modelValue"
           :true-value="item.value"
-          theme="secondary"
-          size="x-small"
+          :theme
+          :size
         />
       </template>
     </div>

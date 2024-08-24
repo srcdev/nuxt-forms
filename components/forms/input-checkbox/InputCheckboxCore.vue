@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-wrapper">
+  <div class="input-checkbox-wrapper" :class="[size]">
     <input
       type="checkbox"
       :true-value="trueValue"
@@ -12,7 +12,7 @@
       v-model="modelValue.data[name]"
       ref="inputField"
     />
-    <div v-if="checkboxStyle === 'styled' && isChecked" :class="[size]">
+    <div v-if="checkboxStyle === 'styled' && isChecked" :class="['input-checkbox-styled', size]">
       <Icon name="material-symbols:check" class="icon-check" />
     </div>
   </div>
@@ -203,14 +203,32 @@ watch(fieldValue, () => {
 <style lang="css">
 .input-checkbox-wrapper {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  --_checkbox-size: 40px;
+  /* grid-template-columns: 1fr;
+  grid-template-rows: 1fr; */
+  grid-template-areas: 'checkbox-stack';
+  --_checkbox-size: initial;
 
-  div {
+  /* Sizes */
+  &.x-small {
+    --_checkbox-size: 20px;
+  }
+  &.small {
+    --_checkbox-size: 24px;
+  }
+  &.normal {
+    --_checkbox-size: 30px;
+  }
+  &.medium {
+    --_checkbox-size: 40px;
+  }
+  &.large {
+    --_checkbox-size: 44px;
+  }
+
+  .input-checkbox-styled {
     display: grid;
-    grid-column: 1;
-    grid-row: 1;
+    grid-area: checkbox-stack;
+
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
     transform: translate(calc(var(--_border-width) * 2), calc(var(--_border-width) * 2));
@@ -219,7 +237,7 @@ watch(fieldValue, () => {
     z-index: -1;
 
     /* Sizes */
-    &.x-small {
+    /* &.x-small {
       --_checkbox-size: 24px;
     }
     &.small {
@@ -233,9 +251,11 @@ watch(fieldValue, () => {
     }
     &.large {
       --_checkbox-size: 44px;
-    }
+    } */
 
     .icon-check {
+      grid-area: stack;
+
       height: calc(var(--_checkbox-size) * 0.8);
       width: calc(var(--_checkbox-size) * 0.8);
       transform: translateY(-1px);
@@ -247,9 +267,11 @@ watch(fieldValue, () => {
     --_border-width: var(--input-border-width-default);
     --_outline-width: var(--input-outline-width-thin);
 
-    display: grid;
+    /* display: grid;
     grid-column: 1;
-    grid-row: 1;
+    grid-row: 1; */
+    grid-area: checkbox-stack;
+
     border-radius: 2px;
     /* border: var(--_border-width) solid var(--_form-theme); */
 
@@ -267,7 +289,7 @@ watch(fieldValue, () => {
     }
 
     /* Sizes */
-    &.x-small {
+    /* &.x-small {
       --_checkbox-size: 24px;
     }
     &.small {
@@ -281,7 +303,7 @@ watch(fieldValue, () => {
     }
     &.large {
       --_checkbox-size: 44px;
-    }
+    } */
     &:focus {
       border: var(--_border-width) solid var(--_form-theme);
       outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%);

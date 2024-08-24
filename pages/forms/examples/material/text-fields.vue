@@ -104,7 +104,7 @@
                           v-model="formData"
                           v-model:fieldData="citiesData"
                           theme="secondary"
-                          size="x-small"
+                          size="normal"
                         >
                           <template #description>
                             <p class="checkbox-description">This is description: optionsLayout = 'equal-widths'</p>
@@ -128,7 +128,7 @@
                           v-model="formData"
                           v-model:fieldData="countriesData"
                           theme="secondary"
-                          size="x-small"
+                          size="normal"
                           options-layout="inline"
                         >
                           <template #description>
@@ -177,7 +177,7 @@
                           }"
                           v-model="formData"
                           theme="secondary"
-                          size="x-small"
+                          size="normal"
                         >
                           <template #description>
                             <p class="checkbox-description">This is a description of what the user is required to do</p>
