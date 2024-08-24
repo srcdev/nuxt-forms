@@ -4,7 +4,7 @@
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
-    <InputCheckboxWithLabel :id :name :required :c12 v-model="modelValue" :theme :size />
+    <InputCheckboxWithLabel :id :name :required :c12 v-model="modelValue" :theme :size :checkboxStyle />
   </fieldset>
 </template>
 
@@ -64,6 +64,13 @@ const props = defineProps({
     default: 'medium',
     validator(value: string) {
       return propValidators.size.includes(value);
+    },
+  },
+  checkboxStyle: {
+    type: String as PropType<string>,
+    default: 'styled',
+    validator(value: string) {
+      return propValidators.checkboxStyle.includes(value);
     },
   },
 });

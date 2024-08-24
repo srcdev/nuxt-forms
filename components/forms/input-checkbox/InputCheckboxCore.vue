@@ -12,8 +12,8 @@
       v-model="modelValue.data[name]"
       ref="inputField"
     />
-    <div v-if="checkboxStyle === 'styled' && isChecked" :class="['input-checkbox-styled', size]">
-      <Icon name="material-symbols:check" class="icon-check" />
+    <div v-if="checkboxStyle === 'styled'" :class="['input-checkbox-styled', size]">
+      <Icon name="material-symbols:check" class="icon-check" :class="[{ checked: isChecked }]" />
     </div>
   </div>
 </template>
@@ -255,10 +255,19 @@ watch(fieldValue, () => {
 
     .icon-check {
       grid-area: stack;
+      display: block;
+      height: var(--_checkbox-size);
+      width: var(--_checkbox-size);
+      transform: translate(-3px, 0px);
+      zoom: 0.75;
+      margin: 0;
+      opacity: 0;
+      padding: 0;
+      transition: opacity 0.2s ease-in-out;
 
-      height: calc(var(--_checkbox-size) * 0.8);
-      width: calc(var(--_checkbox-size) * 0.8);
-      transform: translateY(-1px);
+      &.checked {
+        opacity: 1;
+      }
     }
   }
 
@@ -267,43 +276,27 @@ watch(fieldValue, () => {
     --_border-width: var(--input-border-width-default);
     --_outline-width: var(--input-outline-width-thin);
 
-    /* display: grid;
-    grid-column: 1;
-    grid-row: 1; */
     grid-area: checkbox-stack;
 
-    border-radius: 2px;
-    /* border: var(--_border-width) solid var(--_form-theme); */
-
+    border-radius: 4px;
     border: var(--_border-width) solid var(--_form-theme);
-    /* outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%); */
-
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
 
     transition: all 0.2s ease-in-out;
+
+    &.default {
+    }
 
     &.styled {
       appearance: none;
       overflow: hidden;
     }
 
-    /* Sizes */
-    /* &.x-small {
-      --_checkbox-size: 24px;
+    &:focus-visible {
+      border-radius: 4px;
     }
-    &.small {
-      --_checkbox-size: 30px;
-    }
-    &.normal {
-      --_checkbox-size: 36px;
-    }
-    &.medium {
-      --_checkbox-size: 40px;
-    }
-    &.large {
-      --_checkbox-size: 44px;
-    } */
+
     &:focus {
       border: var(--_border-width) solid var(--_form-theme);
       outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%);
@@ -318,10 +311,8 @@ watch(fieldValue, () => {
     }
     &.error {
       /* border-color: var(--theme-error); */
-
       border: var(--_border-width) solid var(--theme-error);
       outline: var(--_outline-width) solid hsl(from var(--theme-error) h s 75%);
-
       background-color: hsl(from var(--theme-error) h s 95%);
     }
 

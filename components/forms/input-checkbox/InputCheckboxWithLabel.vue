@@ -1,6 +1,6 @@
 <template>
   <div class="input-checkbox-with-label">
-    <InputCheckboxCore :id :name :required :c12 v-model="modelValue" :theme :size :trueValue :falseValue />
+    <InputCheckboxCore :id :name :required :c12 v-model="modelValue" :theme :size :trueValue :falseValue :checkboxStyle />
     <label :for="id">{{ c12.label }}</label>
   </div>
 </template>
@@ -57,6 +57,13 @@ const props = defineProps({
     default: 'medium',
     validator(value: string) {
       return propValidators.size.includes(value);
+    },
+  },
+  checkboxStyle: {
+    type: String as PropType<string>,
+    default: 'styled',
+    validator(value: string) {
+      return propValidators.checkboxStyle.includes(value);
     },
   },
 });

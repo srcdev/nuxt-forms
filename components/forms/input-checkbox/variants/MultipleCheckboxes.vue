@@ -19,6 +19,7 @@
           :true-value="item.value"
           :theme
           :size
+          :checkboxStyle
         />
       </template>
     </div>
@@ -80,6 +81,13 @@ const props = defineProps({
   equalCols: {
     type: Boolean,
     default: true,
+  },
+  checkboxStyle: {
+    type: String as PropType<string>,
+    default: 'styled',
+    validator(value: string) {
+      return propValidators.checkboxStyle.includes(value);
+    },
   },
 });
 

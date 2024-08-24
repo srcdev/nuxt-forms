@@ -177,7 +177,8 @@
                           }"
                           v-model="formData"
                           theme="secondary"
-                          size="normal"
+                          size="small"
+                          checkboxStyle="default"
                         >
                           <template #description>
                             <p class="checkbox-description">This is a description of what the user is required to do</p>
