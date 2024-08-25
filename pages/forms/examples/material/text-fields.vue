@@ -105,6 +105,7 @@
                           v-model:fieldData="citiesData"
                           theme="secondary"
                           size="normal"
+                          checkbox-style="check"
                         >
                           <template #description>
                             <p class="checkbox-description">This is description: optionsLayout = 'equal-widths'</p>
@@ -130,6 +131,7 @@
                           theme="secondary"
                           size="normal"
                           options-layout="inline"
+                          checkbox-style="cross"
                         >
                           <template #description>
                             <p class="checkbox-description">This is description: optionsLayout = 'inline'</p>
@@ -178,7 +180,8 @@
                           v-model="formData"
                           theme="secondary"
                           size="small"
-                          checkboxStyle="default"
+                          checkbox-appearance="syled"
+                          checkbox-style="check"
                         >
                           <template #description>
                             <p class="checkbox-description">This is a description of what the user is required to do</p>

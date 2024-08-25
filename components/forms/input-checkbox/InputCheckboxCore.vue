@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-wrapper" :class="[size]">
+  <div class="input-checkbox-wrapper" :class="[size, `theme-${theme}`]">
     <input
       type="checkbox"
       :true-value="trueValue"
@@ -8,12 +8,13 @@
       :name
       :required="props.required && !props.multipleOptions"
       :value="trueValue"
-      :class="['input-checkbox', `theme-${theme}`, size, checkboxStyle, { error: fieldHasError }]"
+      :class="['input-checkbox', `theme-${theme}`, size, checkboxAppearance, { error: fieldHasError }]"
       v-model="modelValue.data[name]"
       ref="inputField"
     />
-    <div v-if="checkboxStyle === 'styled'" :class="['input-checkbox-styled', size]">
+    <div v-if="checkboxAppearance === 'styled'" :class="['input-checkbox-styled', size, checkboxStyle]">
       <Icon name="material-symbols:check" class="icon-check" :class="[{ checked: isChecked }]" />
+      <div v-if="checkboxStyle === 'check' || checkboxStyle === 'cross'" :class="[checkboxStyle, { checked: isChecked }]"></div>
     </div>
   </div>
 </template>
@@ -72,9 +73,16 @@ const props = defineProps({
       return propValidators.size.includes(value);
     },
   },
-  checkboxStyle: {
+  checkboxAppearance: {
     type: String as PropType<string>,
     default: 'styled',
+    validator(value: string) {
+      return propValidators.checkboxAppearance.includes(value);
+    },
+  },
+  checkboxStyle: {
+    type: String as PropType<string>,
+    default: 'check',
     validator(value: string) {
       return propValidators.checkboxStyle.includes(value);
     },
@@ -207,6 +215,11 @@ watch(fieldValue, () => {
   grid-template-rows: 1fr; */
   grid-template-areas: 'checkbox-stack';
   --_checkbox-size: initial;
+  --_form-theme: var(--theme-form-primary);
+
+  &.theme-secondary {
+    --_form-theme: var(--theme-form-secondary);
+  }
 
   /* Sizes */
   &.x-small {
@@ -252,6 +265,59 @@ watch(fieldValue, () => {
     &.large {
       --_checkbox-size: 44px;
     } */
+
+    :not(&.check),
+    :not(&.cross) {
+      .icon-check {
+        display: none;
+      }
+    }
+
+    .check {
+      grid-area: stack;
+      width: calc(var(--_checkbox-size) * 0.2);
+      height: calc(var(--_checkbox-size) * 0.45);
+      border-bottom: 3px solid var(--_form-theme);
+      border-right: 3px solid var(--_form-theme);
+      transform: rotate(45deg) translate(-2px, -1px);
+      /* transform: translate(-3px, 0px); */
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+
+      &.checked {
+        opacity: 1;
+      }
+    }
+
+    .cross {
+      grid-area: stack;
+      width: calc(var(--_checkbox-size) * 0.65);
+      height: 2px;
+      background-color: var(--_form-theme);
+      transform: rotate(45deg);
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+
+      &.checked {
+        opacity: 1;
+
+        &::after {
+          opacity: 1;
+        }
+      }
+
+      &::after {
+        content: '';
+        grid-area: stack;
+        display: block;
+        width: calc(var(--_checkbox-size) * 0.65);
+        height: 2px;
+        background-color: var(--_form-theme);
+        transform: rotate(-90deg);
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+      }
+    }
 
     .icon-check {
       grid-area: stack;

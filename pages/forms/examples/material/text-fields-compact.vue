@@ -104,6 +104,7 @@
                           v-model="formData"
                           v-model:fieldData="citiesData"
                           theme="secondary"
+                          checkbox-style="cross"
                           size="x-small"
                         >
                           <template #description>
@@ -155,6 +156,7 @@
                           theme="secondary"
                           size="normal"
                           options-layout="block"
+                          checkbox-style="cross"
                         >
                           <template #description>
                             <p class="checkbox-description">This is description: optionsLayout = 'block'</p>
