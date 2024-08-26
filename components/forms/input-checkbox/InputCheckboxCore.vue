@@ -215,11 +215,17 @@ watch(fieldValue, () => {
   grid-template-rows: 1fr; */
   grid-template-areas: 'checkbox-stack';
   --_checkbox-size: initial;
+  --_checkbox-border-radius: 4px;
   --_form-theme: var(--theme-form-primary);
 
   &.theme-secondary {
     --_form-theme: var(--theme-form-secondary);
   }
+
+  border-radius: var(--_checkbox-border-radius);
+  border: var(--_border-width) solid var(--_form-theme);
+  height: var(--_checkbox-size);
+  width: var(--_checkbox-size);
 
   /* Sizes */
   &.x-small {
@@ -244,7 +250,7 @@ watch(fieldValue, () => {
 
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
-    transform: translate(calc(var(--_border-width) * 2), calc(var(--_border-width) * 2));
+    /* transform: translate(calc(var(--_border-width) * 2), calc(var(--_border-width) * 2)); */
     place-content: center;
     position: relative;
     z-index: -1;
@@ -279,7 +285,7 @@ watch(fieldValue, () => {
       height: calc(var(--_checkbox-size) * 0.45);
       border-bottom: 3px solid var(--_form-theme);
       border-right: 3px solid var(--_form-theme);
-      transform: rotate(45deg) translate(-2px, -1px);
+      transform: rotate(45deg) translate(-1px, -1px);
       /* transform: translate(-3px, 0px); */
       opacity: 0;
       transition: opacity 0.2s ease-in-out;
@@ -292,7 +298,7 @@ watch(fieldValue, () => {
     .cross {
       grid-area: stack;
       width: calc(var(--_checkbox-size) * 0.65);
-      height: 2px;
+      height: 3px;
       background-color: var(--_form-theme);
       transform: rotate(45deg);
       opacity: 0;
@@ -311,7 +317,7 @@ watch(fieldValue, () => {
         grid-area: stack;
         display: block;
         width: calc(var(--_checkbox-size) * 0.65);
-        height: 2px;
+        height: 3px;
         background-color: var(--_form-theme);
         transform: rotate(-90deg);
         opacity: 0;
@@ -344,7 +350,7 @@ watch(fieldValue, () => {
 
     grid-area: checkbox-stack;
 
-    border-radius: 4px;
+    border-radius: var(--_checkbox-border-radius);
     border: var(--_border-width) solid var(--_form-theme);
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
@@ -356,7 +362,9 @@ watch(fieldValue, () => {
 
     &.styled {
       appearance: none;
+      margin: 0;
       overflow: hidden;
+      opacity: 0;
     }
 
     &:focus-visible {
