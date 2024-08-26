@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-with-label">
+  <div class="input-checkbox-with-label" :class="[`theme-${theme}`, { error: fieldHasError }]">
     <InputCheckboxCore :id :name :required :c12 v-model="modelValue" :theme :size :trueValue :falseValue :checkboxAppearance :checkboxStyle />
     <label :for="id">{{ c12.label }}</label>
   </div>
@@ -83,9 +83,9 @@ const modelValue = defineModel() as Ref<IFormData>;
 const name = computed(() => {
   return props.name !== null ? props.name : props.id;
 });
-// const fieldHasError = computed(() => {
-//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
-// });
+const fieldHasError = computed(() => {
+  return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
+});
 </script>
 
 <style lang="css">
@@ -98,7 +98,16 @@ const name = computed(() => {
   display: flex;
   align-items: center;
 
+  &.theme-secondary {
+    --_form-theme: var(--theme-form-secondary);
+  }
+
+  &.error {
+    --_form-theme: var(--theme-error);
+  }
+
   label {
+    color: var(--_form-theme);
     font-family: var(--font-family);
     font-size: 14px;
     font-weight: 500;

@@ -1,5 +1,5 @@
 <template>
-  <fieldset class="single-radio-fieldset">
+  <fieldset class="single-radio-fieldset" :class="[`theme-${theme}`, { error: fieldHasError }]">
     <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
     <template v-if="hasDescription">
       <slot name="description"></slot>
@@ -75,18 +75,29 @@ const modelValue = defineModel() as Ref<IFormData>;
 const name = computed(() => {
   return props.name !== null ? props.name : props.id;
 });
-// const fieldHasError = computed(() => {
-//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
-// });
+const fieldHasError = computed(() => {
+  return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
+});
 </script>
 
 <style lang="css">
 .single-radio-fieldset {
+  --_form-theme: var(--theme-form-primary);
+
   margin: 0;
   padding: 0;
   border: 0;
 
+  &.theme-secondary {
+    --_form-theme: var(--theme-form-secondary);
+  }
+
+  &.error {
+    --_form-theme: var(--theme-error);
+  }
+
   legend {
+    color: var(--_form-theme);
     font-family: var(--font-family);
     font-size: 18px;
     font-weight: 500;

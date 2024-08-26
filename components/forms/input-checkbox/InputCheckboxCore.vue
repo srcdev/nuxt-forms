@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-wrapper" :class="[size, `theme-${theme}`, checkboxAppearance, { checked: isChecked }, { focus: isFocussed }]">
+  <div class="input-checkbox-wrapper" :class="[size, `theme-${theme}`, checkboxAppearance, { checked: isChecked }, { focus: isFocussed }, { error: fieldHasError }]">
     <input
       type="checkbox"
       :true-value="trueValue"
@@ -226,6 +226,10 @@ watch(fieldValue, () => {
 
   &.theme-secondary {
     --_form-theme: var(--theme-form-secondary);
+  }
+
+  &.error {
+    --_form-theme: var(--theme-error);
   }
 
   &.styled {

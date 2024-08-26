@@ -135,7 +135,18 @@ const fieldHasError = computed(() => {
 
 <style lang="css">
 .input-textarea-material {
+  --_form-theme: var(--theme-form-primary);
+  &.theme-secondary {
+    --_form-theme: var(--theme-form-secondary);
+  }
+
+  &.error {
+    --_form-theme: var(--theme-error);
+  }
+
   textarea {
+    color: var(--_form-theme);
+
     background-color: transparent;
     line-height: var(--line-height);
 
@@ -152,13 +163,14 @@ const fieldHasError = computed(() => {
   }
 
   label {
+    color: var(--_form-theme);
     margin: initial;
     line-height: var(--line-height);
     padding: initial;
+    transition: color 0.2s ease-in-out;
   }
 
   --_gutter: 12px;
-  --_form-theme: var(--theme-form-primary);
   --_border-width: var(--input-border-width-default);
   --_outline-width: var(--input-outline-width-thin);
 
@@ -168,10 +180,6 @@ const fieldHasError = computed(() => {
 
   margin-bottom: 20px;
   overflow: hidden;
-
-  &.theme-secondary {
-    --_form-theme: var(--theme-form-secondary);
-  }
 
   &:focus-within {
     border: var(--_border-width) solid var(--_form-theme);
@@ -201,6 +209,7 @@ const fieldHasError = computed(() => {
     background-color: transparent;
     z-index: 2;
     height: 3.5rem;
+    transition: color 0.2s ease-in-out;
 
     &.active,
     &.dirty,

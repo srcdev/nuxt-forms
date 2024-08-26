@@ -1,5 +1,5 @@
 <template>
-  <fieldset class="multiple-radio-fieldset">
+  <fieldset class="multiple-radio-fieldset" :class="[`theme-${theme}`, { error: fieldHasError }]">
     <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
     <template v-if="hasDescription">
       <slot name="description"></slot>
@@ -119,18 +119,30 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 // };
 // modelValue.value.formFieldsC12[props.name] = formFieldC12;
 
-// const fieldHasError = computed(() => {
-//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
-// });
+const fieldHasError = computed(() => {
+  return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
+});
 </script>
 
 <style lang="css">
 .multiple-radio-fieldset {
+  --_form-theme: var(--theme-form-primary);
+
   margin: 0;
   padding: 0;
   border: 0;
 
+  &.theme-secondary {
+    --_form-theme: var(--theme-form-secondary);
+  }
+
+  &.error {
+    --_form-theme: var(--theme-error);
+  }
+
   legend {
+    color: var(--_form-theme);
+
     font-family: var(--font-family);
     font-size: 18px;
     font-weight: 500;
