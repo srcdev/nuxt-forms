@@ -180,7 +180,7 @@
                           v-model="formData"
                           theme="secondary"
                           size="small"
-                          checkbox-appearance="syled"
+                          checkbox-appearance="styled"
                           checkbox-style="check"
                         >
                           <template #description>

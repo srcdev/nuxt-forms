@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-wrapper" :class="[size, `theme-${theme}`]">
+  <div class="input-checkbox-wrapper" :class="[size, `theme-${theme}`, checkboxAppearance, { checked: isChecked }, { focus: isFocussed }]">
     <input
       type="checkbox"
       :true-value="trueValue"
@@ -11,6 +11,8 @@
       :class="['input-checkbox', `theme-${theme}`, size, checkboxAppearance, { error: fieldHasError }]"
       v-model="modelValue.data[name]"
       ref="inputField"
+      @focus="isFocussed = true"
+      @blur="isFocussed = false"
     />
     <div v-if="checkboxAppearance === 'styled'" :class="['input-checkbox-styled', size, checkboxStyle]">
       <Icon name="material-symbols:check" class="icon-check" :class="[{ checked: isChecked }]" />
@@ -128,6 +130,9 @@ const isChecked = computed(() => {
     return isValid;
   }
 });
+
+const isFocussed = ref(false);
+
 // watch(isChecked, () => {
 //   console.log('inputField.value', inputField.value?.validity);
 // });
@@ -210,22 +215,30 @@ watch(fieldValue, () => {
 
 <style lang="css">
 .input-checkbox-wrapper {
-  display: grid;
-  /* grid-template-columns: 1fr;
-  grid-template-rows: 1fr; */
-  grid-template-areas: 'checkbox-stack';
   --_checkbox-size: initial;
   --_checkbox-border-radius: 4px;
   --_form-theme: var(--theme-form-primary);
+  --_outline-width: var(--input-outline-width-thin);
+  --_border-width: var(--input-border-width-default);
+
+  display: grid;
+  grid-template-areas: 'checkbox-stack';
 
   &.theme-secondary {
     --_form-theme: var(--theme-form-secondary);
   }
 
-  border-radius: var(--_checkbox-border-radius);
-  border: var(--_border-width) solid var(--_form-theme);
-  height: var(--_checkbox-size);
-  width: var(--_checkbox-size);
+  &.styled {
+    border-radius: var(--_checkbox-border-radius);
+    border: var(--_border-width) solid var(--_form-theme);
+    height: var(--_checkbox-size);
+    width: var(--_checkbox-size);
+
+    &.focus {
+      /* border: var(--_border-width) solid var(--_form-theme); */
+      outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%);
+    }
+  }
 
   /* Sizes */
   &.x-small {
@@ -344,10 +357,6 @@ watch(fieldValue, () => {
   }
 
   .input-checkbox {
-    --_form-theme: var(--theme-form-primary);
-    --_border-width: var(--input-border-width-default);
-    --_outline-width: var(--input-outline-width-thin);
-
     grid-area: checkbox-stack;
 
     border-radius: var(--_checkbox-border-radius);
