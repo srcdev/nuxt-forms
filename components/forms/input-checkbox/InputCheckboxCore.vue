@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-wrapper" :class="[size, `theme-${theme}`, checkboxAppearance, { checked: isChecked }, { focus: isFocussed }, { error: fieldHasError }]">
+  <div class="input-checkbox-wrapper" :class="[size, `theme-${theme}`, checkboxAppearance, { error: fieldHasError }]">
     <input
       type="checkbox"
       :true-value="trueValue"
@@ -11,8 +11,6 @@
       :class="['input-checkbox', `theme-${theme}`, size, checkboxAppearance, { error: fieldHasError }]"
       v-model="modelValue.data[name]"
       ref="inputField"
-      @focus="isFocussed = true"
-      @blur="isFocussed = false"
     />
     <div v-if="checkboxAppearance === 'styled'" :class="['input-checkbox-styled', size, checkboxStyle]">
       <Icon name="material-symbols:check" class="icon-check" :class="[{ checked: isChecked }]" />
@@ -213,7 +211,7 @@ watch(fieldValue, () => {
 // });
 </script>
 
-<style lang="css">
+<style scoped lang="css">
 .input-checkbox-wrapper {
   --_checkbox-size: initial;
   --_checkbox-border-radius: 4px;
@@ -240,9 +238,8 @@ watch(fieldValue, () => {
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
 
-    &.focus {
+    &:has(.input-checkbox:focus-visible) {
       box-shadow: 0 0 2px 3px var(--_focus-colour);
-      /* border-color: var(--_focus-colour); */
       outline-color: var(--_focus-colour);
     }
   }
@@ -270,27 +267,9 @@ watch(fieldValue, () => {
 
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
-    /* transform: translate(calc(var(--_border-width) * 2), calc(var(--_border-width) * 2)); */
     place-content: center;
     position: relative;
     z-index: -1;
-
-    /* Sizes */
-    /* &.x-small {
-      --_checkbox-size: 24px;
-    }
-    &.small {
-      --_checkbox-size: 30px;
-    }
-    &.normal {
-      --_checkbox-size: 36px;
-    }
-    &.medium {
-      --_checkbox-size: 40px;
-    }
-    &.large {
-      --_checkbox-size: 44px;
-    } */
 
     :not(&.check),
     :not(&.cross) {

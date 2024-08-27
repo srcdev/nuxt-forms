@@ -9,4 +9,5 @@
   --theme-form-secondary-color: var(--gray-1);
   --theme-form-secondary-color-hover: var(--gray-11);
   --theme-form-secondary-focus: var(--blue-6);
+  --theme-form-secondary-radio-color-bg: var(--gray-00);
 }
