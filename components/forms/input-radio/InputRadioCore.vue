@@ -11,8 +11,10 @@
       :class="['input-radio', radioStyle, { error: fieldHasError }]"
       v-model="modelValue.data[name]"
       ref="inputField"
+      @focus="isFocussed = true"
+      @blur="isFocussed = false"
     />
-    <div v-if="radioStyle === 'styled'" class="styled-radio" :class="[{ checked: isChecked }]"></div>
+    <div v-if="radioStyle === 'styled'" class="styled-radio" :class="[{ focus: isFocussed }, { checked: isChecked }]"></div>
   </div>
 </template>
 
@@ -82,6 +84,7 @@ const props = defineProps({
 const slots = useSlots();
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
+const isFocussed = ref(false);
 
 const modelValue = defineModel() as Ref<IFormData>;
 
@@ -105,6 +108,7 @@ const inputField = ref<HTMLInputElement | null>(null);
 const isArray = Array.isArray(modelValue.value.data[name.value]);
 
 const isChecked = computed(() => {
+  // this is incorrectly reposting checked status
   if (isArray) {
     if (name.value in modelValue.value.data) {
       const keyValue = modelValue.value.data[name.value] as any[];
@@ -208,6 +212,7 @@ watch(fieldValue, () => {
   --_box-shadow-color: hsl(from var(--_form-theme) h s 50%);
   --_radio-size: 40px;
   --_radio-fill-colour: hsl(from var(--_form-theme) h s 100%);
+  --_focus-colour: var(--theme-form-primary-focus);
 
   display: grid;
   grid-template-columns: 1fr;
@@ -231,6 +236,7 @@ watch(fieldValue, () => {
 
   &.theme-secondary {
     --_form-theme: var(--theme-form-secondary);
+    --_focus-colour: var(--theme-form-secondary-focus);
   }
 
   &.error {
@@ -256,7 +262,8 @@ watch(fieldValue, () => {
     }
 
     .input-radio:focus + & {
-      box-shadow: 0 0 2px 2px var(--_box-shadow-color);
+      box-shadow: 0 0 2px 3px var(--_focus-colour);
+      outline-color: var(--_focus-colour);
     }
   }
 
@@ -280,7 +287,7 @@ watch(fieldValue, () => {
       width: initial;
     }
 
-    &:focus {
+    &.focus {
       border: var(--_border-width) solid var(--_form-theme);
       outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%);
     }

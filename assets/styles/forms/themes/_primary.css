@@ -8,4 +8,5 @@
   --theme-form-primary-bg-hover: var(--blue-2);
   --theme-form-primary-color: var(--blue-1);
   --theme-form-primary-color-hover: var(--blue-11);
+  --theme-form-secondary-focus: var(--blue-6);
 }

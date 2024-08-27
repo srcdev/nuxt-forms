@@ -220,12 +220,14 @@ watch(fieldValue, () => {
   --_form-theme: var(--theme-form-primary);
   --_outline-width: var(--input-outline-width-thin);
   --_border-width: var(--input-border-width-default);
+  --_focus-colour: var(--theme-form-primary-focus);
 
   display: grid;
   grid-template-areas: 'checkbox-stack';
 
   &.theme-secondary {
     --_form-theme: var(--theme-form-secondary);
+    --_focus-colour: var(--theme-form-secondary-focus);
   }
 
   &.error {
@@ -239,8 +241,9 @@ watch(fieldValue, () => {
     width: var(--_checkbox-size);
 
     &.focus {
-      /* border: var(--_border-width) solid var(--_form-theme); */
-      outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%);
+      box-shadow: 0 0 2px 3px var(--_focus-colour);
+      /* border-color: var(--_focus-colour); */
+      outline-color: var(--_focus-colour);
     }
   }
 
