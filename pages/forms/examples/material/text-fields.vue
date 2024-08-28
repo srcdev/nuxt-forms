@@ -159,7 +159,7 @@
                           theme="secondary"
                           size="normal"
                           options-layout="equal-widths"
-                          radio-style="with-decorator"
+                          radio-appearance="with-decorator"
                         >
                           <template #description>
                             <p class="checkbox-description">This is description: optionsLayout = 'equal-widths'</p>

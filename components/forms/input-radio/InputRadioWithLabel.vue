@@ -1,6 +1,6 @@
 <template>
   <div class="input-radio-with-label" :class="[`theme-${theme}`, { error: fieldHasError }]">
-    <InputRadioCore :id :name :required :c12 v-model="modelValue" :theme :size :trueValue :falseValue :radioStyle />
+    <InputRadioCore :id :name :required :c12 v-model="modelValue" :theme :size :trueValue :falseValue :radioAppearance />
     <label :for="id">{{ c12.label }}</label>
   </div>
 </template>
@@ -59,11 +59,11 @@ const props = defineProps({
       return propValidators.size.includes(value);
     },
   },
-  radioStyle: {
+  radioAppearance: {
     type: String as PropType<string>,
     default: null,
     validator(value: string) {
-      return propValidators.radioStyle.includes(value);
+      return propValidators.radioAppearance.includes(value);
     },
   },
 });

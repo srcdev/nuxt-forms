@@ -4,7 +4,7 @@
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
-    <InputRadioWithLabel :id :name :required :c12 v-model="modelValue" :theme :size :radioStyle />
+    <InputRadioWithLabel :id :name :required :c12 v-model="modelValue" :theme :size :radioAppearance />
   </fieldset>
 </template>
 
@@ -66,11 +66,11 @@ const props = defineProps({
       return propValidators.size.includes(value);
     },
   },
-  radioStyle: {
+  radioAppearance: {
     type: String as PropType<string>,
     default: null,
     validator(value: string) {
-      return propValidators.radioStyle.includes(value);
+      return propValidators.radioAppearance.includes(value);
     },
   },
 });

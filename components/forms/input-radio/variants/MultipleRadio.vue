@@ -19,7 +19,7 @@
           :true-value="item.value"
           :theme
           :size
-          :radioStyle
+          :radioAppearance
         />
       </template>
     </div>
@@ -82,11 +82,11 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  radioStyle: {
+  radioAppearance: {
     type: String as PropType<string>,
     default: null,
     validator(value: string) {
-      return propValidators.radioStyle.includes(value);
+      return propValidators.radioAppearance.includes(value);
     },
   },
 });

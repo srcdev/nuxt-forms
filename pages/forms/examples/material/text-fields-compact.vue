@@ -158,7 +158,7 @@
                           theme="secondary"
                           size="x-small"
                           options-layout="block"
-                          radio-style="with-decorator"
+                          radio-appearance="with-decorator"
                         >
                           <template #description>
                             <p class="checkbox-description">This is description: optionsLayout = 'block'</p>

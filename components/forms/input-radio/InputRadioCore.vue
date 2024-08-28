@@ -1,5 +1,5 @@
 <template>
-  <div class="input-radio-wrapper" :class="[`theme-${theme}`, size, radioStyle, { error: fieldHasError }]">
+  <div class="input-radio-wrapper" :class="[`theme-${theme}`, size, radioAppearance, { error: fieldHasError }]">
     <input
       type="radio"
       :true-value="trueValue"
@@ -8,11 +8,11 @@
       :name
       :required="props.required && !props.multipleOptions"
       :value="trueValue"
-      :class="['input-radio-core', radioStyle]"
+      :class="['input-radio-core', radioAppearance]"
       v-model="modelValue.data[name]"
       ref="inputField"
     />
-    <div v-if="radioStyle === 'with-decorator'" class="input-radio-decorator"></div>
+    <div v-if="radioAppearance === 'with-decorator'" class="input-radio-decorator"></div>
   </div>
 </template>
 
@@ -68,11 +68,11 @@ const props = defineProps({
       return propValidators.size.includes(value);
     },
   },
-  radioStyle: {
+  radioAppearance: {
     type: String as PropType<string>,
     default: null,
     validator(value: string) {
-      return propValidators.radioStyle.includes(value);
+      return propValidators.radioAppearance.includes(value);
     },
   },
 });

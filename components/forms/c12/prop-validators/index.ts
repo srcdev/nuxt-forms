@@ -4,7 +4,7 @@ export const propValidators = {
   theme: ['primary', 'secondary', 'tertiary', 'ghost', 'error', 'success', 'warning'],
   checkboxAppearance: [null, 'with-decorator'],
   checkboxStyle: ['check', 'cross'],
-  radioStyle: [null, 'with-decorator'],
+  radioAppearance: [null, 'with-decorator'],
   optionsLayout: ['block', 'inline', 'equal-widths'],
 };
 
