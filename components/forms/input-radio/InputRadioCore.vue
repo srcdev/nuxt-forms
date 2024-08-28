@@ -8,7 +8,7 @@
       :name
       :required="props.required && !props.multipleOptions"
       :value="trueValue"
-      :class="['input-radio-core', { 'with-decorator': radioStyle === 'styled' }, { error: fieldHasError }]"
+      :class="['input-radio-core', { 'with-decorator': radioStyle === 'styled' }]"
       v-model="modelValue.data[name]"
       ref="inputField"
     />
@@ -211,6 +211,7 @@ watch(fieldValue, () => {
   --_background-colour: var(--theme-form-primary-radio-color-bg);
   --_decorator-size: calc(var(--_radio-size) - (var(--_border-width) * 2));
   --_checked-color: var(--_background-colour);
+  --_box-shadow: 0 0 2px 3px transparent;
 
   display: grid;
   grid-template-areas: 'radio-stack';
@@ -242,6 +243,23 @@ watch(fieldValue, () => {
     --_radio-size: 44px;
   }
 
+  &:has(.input-radio-core.with-decorator:focus-visible) {
+    --_box-shadow: 0 0 2px 3px var(--_focus-colour);
+    --_focus-colour: var(--_focus-colour);
+
+    &.theme-primary {
+      --_focus-colour: var(--theme-form-primary-focus);
+    }
+
+    &.theme-secondary {
+      --_focus-colour: var(--theme-form-secondary-focus);
+    }
+  }
+
+  &:has(.input-radio-core.with-decorator:checked) {
+    --_checked-color: hsl(from var(--_form-theme) h s 50%);
+  }
+
   &.with-decorator {
     border-radius: var(--_radio-border-radius);
     border: var(--_border-width) solid var(--_form-theme);
@@ -255,30 +273,18 @@ watch(fieldValue, () => {
       border: var(--_border-width) solid var(--_background-colour);
       border-radius: var(--_radio-border-radius);
       background-color: var(--_checked-color);
+      box-shadow: var(--_box-shadow);
+      outline-color: var(--_focus-colour);
     }
 
     .input-radio-core {
       grid-area: radio-stack;
       &.with-decorator {
         opacity: 0;
-        background-color: red;
         appearance: none;
         overflow: hidden;
         height: initial;
         width: initial;
-      }
-    }
-
-    &:has(.input-radio-core.with-decorator:focus-visible) {
-      .input-radio-decorator {
-        box-shadow: 0 0 2px 3px var(--_focus-colour);
-        outline-color: var(--_focus-colour);
-      }
-    }
-
-    &:has(.input-radio-core.with-decorator:checked) {
-      .input-radio-decorator {
-        --_checked-color: hsl(from var(--_form-theme) h s 50%);
       }
     }
   }

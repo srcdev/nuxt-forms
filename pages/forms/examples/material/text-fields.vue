@@ -179,7 +179,7 @@
                           }"
                           v-model="formData"
                           theme="secondary"
-                          size="small"
+                          size="normal"
                           checkbox-appearance="styled"
                           checkbox-style="check"
                         >

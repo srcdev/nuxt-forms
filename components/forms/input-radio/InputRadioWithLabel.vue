@@ -83,7 +83,6 @@ const fieldHasError = computed(() => {
 
   display: flex;
   align-items: center;
-  gap: 10px;
 
   &.theme-secondary {
     --_form-theme: var(--theme-form-secondary);
@@ -102,6 +101,7 @@ const fieldHasError = computed(() => {
     width: 100%;
     height: 100%;
     align-items: center;
+    padding-inline: 10px;
   }
 }
 </style>

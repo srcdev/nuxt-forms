@@ -154,7 +154,7 @@
                           v-model="formData"
                           v-model:fieldData="titleData"
                           theme="secondary"
-                          size="normal"
+                          size="x-small"
                           options-layout="block"
                           checkbox-style="cross"
                         >
