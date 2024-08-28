@@ -19,8 +19,7 @@
           :true-value="item.value"
           :theme
           :size
-          :checkboxAppearance
-          :checkboxStyle
+          :radioStyle
         />
       </template>
     </div>
@@ -83,18 +82,11 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  checkboxAppearance: {
+  radioStyle: {
     type: String as PropType<string>,
-    default: 'styled',
+    default: null,
     validator(value: string) {
-      return propValidators.checkboxAppearance.includes(value);
-    },
-  },
-  checkboxStyle: {
-    type: String as PropType<string>,
-    default: 'check',
-    validator(value: string) {
-      return propValidators.checkboxStyle.includes(value);
+      return propValidators.radioStyle.includes(value);
     },
   },
 });

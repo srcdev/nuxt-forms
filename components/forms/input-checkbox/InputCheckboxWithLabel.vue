@@ -61,7 +61,7 @@ const props = defineProps({
   },
   checkboxAppearance: {
     type: String as PropType<string>,
-    default: 'styled',
+    default: 'with-decorator',
     validator(value: string) {
       return propValidators.checkboxAppearance.includes(value);
     },

@@ -8,11 +8,11 @@
       :name
       :required="props.required && !props.multipleOptions"
       :value="trueValue"
-      :class="['input-checkbox', `theme-${theme}`, size, checkboxAppearance, { error: fieldHasError }]"
+      :class="['input-checkbox-core', `theme-${theme}`, size, checkboxAppearance, { error: fieldHasError }]"
       v-model="modelValue.data[name]"
       ref="inputField"
     />
-    <div v-if="checkboxAppearance === 'styled'" :class="['input-checkbox-styled', size, checkboxStyle]">
+    <div v-if="checkboxAppearance === 'with-decorator'" :class="['input-checkbox-decorator', size, checkboxStyle]">
       <Icon name="material-symbols:check" class="icon-check" :class="[{ checked: isChecked }]" />
       <div v-if="checkboxStyle === 'check' || checkboxStyle === 'cross'" :class="[checkboxStyle, { checked: isChecked }]"></div>
     </div>
@@ -75,7 +75,7 @@ const props = defineProps({
   },
   checkboxAppearance: {
     type: String as PropType<string>,
-    default: 'styled',
+    default: 'with-decorator',
     validator(value: string) {
       return propValidators.checkboxAppearance.includes(value);
     },
@@ -232,13 +232,13 @@ watch(fieldValue, () => {
     --_form-theme: var(--theme-error);
   }
 
-  &.styled {
+  &.with-decorator {
     border-radius: var(--_checkbox-border-radius);
     border: var(--_border-width) solid var(--_form-theme);
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
 
-    &:has(.input-checkbox:focus-visible) {
+    &:has(.input-checkbox-core:focus-visible) {
       box-shadow: 0 0 2px 3px var(--_focus-colour);
       outline-color: var(--_focus-colour);
     }
@@ -261,7 +261,7 @@ watch(fieldValue, () => {
     --_checkbox-size: 44px;
   }
 
-  .input-checkbox-styled {
+  .input-checkbox-decorator {
     display: grid;
     grid-area: checkbox-stack;
 
@@ -342,7 +342,7 @@ watch(fieldValue, () => {
     }
   }
 
-  .input-checkbox {
+  .input-checkbox-core {
     grid-area: checkbox-stack;
 
     border-radius: var(--_checkbox-border-radius);
@@ -355,7 +355,7 @@ watch(fieldValue, () => {
     &.default {
     }
 
-    &.styled {
+    &.with-decorator {
       appearance: none;
       margin: 0;
       overflow: hidden;

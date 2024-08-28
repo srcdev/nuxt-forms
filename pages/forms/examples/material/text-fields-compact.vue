@@ -156,7 +156,7 @@
                           theme="secondary"
                           size="x-small"
                           options-layout="block"
-                          checkbox-style="cross"
+                          radio-style="with-decorator"
                         >
                           <template #description>
                             <p class="checkbox-description">This is description: optionsLayout = 'block'</p>
@@ -180,7 +180,7 @@
                           v-model="formData"
                           theme="secondary"
                           size="x-small"
-                          checkbox-appearance="styled"
+                          checkbox-appearance="with-decorator"
                         >
                           <template #description>
                             <p class="checkbox-description">This is a description of what the user is required to do</p>

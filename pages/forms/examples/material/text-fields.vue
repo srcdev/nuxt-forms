@@ -157,6 +157,7 @@
                           theme="secondary"
                           size="normal"
                           options-layout="equal-widths"
+                          radio-style="with-decorator"
                         >
                           <template #description>
                             <p class="checkbox-description">This is description: optionsLayout = 'equal-widths'</p>
@@ -180,7 +181,7 @@
                           v-model="formData"
                           theme="secondary"
                           size="normal"
-                          checkbox-appearance="styled"
+                          checkbox-appearance="with-decorator"
                           checkbox-style="check"
                         >
                           <template #description>
