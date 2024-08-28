@@ -106,6 +106,7 @@
                           theme="secondary"
                           size="normal"
                           checkbox-style="check"
+                          checkbox-appearance="with-decorator"
                         >
                           <template #description>
                             <p class="checkbox-description">This is description: optionsLayout = 'equal-widths'</p>
@@ -132,6 +133,7 @@
                           size="normal"
                           options-layout="inline"
                           checkbox-style="cross"
+                          checkbox-appearance="with-decorator"
                         >
                           <template #description>
                             <p class="checkbox-description">This is description: optionsLayout = 'inline'</p>

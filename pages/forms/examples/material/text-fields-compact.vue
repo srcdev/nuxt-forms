@@ -105,6 +105,7 @@
                           v-model:fieldData="citiesData"
                           theme="secondary"
                           checkbox-style="cross"
+                          checkbox-appearance="with-decorator"
                           size="x-small"
                         >
                           <template #description>
@@ -131,6 +132,7 @@
                           theme="secondary"
                           size="x-small"
                           options-layout="inline"
+                          checkbox-appearance="with-decorator"
                         >
                           <template #description>
                             <p class="checkbox-description">This is description: optionsLayout = 'inline'</p>
