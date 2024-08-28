@@ -136,13 +136,36 @@ const fieldHasError = computed(() => {
 <style lang="css">
 .input-text-material {
   --_form-theme: var(--theme-form-primary);
+  --_focus-colour: var(--theme-form-primary-focus);
+  --_gutter: 12px;
+  --_border-width: var(--input-border-width-default);
+  --_outline-width: var(--input-outline-width-thin);
+
   &.theme-secondary {
     --_form-theme: var(--theme-form-secondary);
+    --_focus-colour: var(--theme-form-secondary-focus);
   }
 
   &.error {
     --_form-theme: var(--theme-error);
   }
+
+  /*
+  &:has(.input-text:invalid),
+  &:has(.input-textarea:invalid) {
+    --_form-theme: green;
+  }
+  */
+
+  /*
+  &:not(:placeholder-shown):invalid {
+    --_form-theme: green;
+  }
+  &:has(.text-input:not(:placeholder-shown):invalid) {
+    --_form-theme: red;
+  }
+
+  */
 
   input {
     background-color: transparent;
@@ -168,10 +191,6 @@ const fieldHasError = computed(() => {
     transition: color 0.2s ease-in-out;
   }
 
-  --_gutter: 12px;
-  --_border-width: var(--input-border-width-default);
-  --_outline-width: var(--input-outline-width-thin);
-
   display: grid;
   border-radius: 2px;
   border: var(--_border-width) solid var(--_form-theme);
@@ -183,6 +202,11 @@ const fieldHasError = computed(() => {
     border: var(--_border-width) solid var(--_form-theme);
     outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%);
     background-color: hsl(from var(--_form-theme) h s 95%);
+  }
+
+  &:has(.input-text:focus-visible) {
+    box-shadow: 0 0 2px 3px var(--_focus-colour);
+    outline-color: var(--_focus-colour);
   }
 
   &.error {
