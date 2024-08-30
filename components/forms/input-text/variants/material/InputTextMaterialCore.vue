@@ -6,6 +6,7 @@
     <div class="input-text-container" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]">
       <slot name="input"></slot>
     </div>
+    <InputError :c12 :fieldHasError :id></InputError>
   </div>
 </template>
 
@@ -38,8 +39,9 @@ const props = defineProps({
   },
   type: {
     type: String,
+    required: true,
     validator(value: string) {
-      return ['text', 'password', 'tel', 'number', 'email', 'url'].includes(value);
+      return propValidators.inputTypesText.includes(value);
     },
   },
   id: {
@@ -93,11 +95,12 @@ const errorMessage = computed(() => {
 });
 
 const labelText = computed(() => {
-  if (modelValue.value.submitAttempted && !modelValue.value.formFieldsC12[props.name].isValid) {
-    return errorMessage.value;
-  } else {
-    return props.c12.label;
-  }
+  return props.c12.label;
+  // if (modelValue.value.submitAttempted && !modelValue.value.formFieldsC12[props.name].isValid) {
+  //   return errorMessage.value;
+  // } else {
+  //   return props.c12.label;
+  // }
 });
 
 const modelValue = defineModel() as Ref<IFormData>;

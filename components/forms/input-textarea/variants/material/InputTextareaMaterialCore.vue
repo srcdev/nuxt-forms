@@ -7,6 +7,7 @@
       <slot name="input"></slot>
     </div>
   </div>
+  <div v-if="fieldHasError" class="input-textarea-error-message" :id="`${id}-error-message`">{{ c12.errorMessage }}</div>
 </template>
 
 <script setup lang="ts">
@@ -93,11 +94,12 @@ const errorMessage = computed(() => {
 });
 
 const labelText = computed(() => {
-  if (modelValue.value.submitAttempted && !modelValue.value.formFieldsC12[props.name].isValid) {
-    return errorMessage.value;
-  } else {
-    return props.c12.label;
-  }
+  return props.c12.label;
+  // if (modelValue.value.submitAttempted && !modelValue.value.formFieldsC12[props.name].isValid) {
+  //   return errorMessage.value;
+  // } else {
+  //   return props.c12.label;
+  // }
 });
 
 const modelValue = defineModel() as Ref<IFormData>;

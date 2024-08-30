@@ -17,6 +17,8 @@
       :class="['input-text', 'text-normal', styleClassPassthrough, { active: isFocused }, { dirty: fieldIsDirty }, { error: fieldHasError }]"
       v-model="modelValue.data[name]"
       ref="inputField"
+      :aria-invalid="fieldHasError"
+      :aria-describedby="`${id}-error-message`"
       @focusin="updateFocus(name, true)"
       @focusout="updateFocus(name, false)"
     />

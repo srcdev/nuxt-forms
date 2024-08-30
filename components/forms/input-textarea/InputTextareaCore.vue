@@ -16,6 +16,8 @@
       v-model="<string>modelValue.data[name]"
       ref="inputField"
       :placeholder="c12.placeholder"
+      :aria-invalid="fieldHasError"
+      :aria-describedby="`${id}-error-message`"
       @focusin="updateFocus(name, true)"
       @focusout="updateFocus(name, false)"
     ></textarea>

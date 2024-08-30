@@ -6,6 +6,8 @@ export const propValidators = {
   checkboxStyle: ['check', 'cross'],
   radioAppearance: [null, 'with-decorator'],
   optionsLayout: ['block', 'inline', 'equal-widths'],
+  inputTypesButton: ['button', 'cancel', 'reset', 'submit'],
+  inputTypesText: ['text', 'email', 'password', 'number', 'tel', 'url'],
 };
 
 export default propValidators;
