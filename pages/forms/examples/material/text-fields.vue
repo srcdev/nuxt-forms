@@ -4,6 +4,15 @@
       <template #layout-content>
         <div>
           <h1>Material UI text fields ({{ compact ? 'compact' : 'default' }})</h1>
+          <ul class="flex-group">
+            <li>
+              <InputButtonSubmit @click.stop.prevent="swapCompact(false)" button-text="Use Default UI" theme="primary" size="normal" />
+            </li>
+            <li>
+              <InputButtonSubmit @click.stop.prevent="swapCompact(true)" button-text="Use Compact UI" theme="secondary" size="normal" />
+            </li>
+          </ul>
+
           <p>Example test fields in default material UI</p>
           <p>Use 'test@test.com' to trigger server errors</p>
         </div>
@@ -13,6 +22,7 @@
               <template #default>
                 <ClientOnly>
                   <form class="form-wrapper" @submit.stop.prevent="submitForm()">
+                    <div aria-live="assertive" id="message"></div>
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
                         <InputEmailMaterial
@@ -233,6 +243,9 @@ useHead({
 });
 
 const compact = ref(false);
+const swapCompact = (newStyle: boolean) => {
+  compact.value = newStyle;
+};
 
 /*
  * Fetch some sample data
@@ -322,5 +335,18 @@ const submitForm = async () => {
   font-size: 16px;
   margin-top: 12px;
   color: var(--theme-form-secondary);
+}
+
+.flex-group {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+ul.flex-group {
+  list-style-type: none;
+  padding: 0;
 }
 </style>
