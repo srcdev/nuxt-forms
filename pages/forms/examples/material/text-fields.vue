@@ -6,10 +6,10 @@
           <h1>Material UI text fields ({{ compact ? 'compact' : 'default' }})</h1>
           <ul class="flex-group">
             <li>
-              <InputButtonSubmit @click.stop.prevent="swapCompact(false)" button-text="Use Default UI" theme="primary" size="normal" />
+              <InputButtonSubmit type="button" @click.stop.prevent="swapCompact(false)" button-text="Use Default UI" theme="primary" size="normal" />
             </li>
             <li>
-              <InputButtonSubmit @click.stop.prevent="swapCompact(true)" button-text="Use Compact UI" theme="secondary" size="normal" />
+              <InputButtonSubmit type="button" @click.stop.prevent="swapCompact(true)" button-text="Use Compact UI" theme="secondary" size="normal" />
             </li>
           </ul>
 
@@ -205,7 +205,7 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <InputButtonSubmit @click.stop.prevent="submitForm()" :is-pending="false" :readonly="submitDisabled" button-text="Submit" theme="secondary" size="medium" />
+                        <InputButtonSubmit type="button" @click.stop.prevent="submitForm()" :is-pending="false" :readonly="submitDisabled" button-text="Submit" theme="secondary" size="medium" />
                       </template>
                     </FormField>
                   </form>

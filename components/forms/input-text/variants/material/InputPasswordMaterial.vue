@@ -3,7 +3,7 @@
     <template #input>
       <InputTextCore :id :name :type :validation :required v-model="modelValue" :c12 :style-class-passthrough="styleClassPassthrough">
         <template #right>
-          <InputButtonCore @click.stop.prevent="toggleDisplayPassword" :is-pending="false" button-text="Submit" theme="ghost" size="x-small">
+          <InputButtonCore type="button" @click.stop.prevent="toggleDisplayPassword" :is-pending="false" button-text="Submit" theme="ghost" size="x-small">
             <template #iconOnly>
               <Icon v-if="displayPassword" name="radix-icons:eye-none" class="icon" />
               <Icon v-else name="radix-icons:eye-open" class="icon" />
