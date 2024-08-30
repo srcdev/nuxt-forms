@@ -7,9 +7,6 @@
           <NuxtLink to="/forms/examples/material/text-fields">Material UI text fields</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/forms/examples/material/text-fields-compact">Material UI text fields (compact)</NuxtLink>
-        </li>
-        <li>
           <NuxtLink to="/forms/examples/buttons">Buttons</NuxtLink>
         </li>
       </ul>
