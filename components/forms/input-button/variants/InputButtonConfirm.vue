@@ -1,6 +1,6 @@
 <template>
   <InputButtonCore
-    type="submit"
+    type="button"
     :use-effect="useEffect"
     :isPending="isPending"
     :readonly

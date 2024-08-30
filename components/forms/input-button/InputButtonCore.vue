@@ -54,9 +54,9 @@ const props = defineProps({
   },
   type: {
     type: String as PropType<'submit' | 'button' | 'reset'>,
-    default: 'submit',
+    default: 'button',
     validator(value: string) {
-      return ['button', 'cancel', 'reset', 'submit'].includes(value);
+      return propValidators.inputTypesButton.includes(value);
     },
   },
   buttonText: {
@@ -131,6 +131,8 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
   &:hover,
   &:focus-visible {
     cursor: pointer;
+    /* outline: 2px solid royalblue;
+    box-shadow: 1px 1px 8px 1px royalblue; */
   }
 
   &[readonly] {
