@@ -9,25 +9,25 @@
           <p>Themes switcher</p>
           <ul class="flex-group">
             <li>
-              <InputButtonSubmit @click.stop.prevent="swapTheme('primary')" :is-pending="false" button-text="Primary" theme="primary" size="normal" />
+              <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('primary')" :is-pending="false" button-text="Primary" theme="primary" size="normal" />
             </li>
             <li>
-              <InputButtonSubmit @click.stop.prevent="swapTheme('secondary')" :is-pending="false" button-text="Secondary" theme="secondary" size="normal" />
+              <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('secondary')" :is-pending="false" button-text="Secondary" theme="secondary" size="normal" />
             </li>
             <li>
-              <InputButtonSubmit @click.stop.prevent="swapTheme('tertiary')" :is-pending="false" button-text="Tertiary" theme="tertiary" size="normal" />
+              <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('tertiary')" :is-pending="false" button-text="Tertiary" theme="tertiary" size="normal" />
             </li>
             <li>
-              <InputButtonSubmit @click.stop.prevent="swapTheme('warning')" :is-pending="false" button-text="Warning" theme="warning" size="normal" />
+              <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('warning')" :is-pending="false" button-text="Warning" theme="warning" size="normal" />
             </li>
             <li>
-              <InputButtonSubmit @click.stop.prevent="swapTheme('success')" :is-pending="false" button-text="Success" theme="success" size="normal" />
+              <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('success')" :is-pending="false" button-text="Success" theme="success" size="normal" />
             </li>
             <li>
-              <InputButtonSubmit @click.stop.prevent="swapTheme('error')" :is-pending="false" button-text="Error" theme="error" size="normal" />
+              <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('error')" :is-pending="false" button-text="Error" theme="error" size="normal" />
             </li>
             <li>
-              <InputButtonSubmit @click.stop.prevent="swapTheme('ghost')" :is-pending="false" button-text="Ghost" theme="ghost" size="normal" />
+              <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('ghost')" :is-pending="false" button-text="Ghost" theme="ghost" size="normal" />
             </li>
           </ul>
 
@@ -35,13 +35,13 @@
             <template #default>
               <form @submit.prevent="submitForm">
                 <div class="flex-group">
-                  <InputButtonSubmit @click.stop.prevent="submitForm" :is-pending="false" button-text="Submit" :theme size="x-small" />
+                  <InputButtonSubmit type="button" @click.stop.prevent="submitForm" :is-pending="false" button-text="Submit" :theme size="x-small" />
 
-                  <InputButtonSubmit @click.stop.prevent="submitForm" :is-pending="false" button-text="Submit" :theme size="small" />
+                  <InputButtonSubmit type="button" @click.stop.prevent="submitForm" :is-pending="false" button-text="Submit" :theme size="small" />
 
-                  <InputButtonSubmit @click.stop.prevent="submitForm" :is-pending="false" button-text="Submit" :theme size="normal" />
-                  <InputButtonSubmit @click.stop.prevent="submitForm" :is-pending="false" button-text="Submit" :theme size="medium" />
-                  <InputButtonSubmit @click.stop.prevent="submitForm" :is-pending="false" button-text="Submit" :theme size="large" />
+                  <InputButtonSubmit type="button" @click.stop.prevent="submitForm" :is-pending="false" button-text="Submit" :theme size="normal" />
+                  <InputButtonSubmit type="button" @click.stop.prevent="submitForm" :is-pending="false" button-text="Submit" :theme size="medium" />
+                  <InputButtonSubmit type="button" @click.stop.prevent="submitForm" :is-pending="false" button-text="Submit" :theme size="large" />
                 </div>
 
                 <div class="flex-group">
@@ -122,7 +122,8 @@ const fieldsInitialState = ref<IFieldsInitialState>({
 });
 
 // Setup formData
-const { formData, getErrorCount, updateErrorMessages, resetForm, formIsValid, submitDisabled } = useFormControl(fieldsInitialState);
+const { formData, initFormData, getErrorCount, updateErrorMessages, formIsValid, submitDisabled, useApiErrors } = useFormControl();
+await initFormData(fieldsInitialState);
 
 const submitForm = async () => {
   await getErrorCount(true);
