@@ -6,8 +6,8 @@
     <div class="input-textarea-container" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]">
       <slot name="input"></slot>
     </div>
+    <InputError :c12 :fieldHasError :id></InputError>
   </div>
-  <div v-if="fieldHasError" class="input-textarea-error-message" :id="`${id}-error-message`">{{ c12.errorMessage }}</div>
 </template>
 
 <script setup lang="ts">

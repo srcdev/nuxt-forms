@@ -74,7 +74,7 @@ defineProps({
     --_gutter-block: var(--_gutter);
   }
 
-  &.hide {
+  &.hide-XX {
     --_grid-template-rows: 0fr;
     --_opacity: var(--_opacity-hide);
     --_display: var(--_display-hide);
