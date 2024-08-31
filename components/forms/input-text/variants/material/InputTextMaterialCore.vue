@@ -207,7 +207,8 @@ const fieldHasError = computed(() => {
     background-color: hsl(from var(--_form-theme) h s 95%);
   }
 
-  &:has(.input-text:focus-visible) {
+  &:has(.input-text-core:focus-visible),
+  &:has(.input-button-core:focus-visible) {
     box-shadow: 0 0 2px 3px var(--_focus-colour);
     outline-color: var(--_focus-colour);
   }
@@ -259,7 +260,7 @@ const fieldHasError = computed(() => {
       opacity: 1;
     }
 
-    .input-text {
+    .input-text-core {
       font-family: var(--font-family);
       border: 0px solid green;
       padding: calc(var(--_gutter) / 2) var(--_gutter);

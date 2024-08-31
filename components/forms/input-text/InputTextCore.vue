@@ -14,7 +14,7 @@
       :pattern="componentValidation.pattern"
       :maxlength="componentValidation.maxlength"
       :required
-      :class="['input-text', 'text-normal', styleClassPassthrough, { active: isFocused }, { dirty: fieldIsDirty }, { error: fieldHasError }]"
+      :class="['input-text-core', 'text-normal', styleClassPassthrough, { active: isFocused }, { dirty: fieldIsDirty }, { error: fieldHasError }]"
       v-model="modelValue.data[name]"
       ref="inputField"
       :aria-invalid="fieldHasError"

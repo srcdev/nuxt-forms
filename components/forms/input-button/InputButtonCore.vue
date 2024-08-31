@@ -4,7 +4,7 @@
     :readonly
     :aria-disabled="readonly"
     :data-test-id="dataTestId"
-    class="btn"
+    class="input-button-core btn"
     :class="[`btn-${type}`, `theme-${theme}`, size, effectClass, styleClassPassthrough, { 'icon-only': isIconOnly }]"
   >
     <span v-if="useEffect && effect == 'fancy'" class="fancy"></span>
