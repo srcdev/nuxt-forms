@@ -1,6 +1,6 @@
 <template>
   <div class="input-error-message" :class="[{ show: fieldHasError }, { hide: !fieldHasError }]">
-    <div class="inner">
+    <div class="inner" :class="[{ show: fieldHasError }]">
       <div class="message" :id="`${id}-error-message`">{{ c12.errorMessage }}</div>
     </div>
   </div>
@@ -51,7 +51,9 @@ defineProps({
   --_message-translate-y-hide: calc(var(--_gutter) * -2);
   --_message-translate-y-show: 2px;
   --_message-translate-y: var(--_message-translate-y-hide);
-  --_padding: initial;
+  --_padding-message-show: var(--_gutter);
+  --_padding-message-hide: 0;
+  --_padding-message: var(--_padding-message-hide);
 
   grid-row: 2;
   grid-column: 1;
@@ -72,6 +74,7 @@ defineProps({
     --_display: var(--_display-show);
     --_message-translate-y: var(--_message-translate-y-show);
     --_gutter-block: var(--_gutter);
+    --_padding-message: var(--_padding-message-show);
   }
 
   &.hide-XX {
@@ -80,27 +83,35 @@ defineProps({
     --_display: var(--_display-hide);
     --_message-translate-y: var(--_message-translate-y-hide);
     --_gutter-block: 0;
+    --_padding-message: var(--_padding-message-hide);
   }
 
   .inner {
     overflow: hidden;
-    display: var(--_display);
-    opacity: var(--_opacity);
+    /* display: var(--_display-hide);
+    opacity: var(--_opacity-hide); */
 
-    transition-property: display, opacity;
+    /* transition-property: display, opacity;
     transition-duration: var(--_transition-duration);
-    transition-timing-function: linear;
-    transition-behavior: allow-discrete;
+    transition-timing-function: var(--_transition-timing-function);
+    transition-behavior: allow-discrete; */
+
+    transition: opacity var(--_transition-duration) var(--_transition-timing-function), display var(--_transition-duration) var(--_transition-timing-function) allow-discrete;
+
+    &.show {
+      display: var(--_display-show);
+      opacity: var(--_opacity-show);
+    }
 
     .message {
       font-family: var(--font-family);
       font-size: 16px;
       font-weight: 500;
-      padding-block: var(--_gutter-block);
+      padding-block: var(--_padding-message);
       padding-inline: var(--_gutter-inline);
       transform: translateY(var(--_message-translate-y));
 
-      transition-property: transform, padding-block;
+      transition-property: transform, padding;
       transition-duration: var(--_transition-duration);
       transition-timing-function: linear;
     }
