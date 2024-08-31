@@ -86,3 +86,12 @@ const toggleDisplayPassword = () => {
   displayPassword.value = !displayPassword.value;
 };
 </script>
+
+<style lang="css" scoped>
+/* :deep(.input-text-core:not(.active)),
+:deep(.input-text-core:not(.dirty)) {
+  + .right-content {
+    display: none !important;
+  }
+} */
+</style>

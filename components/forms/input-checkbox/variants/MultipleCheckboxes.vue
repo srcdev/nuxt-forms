@@ -4,6 +4,7 @@
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
+    <InputError :errorMessaging :fieldHasError :id="name" :isDetached="true" />
     <div class="multiple-checkboxes-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
         <InputCheckboxWithLabel
@@ -121,6 +122,18 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
 const fieldHasError = computed(() => {
   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
+});
+
+const errorMessaging = computed(() => {
+  if (
+    typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined' &&
+    modelValue.value!.formFieldsC12[props.name].useCustomError &&
+    modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue
+  ) {
+    return modelValue.value.formFieldsC12[props.name]?.customErrors || [];
+  } else {
+    return props.c12.errorMessage;
+  }
 });
 </script>
 

@@ -344,16 +344,11 @@ watch(fieldValue, () => {
 
   .input-checkbox-core {
     grid-area: checkbox-stack;
-
-    border-radius: var(--_checkbox-border-radius);
     border: var(--_border-width) solid var(--_form-theme);
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
 
     transition: all 0.2s ease-in-out;
-
-    &.default {
-    }
 
     &.with-decorator {
       appearance: none;
@@ -363,7 +358,7 @@ watch(fieldValue, () => {
     }
 
     &:focus-visible {
-      border-radius: 4px;
+      border-radius: var(--input-border-radius);
     }
 
     &:focus {

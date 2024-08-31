@@ -1,0 +1,5 @@
+:where(html) {
+  --focus-visible-colour: #4169e1;
+  --focus-visible-box-shadow: 1px 1px 8px 1px var(--focus-visible-colour);
+  --focus-visible-outline: 2px solid var(--focus-visible-colour);
+}

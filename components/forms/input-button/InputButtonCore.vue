@@ -111,7 +111,6 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
 .btn {
   --_padding-block: var(--theme-form-button-padding-block-normal);
   --_padding-inline: var(--theme-form-button-padding-inline-normal);
-  --_border-radius: 4px;
   --_icon-gap: var(--theme-form-button-icon-gap-normal);
 
   align-items: center;
@@ -119,8 +118,7 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
   gap: var(--_icon-gap);
   justify-content: center;
   border: none;
-  border-radius: var(--_border-radius);
-
+  border-radius: var(--input-border-radius);
   font-family: var(--font-family);
 
   padding-inline: var(--_padding-inline);
@@ -131,8 +129,8 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
   &:hover,
   &:focus-visible {
     cursor: pointer;
-    /* outline: 2px solid royalblue;
-    box-shadow: 1px 1px 8px 1px royalblue; */
+    /* outline: var(--focus-visible-outline);
+    box-shadow: var(--focus-visible-box-shadow); */
   }
 
   &[readonly] {

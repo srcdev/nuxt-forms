@@ -1,9 +1,10 @@
 <template>
-  <fieldset class="single-checkbox-fieldset" :class="[`theme-${theme}`, { error: fieldHasError }]">
+  <fieldset class="single-checkbox-fieldset" :class="[styleClassPassthrough, `theme-${theme}`, { error: fieldHasError }]">
     <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
+    <InputError :errorMessaging :fieldHasError :id="name" :isDetached="true" />
     <InputCheckboxWithLabel :id :name :required :c12 v-model="modelValue" :theme :size :checkboxAppearance :checkboxStyle />
   </fieldset>
 </template>
@@ -92,6 +93,18 @@ const name = computed(() => {
 const fieldHasError = computed(() => {
   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
 });
+
+const errorMessaging = computed(() => {
+  if (
+    typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined' &&
+    modelValue.value!.formFieldsC12[props.name].useCustomError &&
+    modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue
+  ) {
+    return modelValue.value.formFieldsC12[props.name]?.customErrors || [];
+  } else {
+    return props.c12.errorMessage;
+  }
+});
 </script>
 
 <style lang="css">
@@ -122,5 +135,16 @@ const fieldHasError = computed(() => {
       margin-bottom: 0;
     }
   }
+
+  .input-checkbox-with-label {
+    margin-block-start: 12px;
+  }
+
+  /* &:has(.input-error-message.show) {
+    .input-checkbox-with-label {
+      margin-block-start: 12px;
+      transition: margin 500ms linear;
+    }
+  } */
 }
 </style>

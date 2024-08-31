@@ -1,17 +1,22 @@
 <template>
-  <div class="input-error-message" :class="[{ show: fieldHasError }, { hide: !fieldHasError }]">
+  <div class="input-error-message" :class="[{ show: fieldHasError }, { detached: isDetached }, { hide: !fieldHasError }]">
     <div class="inner" :class="[{ show: fieldHasError }]">
-      <div class="message" :id="`${id}-error-message`">{{ c12.errorMessage }}</div>
+      <div class="message" :id="`${id}-error-message`">
+        <ul v-if="isArray">
+          <li v-for="(message, index) in errorMessaging" :key="index">{{ message }}</li>
+        </ul>
+        <span v-else>
+          {{ errorMessaging }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { InpuTextC12 } from '@/types/types.forms';
-
-defineProps({
-  c12: {
-    type: Object as PropType<InpuTextC12>,
+const props = defineProps({
+  errorMessaging: {
+    type: [Object, String],
     required: true,
   },
   fieldHasError: {
@@ -30,6 +35,14 @@ defineProps({
     type: Boolean,
     value: false,
   },
+  isDetached: {
+    type: Boolean,
+    required: true,
+  },
+});
+
+const isArray = computed(() => {
+  return Array.isArray(props.errorMessaging);
 });
 </script>
 
@@ -68,6 +81,10 @@ defineProps({
   transition-timing-function: var(--_transition-timing-function);
   transition-behavior: allow-discrete;
 
+  &.detached {
+    border-radius: var(--input-border-radius);
+  }
+
   &.show {
     --_grid-template-rows: 1fr;
     --_opacity: var(--_opacity-show);
@@ -77,24 +94,8 @@ defineProps({
     --_padding-message: var(--_padding-message-show);
   }
 
-  &.hide-XX {
-    --_grid-template-rows: 0fr;
-    --_opacity: var(--_opacity-hide);
-    --_display: var(--_display-hide);
-    --_message-translate-y: var(--_message-translate-y-hide);
-    --_gutter-block: 0;
-    --_padding-message: var(--_padding-message-hide);
-  }
-
   .inner {
     overflow: hidden;
-    /* display: var(--_display-hide);
-    opacity: var(--_opacity-hide); */
-
-    /* transition-property: display, opacity;
-    transition-duration: var(--_transition-duration);
-    transition-timing-function: var(--_transition-timing-function);
-    transition-behavior: allow-discrete; */
 
     transition: opacity var(--_transition-duration) var(--_transition-timing-function), display var(--_transition-duration) var(--_transition-timing-function) allow-discrete;
 
@@ -114,12 +115,16 @@ defineProps({
       transition-property: transform, padding;
       transition-duration: var(--_transition-duration);
       transition-timing-function: linear;
-    }
 
-    @starting-style {
-      .inner {
-        opacity: var(--_opacity-hide);
-        display: var(--_display-hide);
+      ul {
+        list-style-type: none;
+        padding-inline-start: 0;
+        margin-block-start: 0;
+        margin-block-end: 0;
+
+        li + li {
+          margin-block-start: 6px;
+        }
       }
     }
   }

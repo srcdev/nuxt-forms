@@ -1,12 +1,12 @@
 <template>
   <div class="input-textarea-material" :class="[`theme-${theme}`, { error: fieldHasError }, { compact: compact }]">
     <label class="label" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]" :for="id">
-      <span>{{ labelText }}</span>
+      <span>{{ c12.label }}</span>
     </label>
     <div class="input-textarea-container" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]">
       <slot name="input"></slot>
     </div>
-    <InputError :c12 :fieldHasError :id></InputError>
+    <InputError :errorMessaging :fieldHasError :id :isDetached="false" />
   </div>
 </template>
 
@@ -69,37 +69,16 @@ const props = defineProps({
   },
 });
 
-const errorMessage = computed(() => {
+const errorMessaging = computed(() => {
   if (
     typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined' &&
     modelValue.value!.formFieldsC12[props.name].useCustomError &&
     modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue
   ) {
-    const customErrorsMessages = modelValue.value.formFieldsC12[props.name]?.customErrors || [];
-    let errorMessages = '';
-
-    if (Array.isArray(customErrorsMessages)) {
-      customErrorsMessages.forEach((message: string, index: number) => {
-        const join = index === 0 ? '' : ', ';
-        errorMessages += join + message;
-      });
-    } else {
-      errorMessages = modelValue.value.formFieldsC12[props.name].customErrors as string;
-    }
-
-    return errorMessages;
+    return modelValue.value.formFieldsC12[props.name]?.customErrors || [];
   } else {
     return props.c12.errorMessage;
   }
-});
-
-const labelText = computed(() => {
-  return props.c12.label;
-  // if (modelValue.value.submitAttempted && !modelValue.value.formFieldsC12[props.name].isValid) {
-  //   return errorMessage.value;
-  // } else {
-  //   return props.c12.label;
-  // }
 });
 
 const modelValue = defineModel() as Ref<IFormData>;
@@ -122,17 +101,6 @@ const fieldHasError = computed(() => {
   }
   return false;
 });
-
-// const { fieldHasError } = useFormControl(props.name);
-
-// watch(
-//   () => errorMessage.value,
-//   (newValue, oldValue) => {
-//     if (newValue !== oldValue) {
-//       console.log(`${props.name} errorMessage "${errorMessage.value}"`);
-//     }
-//   }
-// );
 </script>
 
 <style lang="css">

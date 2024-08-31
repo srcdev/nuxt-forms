@@ -4,6 +4,7 @@
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
+    <InputError :errorMessaging :fieldHasError :id="name" :isDetached="true" />
     <div class="multiple-radio-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
         <InputRadioWithLabel
@@ -96,6 +97,18 @@ const hasDescription = computed(() => slots.description !== undefined);
 
 const modelValue = defineModel() as Ref<IFormData>;
 const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
+
+const errorMessaging = computed(() => {
+  if (
+    typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined' &&
+    modelValue.value!.formFieldsC12[props.name].useCustomError &&
+    modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue
+  ) {
+    return modelValue.value.formFieldsC12[props.name]?.customErrors || [];
+  } else {
+    return props.c12.errorMessage;
+  }
+});
 
 // const isArray = Array.isArray(modelValue.value.data[props.name]);
 // const formFieldC12 = <IFormFieldC12>{

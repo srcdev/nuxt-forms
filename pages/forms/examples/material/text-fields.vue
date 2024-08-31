@@ -109,7 +109,7 @@
                           :c12="{
                             label: 'Check all Cities you like',
                             placeholder: 'eg. Type something here',
-                            errorMessage: 'Please accept our terms and conditions',
+                            errorMessage: 'Please choose at least 1 location',
                           }"
                           v-model="formData"
                           v-model:fieldData="citiesData"

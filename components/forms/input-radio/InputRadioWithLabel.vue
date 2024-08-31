@@ -1,5 +1,5 @@
 <template>
-  <div class="input-radio-with-label" :class="[`theme-${theme}`, { error: fieldHasError }]">
+  <div class="input-radio-with-label" :class="[styleClassPassthrough, `theme-${theme}`, { error: fieldHasError }]">
     <InputRadioCore :id :name :required :c12 v-model="modelValue" :theme :size :trueValue :falseValue :radioAppearance />
     <label :for="id">{{ c12.label }}</label>
   </div>

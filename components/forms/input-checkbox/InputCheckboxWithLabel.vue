@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-with-label" :class="[`theme-${theme}`, { error: fieldHasError }]">
+  <div class="input-checkbox-with-label" :class="[styleClassPassthrough, `theme-${theme}`, { error: fieldHasError }]">
     <InputCheckboxCore :id :name :required :c12 v-model="modelValue" :theme :size :trueValue :falseValue :checkboxAppearance :checkboxStyle />
     <label :for="id">{{ c12.label }}</label>
   </div>
