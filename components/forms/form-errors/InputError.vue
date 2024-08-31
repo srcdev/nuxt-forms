@@ -36,8 +36,13 @@ defineProps({
 <style lang="css" scoped>
 .input-error-message {
   --_grid-template-rows: 0fr;
-  --_opacity: 0;
-  --_display: none;
+  --_opacity-show: 1;
+  --_opacity-hide: 0;
+  --_opacity: var(--_opacity-hide);
+
+  --_display-show: block;
+  --_display-hide: none;
+  --_display: var(--_display-hide);
   --_gutter: 12px;
   --_gutter-block: 0;
   --_gutter-inline: var(--_gutter);
@@ -63,16 +68,16 @@ defineProps({
 
   &.show {
     --_grid-template-rows: 1fr;
-    --_opacity: 1;
-    --_display: block;
+    --_opacity: var(--_opacity-show);
+    --_display: var(--_display-show);
     --_message-translate-y: var(--_message-translate-y-show);
     --_gutter-block: var(--_gutter);
   }
 
   &.hide {
     --_grid-template-rows: 0fr;
-    --_opacity: 0;
-    --_display: none;
+    --_opacity: var(--_opacity-hide);
+    --_display: var(--_display-hide);
     --_message-translate-y: var(--_message-translate-y-hide);
     --_gutter-block: 0;
   }
@@ -98,6 +103,13 @@ defineProps({
       transition-property: transform, padding-block;
       transition-duration: var(--_transition-duration);
       transition-timing-function: linear;
+    }
+
+    @starting-style {
+      .inner {
+        opacity: var(--_opacity-hide);
+        display: var(--_display-hide);
+      }
     }
   }
 }
