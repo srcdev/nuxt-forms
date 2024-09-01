@@ -22,7 +22,7 @@
               <template #default>
                 <ClientOnly>
                   <form class="form-wrapper" @submit.stop.prevent="submitForm()">
-                    <div aria-live="assertive" id="message"></div>
+                    <div aria-live="assertive" id="aria-live-message"></div>
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
                         <InputEmailMaterial
