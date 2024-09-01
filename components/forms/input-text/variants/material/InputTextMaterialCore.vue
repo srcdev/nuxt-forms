@@ -110,6 +110,7 @@ const fieldHasError = computed(() => {
   --_focus-colour: var(--theme-form-primary-focus);
   --_gutter: 12px;
   --_border-width: var(--input-border-width-default);
+  --_border-color: var(--_form-theme);
   --_outline-width: var(--input-outline-width-thin);
 
   &.theme-secondary {
@@ -164,13 +165,13 @@ const fieldHasError = computed(() => {
 
   display: grid;
   border-radius: 2px;
-  border: var(--_border-width) solid var(--_form-theme);
+  border: var(--_border-width) solid var(--_border-color);
 
   margin-bottom: 20px;
   overflow: hidden;
 
   &:focus-within {
-    border: var(--_border-width) solid var(--_form-theme);
+    --_border-color: white;
     outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%);
     background-color: hsl(from var(--_form-theme) h s 95%);
   }

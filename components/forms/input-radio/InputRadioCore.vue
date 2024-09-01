@@ -131,6 +131,7 @@ watch(fieldValue, () => {
   --_form-theme: var(--theme-form-primary);
   --_outline-width: var(--input-outline-width-thin);
   --_border-width: var(--input-border-width-default);
+  --_border-color: var(--_form-theme);
   --_focus-colour: var(--theme-form-primary-focus);
   --_background-colour: var(--theme-form-primary-radio-color-bg);
   --_decorator-size: calc(var(--_radio-size) - (var(--_border-width) * 2));
@@ -168,6 +169,7 @@ watch(fieldValue, () => {
   }
 
   &:has(.input-radio-core.with-decorator:focus-visible) {
+    --_border-color: white;
     --_box-shadow: 0 0 2px 3px var(--_focus-colour);
     --_focus-colour: var(--_focus-colour);
 
@@ -186,7 +188,7 @@ watch(fieldValue, () => {
 
   &.with-decorator {
     border-radius: var(--_radio-border-radius);
-    border: var(--_border-width) solid var(--_form-theme);
+    border: var(--_border-width) solid var(--_border-color);
     height: var(--_radio-size);
     width: var(--_radio-size);
 
