@@ -6,7 +6,7 @@
           <h1>Material UI text fields ({{ compact ? 'compact' : 'default' }})</h1>
           <ul class="flex-group">
             <li>
-              <InputButtonSubmit type="button" @click.stop.prevent="swapCompact(false)" button-text="Use Default UI" theme="primary" size="normal" />
+              <InputButtonSubmit type="button" @click.stop.prevent="swapCompact(false)" button-text="Use Default UI" theme="secondary" size="normal" />
             </li>
             <li>
               <InputButtonSubmit type="button" @click.stop.prevent="swapCompact(true)" button-text="Use Compact UI" theme="secondary" size="normal" />
