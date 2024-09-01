@@ -1,7 +1,7 @@
 <template>
   <InputTextareaMaterialCore :type :id :name :required :c12 :styleClassPassthrough :theme v-model="modelValue">
     <template #input>
-      <InputTextareaCore :id :name type="text" :validation :required v-model="modelValue" :c12 :style-class-passthrough="styleClassPassthrough" />
+      <InputTextareaCore :id :name :validation :required v-model="modelValue" :c12 :style-class-passthrough="styleClassPassthrough" />
     </template>
   </InputTextareaMaterialCore>
 </template>

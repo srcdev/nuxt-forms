@@ -12,7 +12,7 @@
       :pattern="componentValidation.pattern"
       :maxlength="componentValidation.maxlength"
       :required
-      :class="['input-textarea', 'text-normal', styleClassPassthrough, { active: isFocused }, { dirty: fieldIsDirty }, { error: fieldHasError }]"
+      :class="['input-textarea-core', 'text-normal', styleClassPassthrough, { active: isFocused }, { dirty: fieldIsDirty }, { error: fieldHasError }]"
       v-model="<string>modelValue.data[name]"
       ref="inputField"
       :placeholder="c12.placeholder"
@@ -35,15 +35,7 @@ import type { InpuTextC12, IFormFieldC12, IFormData } from '@/types/types.forms'
 import { validationConfig } from '@/components/forms/c12/validation-patterns';
 
 const props = defineProps({
-  type: {
-    // type: String as PropType<"text" | "password" | "tel" | "number" | "email" | "url">, // This breaks props setup in unit tests
-    type: String,
-    validator(value: string) {
-      return ['text', 'password', 'tel', 'number', 'email', 'url'].includes(value);
-    },
-  },
   id: {
-    // type: String as PropType<string>,
     type: String,
     required: true,
   },
@@ -76,6 +68,7 @@ const hasRightContent = computed(() => slots.right !== undefined);
 const modelValue = defineModel() as Ref<IFormData>;
 
 const updateFocus = (name: string, isFocused: boolean) => {
+  console.log(`textarea | updateFocus: ${name} ${isFocused}`);
   modelValue.value.focusedField = isFocused ? name : '';
 };
 

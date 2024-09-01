@@ -1,6 +1,6 @@
 <template>
   <div class="input-text-material" :class="[`theme-${theme}`, { error: fieldHasError }, { compact: compact }]">
-    <label class="label" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]" :for="id">
+    <label class="input-text-label" :for="id" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]">
       <span>{{ c12.label }}</span>
     </label>
     <div class="input-text-container" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]">
@@ -138,7 +138,7 @@ const fieldHasError = computed(() => {
 
   */
 
-  input {
+  .input-text-core {
     background-color: transparent;
     line-height: var(--line-height);
 
@@ -154,7 +154,7 @@ const fieldHasError = computed(() => {
     }
   }
 
-  label {
+  .input-text-label {
     color: var(--_form-theme);
     margin: initial;
     line-height: var(--line-height);
@@ -193,7 +193,7 @@ const fieldHasError = computed(() => {
     background-color: hsl(from var(--theme-error) h s 95%);
   }
 
-  .label {
+  .input-text-label {
     grid-row: 1;
     grid-column: 1;
 
@@ -277,7 +277,7 @@ const fieldHasError = computed(() => {
     }
   }
 
-  .label {
+  .input-text-label {
     &.compact {
       align-content: center;
       font-size: 16px;

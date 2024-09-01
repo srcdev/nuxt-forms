@@ -1,6 +1,6 @@
 <template>
   <div class="input-textarea-material" :class="[`theme-${theme}`, { error: fieldHasError }, { compact: compact }]">
-    <label class="label" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]" :for="id">
+    <label class="input-textarea-label" :for="id" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]">
       <span>{{ c12.label }}</span>
     </label>
     <div class="input-textarea-container" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]">
@@ -35,12 +35,6 @@ const props = defineProps({
     default: 'primary',
     validator(value: string) {
       return propValidators.theme.includes(value);
-    },
-  },
-  type: {
-    type: String,
-    validator(value: string) {
-      return ['text', 'password', 'tel', 'number', 'email', 'url'].includes(value);
     },
   },
   id: {
@@ -138,7 +132,7 @@ const fieldHasError = computed(() => {
     }
   }
 
-  label {
+  .input-textarea-label {
     color: var(--_form-theme);
     margin: initial;
     line-height: var(--line-height);
@@ -159,7 +153,7 @@ const fieldHasError = computed(() => {
     background-color: hsl(from var(--_form-theme) h s 95%);
   }
 
-  &:has(.input-textarea:focus-visible) {
+  &:has(.input-textarea-core:focus-visible) {
     box-shadow: 0 0 2px 3px var(--_focus-colour);
     outline-color: var(--_focus-colour);
   }
@@ -173,7 +167,7 @@ const fieldHasError = computed(() => {
     background-color: hsl(from var(--theme-error) h s 95%);
   }
 
-  .label {
+  .input-textarea-label {
     grid-row: 1;
     grid-column: 1;
 
@@ -213,7 +207,7 @@ const fieldHasError = computed(() => {
       opacity: 1;
     }
 
-    .input-textarea {
+    .input-textarea-core {
       font-family: var(--font-family);
       border: 0px solid green;
       padding: calc(var(--_gutter) / 2) var(--_gutter);
@@ -259,7 +253,7 @@ const fieldHasError = computed(() => {
     }
   }
 
-  .label {
+  .input-textarea-label {
     &.compact {
       align-content: center;
       font-size: 16px;
