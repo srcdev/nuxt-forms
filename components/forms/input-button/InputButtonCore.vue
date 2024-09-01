@@ -126,11 +126,13 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
 
   transition: all 0.2s ease-in-out;
 
-  &:hover,
-  &:focus-visible {
+  &:hover {
     cursor: pointer;
-    /* outline: var(--focus-visible-outline);
-    box-shadow: var(--focus-visible-box-shadow); */
+  }
+
+  &:focus-visible {
+    outline: var(--focus-visible-outline);
+    box-shadow: var(--focus-visible-box-shadow);
   }
 
   &[readonly] {
