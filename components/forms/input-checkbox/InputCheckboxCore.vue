@@ -359,6 +359,10 @@ watch(fieldValue, () => {
       opacity: 0;
     }
 
+    &:hover {
+      cursor: pointer;
+    }
+
     &:focus-visible {
       border-radius: var(--input-border-radius);
     }

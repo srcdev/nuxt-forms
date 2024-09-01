@@ -212,6 +212,10 @@ watch(fieldValue, () => {
         height: initial;
         width: initial;
       }
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }

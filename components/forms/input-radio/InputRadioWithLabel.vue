@@ -1,7 +1,7 @@
 <template>
   <div class="input-radio-with-label" :class="[styleClassPassthrough, `theme-${theme}`, { error: fieldHasError }]">
     <InputRadioCore :id :name :required :c12 v-model="modelValue" :theme :size :trueValue :falseValue :radioAppearance />
-    <label :for="id">{{ c12.label }}</label>
+    <label class="input-radio-label" :for="id">{{ c12.label }}</label>
   </div>
 </template>
 
@@ -99,7 +99,7 @@ const fieldHasError = computed(() => {
     --_form-theme: var(--theme-error);
   }
 
-  label {
+  .input-radio-label {
     color: var(--_form-theme);
     font-family: var(--font-family);
     font-size: 14px;
@@ -109,6 +109,10 @@ const fieldHasError = computed(() => {
     height: 100%;
     align-items: center;
     padding-inline: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="input-checkbox-with-label" :class="[styleClassPassthrough, `theme-${theme}`, { error: fieldHasError }]">
     <InputCheckboxCore :id :name :required :c12 v-model="modelValue" :theme :size :trueValue :falseValue :checkboxAppearance :checkboxStyle />
-    <label :for="id">{{ c12.label }}</label>
+    <label class="input-checkbox-label" :for="id">{{ c12.label }}</label>
   </div>
 </template>
 
@@ -106,7 +106,7 @@ const fieldHasError = computed(() => {
     --_form-theme: var(--theme-error);
   }
 
-  label {
+  .input-checkbox-label {
     color: var(--_form-theme);
     font-family: var(--font-family);
     font-size: 14px;
@@ -116,6 +116,10 @@ const fieldHasError = computed(() => {
     height: 100%;
     align-items: center;
     padding-inline: var(--_label-padding-inline);
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 </style>
