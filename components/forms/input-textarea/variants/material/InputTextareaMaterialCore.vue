@@ -117,9 +117,10 @@ const fieldHasError = computed(() => {
 
   .input-textarea-core {
     color: var(--_form-theme);
-
     background-color: transparent;
     line-height: var(--line-height);
+    field-sizing: content;
+    min-height: 3rem;
 
     &:focus {
       outline: none;
