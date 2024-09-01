@@ -115,7 +115,7 @@ const fieldHasError = computed(() => {
     --_form-theme: var(--theme-error);
   }
 
-  textarea {
+  .input-textarea-core {
     color: var(--_form-theme);
 
     background-color: transparent;
