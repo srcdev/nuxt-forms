@@ -1,10 +1,8 @@
 <template>
   <div class="input-textarea-wrapper" :class="[{ 'has-left-content': hasLeftContent }, { 'has-right-content': hasRightContent }]">
-    <template v-if="hasLeftContent">
-      <span class="left-content">
-        <slot name="left"></slot>
-      </span>
-    </template>
+    <span v-if="hasLeftContent" class="left-content">
+      <slot name="left"></slot>
+    </span>
 
     <textarea
       :id
@@ -22,11 +20,9 @@
       @focusout="updateFocus(name, false)"
     ></textarea>
 
-    <template v-if="hasRightContent">
-      <span class="right-content">
-        <slot name="right"></slot>
-      </span>
-    </template>
+    <span v-if="hasRightContent" class="right-content">
+      <slot name="right"></slot>
+    </span>
   </div>
 </template>
 
