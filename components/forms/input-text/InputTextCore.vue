@@ -76,7 +76,6 @@ const hasRightContent = computed(() => slots.right !== undefined);
 const modelValue = defineModel() as Ref<IFormData>;
 
 const updateFocus = (name: string, isFocused: boolean) => {
-  console.log(`text | updateFocus: ${name} ${isFocused}`);
   modelValue.value.focusedField = isFocused ? name : '';
 };
 

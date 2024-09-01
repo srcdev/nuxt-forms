@@ -3,7 +3,16 @@
     <template #input>
       <InputTextCore :id :name :type :validation :required v-model="modelValue" :c12 :style-class-passthrough="styleClassPassthrough">
         <template #right>
-          <InputButtonCore type="button" @click.stop.prevent="toggleDisplayPassword" :is-pending="false" button-text="Submit" theme="ghost" size="x-small">
+          <InputButtonCore
+            type="button"
+            @click.stop.prevent="toggleDisplayPassword"
+            :is-pending="false"
+            :buttonText
+            theme="ghost"
+            size="x-small"
+            @focusin="updateFocus(name, true)"
+            @focusout="updateFocus(name, false)"
+          >
             <template #iconOnly>
               <Icon v-if="displayPassword" name="radix-icons:eye-none" class="icon" />
               <Icon v-else name="radix-icons:eye-open" class="icon" />
@@ -75,11 +84,19 @@ const name = computed(() => {
 
 const modelValue = defineModel() as Ref<IFormData>;
 
+const updateFocus = (name: string, isFocused: boolean) => {
+  modelValue.value.focusedField = isFocused ? name : '';
+};
+
 const displayPassword = ref(false);
 
 const type = computed(() => {
   // return displayPassword.value && !modelValue.value.isPending ? "text" : "password";
   return displayPassword.value ? 'text' : 'password';
+});
+
+const buttonText = computed(() => {
+  return displayPassword.value ? 'Hide password' : 'Show password';
 });
 
 const toggleDisplayPassword = () => {
