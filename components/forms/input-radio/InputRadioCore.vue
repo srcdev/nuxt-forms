@@ -134,6 +134,7 @@ watch(fieldValue, () => {
   --_border-color: var(--_form-theme);
   --_focus-colour: var(--theme-form-primary-focus);
   --_background-colour: var(--theme-form-primary-radio-color-bg);
+  --_background: none;
   --_decorator-size: calc(var(--_radio-size) - (var(--_border-width) * 2));
   --_checked-color: var(--_background-colour);
   --_box-shadow: 0 0 2px 3px transparent;
@@ -184,6 +185,7 @@ watch(fieldValue, () => {
 
   &:has(.input-radio-core.with-decorator:checked) {
     --_checked-color: hsl(from var(--_form-theme) h s 50%);
+    --_background: radial-gradient(circle, rgba(63, 94, 251, 1) 30%, rgba(63, 94, 251, 0.5550814075630253) 70%, rgba(255, 255, 255, 0.42622986694677867) 100%);
   }
 
   &.with-decorator {
@@ -198,7 +200,9 @@ watch(fieldValue, () => {
       width: var(--_decorator-size);
       border: var(--_border-width) solid var(--_background-colour);
       border-radius: var(--_radio-border-radius);
-      background-color: var(--_checked-color);
+      background: var(--_checked-color);
+      /* background: rgb(0, 0, 255); */
+      background: var(--_background);
       box-shadow: var(--_box-shadow);
       outline-color: var(--_focus-colour);
     }
