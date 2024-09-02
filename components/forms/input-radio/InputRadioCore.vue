@@ -213,8 +213,8 @@ watch(fieldValue, () => {
         opacity: 0;
         appearance: none;
         overflow: hidden;
-        height: initial;
-        width: initial;
+        height: var(--_radio-size);
+        width: var(--_radio-size);
       }
 
       &:hover {
