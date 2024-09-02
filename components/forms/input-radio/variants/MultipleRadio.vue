@@ -1,6 +1,9 @@
 <template>
-  <fieldset class="multiple-radio-fieldset" :class="[`theme-${theme}`, { error: fieldHasError }]">
-    <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
+  <fieldset class="multiple-radio-fieldset" :class="[`theme-${theme}`, { error: fieldHasError }]" :aria-required="required" :aria-invalid="fieldHasError" role="radiogroup">
+    <legend :class="[{ 'has-description': hasDescription }]">
+      {{ legend }}
+      <span v-if="required">&nbsp;(Required)</span>
+    </legend>
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
