@@ -163,6 +163,13 @@ const errorMessaging = computed(() => {
       margin-bottom: 0;
     }
   }
+
+  .label-description {
+    font-family: var(--font-family);
+    font-size: 16px;
+    margin-top: 12px;
+    color: var(--theme-form-secondary);
+  }
 }
 
 .multiple-checkboxes-items {

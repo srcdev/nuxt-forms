@@ -99,6 +99,33 @@
                       </template>
                     </FormField>
 
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <InputRangeDefault
+                          id="score"
+                          name="score"
+                          :min="0"
+                          :max="100"
+                          :step="1"
+                          :required="true"
+                          validation="positiveNumber0to100"
+                          :c12="{
+                            label: 'Score between 0 & 100',
+                            placeholder: 'eg. What\'s your score?',
+                            errorMessage: 'Score between 0 & 100',
+                          }"
+                          v-model="formData"
+                          theme="secondary"
+                        >
+                          <template #description>
+                            <p class="label-description">This is a description of what the user is required to do</p>
+                          </template>
+                          <template #left>&lt;</template>
+                          <template #right>&gt;</template>
+                        </InputRangeDefault>
+                      </template>
+                    </FormField>
+
                     <FormField v-if="citiesData !== null" width="wide" :has-gutter="false">
                       <template #default>
                         <MultipleCheckboxes
@@ -119,7 +146,7 @@
                           checkbox-appearance="with-decorator"
                         >
                           <template #description>
-                            <p class="checkbox-description">This is description: optionsLayout = 'equal-widths'</p>
+                            <p class="label-description">This is description: optionsLayout = 'equal-widths'</p>
                           </template>
                         </MultipleCheckboxes>
                       </template>
@@ -146,7 +173,7 @@
                           checkbox-appearance="with-decorator"
                         >
                           <template #description>
-                            <p class="checkbox-description">This is description: optionsLayout = 'inline'</p>
+                            <p class="label-description">This is description: optionsLayout = 'inline'</p>
                           </template>
                         </MultipleCheckboxes>
                       </template>
@@ -172,7 +199,7 @@
                           radio-appearance="with-decorator"
                         >
                           <template #description>
-                            <p class="checkbox-description">This is description: optionsLayout = 'equal-widths'</p>
+                            <p class="label-description">This is description: optionsLayout = 'equal-widths'</p>
                           </template>
                         </MultipleRadio>
                       </template>
@@ -197,7 +224,7 @@
                           checkbox-style="check"
                         >
                           <template #description>
-                            <p class="checkbox-description">This is a description of what the user is required to do</p>
+                            <p class="label-description">This is a description of what the user is required to do</p>
                           </template>
                         </SingleCheckbox>
                       </template>
@@ -267,6 +294,7 @@ const fieldsInitialState = ref<IFieldsInitialState>({
   password: '',
   message: '',
   // message: 'This is test 1234567890,.<>?@;:',
+  score: 50,
   cities: [],
   countries: [],
   title: [],
@@ -329,14 +357,6 @@ const submitForm = async () => {
 </script>
 
 <style lang="css">
-.checkbox-description,
-.radio-description {
-  font-family: var(--font-family);
-  font-size: 16px;
-  margin-top: 12px;
-  color: var(--theme-form-secondary);
-}
-
 .flex-group {
   align-items: flex-start;
   display: flex;

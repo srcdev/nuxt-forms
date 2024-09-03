@@ -1,12 +1,18 @@
 <template>
-  <fieldset class="single-checkbox-fieldset" :class="[styleClassPassthrough, `theme-${theme}`, { error: fieldHasError }]">
-    <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
+  <div class="input-range-with-label" :class="[styleClassPassthrough, `theme-${theme}`, { error: fieldHasError }]">
+    <label class="input-range-label" :for="id">{{ c12.label }}</label>
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
-    <InputError :errorMessaging :fieldHasError :id="name" :isDetached="true" />
-    <InputCheckboxWithLabel :id :name :required :c12 v-model="modelValue" :theme :size :checkboxAppearance :checkboxStyle />
-  </fieldset>
+    <InputRangeCore :id :name :required :c12 v-model="modelValue" :theme :size :weight :min :max :step>
+      <template v-if="hasLeftContent" #left>
+        <slot name="left"></slot>
+      </template>
+      <template v-if="hasRightContent" #right>
+        <slot name="right"></slot>
+      </template>
+    </InputRangeCore>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -25,29 +31,25 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  legend: {
-    type: String,
-    required: true,
-  },
   required: {
     type: Boolean,
     value: false,
   },
+  min: {
+    type: Number,
+    default: 0,
+  },
+  max: {
+    type: Number,
+    default: 100,
+  },
+  step: {
+    type: Number,
+    default: 1,
+  },
   c12: {
     type: Object as PropType<InpuTextC12>,
     required: true,
-  },
-  trueValue: {
-    type: [String, Number, Boolean],
-    default: true,
-  },
-  falseValue: {
-    type: [String, Number, Boolean],
-    default: false,
-  },
-  multipleOptions: {
-    type: Boolean,
-    default: false,
   },
   styleClassPassthrough: {
     type: String,
@@ -67,53 +69,36 @@ const props = defineProps({
       return propValidators.size.includes(value);
     },
   },
-  checkboxAppearance: {
+  weight: {
     type: String as PropType<string>,
-    default: null,
+    default: 'wght-400',
     validator(value: string) {
-      return propValidators.checkboxAppearance.includes(value);
-    },
-  },
-  checkboxStyle: {
-    type: String as PropType<string>,
-    default: 'check',
-    validator(value: string) {
-      return propValidators.checkboxStyle.includes(value);
+      return propValidators.weight.includes(value);
     },
   },
 });
 
 const slots = useSlots();
 const hasDescription = computed(() => slots.description !== undefined);
+const hasLeftContent = computed(() => slots.left !== undefined);
+const hasRightContent = computed(() => slots.right !== undefined);
 
 const modelValue = defineModel() as Ref<IFormData>;
+
 const name = computed(() => {
   return props.name !== null ? props.name : props.id;
 });
 const fieldHasError = computed(() => {
   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
 });
-
-const errorMessaging = computed(() => {
-  if (
-    typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined' &&
-    modelValue.value!.formFieldsC12[props.name].useCustomError &&
-    modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue
-  ) {
-    return modelValue.value.formFieldsC12[props.name]?.customErrors || [];
-  } else {
-    return props.c12.errorMessage;
-  }
-});
 </script>
 
 <style lang="css">
-.single-checkbox-fieldset {
+.input-range-with-label {
   --_form-theme: var(--theme-form-primary);
-
-  margin: 0;
-  padding: 0;
-  border: 0;
+  --_border-width: var(--input-border-width-default);
+  --_outline-width: var(--input-outline-width-thin);
+  --_label-padding-inline: 10px;
 
   &.theme-secondary {
     --_form-theme: var(--theme-form-secondary);
@@ -123,16 +108,16 @@ const errorMessaging = computed(() => {
     --_form-theme: var(--theme-error);
   }
 
-  legend {
+  .input-range-label {
     color: var(--_form-theme);
+    display: block;
     font-family: var(--font-family);
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 12px;
-    transition: color 0.2s;
 
-    &.has-description {
-      margin-bottom: 0;
+    &:hover {
+      cursor: pointer;
     }
   }
 
@@ -142,16 +127,5 @@ const errorMessaging = computed(() => {
     margin-top: 12px;
     color: var(--theme-form-secondary);
   }
-
-  .input-checkbox-with-label {
-    margin-block-start: 12px;
-  }
-
-  /* &:has(.input-error-message.show) {
-    .input-checkbox-with-label {
-      margin-block-start: 12px;
-      transition: margin 500ms linear;
-    }
-  } */
 }
 </style>

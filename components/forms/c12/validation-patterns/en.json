@@ -46,5 +46,11 @@
     "minlength": 1,
     "maxlength": 255,
     "hint": "+441632123123"
+  },
+  "positiveNumber0to100": {
+    "pattern": "^(100|[1-9]?[0-9])$",
+    "minlength": 1,
+    "maxlength": 3,
+    "hint": "Enter a number between 0 and 100"
   }
 }
