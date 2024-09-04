@@ -146,6 +146,13 @@ onMounted(() => {
 
 <style lang="css">
 .input-range-wrapper {
+  --_form-theme: var(--theme-form-primary);
+  --_focus-colour: var(--theme-form-primary-focus);
+  --_gutter: 12px;
+  --_border-width: var(--input-border-width-thin);
+  --_border-color: var(--_form-theme);
+  --_outline-width: var(--input-outline-width-thin);
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -153,6 +160,12 @@ onMounted(() => {
 
   .input-range-core {
     flex-grow: 1;
+    height: 24px;
+
+    &:focus-visible {
+      outline: var(--focus-visible-outline);
+      box-shadow: var(--focus-visible-box-shadow);
+    }
   }
 }
 </style>
