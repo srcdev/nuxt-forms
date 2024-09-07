@@ -9,14 +9,30 @@
         <slot name="datalist"></slot>
       </template>
       <template v-if="hasLeftContent" #left>
-        <InputButtonCore type="button" @click.stop.prevent="updateRange(-step)" :is-pending="false" buttonText="Step down" theme="ghost" size="x-small">
+        <InputButtonCore
+          type="button"
+          @click.stop.prevent="updateRange(-step, Number(modelValue.data[name]) > min)"
+          :readonly="Number(modelValue.data[name]) === min"
+          :is-pending="false"
+          buttonText="Step down"
+          theme="ghost"
+          size="x-small"
+        >
           <template #iconOnly>
             <slot name="left"></slot>
           </template>
         </InputButtonCore>
       </template>
       <template v-if="hasRightContent" #right>
-        <InputButtonCore type="button" @click.stop.prevent="updateRange(step)" :is-pending="false" buttonText="Step up" theme="ghost" size="x-small">
+        <InputButtonCore
+          type="button"
+          @click.stop.prevent="updateRange(step, Number(modelValue.data[name]) < max)"
+          :readonly="Number(modelValue.data[name]) === max"
+          :is-pending="false"
+          buttonText="Step up"
+          theme="ghost"
+          size="x-small"
+        >
           <template #iconOnly>
             <slot name="right"></slot>
           </template>
@@ -104,9 +120,10 @@ const fieldHasError = computed(() => {
   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
 });
 
-const updateRange = (step: number) => {
-  modelValue.value.data[name.value] = Number(modelValue.value.data[name.value]) + step;
-  console.log('updateRange', modelValue.value.data[name.value], step);
+const updateRange = (step: number, withinRangeLimit: boolean) => {
+  if (withinRangeLimit) {
+    modelValue.value.data[name.value] = Number(modelValue.value.data[name.value]) + step;
+  }
 };
 </script>
 
