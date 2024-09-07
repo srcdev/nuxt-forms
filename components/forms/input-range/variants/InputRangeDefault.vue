@@ -5,11 +5,22 @@
       <slot name="description"></slot>
     </template>
     <InputRangeCore :id :name :required :c12 v-model="modelValue" :theme :size :weight :min :max :step>
+      <template v-if="hasDataList" #datalist>
+        <slot name="datalist"></slot>
+      </template>
       <template v-if="hasLeftContent" #left>
-        <slot name="left"></slot>
+        <InputButtonCore type="button" @click.stop.prevent="updateRange(-step)" :is-pending="false" buttonText="Step down" theme="ghost" size="x-small">
+          <template #iconOnly>
+            <slot name="left"></slot>
+          </template>
+        </InputButtonCore>
       </template>
       <template v-if="hasRightContent" #right>
-        <slot name="right"></slot>
+        <InputButtonCore type="button" @click.stop.prevent="updateRange(step)" :is-pending="false" buttonText="Step up" theme="ghost" size="x-small">
+          <template #iconOnly>
+            <slot name="right"></slot>
+          </template>
+        </InputButtonCore>
       </template>
     </InputRangeCore>
   </div>
@@ -80,6 +91,7 @@ const props = defineProps({
 
 const slots = useSlots();
 const hasDescription = computed(() => slots.description !== undefined);
+const hasDataList = computed(() => slots.datalist !== undefined);
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
 
@@ -91,6 +103,11 @@ const name = computed(() => {
 const fieldHasError = computed(() => {
   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
 });
+
+const updateRange = (step: number) => {
+  modelValue.value.data[name.value] = Number(modelValue.value.data[name.value]) + step;
+  console.log('updateRange', modelValue.value.data[name.value], step);
+};
 </script>
 
 <style lang="css">

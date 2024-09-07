@@ -4,18 +4,25 @@
       <slot name="left"></slot>
     </div>
 
-    <input
-      type="range"
-      :id
-      :name
-      :required
-      :min
-      :max
-      :step
-      :class="['input-range-core', `input-range--${theme}`, `input-range--${size}`, `input-range--${weight}`, styleClassPassthrough]"
-      v-model="modelValue.data[name]"
-      ref="inputField"
-    />
+    <div class="input-range-container">
+      <input
+        type="range"
+        :id
+        :name
+        :required
+        :min
+        :max
+        :step
+        :list="hasDataList ? name + '-datalist' : ''"
+        :class="['input-range-core', `input-range--${theme}`, `input-range--${size}`, `input-range--${weight}`, styleClassPassthrough]"
+        v-model="modelValue.data[name]"
+        ref="inputField"
+      />
+
+      <template v-if="hasDataList">
+        <slot name="datalist"></slot>
+      </template>
+    </div>
     <div v-if="hasRightContent" class="slot right">
       <slot name="right"></slot>
     </div>
@@ -84,6 +91,7 @@ const props = defineProps({
 });
 
 const slots = useSlots();
+const hasDataList = computed(() => slots.datalist !== undefined);
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
 
@@ -153,18 +161,44 @@ onMounted(() => {
   --_border-color: var(--_form-theme);
   --_outline-width: var(--input-outline-width-thin);
 
+  --_input-range-height: 24px;
+  --_slot-translate-y: calc(var(--_input-range-height) / 4);
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
 
-  .input-range-core {
-    flex-grow: 1;
-    height: 24px;
+  .slot {
+    align-self: flex-start;
+    transform: translateY(-4px);
+  }
 
-    &:focus-visible {
-      outline: var(--focus-visible-outline);
-      box-shadow: var(--focus-visible-box-shadow);
+  .input-range-container {
+    flex-grow: 1;
+    .input-range-core {
+      height: var(--_input-range-height);
+      margin: 0;
+      width: 100%;
+
+      &:focus-visible {
+        outline: var(--focus-visible-outline);
+        box-shadow: var(--focus-visible-box-shadow);
+      }
+    }
+
+    .input-range-datalist {
+      display: flex;
+      flex-direction: column;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: 500;
+      justify-content: space-between;
+      writing-mode: vertical-lr;
+      width: 100%;
+      option {
+        padding: 0;
+      }
     }
   }
 }

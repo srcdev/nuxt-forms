@@ -120,8 +120,21 @@
                           <template #description>
                             <p class="label-description">This is a description of what the user is required to do</p>
                           </template>
-                          <template #left>&lt;</template>
-                          <template #right>&gt;</template>
+                          <template #datalist>
+                            <datalist class="input-range-datalist" id="score-datalist">
+                              <option value="0" label="Rubbish!"></option>
+                              <option value="25" label="Below par"></option>
+                              <option value="50" label="Average"></option>
+                              <option value="75" label="Quite good"></option>
+                              <option value="100" label="Excellent"></option>
+                            </datalist>
+                          </template>
+                          <template #left>
+                            <Icon name="gridicons:minus-small" class="icon" />
+                          </template>
+                          <template #right>
+                            <Icon name="gridicons:plus-small" class="icon" />
+                          </template>
                         </InputRangeDefault>
                       </template>
                     </FormField>
