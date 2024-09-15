@@ -3,7 +3,7 @@
     <NuxtLayout name="default">
       <template #layout-content>
         <div>
-          <h1>Material UI text fields ({{ compact ? 'compact' : 'default' }})</h1>
+          <h1 class="header-1">Material UI text fields ({{ compact ? 'compact' : 'default' }})</h1>
           <ul class="flex-group">
             <li>
               <InputButtonSubmit type="button" @click.stop.prevent="swapCompact(false)" button-text="Use Default UI" theme="secondary" size="normal" />
@@ -381,5 +381,10 @@ const submitForm = async () => {
 ul.flex-group {
   list-style-type: none;
   padding: 0;
+}
+
+.header-1 {
+  font-family: var(--font-family);
+  color: var(--brand-success-text-text);
 }
 </style>

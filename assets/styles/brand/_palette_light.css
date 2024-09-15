@@ -1,0 +1,145 @@
+:root {
+  --light-grayscale-surface-subtle: #f3f2f4;
+  --light-grayscale-surface-default: #847fbc;
+  --light-grayscale-surface-disabled: #c6c4ca;
+  --light-grayscale-border-default: #9d99a3;
+  --light-grayscale-border-disabled: #ada9b2;
+  --light-grayscale-border-dark: #5e5a63;
+  --light-grayscale-text-title: #37353b;
+  /* Following was using colour picker as #e3271c is a red colour */
+  --light-grayscale-text-body: #48464d;
+  --light-grayscale-text-subtitle: #78747f;
+  --light-grayscale-text-caption: #847fbc;
+  --light-grayscale-text-negative: #f3f2f4;
+  --light-grayscale-text-disabled: #ada9b2;
+
+  --light-primary-surface-subtle: #f1ebf9;
+  --light-primary-surface-light: #d3c0ed;
+  --light-primary-surface-default: #7033c4;
+  --light-primary-surface-dark: #50248b;
+  --light-primary-border-subtle: #d3c0ed;
+  --light-primary-border-default: #7033c4;
+  --light-primary-border-dark: #3e1c6c;
+  --light-primary-border-light: #bda1e4;
+  --light-primary-text-icon: #7033c4;
+
+  --light-secondary-surface-subtle: #faf3ff;
+  --light-secondary-surface-light: #efd9fd;
+  --light-secondary-surface-default: #ca85fa;
+  --light-secondary-surface-dark: #8f5eb2;
+  --light-secondary-border-subtle: #efd9fd;
+  --light-secondary-border-default: #ca85fa;
+  --light-secondary-border-dark: #6f498a;
+  --light-secondary-border-light: #e7c7fd;
+  --light-secondary-text-icon: #ca85fa;
+
+  --light-accent-primary-surface-light: #fff7eb;
+  --light-accent-primary-surface-subtle: #ffe6c0;
+  --light-accent-primary-surface-default: #ffae33;
+  --light-accent-primary-surface-dark: #b57c24;
+  --light-accent-primary-border-subtle: #ffe6c0;
+  --light-accent-primary-border-default: #ffae33;
+  --light-accent-primary-border-dark: #8c601c;
+  --light-accent-primary-border-light: #ffdaa1;
+  --light-accent-primary-text-icon: #ffae33;
+
+  --light-accent-secondary-surface-subtle: #fbeaf3;
+  --light-accent-secondary-surface-light: #f1bed9;
+  --light-accent-secondary-surface-default: #d22d85;
+  --light-accent-secondary-surface-dark: #95205e;
+  --light-accent-secondary-border-subtle: #f1bed9;
+  --light-accent-secondary-border-default: #d22d85;
+  --light-accent-secondary-border-dark: #741949;
+  --light-accent-secondary-border-light: #ea9ec7;
+  --light-accent-secondary-text-icon: #d22d85;
+
+  --light-accent-tertiary-surface-subtle: #e9eff9;
+  --light-accent-tertiary-surface-light: #bccded;
+  --light-accent-tertiary-surface-default: #265ec5;
+  --light-accent-tertiary-surface-dark: #1b438c;
+  --light-accent-tertiary-border-subtle: #bccded;
+  --light-accent-tertiary-border-default: #265ec5;
+  --light-accent-tertiary-border-dark: #15346c;
+  --light-accent-tertiary-border-light: #9bb5e4;
+  --light-accent-tertiary-text-icon: #265ec5;
+
+  --light-error-surface-subtle: #faebee;
+  --light-error-surface-light: #f0c2ca;
+  --light-error-surface-default: #ce3b45;
+  --light-error-surface-dark: #922a3c;
+  --light-error-border-subtle: #f0c2ca;
+  --light-error-border-default: #ce3b54;
+  --light-error-border-dark: #71202e;
+  --light-error-border-light: #e8a5b0;
+  --light-error-text-icon: #ce3b54;
+
+  --light-warning-orange-surface-subtle: #fff7eb;
+  --light-warning-orange-surface-light: #ffe6c0;
+  --light-warning-orange-surface-default: #ffae33;
+  --light-warning-orange-surface-dark: #b57c24;
+  --light-warning-orange-border-subtle: #ffe6c0;
+  --light-warning-orange-border-default: #ffae33;
+  --light-warning-orange-border-dark: #8c601c;
+  --light-warning-orange-border-light: #ffdaa1;
+  --light-warning-orange-text-icon: #ffae33;
+
+  --light-warning-yellow-surface-subtle: #fffae6;
+  --light-warning-yellow-surface-light: #fff0b0;
+  --light-warning-yellow-surface-default: #ffd000;
+  --light-warning-yellow-surface-dark: #b59400;
+  --light-warning-yellow-border-subtle: #fff0b0;
+  --light-warning-yellow-border-default: #ffd000;
+  --light-warning-yellow-border-dark: #8c7200;
+  --light-warning-yellow-border-light: #ffe9ba;
+  --light-warning-yellow-text-icon: #ffd000;
+
+  --light-success-surface-subtle: #ebf8f3;
+  --light-success-surface-light: #c2ebd9;
+  --light-success-surface-default: #39bd83;
+  --light-success-surface-dark: #28865d;
+  --light-success-border-subtle: #c2ebd9;
+  --light-success-border-default: #39bd83;
+  --light-success-border-dark: #1f6848;
+  --light-success-border-light: #a4e1c6;
+  --light-success-text-icon: #39bd83;
+
+  /* Colour Zones - Brand 2 */
+
+  --light-zone-orange-light: #ffe6c0;
+  --light-zone-orange-solid: #ffae33;
+  --light-zone-orange-dark: #b57c24;
+
+  --light-zone-yellow-light: #ffe6c0;
+  --light-zone-yellow-solid: #ffae33;
+  --light-zone-yellow-dark: #b57c24;
+
+  --light-zone-pink-light: #f1bed9;
+  --light-zone-pink-solid: #d22d85;
+  --light-zone-pink-dark: #95205e;
+
+  --light-zone-blue-light: #bccded;
+  --light-zone-blue-solid: #265ec5;
+  --light-zone-blue-dark: #1b438c;
+
+  --light-zone-red-light: #f0c2ca;
+  --light-zone-red-solid: #ce3b54;
+  --light-zone-red-dark: #922a3c;
+
+  --light-zone-green-light: #c2ebd9;
+  --light-zone-green-solid: #39bd83;
+  --light-zone-green-dark: #28865d;
+
+  /* TODO: add Brand 1 colours (these are brand 2 colours) */
+
+  --light-zone-purple-primary-light: #d3c0ed;
+  --light-zone-purple-primary-solid: #7033c4;
+  --light-zone-purple-primary-dark: #50248b;
+
+  --light-zone-purple-secondary-light: #efd9fd;
+  --light-zone-purple-secondary-solid: #ca85fa;
+  --light-zone-purple-secondary-dark: #8f5eb2;
+
+  --light-zone-grey-light: #c9c9c9;
+  --light-zone-grey-solid: #a9a9a9;
+  --light-zone-grey-dark: #858585;
+}
