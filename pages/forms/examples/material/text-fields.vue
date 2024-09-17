@@ -35,7 +35,7 @@
                             placeholder: 'eg. joe@example.com',
                             errorMessage: 'Please enter a valid email address',
                           }"
-                          v-model="formData"
+                          v-model="state"
                           theme="secondary"
                           :compact
                         />
@@ -54,7 +54,7 @@
                             placeholder: 'eg. YourUserName',
                             errorMessage: 'Please enter a valid username',
                           }"
-                          v-model="formData"
+                          v-model="state"
                           theme="secondary"
                           :compact
                         />
@@ -73,7 +73,7 @@
                             placeholder: 'eg. Your5illYPa55w0rd',
                             errorMessage: 'Please enter a valid password',
                           }"
-                          v-model="formData"
+                          v-model="state"
                           theme="secondary"
                           :compact
                         />
@@ -92,7 +92,7 @@
                             placeholder: 'eg. Type something here',
                             errorMessage: 'Bad characters in message',
                           }"
-                          v-model="formData"
+                          v-model="state"
                           theme="secondary"
                           :compact
                         />
@@ -114,7 +114,7 @@
                             placeholder: 'eg. What\'s your score?',
                             errorMessage: 'Score between 0 & 100',
                           }"
-                          v-model="formData"
+                          v-model="state"
                           theme="secondary"
                         >
                           <template #description>
@@ -151,7 +151,7 @@
                             placeholder: 'eg. Type something here',
                             errorMessage: 'Please choose at least 1 location',
                           }"
-                          v-model="formData"
+                          v-model="state"
                           v-model:fieldData="citiesData"
                           theme="secondary"
                           size="normal"
@@ -177,7 +177,7 @@
                             placeholder: 'eg. Choose some locations',
                             errorMessage: 'Please select a country',
                           }"
-                          v-model="formData"
+                          v-model="state"
                           v-model:fieldData="countriesData"
                           theme="secondary"
                           size="normal"
@@ -204,7 +204,7 @@
                             placeholder: 'eg. Choose some title',
                             errorMessage: 'Please select a title',
                           }"
-                          v-model="formData"
+                          v-model="state"
                           v-model:fieldData="titleData"
                           theme="secondary"
                           size="normal"
@@ -230,7 +230,7 @@
                             placeholder: 'eg. Type something here',
                             errorMessage: 'Please accept our terms and conditions',
                           }"
-                          v-model="formData"
+                          v-model="state"
                           theme="secondary"
                           size="normal"
                           checkbox-appearance="with-decorator"
@@ -245,7 +245,15 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <InputButtonSubmit type="button" @click.stop.prevent="submitForm()" :is-pending="false" :readonly="submitDisabled" button-text="Submit" theme="secondary" size="medium" />
+                        <InputButtonSubmit
+                          type="button"
+                          @click.stop.prevent="submitForm()"
+                          :is-pending="false"
+                          :readonly="formControl.submitDisabled"
+                          button-text="Submit"
+                          theme="secondary"
+                          size="medium"
+                        />
                       </template>
                     </FormField>
                   </form>
@@ -257,7 +265,7 @@
             <ClientOnly>
               <p>Client only content</p>
               <pre>
-                {{ formData }}
+                {{ state }}
               </pre>
             </ClientOnly>
           </template>
@@ -268,6 +276,7 @@
 </template>
 
 <script setup lang="ts">
+import { z, ZodError } from 'zod';
 import type { IFieldsInitialState, IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
 
 definePageMeta({
@@ -297,16 +306,68 @@ const { data: titleData } = await useFetch<IFormMultipleOptions>('/api/utils?cat
 /*
  * Setup forms
  */
-const fieldsInitialState = ref<IFieldsInitialState>({
-  // emailAddress: "simon@simon.com",
-  // emailAddress: "test@test.com",
+const formControl = reactive({
+  errorCount: 0,
+  formIsValid: false,
+  isPending: false,
+  submitSuccess: true,
+  submitDisabled: false,
+  submitAttempted: false,
+  displayLoader: false,
+});
+
+const formSchema = z
+  .object({
+    emailAddress: z.string().email(),
+    username: z.string().trim().min(2, 'Username is too short').max(255, 'Username is too long'),
+    password: z.string(),
+    message: z.string(),
+    score: z
+      .number({
+        required_error: 'Score is required',
+        invalid_type_error: 'Score must be a number',
+      })
+      .gte(0)
+      .lte(100),
+    cities: z.array(z.string()).min(1),
+    countries: z.array(z.string()).min(1).max(3),
+    title: z.array(z.string()).nonempty(),
+    terms: z.boolean().refine((val) => val === true, { message: 'You must accept our terms' }),
+  })
+  .required({
+    emailAddress: true,
+    username: true,
+    password: true,
+    message: true,
+    score: true,
+    cities: true,
+    countries: true,
+    title: true,
+    terms: true,
+  });
+
+type formSchema = z.infer<typeof formSchema>;
+const formErrors = ref<z.ZodFormattedError<formSchema> | null>(null);
+
+const doZodValidate = async () => {
+  const valid = formSchema.safeParse(toRaw(state));
+  if (!valid.success) {
+    formErrors.value = valid.error.format();
+  } else {
+    formErrors.value = null;
+  }
+
+  const errorCount = Object.keys(formErrors.value ?? []).length;
+  formControl.errorCount = errorCount;
+  formControl.formIsValid = errorCount === 0;
+  return valid.success;
+};
+
+const state = ref<IFieldsInitialState>({
   emailAddress: '',
-  // username: "",
   username: '',
-  // password: "!+Password123",
   password: '',
   message: '',
-  // message: 'This is test 1234567890,.<>?@;:',
   score: 50,
   cities: [],
   countries: [],
@@ -316,27 +377,64 @@ const fieldsInitialState = ref<IFieldsInitialState>({
 
 // Setup formData
 const { formData, initFormData, getErrorCount, updateErrorMessages, formIsValid, submitDisabled, useApiErrors } = useFormControl();
-await initFormData(fieldsInitialState);
+await initFormData(state);
+
+// Function to push API errors into Zod formErrors
+const pushApiErrorsToFormErrors = async (apiError: any[], formSchema: z.ZodObject<any>) => {
+  const formErrors = ref({}) as any;
+
+  // Map API errors to form fields
+  apiError.forEach((error) => {
+    const fieldPath = error.key.split('.').map((key: string) => key.charAt(0).toLowerCase() + key.slice(1));
+    formErrors.value[fieldPath.join('.')] = error.message;
+  });
+
+  // Create a ZodError object to hold the issues
+  const zodError = new ZodError([]);
+
+  // Add issues to the ZodError object
+  for (const [path, message] of Object.entries(formErrors.value)) {
+    zodError.addIssue({
+      path: path.split('.'),
+      message: message as string,
+      code: z.ZodIssueCode.custom,
+    });
+  }
+
+  formErrors.value = zodError.format();
+  const errorCount = Object.keys(formErrors.value ?? []).length;
+  formControl.errorCount = errorCount;
+  formControl.formIsValid = errorCount === 0;
+
+  return formErrors.value;
+};
 
 async function postFormData() {
+  formControl.displayLoader = true;
   try {
     const data = await $fetch('/api/textFields', {
       method: 'post',
-      body: formData.value.data,
-      onResponse({ response }) {
+      body: state,
+      async onResponse({ response }) {
         if (response.status === 400) {
           console.log('onResponse', response);
           console.log(response.status);
 
-          useApiErrors(response._data.data.errors);
+          // useApiErrors(response._data.data.errors);
           // for (const [key, message] of Object.entries(response._data.data.errors)) {
           //   console.log(`${key}: ${message}`);
           //   updateErrorMessages(key, message);
           // }
+
+          // if (error instanceof Error) {
+          formErrors.value = await pushApiErrorsToFormErrors(response._data, formSchema);
+          formControl.formIsValid = false;
+          // }
+          formControl.submitAttempted = false;
         }
         if (response.status === 200) {
-          formData.value.isPending = false;
-          formData.value.submitSuccess = true;
+          formControl.isPending = false;
+          formControl.submitSuccess = true;
         }
       },
     });
@@ -344,28 +442,15 @@ async function postFormData() {
     // return data;
   } catch (error) {
     console.warn('2: An error occured posting form data', error);
+  } finally {
+    formControl.displayLoader = false;
   }
 }
 
 const submitForm = async () => {
-  getErrorCount(true);
-
-  if (formIsValid.value) {
-    formData.value.isPending = true;
-    formData.value.submitDisabled = true;
-    console.log('Form is good - post it!');
-
-    postFormData();
-
-    // formData.value.errorMessages['emailAddress'] = {
-    //   useCustomError: true,
-    //   message: 'This is a custom error message',
-    // };
-
-    // executePost();
-  } else {
-    console.warn('Form has errors');
-  }
+  if (!(await doZodValidate())) return;
+  formControl.submitAttempted = true;
+  postFormData();
 };
 </script>
 
