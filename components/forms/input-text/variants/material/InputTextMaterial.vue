@@ -58,6 +58,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const name = computed(() => {

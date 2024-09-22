@@ -75,6 +75,10 @@ const props = defineProps({
       return propValidators.radioAppearance.includes(value);
     },
   },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const modelValue = defineModel() as Ref<IFormData>;
@@ -87,9 +91,9 @@ const inputField = ref<HTMLInputElement | null>(null);
 
 const isArray = Array.isArray(modelValue.value.data[name.value]);
 
-const fieldHasError = computed(() => {
-  return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
-});
+// const fieldHasError = computed(() => {
+//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
+// });
 
 if (modelValue.value.formFieldsC12[name.value] === undefined) {
   const formFieldC12 = <IFormFieldC12>{

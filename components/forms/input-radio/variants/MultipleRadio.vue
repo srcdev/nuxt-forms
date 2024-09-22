@@ -24,6 +24,7 @@
           :theme
           :size
           :radioAppearance
+          :fieldHasError
         />
       </template>
     </div>
@@ -93,6 +94,10 @@ const props = defineProps({
       return propValidators.radioAppearance.includes(value);
     },
   },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const slots = useSlots();
@@ -127,9 +132,9 @@ const errorMessaging = computed(() => {
 // };
 // modelValue.value.formFieldsC12[props.name] = formFieldC12;
 
-const fieldHasError = computed(() => {
-  return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
-});
+// const fieldHasError = computed(() => {
+//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
+// });
 </script>
 
 <style lang="css">

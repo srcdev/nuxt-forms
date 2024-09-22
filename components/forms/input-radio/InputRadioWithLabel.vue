@@ -1,6 +1,6 @@
 <template>
   <div class="input-radio-with-label" :class="[styleClassPassthrough, `theme-${theme}`, { error: fieldHasError }]">
-    <InputRadioCore :id :name :required :c12 v-model="modelValue" :theme :size :trueValue :falseValue :radioAppearance />
+    <InputRadioCore :id :name :required :c12 v-model="modelValue" :theme :size :trueValue :falseValue :radioAppearance :fieldHasError />
     <label class="input-radio-label" :for="id">{{ c12.label }}</label>
   </div>
 </template>
@@ -66,6 +66,10 @@ const props = defineProps({
       return propValidators.radioAppearance.includes(value);
     },
   },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const slots = useSlots();
@@ -76,9 +80,9 @@ const modelValue = defineModel() as Ref<IFormData>;
 const name = computed(() => {
   return props.name !== null ? props.name : props.id;
 });
-const fieldHasError = computed(() => {
-  return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
-});
+// const fieldHasError = computed(() => {
+//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
+// });
 </script>
 
 <style lang="css">

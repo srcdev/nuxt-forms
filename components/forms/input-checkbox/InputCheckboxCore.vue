@@ -87,6 +87,10 @@ const props = defineProps({
       return propValidators.checkboxStyle.includes(value);
     },
   },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const slots = useSlots();
@@ -138,9 +142,9 @@ const isFocussed = ref(false);
 // const fieldIsDirty = computed(() => {
 //   return modelValue.value!.formFieldsC12[name.value].isDirty;
 // });
-const fieldHasError = computed(() => {
-  return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
-});
+// const fieldHasError = computed(() => {
+//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
+// });
 
 // const { updateFieldValidity } = useFormControl(name.value);
 

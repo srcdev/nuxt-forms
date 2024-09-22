@@ -61,6 +61,10 @@ const props = defineProps({
     type: Boolean,
     value: false,
   },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const errorMessaging = computed(() => {
@@ -82,19 +86,19 @@ const isFocused = computed(() => {
 });
 
 const fieldIsDirty = computed(() => {
-  if (typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined') {
-    return modelValue.value!.formFieldsC12[props.name].isDirty;
-  } else {
-    return false;
-  }
+  //if (typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined') {
+  //  return modelValue.value!.formFieldsC12[props.name].isDirty;
+  //} else {
+  return false;
+  //}
 });
 
-const fieldHasError = computed(() => {
-  if (typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined') {
-    return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
-  }
-  return false;
-});
+// const fieldHasError = computed(() => {
+//   if (typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined') {
+//     return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
+//   }
+//   return false;
+// });
 </script>
 
 <style lang="css">

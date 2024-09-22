@@ -55,6 +55,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const slots = useSlots();
@@ -82,11 +86,12 @@ const componentValidation = validationConfig[validatorLocale.value][props.valida
 const inputField = ref<HTMLInputElement | null>(null);
 
 const fieldIsDirty = computed(() => {
-  return modelValue.value!.formFieldsC12[name.value].isDirty;
+  // return modelValue.value!.formFieldsC12[name.value].isDirty;
+  return false;
 });
-const fieldHasError = computed(() => {
-  return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
-});
+// const fieldHasError = computed(() => {
+//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
+// });
 
 // const { fieldHasError } = useFormControl(name.value);
 

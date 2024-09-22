@@ -5,7 +5,7 @@
       <slot name="description"></slot>
     </template>
     <InputError :errorMessaging :fieldHasError :id="name" :isDetached="true" />
-    <InputCheckboxWithLabel :id :name :required :c12 v-model="modelValue" :theme :size :checkboxAppearance :checkboxStyle />
+    <InputCheckboxWithLabel :id :name :required :c12 v-model="modelValue" :theme :size :checkboxAppearance :checkboxStyle :fieldHasError />
   </fieldset>
 </template>
 
@@ -81,6 +81,10 @@ const props = defineProps({
       return propValidators.checkboxStyle.includes(value);
     },
   },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const slots = useSlots();
@@ -90,9 +94,9 @@ const modelValue = defineModel() as Ref<IFormData>;
 const name = computed(() => {
   return props.name !== null ? props.name : props.id;
 });
-const fieldHasError = computed(() => {
-  return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
-});
+// const fieldHasError = computed(() => {
+//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
+// });
 
 const errorMessaging = computed(() => {
   if (

@@ -5,7 +5,7 @@
       <slot name="description"></slot>
     </template>
     <InputError :errorMessaging :fieldHasError :id="name" :isDetached="true" />
-    <InputRadioWithLabel :id :name :required :c12 v-model="modelValue" :theme :size :radioAppearance />
+    <InputRadioWithLabel :id :name :required :c12 v-model="modelValue" :theme :size :radioAppearance :fieldHasError />
   </fieldset>
 </template>
 
@@ -74,6 +74,10 @@ const props = defineProps({
       return propValidators.radioAppearance.includes(value);
     },
   },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const slots = useSlots();
@@ -83,9 +87,9 @@ const modelValue = defineModel() as Ref<IFormData>;
 const name = computed(() => {
   return props.name !== null ? props.name : props.id;
 });
-const fieldHasError = computed(() => {
-  return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
-});
+// const fieldHasError = computed(() => {
+//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
+// });
 
 const errorMessaging = computed(() => {
   if (

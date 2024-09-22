@@ -1,7 +1,7 @@
 <template>
-  <InputTextareaMaterialCore :type :id :name :required :c12 :styleClassPassthrough :theme v-model="modelValue">
+  <InputTextareaMaterialCore :type :id :name :required :c12 :styleClassPassthrough :fieldHasError :theme v-model="modelValue">
     <template #input>
-      <InputTextareaCore :id :name :validation :required v-model="modelValue" :c12 :style-class-passthrough="styleClassPassthrough" />
+      <InputTextareaCore :id :name :validation :required v-model="modelValue" :c12 :styleClassPassthrough :fieldHasError />
     </template>
   </InputTextareaMaterialCore>
 </template>
@@ -64,6 +64,10 @@ const props = defineProps({
   styleClassPassthrough: {
     type: String,
     default: '',
+  },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
   },
 });
 

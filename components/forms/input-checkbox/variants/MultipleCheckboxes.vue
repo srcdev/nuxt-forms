@@ -22,6 +22,7 @@
           :size
           :checkboxAppearance
           :checkboxStyle
+          :fieldHasError
         />
       </template>
     </div>
@@ -98,6 +99,10 @@ const props = defineProps({
       return propValidators.checkboxStyle.includes(value);
     },
   },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const slots = useSlots();
@@ -120,9 +125,9 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 // };
 // modelValue.value.formFieldsC12[props.name] = formFieldC12;
 
-const fieldHasError = computed(() => {
-  return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
-});
+// const fieldHasError = computed(() => {
+//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
+// });
 
 const errorMessaging = computed(() => {
   if (

@@ -1,7 +1,7 @@
 <template>
-  <InputTextMaterialCore type="email" :id :name :required :c12 :styleClassPassthrough :theme v-model="modelValue">
+  <InputTextMaterialCore type="email" :id :name :required :c12 :styleClassPassthrough :fieldHasError :theme v-model="modelValue">
     <template #input>
-      <InputTextCore :id :name type="email" :validation :required v-model="modelValue" :c12 :style-class-passthrough="styleClassPassthrough">
+      <InputTextCore :id :name type="email" :validation :required v-model="modelValue" :c12 :style-class-passthrough="styleClassPassthrough" :fieldHasError>
         <template #left>
           <Icon name="radix-icons:envelope-closed" class="icon" />
         </template>
@@ -61,6 +61,10 @@ const props = defineProps({
   styleClassPassthrough: {
     type: String,
     default: '',
+  },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
   },
 });
 
