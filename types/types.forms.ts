@@ -112,3 +112,17 @@ export interface IFormData {
 export interface IApiErrorMessages {
   [x: string]: string;
 }
+
+// New types
+
+export interface C12nInputText {
+  type: string;
+  id: string;
+  name: string;
+  label: string;
+  placeholder: string;
+  errorMessage: string;
+  fieldHasError: boolean;
+  required: boolean;
+  styleClassPassthrough: string[];
+}

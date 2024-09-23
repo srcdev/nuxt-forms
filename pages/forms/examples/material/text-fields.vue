@@ -16,7 +16,26 @@
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
                         <label for="emailAddress">Email address | error({{ Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress) }})</label>
-                        <input v-model="state.emailAddress" required type="email" id="emailAddress" name="emailAddress" placeholder="" />
+
+                        <InputTextCore
+                          v-model="state"
+                          :c12n="{
+                            type: 'email',
+                            id: 'emailAddress',
+                            name: 'emailAddress',
+                            placeholder: 'Email address',
+                            label: 'Email address',
+                            errorMessage: formErrors?.emailAddress?._errors[0] ?? '',
+                            fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress),
+                            required: true,
+                            styleClassPassthrough: ['style-1', 'style-2'],
+                          }"
+                        >
+                          <template #right>
+                            <Icon name="radix-icons:eye-open" class="icon" />
+                          </template>
+                        </InputTextCore>
+
                         <p v-if="Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress)">
                           {{ formErrors?.emailAddress?._errors[0] }}
                         </p>
@@ -55,7 +74,15 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <button type="submit" @click.stop.prevent="submitForm()" :readonly="zodFormControl.submitDisabled">Submit</button>
+                        <InputButtonSubmit
+                          type="button"
+                          @click.stop.prevent="submitForm()"
+                          :is-pending="false"
+                          :readonly="zodFormControl.submitDisabled"
+                          button-text="Submit"
+                          theme="secondary"
+                          size="medium"
+                        />
                       </template>
                     </FormField>
                   </form>

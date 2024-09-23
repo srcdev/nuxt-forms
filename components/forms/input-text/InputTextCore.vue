@@ -1,186 +1,105 @@
 <template>
-  <div class="input-text-wrapper" :class="[{ 'has-left-content': hasLeftContent }, { 'has-right-content': hasRightContent }]">
-    <template v-if="hasLeftContent">
-      <span class="left-content">
-        <slot name="left"></slot>
-      </span>
-    </template>
+  <div class="input-text-wrapper" :class="[{ 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]">
+    <span v-if="hasLeftSlot" class="left-slot">
+      <slot name="left"></slot>
+    </span>
 
     <input
-      :type
-      :placeholder="c12.placeholder"
-      :id
-      :name
-      :pattern="componentValidation.pattern"
-      :maxlength="componentValidation.maxlength"
-      :required
-      :class="['input-text-core', 'text-normal', styleClassPassthrough, { active: isFocused }, { dirty: fieldIsDirty }, { error: fieldHasError }]"
-      v-model="modelValue.data[name]"
+      :type="c12n.type"
+      :placeholder="c12n.placeholder"
+      :id="c12n.id"
+      :name="c12n.name"
+      :required="c12n.required"
+      :class="['input-text-core', 'text-normal', styleClassPassthrough, { error: c12n.fieldHasError }]"
+      v-model="modelValue[props.c12n.name]"
       ref="inputField"
-      :aria-invalid="fieldHasError"
-      :aria-describedby="`${id}-error-message`"
-      @focusin="updateFocus(name, true)"
-      @focusout="updateFocus(name, false)"
+      :aria-invalid="c12n.fieldHasError"
+      :aria-describedby="`${c12n.id}-error-message`"
     />
 
-    <template v-if="hasRightContent">
-      <span class="right-content">
-        <slot name="right"></slot>
-      </span>
-    </template>
+    <span v-if="hasRightSlot" class="right-slot">
+      <slot name="right"></slot>
+    </span>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { InpuTextC12, IFormFieldC12, IFormData } from '@/types/types.forms';
-import { validationConfig } from '@/components/forms/c12/validation-patterns';
+import type { C12nInputText, IFormFieldC12, IFormData, IFieldsInitialState } from '@/types/types.forms';
 import propValidators from '../c12/prop-validators';
 
 const props = defineProps({
-  type: {
-    type: String,
-    validator(value: string) {
-      return propValidators.inputTypesText.includes(value);
-    },
-  },
-  id: {
-    type: String,
+  c12n: {
+    type: Object as PropType<C12nInputText>,
     required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  validation: {
-    type: String,
-    default: null,
-  },
-  required: {
-    type: Boolean,
-    value: false,
-  },
-  c12: {
-    type: Object as PropType<InpuTextC12>,
-    required: true,
-  },
-  styleClassPassthrough: {
-    type: String,
-    default: '',
-  },
-  fieldHasError: {
-    type: Boolean,
-    default: false,
   },
 });
 
 const slots = useSlots();
-const hasLeftContent = computed(() => slots.left !== undefined);
-const hasRightContent = computed(() => slots.right !== undefined);
+const hasLeftSlot = computed(() => slots.left !== undefined);
+const hasRightSlot = computed(() => slots.right !== undefined);
 
-const modelValue = defineModel() as Ref<IFormData>;
+const modelValue = defineModel<IFieldsInitialState>();
 
-const updateFocus = (name: string, isFocused: boolean) => {
-  modelValue.value.focusedField = isFocused ? name : '';
-};
-
-const isFocused = computed(() => {
-  return modelValue.value.focusedField == name.value;
-});
-
-const name = computed(() => {
-  return props.name !== null ? props.name : props.id;
-});
-
-const validatorLocale = toRef(useRuntimeConfig().public.validatorLocale);
-
-const componentValidation = validationConfig[validatorLocale.value][props.validation];
 const inputField = ref<HTMLInputElement | null>(null);
 
-const fieldIsDirty = computed(() => {
-  // return modelValue.value!.formFieldsC12[name.value].isDirty;
-  return false;
-});
-// const fieldHasError = computed(() => {
-//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
-// });
-
-// const { fieldHasError } = useFormControl(name.value);
-
-const formFieldC12 = <IFormFieldC12>{
-  label: props.c12.label,
-  placeholder: props.c12.placeholder,
-  errorMessage: props.c12.errorMessage,
-  useCustomError: false,
-  customErrors: {},
-  isValid: false,
-  isDirty: false,
-  type: 'string',
-  previousValue: null,
-};
-modelValue.value!.formFieldsC12[name.value] = formFieldC12;
-
-const { initFormFieldsC12 } = useFormControl();
-initFormFieldsC12(props.name, formFieldC12);
-
-const fieldValue = computed(() => {
-  return modelValue.value.data[name.value];
-});
-
-watch(fieldValue, () => {
-  if (!modelValue.value!.formFieldsC12[name.value].isDirty) {
-    modelValue.value!.formFieldsC12[name.value].isDirty = modelValue.value.data[name.value] !== '';
-  }
-  modelValue.value!.formFieldsC12[name.value].isValid = inputField.value?.validity.valid ?? false;
-  modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
-
-  if (modelValue.value!.formFieldsC12[name.value].useCustomError && modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue) {
-    modelValue.value!.validityState[name.value] = false;
-    modelValue.value!.formFieldsC12[name.value].isValid = false;
-    modelValue.value.displayErrorMessages = true;
-  }
-});
-
-const isValid = () => {
-  setTimeout(() => {
-    modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
-    modelValue.value!.formFieldsC12[name.value].isValid = inputField.value?.validity.valid ?? false;
-    if (!modelValue.value!.formFieldsC12[name.value].isDirty) {
-      modelValue.value!.formFieldsC12[name.value].isDirty = modelValue.value.data[name.value] !== '';
-    }
-  }, 0);
-};
-
-onMounted(() => {
-  isValid();
+const styleClassPassthrough = computed(() => {
+  return props.c12n.styleClassPassthrough?.join(' ');
 });
 </script>
 
 <style lang="css">
 .input-text-wrapper {
+  --_form-theme: var(--theme-form-primary);
+  --_focus-colour: var(--theme-form-primary-focus);
+  --_gutter: 12px;
+  --_border-width: var(--input-border-width-thin);
+  --_border-color: var(--_form-theme);
+
+  display: flex;
   align-items: center;
-  display: grid;
-  grid-template-columns: 1fr;
 
-  &.has-left-content {
-    grid-template-columns: auto 1fr;
-    margin-left: var(--_gutter);
+  border-radius: 2px;
+  border: var(--_border-width) solid var(--_border-color);
 
-    .left-content {
+  &.theme-secondary {
+    --_form-theme: var(--theme-form-secondary);
+    --_focus-colour: var(--theme-form-secondary-focus);
+  }
+
+  &.error {
+    --_form-theme: var(--theme-error);
+  }
+
+  &:focus-within {
+    --_border-color: white;
+    background-color: hsl(from var(--_form-theme) h s 95%);
+
+    outline: var(--focus-visible-outline);
+    box-shadow: var(--focus-visible-box-shadow);
+  }
+
+  &.has-left-slot {
+    .left-slot {
       display: flex;
       align-items: center;
     }
   }
 
-  &.has-right-content {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    /* display: flex; */
-    margin-right: var(--_gutter);
-
-    .right-content {
+  &.has-right-slot {
+    .right-slot {
       display: flex;
       align-items: center;
     }
+  }
+
+  .input-text-core {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    flex-grow: 1;
+
+    color: var(--_form-theme);
+    line-height: var(--line-height);
   }
 }
 </style>
