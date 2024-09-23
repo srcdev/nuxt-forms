@@ -196,9 +196,9 @@ const submitForm = async () => {
 
           // if (error instanceof Error) {
           await pushApiErrorsToFormErrors(response._data);
-          zodFormControl.formIsValid = false;
+          // zodFormControl.formIsValid = false;
           // }
-          zodFormControl.submitAttempted = false;
+          // zodFormControl.submitAttempted = false;
         }
         if (response.status === 200) {
           zodFormControl.submitSuccessful = true;
