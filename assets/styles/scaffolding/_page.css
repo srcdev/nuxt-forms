@@ -1,0 +1,20 @@
+html {
+  background-color: var(--body-background-color);
+  font-size: 62.5%;
+}
+body,
+p,
+span,
+pre,
+code,
+div,
+input,
+button,
+label,
+fieldset,
+legend,
+li,
+a {
+  color: var(--brand-grayscale-text-body);
+  font-size: 1.6rem;
+}

@@ -2,6 +2,9 @@
 @import './_palette_dark.css';
 
 :root {
+  --body-background-color: var(--light-body-background-color);
+  --focus-visible-colour: var(--light-focus-visible-colour);
+
   --brand-grayscale-surface-subtle: var(--light-grayscale-surface-subtle);
   --brand-grayscale-surface-default: var(--light-grayscale-surface-default);
   --brand-grayscale-surface-disabled: var(--light-grayscale-surface-disabled);
@@ -149,6 +152,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --body-background-color: var(--dark-body-background-color);
+    --focus-visible-colour: var(--dark-focus-visible-colour);
+
     --brand-grayscale-surface-subtle: var(--dark-grayscale-surface-subtle);
     --brand-grayscale-surface-default: var(--dark-grayscale-surface-default);
     --brand-grayscale-surface-disabled: var(--dark-grayscale-surface-disabled);
@@ -157,7 +163,7 @@
     --brand-grayscale-border-dark: var(--dark-grayscale-border-dark);
     --brand-grayscale-text-title: var(--dark-grayscale-text-title);
     /* Following was using colour picker as #e3271c is a red colour */
-    --brand-grayscale-text-body: var(--dark-grayscale-text-body);
+    --brand-grayscale-text-body: var(--dark-grayscale-text-negative);
     --brand-grayscale-text-subtitle: var(--dark-grayscale-text-subtitle);
     --brand-grayscale-text-caption: var(--dark-grayscale-text-caption);
     --brand-grayscale-text-negative: var(--dark-grayscale-text-negative);

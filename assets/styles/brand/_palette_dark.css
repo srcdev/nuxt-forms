@@ -1,4 +1,5 @@
 :root {
+  --dark-body-background-color: #494549;
   --dark-grayscale-surface-subtle: #f3f2f4;
   --dark-grayscale-surface-default: #847d85;
   --dark-grayscale-surface-disabled: #c6c3c7;
@@ -11,6 +12,8 @@
   --dark-grayscale-text-caption: #847d85;
   --dark-grayscale-text-negative: #f3f2f3;
   --dark-grayscale-text-disabled: #c6c3c7;
+
+  --dark-focus-visible-colour: #4169e1;
 
   --dark-primary-surface-subtle: #f2e8f2;
   --dark-primary-surface-light: #d5b9d7;

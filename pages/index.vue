@@ -27,7 +27,7 @@ useHead({
 </script>
 
 <style lang="css">
-p {
+/* p {
   color: initial;
-}
+} */
 </style>

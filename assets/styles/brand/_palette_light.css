@@ -1,4 +1,5 @@
 :root {
+  --light-body-background-color: #f3f2f4;
   --light-grayscale-surface-subtle: #f3f2f4;
   --light-grayscale-surface-default: #847fbc;
   --light-grayscale-surface-disabled: #c6c4ca;
@@ -6,12 +7,13 @@
   --light-grayscale-border-disabled: #ada9b2;
   --light-grayscale-border-dark: #5e5a63;
   --light-grayscale-text-title: #37353b;
-  /* Following was using colour picker as #e3271c is a red colour */
   --light-grayscale-text-body: #48464d;
   --light-grayscale-text-subtitle: #78747f;
   --light-grayscale-text-caption: #847fbc;
   --light-grayscale-text-negative: #f3f2f4;
   --light-grayscale-text-disabled: #ada9b2;
+
+  --light-focus-visible-colour: #4169e1;
 
   --light-primary-surface-subtle: #f1ebf9;
   --light-primary-surface-light: #d3c0ed;

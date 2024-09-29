@@ -15,9 +15,7 @@
                     <div aria-live="assertive" id="aria-live-message"></div>
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <label for="emailAddress">Email address | error({{ Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress) }})</label>
-
-                        <InputTextCore
+                        <InputTextWithLabel
                           v-model="state"
                           :c12n="{
                             type: 'email',
@@ -29,12 +27,13 @@
                             fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress),
                             required: true,
                             styleClassPassthrough: ['style-1', 'style-2'],
+                            deepCssClassPassthrough: ['deep-bath', 'deep-bristol'],
                           }"
                         >
                           <template #right>
                             <Icon name="radix-icons:eye-open" class="icon" />
                           </template>
-                        </InputTextCore>
+                        </InputTextWithLabel>
 
                         <p v-if="Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress)">
                           {{ formErrors?.emailAddress?._errors[0] }}

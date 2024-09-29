@@ -126,3 +126,27 @@ export interface C12nInputText {
   required: boolean;
   styleClassPassthrough: string[];
 }
+
+export interface C12nInputTextCore {
+  type: string;
+  id: string;
+  name: string;
+  label: string;
+  placeholder: string;
+  errorMessage: string;
+  fieldHasError: boolean;
+  required: boolean;
+}
+
+export interface InputTextWithLabel {
+  type: string;
+  id: string;
+  name: string;
+  label: string;
+  placeholder: string;
+  errorMessage: string;
+  fieldHasError: boolean;
+  required: boolean;
+  styleClassPassthrough: string[];
+  deepCssClassPassthrough: string[];
+}

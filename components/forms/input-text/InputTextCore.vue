@@ -10,8 +10,8 @@
       :id="c12n.id"
       :name="c12n.name"
       :required="c12n.required"
-      :class="['input-text-core', 'text-normal', styleClassPassthrough, { error: c12n.fieldHasError }]"
-      v-model="modelValue[props.c12n.name]"
+      :class="['input-text-core', 'text-normal', elementClasses, { error: c12n.fieldHasError }]"
+      v-model="modelValue[c12n.name]"
       ref="inputField"
       :aria-invalid="c12n.fieldHasError"
       :aria-describedby="`${c12n.id}-error-message`"
@@ -24,13 +24,16 @@
 </template>
 
 <script setup lang="ts">
-import type { C12nInputText, IFormFieldC12, IFormData, IFieldsInitialState } from '@/types/types.forms';
-import propValidators from '../c12/prop-validators';
+import type { C12nInputTextCore, IFormFieldC12, IFormData, IFieldsInitialState } from '@/types/types.forms';
 
-const props = defineProps({
+const { c12n, styleClassPassthrough } = defineProps({
   c12n: {
-    type: Object as PropType<C12nInputText>,
+    type: Object as PropType<C12nInputTextCore>,
     required: true,
+  },
+  styleClassPassthrough: {
+    type: Object as PropType<string[]>,
+    default: [],
   },
 });
 
@@ -42,8 +45,10 @@ const modelValue = defineModel<IFieldsInitialState>();
 
 const inputField = ref<HTMLInputElement | null>(null);
 
-const styleClassPassthrough = computed(() => {
-  return props.c12n.styleClassPassthrough?.join(' ');
+const { elementClasses, updatedElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+
+onMounted(() => {
+  updatedElementClasses(['deep-bristol', 'deep-london', 'deep-bath']);
 });
 </script>
 
