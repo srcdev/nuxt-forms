@@ -1,17 +1,17 @@
 <template>
-  <div class="input-text-wrapper" :class="[{ 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]">
+  <div class="input-text-wrapper" :class="[{ dirty: isDirty }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]">
     <span v-if="hasLeftSlot" class="left-slot">
       <slot name="left"></slot>
     </span>
 
     <input
       :type="c12n.type"
-      :placeholder="c12n.placeholder"
+      :placeholder="c12n.placeholder ?? ''"
       :id="c12n.id"
       :name="c12n.name"
       :required="c12n.required"
-      :class="['input-text-core', 'text-normal', elementClasses, { error: c12n.fieldHasError }]"
-      v-model="modelValue[c12n.name]"
+      :class="['input-text-core', 'text-normal', elementClasses, { dirty: isDirty }, { error: c12n.fieldHasError }]"
+      v-model="modelValue"
       ref="inputField"
       :aria-invalid="c12n.fieldHasError"
       :aria-describedby="`${c12n.id}-error-message`"
@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import type { C12nInputTextCore, IFormFieldC12, IFormData, IFieldsInitialState } from '@/types/types.forms';
+import type { C12nInputTextCore, IFormFieldC12, IFormData, IFieldsInitialState, TFieldsInitialState } from '@/types/types.forms';
 
 const { c12n, styleClassPassthrough } = defineProps({
   c12n: {
@@ -32,8 +32,8 @@ const { c12n, styleClassPassthrough } = defineProps({
     required: true,
   },
   styleClassPassthrough: {
-    type: Object as PropType<string[]>,
-    default: [],
+    type: Array as PropType<string[]>,
+    default: () => [],
   },
 });
 
@@ -41,14 +41,15 @@ const slots = useSlots();
 const hasLeftSlot = computed(() => slots.left !== undefined);
 const hasRightSlot = computed(() => slots.right !== undefined);
 
-const modelValue = defineModel<IFieldsInitialState>();
+const modelValue = defineModel();
+const isDirty = defineModel('isDirty');
 
 const inputField = ref<HTMLInputElement | null>(null);
 
-const { elementClasses, updatedElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 onMounted(() => {
-  updatedElementClasses(['deep-bristol', 'deep-london', 'deep-bath']);
+  updateElementClasses(['deep-bristol', 'deep-london', 'deep-bath']);
 });
 </script>
 
@@ -104,7 +105,22 @@ onMounted(() => {
     flex-grow: 1;
 
     color: var(--_form-theme);
+    font-family: var(--font-family);
     line-height: var(--line-height);
+    padding: 8px 12px;
+
+    /*
+      &::placeholder,
+      &:-ms-input-placeholder,
+      &::-moz-placeholder, */
+    &::-webkit-input-placeholder {
+      font-family: var(--font-family);
+      /* color: var(--gray-5); */
+      /* color: hsl(from var(--_form-theme) h s 50%); */
+      font-size: var(--font-size);
+      font-style: italic;
+      font-weight: 500;
+    }
   }
 }
 </style>

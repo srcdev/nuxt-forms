@@ -52,9 +52,6 @@ const useZodValidation = (formSchema: any) => {
   };
 
   const doZodValidate = async (state: any) => {
-    console.log('doZodValidate -> state');
-    console.log(state);
-
     const valid = formSchema.safeParse(toRaw(state));
     if (!valid.success) {
       zodErrorObj.value = valid.error.format();

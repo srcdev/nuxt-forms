@@ -5,7 +5,7 @@ export const useStyleClassPassthrough = (styleClassPassthrough: string[]) => {
     return styleClassPassthroughRef.value.join(' ');
   });
 
-  const updatedElementClasses = (cssClass: string | string[]) => {
+  const updateElementClasses = (cssClass: string | string[]) => {
     let cssClasses = [] as string[];
     if (typeof cssClass === 'string') {
       cssClasses = [cssClass];
@@ -24,6 +24,6 @@ export const useStyleClassPassthrough = (styleClassPassthrough: string[]) => {
 
   return {
     elementClasses,
-    updatedElementClasses,
+    updateElementClasses,
   };
 };

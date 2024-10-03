@@ -27,6 +27,10 @@ export interface IFieldsInitialState {
   [key: string]: null | string | boolean | number | URL | object | IOptionsValueArr[];
 }
 
+export type TFieldsInitialState = {
+  [key: string]: null | string | boolean | number | URL | object | IOptionsValueArr[];
+};
+
 export interface IValidityState {
   badInput: boolean;
   customError: boolean;

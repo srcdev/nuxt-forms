@@ -16,15 +16,54 @@
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
                         <InputTextWithLabel
-                          v-model="state"
+                          v-model="state.emailAddress"
                           :c12n="{
                             type: 'email',
                             id: 'emailAddress',
                             name: 'emailAddress',
-                            placeholder: 'Email address',
+                            placeholder: 'eg. name@domain.com',
                             label: 'Email address',
                             errorMessage: formErrors?.emailAddress?._errors[0] ?? '',
                             fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress),
+                            required: true,
+                            styleClassPassthrough: ['style-1', 'style-2'],
+                            deepCssClassPassthrough: ['deep-bath', 'deep-bristol'],
+                          }"
+                        />
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <InputTextWithLabel
+                          v-model="state.username"
+                          :c12n="{
+                            type: 'text',
+                            id: 'username',
+                            name: 'username',
+                            placeholder: 'eg. name@domain.com',
+                            label: 'Username',
+                            errorMessage: formErrors?.username?._errors[0] ?? '',
+                            fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.username),
+                            required: true,
+                            styleClassPassthrough: ['style-1', 'style-2'],
+                            deepCssClassPassthrough: ['deep-bath', 'deep-bristol'],
+                          }"
+                        />
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <InputPasswordWithLabel
+                          v-model="state.password"
+                          :c12n="{
+                            type: 'password',
+                            id: 'password',
+                            name: 'password',
+                            label: 'Password',
+                            errorMessage: formErrors?.password?._errors[0] ?? '',
+                            fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.password),
                             required: true,
                             styleClassPassthrough: ['style-1', 'style-2'],
                             deepCssClassPassthrough: ['deep-bath', 'deep-bristol'],
@@ -33,31 +72,7 @@
                           <template #right>
                             <Icon name="radix-icons:eye-open" class="icon" />
                           </template>
-                        </InputTextWithLabel>
-
-                        <p v-if="Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress)">
-                          {{ formErrors?.emailAddress?._errors[0] }}
-                        </p>
-                      </template>
-                    </FormField>
-
-                    <FormField width="wide" :has-gutter="false">
-                      <template #default>
-                        <label for="username">Username | error({{ Boolean(zodFormControl.submitAttempted && formErrors?.username) }})</label>
-                        <input v-model="state.username" required type="text" id="username" name="username" placeholder="" />
-                        <p v-if="Boolean(zodFormControl.submitAttempted && formErrors?.username)">
-                          {{ formErrors?.username?._errors[0] }}
-                        </p>
-                      </template>
-                    </FormField>
-
-                    <FormField width="wide" :has-gutter="false">
-                      <template #default>
-                        <label for="password">Password | error({{ Boolean(zodFormControl.submitAttempted && formErrors?.password) }})</label>
-                        <input v-model="state.password" required type="password" id="password" name="password" placeholder="" />
-                        <p v-if="Boolean(zodFormControl.submitAttempted && formErrors?.password)">
-                          {{ formErrors?.password?._errors[0] }}
-                        </p>
+                        </InputPasswordWithLabel>
                       </template>
                     </FormField>
 
@@ -114,7 +129,7 @@
 
 <script setup lang="ts">
 import { z, ZodError } from 'zod';
-import type { IFieldsInitialState, IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
+import type { IFieldsInitialState, TFieldsInitialState, IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
 
 definePageMeta({
   layout: false,
@@ -186,16 +201,16 @@ const formSchema = z
 type formSchema = z.infer<typeof formSchema>;
 const formErrors = computed<z.ZodFormattedError<formSchema> | null>(() => zodErrorObj.value);
 
-const state = reactive<IFieldsInitialState>({
+const state = reactive({
   emailAddress: '',
   username: '',
   password: '',
   message: '',
-  // score: 50,
-  // cities: [],
-  // countries: [],
-  // title: [],
-  // terms: false,
+  score: 50,
+  cities: [],
+  countries: [],
+  title: [],
+  terms: false,
 });
 
 const { zodFormControl, zodErrorObj, pushApiErrorsToFormErrors, doZodValidate } = useZodValidation(formSchema);
@@ -242,8 +257,8 @@ const submitForm = async () => {
 
 watch(
   () => state,
-  (newValue, oldValue) => {
-    console.log('Watching state');
+  () => {
+    // console.log('Watching state');
     doZodValidate(state);
   },
   { deep: true }

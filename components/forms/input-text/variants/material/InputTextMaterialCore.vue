@@ -249,13 +249,12 @@ const fieldIsDirty = computed(() => {
       &.dirty {
         opacity: 1;
       } */
-      /*
+      
       &::placeholder,
       &:-ms-input-placeholder,
-      &::-moz-placeholder, */
+      &::-moz-placeholder,
       &::-webkit-input-placeholder {
         font-family: var(--font-family);
-        /* color: var(--gray-5); */
         color: hsl(from var(--_form-theme) h s 50%);
         font-size: var(--font-size);
         font-style: italic;
