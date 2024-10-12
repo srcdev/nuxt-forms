@@ -96,6 +96,15 @@ export interface IFormFieldsC12 {
   [x: string]: IFormFieldC12;
 }
 
+export interface IFormFieldState {
+  isValid: boolean;
+  isDirty: boolean;
+}
+
+export interface IFormFieldStateObj {
+  [x: string]: IFormFieldState;
+}
+
 export interface IFormData {
   [x: string]: string | boolean | number | URL | object;
   data: IFieldsInitialState;

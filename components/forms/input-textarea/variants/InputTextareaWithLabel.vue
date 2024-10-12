@@ -1,15 +1,15 @@
 <template>
-  <div class="input-text-with-label" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
-    <label :for="c12n.id" class="input-text-label">{{ c12n.label }}</label>
+  <div class="input-textarea-with-label" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
+    <label :for="c12n.id" class="input-textarea-label">{{ c12n.label }}</label>
 
-    <InputTextCore v-model="modelValue" v-model:isDirty="isDirty" v-model:isActive="isActive" :c12n :styleClassPassthrough="deepCssClassPassthrough">
+    <InputTextareaCore v-model="modelValue" v-model:isDirty="isDirty" v-model:isActive="isActive" :c12n :styleClassPassthrough="deepCssClassPassthrough">
       <template v-if="hasLeftSlot" #left>
         <slot name="left"></slot>
       </template>
       <template v-if="hasRightSlot" #right>
         <slot name="right"></slot>
       </template>
-    </InputTextCore>
+    </InputTextareaCore>
     <InputError :errorMessaging="c12n.errorMessage" :fieldHasError="c12n.fieldHasError" :id="c12n.id" :isDetached="false" />
   </div>
 </template>
@@ -56,14 +56,14 @@ watch(
 </script>
 
 <style lang="css">
-.input-text-with-label {
+.input-textarea-with-label {
   --_form-theme: var(--theme-form-primary);
   --_focus-colour: var(--theme-form-primary-focus);
   --_border-width: var(--input-border-width-thin);
   --_border-color: var(--_form-theme);
   --_outline-width: var(--input-outline-width-thin);
 
-  .input-text-label {
+  .input-textarea-label {
     display: block;
     font-family: var(--font-family);
     font-size: 16px;

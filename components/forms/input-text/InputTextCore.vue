@@ -1,5 +1,5 @@
 <template>
-  <div class="input-text-wrapper" :class="[{ dirty: isDirty }, { error: c12n.fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]">
+  <div class="input-text-wrapper" :class="[{ dirty: isDirty }, { active: isActive }, { error: c12n.fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]">
     <span v-if="hasLeftSlot" class="slot left-slot">
       <slot name="left"></slot>
     </span>
@@ -10,11 +10,13 @@
       :id="c12n.id"
       :name="c12n.name"
       :required="c12n.required"
-      :class="['input-text-core', 'text-normal', elementClasses, { dirty: isDirty }]"
+      :class="['input-text-core', 'text-normal', elementClasses, { dirty: isDirty }, { active: isActive }]"
       v-model="modelValue"
       ref="inputField"
       :aria-invalid="c12n.fieldHasError"
       :aria-describedby="`${c12n.id}-error-message`"
+      @focusin="updateFocus(true)"
+      @focusout="updateFocus(false)"
     />
 
     <span v-if="hasRightSlot" class="slot right-slot">
@@ -43,6 +45,11 @@ const hasRightSlot = computed(() => slots.right !== undefined);
 
 const modelValue = defineModel();
 const isDirty = defineModel('isDirty');
+const isActive = defineModel('isActive');
+
+const updateFocus = (isFocused: boolean) => {
+  isActive.value = isFocused;
+};
 
 const inputField = ref<HTMLInputElement | null>(null);
 

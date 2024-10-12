@@ -1,4 +1,5 @@
 import { z, ZodError } from 'zod';
+import { type IFormFieldStateObj } from '@/types/types.forms';
 
 const useZodValidation = (formSchema: any) => {
   const zodFormControl = reactive({
@@ -10,10 +11,22 @@ const useZodValidation = (formSchema: any) => {
     formIsValid: false,
     isPending: false,
     isDisabled: false,
+    // formFieldStateArr: {} as IFormFieldStateObj,
   });
+
+  // const formFieldState = {
+  //   isValid: false,
+  //   isDirty: false,
+  // };
 
   type formSchema = z.infer<typeof formSchema>;
   const zodErrorObj = ref<z.ZodFormattedError<formSchema> | null>(null);
+
+  // const initZodForm = () => {
+  //   for (const [field] of Object.entries(formSchema.shape)) {
+  //     zodFormControl.formFieldStateArr[field] = formFieldState;
+  //   }
+  // };
 
   const getErrorCount = (zodErrorObj: Ref<z.ZodFormattedError<formSchema> | null>) => {
     const zodCountErrors = zodErrorObj.value ?? [];
@@ -66,6 +79,7 @@ const useZodValidation = (formSchema: any) => {
   };
 
   return {
+    // initZodForm,
     zodFormControl,
     zodErrorObj,
     pushApiErrorsToFormErrors,

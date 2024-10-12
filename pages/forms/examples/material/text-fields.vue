@@ -87,11 +87,21 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <label for="message">Message | error({{ Boolean(zodFormControl.submitAttempted && formErrors?.message) }})</label>
-                        <textarea v-model="<string>state.message" required id="message" name="message" placeholder=""></textarea>
-                        <p v-if="Boolean(zodFormControl.submitAttempted && formErrors?.message)">
-                          {{ formErrors?.message?._errors[0] }}
-                        </p>
+                        <InputTextareaWithLabel
+                          v-model="state.message"
+                          :c12n="{
+                            id: 'message',
+                            name: 'message',
+                            placeholder: 'Type your message here',
+                            label: 'Your mesage',
+                            errorMessage: formErrors?.message?._errors[0] ?? '',
+                            fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.message),
+                            required: true,
+                            styleClassPassthrough: ['style-1', 'style-2'],
+                            deepCssClassPassthrough: ['deep-bath', 'deep-bristol'],
+                          }"
+                        >
+                        </InputTextareaWithLabel>
                       </template>
                     </FormField>
 
@@ -222,7 +232,15 @@ const state = reactive({
   terms: false,
 });
 
-const { zodFormControl, zodErrorObj, pushApiErrorsToFormErrors, doZodValidate } = useZodValidation(formSchema);
+const {
+  // initZodForm,
+  zodFormControl,
+  zodErrorObj,
+  pushApiErrorsToFormErrors,
+  doZodValidate,
+} = useZodValidation(formSchema);
+
+// initZodForm();
 
 const submitForm = async () => {
   zodFormControl.submitAttempted = true;

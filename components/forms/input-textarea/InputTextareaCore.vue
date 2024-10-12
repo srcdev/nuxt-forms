@@ -1,175 +1,154 @@
 <template>
-  <div class="input-textarea-wrapper" :class="[{ 'has-left-content': hasLeftContent }, { 'has-right-content': hasRightContent }]">
-    <span v-if="hasLeftContent" class="left-content">
+  <div class="input-textarea-wrapper" :class="[{ dirty: isDirty }, { active: isActive }, { error: c12n.fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]">
+    <span v-if="hasLeftSlot" class="slot left-slot">
       <slot name="left"></slot>
     </span>
 
     <textarea
-      :id
-      :name
-      :pattern="componentValidation.pattern"
-      :maxlength="componentValidation.maxlength"
-      :required
-      :class="['input-textarea-core', 'text-normal', styleClassPassthrough, { active: isFocused }, { dirty: fieldIsDirty }, { error: fieldHasError }]"
-      v-model="<string>modelValue.data[name]"
+      :placeholder="c12n.placeholder ?? ''"
+      :id="c12n.id"
+      :name="c12n.name"
+      :required="c12n.required"
+      :class="['input-text-core', 'text-normal', elementClasses, { dirty: isDirty }, { active: isActive }]"
+      v-model="modelValue"
       ref="inputField"
-      :placeholder="c12.placeholder"
-      :aria-invalid="fieldHasError"
-      :aria-describedby="`${id}-error-message`"
-      @focusin="updateFocus(name, true)"
-      @focusout="updateFocus(name, false)"
+      :aria-invalid="c12n.fieldHasError"
+      :aria-describedby="`${c12n.id}-error-message`"
+      @focusin="updateFocus(true)"
+      @focusout="updateFocus(false)"
     ></textarea>
 
-    <span v-if="hasRightContent" class="right-content">
+    <span v-if="hasRightSlot" class="slot right-slot">
       <slot name="right"></slot>
     </span>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { InpuTextC12, IFormFieldC12, IFormData } from '@/types/types.forms';
-import { validationConfig } from '@/components/forms/c12/validation-patterns';
+import type { C12nInputTextCore, IFormFieldC12, IFormData, IFieldsInitialState, TFieldsInitialState } from '@/types/types.forms';
 
-const props = defineProps({
-  id: {
-    type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  validation: {
-    type: String,
-    default: null,
-  },
-  required: {
-    type: Boolean,
-    value: false,
-  },
-  c12: {
-    type: Object as PropType<InpuTextC12>,
+const { c12n, styleClassPassthrough } = defineProps({
+  c12n: {
+    type: Object as PropType<C12nInputTextCore>,
     required: true,
   },
   styleClassPassthrough: {
-    type: String,
-    default: '',
-  },
-  fieldHasError: {
-    type: Boolean,
-    default: false,
+    type: Array as PropType<string[]>,
+    default: () => [],
   },
 });
 
 const slots = useSlots();
-const hasLeftContent = computed(() => slots.left !== undefined);
-const hasRightContent = computed(() => slots.right !== undefined);
+const hasLeftSlot = computed(() => slots.left !== undefined);
+const hasRightSlot = computed(() => slots.right !== undefined);
 
-const modelValue = defineModel() as Ref<IFormData>;
+const modelValue = defineModel();
+const isDirty = defineModel('isDirty');
+const isActive = defineModel('isActive');
 
-const updateFocus = (name: string, isFocused: boolean) => {
-  console.log(`textarea | updateFocus: ${name} ${isFocused}`);
-  modelValue.value.focusedField = isFocused ? name : '';
+const updateFocus = (isFocused: boolean) => {
+  isActive.value = isFocused;
 };
 
-const isFocused = computed(() => {
-  return modelValue.value.focusedField == name.value;
-});
-
-const name = computed(() => {
-  return props.name !== null ? props.name : props.id;
-});
-
-const validatorLocale = toRef(useRuntimeConfig().public.validatorLocale);
-
-const componentValidation = validationConfig[validatorLocale.value][props.validation];
 const inputField = ref<HTMLInputElement | null>(null);
 
-const fieldIsDirty = computed(() => {
-  // return modelValue.value!.formFieldsC12[name.value].isDirty;
-  return false;
-});
-// const fieldHasError = computed(() => {
-//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
-// });
-
-// const { fieldHasError } = useFormControl(name.value);
-
-const formFieldC12 = <IFormFieldC12>{
-  label: props.c12.label,
-  placeholder: props.c12.placeholder,
-  errorMessage: props.c12.errorMessage,
-  useCustomError: false,
-  customErrors: {},
-  isValid: false,
-  isDirty: false,
-  type: 'string',
-  previousValue: null,
-};
-modelValue.value!.formFieldsC12[name.value] = formFieldC12;
-
-const { initFormFieldsC12 } = useFormControl();
-initFormFieldsC12(props.name, formFieldC12);
-
-const fieldValue = computed(() => {
-  return modelValue.value.data[name.value];
-});
-
-watch(fieldValue, () => {
-  if (!modelValue.value!.formFieldsC12[name.value].isDirty) {
-    modelValue.value!.formFieldsC12[name.value].isDirty = modelValue.value.data[name.value] !== '';
-  }
-  modelValue.value!.formFieldsC12[name.value].isValid = inputField.value?.validity.valid ?? false;
-  modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
-
-  if (modelValue.value!.formFieldsC12[name.value].useCustomError && modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue) {
-    modelValue.value!.validityState[name.value] = false;
-    modelValue.value!.formFieldsC12[name.value].isValid = false;
-    modelValue.value.displayErrorMessages = true;
-  }
-});
-
-const isValid = () => {
-  setTimeout(() => {
-    modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
-    modelValue.value!.formFieldsC12[name.value].isValid = inputField.value?.validity.valid ?? false;
-    if (!modelValue.value!.formFieldsC12[name.value].isDirty) {
-      modelValue.value!.formFieldsC12[name.value].isDirty = modelValue.value.data[name.value] !== '';
-    }
-  }, 0);
-};
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 onMounted(() => {
-  isValid();
+  updateElementClasses(['deep-bristol', 'deep-london', 'deep-bath']);
 });
 </script>
 
 <style lang="css">
 .input-textarea-wrapper {
+  --_form-theme: var(--theme-form-primary);
+  --_focus-colour: var(--theme-form-primary-focus);
+  --_gutter: 12px;
+  --_border-width: var(--input-border-width-thin);
+  --_border-color: var(--_form-theme);
+  --_input-bg-color: white;
+  --_input-text-color: var(--brand-grayscale-text-form);
+
+  display: flex;
   align-items: center;
-  display: grid;
-  grid-template-columns: 1fr;
 
-  &.has-left-content {
-    grid-template-columns: auto 1fr;
-    margin-left: var(--_gutter);
+  background-color: var(--_input-bg-color);
+  border-radius: var(--input-border-width-default);
+  border: var(--_border-width) solid var(--_border-color);
 
-    .left-content {
+  &.theme-secondary {
+    --_form-theme: var(--theme-form-secondary);
+    --_focus-colour: var(--theme-form-secondary-focus);
+  }
+
+  &.error {
+    --_form-theme: var(--theme-error);
+    --_input-text-color: var(--theme-error);
+  }
+
+  &:focus-within {
+    --_border-color: white;
+    /* background-color: hsl(from var(--_form-theme) h s 95%); */
+
+    outline: var(--focus-visible-outline);
+    box-shadow: var(--focus-visible-box-shadow);
+  }
+
+  .slot {
+    display: inline-block;
+    padding-inline: 8px;
+
+    .icon {
+      color: var(--_input-text-color);
+    }
+  }
+
+  &.has-left-slot {
+    .left-slot {
       display: flex;
       align-items: center;
     }
   }
 
-  &.has-right-content {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    /* display: flex; */
-    margin-right: var(--_gutter);
-
-    .right-content {
+  &.has-right-slot {
+    .right-slot {
       display: flex;
       align-items: center;
     }
   }
+
+  .input-text-core {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    flex-grow: 1;
+
+    color: var(--_input-text-color);
+    font-family: var(--font-family);
+    font-size: var(--theme-form-button-font-size-normal);
+    line-height: var(--line-height);
+    padding: 8px 12px;
+
+    &::placeholder,
+    &::-webkit-input-placeholder {
+      font-family: var(--font-family);
+      font-size: var(--font-size);
+      font-style: italic;
+      font-weight: 400;
+    }
+  }
+}
+
+input:autofill,
+input:-webkit-autofill-strong-password,
+input:-webkit-autofill-strong-password-viewable,
+input:-webkit-autofill-and-obscured {
+  background-color: var(--_input-bg-color) !important;
+  background-image: none !important;
+  color: var(--_input-text-color) !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--_input-bg-color) inset;
+  /* -webkit-text-fill-color: black; */
+  transition: background-color 5000s ease-in-out 0s;
 }
 </style>
