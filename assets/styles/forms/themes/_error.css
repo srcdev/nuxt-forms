@@ -1,4 +1,4 @@
-:where(html) {
+:root {
   --theme-error: var(--red-7);
   --theme-form-error: var(--red-8);
   --theme-form-error-border: var(--red-2);

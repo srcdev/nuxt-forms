@@ -1,4 +1,4 @@
-:where(html) {
+:root {
   --font-size: 16px;
   --line-height: calc((var(--font-size) * 2) - 10px);
 

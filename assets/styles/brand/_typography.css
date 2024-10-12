@@ -1,4 +1,4 @@
-:where(html) {
+:root {
   --text-heading-line-height: 1.3;
 
   --text-heading1-size: 56px;

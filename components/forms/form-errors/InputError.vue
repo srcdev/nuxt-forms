@@ -1,13 +1,18 @@
 <template>
   <div class="input-error-message" :class="[{ show: fieldHasError }, { detached: isDetached }, { hide: !fieldHasError }]">
     <div class="inner" :class="[{ show: fieldHasError }]">
-      <div class="message" :id="`${id}-error-message`">
-        <ul v-if="isArray">
-          <li v-for="(message, index) in errorMessaging" :key="index">{{ message }}</li>
-        </ul>
-        <span v-else>
-          {{ errorMessaging }}
-        </span>
+      <div class="inner-content">
+        <div class="inner-icon">
+          <Icon name="radix-icons:circle-backslash" class="icon" />
+        </div>
+        <div class="message" :id="`${id}-error-message`">
+          <ul v-if="isArray">
+            <li v-for="(message, index) in errorMessaging" :key="index">{{ message }}</li>
+          </ul>
+          <span v-else>
+            {{ errorMessaging }}
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -62,7 +67,7 @@ const isArray = computed(() => {
   --_transition-duration: 500ms;
   --_transition-timing-function: linear;
   --_message-translate-y-hide: calc(var(--_gutter) * -2);
-  --_message-translate-y-show: 2px;
+  --_message-translate-y-show: 0;
   --_message-translate-y: var(--_message-translate-y-hide);
   --_padding-message-show: var(--_gutter);
   --_padding-message-hide: 0;
@@ -75,6 +80,7 @@ const isArray = computed(() => {
 
   color: hsl(from var(--theme-error) h s 95%);
   background-color: var(--theme-error);
+  border-radius: 0 0 4px 4px;
 
   transition-property: grid-template-rows;
   transition-duration: var(--_transition-duration);
@@ -95,8 +101,9 @@ const isArray = computed(() => {
   }
 
   .inner {
-    overflow: hidden;
+    align-items: center;
 
+    overflow: hidden;
     transition: opacity var(--_transition-duration) var(--_transition-timing-function), display var(--_transition-duration) var(--_transition-timing-function) allow-discrete;
 
     &.show {
@@ -104,26 +111,47 @@ const isArray = computed(() => {
       opacity: var(--_opacity-show);
     }
 
-    .message {
-      font-family: var(--font-family);
-      font-size: 16px;
-      font-weight: 500;
-      padding-block: var(--_padding-message);
-      padding-inline: var(--_gutter-inline);
-      transform: translateY(var(--_message-translate-y));
+    .inner-content {
+      display: flex;
+      align-items: center;
 
-      transition-property: transform, padding;
-      transition-duration: var(--_transition-duration);
-      transition-timing-function: linear;
+      .inner-icon {
+        display: inline-block;
+        padding-left: 12px;
 
-      ul {
-        list-style-type: none;
-        padding-inline-start: 0;
-        margin-block-start: 0;
-        margin-block-end: 0;
+        .icon {
+          color: white;
+          transform: translateY(3px);
+        }
+      }
 
-        li + li {
-          margin-block-start: 6px;
+      .message {
+        display: inline-block;
+        flex-grow: 1;
+        font-family: var(--font-family);
+        font-size: 16px;
+        font-weight: 500;
+        padding-block: var(--_padding-message);
+        padding-inline: var(--_gutter-inline);
+        transform: translateY(var(--_message-translate-y));
+
+        transition-property: transform, padding;
+        transition-duration: var(--_transition-duration);
+        transition-timing-function: linear;
+
+        span {
+          color: white;
+        }
+
+        ul {
+          list-style-type: none;
+          padding-inline-start: 0;
+          margin-block-start: 0;
+          margin-block-end: 0;
+
+          li + li {
+            margin-block-start: 6px;
+          }
         }
       }
     }

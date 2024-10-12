@@ -1,4 +1,4 @@
-:where(html) {
+:root {
   --theme-form-secondary: var(--gray-8);
   --theme-form-secondary-border: var(--gray-2);
   --theme-form-secondary-border-hover: var(--gray-0);

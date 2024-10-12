@@ -1,4 +1,4 @@
-:where(html) {
+:root {
   --theme-success: var(--green-7);
   --theme-form-success: var(--green-8);
   --theme-form-success-border: var(--green-2);

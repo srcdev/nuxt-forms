@@ -1,6 +1,6 @@
 <template>
-  <div class="input-text-wrapper" :class="[{ dirty: isDirty }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]">
-    <span v-if="hasLeftSlot" class="left-slot">
+  <div class="input-text-wrapper" :class="[{ dirty: isDirty }, { error: c12n.fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]">
+    <span v-if="hasLeftSlot" class="slot left-slot">
       <slot name="left"></slot>
     </span>
 
@@ -10,14 +10,14 @@
       :id="c12n.id"
       :name="c12n.name"
       :required="c12n.required"
-      :class="['input-text-core', 'text-normal', elementClasses, { dirty: isDirty }, { error: c12n.fieldHasError }]"
+      :class="['input-text-core', 'text-normal', elementClasses, { dirty: isDirty }]"
       v-model="modelValue"
       ref="inputField"
       :aria-invalid="c12n.fieldHasError"
       :aria-describedby="`${c12n.id}-error-message`"
     />
 
-    <span v-if="hasRightSlot" class="right-slot">
+    <span v-if="hasRightSlot" class="slot right-slot">
       <slot name="right"></slot>
     </span>
   </div>
@@ -60,11 +60,14 @@ onMounted(() => {
   --_gutter: 12px;
   --_border-width: var(--input-border-width-thin);
   --_border-color: var(--_form-theme);
+  --_input-bg-color: white;
+  --_input-text-color: var(--brand-grayscale-text-form);
 
   display: flex;
   align-items: center;
 
-  border-radius: 2px;
+  background-color: var(--_input-bg-color);
+  border-radius: var(--input-border-width-default);
   border: var(--_border-width) solid var(--_border-color);
 
   &.theme-secondary {
@@ -74,14 +77,24 @@ onMounted(() => {
 
   &.error {
     --_form-theme: var(--theme-error);
+    --_input-text-color: var(--theme-error);
   }
 
   &:focus-within {
     --_border-color: white;
-    background-color: hsl(from var(--_form-theme) h s 95%);
+    /* background-color: hsl(from var(--_form-theme) h s 95%); */
 
     outline: var(--focus-visible-outline);
     box-shadow: var(--focus-visible-box-shadow);
+  }
+
+  .slot {
+    display: inline-block;
+    padding-inline: 8px;
+
+    .icon {
+      color: var(--_input-text-color);
+    }
   }
 
   &.has-left-slot {
@@ -99,28 +112,37 @@ onMounted(() => {
   }
 
   .input-text-core {
+    background-color: transparent;
     border: none;
     outline: none;
     box-shadow: none;
     flex-grow: 1;
 
-    color: var(--_form-theme);
+    color: var(--_input-text-color);
     font-family: var(--font-family);
+    font-size: var(--theme-form-button-font-size-normal);
     line-height: var(--line-height);
     padding: 8px 12px;
 
-    /*
-      &::placeholder,
-      &:-ms-input-placeholder,
-      &::-moz-placeholder, */
+    &::placeholder,
     &::-webkit-input-placeholder {
       font-family: var(--font-family);
-      /* color: var(--gray-5); */
-      /* color: hsl(from var(--_form-theme) h s 50%); */
       font-size: var(--font-size);
       font-style: italic;
-      font-weight: 500;
+      font-weight: 400;
     }
   }
+}
+
+input:autofill,
+input:-webkit-autofill-strong-password,
+input:-webkit-autofill-strong-password-viewable,
+input:-webkit-autofill-and-obscured {
+  background-color: var(--_input-bg-color) !important;
+  background-image: none !important;
+  color: var(--_input-text-color) !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--_input-bg-color) inset;
+  /* -webkit-text-fill-color: black; */
+  transition: background-color 5000s ease-in-out 0s;
 }
 </style>

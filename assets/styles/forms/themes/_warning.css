@@ -1,4 +1,4 @@
-:where(html) {
+:root {
   --theme-form-warning: var(--orange-8);
   --theme-form-warning-border: var(--orange-2);
   --theme-form-warning-border-hover: var(--orange-0);

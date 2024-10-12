@@ -29,7 +29,11 @@
                             styleClassPassthrough: ['style-1', 'style-2'],
                             deepCssClassPassthrough: ['deep-bath', 'deep-bristol'],
                           }"
-                        />
+                        >
+                          <template #left>
+                            <Icon name="radix-icons:envelope-closed" class="icon" />
+                          </template>
+                        </InputTextWithLabel>
                       </template>
                     </FormField>
 
@@ -49,7 +53,11 @@
                             styleClassPassthrough: ['style-1', 'style-2'],
                             deepCssClassPassthrough: ['deep-bath', 'deep-bristol'],
                           }"
-                        />
+                        >
+                          <template #left>
+                            <Icon name="radix-icons:person" class="icon" />
+                          </template>
+                        </InputTextWithLabel>
                       </template>
                     </FormField>
 
@@ -61,6 +69,7 @@
                             type: 'password',
                             id: 'password',
                             name: 'password',
+                            placeholder: 'eg. a mixure of numbers and letters',
                             label: 'Password',
                             errorMessage: formErrors?.password?._errors[0] ?? '',
                             fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.password),

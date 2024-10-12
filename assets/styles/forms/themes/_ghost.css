@@ -1,4 +1,4 @@
-:where(html) {
+:root {
   --theme-form-ghost: var(--gray-8);
   --theme-form-ghost-border: transparent;
   --theme-form-ghost-border-hover: var(--gray-0);

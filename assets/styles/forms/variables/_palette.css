@@ -1,4 +1,4 @@
-:where(html) {
+:root {
   --grayscale-surface-subtle: #f3f2f4;
   --grayscale-surface-default: #847d85;
   --grayscale-surface-disabled: #c6c3c7;

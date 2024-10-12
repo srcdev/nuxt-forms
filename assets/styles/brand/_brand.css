@@ -12,8 +12,8 @@
   --brand-grayscale-border-disabled: var(--light-grayscale-border-disabled);
   --brand-grayscale-border-dark: var(--light-grayscale-border-dark);
   --brand-grayscale-text-title: var(--light-grayscale-text-title);
-  /* Following was using colour picker as #e3271c is a red colour */
   --brand-grayscale-text-body: var(--light-grayscale-text-body);
+  --brand-grayscale-text-form: var(--light-grayscale-text-form);
   --brand-grayscale-text-subtitle: var(--light-grayscale-text-subtitle);
   --brand-grayscale-text-caption: var(--light-grayscale-text-caption);
   --brand-grayscale-text-negative: var(--light-grayscale-text-negative);
@@ -162,8 +162,8 @@
     --brand-grayscale-border-disabled: var(--dark-grayscale-border-disabled);
     --brand-grayscale-border-dark: var(--dark-grayscale-border-dark);
     --brand-grayscale-text-title: var(--dark-grayscale-text-title);
-    /* Following was using colour picker as #e3271c is a red colour */
     --brand-grayscale-text-body: var(--dark-grayscale-text-negative);
+    --brand-grayscale-text-form: var(--dark-grayscale-text-form);
     --brand-grayscale-text-subtitle: var(--dark-grayscale-text-subtitle);
     --brand-grayscale-text-caption: var(--dark-grayscale-text-caption);
     --brand-grayscale-text-negative: var(--dark-grayscale-text-negative);
