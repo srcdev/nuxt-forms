@@ -47,6 +47,8 @@ export function useFormControl(name: string = '') {
   };
 
   const updatePreviousValues = () => {
+    console.log(`useFormControl | updatePreviousValues`);
+
     Object.keys(formData.value.data).forEach((key) => {
       formData.value.formFieldsC12[key].previousValue = formData.value.data[key];
     });

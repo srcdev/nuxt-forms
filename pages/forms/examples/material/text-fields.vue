@@ -225,26 +225,20 @@ const state = reactive({
   username: '',
   password: '',
   message: '',
-  score: 50,
-  cities: [],
-  countries: [],
-  title: [],
-  terms: false,
+  // score: 50,
+  // cities: [],
+  // countries: [],
+  // title: [],
+  // terms: false,
 });
 
-const {
-  // initZodForm,
-  zodFormControl,
-  zodErrorObj,
-  pushApiErrorsToFormErrors,
-  doZodValidate,
-} = useZodValidation(formSchema);
+const { initZodForm, zodFormControl, zodErrorObj, pushApiErrorsToFormErrors, doZodValidate } = useZodValidation(formSchema);
 
-// initZodForm();
+initZodForm();
 
 const submitForm = async () => {
   zodFormControl.submitAttempted = true;
-  if (!(await doZodValidate(state))) return;
+  if (!(await doZodValidate(state, true))) return;
   zodFormControl.displayLoader = true;
   try {
     console.log('Form valid - post it');

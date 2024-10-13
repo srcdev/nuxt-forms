@@ -99,6 +99,7 @@ export interface IFormFieldsC12 {
 export interface IFormFieldState {
   isValid: boolean;
   isDirty: boolean;
+  previousValue: null | string | boolean | number | URL | object;
 }
 
 export interface IFormFieldStateObj {

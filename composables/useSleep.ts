@@ -1,5 +1,5 @@
-const useSleep = (ms: number) => {
+async function useSleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
-};
+}
 
 export default useSleep;
