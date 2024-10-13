@@ -6,10 +6,10 @@
           <Icon name="radix-icons:circle-backslash" class="icon" />
         </div>
         <div class="message" :id="`${id}-error-message`">
-          <ul v-if="isArray">
-            <li v-for="(message, index) in errorMessaging" :key="index">{{ message }}</li>
+          <ul v-if="isArray" class="message-list">
+            <li v-for="(message, index) in errorMessaging" :key="index" class="message-list-item">{{ message }}</li>
           </ul>
-          <span v-else>
+          <span v-else class="message-single">
             {{ errorMessaging }}
           </span>
         </div>
@@ -139,21 +139,21 @@ const isArray = computed(() => {
         transition-duration: var(--_transition-duration);
         transition-timing-function: linear;
 
-        span {
+        .message-single {
           color: white;
         }
 
-        ul {
+        .message-list {
           list-style-type: none;
           padding-inline-start: 0;
           margin-block-start: 0;
           margin-block-end: 0;
 
-          li {
+          .message-list-item {
             color: white;
           }
 
-          li + li {
+          .message-list-item + .message-list-item {
             margin-block-start: 6px;
           }
         }
