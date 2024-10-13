@@ -163,3 +163,16 @@ export interface InputTextWithLabel {
   styleClassPassthrough: string[];
   deepCssClassPassthrough: string[];
 }
+
+export interface ApiErrorResponse {
+  url: string;
+  statusCode: number;
+  statusMessage: string;
+  message: string;
+  stack: string;
+  data: {
+    errors: {
+      [key: string]: string | string[]; // Index signature for dynamic keys
+    };
+  };
+}

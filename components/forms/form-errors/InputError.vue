@@ -149,6 +149,10 @@ const isArray = computed(() => {
           margin-block-start: 0;
           margin-block-end: 0;
 
+          li {
+            color: white;
+          }
+
           li + li {
             margin-block-start: 6px;
           }

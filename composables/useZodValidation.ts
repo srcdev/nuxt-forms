@@ -1,5 +1,5 @@
 import { z, ZodError } from 'zod';
-import { type IFormFieldStateObj } from '@/types/types.forms';
+import type { IFormFieldStateObj, ApiErrorResponse } from '@/types/types.forms';
 
 const useZodValidation = (formSchema: any) => {
   const zodFormControl = reactive({
@@ -35,20 +35,37 @@ const useZodValidation = (formSchema: any) => {
     return errorCount;
   };
 
-  const pushApiErrorsToFormErrors = async (apiError: any[]) => {
+  const transformErrorMessages = (errors: any) => {
+    console.log('transformErrorMessages');
+    console.log(errors);
     const apiErrors = ref({}) as any;
+    for (const [key, value] of Object.entries(errors)) {
+      console.log(key, value);
+      const fieldPath = key.split('.').map((key: string) => key.charAt(0).toLowerCase() + key.slice(1));
+      apiErrors.value[fieldPath.join('.')] = value;
+    }
+
+    return apiErrors.value;
+  };
+
+  const pushApiErrorsToFormErrors = async (apiErrorResponse: ApiErrorResponse) => {
+    // console.log('apiErrorResponse');
+    // console.log(apiErrorResponse);
+    // const apiErrors = ref({}) as any;
 
     // Map API errors to form fields
-    apiError.forEach((error) => {
-      const fieldPath = error.key.split('.').map((key: string) => key.charAt(0).toLowerCase() + key.slice(1));
-      apiErrors.value[fieldPath.join('.')] = error.message;
-    });
+    const apiErrors = transformErrorMessages(apiErrorResponse.data.errors);
+
+    // apiErrors.forEach((error) => {
+    //   const fieldPath = error.key.split('.').map((key: string) => key.charAt(0).toLowerCase() + key.slice(1));
+    //   apiErrors.value[fieldPath.join('.')] = error.message;
+    // });
 
     // Create a ZodError object to hold the issues
     const zodError = new ZodError([]);
 
     // Add issues to the ZodError object
-    for (const [path, message] of Object.entries(apiErrors.value)) {
+    for (const [path, message] of Object.entries(apiErrors)) {
       zodError.addIssue({
         path: path.split('.'),
         message: message as string,
@@ -60,7 +77,7 @@ const useZodValidation = (formSchema: any) => {
     zodFormControl.errorCount = getErrorCount(zodErrorObj);
     zodFormControl.formIsValid = zodFormControl.errorCount === 0;
     zodFormControl.displayLoader = false;
-    zodFormControl.submitAttempted = false;
+    zodFormControl.submitAttempted = true;
     return zodErrorObj.value;
   };
 

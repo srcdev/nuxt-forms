@@ -42,7 +42,7 @@ const slots = useSlots();
 const hasLeftSlot = computed(() => slots.left !== undefined);
 const hasRightSlot = computed(() => slots.right !== undefined);
 
-const modelValue = defineModel();
+const modelValue = defineModel<string | number | readonly string[] | null | undefined>();
 const isDirty = defineModel('isDirty');
 const isActive = defineModel('isActive');
 
