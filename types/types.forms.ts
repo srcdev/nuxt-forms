@@ -141,6 +141,20 @@ export interface C12nInputText {
   styleClassPassthrough: string[];
 }
 
+export interface C12nInputRange {
+  id: string;
+  name: string;
+  label: string;
+  min: number;
+  max: number;
+  step: number;
+  placeholder: string;
+  errorMessage: string;
+  fieldHasError: boolean;
+  required: boolean;
+  styleClassPassthrough: string[];
+}
+
 export interface C12nInputTextCore {
   type: string;
   id: string;

@@ -1,18 +1,18 @@
 <template>
-  <div class="input-range-with-label" :class="[styleClassPassthrough, `theme-${theme}`, { error: fieldHasError }]">
-    <label class="input-range-label" :for="id">{{ c12.label }}</label>
+  <div class="input-range-with-label" :class="[c12n.styleClassPassthrough, `theme-${theme}`, { error: c12n.fieldHasError }]">
+    <label class="input-range-label" :for="c12n.id">{{ c12n.label }}</label>
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
-    <InputRangeCore :id :name :required :c12 v-model="modelValue" :theme :size :weight :min :max :step>
+    <InputRangeCore :c12n v-model="modelValue" :theme :size :weight>
       <template v-if="hasDataList" #datalist>
         <slot name="datalist"></slot>
       </template>
       <template v-if="hasLeftContent" #left>
         <InputButtonCore
           type="button"
-          @click.stop.prevent="updateRange(-step, Number(modelValue.data[name]) > min)"
-          :readonly="Number(modelValue.data[name]) === min"
+          @click.stop.prevent="updateRange(-c12n.step, Number(modelValue) > c12n.min)"
+          :readonly="Number(modelValue) === c12n.min"
           :is-pending="false"
           buttonText="Step down"
           theme="ghost"
@@ -26,8 +26,8 @@
       <template v-if="hasRightContent" #right>
         <InputButtonCore
           type="button"
-          @click.stop.prevent="updateRange(step, Number(modelValue.data[name]) < max)"
-          :readonly="Number(modelValue.data[name]) === max"
+          @click.stop.prevent="updateRange(c12n.step, Number(modelValue) < c12n.max)"
+          :readonly="Number(modelValue) === c12n.max"
           :is-pending="false"
           buttonText="Step up"
           theme="ghost"
@@ -45,42 +45,13 @@
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
 
-import type { InpuTextC12, IFormFieldC12, IFormData } from '@/types/types.forms';
+import type { C12nInputRange, IFormFieldC12, IFormData } from '@/types/types.forms';
 // import { validationConfig } from '@/components/forms/c12/validation-patterns';
 
-const props = defineProps({
-  id: {
-    // type: String as PropType<string>,
-    type: String,
+const { c12n, theme, size, weight } = defineProps({
+  c12n: {
+    type: Object as PropType<C12nInputRange>,
     required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  required: {
-    type: Boolean,
-    value: false,
-  },
-  min: {
-    type: Number,
-    default: 0,
-  },
-  max: {
-    type: Number,
-    default: 100,
-  },
-  step: {
-    type: Number,
-    default: 1,
-  },
-  c12: {
-    type: Object as PropType<InpuTextC12>,
-    required: true,
-  },
-  styleClassPassthrough: {
-    type: String,
-    default: '',
   },
   theme: {
     type: String as PropType<string>,
@@ -111,18 +82,11 @@ const hasDataList = computed(() => slots.datalist !== undefined);
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
 
-const modelValue = defineModel() as Ref<IFormData>;
-
-const name = computed(() => {
-  return props.name !== null ? props.name : props.id;
-});
-const fieldHasError = computed(() => {
-  return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
-});
+const modelValue = defineModel<number | readonly number[]>();
 
 const updateRange = (step: number, withinRangeLimit: boolean) => {
   if (withinRangeLimit) {
-    modelValue.value.data[name.value] = Number(modelValue.value.data[name.value]) + step;
+    modelValue.value = (Number(modelValue.value) + step) as number;
   }
 };
 </script>

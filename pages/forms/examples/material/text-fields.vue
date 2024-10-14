@@ -107,6 +107,48 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
+                        <InputRangeDefault
+                          :c12n="{
+                            id: 'score',
+                            name: 'score',
+                            label: 'Score between 0 & 100',
+                            min: 0,
+                            max: 100,
+                            step: 10,
+                            placeholder: 'eg. What\'s your score?',
+                            errorMessage: formErrors?.score?._errors[0] ?? '',
+                            fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.score),
+                            required: true,
+                            styleClassPassthrough: ['style-1', 'style-2'],
+                            deepCssClassPassthrough: ['deep-bath', 'deep-bristol'],
+                          }"
+                          v-model.number="state.score"
+                          theme="secondary"
+                        >
+                          <template #description>
+                            <p class="label-description">This is a description of what the user is required to do</p>
+                          </template>
+                          <template #datalist>
+                            <datalist class="input-range-datalist" id="score-datalist">
+                              <option value="0" label="Rubbish!"></option>
+                              <option value="25" label="Below par"></option>
+                              <option value="50" label="Average"></option>
+                              <option value="75" label="Quite good"></option>
+                              <option value="100" label="Excellent"></option>
+                            </datalist>
+                          </template>
+                          <template #left>
+                            <Icon name="gridicons:minus-small" class="icon" />
+                          </template>
+                          <template #right>
+                            <Icon name="gridicons:plus-small" class="icon" />
+                          </template>
+                        </InputRangeDefault>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
                         <InputButtonSubmit
                           type="button"
                           @click.stop.prevent="submitForm()"
@@ -193,13 +235,13 @@ const formSchema = z
       .max(255, 'Username is too long'),
     password: z.string().trim().min(8, 'Password is too short').max(25, 'Password is too long'),
     message: z.string().trim().min(2, 'Message is too short').max(255, 'Message is too long'),
-    // score: z
-    //   .number({
-    //     required_error: 'Score is required',
-    //     invalid_type_error: 'Score must be a number',
-    //   })
-    //   .gte(0)
-    //   .lte(100),
+    score: z
+      .number({
+        required_error: 'Score is required',
+        invalid_type_error: 'Score must be a number',
+      })
+      .gte(0)
+      .lte(100),
     // cities: z.array(z.string()).min(1),
     // countries: z.array(z.string()).min(1).max(3),
     // title: z.array(z.string()).nonempty(),
@@ -210,7 +252,7 @@ const formSchema = z
     username: true,
     password: true,
     message: true,
-    // score: true,
+    score: true,
     // cities: true,
     // countries: true,
     // title: true,
@@ -225,7 +267,7 @@ const state = reactive({
   username: '',
   password: '',
   message: '',
-  // score: 50,
+  score: 50,
   // cities: [],
   // countries: [],
   // title: [],
@@ -284,11 +326,6 @@ watch(
   },
   { deep: true }
 );
-
-// onMounted(() => {
-//   console.log('mounted');
-//   initFormFieldsC12();
-// });
 </script>
 
 <style lang="css">

@@ -124,7 +124,8 @@ const useZodValidation = (formSchema: any) => {
   const doZodValidate = async (state: Record<string, any>, isSubmitting: boolean = false) => {
     console.log(`doZodValidate(isSubmitting: ${isSubmitting})`);
     if (isSubmitting) {
-      await updatePreviousValues(state);
+      // Currently updating all previousValues on submit, commented out for now
+      // await updatePreviousValues(state);
     }
     const valid = formSchema.safeParse(toRaw(state));
     if (!valid.success) {

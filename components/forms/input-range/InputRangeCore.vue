@@ -7,15 +7,15 @@
     <div class="input-range-container">
       <input
         type="range"
-        :id
-        :name
-        :required
-        :min
-        :max
-        :step
-        :list="hasDataList ? name + '-datalist' : ''"
-        :class="['input-range-core', `input-range--${theme}`, `input-range--${size}`, `input-range--${weight}`, styleClassPassthrough]"
-        v-model="modelValue.data[name]"
+        :id="c12n.id"
+        :name="c12n.name"
+        :required="c12n.required"
+        :min="c12n.min"
+        :max="c12n.max"
+        :step="c12n.step"
+        :list="hasDataList ? c12n.name + '-datalist' : ''"
+        :class="['input-range-core', `input-range--${theme}`, `input-range--${size}`, `input-range--${weight}`, c12n.styleClassPassthrough]"
+        v-model="modelValue"
         ref="inputField"
       />
 
@@ -32,40 +32,11 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-import type { InpuTextC12, IFormFieldC12, IFormData } from '@/types/types.forms';
-const props = defineProps({
-  id: {
-    // type: String as PropType<string>,
-    type: String,
+import type { C12nInputRange, IFormFieldC12, IFormData } from '@/types/types.forms';
+const { c12n, theme, size, weight } = defineProps({
+  c12n: {
+    type: Object as PropType<C12nInputRange>,
     required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  required: {
-    type: Boolean,
-    value: false,
-  },
-  min: {
-    type: Number,
-    default: 0,
-  },
-  max: {
-    type: Number,
-    default: 100,
-  },
-  step: {
-    type: Number,
-    default: 1,
-  },
-  c12: {
-    type: Object as PropType<InpuTextC12>,
-    required: true,
-  },
-  styleClassPassthrough: {
-    type: String,
-    default: '',
   },
   theme: {
     type: String as PropType<string>,
@@ -95,61 +66,7 @@ const hasDataList = computed(() => slots.datalist !== undefined);
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
 
-const modelValue = defineModel() as Ref<IFormData>;
-
-const name = computed(() => {
-  return props.name !== null ? props.name : props.id;
-});
-
-const inputField = ref<HTMLInputElement | null>(null);
-
-const formFieldC12 = <IFormFieldC12>{
-  label: props.c12.label,
-  placeholder: props.c12.placeholder,
-  errorMessage: props.c12.errorMessage,
-  useCustomError: false,
-  customErrors: {},
-  isValid: false,
-  isDirty: false,
-  type: 'number',
-  previousValue: null,
-};
-modelValue.value!.formFieldsC12[name.value] = formFieldC12;
-
-const { initFormFieldsC12 } = useFormControl();
-initFormFieldsC12(props.name, formFieldC12);
-
-const fieldValue = computed(() => {
-  return modelValue.value.data[name.value];
-});
-
-watch(fieldValue, () => {
-  if (!modelValue.value!.formFieldsC12[name.value].isDirty) {
-    modelValue.value!.formFieldsC12[name.value].isDirty = modelValue.value.data[name.value] !== '';
-  }
-  modelValue.value!.formFieldsC12[name.value].isValid = inputField.value?.validity.valid ?? false;
-  modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
-
-  if (modelValue.value!.formFieldsC12[name.value].useCustomError && modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue) {
-    modelValue.value!.validityState[name.value] = false;
-    modelValue.value!.formFieldsC12[name.value].isValid = false;
-    modelValue.value.displayErrorMessages = true;
-  }
-});
-
-const isValid = () => {
-  setTimeout(() => {
-    modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
-    modelValue.value!.formFieldsC12[name.value].isValid = inputField.value?.validity.valid ?? false;
-    if (!modelValue.value!.formFieldsC12[name.value].isDirty) {
-      modelValue.value!.formFieldsC12[name.value].isDirty = modelValue.value.data[name.value] !== '';
-    }
-  }, 0);
-};
-
-onMounted(() => {
-  isValid();
-});
+const modelValue = defineModel<number | readonly number[]>();
 </script>
 
 <style lang="css">
