@@ -1,18 +1,18 @@
 <template>
-  <div class="input-range-with-label" :class="[c12n.styleClassPassthrough, `theme-${theme}`, { error: c12n.fieldHasError }]">
-    <label class="input-range-label" :for="c12n.id">{{ c12n.label }}</label>
+  <div class="input-range-with-label" :class="[styleClassPassthrough, `theme-${theme}`, { error: fieldHasError }]">
+    <label class="input-range-label" :for="id">{{ label }}</label>
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
-    <InputRangeCore :c12n v-model="modelValue" :theme :size :weight>
+    <InputRangeCore v-model="modelValue" :id :name :min :max :step :theme :required :size :weight :fieldHasError>
       <template v-if="hasDataList" #datalist>
         <slot name="datalist"></slot>
       </template>
       <template v-if="hasLeftContent" #left>
         <InputButtonCore
           type="button"
-          @click.stop.prevent="updateRange(-c12n.step, Number(modelValue) > c12n.min)"
-          :readonly="Number(modelValue) === c12n.min"
+          @click.stop.prevent="updateRange(-step, Number(modelValue) > min)"
+          :readonly="Number(modelValue) === min"
           :is-pending="false"
           buttonText="Step down"
           theme="ghost"
@@ -26,8 +26,8 @@
       <template v-if="hasRightContent" #right>
         <InputButtonCore
           type="button"
-          @click.stop.prevent="updateRange(c12n.step, Number(modelValue) < c12n.max)"
-          :readonly="Number(modelValue) === c12n.max"
+          @click.stop.prevent="updateRange(step, Number(modelValue) < max)"
+          :readonly="Number(modelValue) === max"
           :is-pending="false"
           buttonText="Step up"
           theme="ghost"
@@ -45,13 +45,46 @@
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
 
-import type { C12nInputRange, IFormFieldC12, IFormData } from '@/types/types.forms';
-// import { validationConfig } from '@/components/forms/c12/validation-patterns';
-
-const { c12n, theme, size, weight } = defineProps({
-  c12n: {
-    type: Object as PropType<C12nInputRange>,
+const { id, name, label, required, min, max, step, theme, size, weight, styleClassPassthrough, fieldHasError } = defineProps({
+  id: {
+    type: String,
     required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  label: {
+    type: String,
+    required: true,
+  },
+  min: {
+    type: Number,
+    required: true,
+  },
+  max: {
+    type: Number,
+    required: true,
+  },
+  step: {
+    type: Number,
+    default: 1,
+  },
+  placeholder: {
+    type: String,
+    default: '',
+  },
+  errorMessage: {
+    type: String,
+    required: true,
+  },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
+  required: {
+    type: Boolean,
+    default: false,
   },
   theme: {
     type: String as PropType<string>,
@@ -73,6 +106,14 @@ const { c12n, theme, size, weight } = defineProps({
     validator(value: string) {
       return propValidators.weight.includes(value);
     },
+  },
+  styleClassPassthrough: {
+    type: String,
+    default: '',
+  },
+  deepCssClassPassthrough: {
+    type: String,
+    default: '',
   },
 });
 

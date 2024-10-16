@@ -7,14 +7,14 @@
     <div class="input-range-container">
       <input
         type="range"
-        :id="c12n.id"
-        :name="c12n.name"
-        :required="c12n.required"
-        :min="c12n.min"
-        :max="c12n.max"
-        :step="c12n.step"
-        :list="hasDataList ? c12n.name + '-datalist' : ''"
-        :class="['input-range-core', `input-range--${theme}`, `input-range--${size}`, `input-range--${weight}`, c12n.styleClassPassthrough]"
+        :id
+        :name
+        :required
+        :min
+        :max
+        :step
+        :list="hasDataList ? name + '-datalist' : ''"
+        :class="['input-range-core', `input-range--${theme}`, `input-range--${size}`, `input-range--${weight}`, styleClassPassthrough]"
         v-model="modelValue"
         ref="inputField"
       />
@@ -32,11 +32,34 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-import type { C12nInputRange, IFormFieldC12, IFormData } from '@/types/types.forms';
-const { c12n, theme, size, weight } = defineProps({
-  c12n: {
-    type: Object as PropType<C12nInputRange>,
+const { id, name, required, min, max, step, theme, size, weight, styleClassPassthrough } = defineProps({
+  id: {
+    type: String,
     required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  min: {
+    type: Number,
+    required: true,
+  },
+  max: {
+    type: Number,
+    required: true,
+  },
+  step: {
+    type: Number,
+    default: 1,
+  },
+  placeholder: {
+    type: String,
+    default: '',
+  },
+  required: {
+    type: Boolean,
+    default: false,
   },
   theme: {
     type: String as PropType<string>,
@@ -58,6 +81,14 @@ const { c12n, theme, size, weight } = defineProps({
     validator(value: string) {
       return propValidators.weight.includes(value);
     },
+  },
+  styleClassPassthrough: {
+    type: String,
+    default: '',
+  },
+  deepCssClassPassthrough: {
+    type: String,
+    default: '',
   },
 });
 

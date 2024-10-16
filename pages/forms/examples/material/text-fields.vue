@@ -108,20 +108,18 @@
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
                         <InputRangeDefault
-                          :c12n="{
-                            id: 'score',
-                            name: 'score',
-                            label: 'Score between 0 & 100',
-                            min: 0,
-                            max: 100,
-                            step: 10,
-                            placeholder: 'eg. What\'s your score?',
-                            errorMessage: formErrors?.score?._errors[0] ?? '',
-                            fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.score),
-                            required: true,
-                            styleClassPassthrough: ['style-1', 'style-2'],
-                            deepCssClassPassthrough: ['deep-bath', 'deep-bristol'],
-                          }"
+                          id="score"
+                          name="score"
+                          label="Score between 0 & 100"
+                          :min="0"
+                          :max="100"
+                          :step="10"
+                          placeholder="eg. What\'s your score?"
+                          :errorMessage="formErrors?.score?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.score)"
+                          :required="true"
+                          styleClassPassthrough="['style-1', 'style-2']"
+                          deepCssClassPassthrough="['deep-bath', 'deep-bristol']"
                           v-model.number="state.score"
                           theme="secondary"
                         >
