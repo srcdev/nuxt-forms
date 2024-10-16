@@ -147,6 +147,32 @@
                       </template>
                     </FormField>
 
+                    <FormField v-if="citiesData !== null" width="wide" :has-gutter="false">
+                      <template #default>
+                        <MultipleCheckboxes
+                          :c12n="{
+                            id: 'cities',
+                            name: 'cities',
+                            legend: 'Choose a location',
+                            required: true,
+                            label: 'Check all Cities you like',
+                            placeholder: 'eg. Type something here',
+                            errorMessage: formErrors?.cities?._errors[0] ?? '',
+                            fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.cities),
+                          }"
+                          v-model="state.cities"
+                          v-model:fieldData="citiesData"
+                          size="normal"
+                          checkbox-style="check"
+                          checkbox-appearance="with-decorator"
+                        >
+                          <template #description>
+                            <p class="label-description">This is description: optionsLayout = 'equal-widths'</p>
+                          </template>
+                        </MultipleCheckboxes>
+                      </template>
+                    </FormField>
+
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
                         <InputButtonSubmit
@@ -242,7 +268,7 @@ const formSchema = z
       })
       .gte(0)
       .lte(100),
-    // cities: z.array(z.string()).min(1),
+    cities: z.array(z.string()).min(1, 'Please select at least one city'),
     // countries: z.array(z.string()).min(1).max(3),
     // title: z.array(z.string()).nonempty(),
     // terms: z.boolean().refine((val) => val === true, { message: 'You must accept our terms' }),
@@ -253,7 +279,7 @@ const formSchema = z
     password: true,
     message: true,
     score: true,
-    // cities: true,
+    cities: true,
     // countries: true,
     // title: true,
     // terms: true,
@@ -268,7 +294,7 @@ const state = reactive({
   password: '',
   message: '',
   score: 50,
-  // cities: [],
+  cities: [],
   // countries: [],
   // title: [],
   // terms: false,

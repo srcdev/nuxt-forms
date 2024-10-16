@@ -141,6 +141,29 @@ export interface C12nInputText {
   styleClassPassthrough: string[];
 }
 
+export interface C12nMultipleCheckboxes {
+  id: string;
+  name: string;
+  label: string;
+  legend: string;
+  placeholder: string;
+  errorMessage: string;
+  fieldHasError: boolean;
+  required: boolean;
+  styleClassPassthrough: string[];
+}
+
+export interface C12nInputCheckboxWithLabel {
+  id: string;
+  name: string;
+  required: string;
+  label: string;
+  placeholder: string;
+  errorMessage: string | string[];
+  fieldHasError: boolean;
+  styleClassPassthrough: string[];
+}
+
 export interface C12nInputRange {
   id: string;
   name: string;

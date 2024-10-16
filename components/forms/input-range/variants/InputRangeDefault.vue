@@ -107,10 +107,10 @@ const updateRange = (step: number, withinRangeLimit: boolean) => {
   }
 
   .input-range-label {
-    color: var(--_form-theme);
+    /* color: var(--_form-theme); */
     display: block;
     font-family: var(--font-family);
-    font-size: 18px;
+    /* font-size: 18px; */
     font-weight: 500;
     margin-bottom: 12px;
 
@@ -123,7 +123,7 @@ const updateRange = (step: number, withinRangeLimit: boolean) => {
     font-family: var(--font-family);
     font-size: 16px;
     margin-top: 12px;
-    color: var(--theme-form-secondary);
+    /* color: var(--theme-form-secondary); */
   }
 }
 </style>

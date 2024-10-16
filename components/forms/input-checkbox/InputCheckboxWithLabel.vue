@@ -1,32 +1,30 @@
 <template>
-  <div class="input-checkbox-with-label" :class="[styleClassPassthrough, `theme-${theme}`, { error: fieldHasError }]">
-    <InputCheckboxCore :id :name :required :c12 v-model="modelValue" :theme :size :trueValue :falseValue :checkboxAppearance :checkboxStyle />
-    <label class="input-checkbox-label" :for="id">{{ c12.label }}</label>
+  <div class="input-checkbox-with-label" :class="[c12n.styleClassPassthrough, { error: c12n.fieldHasError }]">
+    <InputCheckboxCore
+      :id="c12n.id"
+      :name="c12n.name"
+      :required="c12n.required"
+      v-model="modelValue"
+      :size
+      :trueValue
+      :falseValue
+      :checkboxAppearance
+      :checkboxStyle
+      :fieldHasError="c12n.fieldHasError"
+    />
+    <label class="input-checkbox-label" :for="c12n.id">{{ c12n.label }}</label>
   </div>
 </template>
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-import type { InpuTextC12, IFormFieldC12, IFormData } from '@/types/types.forms';
+import type { C12nInputCheckboxWithLabel, IFormFieldC12, IFormData } from '@/types/types.forms';
 // import { validationConfig } from '@/components/forms/c12/validation-patterns';
 
-const props = defineProps({
-  id: {
-    // type: String as PropType<string>,
-    type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  required: {
-    type: Boolean,
-    value: false,
-  },
-  c12: {
-    type: Object as PropType<InpuTextC12>,
+const { c12n, trueValue, falseValue, multipleOptions, size, checkboxAppearance, checkboxStyle } = defineProps({
+  c12n: {
+    type: Object as PropType<C12nInputCheckboxWithLabel>,
     required: true,
   },
   trueValue: {
@@ -40,17 +38,6 @@ const props = defineProps({
   multipleOptions: {
     type: Boolean,
     default: false,
-  },
-  styleClassPassthrough: {
-    type: String,
-    default: '',
-  },
-  theme: {
-    type: String as PropType<string>,
-    default: 'primary',
-    validator(value: string) {
-      return propValidators.theme.includes(value);
-    },
   },
   size: {
     type: String as PropType<string>,
@@ -73,20 +60,16 @@ const props = defineProps({
       return propValidators.checkboxStyle.includes(value);
     },
   },
-  fieldHasError: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 const slots = useSlots();
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
 
-const modelValue = defineModel() as Ref<IFormData>;
-const name = computed(() => {
-  return props.name !== null ? props.name : props.id;
-});
+const modelValue = defineModel();
+// const name = computed(() => {
+//   return props.name !== null ? props.name : props.id;
+// });
 // const fieldHasError = computed(() => {
 //   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
 // });
@@ -102,16 +85,12 @@ const name = computed(() => {
   display: flex;
   align-items: center;
 
-  &.theme-secondary {
-    --_form-theme: var(--theme-form-secondary);
-  }
-
   &.error {
     --_form-theme: var(--theme-error);
   }
 
   .input-checkbox-label {
-    color: var(--_form-theme);
+    /* color: var(--_form-theme); */
     font-family: var(--font-family);
     font-size: 14px;
     font-weight: 500;
