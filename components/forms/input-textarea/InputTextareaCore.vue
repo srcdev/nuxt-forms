@@ -26,8 +26,6 @@
 </template>
 
 <script setup lang="ts">
-import type { C12nInputTextCore, IFormFieldC12, IFormData, IFieldsInitialState, TFieldsInitialState } from '@/types/types.forms';
-
 const { maxlength, id, name, placeholder, fieldHasError, required, styleClassPassthrough } = defineProps({
   maxlength: {
     type: Number,

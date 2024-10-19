@@ -21,13 +21,8 @@
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
-
-import type { InpuTextC12, IFormFieldC12, IFormData } from '@/types/types.forms';
-// import { validationConfig } from '@/components/forms/c12/validation-patterns';
-
 const { id, name, required, trueValue, falseValue, multipleOptions, styleClassPassthrough, size, checkboxAppearance, checkboxStyle, fieldHasError } = defineProps({
   id: {
-    // type: String as PropType<string>,
     type: String,
     required: true,
   },
