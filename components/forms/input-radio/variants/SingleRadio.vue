@@ -4,7 +4,7 @@
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
-    <InputError :errorMessaging :fieldHasError :id="name" :isDetached="true" />
+    <InputError :errorMessage :fieldHasError :id="name" :isDetached="true" />
     <InputRadioWithLabel :id :name :required :c12 v-model="modelValue" :theme :size :radioAppearance :fieldHasError />
   </fieldset>
 </template>
@@ -91,7 +91,7 @@ const name = computed(() => {
 //   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
 // });
 
-const errorMessaging = computed(() => {
+const errorMessage = computed(() => {
   if (
     typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined' &&
     modelValue.value!.formFieldsC12[props.name].useCustomError &&

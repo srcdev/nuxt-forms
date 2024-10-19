@@ -1,5 +1,5 @@
 <template>
-  <InputTextWithLabel v-model="modelValue" :c12n>
+  <InputTextWithLabel v-model="modelValue" :type="inputType" :id :name :placeholder :label :errorMessage :fieldHasError :required :styleClassPassthrough>
     <template #right>
       <InputButtonCore
         type="button"
@@ -8,8 +8,8 @@
         :buttonText
         theme="ghost"
         size="x-small"
-        @focusin="updateFocus(c12n.name, true)"
-        @focusout="updateFocus(c12n.name, false)"
+        @focusin="updateFocus(name, true)"
+        @focusout="updateFocus(name, false)"
       >
         <template #iconOnly>
           <Icon v-if="displayPassword" name="radix-icons:eye-none" class="icon" />
@@ -23,10 +23,42 @@
 <script setup lang="ts">
 import type { InputTextWithLabel, IFormFieldC12, IFormData, IFieldsInitialState, TFieldsInitialState } from '@/types/types.forms';
 
-const { c12n } = defineProps({
-  c12n: {
-    type: Object as PropType<InputTextWithLabel>,
+const { type, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough } = defineProps({
+  type: {
+    type: String,
+    default: 'password',
+  },
+  id: {
+    type: String,
     required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  placeholder: {
+    type: String,
+    default: '',
+  },
+  label: {
+    type: String,
+    required: true,
+  },
+  errorMessage: {
+    type: String,
+    required: true,
+  },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  styleClassPassthrough: {
+    type: Array as PropType<string[]>,
+    default: () => [],
   },
 });
 
@@ -37,9 +69,11 @@ const updateFocus = (name: string, isFocused: boolean) => {
   // modelValue.value.focusedField = isFocused ? name : '';
 };
 
+const inputType = ref(type);
+
 const displayPassword = ref(false);
 const buttonText = computed(() => {
-  c12n.type = displayPassword.value ? 'text' : 'password';
+  inputType.value = displayPassword.value ? 'text' : 'password';
   return displayPassword.value ? 'Hide password' : 'Show password';
 });
 const toggleDisplayPassword = () => {

@@ -7,10 +7,10 @@
         </div>
         <div class="message" :id="`${id}-error-message`">
           <ul v-if="isArray" class="message-list">
-            <li v-for="(message, index) in errorMessaging" :key="index" class="message-list-item">{{ message }}</li>
+            <li v-for="(message, index) in errorMessage" :key="index" class="message-list-item">{{ message }}</li>
           </ul>
           <span v-else class="message-single">
-            {{ errorMessaging }}
+            {{ errorMessage }}
           </span>
         </div>
       </div>
@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 const props = defineProps({
-  errorMessaging: {
+  errorMessage: {
     type: [Object, String],
     required: true,
   },
@@ -47,7 +47,7 @@ const props = defineProps({
 });
 
 const isArray = computed(() => {
-  return Array.isArray(props.errorMessaging);
+  return Array.isArray(props.errorMessage);
 });
 </script>
 

@@ -1,8 +1,8 @@
 <template>
   <div class="input-text-with-label" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
-    <label :for="c12n.id" class="input-text-label">{{ c12n.label }}</label>
+    <label :for="id" class="input-text-label">{{ label }}</label>
 
-    <InputTextCore v-model="modelValue" v-model:isDirty="isDirty" v-model:isActive="isActive" :c12n :styleClassPassthrough="deepCssClassPassthrough">
+    <InputTextCore v-model="modelValue" v-model:isDirty="isDirty" v-model:isActive="isActive" :type :id :name :placeholder :label :errorMessage :fieldHasError :required :styleClassPassthrough>
       <template v-if="hasLeftSlot" #left>
         <slot name="left"></slot>
       </template>
@@ -10,17 +10,49 @@
         <slot name="right"></slot>
       </template>
     </InputTextCore>
-    <InputError :errorMessaging="c12n.errorMessage" :fieldHasError="c12n.fieldHasError" :id="c12n.id" :isDetached="false" />
+    <InputError :errorMessage="errorMessage" :fieldHasError :id :isDetached="false" />
   </div>
 </template>
 
 <script setup lang="ts">
 import type { InputTextWithLabel, IFormFieldC12, IFormData, IFieldsInitialState, TFieldsInitialState } from '@/types/types.forms';
 
-const { c12n } = defineProps({
-  c12n: {
-    type: Object as PropType<InputTextWithLabel>,
+const { type, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough } = defineProps({
+  type: {
+    type: String,
     required: true,
+  },
+  id: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  placeholder: {
+    type: String,
+    default: '',
+  },
+  label: {
+    type: String,
+    required: true,
+  },
+  errorMessage: {
+    type: String,
+    required: true,
+  },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  styleClassPassthrough: {
+    type: Array as PropType<string[]>,
+    default: () => [],
   },
 });
 
@@ -32,8 +64,7 @@ const modelValue = defineModel();
 const isActive = ref<boolean>(false);
 const isDirty = ref<boolean>(false);
 
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(c12n.styleClassPassthrough);
-const deepCssClassPassthrough = ref(c12n.deepCssClassPassthrough);
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 const testDirty = () => {
   const watchValue = modelValue.value ?? '';

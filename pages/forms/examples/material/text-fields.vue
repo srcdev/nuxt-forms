@@ -17,18 +17,15 @@
                       <template #default>
                         <InputTextWithLabel
                           v-model="state.emailAddress"
-                          :c12n="{
-                            type: 'email',
-                            id: 'emailAddress',
-                            name: 'emailAddress',
-                            placeholder: 'eg. name@domain.com',
-                            label: 'Email address',
-                            errorMessage: formErrors?.emailAddress?._errors[0] ?? '',
-                            fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress),
-                            required: true,
-                            styleClassPassthrough: ['style-1', 'style-2'],
-                            deepCssClassPassthrough: ['deep-bath', 'deep-bristol'],
-                          }"
+                          type="email"
+                          id="emailAddress"
+                          name="emailAddress"
+                          placeholder="eg. name@domain.com"
+                          label="Email address"
+                          :errorMessage="formErrors?.emailAddress?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress)"
+                          :required="true"
+                          :styleClassPassthrough="['style-1', 'style-2']"
                         >
                           <template #left>
                             <Icon name="radix-icons:envelope-closed" class="icon" />
@@ -41,18 +38,15 @@
                       <template #default>
                         <InputTextWithLabel
                           v-model="state.username"
-                          :c12n="{
-                            type: 'text',
-                            id: 'username',
-                            name: 'username',
-                            placeholder: 'eg. name@domain.com',
-                            label: 'Username',
-                            errorMessage: formErrors?.username?._errors[0] ?? '',
-                            fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.username),
-                            required: true,
-                            styleClassPassthrough: ['style-1', 'style-2'],
-                            deepCssClassPassthrough: ['deep-bath', 'deep-bristol'],
-                          }"
+                          type="text"
+                          id="username"
+                          name="username"
+                          placeholder="eg. name@domain.com"
+                          label="Username"
+                          :errorMessage="formErrors?.username?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.username)"
+                          :required="true"
+                          :styleClassPassthrough="['style-1', 'style-2']"
                         >
                           <template #left>
                             <Icon name="radix-icons:person" class="icon" />
@@ -65,18 +59,14 @@
                       <template #default>
                         <InputPasswordWithLabel
                           v-model="state.password"
-                          :c12n="{
-                            type: 'password',
-                            id: 'password',
-                            name: 'password',
-                            placeholder: 'eg. a mixure of numbers and letters',
-                            label: 'Password',
-                            errorMessage: formErrors?.password?._errors[0] ?? '',
-                            fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.password),
-                            required: true,
-                            styleClassPassthrough: ['style-1', 'style-2'],
-                            deepCssClassPassthrough: ['deep-bath', 'deep-bristol'],
-                          }"
+                          id="password"
+                          name="password"
+                          placeholder="eg. a mixure of numbers and letters"
+                          label="Password"
+                          :errorMessage="formErrors?.password?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.password)"
+                          :required="true"
+                          :styleClassPassthrough="['style-1', 'style-2']"
                         >
                           <template #right>
                             <Icon name="radix-icons:eye-open" class="icon" />
@@ -98,7 +88,6 @@
                             fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.message),
                             required: true,
                             styleClassPassthrough: ['style-1', 'style-2'],
-                            deepCssClassPassthrough: ['deep-bath', 'deep-bristol'],
                           }"
                         >
                         </InputTextareaWithLabel>
@@ -119,7 +108,6 @@
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.score)"
                           :required="true"
                           :styleClassPassthrough="['style-1', 'style-2']"
-                          deepCssClassPassthrough="['deep-bath', 'deep-bristol']"
                           v-model.number="state.score"
                           theme="secondary"
                         >

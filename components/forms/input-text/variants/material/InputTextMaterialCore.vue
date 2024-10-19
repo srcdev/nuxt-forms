@@ -6,7 +6,7 @@
     <div class="input-text-container" :class="[{ active: isFocused }, { error: fieldHasError }, { dirty: fieldIsDirty }, { compact: compact }]">
       <slot name="input"></slot>
     </div>
-    <InputError :errorMessaging :fieldHasError :id :isDetached="false" />
+    <InputError :errorMessage :fieldHasError :id :isDetached="false" />
   </div>
 </template>
 
@@ -74,7 +74,7 @@ const props = defineProps({
   },
 });
 
-const errorMessaging = computed(() => {
+const errorMessage = computed(() => {
   if (
     typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined' &&
     modelValue.value!.formFieldsC12[props.name].useCustomError &&
@@ -249,7 +249,7 @@ const fieldIsDirty = computed(() => {
       &.dirty {
         opacity: 1;
       } */
-      
+
       &::placeholder,
       &:-ms-input-placeholder,
       &::-moz-placeholder,
