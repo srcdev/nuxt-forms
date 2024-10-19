@@ -10,6 +10,7 @@
       :id
       :name
       :required
+      :maxlength
       :class="['input-text-core', 'text-normal', elementClasses, { dirty: isDirty }, { active: isActive }]"
       v-model="modelValue"
       ref="inputField"
@@ -28,10 +29,14 @@
 <script setup lang="ts">
 import type { C12nInputTextCore, IFormFieldC12, IFormData, IFieldsInitialState, TFieldsInitialState } from '@/types/types.forms';
 
-const { type, id, name, placeholder, required, fieldHasError, styleClassPassthrough } = defineProps({
+const { type, maxlength, id, name, placeholder, required, fieldHasError, styleClassPassthrough } = defineProps({
   type: {
     type: String,
     required: true,
+  },
+  maxlength: {
+    type: Number,
+    default: 255,
   },
   id: {
     type: String,

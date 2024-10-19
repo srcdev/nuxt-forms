@@ -1,19 +1,20 @@
 <template>
-  <div class="input-textarea-wrapper" :class="[{ dirty: isDirty }, { active: isActive }, { error: c12n.fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]">
+  <div class="input-textarea-wrapper" :class="[{ dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]">
     <span v-if="hasLeftSlot" class="slot left-slot">
       <slot name="left"></slot>
     </span>
 
     <textarea
-      :placeholder="c12n.placeholder ?? ''"
-      :id="c12n.id"
-      :name="c12n.name"
-      :required="c12n.required"
+      :maxlength
+      :placeholder
+      :id
+      :name
+      :required
       :class="['input-text-core', 'text-normal', elementClasses, { dirty: isDirty }, { active: isActive }]"
       v-model="modelValue"
       ref="inputField"
-      :aria-invalid="c12n.fieldHasError"
-      :aria-describedby="`${c12n.id}-error-message`"
+      :aria-invalid="fieldHasError"
+      :aria-describedby="`${id}-error-message`"
       @focusin="updateFocus(true)"
       @focusout="updateFocus(false)"
     ></textarea>
@@ -27,10 +28,30 @@
 <script setup lang="ts">
 import type { C12nInputTextCore, IFormFieldC12, IFormData, IFieldsInitialState, TFieldsInitialState } from '@/types/types.forms';
 
-const { c12n, styleClassPassthrough } = defineProps({
-  c12n: {
-    type: Object as PropType<C12nInputTextCore>,
+const { maxlength, id, name, placeholder, fieldHasError, required, styleClassPassthrough } = defineProps({
+  maxlength: {
+    type: Number,
+    default: 255,
+  },
+  id: {
+    type: String,
     required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  placeholder: {
+    type: String,
+    default: '',
+  },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
+  required: {
+    type: Boolean,
+    default: false,
   },
   styleClassPassthrough: {
     type: Array as PropType<string[]>,

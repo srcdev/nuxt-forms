@@ -2,7 +2,21 @@
   <div class="input-text-with-label" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
     <label :for="id" class="input-text-label">{{ label }}</label>
 
-    <InputTextCore v-model="modelValue" v-model:isDirty="isDirty" v-model:isActive="isActive" :type :id :name :placeholder :label :errorMessage :fieldHasError :required :styleClassPassthrough>
+    <InputTextCore
+      v-model="modelValue"
+      v-model:isDirty="isDirty"
+      v-model:isActive="isActive"
+      :type
+      :maxlength
+      :id
+      :name
+      :placeholder
+      :label
+      :errorMessage
+      :fieldHasError
+      :required
+      :styleClassPassthrough
+    >
       <template v-if="hasLeftSlot" #left>
         <slot name="left"></slot>
       </template>
@@ -17,7 +31,11 @@
 <script setup lang="ts">
 import type { InputTextWithLabel, IFormFieldC12, IFormData, IFieldsInitialState, TFieldsInitialState } from '@/types/types.forms';
 
-const { type, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough } = defineProps({
+const { type, maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough } = defineProps({
+  maxlength: {
+    type: Number,
+    default: 255,
+  },
   type: {
     type: String,
     required: true,

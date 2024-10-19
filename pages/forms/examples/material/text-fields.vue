@@ -18,6 +18,7 @@
                         <InputTextWithLabel
                           v-model="state.emailAddress"
                           type="email"
+                          :maxlength="fieldMaxLength('email')"
                           id="emailAddress"
                           name="emailAddress"
                           placeholder="eg. name@domain.com"
@@ -39,6 +40,7 @@
                         <InputTextWithLabel
                           v-model="state.username"
                           type="text"
+                          :maxlength="fieldMaxLength('username')"
                           id="username"
                           name="username"
                           placeholder="eg. name@domain.com"
@@ -59,6 +61,7 @@
                       <template #default>
                         <InputPasswordWithLabel
                           v-model="state.password"
+                          :maxlength="fieldMaxLength('password')"
                           id="password"
                           name="password"
                           placeholder="eg. a mixure of numbers and letters"
@@ -79,16 +82,15 @@
                       <template #default>
                         <InputTextareaWithLabel
                           v-model="state.message"
-                          :c12n="{
-                            id: 'message',
-                            name: 'message',
-                            placeholder: 'Type your message here',
-                            label: 'Your mesage',
-                            errorMessage: formErrors?.message?._errors[0] ?? '',
-                            fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.message),
-                            required: true,
-                            styleClassPassthrough: ['style-1', 'style-2'],
-                          }"
+                          :maxlength="fieldMaxLength('message')"
+                          id="message"
+                          name="message"
+                          placeholder="Type your message here"
+                          label="Your mesage"
+                          :errorMessage="formErrors?.message?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.message)"
+                          :required="true"
+                          :styleClassPassthrough="['style-1', 'style-2']"
                         >
                         </InputTextareaWithLabel>
                       </template>
@@ -242,7 +244,7 @@ const formSchema = z
       })
       .trim()
       .min(2, 'Username is too short')
-      .max(255, 'Username is too long'),
+      .max(10, 'Username is too long'),
     password: z.string().trim().min(8, 'Password is too short').max(25, 'Password is too long'),
     message: z.string().trim().min(2, 'Message is too short').max(255, 'Message is too long'),
     score: z
@@ -284,7 +286,7 @@ const state = reactive({
   // terms: false,
 });
 
-const { initZodForm, zodFormControl, zodErrorObj, pushApiErrorsToFormErrors, doZodValidate } = useZodValidation(formSchema);
+const { initZodForm, zodFormControl, zodErrorObj, pushApiErrorsToFormErrors, doZodValidate, fieldMaxLength } = useZodValidation(formSchema);
 
 initZodForm();
 

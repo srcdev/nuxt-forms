@@ -140,12 +140,21 @@ const useZodValidation = (formSchema: any) => {
     return valid.success;
   };
 
+  const fieldMaxLength = (name: string) => {
+    const fieldSchema = formSchema.shape[name];
+    if (fieldSchema instanceof z.ZodString) {
+      return fieldSchema._def.checks.find((check) => check.kind === 'max')?.value || null;
+    }
+    return null;
+  };
+
   return {
     initZodForm,
     zodFormControl,
     zodErrorObj,
     pushApiErrorsToFormErrors,
     doZodValidate,
+    fieldMaxLength,
   };
 };
 

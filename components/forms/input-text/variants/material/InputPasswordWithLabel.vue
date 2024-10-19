@@ -1,5 +1,5 @@
 <template>
-  <InputTextWithLabel v-model="modelValue" :type="inputType" :id :name :placeholder :label :errorMessage :fieldHasError :required :styleClassPassthrough>
+  <InputTextWithLabel v-model="modelValue" :type="inputType" :maxlength :id :name :placeholder :label :errorMessage :fieldHasError :required :styleClassPassthrough>
     <template #right>
       <InputButtonCore
         type="button"
@@ -23,10 +23,14 @@
 <script setup lang="ts">
 import type { InputTextWithLabel, IFormFieldC12, IFormData, IFieldsInitialState, TFieldsInitialState } from '@/types/types.forms';
 
-const { type, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough } = defineProps({
+const { type, maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough } = defineProps({
   type: {
     type: String,
     default: 'password',
+  },
+  maxlength: {
+    type: Number,
+    default: 255,
   },
   id: {
     type: String,
