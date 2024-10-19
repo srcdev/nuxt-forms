@@ -1,28 +1,13 @@
 <template>
-  <fieldset class="multiple-checkboxes-fieldset" :class="[{ error: c12n.fieldHasError }]">
-    <legend :class="[{ 'has-description': hasDescription }]">{{ c12n.legend }}</legend>
+  <fieldset class="multiple-checkboxes-fieldset" :class="[{ error: fieldHasError }]">
+    <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
-    <InputError :errorMessaging="c12n.errorMessage" :fieldHasError="c12n.fieldHasError" :id="c12n.name" :isDetached="true" />
+    <InputError :errorMessaging="errorMessage" :fieldHasError :id="name" :isDetached="true" />
     <div class="multiple-checkboxes-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
-        <InputCheckboxWithLabel
-          :c12n="{
-            id: item.value,
-            name: c12n.name,
-            required: c12n.required,
-            label: item.label,
-            placeholder: 'eg. Type something here',
-            errorMessage: 'Please accept our terms and conditions',
-            fieldHasError: c12n.fieldHasError,
-          }"
-          v-model="modelValue"
-          :true-value="item.value"
-          :size
-          :checkboxAppearance
-          :checkboxStyle
-        />
+        <InputCheckboxWithLabel :id="item.value" :name :required :label="item.label" :fieldHasError v-model="modelValue" :true-value="item.value" :size :checkboxAppearance :checkboxStyle />
       </template>
     </div>
   </fieldset>
@@ -34,10 +19,38 @@ import type { IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
 
 import type { C12nMultipleCheckboxes, IFormFieldC12, IFormData } from '@/types/types.forms';
 
-const { c12n, size, optionsLayout, equalCols, checkboxAppearance, checkboxStyle } = defineProps({
-  c12n: {
-    type: Object as PropType<C12nMultipleCheckboxes>,
+const { id, name, legend, label, required, fieldHasError, placeholder, errorMessage, size, optionsLayout, equalCols, checkboxAppearance, checkboxStyle, styleClassPassthrough } = defineProps({
+  id: {
+    type: String,
     required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  legend: {
+    type: String,
+    required: true,
+  },
+  label: {
+    type: String,
+    required: true,
+  },
+  placeholder: {
+    type: String,
+    default: '',
+  },
+  errorMessage: {
+    type: String,
+    required: true,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
   },
   multipleOptions: {
     type: Boolean,
@@ -75,10 +88,15 @@ const { c12n, size, optionsLayout, equalCols, checkboxAppearance, checkboxStyle 
       return propValidators.checkboxStyle.includes(value);
     },
   },
+  styleClassPassthrough: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
 });
 
 const slots = useSlots();
 const hasDescription = computed(() => slots.description !== undefined);
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 const modelValue = defineModel();
 const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;

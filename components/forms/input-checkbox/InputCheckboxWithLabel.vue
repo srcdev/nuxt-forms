@@ -1,18 +1,7 @@
 <template>
-  <div class="input-checkbox-with-label" :class="[c12n.styleClassPassthrough, { error: c12n.fieldHasError }]">
-    <InputCheckboxCore
-      :id="c12n.id"
-      :name="c12n.name"
-      :required="c12n.required"
-      v-model="modelValue"
-      :size
-      :trueValue
-      :falseValue
-      :checkboxAppearance
-      :checkboxStyle
-      :fieldHasError="c12n.fieldHasError"
-    />
-    <label class="input-checkbox-label" :for="c12n.id">{{ c12n.label }}</label>
+  <div class="input-checkbox-with-label" :class="[elementClasses, { error: fieldHasError }]">
+    <InputCheckboxCore :id :name :required v-model="modelValue" :size :trueValue :falseValue :checkboxAppearance :checkboxStyle :fieldHasError />
+    <label class="input-checkbox-label" :for="id">{{ label }}</label>
   </div>
 </template>
 
@@ -22,10 +11,26 @@ import propValidators from '../c12/prop-validators';
 import type { C12nInputCheckboxWithLabel, IFormFieldC12, IFormData } from '@/types/types.forms';
 // import { validationConfig } from '@/components/forms/c12/validation-patterns';
 
-const { c12n, trueValue, falseValue, multipleOptions, size, checkboxAppearance, checkboxStyle } = defineProps({
-  c12n: {
-    type: Object as PropType<C12nInputCheckboxWithLabel>,
+const { id, name, label, required, fieldHasError, trueValue, falseValue, multipleOptions, size, checkboxAppearance, checkboxStyle, styleClassPassthrough } = defineProps({
+  id: {
+    type: String,
     required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  label: {
+    type: String,
+    required: true,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
   },
   trueValue: {
     type: [String, Number, Boolean],
@@ -60,11 +65,16 @@ const { c12n, trueValue, falseValue, multipleOptions, size, checkboxAppearance, 
       return propValidators.checkboxStyle.includes(value);
     },
   },
+  styleClassPassthrough: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
 });
 
 const slots = useSlots();
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 const modelValue = defineModel();
 // const name = computed(() => {

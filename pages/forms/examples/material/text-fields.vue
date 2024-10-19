@@ -118,7 +118,7 @@
                           :errorMessage="formErrors?.score?._errors[0] ?? ''"
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.score)"
                           :required="true"
-                          styleClassPassthrough="['style-1', 'style-2']"
+                          :styleClassPassthrough="['style-1', 'style-2']"
                           deepCssClassPassthrough="['deep-bath', 'deep-bristol']"
                           v-model.number="state.score"
                           theme="secondary"
@@ -148,16 +148,14 @@
                     <FormField v-if="citiesData !== null" width="wide" :has-gutter="false">
                       <template #default>
                         <MultipleCheckboxes
-                          :c12n="{
-                            id: 'cities',
-                            name: 'cities',
-                            legend: 'Choose a location',
-                            required: true,
-                            label: 'Check all Cities you like',
-                            placeholder: 'eg. Type something here',
-                            errorMessage: formErrors?.cities?._errors[0] ?? '',
-                            fieldHasError: Boolean(zodFormControl.submitAttempted && formErrors?.cities),
-                          }"
+                          id="cities"
+                          name="cities"
+                          legend="Choose a location"
+                          :required="true"
+                          label="Check all Cities you like"
+                          placeholder="eg. Type something here"
+                          :errorMessage="formErrors?.cities?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.cities)"
                           v-model="state.cities"
                           v-model:fieldData="citiesData"
                           size="normal"

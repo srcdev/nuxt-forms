@@ -51,10 +51,6 @@ const { id, name, required, trueValue, falseValue, multipleOptions, styleClassPa
     type: Boolean,
     default: false,
   },
-  styleClassPassthrough: {
-    type: String,
-    default: '',
-  },
   theme: {
     type: String as PropType<string>,
     default: 'primary',
@@ -87,11 +83,16 @@ const { id, name, required, trueValue, falseValue, multipleOptions, styleClassPa
     type: Boolean,
     default: false,
   },
+  styleClassPassthrough: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
 });
 
 const slots = useSlots();
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 const modelValue = defineModel<any>();
 

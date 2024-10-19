@@ -2,7 +2,7 @@
   <div class="input-textarea-with-label" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
     <label :for="c12n.id" class="input-textarea-label">{{ c12n.label }}</label>
 
-    <InputTextareaCore v-model="modelValue" v-model:isDirty="isDirty" v-model:isActive="isActive" :c12n :styleClassPassthrough="deepCssClassPassthrough">
+    <InputTextareaCore v-model:string="modelValue" v-model:isDirty="isDirty" v-model:isActive="isActive" :c12n :styleClassPassthrough="deepCssClassPassthrough">
       <template v-if="hasLeftSlot" #left>
         <slot name="left"></slot>
       </template>

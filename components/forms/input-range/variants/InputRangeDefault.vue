@@ -1,5 +1,5 @@
 <template>
-  <div class="input-range-with-label" :class="[styleClassPassthrough, `theme-${theme}`, { error: fieldHasError }]">
+  <div class="input-range-with-label" :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }]">
     <label class="input-range-label" :for="id">{{ label }}</label>
     <template v-if="hasDescription">
       <slot name="description"></slot>
@@ -108,8 +108,8 @@ const { id, name, label, required, min, max, step, theme, size, weight, styleCla
     },
   },
   styleClassPassthrough: {
-    type: String,
-    default: '',
+    type: Array as PropType<string[]>,
+    default: () => [],
   },
   deepCssClassPassthrough: {
     type: String,
@@ -122,6 +122,7 @@ const hasDescription = computed(() => slots.description !== undefined);
 const hasDataList = computed(() => slots.datalist !== undefined);
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 const modelValue = defineModel<number | readonly number[]>();
 
