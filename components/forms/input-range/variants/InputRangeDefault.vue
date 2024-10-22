@@ -75,7 +75,7 @@ const { id, name, label, required, min, max, step, theme, size, weight, styleCla
     default: '',
   },
   errorMessage: {
-    type: String,
+    type: [Object, String],
     required: true,
   },
   fieldHasError: {

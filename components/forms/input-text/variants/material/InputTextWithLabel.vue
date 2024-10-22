@@ -55,7 +55,7 @@ const { type, maxlength, id, name, placeholder, label, errorMessage, fieldHasErr
     required: true,
   },
   errorMessage: {
-    type: String,
+    type: [Object, String],
     required: true,
   },
   fieldHasError: {

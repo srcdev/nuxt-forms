@@ -244,7 +244,7 @@ const formSchema = z
       })
       .trim()
       .min(2, 'Username is too short')
-      .max(10, 'Username is too long'),
+      .max(25, 'Username is too long'),
     password: z.string().trim().min(8, 'Password is too short').max(25, 'Password is too long'),
     message: z.string().trim().min(2, 'Message is too short').max(255, 'Message is too long'),
     score: z

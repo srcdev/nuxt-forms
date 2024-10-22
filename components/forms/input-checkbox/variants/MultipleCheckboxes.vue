@@ -41,7 +41,7 @@ const { id, name, legend, label, required, fieldHasError, placeholder, errorMess
     default: '',
   },
   errorMessage: {
-    type: String,
+    type: [Object, String],
     required: true,
   },
   required: {
