@@ -151,11 +151,59 @@
                           size="normal"
                           checkbox-style="check"
                           checkbox-appearance="with-decorator"
+                          optionsLayout="inline"
                         >
                           <template #description>
                             <p class="label-description">This is description: optionsLayout = 'equal-widths'</p>
                           </template>
                         </MultipleCheckboxes>
+                      </template>
+                    </FormField>
+
+                    <FormField v-if="countriesData !== null" width="wide" :has-gutter="false">
+                      <template #default>
+                        <MultipleCheckboxes
+                          id="countries"
+                          name="countries"
+                          legend="Choose a country"
+                          :required="true"
+                          label="Check all Countries you like"
+                          placeholder="eg. Type something here"
+                          :errorMessage="formErrors?.countries?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.countries)"
+                          v-model="state.countries"
+                          v-model:fieldData="countriesData"
+                          size="normal"
+                          checkbox-style="check"
+                          checkbox-appearance="with-decorator"
+                          optionsLayout="equal-widths"
+                        >
+                          <template #description>
+                            <p class="label-description">This is description: optionsLayout = 'equal-widths'</p>
+                          </template>
+                        </MultipleCheckboxes>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <SingleCheckbox
+                          id="terms"
+                          name="terms"
+                          legend="Terms and conditions"
+                          :required="true"
+                          :errorMessage="formErrors?.terms?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.terms)"
+                          v-model="state.terms"
+                          size="normal"
+                          checkbox-style="check"
+                          checkbox-appearance="with-decorator"
+                          optionsLayout="equal-widths"
+                        >
+                          <template #labelContent>
+                            <span>You must agree to our <strong>terms and conditions</strong> to continue</span>
+                          </template>
+                        </SingleCheckbox>
                       </template>
                     </FormField>
 
@@ -255,9 +303,9 @@ const formSchema = z
       .gte(0)
       .lte(100),
     cities: z.array(z.string()).min(1, 'Please select at least one city'),
-    // countries: z.array(z.string()).min(1).max(3),
+    countries: z.array(z.string()).min(2, 'Please select at least 2 countries').max(5, 'Please select no more than 5 countries'),
     // title: z.array(z.string()).nonempty(),
-    // terms: z.boolean().refine((val) => val === true, { message: 'You must accept our terms' }),
+    terms: z.boolean().refine((val) => val === true, { message: 'You must accept our terms' }),
   })
   .required({
     emailAddress: true,
@@ -266,9 +314,9 @@ const formSchema = z
     message: true,
     score: true,
     cities: true,
-    // countries: true,
+    countries: true,
     // title: true,
-    // terms: true,
+    terms: true,
   });
 
 type formSchema = z.infer<typeof formSchema>;
@@ -281,9 +329,9 @@ const state = reactive({
   message: '',
   score: 50,
   cities: [],
-  // countries: [],
+  countries: [],
   // title: [],
-  // terms: false,
+  terms: false,
 });
 
 const { initZodForm, zodFormControl, zodErrorObj, pushApiErrorsToFormErrors, doZodValidate, fieldMaxLength } = useZodValidation(formSchema);

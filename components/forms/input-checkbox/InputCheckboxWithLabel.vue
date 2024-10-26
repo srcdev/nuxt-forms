@@ -1,17 +1,17 @@
 <template>
   <div class="input-checkbox-with-label" :class="[elementClasses, { error: fieldHasError }]">
     <InputCheckboxCore :id :name :required v-model="modelValue" :size :trueValue :falseValue :checkboxAppearance :checkboxStyle :fieldHasError />
-    <label class="input-checkbox-label" :for="id">{{ label }}</label>
+    <label v-if="hasLabelContent" class="input-checkbox-label slotted" :for="id">
+      <slot name="labelContent"></slot>
+    </label>
+    <label v-else class="input-checkbox-label" :for="id">{{ label }}</label>
   </div>
 </template>
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-import type { C12nInputCheckboxWithLabel, IFormFieldC12, IFormData } from '@/types/types.forms';
-// import { validationConfig } from '@/components/forms/c12/validation-patterns';
-
-const { id, name, label, required, fieldHasError, trueValue, falseValue, multipleOptions, size, checkboxAppearance, checkboxStyle, styleClassPassthrough } = defineProps({
+const { id, name, label, required, fieldHasError, trueValue, falseValue, size, checkboxAppearance, checkboxStyle, styleClassPassthrough } = defineProps({
   id: {
     type: String,
     required: true,
@@ -38,10 +38,6 @@ const { id, name, label, required, fieldHasError, trueValue, falseValue, multipl
   },
   falseValue: {
     type: [String, Number, Boolean],
-    default: false,
-  },
-  multipleOptions: {
-    type: Boolean,
     default: false,
   },
   size: {
@@ -72,17 +68,10 @@ const { id, name, label, required, fieldHasError, trueValue, falseValue, multipl
 });
 
 const slots = useSlots();
-const hasLeftContent = computed(() => slots.left !== undefined);
-const hasRightContent = computed(() => slots.right !== undefined);
+const hasLabelContent = computed(() => slots.labelContent !== undefined);
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 const modelValue = defineModel();
-// const name = computed(() => {
-//   return props.name !== null ? props.name : props.id;
-// });
-// const fieldHasError = computed(() => {
-//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
-// });
 </script>
 
 <style lang="css">
@@ -112,6 +101,11 @@ const modelValue = defineModel();
 
     &:hover {
       cursor: pointer;
+    }
+
+    &.slotted {
+      font-size: unset;
+      font-weight: unset;
     }
   }
 }

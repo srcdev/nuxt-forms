@@ -1,5 +1,5 @@
 <template>
-  <div class="input-error-message" :class="[{ show: fieldHasError }, { detached: isDetached }, { hide: !fieldHasError }]">
+  <div class="input-error-message" :class="[elementClasses, { show: fieldHasError }, { detached: isDetached }, { hide: !fieldHasError }]">
     <div class="inner" :class="[{ show: fieldHasError }]">
       <div class="inner-content">
         <div class="inner-icon">
@@ -21,7 +21,7 @@
 <script setup lang="ts">
 const props = defineProps({
   errorMessage: {
-    type: [Object, String],
+    type: [Array, Object, String],
     required: true,
   },
   fieldHasError: {
@@ -33,8 +33,8 @@ const props = defineProps({
     required: true,
   },
   styleClassPassthrough: {
-    type: String,
-    default: '',
+    type: Array as PropType<string[]>,
+    default: () => [],
   },
   compact: {
     type: Boolean,
@@ -49,6 +49,8 @@ const props = defineProps({
 const isArray = computed(() => {
   return Array.isArray(props.errorMessage);
 });
+
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
 </script>
 
 <style lang="css" scoped>

@@ -14,17 +14,17 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@iconify-json/gridicons": "^1.2.0",
-    "@iconify-json/material-symbols": "^1.2.1",
-    "@iconify-json/radix-icons": "^1.2.0",
-    "@nuxt/eslint-config": "^0.5.7",
-    "@nuxt/icon": "^1.5.1",
-    "eslint": "^9.11.1",
-    "nuxt": "^3.13.2",
-    "release-it": "^17.6.0",
-    "typescript": "^5.6.2"
+    "@iconify-json/gridicons": "1.2.1",
+    "@iconify-json/material-symbols": "1.2.5",
+    "@iconify-json/radix-icons": "1.2.1",
+    "@nuxt/eslint-config": "0.6.0",
+    "@nuxt/icon": "1.5.6",
+    "eslint": "9.13.0",
+    "nuxt": "3.13.2",
+    "release-it": "17.10.0",
+    "typescript": "5.6.3"
   },
   "dependencies": {
-    "zod": "^3.23.8"
+    "zod": "3.23.8"
   }
 }
