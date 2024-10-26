@@ -116,47 +116,11 @@ const inputErrorStyles = ref<string[]>(styleClassPassthrough);
 
 watchEffect(() => {
   if (!hasDescription.value && fieldHasError) {
-    inputErrorStyles.value.push('mt-12');
+    inputErrorStyles.value.push('mbs-12');
   } else {
-    inputErrorStyles.value = inputErrorStyles.value.filter((style) => style !== 'mt-12');
+    inputErrorStyles.value = inputErrorStyles.value.filter((style) => style !== 'mbs-12');
   }
 });
-
-// const isArray = Array.isArray(modelValue.value.data[props.name]);
-// const formFieldC12 = <IFormFieldC12>{
-//   label: props.c12.label,
-//   placeholder: props.c12.placeholder,
-//   errorMessage: props.c12.errorMessage,
-//   useCustomError: false,
-//   customErrors: {},
-//   isValid: false,
-//   isDirty: false,
-//   type: isArray ? 'array' : 'string',
-//   previousValue: null,
-// };
-// modelValue.value.formFieldsC12[props.name] = formFieldC12;
-
-// const fieldHasError = computed(() => {
-//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
-// });
-
-// const errorMessage = computed(() => {
-//   if (
-//     typeof modelValue.value !== 'undefined' &&
-//     modelValue.value!.formFieldsC12[props.name].useCustomError &&
-//     modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue
-//   ) {
-//     return modelValue.value.formFieldsC12[props.name]?.customErrors || [];
-//   } else {
-//     return props.c12.errorMessage;
-//   }
-// });
-
-// watchEffect(() => {
-//   if (!hasDescription.value && !fieldHasError) {
-//     updateElementClasses(['mt-20']);
-//   }
-// });
 </script>
 
 <style lang="css">
