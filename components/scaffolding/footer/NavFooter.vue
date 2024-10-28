@@ -53,6 +53,7 @@ footer {
     .text {
       font-family: 'Poppins', Sans-serif;
       font-family: var(--font-family);
+      font-size: var(--step-1);
       text-align: start;
     }
   }

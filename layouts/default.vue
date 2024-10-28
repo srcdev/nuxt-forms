@@ -4,10 +4,13 @@
       <h1><NuxtLink to="/">Home</NuxtLink></h1>
       <ul class="flex-group">
         <li>
-          <NuxtLink to="/forms/examples/material/text-fields">Material UI text fields</NuxtLink>
+          <NuxtLink to="/typography" class="link-normal">Typography</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="/forms/examples/buttons">Buttons</NuxtLink>
+          <NuxtLink to="/forms/examples/material/text-fields" class="link-normal">Material UI text fields</NuxtLink>
+        </li>
+        <li>
+          <NuxtLink to="/forms/examples/buttons" class="link-normal">Buttons</NuxtLink>
         </li>
       </ul>
     </div>

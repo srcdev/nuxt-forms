@@ -13,5 +13,6 @@ legend,
 li,
 a {
   color: var(--brand-grayscale-text-body);
-  font-size: 1.6rem;
+  font-family: var(--font-family);
+  font-size: var(--step-1);
 }
