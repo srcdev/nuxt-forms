@@ -1,30 +1,23 @@
 <template>
-  <fieldset class="multiple-radio-fieldset" :class="[`theme-${theme}`, { error: fieldHasError }]" :aria-required="required" :aria-invalid="fieldHasError" role="radiogroup">
-    <legend :class="[{ 'has-description': hasDescription }]">
-      {{ legend }}
-      <span v-if="required">&nbsp;(Required)</span>
-    </legend>
+  <fieldset class="multiple-radiobuttons-fieldset" :class="[{ error: fieldHasError }]">
+    <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
-    <InputError :errorMessage :fieldHasError :id="name" :isDetached="true" />
-    <div class="multiple-radio-items" :class="[optionsLayout]">
+    <InputError :errorMessage="errorMessage" :fieldHasError :id="name" :isDetached="true" />
+    <div class="multiple-radiobuttons-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
-        <InputRadioWithLabel
+        <InputRadiobuttonWithLabel
           :id="item.value"
-          :name
+          :name="item.name"
           :required
-          :c12="{
-            label: item.label,
-            placeholder: 'eg. Type something here',
-            errorMessage: 'Please accept our terms and conditions',
-          }"
+          :label="item.label"
+          :fieldHasError
           v-model="modelValue"
           :true-value="item.value"
-          :theme
           :size
-          :radioAppearance
-          :fieldHasError
+          :checkboxAppearance
+          :checkboxStyle
         />
       </template>
     </div>
@@ -35,9 +28,13 @@
 import propValidators from '../../c12/prop-validators';
 import type { IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
 
-import type { InpuTextC12, IFormFieldC12, IFormData } from '@/types/types.forms';
+import type { C12nMultipleCheckboxes, IFormFieldC12, IFormData } from '@/types/types.forms';
 
-const props = defineProps({
+const { id, name, legend, label, required, fieldHasError, placeholder, errorMessage, size, optionsLayout, equalCols, checkboxAppearance, checkboxStyle, styleClassPassthrough } = defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
@@ -46,28 +43,29 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  label: {
+    type: String,
+    required: true,
+  },
+  placeholder: {
+    type: String,
+    default: '',
+  },
+  errorMessage: {
+    type: [Object, String],
+    required: true,
+  },
   required: {
     type: Boolean,
-    value: false,
+    default: false,
   },
-  c12: {
-    type: Object as PropType<InpuTextC12>,
-    required: true,
+  fieldHasError: {
+    type: Boolean,
+    default: false,
   },
   multipleOptions: {
     type: Boolean,
     default: false,
-  },
-  styleClassPassthrough: {
-    type: String,
-    default: '',
-  },
-  theme: {
-    type: String as PropType<string>,
-    default: 'primary',
-    validator(value: string) {
-      return propValidators.theme.includes(value);
-    },
   },
   size: {
     type: String as PropType<string>,
@@ -87,36 +85,32 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  radioAppearance: {
+  checkboxAppearance: {
     type: String as PropType<string>,
     default: null,
     validator(value: string) {
-      return propValidators.radioAppearance.includes(value);
+      return propValidators.checkboxAppearance.includes(value);
     },
   },
-  fieldHasError: {
-    type: Boolean,
-    default: false,
+  checkboxStyle: {
+    type: String as PropType<string>,
+    default: 'check',
+    validator(value: string) {
+      return propValidators.checkboxStyle.includes(value);
+    },
+  },
+  styleClassPassthrough: {
+    type: Array as PropType<string[]>,
+    default: () => [],
   },
 });
 
 const slots = useSlots();
 const hasDescription = computed(() => slots.description !== undefined);
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
-const modelValue = defineModel() as Ref<IFormData>;
+const modelValue = defineModel();
 const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
-
-const errorMessage = computed(() => {
-  if (
-    typeof modelValue.value!.formFieldsC12[props.name] !== 'undefined' &&
-    modelValue.value!.formFieldsC12[props.name].useCustomError &&
-    modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue
-  ) {
-    return modelValue.value.formFieldsC12[props.name]?.customErrors || [];
-  } else {
-    return props.c12.errorMessage;
-  }
-});
 
 // const isArray = Array.isArray(modelValue.value.data[props.name]);
 // const formFieldC12 = <IFormFieldC12>{
@@ -135,40 +129,54 @@ const errorMessage = computed(() => {
 // const fieldHasError = computed(() => {
 //   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
 // });
+
+// const errorMessage = computed(() => {
+//   if (
+//     typeof modelValue.value !== 'undefined' &&
+//     modelValue.value!.formFieldsC12[props.name].useCustomError &&
+//     modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue
+//   ) {
+//     return modelValue.value.formFieldsC12[props.name]?.customErrors || [];
+//   } else {
+//     return props.c12.errorMessage;
+//   }
+// });
 </script>
 
 <style lang="css">
-.multiple-radio-fieldset {
+.multiple-radiobuttons-fieldset {
   --_form-theme: var(--theme-form-primary);
 
   margin: 0;
   padding: 0;
   border: 0;
 
-  &.theme-secondary {
-    --_form-theme: var(--theme-form-secondary);
-  }
-
   &.error {
     --_form-theme: var(--theme-error);
   }
 
   legend {
-    color: var(--_form-theme);
-
+    /* color: var(--_form-theme); */
     font-family: var(--font-family);
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
 
     &.has-description {
       margin-bottom: 0;
     }
   }
+
+  .label-description {
+    font-family: var(--font-family);
+    font-size: 16px;
+    margin-top: 12px;
+    /* color: var(--theme-form-secondary); */
+  }
 }
 
-.multiple-radio-items {
+.multiple-radiobuttons-items {
   display: flex;
-  gap: 18px;
+  gap: 12px;
   margin-top: 12px;
 
   &.inline {

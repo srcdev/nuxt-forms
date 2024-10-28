@@ -93,6 +93,16 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
     border-radius: var(--input-border-radius);
   }
 
+  /* &.mbs-12 {
+    transition: margin-block-start var(--_transition-duration) var(--_transition-timing-function);
+    &.hide {
+      margin-block-start: 0;
+    }
+    &.show {
+      margin-block-start: 12px;
+    }
+  } */
+
   &.show {
     --_grid-template-rows: 1fr;
     --_opacity: var(--_opacity-show);

@@ -1,6 +1,6 @@
 <template>
   <div class="input-textarea-with-label" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
-    <label :for="id" class="input-textarea-label">{{ label }}</label>
+    <label :for="id" class="input-textarea-label body-normal-semibold">{{ label }}</label>
 
     <InputTextareaCore v-model="modelValue" v-model:isDirty="isDirty" v-model:isActive="isActive" :maxlength :id :name :placeholder :label :fieldHasError :required :styleClassPassthrough>
       <template v-if="hasLeftSlot" #left>
@@ -86,17 +86,8 @@ watch(
 
 <style lang="css">
 .input-textarea-with-label {
-  --_form-theme: var(--theme-form-primary);
-  --_focus-colour: var(--theme-form-primary-focus);
-  --_border-width: var(--input-border-width-thin);
-  --_border-color: var(--_form-theme);
-  --_outline-width: var(--input-outline-width-thin);
-
   .input-textarea-label {
     display: block;
-    font-family: var(--font-family);
-    font-size: 16px;
-    font-weight: 500;
     padding-block: 8px;
   }
 }

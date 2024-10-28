@@ -1,10 +1,10 @@
 <template>
-  <div class="input-checkbox-with-label" :class="[elementClasses, { error: fieldHasError }]">
-    <InputCheckboxCore :id :name :required v-model="modelValue" :size :trueValue :falseValue :checkboxAppearance :checkboxStyle :fieldHasError />
-    <label v-if="hasLabelContent" class="input-checkbox-label body-normal" :for="id">
+  <div class="input-radiobutton-with-label" :class="[elementClasses, { error: fieldHasError }]">
+    <InputRadiobuttonCore :id :name :required v-model="modelValue" :size :trueValue :falseValue :checkboxAppearance :checkboxStyle :fieldHasError />
+    <label v-if="hasLabelContent" class="input-radiobutton-label body-normal" :for="id">
       <slot name="labelContent"></slot>
     </label>
-    <label v-else class="input-checkbox-label body-normal-semibold" :for="id">{{ label }}</label>
+    <label v-else class="input-radiobutton-label body-normal-semibold" :for="id">{{ label }}</label>
   </div>
 </template>
 
@@ -75,17 +75,17 @@ const modelValue = defineModel();
 </script>
 
 <style lang="css">
-.input-checkbox-with-label {
+.input-radiobutton-with-label {
   --_form-theme: var(--theme-form-primary);
 
-  display: flex;
+  display: grid;
   align-items: center;
-
+  grid-template-columns: auto 1fr;
   &.error {
     --_form-theme: var(--theme-error);
   }
 
-  .input-checkbox-label {
+  .input-radiobutton-label {
     display: flex;
     width: 100%;
     height: 100%;

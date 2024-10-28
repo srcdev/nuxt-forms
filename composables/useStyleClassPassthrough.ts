@@ -25,5 +25,6 @@ export const useStyleClassPassthrough = (styleClassPassthrough: string[]) => {
   return {
     elementClasses,
     updateElementClasses,
+    styleClassPassthroughRef,
   };
 };

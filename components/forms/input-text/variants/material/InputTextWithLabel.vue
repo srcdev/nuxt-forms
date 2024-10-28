@@ -1,6 +1,6 @@
 <template>
   <div class="input-text-with-label" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
-    <label :for="id" class="input-text-label">{{ label }}</label>
+    <label :for="id" class="input-text-label body-normal-bold">{{ label }}</label>
 
     <InputTextCore
       v-model="modelValue"
@@ -112,9 +112,6 @@ watch(
 
   .input-text-label {
     display: block;
-    font-family: var(--font-family);
-    font-size: 16px;
-    font-weight: 500;
     padding-block: 8px;
   }
 }

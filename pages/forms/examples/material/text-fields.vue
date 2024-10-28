@@ -4,7 +4,7 @@
       <template #layout-content>
         <div>
           <h1 class="header-1">Material UI text fields ({{ compact ? 'compact' : 'default' }})</h1>
-          <p>Use 'test@test.com' to trigger server errors</p>
+          <p class="body-normal">Use 'test@test.com' to trigger server errors</p>
         </div>
         <ContentGrid>
           <template #slot1>
@@ -135,6 +135,31 @@
                       </template>
                     </FormField>
 
+                    <FormField v-if="titleData !== null" width="wide" :has-gutter="false">
+                      <template #default>
+                        <MultipleRadiobuttons
+                          id="title"
+                          name="title"
+                          legend="What is your title"
+                          :required="true"
+                          label="Check one"
+                          placeholder="eg. Type something here"
+                          :errorMessage="formErrors?.title?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.title)"
+                          v-model="state.title"
+                          v-model:fieldData="titleData"
+                          size="normal"
+                          checkbox-style="cross"
+                          checkbox-appearance="with-decorator"
+                          optionsLayout="equal-widths"
+                        >
+                          <template #description>
+                            <p class="label-description">This is description: optionsLayout = 'equal-widths/inline'</p>
+                          </template>
+                        </MultipleRadiobuttons>
+                      </template>
+                    </FormField>
+
                     <FormField v-if="citiesData !== null" width="wide" :has-gutter="false">
                       <template #default>
                         <MultipleCheckboxes
@@ -149,7 +174,7 @@
                           v-model="state.cities"
                           v-model:fieldData="citiesData"
                           size="normal"
-                          checkbox-style="check"
+                          checkbox-style="cross"
                           checkbox-appearance="with-decorator"
                           optionsLayout="inline"
                         >
@@ -179,9 +204,50 @@
                           optionsLayout="equal-widths"
                         >
                           <template #description>
-                            <p class="label-description">This is description: optionsLayout = 'equal-widths'</p>
+                            <p class="label-description">This is description: optionsLayout = 'inline'</p>
                           </template>
                         </MultipleCheckboxes>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <SingleCheckbox
+                          id="agreed"
+                          name="agreed"
+                          legend="I agree (label with description)"
+                          label="Click to agree to something"
+                          :required="true"
+                          :errorMessage="formErrors?.agreed?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.agreed)"
+                          v-model="state.agreed"
+                          size="normal"
+                          checkbox-style="check"
+                          checkbox-appearance="with-decorator"
+                        >
+                          <template #description>
+                            <p class="label-description">You must <strong>agree</strong> to continue</p>
+                          </template>
+                        </SingleCheckbox>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <SingleCheckbox
+                          id="agree"
+                          name="agree"
+                          legend="I agree (label no description)"
+                          label="Click to agree to something"
+                          :required="true"
+                          :errorMessage="formErrors?.agree?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.agree)"
+                          v-model="state.agree"
+                          size="normal"
+                          checkbox-style="check"
+                          checkbox-appearance="with-decorator"
+                        >
+                        </SingleCheckbox>
                       </template>
                     </FormField>
 
@@ -198,10 +264,9 @@
                           size="normal"
                           checkbox-style="check"
                           checkbox-appearance="with-decorator"
-                          optionsLayout="equal-widths"
                         >
                           <template #labelContent>
-                            <span>You must agree to our <strong>terms and conditions</strong> to continue</span>
+                            <span class="body-normal">You must agree to our <NuxtLink to="/typography" class="link-normal">terms and conditions</NuxtLink> to continue</span>
                           </template>
                         </SingleCheckbox>
                       </template>
@@ -304,7 +369,9 @@ const formSchema = z
       .lte(100),
     cities: z.array(z.string()).min(1, 'Please select at least one city'),
     countries: z.array(z.string()).min(2, 'Please select at least 2 countries').max(5, 'Please select no more than 5 countries'),
-    // title: z.array(z.string()).nonempty(),
+    title: z.string().min(1, { message: 'Title is required' }),
+    agreed: z.boolean().refine((val) => val === true, { message: 'You must tick this box' }),
+    agree: z.boolean().refine((val) => val === true, { message: 'You must tick this box' }),
     terms: z.boolean().refine((val) => val === true, { message: 'You must accept our terms' }),
   })
   .required({
@@ -315,7 +382,9 @@ const formSchema = z
     score: true,
     cities: true,
     countries: true,
-    // title: true,
+    title: true,
+    agreed: true,
+    agree: true,
     terms: true,
   });
 
@@ -330,7 +399,9 @@ const state = reactive({
   score: 50,
   cities: [],
   countries: [],
-  // title: [],
+  title: '',
+  agreed: false,
+  agree: false,
   terms: false,
 });
 

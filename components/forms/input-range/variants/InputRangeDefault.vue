@@ -1,6 +1,6 @@
 <template>
   <div class="input-range-with-label" :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }]">
-    <label class="input-range-label" :for="id">{{ label }}</label>
+    <label class="input-range-label body-normal-bold" :for="id">{{ label }}</label>
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
@@ -149,11 +149,7 @@ const updateRange = (step: number, withinRangeLimit: boolean) => {
   }
 
   .input-range-label {
-    /* color: var(--_form-theme); */
     display: block;
-    font-family: var(--font-family);
-    /* font-size: 18px; */
-    font-weight: 500;
     margin-bottom: 12px;
 
     &:hover {
