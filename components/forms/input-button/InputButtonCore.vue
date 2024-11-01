@@ -124,12 +124,12 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
   --_theme-form-outline-hover: var(--theme-form-primary-outline-hover);
   --_theme-form-bg: var(--theme-form-primary-bg);
   --_theme-form-bg-hover: var(--theme-form-primary-bg-hover);
-  --_theme-form-color: var(--theme-form-primary-color);
-  --_theme-form-color-hover: var(--theme-form-primary-color-hover);
   --_theme-form-text-color: var(--theme-form-primary-color);
   --_theme-form-text-color-hover: var(--theme-form-primary-color-hover);
 
   align-items: center;
+  color: var(--_theme-form-text-color);
+
   display: flex;
   gap: var(--_icon-gap);
   justify-content: center;
@@ -143,7 +143,7 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    --_theme-form-text-color: var(--_theme-form-color-hover);
+    --_theme-form-text-color: var(--_theme-form-text-color-hover);
     cursor: pointer;
   }
 
@@ -219,7 +219,7 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
   }
 
   .btn-text {
-    color: var(--_theme-form-text-color);
+    /* color: var(--_theme-form-text-color); */
     &.small {
       font-size: var(--theme-form-button-font-size-small);
     }
@@ -287,7 +287,7 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
 
   background-color: var(--_theme-form-bg);
   border: var(--_border-width) solid var(--_theme-form-border);
-  color: var(--_theme-form-color);
+  color: var(--_theme-form-text-color);
   outline: 1px solid var(--_theme-form-outline);
 
   /*
@@ -300,8 +300,8 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
     --_theme-form-outline-hover: var(--theme-form-secondary-outline-hover);
     --_theme-form-bg: var(--theme-form-secondary-bg);
     --_theme-form-bg-hover: var(--theme-form-secondary-bg-hover);
-    --_theme-form-color: var(--theme-form-secondary-color);
-    --_theme-form-color-hover: var(--theme-form-secondary-color-hover);
+    --_theme-form-text-color: var(--theme-form-secondary-color);
+    --_theme-form-text-color-hover: var(--theme-form-secondary-color-hover);
   }
 
   &.theme-tertiary {
@@ -311,8 +311,8 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
     --_theme-form-outline-hover: var(--theme-form-tertiary-outline-hover);
     --_theme-form-bg: var(--theme-form-tertiary-bg);
     --_theme-form-bg-hover: var(--theme-form-tertiary-bg-hover);
-    --_theme-form-color: var(--theme-form-tertiary-color);
-    --_theme-form-color-hover: var(--theme-form-tertiary-color-hover);
+    --_theme-form-text-color: var(--theme-form-tertiary-color);
+    --_theme-form-text-color-hover: var(--theme-form-tertiary-color-hover);
   }
 
   &.theme-warning {
@@ -322,8 +322,8 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
     --_theme-form-outline-hover: var(--theme-form-warning-outline-hover);
     --_theme-form-bg: var(--theme-form-warning-bg);
     --_theme-form-bg-hover: var(--theme-form-warning-bg-hover);
-    --_theme-form-color: var(--theme-form-warning-color);
-    --_theme-form-color-hover: var(--theme-form-warning-color-hover);
+    --_theme-form-text-color: var(--theme-form-warning-color);
+    --_theme-form-text-color-hover: var(--theme-form-warning-color-hover);
   }
 
   &.theme-error {
@@ -333,8 +333,8 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
     --_theme-form-outline-hover: var(--theme-form-error-outline-hover);
     --_theme-form-bg: var(--theme-form-error-bg);
     --_theme-form-bg-hover: var(--theme-form-error-bg-hover);
-    --_theme-form-color: var(--theme-form-error-color);
-    --_theme-form-color-hover: var(--theme-form-error-color-hover);
+    --_theme-form-text-color: var(--theme-form-error-color);
+    --_theme-form-text-color-hover: var(--theme-form-error-color-hover);
   }
 
   &.theme-success {
@@ -344,8 +344,8 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
     --_theme-form-outline-hover: var(--theme-form-success-outline-hover);
     --_theme-form-bg: var(--theme-form-success-bg);
     --_theme-form-bg-hover: var(--theme-form-success-bg-hover);
-    --_theme-form-color: var(--theme-form-success-color);
-    --_theme-form-color-hover: var(--theme-form-success-color-hover);
+    --_theme-form-text-color: var(--theme-form-success-color);
+    --_theme-form-text-color-hover: var(--theme-form-success-color-hover);
   }
 
   &.theme-ghost {
@@ -355,8 +355,8 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
     --_theme-form-outline-hover: var(--theme-form-ghost-outline-hover);
     --_theme-form-bg: var(--theme-form-ghost-bg);
     --_theme-form-bg-hover: var(--theme-form-ghost-bg-hover);
-    --_theme-form-color: var(--theme-form-ghost-color);
-    --_theme-form-color-hover: var(--theme-form-ghost-color-hover);
+    --_theme-form-text-color: var(--theme-form-ghost-color);
+    --_theme-form-text-color-hover: var(--theme-form-ghost-color-hover);
   }
 
   /*
@@ -364,7 +364,7 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
   **/
   &:hover,
   &:focus-visible {
-    --_theme-form-color: var(--_theme-form-color-hover);
+    --_theme-form-text-color: var(--_theme-form-text-color-hover);
     --_theme-form-bg: var(--_theme-form-bg-hover);
     --_theme-form-border: var(--_theme-form-border-hover);
     --_theme-form-outline: var(--_theme-form-outline-hover);

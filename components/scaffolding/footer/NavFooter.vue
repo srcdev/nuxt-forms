@@ -24,6 +24,7 @@
 
 <style lang="css">
 footer {
+  display: none;
   padding: 1rem;
   text-align: center;
   background: white;

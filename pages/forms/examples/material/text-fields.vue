@@ -98,6 +98,36 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
+                        <InputNumberDefault
+                          id="count"
+                          name="count"
+                          label="How many things? Between 0 & 100"
+                          :min="0"
+                          :max="100"
+                          :step="1"
+                          placeholder="eg. What\'s your count?"
+                          :errorMessage="formErrors?.count?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.count)"
+                          :required="true"
+                          :styleClassPassthrough="['count-1', 'count-2']"
+                          v-model.number="state.count"
+                          theme="secondary"
+                        >
+                          <template #description>
+                            <p class="label-description">This is a description of what the user is required to do</p>
+                          </template>
+                          <template #left>
+                            <Icon name="gridicons:minus-small" class="icon" />
+                          </template>
+                          <template #right>
+                            <Icon name="gridicons:plus-small" class="icon" />
+                          </template>
+                        </InputNumberDefault>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
                         <InputRangeDefault
                           id="score"
                           name="score"
@@ -360,6 +390,12 @@ const formSchema = z
       .max(25, 'Username is too long'),
     password: z.string().trim().min(8, 'Password is too short').max(25, 'Password is too long'),
     message: z.string().trim().min(2, 'Message is too short').max(255, 'Message is too long'),
+    count: z
+      .number({
+        required_error: 'Count is required',
+        invalid_type_error: 'Count must be a number',
+      })
+      .int({ message: 'Count must be a whole number' }),
     score: z
       .number({
         required_error: 'Score is required',
@@ -379,6 +415,7 @@ const formSchema = z
     username: true,
     password: true,
     message: true,
+    count: true,
     score: true,
     cities: true,
     countries: true,
@@ -396,6 +433,7 @@ const state = reactive({
   username: '',
   password: '',
   message: '',
+  count: 25,
   score: 50,
   cities: [],
   countries: [],

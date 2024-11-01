@@ -12,7 +12,6 @@ fieldset,
 legend,
 li,
 a {
-  color: var(--brand-grayscale-text-body);
   font-family: var(--font-family);
   font-size: var(--step-1);
 }
