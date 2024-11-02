@@ -91,6 +91,7 @@ const modelValue = defineModel();
     height: 100%;
     align-items: center;
     margin-block: 8px;
+    padding-inline: 8px;
 
     &:hover {
       cursor: pointer;

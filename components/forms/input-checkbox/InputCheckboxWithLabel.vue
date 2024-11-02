@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-with-label" :class="[elementClasses, { error: fieldHasError }]">
+  <div class="input-checkbox-with-label" :class="[elementClasses, optionsLayout, { error: fieldHasError }]">
     <InputCheckboxCore :id :name :required v-model="modelValue" :size :trueValue :falseValue :checkboxAppearance :checkboxStyle :fieldHasError />
     <label v-if="hasLabelContent" class="input-checkbox-label body-normal" :for="id">
       <slot name="labelContent"></slot>
@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { id, name, label, required, fieldHasError, trueValue, falseValue, size, checkboxAppearance, checkboxStyle, styleClassPassthrough } = defineProps({
+const { id, name, label, required, fieldHasError, trueValue, falseValue, size, checkboxAppearance, checkboxStyle, optionsLayout, styleClassPassthrough } = defineProps({
   id: {
     type: String,
     required: true,
@@ -61,6 +61,13 @@ const { id, name, label, required, fieldHasError, trueValue, falseValue, size, c
       return propValidators.checkboxStyle.includes(value);
     },
   },
+  optionsLayout: {
+    type: String as PropType<string>,
+    default: 'equal-widths',
+    validator(value: string) {
+      return propValidators.optionsLayout.includes(value);
+    },
+  },
   styleClassPassthrough: {
     type: Array as PropType<string[]>,
     default: () => [],
@@ -77,6 +84,7 @@ const modelValue = defineModel();
 <style lang="css">
 .input-checkbox-with-label {
   --_form-theme: var(--theme-form-primary);
+  --_white-space: wrap;
 
   display: flex;
   align-items: center;
@@ -85,12 +93,18 @@ const modelValue = defineModel();
     --_form-theme: var(--theme-error);
   }
 
+  &.inline {
+    --_white-space: nowrap;
+  }
+
   .input-checkbox-label {
     display: flex;
     width: 100%;
     height: 100%;
     align-items: center;
     margin-block: 8px;
+    padding-inline: 8px;
+    white-space: var(--_white-space);
 
     &:hover {
       cursor: pointer;

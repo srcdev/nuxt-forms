@@ -7,7 +7,19 @@
     <InputError :errorMessage="errorMessage" :fieldHasError :id="name" :isDetached="true" />
     <div class="multiple-checkboxes-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
-        <InputCheckboxWithLabel :id="item.value" :name :required :label="item.label" :fieldHasError v-model="modelValue" :true-value="item.value" :size :checkboxAppearance :checkboxStyle />
+        <InputCheckboxWithLabel
+          :id="item.value"
+          :name
+          :required
+          :label="item.label"
+          :fieldHasError
+          v-model="modelValue"
+          :true-value="item.value"
+          :size
+          :checkboxAppearance
+          :optionsLayout
+          :checkboxStyle
+        />
       </template>
     </div>
   </fieldset>

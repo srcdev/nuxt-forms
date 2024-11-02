@@ -395,7 +395,9 @@ const formSchema = z
         required_error: 'Count is required',
         invalid_type_error: 'Count must be a number',
       })
-      .int({ message: 'Count must be a whole number' }),
+      .int({ message: 'Count must be a whole number' })
+      .gte(25, 'Count must be between 25 and 75')
+      .lte(75, 'Count must be between 25 and 75'),
     score: z
       .number({
         required_error: 'Score is required',

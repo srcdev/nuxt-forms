@@ -1,6 +1,12 @@
 {
   "data": [
     {
+      "id": "bradford-on-avon",
+      "name": "cities",
+      "value": "cities-2",
+      "label": "Bradford on Avon"
+    },
+    {
       "id": "bath",
       "name": "cities",
       "value": "cities-12",
