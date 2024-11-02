@@ -142,7 +142,7 @@ const updateValue = (step: number, withinRangeLimit: boolean) => {
 
   .input-number-label {
     display: block;
-    margin-bottom: 12px;
+    margin-block: 8px;
 
     &:hover {
       cursor: pointer;

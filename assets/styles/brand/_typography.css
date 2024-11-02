@@ -13,18 +13,6 @@
 /* font-family: 'Poppins', Sans-serif; */
 /* font-family: var(--font-family); */
 
-/* ul {
-    list-style-type: none;
-    padding: 0;
-
-    li {
-      background: #ffffff;
-      border-radius: 5px;
-      padding: 10px;
-      margin-block-end: 20px;
-    }
-  } */
-
 .heading-1 {
   font-size: var(--step-5);
   font-weight: bold;

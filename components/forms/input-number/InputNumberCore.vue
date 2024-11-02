@@ -177,7 +177,6 @@ onMounted(() => {
 
     &:focus-visible {
       --_border-color: white;
-      /* background-color: hsl(from var(--_form-theme) h s 95%); */
 
       outline: var(--focus-visible-outline);
       box-shadow: var(--focus-visible-box-shadow);

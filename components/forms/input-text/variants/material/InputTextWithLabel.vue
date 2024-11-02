@@ -112,7 +112,7 @@ watch(
 
   .input-text-label {
     display: block;
-    padding-block: 8px;
+    margin-block: 8px;
   }
 }
 </style>

@@ -150,7 +150,7 @@ const updateRange = (step: number, withinRangeLimit: boolean) => {
 
   .input-range-label {
     display: block;
-    margin-bottom: 12px;
+    margin-block: 8px;
 
     &:hover {
       cursor: pointer;
