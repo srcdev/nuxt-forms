@@ -374,58 +374,73 @@ const { data: titleData } = await useFetch<IFormMultipleOptions>('/api/utils?cat
 /*
  * Setup forms
  */
-const formSchema = z
-  .object({
-    emailAddress: z
-      .string({
-        required_error: 'Email address is required',
-      })
-      .email({ message: 'Invalid email address' }),
-    username: z
-      .string({
-        required_error: 'Username is required',
-      })
-      .trim()
-      .min(2, 'Username is too short')
-      .max(25, 'Username is too long'),
-    password: z.string().trim().min(8, 'Password is too short').max(25, 'Password is too long'),
-    message: z.string().trim().min(2, 'Message is too short').max(255, 'Message is too long'),
-    count: z
-      .number({
-        required_error: 'Count is required',
-        invalid_type_error: 'Count must be a number',
-      })
-      .int({ message: 'Count must be a whole number' })
-      .gte(25, 'Count must be between 25 and 75')
-      .lte(75, 'Count must be between 25 and 75'),
-    score: z
-      .number({
-        required_error: 'Score is required',
-        invalid_type_error: 'Score must be a number',
-      })
-      .gte(0)
-      .lte(100),
-    cities: z.array(z.string()).min(1, 'Please select at least one city'),
-    countries: z.array(z.string()).min(2, 'Please select at least 2 countries').max(5, 'Please select no more than 5 countries'),
-    title: z.string().min(1, { message: 'Title is required' }),
-    agreed: z.boolean().refine((val) => val === true, { message: 'You must tick this box' }),
-    agree: z.boolean().refine((val) => val === true, { message: 'You must tick this box' }),
-    terms: z.boolean().refine((val) => val === true, { message: 'You must accept our terms' }),
-  })
-  .required({
-    emailAddress: true,
-    username: true,
-    password: true,
-    message: true,
-    count: true,
-    score: true,
-    cities: true,
-    countries: true,
-    title: true,
-    agreed: true,
-    agree: true,
-    terms: true,
-  });
+const formSchema = reactive(
+  z
+    .object({
+      emailAddress: z
+        .string({
+          required_error: 'Email address is required',
+        })
+        .email({ message: 'Invalid email address' })
+        .refine((email) => email !== zodFormControl.previousState.emailAddress.value, {
+          message: 'This email address has already been used',
+        }),
+      username: z
+        .string({
+          required_error: 'Username is required',
+        })
+        .trim()
+        .min(2, 'Username is too short')
+        .max(25, 'Username is too long')
+        .refine((email) => email !== zodFormControl.previousState.username.value, {
+          message: 'This username has already been used',
+        }),
+      password: z
+        .string()
+        .trim()
+        .min(8, 'Password is too short')
+        .max(25, 'Password is too long')
+        .refine((email) => email !== zodFormControl.previousState.password.value, {
+          message: "You've already used this password",
+        }),
+      message: z.string().trim().min(2, 'Message is too short').max(255, 'Message is too long'),
+      count: z
+        .number({
+          required_error: 'Count is required',
+          invalid_type_error: 'Count must be a number',
+        })
+        .int({ message: 'Count must be a whole number' })
+        .gte(25, 'Count must be between 25 and 75')
+        .lte(75, 'Count must be between 25 and 75'),
+      score: z
+        .number({
+          required_error: 'Score is required',
+          invalid_type_error: 'Score must be a number',
+        })
+        .gte(0)
+        .lte(100),
+      cities: z.array(z.string()).min(1, 'Please select at least one city'),
+      countries: z.array(z.string()).min(2, 'Please select at least 2 countries').max(5, 'Please select no more than 5 countries'),
+      title: z.string().min(1, { message: 'Title is required' }),
+      agreed: z.boolean().refine((val) => val === true, { message: 'You must tick this box' }),
+      agree: z.boolean().refine((val) => val === true, { message: 'You must tick this box' }),
+      terms: z.boolean().refine((val) => val === true, { message: 'You must accept our terms' }),
+    })
+    .required({
+      emailAddress: true,
+      username: true,
+      password: true,
+      message: true,
+      count: true,
+      score: true,
+      cities: true,
+      countries: true,
+      title: true,
+      agreed: true,
+      agree: true,
+      terms: true,
+    })
+);
 
 type formSchema = z.infer<typeof formSchema>;
 const formErrors = computed<z.ZodFormattedError<formSchema> | null>(() => zodErrorObj.value);
@@ -470,7 +485,7 @@ const submitForm = async () => {
           // }
 
           // if (error instanceof Error) {
-          await pushApiErrorsToFormErrors(response._data);
+          await pushApiErrorsToFormErrors(response._data, state);
           // zodFormControl.formIsValid = false;
           // }
           // zodFormControl.submitAttempted = false;

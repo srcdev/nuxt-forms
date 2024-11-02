@@ -11,22 +11,25 @@ const useZodValidation = (formSchema: any) => {
     formIsValid: false,
     isPending: false,
     isDisabled: false,
-    formFieldStateArr: {} as IFormFieldStateObj,
+    previousState: {} as Record<string, any>,
   });
-
-  const formFieldState = {
-    isValid: false,
-    isDirty: false,
-    previousValue: null,
-  };
 
   type formSchema = z.infer<typeof formSchema>;
   const zodErrorObj = ref<z.ZodFormattedError<formSchema> | null>(null);
 
-  const initZodForm = () => {
+  const resetPreviousValues = () => {
     for (const [field] of Object.entries(formSchema.shape)) {
-      zodFormControl.formFieldStateArr[field] = formFieldState;
+      const previousValue = {
+        value: null,
+        message: '',
+      };
+
+      zodFormControl.previousState[field] = previousValue;
     }
+  };
+
+  const initZodForm = () => {
+    resetPreviousValues();
   };
 
   const getErrorCount = (zodErrorObj: Ref<z.ZodFormattedError<formSchema> | null>) => {
@@ -37,11 +40,8 @@ const useZodValidation = (formSchema: any) => {
   };
 
   const transformErrorMessages = (errors: any) => {
-    // console.log('transformErrorMessages');
-    // console.log(errors);
     const apiErrors = ref({}) as any;
     for (const [key, value] of Object.entries(errors)) {
-      // console.log(key, value);
       const fieldPath = key.split('.').map((key: string) => key.charAt(0).toLowerCase() + key.slice(1));
       apiErrors.value[fieldPath.join('.')] = value;
     }
@@ -49,29 +49,31 @@ const useZodValidation = (formSchema: any) => {
     return apiErrors.value;
   };
 
-  const pushApiErrorsToFormErrors = async (apiErrorResponse: ApiErrorResponse) => {
-    // console.log('apiErrorResponse');
-    // console.log(apiErrorResponse);
-    // const apiErrors = ref({}) as any;
+  const updatePreviousValue = async (field: string, message: string, state: Record<string, any>) => {
+    const previousValue = {
+      value: state[field],
+      message: message,
+    };
+    zodFormControl.previousState[field] = previousValue;
+  };
 
-    // Map API errors to form fields
+  const pushApiErrorsToFormErrors = async (apiErrorResponse: ApiErrorResponse, state: Record<string, any>) => {
     const apiErrors = transformErrorMessages(apiErrorResponse.data.errors);
 
-    // apiErrors.forEach((error) => {
-    //   const fieldPath = error.key.split('.').map((key: string) => key.charAt(0).toLowerCase() + key.slice(1));
-    //   apiErrors.value[fieldPath.join('.')] = error.message;
-    // });
-
-    // Create a ZodError object to hold the issues
+    // 1: Create a ZodError object to hold the issues
     const zodError = new ZodError([]);
 
-    // Add issues to the ZodError object
+    // 2: Reset previous state values
+    resetPreviousValues();
+
+    // 3: Add issues to the ZodError object
     for (const [path, message] of Object.entries(apiErrors)) {
       zodError.addIssue({
         path: path.split('.'),
         message: message as string,
         code: z.ZodIssueCode.custom,
       });
+      await updatePreviousValue(path, message as string, state);
     }
 
     zodErrorObj.value = zodError.format();
@@ -82,85 +84,7 @@ const useZodValidation = (formSchema: any) => {
     return zodErrorObj.value;
   };
 
-  // const updateValue = async (key: string, value: string) => {
-  //   console.log(`Updating key(${key}) with value(${value}) | previousValue(${zodFormControl.formFieldStateArr[key].previousValue})`);
-  //   zodFormControl.formFieldStateArr[key].previousValue = value ?? null;
-  // };
-
-  // async function updatePreviousValues(state: Record<string, any>, zodFormControl: any) {
-  //   Object.keys(state).forEach((key) => {
-  //     if (zodFormControl.formFieldStateArr[key]) {
-  //       zodFormControl.formFieldStateArr[key].previousValue = state[key] ?? null;
-  //     }
-  //   });
-  // }
-
-  const updatePreviousValues = async (state: Record<string, any>) => {
-    console.log(`useZodValidation | updatePreviousValues`);
-    // console.log('##### state');
-    // console.log(state);
-
-    // Object.keys(state).forEach((key) => {
-    //   console.log(`key(${key}) | state[key](${state[key]})`);
-    //   zodFormControl.formFieldStateArr[key].previousValue = state[key] ?? null;
-    // });
-
-    // const formFieldStateArr = reactive<IFormFieldStateObj>(zodFormControl.formFieldStateArr);
-    const formFieldStateArr = { ...toRaw(zodFormControl.formFieldStateArr) } as IFormFieldStateObj;
-    // console.log('#### formFieldStateArr');
-    // console.log(formFieldStateArr);
-
-    for (const [key, value] of Object.entries(state)) {
-      await useSleep(100);
-      console.log(`Updating key(${key}) with value(${value}) | previousValue(${zodFormControl.formFieldStateArr[key].previousValue})`);
-      if (formFieldStateArr[key] && state[key]) {
-        formFieldStateArr[key].previousValue = value ?? null;
-      }
-      // updateValue(key, value);
-    }
-    console.log('#### formFieldStateArr');
-    console.log(formFieldStateArr);
-    zodFormControl.formFieldStateArr = formFieldStateArr;
-
-    // Object.entries(zodFormControl.formFieldStateArr).forEach(async ([key]) => {
-    //   if (state[key]) {
-    //     await useSleep(2000);
-    //     console.log(`state[${key}]`, state[key]);
-    //     zodFormControl.formFieldStateArr[key].previousValue = state[key] ?? null;
-    //   }
-    //   // updateValue(key, value);
-    // });
-
-    // for (const [key] of Object.entries(zodFormControl.formFieldStateArr)) {
-    //   await useSleep(2000);
-    //   if (state[key]) {
-    //     // formFieldStateArr[key].previousValue = value ?? null;
-    //     console.log(`state[${key}]`);
-    //     console.log(state[key]);
-    //     zodFormControl.formFieldStateArr[key].previousValue = state[key] ?? null;
-    //   }
-    //   // updateValue(key, value);
-    // }
-
-    // zodFormControl.formFieldStateArr = formFieldStateArr;
-
-    // Object.keys(state).forEach(async (key) => {
-    //   await useSleep(2000);
-    //   if (zodFormControl.formFieldStateArr[key]) {
-    //     console.log(`Updating key(${key}) with value(${state[key]})`);
-    //     zodFormControl.formFieldStateArr[key].previousValue = state[key] ?? null;
-    //   }
-    // });
-
-    // return;
-  };
-
-  const doZodValidate = async (state: Record<string, any>, isSubmitting: boolean = false) => {
-    console.log(`doZodValidate(isSubmitting: ${isSubmitting})`);
-    if (isSubmitting) {
-      // Currently updating all previousValues on submit, commented out for now
-      // await updatePreviousValues(state);
-    }
+  const doZodValidate = async (state: Record<string, any>) => {
     const valid = formSchema.safeParse(toRaw(state));
     if (!valid.success) {
       zodErrorObj.value = valid.error.format();
