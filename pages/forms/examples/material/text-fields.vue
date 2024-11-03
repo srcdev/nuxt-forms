@@ -460,13 +460,21 @@ const state = reactive({
   terms: false,
 });
 
-const { initZodForm, zodFormControl, zodErrorObj, pushApiErrorsToFormErrors, doZodValidate, fieldMaxLength } = useZodValidation(formSchema);
+const {
+  initZodForm,
+  zodFormControl,
+  zodErrorObj,
+  // formErrors,
+  pushApiErrorsToFormErrors,
+  doZodValidate,
+  fieldMaxLength,
+} = useZodValidation(formSchema);
 
 initZodForm();
 
 const submitForm = async () => {
   zodFormControl.submitAttempted = true;
-  if (!(await doZodValidate(state, true))) return;
+  if (!(await doZodValidate(state))) return;
   zodFormControl.displayLoader = true;
   try {
     console.log('Form valid - post it');
