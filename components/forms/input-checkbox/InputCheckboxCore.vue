@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-wrapper" :class="[size, checkboxAppearance, { error: fieldHasError }]">
+  <div class="input-checkbox-wrapper" :class="[theme, size, checkboxAppearance, { error: fieldHasError }]">
     <input
       type="checkbox"
       :true-value="trueValue"
@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
-const { id, name, required, trueValue, falseValue, multipleOptions, styleClassPassthrough, size, checkboxAppearance, checkboxStyle, fieldHasError } = defineProps({
+const { id, name, required, trueValue, falseValue, multipleOptions, theme, styleClassPassthrough, size, checkboxAppearance, checkboxStyle, fieldHasError } = defineProps({
   id: {
     type: String,
     required: true,
@@ -91,21 +91,6 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleC
 
 const modelValue = defineModel<any>();
 
-// const updateFocus = (name: string, isFocused: boolean) => {
-//   modelValue.value.focusedField = isFocused ? name : '';
-// };
-
-// const isFocused = computed(() => {
-//   return modelValue.value.focusedField == name.value;
-// });
-
-// const name = computed(() => {
-//   return props.name !== null ? props.name : props.id;
-// });
-
-// const validatorLocale = toRef(useRuntimeConfig().public.validatorLocale);
-
-// const componentValidation = validationConfig[validatorLocale.value][props.validation];
 const inputField = ref<HTMLInputElement | null>(null);
 
 const isArray = Array.isArray(modelValue.value);
@@ -119,87 +104,6 @@ const isChecked = computed(() => {
     return modelValue.value === trueValue;
   }
 });
-
-const isFocussed = ref(false);
-
-// watch(isChecked, () => {
-//   console.log('inputField.value', inputField.value?.validity);
-// });
-
-// const fieldIsDirty = computed(() => {
-//   return modelValue.value!.formFieldsC12[name.value].isDirty;
-// });
-// const fieldHasError = computed(() => {
-//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[name.value].isValid;
-// });
-
-// const { updateFieldValidity } = useFormControl(name.value);
-
-// if (
-//   // !isArray &&
-//   modelValue.value.formFieldsC12[name.value] === undefined
-// ) {
-//   const formFieldC12 = <IFormFieldC12>{
-//     label: props.c12.label,
-//     placeholder: props.c12.placeholder,
-//     errorMessage: props.c12.errorMessage,
-//     useCustomError: false,
-//     customErrors: {},
-//     isValid: false,
-//     isDirty: false,
-//     type: isArray ? 'array' : 'string',
-//     previousValue: null,
-//   };
-//   modelValue.value.formFieldsC12[name.value] = formFieldC12;
-// }
-
-// const { initFormFieldsC12 } = useFormControl();
-// initFormFieldsC12(props.name, formFieldC12);
-
-// const fieldValue = computed(() => {
-//   return modelValue.value;
-// });
-
-// watch(fieldValue, () => {
-//   if (isArray) {
-//     // console.log(Object.values(modelValue.value.data[name.value] ?? []).length);
-//     modelValue.value.validityState[name.value] = Object.values(modelValue.value.data[name.value] ?? []).length > 0;
-//     modelValue.value!.formFieldsC12[name.value].isValid = modelValue.value.validityState[name.value];
-//     // console.log(Object.keys(modelValue.value.data[name.value]).length);
-//     // if (name.value in modelValue.value.data) {
-//     //   const keyValue = modelValue.value.data[name.value] as any[];
-//     //   const isValid = keyValue.indexOf(props.trueValue) > -1;
-//     //   modelValue.value.validityState[name.value] = isValid;
-//     // }
-//   } else {
-//     // updateFieldValidity(name.value, inputField.value?.validity.valid ?? false);
-//     if (!modelValue.value!.formFieldsC12[name.value].isDirty) {
-//       modelValue.value!.formFieldsC12[name.value].isDirty = modelValue.value.data[name.value] !== '';
-//     }
-//     modelValue.value!.formFieldsC12[name.value].isValid = inputField.value?.validity.valid ?? false;
-//     modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
-//   }
-
-//   // if (modelValue.value!.formFieldsC12[name.value].useCustomError && modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue) {
-//   //   modelValue.value!.validityState[name.value] = false;
-//   //   modelValue.value!.formFieldsC12[name.value].isValid = false;
-//   //   modelValue.value.displayErrorMessages = true;
-//   // }
-// });
-
-// const isValid = () => {
-//   setTimeout(() => {
-//     modelValue.value!.validityState[name.value] = inputField.value?.validity.valid ?? false;
-//     modelValue.value!.formFieldsC12[name.value].isValid = inputField.value?.validity.valid ?? false;
-//     if (!modelValue.value!.formFieldsC12[name.value].isDirty) {
-//       modelValue.value!.formFieldsC12[name.value].isDirty = modelValue.value.data[name.value] !== '';
-//     }
-//   }, 0);
-// };
-
-// onMounted(() => {
-//   isValid();
-// });
 </script>
 
 <style scoped lang="css">

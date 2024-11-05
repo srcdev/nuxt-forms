@@ -6,7 +6,7 @@
     </template>
     <InputError :errorMessage :fieldHasError :id="name" :isDetached="true" :styleClassPassthrough="inputErrorStyles" />
     <div class="single-checkbox-items" :class="[optionsLayout]">
-      <InputCheckboxWithLabel :id :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :checkboxAppearance :checkboxStyle>
+      <InputCheckboxWithLabel :id :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :checkboxAppearance :checkboxStyle :theme>
         <template v-if="hasLabelContent" #labelContent>
           <slot name="labelContent"></slot>
         </template>
@@ -17,12 +17,10 @@
 
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
-import type { IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
+import type { IFormMultipleOptions } from '@/types/types.forms';
 
-import type { C12nMultipleCheckboxes, IFormFieldC12, IFormData } from '@/types/types.forms';
-
-const { id, name, legend, label, required, fieldHasError, errorMessage, size, optionsLayout, equalCols, trueValue, falseValue, checkboxAppearance, checkboxStyle, styleClassPassthrough } = defineProps(
-  {
+const { id, name, legend, label, required, fieldHasError, errorMessage, size, optionsLayout, equalCols, trueValue, falseValue, checkboxAppearance, checkboxStyle, styleClassPassthrough, theme } =
+  defineProps({
     id: {
       type: String,
       required: true,
@@ -100,8 +98,14 @@ const { id, name, legend, label, required, fieldHasError, errorMessage, size, op
       type: Array as PropType<string[]>,
       default: () => [],
     },
-  }
-);
+    theme: {
+      type: String as PropType<string>,
+      default: 'primary',
+      validator(value: string) {
+        return propValidators.theme.includes(value);
+      },
+    },
+  });
 
 const slots = useSlots();
 const hasDescription = computed(() => slots.description !== undefined);

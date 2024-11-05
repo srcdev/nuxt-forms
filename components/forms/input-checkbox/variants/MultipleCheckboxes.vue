@@ -19,6 +19,7 @@
           :checkboxAppearance
           :optionsLayout
           :checkboxStyle
+          :theme
         />
       </template>
     </div>
@@ -31,7 +32,7 @@ import type { IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
 
 import type { C12nMultipleCheckboxes, IFormFieldC12, IFormData } from '@/types/types.forms';
 
-const { id, name, legend, label, required, fieldHasError, placeholder, errorMessage, size, optionsLayout, equalCols, checkboxAppearance, checkboxStyle, styleClassPassthrough } = defineProps({
+const { id, name, legend, label, required, fieldHasError, placeholder, errorMessage, size, optionsLayout, equalCols, checkboxAppearance, checkboxStyle, styleClassPassthrough, theme } = defineProps({
   id: {
     type: String,
     required: true,
@@ -103,6 +104,13 @@ const { id, name, legend, label, required, fieldHasError, placeholder, errorMess
   styleClassPassthrough: {
     type: Array as PropType<string[]>,
     default: () => [],
+  },
+  theme: {
+    type: String as PropType<string>,
+    default: 'primary',
+    validator(value: string) {
+      return propValidators.theme.includes(value);
+    },
   },
 });
 

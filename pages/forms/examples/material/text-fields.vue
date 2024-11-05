@@ -111,7 +111,7 @@
                           :required="true"
                           :styleClassPassthrough="['count-1', 'count-2']"
                           v-model.number="state.count"
-                          theme="secondary"
+                          theme="primary"
                         >
                           <template #description>
                             <p class="label-description">This is a description of what the user is required to do</p>
@@ -141,7 +141,7 @@
                           :required="true"
                           :styleClassPassthrough="['style-1', 'style-2']"
                           v-model.number="state.score"
-                          theme="secondary"
+                          theme="primary"
                         >
                           <template #description>
                             <p class="label-description">This is a description of what the user is required to do</p>
@@ -182,6 +182,7 @@
                           checkbox-style="cross"
                           checkbox-appearance="with-decorator"
                           optionsLayout="equal-widths"
+                          theme="primary"
                         >
                           <template #description>
                             <p class="label-description">This is description: optionsLayout = 'equal-widths/inline'</p>
@@ -207,6 +208,7 @@
                           checkbox-style="cross"
                           checkbox-appearance="with-decorator"
                           optionsLayout="inline"
+                          theme="primary"
                         >
                           <template #description>
                             <p class="label-description">This is description: optionsLayout = 'equal-widths'</p>
@@ -232,6 +234,7 @@
                           checkbox-style="check"
                           checkbox-appearance="with-decorator"
                           optionsLayout="equal-widths"
+                          theme="primary"
                         >
                           <template #description>
                             <p class="label-description">This is description: optionsLayout = 'inline'</p>
@@ -254,6 +257,7 @@
                           size="normal"
                           checkbox-style="check"
                           checkbox-appearance="with-decorator"
+                          theme="primary"
                         >
                           <template #description>
                             <p class="label-description">You must <strong>agree</strong> to continue</p>
@@ -276,6 +280,7 @@
                           size="normal"
                           checkbox-style="check"
                           checkbox-appearance="with-decorator"
+                          theme="primary"
                         >
                         </SingleCheckbox>
                       </template>
@@ -294,6 +299,7 @@
                           size="normal"
                           checkbox-style="check"
                           checkbox-appearance="with-decorator"
+                          theme="primary"
                         >
                           <template #labelContent>
                             <span class="body-normal">You must agree to our <NuxtLink to="/typography" class="link-normal">terms and conditions</NuxtLink> to continue</span>
@@ -310,7 +316,7 @@
                           :is-pending="false"
                           :readonly="zodFormControl.submitDisabled"
                           button-text="Submit"
-                          theme="secondary"
+                          theme="primary"
                           size="medium"
                         />
                       </template>

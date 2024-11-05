@@ -1,6 +1,6 @@
 <template>
   <div class="input-radiobutton-with-label" :class="[elementClasses, { error: fieldHasError }]">
-    <InputRadiobuttonCore :id :name :required v-model="modelValue" :size :trueValue :falseValue :checkboxAppearance :checkboxStyle :fieldHasError />
+    <InputRadiobuttonCore :id :name :required v-model="modelValue" :size :trueValue :falseValue :checkboxAppearance :checkboxStyle :fieldHasError :theme />
     <label v-if="hasLabelContent" class="input-radiobutton-label body-normal" :for="id">
       <slot name="labelContent"></slot>
     </label>
@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { id, name, label, required, fieldHasError, trueValue, falseValue, size, checkboxAppearance, checkboxStyle, styleClassPassthrough } = defineProps({
+const { id, name, label, required, fieldHasError, trueValue, falseValue, size, checkboxAppearance, checkboxStyle, styleClassPassthrough, theme } = defineProps({
   id: {
     type: String,
     required: true,
@@ -64,6 +64,13 @@ const { id, name, label, required, fieldHasError, trueValue, falseValue, size, c
   styleClassPassthrough: {
     type: Array as PropType<string[]>,
     default: () => [],
+  },
+  theme: {
+    type: String as PropType<string>,
+    default: 'primary',
+    validator(value: string) {
+      return propValidators.theme.includes(value);
+    },
   },
 });
 

@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
-const { id, name, required, trueValue, falseValue, multipleOptions, styleClassPassthrough, size, checkboxAppearance, checkboxStyle, fieldHasError } = defineProps({
+const { id, name, required, trueValue, falseValue, multipleOptions, theme, styleClassPassthrough, size, checkboxAppearance, checkboxStyle, fieldHasError } = defineProps({
   id: {
     type: String,
     required: true,
