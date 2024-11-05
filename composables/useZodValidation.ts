@@ -34,6 +34,7 @@ const useZodValidation = (formSchema: any) => {
 
   const getErrorCount = (zodErrorObj: Ref<z.ZodFormattedError<formSchema> | null>) => {
     const zodCountErrors = zodErrorObj.value ?? [];
+    // @ts-ignore
     delete zodCountErrors._errors;
     const errorCount = Object.keys(zodCountErrors ?? []).length;
     return errorCount;
