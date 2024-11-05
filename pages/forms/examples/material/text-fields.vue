@@ -101,10 +101,10 @@
                         <InputNumberDefault
                           id="count"
                           name="count"
-                          label="How many things? Between 0 & 100"
-                          :min="0"
-                          :max="100"
-                          :step="1"
+                          label="How many things? Between 25 & 75 , step 5"
+                          :min="25"
+                          :max="75"
+                          :step="5"
                           placeholder="eg. What\'s your count?"
                           :errorMessage="formErrors?.count?._errors[0] ?? ''"
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.count)"
@@ -411,7 +411,8 @@ const formSchema = reactive(
         })
         .int({ message: 'Count must be a whole number' })
         .gte(25, 'Count must be between 25 and 75')
-        .lte(75, 'Count must be between 25 and 75'),
+        .lte(75, 'Count must be between 25 and 75')
+        .multipleOf(5, 'Count must be a multiple of 5'),
       score: z
         .number({
           required_error: 'Score is required',

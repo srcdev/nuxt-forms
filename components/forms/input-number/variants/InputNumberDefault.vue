@@ -4,6 +4,8 @@
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
+    <InputError :errorMessage :fieldHasError :id :isDetached="true" :styleClassPassthrough="['mbe-20']" />
+
     <InputNumberCore v-model="modelValue" :id :name :min :max :step :theme :required :size :weight :fieldHasError>
       <template v-if="hasLeftContent" #left>
         <InputButtonCore
@@ -42,7 +44,7 @@
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
 
-const { id, name, label, required, min, max, step, theme, size, weight, styleClassPassthrough, fieldHasError } = defineProps({
+const { id, name, label, required, min, max, step, theme, size, weight, styleClassPassthrough, errorMessage, fieldHasError } = defineProps({
   id: {
     type: String,
     required: true,
