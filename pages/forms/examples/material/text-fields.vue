@@ -234,7 +234,7 @@
                           checkbox-style="check"
                           checkbox-appearance="with-decorator"
                           optionsLayout="equal-widths"
-                          theme="primary"
+                          theme="secondary"
                         >
                           <template #description>
                             <p class="label-description">This is description: optionsLayout = 'inline'</p>

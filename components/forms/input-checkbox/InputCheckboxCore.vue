@@ -110,31 +110,21 @@ const isChecked = computed(() => {
 .input-checkbox-wrapper {
   --_checkbox-size: initial;
   --_checkbox-border-radius: 4px;
-  --_form-theme: var(--theme-form-primary);
   --_outline-width: var(--input-outline-width-thin);
-  --_border-width: var(--input-border-width-thin);
-  --_border-color: var(--brand-grayscale-border-default);
-  --_outline-color: var(--brand-grayscale-border-default);
-  --_focus-colour: var(--theme-form-primary-focus);
-  --_input-bg-color: white;
+  --_border-width: var(--input-border-width-thin); /* --input-border-width-default / 2px */
 
   display: grid;
   grid-template-areas: 'checkbox-stack';
 
-  &.error {
-    --_form-theme: var(--theme-error);
-  }
-
   &.with-decorator {
     border-radius: var(--_checkbox-border-radius);
-    border: var(--_border-width) solid var(--_border-color);
+    border: var(--_border-width) solid var(--theme-form-input-border);
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
 
     &:has(.input-checkbox-core:focus-visible) {
-      --_border-color: white;
-      box-shadow: 0 0 2px 3px var(--_focus-colour);
-      outline-color: var(--_focus-colour);
+      box-shadow: 0 0 2px 3px var(--theme-form-checkbox-shadow-focus);
+      outline-color: var(--theme-form-input-outline-focus);
     }
   }
 
@@ -158,7 +148,7 @@ const isChecked = computed(() => {
   .input-checkbox-decorator {
     display: grid;
     grid-area: checkbox-stack;
-    background-color: var(--_input-bg-color);
+    background-color: var(--theme-form-input-bg);
 
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
@@ -177,10 +167,9 @@ const isChecked = computed(() => {
       grid-area: stack;
       width: calc(var(--_checkbox-size) * 0.2);
       height: calc(var(--_checkbox-size) * 0.45);
-      border-bottom: 3px solid var(--_form-theme);
-      border-right: 3px solid var(--_form-theme);
+      border-bottom: 3px solid var(--theme-form-checkbox-symbol);
+      border-right: 3px solid var(--theme-form-checkbox-symbol);
       transform: rotate(45deg) translate(-1px, -1px);
-      /* transform: translate(-3px, 0px); */
       opacity: 0;
       transition: opacity 0.2s ease-in-out;
 
@@ -193,7 +182,7 @@ const isChecked = computed(() => {
       grid-area: stack;
       width: calc(var(--_checkbox-size) * 0.65);
       height: 3px;
-      background-color: var(--_form-theme);
+      background-color: var(--theme-form-checkbox-symbol);
       transform: rotate(45deg);
       opacity: 0;
       transition: opacity 0.2s ease-in-out;
@@ -212,7 +201,7 @@ const isChecked = computed(() => {
         display: block;
         width: calc(var(--_checkbox-size) * 0.65);
         height: 3px;
-        background-color: var(--_form-theme);
+        background-color: var(--theme-form-checkbox-bg);
         transform: rotate(-90deg);
         opacity: 0;
         transition: opacity 0.2s ease-in-out;
@@ -239,7 +228,7 @@ const isChecked = computed(() => {
 
   .input-checkbox-core {
     grid-area: checkbox-stack;
-    border: var(--_border-width) solid var(--_form-theme);
+    border: var(--_border-width) solid var(--theme-form-input-border);
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
 
@@ -257,12 +246,8 @@ const isChecked = computed(() => {
     }
 
     &:focus-visible {
-      border-radius: var(--input-border-radius);
-    }
-
-    &:focus {
-      border: var(--_border-width) solid var(--_form-theme);
-      outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%);
+      border: var(--_border-width) solid var(--theme-form-input-border);
+      outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 50%);
     }
 
     &:checked::after {
@@ -272,25 +257,6 @@ const isChecked = computed(() => {
       place-content: center;
       font-size: calc(var(--_checkbox-size) * 0.75);
     }
-    &.error {
-      /* border-color: var(--theme-error); */
-      border: var(--_border-width) solid var(--theme-error);
-      outline: var(--_outline-width) solid hsl(from var(--theme-error) h s 75%);
-      background-color: hsl(from var(--theme-error) h s 95%);
-    }
-
-    /* &:valid {
-      border-color: var(--theme-success);
-    }
-    &:invalid {
-      border-color: var(--theme-error);
-    }
-    &:not(:placeholder-shown):valid {
-      border-color: var(--theme-success);
-    }
-    &:not(:placeholder-shown):invalid {
-      border-color: var(--theme-error);
-    } */
   }
 }
 </style>

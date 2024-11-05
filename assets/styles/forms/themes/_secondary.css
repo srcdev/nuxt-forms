@@ -8,6 +8,22 @@
   --theme-form-secondary-bg-hover: var(--gray-2);
   --theme-form-secondary-color: var(--gray-1);
   --theme-form-secondary-color-hover: var(--gray-11);
-  --theme-form-secondary-focus: var(--blue-6);
-  --theme-form-secondary-radio-color-bg: var(--gray-00);
+  --theme-form-secondary-focus: var(--gray-6);
+  --theme-form-secondary-radio-fill: var(--gray-00);
+
+  .secondary {
+    --theme-form-input-bg: white;
+    --theme-form-input-border: var(--gray-8);
+    --theme-form-input-border-active: var(--gray-2);
+    --theme-form-input-border-focus: var(--gray-2);
+    --theme-form-input-outline: var(--gray-6);
+    --theme-form-input-outline-active: var(--gray-8);
+    --theme-form-input-outline-focus: var(--gray-8);
+    --theme-form-checkbox-bg: var(--gray-6);
+    --theme-form-checkbox-bg-active: var(--gray-6);
+    --theme-form-checkbox-bg-focus: var(--gray-6);
+    --theme-form-checkbox-shadow: transparent;
+    --theme-form-checkbox-shadow-focus: var(--gray-6);
+    --theme-form-checkbox-symbol: var(--gray-8);
+  }
 }
