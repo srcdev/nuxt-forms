@@ -10,19 +10,26 @@
   --theme-form-error-color: var(--red-1);
   --theme-form-error-color-hover: var(--red-9);
 
-  .error {
+  [data-form-theme='error'] {
     --theme-form-input-bg: white;
     --theme-form-input-border: var(--red-8);
     --theme-form-input-border-active: var(--red-2);
     --theme-form-input-border-focus: var(--red-2);
+    /* --theme-form-input-border-focus: red; */
     --theme-form-input-outline: var(--red-6);
+    /* --theme-form-input-outline: white; */
     --theme-form-input-outline-active: var(--red-8);
     --theme-form-input-outline-focus: var(--red-8);
-    --theme-form-checkbox-bg: var(--red-6);
-    --theme-form-checkbox-bg-active: var(--red-6);
-    --theme-form-checkbox-bg-focus: var(--red-6);
+    --theme-form-input-text: var(--brand-grayscale-text-form);
+
+    --theme-form-checkbox-bg: white;
     --theme-form-checkbox-shadow: transparent;
     --theme-form-checkbox-shadow-focus: var(--red-6);
     --theme-form-checkbox-symbol: var(--red-8);
+
+    --theme-form-radio-bg: white;
+    --theme-form-radio-shadow: transparent;
+    --theme-form-radio-shadow-focus: var(--red-6);
+    --theme-form-radio-symbol: var(--red-8);
   }
 }

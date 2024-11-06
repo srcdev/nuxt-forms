@@ -1,5 +1,5 @@
 <template>
-  <div class="input-number-wrapper" :class="elementClasses">
+  <div class="input-number-wrapper" :data-form-theme="formTheme" :class="elementClasses">
     <div v-if="hasLeftContent" class="slot left">
       <slot name="left"></slot>
     </div>
@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { id, name, required, min, max, step, theme, size, weight, styleClassPassthrough } = defineProps({
+const { id, name, required, min, max, step, theme, size, weight, fieldHasError, styleClassPassthrough } = defineProps({
   id: {
     type: String,
     required: true,
@@ -78,6 +78,10 @@ const { id, name, required, min, max, step, theme, size, weight, styleClassPasst
       return propValidators.weight.includes(value);
     },
   },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
   styleClassPassthrough: {
     type: Array as PropType<string[]>,
     default: () => [],
@@ -87,6 +91,10 @@ const { id, name, required, min, max, step, theme, size, weight, styleClassPasst
 const slots = useSlots();
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
+
+const formTheme = computed(() => {
+  return fieldHasError ? 'error' : theme;
+});
 
 const modelValue = defineModel<number | readonly number[]>();
 
@@ -100,39 +108,14 @@ onMounted(() => {
 
 <style lang="css">
 .input-number-wrapper {
-  --_form-theme: var(--theme-form-primary);
-  --_focus-colour: var(--theme-form-primary-focus);
   --_gutter: 12px;
   --_border-width: var(--input-border-width-thin);
-  --_border-color: var(--_form-theme);
-  --_input-bg-color: white;
-  --_input-text-color: var(--brand-grayscale-text-form);
   --_min-width: v-bind(minLength);
 
   display: flex;
   align-items: center;
 
-  /* background-color: var(--_input-bg-color);
-  border-radius: var(--input-border-width-default);
-  border: var(--_border-width) solid var(--_border-color); */
   width: fit-content;
-
-  &.theme-secondary {
-    --_form-theme: var(--theme-form-secondary);
-    --_focus-colour: var(--theme-form-secondary-focus);
-  }
-
-  &.error {
-    --_form-theme: var(--theme-error);
-    --_input-text-color: var(--theme-error);
-  }
-
-  /* &:focus-within {
-    --_border-color: white;
-
-    outline: var(--focus-visible-outline);
-    box-shadow: var(--focus-visible-box-shadow);
-  } */
 
   .slot {
     display: inline-block;
@@ -163,11 +146,12 @@ onMounted(() => {
     outline: none;
     box-shadow: none;
 
-    background-color: var(--_input-bg-color);
+    background-color: var(--theme-form-input-bg);
     border-radius: var(--input-border-width-default);
-    border: var(--_border-width) solid var(--_border-color);
+    border: var(--_border-width) solid var(--theme-form-input-border);
+    outline: var(--_outline-width) solid var(--theme-form-input-outline);
 
-    color: var(--_input-text-color);
+    /* color: var(--theme-form-input-text); */
     font-family: var(--font-family);
     font-size: var(--theme-form-button-font-size-normal);
     line-height: var(--line-height);
@@ -176,9 +160,8 @@ onMounted(() => {
     min-width: var(--_min-width);
 
     &:focus-visible {
-      --_border-color: white;
-
-      outline: var(--focus-visible-outline);
+      border: var(--_border-width) solid var(--theme-form-input-border);
+      outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 50%);
       box-shadow: var(--focus-visible-box-shadow);
     }
 
@@ -202,10 +185,10 @@ input:autofill,
 input:-webkit-autofill-strong-password,
 input:-webkit-autofill-strong-password-viewable,
 input:-webkit-autofill-and-obscured {
-  background-color: var(--_input-bg-color) !important;
+  background-color: var(--theme-form-input-bg) !important;
   background-image: none !important;
-  color: var(--_input-text-color) !important;
-  -webkit-box-shadow: 0 0 0px 1000px var(--_input-bg-color) inset;
+  color: var(--theme-form-input-text) !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--theme-form-input-bg) inset;
   /* -webkit-text-fill-color: black; */
   transition: background-color 5000s ease-in-out 0s;
 }

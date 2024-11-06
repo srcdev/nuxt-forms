@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-wrapper" :class="[theme, size, checkboxAppearance, { error: fieldHasError }]">
+  <div class="input-checkbox-wrapper" :data-form-theme="formTheme" :class="[size, checkboxAppearance, { error: fieldHasError }]">
     <input
       type="checkbox"
       :true-value="trueValue"
@@ -89,6 +89,10 @@ const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
+const formTheme = computed(() => {
+  return fieldHasError ? 'error' : theme;
+});
+
 const modelValue = defineModel<any>();
 
 const inputField = ref<HTMLInputElement | null>(null);
@@ -97,9 +101,7 @@ const isArray = Array.isArray(modelValue.value);
 
 const isChecked = computed(() => {
   if (isArray) {
-    // if (name in (toRaw(modelValue.value) as any)) {
     return modelValue.value.indexOf(trueValue) > -1;
-    // }
   } else {
     return modelValue.value === trueValue;
   }
@@ -114,7 +116,7 @@ const isChecked = computed(() => {
   --_border-width: var(--input-border-width-thin); /* --input-border-width-default / 2px */
 
   display: grid;
-  grid-template-areas: 'checkbox-stack';
+  grid-template-areas: 'element-stack';
 
   &.with-decorator {
     border-radius: var(--_checkbox-border-radius);
@@ -147,8 +149,8 @@ const isChecked = computed(() => {
 
   .input-checkbox-decorator {
     display: grid;
-    grid-area: checkbox-stack;
-    background-color: var(--theme-form-input-bg);
+    grid-area: element-stack;
+    background-color: var(--theme-form-checkbox-bg);
 
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
@@ -201,7 +203,7 @@ const isChecked = computed(() => {
         display: block;
         width: calc(var(--_checkbox-size) * 0.65);
         height: 3px;
-        background-color: var(--theme-form-checkbox-bg);
+        background-color: var(--theme-form-checkbox-symbol);
         transform: rotate(-90deg);
         opacity: 0;
         transition: opacity 0.2s ease-in-out;
@@ -227,7 +229,7 @@ const isChecked = computed(() => {
   }
 
   .input-checkbox-core {
-    grid-area: checkbox-stack;
+    grid-area: element-stack;
     border: var(--_border-width) solid var(--theme-form-input-border);
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);

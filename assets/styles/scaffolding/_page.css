@@ -1,5 +1,11 @@
+:root {
+  /* color-scheme: light dark; */
+}
+
 html {
   background-color: var(--body-background-color);
+  /* background-color: light-dark(var(--light-body-background-color), var(--dark-body-background-color)); */
+
   font-size: 62.5%;
 }
 body,

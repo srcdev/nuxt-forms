@@ -1,5 +1,5 @@
 <template>
-  <div class="input-range-wrapper">
+  <div class="input-range-wrapper" :data-form-theme="formTheme">
     <div v-if="hasLeftContent" class="slot left">
       <slot name="left"></slot>
     </div>
@@ -14,7 +14,7 @@
         :max
         :step
         :list="hasDataList ? name + '-datalist' : ''"
-        :class="['input-range-core', `input-range--${theme}`, `input-range--${size}`, `input-range--${weight}`, styleClassPassthrough]"
+        :class="['input-range-core', `input-range--${size}`, `input-range--${weight}`, styleClassPassthrough]"
         v-model="modelValue"
         ref="inputField"
       />
@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { id, name, required, min, max, step, theme, size, weight, styleClassPassthrough } = defineProps({
+const { id, name, required, min, max, step, theme, size, weight, styleClassPassthrough, fieldHasError } = defineProps({
   id: {
     type: String,
     required: true,
@@ -82,11 +82,11 @@ const { id, name, required, min, max, step, theme, size, weight, styleClassPasst
       return propValidators.weight.includes(value);
     },
   },
-  styleClassPassthrough: {
-    type: String,
-    default: '',
+  fieldHasError: {
+    type: Boolean,
+    default: false,
   },
-  deepCssClassPassthrough: {
+  styleClassPassthrough: {
     type: String,
     default: '',
   },
@@ -96,6 +96,10 @@ const slots = useSlots();
 const hasDataList = computed(() => slots.datalist !== undefined);
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
+
+const formTheme = computed(() => {
+  return fieldHasError ? 'error' : theme;
+});
 
 const modelValue = defineModel<number | readonly number[]>();
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="input-number-with-label" :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }]">
+  <div class="input-number-with-label" :data-form-theme="formTheme" :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }]">
     <label class="input-number-label body-normal-bold" :for="id">{{ label }}</label>
     <template v-if="hasDescription">
       <slot name="description"></slot>
@@ -117,6 +117,10 @@ const hasDescription = computed(() => slots.description !== undefined);
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+
+const formTheme = computed(() => {
+  return fieldHasError ? 'error' : theme;
+});
 
 const modelValue = defineModel<number | readonly number[]>();
 

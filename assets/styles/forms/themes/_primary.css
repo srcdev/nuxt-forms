@@ -11,19 +11,26 @@
   --theme-form-primary-focus: var(--blue-6);
   --theme-form-primary-radio-fill: var(--gray-00);
 
-  .primary {
+  [data-form-theme='primary'] {
     --theme-form-input-bg: white;
     --theme-form-input-border: var(--blue-8);
     --theme-form-input-border-active: var(--blue-2);
-    --theme-form-input-border-focus: var(--blue-2);
-    --theme-form-input-outline: var(--blue-6);
+    /* --theme-form-input-border-focus: var(--blue-2); */
+    --theme-form-input-border-focus: red;
+    /* --theme-form-input-outline: var(--blue-6); */
+    --theme-form-input-outline: white;
     --theme-form-input-outline-active: var(--blue-8);
     --theme-form-input-outline-focus: var(--blue-8);
-    --theme-form-checkbox-bg: var(--blue-6);
-    --theme-form-checkbox-bg-active: var(--blue-6);
-    --theme-form-checkbox-bg-focus: var(--blue-6);
+    --theme-form-input-text: var(--brand-grayscale-text-form);
+
+    --theme-form-checkbox-bg: white;
     --theme-form-checkbox-shadow: transparent;
     --theme-form-checkbox-shadow-focus: var(--blue-6);
     --theme-form-checkbox-symbol: var(--blue-8);
+
+    --theme-form-radio-bg: white;
+    --theme-form-radio-shadow: transparent;
+    --theme-form-radio-shadow-focus: var(--blue-6);
+    --theme-form-radio-symbol: var(--blue-8);
   }
 }

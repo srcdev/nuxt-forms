@@ -1,5 +1,5 @@
 <template>
-  <div class="input-radiobutton-wrapper" :class="[size, checkboxAppearance, { error: fieldHasError }]">
+  <div class="input-radiobutton-wrapper" :data-form-theme="formTheme" :class="[size, checkboxAppearance, { error: fieldHasError }]">
     <input
       type="radio"
       :true-value="trueValue"
@@ -88,6 +88,10 @@ const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
+const formTheme = computed(() => {
+  return fieldHasError ? 'error' : theme;
+});
+
 const modelValue = defineModel<any>();
 
 const inputField = ref<HTMLInputElement | null>(null);
@@ -106,32 +110,22 @@ const isChecked = computed(() => {
 <style scoped lang="css">
 .input-radiobutton-wrapper {
   --_checkbox-size: initial;
-  --_form-theme: var(--theme-form-primary);
   --_outline-width: var(--input-outline-width-thin);
   --_border-width: var(--input-border-width-thin);
-  --_border-color: var(--brand-grayscale-border-default);
-  --_outline-color: var(--brand-grayscale-border-default);
-  --_focus-colour: var(--theme-form-primary-focus);
-  --_input-bg-color: white;
 
   display: grid;
-  grid-template-areas: 'checkbox-stack';
-
-  &.error {
-    --_form-theme: var(--theme-error);
-  }
+  grid-template-areas: 'element-stack';
 
   &.with-decorator {
     border-radius: 50%;
-    border: var(--_border-width) solid var(--_border-color);
+    border: var(--_border-width) solid var(--theme-form-input-border);
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
     overflow: hidden;
 
     &:has(.input-radiobutton-core:focus-visible) {
-      --_border-color: white;
-      box-shadow: 0 0 2px 3px var(--_focus-colour);
-      outline-color: var(--_focus-colour);
+      box-shadow: 0 0 2px 3px var(--theme-form-radio-shadow-focus);
+      outline-color: var(--theme-form-input-outline-focus);
     }
   }
 
@@ -155,8 +149,8 @@ const isChecked = computed(() => {
   .input-radiobutton-decorator {
     --_padding: 5px;
     display: grid;
-    grid-area: checkbox-stack;
-    background-color: var(--_input-bg-color);
+    grid-area: element-stack;
+    background-color: var(--theme-form-checkbox-bg);
 
     place-content: center;
     position: relative;
@@ -164,10 +158,10 @@ const isChecked = computed(() => {
 
     div {
       grid-area: stack;
-      background-color: hsl(from var(--_form-theme) h s 50%);
+      background-color: hsl(from var(--theme-form-radio-symbol) h s 50%);
       width: calc(var(--_checkbox-size) - (var(--_padding) * 2));
       height: calc(var(--_checkbox-size) - var(--_padding) * 2);
-      border: 1px solid var(--_form-theme);
+      border: 1px solid var(--theme-form-input-border);
       border-radius: 50%;
       opacity: 0;
       transition: opacity 0.2s ease-in-out;
@@ -179,8 +173,8 @@ const isChecked = computed(() => {
   }
 
   .input-radiobutton-core {
-    grid-area: checkbox-stack;
-    border: var(--_border-width) solid var(--_form-theme);
+    grid-area: element-stack;
+    border: var(--_border-width) solid var(--theme-form-input-border);
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
 
@@ -202,36 +196,16 @@ const isChecked = computed(() => {
     }
 
     &:focus {
-      border: var(--_border-width) solid var(--_form-theme);
-      outline: var(--_outline-width) solid hsl(from var(--_form-theme) h s 50%);
+      border: var(--_border-width) solid var(--theme-form-input-border);
+      outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline) h s 50%);
     }
 
     &:checked::after {
-      /* content: '✔'; */
       display: grid;
       font-family: var(--font-family);
       place-content: center;
       font-size: calc(var(--_checkbox-size) * 0.75);
     }
-    &.error {
-      /* border-color: var(--theme-error); */
-      border: var(--_border-width) solid var(--theme-error);
-      outline: var(--_outline-width) solid hsl(from var(--theme-error) h s 75%);
-      background-color: hsl(from var(--theme-error) h s 95%);
-    }
-
-    /* &:valid {
-      border-color: var(--theme-success);
-    }
-    &:invalid {
-      border-color: var(--theme-error);
-    }
-    &:not(:placeholder-shown):valid {
-      border-color: var(--theme-success);
-    }
-    &:not(:placeholder-shown):invalid {
-      border-color: var(--theme-error);
-    } */
   }
 }
 </style>

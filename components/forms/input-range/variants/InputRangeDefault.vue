@@ -1,5 +1,5 @@
 <template>
-  <div class="input-range-with-label" :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }]">
+  <div class="input-range-with-label" :data-form-theme="formTheme" :class="[elementClasses, { error: fieldHasError }]">
     <label class="input-range-label body-normal-bold" :for="id">{{ label }}</label>
     <template v-if="hasDescription">
       <slot name="description"></slot>
@@ -126,6 +126,10 @@ const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
+const formTheme = computed(() => {
+  return fieldHasError ? 'error' : theme;
+});
+
 const modelValue = defineModel<number | readonly number[]>();
 
 const updateRange = (step: number, withinRangeLimit: boolean) => {
@@ -137,19 +141,6 @@ const updateRange = (step: number, withinRangeLimit: boolean) => {
 
 <style lang="css">
 .input-range-with-label {
-  --_form-theme: var(--theme-form-primary);
-  --_border-width: var(--input-border-width-default);
-  --_outline-width: var(--input-outline-width-thin);
-  --_label-padding-inline: 10px;
-
-  &.theme-secondary {
-    --_form-theme: var(--theme-form-secondary);
-  }
-
-  &.error {
-    --_form-theme: var(--theme-error);
-  }
-
   .input-range-label {
     display: block;
     margin-block: 8px;
@@ -163,7 +154,6 @@ const updateRange = (step: number, withinRangeLimit: boolean) => {
     font-family: var(--font-family);
     font-size: 16px;
     margin-top: 12px;
-    /* color: var(--theme-form-secondary); */
   }
 }
 </style>
