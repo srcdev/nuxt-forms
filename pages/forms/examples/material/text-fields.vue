@@ -27,6 +27,7 @@
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress)"
                           :required="true"
                           :styleClassPassthrough="['style-1', 'style-2']"
+                          theme="primary"
                         >
                           <template #left>
                             <Icon name="radix-icons:envelope-closed" class="icon" />
@@ -49,6 +50,7 @@
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.username)"
                           :required="true"
                           :styleClassPassthrough="['style-1', 'style-2']"
+                          theme="primary"
                         >
                           <template #left>
                             <Icon name="radix-icons:person" class="icon" />
@@ -70,6 +72,7 @@
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.password)"
                           :required="true"
                           :styleClassPassthrough="['style-1', 'style-2']"
+                          theme="primary"
                         >
                           <template #right>
                             <Icon name="radix-icons:eye-open" class="icon" />
@@ -234,7 +237,7 @@
                           checkbox-style="check"
                           checkbox-appearance="with-decorator"
                           optionsLayout="equal-widths"
-                          theme="secondary"
+                          theme="primary"
                         >
                           <template #description>
                             <p class="label-description">This is description: optionsLayout = 'inline'</p>

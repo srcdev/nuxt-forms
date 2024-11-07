@@ -124,8 +124,9 @@ const isChecked = computed(() => {
     overflow: hidden;
 
     &:has(.input-radiobutton-core:focus-visible) {
-      box-shadow: 0 0 2px 3px var(--theme-form-radio-shadow-focus);
-      outline-color: var(--theme-form-input-outline-focus);
+      border: var(--_border-width) solid var(--theme-form-input-border-focus);
+      outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 50%);
+      box-shadow: var(--focus-visible-box-shadow);
     }
   }
 
@@ -191,9 +192,9 @@ const isChecked = computed(() => {
       cursor: pointer;
     }
 
-    &:focus-visible {
+    /* &:focus-visible {
       border-radius: var(--input-border-radius);
-    }
+    } */
 
     &:focus {
       border: var(--_border-width) solid var(--theme-form-input-border);

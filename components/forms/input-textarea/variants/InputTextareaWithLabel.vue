@@ -1,8 +1,8 @@
 <template>
-  <div class="input-textarea-with-label" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
+  <div class="input-textarea-with-label" :data-form-theme="formTheme" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
     <label :for="id" class="input-textarea-label body-normal-semibold">{{ label }}</label>
 
-    <InputTextareaCore v-model="modelValue" v-model:isDirty="isDirty" v-model:isActive="isActive" :maxlength :id :name :placeholder :label :fieldHasError :required :styleClassPassthrough>
+    <InputTextareaCore v-model="modelValue" v-model:isDirty="isDirty" v-model:isActive="isActive" :maxlength :id :name :placeholder :label :fieldHasError :required :styleClassPassthrough :theme>
       <template v-if="hasLeftSlot" #left>
         <slot name="left"></slot>
       </template>
@@ -15,7 +15,8 @@
 </template>
 
 <script setup lang="ts">
-const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough } = defineProps({
+import propValidators from '../../c12/prop-validators';
+const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme } = defineProps({
   maxlength: {
     type: Number,
     default: 255,
@@ -52,11 +53,22 @@ const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, re
     type: Array as PropType<string[]>,
     default: () => [],
   },
+  theme: {
+    type: String as PropType<string>,
+    default: 'primary',
+    validator(value: string) {
+      return propValidators.theme.includes(value);
+    },
+  },
 });
 
 const slots = useSlots();
 const hasLeftSlot = computed(() => slots.left !== undefined);
 const hasRightSlot = computed(() => slots.right !== undefined);
+
+const formTheme = computed(() => {
+  return fieldHasError ? 'error' : theme;
+});
 
 const modelValue = defineModel<string | number | readonly string[] | null | undefined>();
 const isActive = ref<boolean>(false);

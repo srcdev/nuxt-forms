@@ -1,5 +1,5 @@
 <template>
-  <div class="input-text-with-label" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
+  <div class="input-text-with-label" :data-form-theme="formTheme" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
     <label :for="id" class="input-text-label body-normal-bold">{{ label }}</label>
 
     <InputTextCore
@@ -16,6 +16,7 @@
       :fieldHasError
       :required
       :styleClassPassthrough
+      :theme
     >
       <template v-if="hasLeftSlot" #left>
         <slot name="left"></slot>
@@ -29,7 +30,8 @@
 </template>
 
 <script setup lang="ts">
-const { type, maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough } = defineProps({
+import propValidators from '../../../c12/prop-validators';
+const { type, maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme } = defineProps({
   maxlength: {
     type: Number,
     default: 255,
@@ -70,11 +72,22 @@ const { type, maxlength, id, name, placeholder, label, errorMessage, fieldHasErr
     type: Array as PropType<string[]>,
     default: () => [],
   },
+  theme: {
+    type: String as PropType<string>,
+    default: 'primary',
+    validator(value: string) {
+      return propValidators.theme.includes(value);
+    },
+  },
 });
 
 const slots = useSlots();
 const hasLeftSlot = computed(() => slots.left !== undefined);
 const hasRightSlot = computed(() => slots.right !== undefined);
+
+const formTheme = computed(() => {
+  return fieldHasError ? 'error' : theme;
+});
 
 const modelValue = defineModel();
 const isActive = ref<boolean>(false);

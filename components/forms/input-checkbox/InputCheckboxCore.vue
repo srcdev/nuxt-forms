@@ -84,9 +84,6 @@ const { id, name, required, trueValue, falseValue, multipleOptions, theme, style
   },
 });
 
-const slots = useSlots();
-const hasLeftContent = computed(() => slots.left !== undefined);
-const hasRightContent = computed(() => slots.right !== undefined);
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 const formTheme = computed(() => {
@@ -125,8 +122,9 @@ const isChecked = computed(() => {
     width: var(--_checkbox-size);
 
     &:has(.input-checkbox-core:focus-visible) {
-      box-shadow: 0 0 2px 3px var(--theme-form-checkbox-shadow-focus);
-      outline-color: var(--theme-form-input-outline-focus);
+      border: var(--_border-width) solid var(--theme-form-input-border-focus);
+      outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 50%);
+      box-shadow: var(--focus-visible-box-shadow);
     }
   }
 
@@ -250,6 +248,7 @@ const isChecked = computed(() => {
     &:focus-visible {
       border: var(--_border-width) solid var(--theme-form-input-border);
       outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 50%);
+      box-shadow: var(--focus-visible-box-shadow);
     }
 
     &:checked::after {

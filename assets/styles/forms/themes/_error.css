@@ -15,9 +15,8 @@
     --theme-form-input-border: var(--red-8);
     --theme-form-input-border-active: var(--red-2);
     --theme-form-input-border-focus: var(--red-2);
-    /* --theme-form-input-border-focus: red; */
-    --theme-form-input-outline: var(--red-6);
-    /* --theme-form-input-outline: white; */
+    /* --theme-form-input-outline: var(--red-6); */
+    --theme-form-input-outline: white;
     --theme-form-input-outline-active: var(--red-8);
     --theme-form-input-outline-focus: var(--red-8);
     --theme-form-input-text: var(--brand-grayscale-text-form);
