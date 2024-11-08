@@ -20,6 +20,8 @@
       ref="inputField"
       :aria-invalid="fieldHasError"
       :aria-describedby="`${id}-error-message`"
+      :pattern="inputPattern"
+      :inputmode
       @focusin="updateFocus(true)"
       @focusout="updateFocus(false)"
     />
@@ -33,12 +35,14 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-import type { C12nInputTextCore, IFormFieldC12, IFormData, IFieldsInitialState, TFieldsInitialState } from '@/types/types.forms';
-
-const { type, maxlength, id, name, placeholder, required, fieldHasError, styleClassPassthrough, theme } = defineProps({
+const { type, inputmode, maxlength, id, name, placeholder, required, fieldHasError, styleClassPassthrough, theme } = defineProps({
   type: {
     type: String,
     required: true,
+  },
+  inputmode: {
+    type: String as PropType<'text' | 'email' | 'tel' | 'url' | 'search' | 'numeric' | 'none' | 'decimal'>,
+    default: 'text',
   },
   maxlength: {
     type: Number,
@@ -89,6 +93,10 @@ const modelValue = defineModel();
 const isDirty = defineModel('isDirty');
 const isActive = defineModel('isActive');
 
+const inputPattern = computed(() => {
+  return inputmode === 'numeric' ? '[0-9]+' : undefined;
+});
+
 const updateFocus = (isFocused: boolean) => {
   isActive.value = isFocused;
 };
@@ -97,8 +105,28 @@ const inputField = ref<HTMLInputElement | null>(null);
 
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
+// TODO: Move this to a utility function to allow removeEventListener on unmounted
+// Leaving like this could lead to memory leaks
+const validateInput = () => {
+  if (inputField.value !== null) {
+    inputField.value.addEventListener('beforeinput', (event: any) => {
+      let beforeValue = modelValue.value;
+      event.target.addEventListener(
+        'input',
+        () => {
+          if (inputField.value !== null && inputField.value.validity.patternMismatch) {
+            inputField.value.value = beforeValue as string;
+          }
+        },
+        { once: true }
+      );
+    });
+  }
+};
+
 onMounted(() => {
   updateElementClasses(['deep-bristol', 'deep-london', 'deep-bath']);
+  if (inputmode === 'numeric') validateInput();
 });
 </script>
 

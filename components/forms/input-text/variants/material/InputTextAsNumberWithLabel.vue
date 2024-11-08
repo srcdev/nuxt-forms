@@ -1,0 +1,113 @@
+<template>
+  <div class="input-text-with-label" :data-form-theme="formTheme" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
+    <label :for="id" class="input-text-label body-normal-bold">{{ label }}</label>
+    <template v-if="hasDescription">
+      <slot name="description"></slot>
+    </template>
+
+    <InputTextCore
+      v-model="modelValue"
+      v-model:isDirty="isDirty"
+      v-model:isActive="isActive"
+      type="text"
+      :maxlength
+      :id
+      :name
+      :placeholder
+      :label
+      :errorMessage
+      :fieldHasError
+      :required
+      :styleClassPassthrough
+      :theme
+      inputmode="numeric"
+    >
+      <template v-if="hasLeftSlot" #left>
+        <slot name="left"></slot>
+      </template>
+      <template v-if="hasRightSlot" #right>
+        <slot name="right"></slot>
+      </template>
+    </InputTextCore>
+    <InputError :errorMessage="errorMessage" :fieldHasError :id :isDetached="false" />
+  </div>
+</template>
+
+<script setup lang="ts">
+import propValidators from '../../../c12/prop-validators';
+const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme } = defineProps({
+  maxlength: {
+    type: Number,
+    default: 255,
+  },
+  id: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  placeholder: {
+    type: String,
+    default: '',
+  },
+  label: {
+    type: String,
+    required: true,
+  },
+  errorMessage: {
+    type: [Object, String],
+    required: true,
+  },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  styleClassPassthrough: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
+  theme: {
+    type: String as PropType<string>,
+    default: 'primary',
+    validator(value: string) {
+      return propValidators.theme.includes(value);
+    },
+  },
+});
+
+const slots = useSlots();
+const hasDescription = computed(() => slots.description !== undefined);
+const hasLeftSlot = computed(() => slots.left !== undefined);
+const hasRightSlot = computed(() => slots.right !== undefined);
+
+const formTheme = computed(() => {
+  return fieldHasError ? 'error' : theme;
+});
+
+const modelValue = defineModel();
+const isActive = ref<boolean>(false);
+const isDirty = ref<boolean>(false);
+
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+</script>
+
+<style lang="css">
+.input-text-with-label {
+  --_form-theme: var(--theme-form-primary);
+  --_focus-colour: var(--theme-form-primary-focus);
+  --_border-width: var(--input-border-width-thin);
+  --_border-color: var(--_form-theme);
+  --_outline-width: var(--input-outline-width-thin);
+
+  .input-text-label {
+    display: block;
+    margin-block: 8px;
+  }
+}
+</style>

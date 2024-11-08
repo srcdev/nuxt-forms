@@ -17,6 +17,7 @@
         v-model="modelValue"
         ref="inputField"
         inputmode="numeric"
+        pattern="[0-9]+"
       />
     </div>
     <div v-if="hasRightContent" class="slot right">
@@ -99,7 +100,7 @@ const formTheme = computed(() => {
 const modelValue = defineModel<number | readonly number[]>();
 
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
-const minLength = computed(() => max.toString().length);
+const minLength = computed(() => `${max.toString().length + 3}ch`);
 
 onMounted(() => {
   updateElementClasses(['number-1']);

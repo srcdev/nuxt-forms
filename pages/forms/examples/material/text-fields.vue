@@ -101,6 +101,28 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
+                        <InputTextAsNumberWithLabel
+                          v-model.number="state.count2"
+                          :maxlength="fieldMaxLength('count2')"
+                          id="count2"
+                          name="count2"
+                          placeholder="eg. 10"
+                          label="How many things? Between 25 & 75"
+                          :errorMessage="formErrors?.count2?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.count2)"
+                          :required="true"
+                          :styleClassPassthrough="['style-1', 'style-2']"
+                          theme="primary"
+                        >
+                          <template #description>
+                            <p class="label-description">Input type="text" inputmode="numeric"</p>
+                          </template>
+                        </InputTextAsNumberWithLabel>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
                         <InputNumberDefault
                           id="count"
                           name="count"
@@ -117,7 +139,7 @@
                           theme="primary"
                         >
                           <template #description>
-                            <p class="label-description">This is a description of what the user is required to do</p>
+                            <p class="label-description">Input type="number" inputmode="numeric"</p>
                           </template>
                           <template #left>
                             <Icon name="gridicons:minus-small" class="icon" />
@@ -422,6 +444,14 @@ const formSchema = reactive(
         .gte(25, 'Count must be between 25 and 75')
         .lte(75, 'Count must be between 25 and 75')
         .multipleOf(5, 'Count must be a multiple of 5'),
+      count2: z
+        .number({
+          required_error: 'Count is required',
+          invalid_type_error: 'Count must be a number',
+        })
+        .int({ message: 'Count must be a whole number' })
+        .gte(25, 'Count must be between 25 and 75')
+        .lte(75, 'Count must be between 25 and 75'),
       score: z
         .number({
           required_error: 'Score is required',
@@ -442,6 +472,7 @@ const formSchema = reactive(
       password: true,
       message: true,
       count: true,
+      count2: true,
       score: true,
       cities: true,
       countries: true,
@@ -461,6 +492,7 @@ const state = reactive({
   password: '',
   message: '',
   count: 25,
+  count2: 25,
   score: 50,
   cities: [],
   countries: [],
