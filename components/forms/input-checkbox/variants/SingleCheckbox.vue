@@ -4,7 +4,6 @@
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
-    <InputError :errorMessage :fieldHasError :id="name" :isDetached="true" :styleClassPassthrough="inputErrorStyles" />
     <div class="single-checkbox-items" :class="[optionsLayout]">
       <InputCheckboxWithLabel :id :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :checkboxAppearance :checkboxStyle :theme>
         <template v-if="hasLabelContent" #labelContent>
@@ -12,6 +11,7 @@
         </template>
       </InputCheckboxWithLabel>
     </div>
+    <InputError :errorMessage :fieldHasError :id="name" :isDetached="true" :styleClassPassthrough="inputErrorStyles" />
   </fieldset>
 </template>
 

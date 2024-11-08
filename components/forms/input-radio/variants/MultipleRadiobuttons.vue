@@ -4,7 +4,6 @@
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
-    <InputError :errorMessage="errorMessage" :fieldHasError :id="name" :isDetached="true" />
     <div class="multiple-radiobuttons-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
         <InputRadiobuttonWithLabel
@@ -22,6 +21,7 @@
         />
       </template>
     </div>
+    <InputError :errorMessage="errorMessage" :fieldHasError :id="name" :isDetached="true" />
   </fieldset>
 </template>
 

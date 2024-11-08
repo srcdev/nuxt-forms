@@ -23,19 +23,27 @@
       inputmode="numeric"
     >
       <template v-if="hasLeftSlot" #left>
-        <slot name="left"></slot>
+        <InputButtonCore type="button" @click.stop.prevent="updateValue(-step, Number(modelValue) > min)" :is-pending="false" buttonText="Step down" theme="ghost" size="x-small">
+          <template #iconOnly>
+            <slot name="left"></slot>
+          </template>
+        </InputButtonCore>
       </template>
       <template v-if="hasRightSlot" #right>
-        <slot name="right"></slot>
+        <InputButtonCore type="button" @click.stop.prevent="updateValue(step, Number(modelValue) < max)" :is-pending="false" buttonText="Step up" theme="ghost" size="x-small">
+          <template #iconOnly>
+            <slot name="right"></slot>
+          </template>
+        </InputButtonCore>
       </template>
     </InputTextCore>
-    <InputError :errorMessage="errorMessage" :fieldHasError :id :isDetached="false" />
+    <InputError :errorMessage="errorMessage" :fieldHasError :id :isDetached="true" />
   </div>
 </template>
 
 <script setup lang="ts">
 import propValidators from '../../../c12/prop-validators';
-const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme } = defineProps({
+const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, step, min, max } = defineProps({
   maxlength: {
     type: Number,
     default: 255,
@@ -79,6 +87,18 @@ const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, re
       return propValidators.theme.includes(value);
     },
   },
+  min: {
+    type: Number,
+    required: true,
+  },
+  max: {
+    type: Number,
+    required: true,
+  },
+  step: {
+    type: Number,
+    default: 1,
+  },
 });
 
 const slots = useSlots();
@@ -95,19 +115,28 @@ const isActive = ref<boolean>(false);
 const isDirty = ref<boolean>(false);
 
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+const minLength = computed(() => `${max.toString().length + 3}ch`);
+
+const updateValue = (step: number, withinRangeLimit: boolean) => {
+  if (withinRangeLimit) {
+    modelValue.value = (Number(modelValue.value) + step) as number;
+  }
+};
+
+onMounted(() => {
+  updateElementClasses(['input-text-as-number']);
+});
 </script>
 
 <style lang="css">
-.input-text-with-label {
-  --_form-theme: var(--theme-form-primary);
-  --_focus-colour: var(--theme-form-primary-focus);
-  --_border-width: var(--input-border-width-thin);
-  --_border-color: var(--_form-theme);
-  --_outline-width: var(--input-outline-width-thin);
-
-  .input-text-label {
-    display: block;
-    margin-block: 8px;
+.input-text-as-number {
+  .input-text-wrapper {
+    width: fit-content;
+    .input-text-core.input-text-as-number {
+      flex-grow: initial;
+      text-align: center;
+      width: v-bind(minLength);
+    }
   }
 }
 </style>

@@ -104,6 +104,9 @@
                         <InputTextAsNumberWithLabel
                           v-model.number="state.count2"
                           :maxlength="fieldMaxLength('count2')"
+                          :min="25"
+                          :max="75"
+                          :step="5"
                           id="count2"
                           name="count2"
                           placeholder="eg. 10"
@@ -116,6 +119,12 @@
                         >
                           <template #description>
                             <p class="label-description">Input type="text" inputmode="numeric"</p>
+                          </template>
+                          <template #left>
+                            <Icon name="gridicons:minus-small" class="icon" />
+                          </template>
+                          <template #right>
+                            <Icon name="gridicons:plus-small" class="icon" />
                           </template>
                         </InputTextAsNumberWithLabel>
                       </template>
@@ -507,7 +516,7 @@ const {
   zodFormControl,
   zodErrorObj,
   // formErrors,
-  pushApiErrorsToFormErrors,
+  pushCustomErrors,
   doZodValidate,
   fieldMaxLength,
 } = useZodValidation(formSchema);
@@ -535,7 +544,7 @@ const submitForm = async () => {
           // }
 
           // if (error instanceof Error) {
-          await pushApiErrorsToFormErrors(response._data, state);
+          await pushCustomErrors(response._data, state);
           // zodFormControl.formIsValid = false;
           // }
           // zodFormControl.submitAttempted = false;

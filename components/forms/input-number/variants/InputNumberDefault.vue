@@ -4,7 +4,6 @@
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
-    <InputError :errorMessage :fieldHasError :id :isDetached="true" :styleClassPassthrough="['mbe-20']" />
 
     <InputNumberCore v-model="modelValue" :id :name :min :max :step :theme :required :size :weight :fieldHasError>
       <template v-if="hasLeftContent" #left>
@@ -38,6 +37,7 @@
         </InputButtonCore>
       </template>
     </InputNumberCore>
+    <InputError :errorMessage :fieldHasError :id :isDetached="true" />
   </div>
 </template>
 

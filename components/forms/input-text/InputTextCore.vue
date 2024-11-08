@@ -116,6 +116,7 @@ const validateInput = () => {
         () => {
           if (inputField.value !== null && inputField.value.validity.patternMismatch) {
             inputField.value.value = beforeValue as string;
+            console.log('you did some bad chars');
           }
         },
         { once: true }

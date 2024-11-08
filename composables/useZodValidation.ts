@@ -58,7 +58,7 @@ const useZodValidation = (formSchema: any) => {
     zodFormControl.previousState[field] = previousValue;
   };
 
-  const pushApiErrorsToFormErrors = async (apiErrorResponse: ApiErrorResponse, state: Record<string, any>) => {
+  const pushCustomErrors = async (apiErrorResponse: ApiErrorResponse, state: Record<string, any>) => {
     const apiErrors = transformErrorMessages(apiErrorResponse.data.errors);
 
     // 1: Create a ZodError object to hold the issues
@@ -111,7 +111,7 @@ const useZodValidation = (formSchema: any) => {
     initZodForm,
     zodFormControl,
     zodErrorObj,
-    pushApiErrorsToFormErrors,
+    pushCustomErrors,
     doZodValidate,
     fieldMaxLength,
   };

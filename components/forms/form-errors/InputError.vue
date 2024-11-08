@@ -91,6 +91,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
 
   &.detached {
     border-radius: var(--input-border-radius);
+    margin-block-start: 20px;
   }
 
   /* &.mbs-12 {

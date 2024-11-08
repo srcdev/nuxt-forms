@@ -4,7 +4,6 @@
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
-    <InputError :errorMessage="errorMessage" :fieldHasError :id="name" :isDetached="true" />
     <div class="multiple-checkboxes-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
         <InputCheckboxWithLabel
@@ -23,6 +22,7 @@
         />
       </template>
     </div>
+    <InputError :errorMessage="errorMessage" :fieldHasError :id="name" :isDetached="true" />
   </fieldset>
 </template>
 
