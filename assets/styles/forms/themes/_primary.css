@@ -11,6 +11,8 @@
   --theme-form-primary-focus: var(--blue-6);
   --theme-form-primary-radio-fill: var(--gray-00);
 
+  --theme-link-default: #1100ef;
+
   [data-form-theme='primary'] {
     --theme-form-input-bg: white;
     --theme-form-input-border: var(--blue-8);

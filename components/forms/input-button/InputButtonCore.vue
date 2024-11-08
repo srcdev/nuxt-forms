@@ -122,9 +122,9 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
   --_theme-form-border-hover: var(--theme-form-primary-border-hover);
   --_theme-form-outline: var(--theme-form-primary-outline);
   --_theme-form-outline-hover: var(--theme-form-primary-outline-hover);
-  --_theme-form-bg: var(--blue-6);
+  --_theme-form-bg: var(--theme-link-default);
   --_theme-form-bg-hover: var(--theme-form-primary-bg-hover);
-  --_theme-form-text-color: var(--blue-0);
+  --_theme-form-text-color: var(--theme-form-primary-color);
   --_theme-form-text-color-hover: var(--theme-form-primary-color-hover);
 
   align-items: center;
