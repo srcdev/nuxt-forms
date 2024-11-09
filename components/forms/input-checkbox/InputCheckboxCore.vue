@@ -124,7 +124,7 @@ const isChecked = computed(() => {
     &:has(.input-checkbox-core:focus-visible) {
       border: var(--_border-width) solid var(--theme-form-input-border-focus);
       outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 50%);
-      box-shadow: var(--focus-visible-box-shadow);
+      box-shadow: var(--theme-form-focus-box-shadow);
     }
   }
 
@@ -248,7 +248,7 @@ const isChecked = computed(() => {
     &:focus-visible {
       border: var(--_border-width) solid var(--theme-form-input-border);
       outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 50%);
-      box-shadow: var(--focus-visible-box-shadow);
+      box-shadow: var(--theme-form-focus-box-shadow);
     }
 
     &:checked::after {

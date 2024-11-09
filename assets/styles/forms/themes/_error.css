@@ -9,6 +9,8 @@
     --theme-form-input-outline-focus: var(--red-6);
     --theme-form-input-text: var(--brand-grayscale-text-form);
 
+    --theme-form-focus-box-shadow: 1px 1px 8px 1px var(--red-12);
+
     --theme-form-checkbox-bg: white;
     --theme-form-checkbox-shadow: transparent;
     --theme-form-checkbox-shadow-focus: var(--red-6);
@@ -35,7 +37,10 @@
     --theme-btn-border-focus: var(--red-12);
     --theme-btn-outline-focus: var(--red-0);
     --theme-btn-text-focus: var(--red-12);
+
+    --theme-form-focus-box-shadow: 1px 1px 8px 1px var(--red-12);
   }
 
   --theme-error-surface: var(--red-12);
+  --theme-error-text: var(--red-0);
 }

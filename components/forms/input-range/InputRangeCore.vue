@@ -131,8 +131,7 @@ const modelValue = defineModel<number | readonly number[]>();
       width: 100%;
 
       &:focus-visible {
-        outline: var(--focus-visible-outline);
-        box-shadow: var(--focus-visible-box-shadow);
+        box-shadow: var(--theme-form-focus-box-shadow);
       }
     }
 

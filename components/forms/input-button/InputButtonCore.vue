@@ -153,7 +153,7 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
     --theme-btn-border: var(--theme-btn-border-focus);
     --theme-btn-text: var(--theme-btn-text-focus);
     --theme-btn-outline: var(--theme-btn-outline-focus);
-    box-shadow: var(--focus-visible-box-shadow);
+    box-shadow: var(--theme-form-focus-box-shadow);
   }
 
   &[readonly] {
