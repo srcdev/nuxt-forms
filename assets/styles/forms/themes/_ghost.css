@@ -1,11 +1,39 @@
 :root {
-  --theme-form-ghost: var(--gray-8);
-  --theme-form-ghost-border: transparent;
-  --theme-form-ghost-border-hover: var(--gray-0);
-  --theme-form-ghost-outline: transparent;
-  --theme-form-ghost-outline-hover: var(--gray-11);
-  --theme-form-ghost-bg: transparent;
-  --theme-form-ghost-bg-hover: var(--gray-2);
-  --theme-form-ghost-color: var(--gray-11);
-  --theme-form-ghost-color-hover: var(--gray-11);
+  [data-form-theme='ghost'] {
+    --theme-form-input-bg: white;
+    --theme-form-input-border: var(--gray-8);
+    --theme-form-input-border-active: var(--gray-2);
+    --theme-form-input-border-focus: var(--gray-2);
+    --theme-form-input-outline: white;
+    --theme-form-input-outline-active: var(--gray-6);
+    --theme-form-input-outline-focus: var(--gray-6);
+    --theme-form-input-text: var(--brand-grayscale-text-form);
+
+    --theme-form-checkbox-bg: white;
+    --theme-form-checkbox-shadow: transparent;
+    --theme-form-checkbox-shadow-focus: var(--gray-6);
+    --theme-form-checkbox-symbol: var(--gray-8);
+
+    --theme-form-radio-bg: white;
+    --theme-form-radio-shadow: transparent;
+    --theme-form-radio-shadow-focus: var(--gray-6);
+    --theme-form-radio-symbol: var(--gray-8);
+  }
+
+  [data-btn-theme='ghost'] {
+    --theme-btn-bg: var(--gray-0);
+    --theme-btn-border: transparent;
+    --theme-btn-outline: transparent;
+    --theme-btn-text: var(--gray-12);
+
+    --theme-btn-bg-hover: var(--gray-2);
+    --theme-btn-border-hover: transparent;
+    --theme-btn-outline-hover: transparent;
+    --theme-btn-text-hover: var(--gray-12);
+
+    --theme-btn-bg-focus: var(--gray-1);
+    --theme-btn-border-focus: transparent;
+    --theme-btn-outline-focus: transparent;
+    --theme-btn-text-focus: var(--gray-12);
+  }
 }

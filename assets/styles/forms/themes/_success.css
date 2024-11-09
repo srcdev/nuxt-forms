@@ -1,12 +1,39 @@
 :root {
-  --theme-success: var(--green-7);
-  --theme-form-success: var(--green-8);
-  --theme-form-success-border: var(--green-2);
-  --theme-form-success-border-hover: var(--green-0);
-  --theme-form-success-outline: var(--green-9);
-  --theme-form-success-outline-hover: var(--green-9);
-  --theme-form-success-bg: var(--green-9);
-  --theme-form-success-bg-hover: var(--green-2);
-  --theme-form-success-color: var(--green-1);
-  --theme-form-success-color-hover: var(--green-9);
+  [data-form-theme='success'] {
+    --theme-form-input-bg: white;
+    --theme-form-input-border: var(--green-8);
+    --theme-form-input-border-active: var(--green-2);
+    --theme-form-input-border-focus: var(--green-2);
+    --theme-form-input-outline: white;
+    --theme-form-input-outline-active: var(--green-6);
+    --theme-form-input-outline-focus: var(--green-6);
+    --theme-form-input-text: var(--brand-grayscale-text-form);
+
+    --theme-form-checkbox-bg: white;
+    --theme-form-checkbox-shadow: transparent;
+    --theme-form-checkbox-shadow-focus: var(--green-6);
+    --theme-form-checkbox-symbol: var(--green-8);
+
+    --theme-form-radio-bg: white;
+    --theme-form-radio-shadow: transparent;
+    --theme-form-radio-shadow-focus: var(--green-6);
+    --theme-form-radio-symbol: var(--green-8);
+  }
+
+  [data-btn-theme='success'] {
+    --theme-btn-bg: var(--green-12);
+    --theme-btn-border: var(--green-0);
+    --theme-btn-outline: var(--green-12);
+    --theme-btn-text: var(--green-0);
+
+    --theme-btn-bg-hover: var(--green-0);
+    --theme-btn-border-hover: var(--green-12);
+    --theme-btn-outline-hover: var(--green-0);
+    --theme-btn-text-hover: var(--green-12);
+
+    --theme-btn-bg-focus: var(--green-0);
+    --theme-btn-border-focus: var(--green-12);
+    --theme-btn-outline-focus: var(--green-0);
+    --theme-btn-text-focus: var(--green-12);
+  }
 }

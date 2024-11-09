@@ -133,18 +133,9 @@ const updateValue = (step: number, withinRangeLimit: boolean) => {
 
 <style lang="css">
 .input-number-with-label {
-  --_form-theme: var(--theme-form-primary);
   --_border-width: var(--input-border-width-default);
   --_outline-width: var(--input-outline-width-thin);
   --_label-padding-inline: 10px;
-
-  &.theme-secondary {
-    --_form-theme: var(--theme-form-secondary);
-  }
-
-  &.error {
-    --_form-theme: var(--theme-error);
-  }
 
   .input-number-label {
     display: block;
@@ -159,7 +150,6 @@ const updateValue = (step: number, withinRangeLimit: boolean) => {
     font-family: var(--font-family);
     font-size: 16px;
     margin-top: 12px;
-    /* color: var(--theme-form-secondary); */
   }
 }
 </style>

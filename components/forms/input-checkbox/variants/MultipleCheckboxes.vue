@@ -120,52 +120,15 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleC
 
 const modelValue = defineModel();
 const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
-
-// const isArray = Array.isArray(modelValue.value.data[props.name]);
-// const formFieldC12 = <IFormFieldC12>{
-//   label: props.c12.label,
-//   placeholder: props.c12.placeholder,
-//   errorMessage: props.c12.errorMessage,
-//   useCustomError: false,
-//   customErrors: {},
-//   isValid: false,
-//   isDirty: false,
-//   type: isArray ? 'array' : 'string',
-//   previousValue: null,
-// };
-// modelValue.value.formFieldsC12[props.name] = formFieldC12;
-
-// const fieldHasError = computed(() => {
-//   return modelValue.value!.submitAttempted && !modelValue.value!.formFieldsC12[props.name].isValid;
-// });
-
-// const errorMessage = computed(() => {
-//   if (
-//     typeof modelValue.value !== 'undefined' &&
-//     modelValue.value!.formFieldsC12[props.name].useCustomError &&
-//     modelValue.value.data[props.name] === modelValue.value.formFieldsC12[props.name].previousValue
-//   ) {
-//     return modelValue.value.formFieldsC12[props.name]?.customErrors || [];
-//   } else {
-//     return props.c12.errorMessage;
-//   }
-// });
 </script>
 
 <style lang="css">
 .multiple-checkboxes-fieldset {
-  --_form-theme: var(--theme-form-primary);
-
   margin: 0;
   padding: 0;
   border: 0;
 
-  &.error {
-    --_form-theme: var(--theme-error);
-  }
-
   legend {
-    /* color: var(--_form-theme); */
     font-family: var(--font-family);
     font-size: 16px;
     font-weight: 500;
@@ -179,7 +142,6 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
     font-family: var(--font-family);
     font-size: 16px;
     margin-top: 12px;
-    /* color: var(--theme-form-secondary); */
   }
 }
 

@@ -80,8 +80,8 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   display: grid;
   grid-template-rows: var(--_grid-template-rows);
 
-  color: hsl(from var(--theme-error) h s 95%);
-  background-color: var(--theme-error);
+  color: var(--theme-error-text);
+  background-color: var(--theme-error-surface);
   border-radius: 0 0 4px 4px;
 
   transition-property: grid-template-rows;

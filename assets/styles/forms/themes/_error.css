@@ -1,24 +1,12 @@
 :root {
-  --theme-error: var(--red-7);
-  --theme-form-error: var(--red-8);
-  --theme-form-error-border: var(--red-2);
-  --theme-form-error-border-hover: var(--red-0);
-  --theme-form-error-outline: var(--red-9);
-  --theme-form-error-outline-hover: var(--red-9);
-  --theme-form-error-bg: var(--red-9);
-  --theme-form-error-bg-hover: var(--red-2);
-  --theme-form-error-color: var(--red-1);
-  --theme-form-error-color-hover: var(--red-9);
-
   [data-form-theme='error'] {
     --theme-form-input-bg: white;
     --theme-form-input-border: var(--red-8);
     --theme-form-input-border-active: var(--red-2);
     --theme-form-input-border-focus: var(--red-2);
-    /* --theme-form-input-outline: var(--red-6); */
     --theme-form-input-outline: white;
-    --theme-form-input-outline-active: var(--red-8);
-    --theme-form-input-outline-focus: var(--red-8);
+    --theme-form-input-outline-active: var(--red-6);
+    --theme-form-input-outline-focus: var(--red-6);
     --theme-form-input-text: var(--brand-grayscale-text-form);
 
     --theme-form-checkbox-bg: white;
@@ -31,4 +19,23 @@
     --theme-form-radio-shadow-focus: var(--red-6);
     --theme-form-radio-symbol: var(--red-8);
   }
+
+  [data-btn-theme='error'] {
+    --theme-btn-bg: var(--red-12);
+    --theme-btn-border: var(--red-0);
+    --theme-btn-outline: var(--red-12);
+    --theme-btn-text: var(--red-0);
+
+    --theme-btn-bg-hover: var(--red-0);
+    --theme-btn-border-hover: var(--red-12);
+    --theme-btn-outline-hover: var(--red-0);
+    --theme-btn-text-hover: var(--red-12);
+
+    --theme-btn-bg-focus: var(--red-0);
+    --theme-btn-border-focus: var(--red-12);
+    --theme-btn-outline-focus: var(--red-0);
+    --theme-btn-text-focus: var(--red-12);
+  }
+
+  --theme-error-surface: var(--red-12);
 }

@@ -1,24 +1,9 @@
 :root {
-  --theme-form-primary: var(--blue-8);
-  --theme-form-primary-border: var(--blue-2);
-  --theme-form-primary-border-hover: var(--blue-0);
-  --theme-form-primary-outline: var(--blue-11);
-  --theme-form-primary-outline-hover: var(--blue-11);
-  --theme-form-primary-bg: var(--blue-6);
-  --theme-form-primary-bg-hover: var(--blue-2);
-  --theme-form-primary-color: var(--blue-1);
-  --theme-form-primary-color-hover: var(--blue-11);
-  --theme-form-primary-focus: var(--blue-6);
-  --theme-form-primary-radio-fill: var(--gray-00);
-
-  --theme-link-default: #1100ef;
-
   [data-form-theme='primary'] {
     --theme-form-input-bg: white;
     --theme-form-input-border: var(--blue-8);
     --theme-form-input-border-active: var(--blue-2);
     --theme-form-input-border-focus: var(--blue-2);
-    /* --theme-form-input-outline: var(--blue-6); */
     --theme-form-input-outline: white;
     --theme-form-input-outline-active: var(--blue-6);
     --theme-form-input-outline-focus: var(--blue-6);
@@ -33,5 +18,22 @@
     --theme-form-radio-shadow: transparent;
     --theme-form-radio-shadow-focus: var(--blue-6);
     --theme-form-radio-symbol: var(--blue-8);
+  }
+
+  [data-btn-theme='primary'] {
+    --theme-btn-bg: var(--blue-12);
+    --theme-btn-border: var(--blue-0);
+    --theme-btn-outline: var(--blue-12);
+    --theme-btn-text: var(--blue-0);
+
+    --theme-btn-bg-hover: var(--blue-0);
+    --theme-btn-border-hover: var(--blue-12);
+    --theme-btn-outline-hover: var(--blue-0);
+    --theme-btn-text-hover: var(--blue-12);
+
+    --theme-btn-bg-focus: var(--blue-0);
+    --theme-btn-border-focus: var(--blue-12);
+    --theme-btn-outline-focus: var(--blue-0);
+    --theme-btn-text-focus: var(--blue-12);
   }
 }

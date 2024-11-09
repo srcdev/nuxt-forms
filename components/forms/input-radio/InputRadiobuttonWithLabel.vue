@@ -83,14 +83,9 @@ const modelValue = defineModel();
 
 <style lang="css">
 .input-radiobutton-with-label {
-  --_form-theme: var(--theme-form-primary);
-
   display: grid;
   align-items: center;
   grid-template-columns: auto 1fr;
-  &.error {
-    --_form-theme: var(--theme-error);
-  }
 
   .input-radiobutton-label {
     display: flex;

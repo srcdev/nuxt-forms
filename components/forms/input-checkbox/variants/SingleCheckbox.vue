@@ -129,18 +129,11 @@ watchEffect(() => {
 
 <style lang="css">
 .single-checkbox-fieldset {
-  --_form-theme: var(--theme-form-primary);
-
   margin: 0;
   padding: 0;
   border: 0;
 
-  &.error {
-    --_form-theme: var(--theme-error);
-  }
-
   legend {
-    /* color: var(--_form-theme); */
     font-family: var(--font-family);
     font-size: 16px;
     font-weight: 500;
@@ -154,7 +147,6 @@ watchEffect(() => {
     font-family: var(--font-family);
     font-size: 16px;
     margin-top: 12px;
-    /* color: var(--theme-form-secondary); */
   }
 }
 

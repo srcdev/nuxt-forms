@@ -37,8 +37,11 @@ import propValidators from '../c12/prop-validators';
 
 const { type, inputmode, maxlength, id, name, placeholder, required, fieldHasError, styleClassPassthrough, theme } = defineProps({
   type: {
-    type: String,
-    required: true,
+    type: String as PropType<'text' | 'email' | 'password' | 'number' | 'tel' | 'url'>,
+    default: 'text',
+    validator(value: string) {
+      return propValidators.inputTypesText.includes(value);
+    },
   },
   inputmode: {
     type: String as PropType<'text' | 'email' | 'tel' | 'url' | 'search' | 'numeric' | 'none' | 'decimal'>,
@@ -133,8 +136,6 @@ onMounted(() => {
 
 <style lang="css">
 .input-text-wrapper {
-  --_form-theme: var(--theme-form-primary);
-  --_focus-colour: var(--theme-form-primary-focus);
   --_gutter: 12px;
   --_border-width: var(--input-border-width-thin);
   --_outline-width: var(--input-border-width-thin);

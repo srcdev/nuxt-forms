@@ -1,11 +1,12 @@
 <template>
   <button
-    :type="type"
+    :type
     :readonly
     :aria-disabled="readonly"
     :data-test-id="dataTestId"
+    :data-btn-theme="theme"
     class="input-button-core btn"
-    :class="[`btn-${type}`, `theme-${theme}`, size, effectClass, styleClassPassthrough, { 'icon-only': isIconOnly }]"
+    :class="[`btn-${type}`, size, effectClass, styleClassPassthrough, { 'icon-only': isIconOnly }]"
   >
     <span v-if="useEffect && effect == 'fancy'" class="fancy"></span>
     <template v-if="hasLeftContent && !isIconOnly">
@@ -115,21 +116,7 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
   --_border-width: var(--input-border-width-default);
   --_outline-width: var(--input-outline-width-thin);
 
-  /*
-  * Initial theme (primary)
-  **/
-  --_theme-form-border: var(--theme-form-primary-border);
-  --_theme-form-border-hover: var(--theme-form-primary-border-hover);
-  --_theme-form-outline: var(--theme-form-primary-outline);
-  --_theme-form-outline-hover: var(--theme-form-primary-outline-hover);
-  --_theme-form-bg: var(--theme-link-default);
-  --_theme-form-bg-hover: var(--theme-form-primary-bg-hover);
-  --_theme-form-text-color: var(--theme-form-primary-color);
-  --_theme-form-text-color-hover: var(--theme-form-primary-color-hover);
-
   align-items: center;
-  color: var(--_theme-form-text-color);
-
   display: flex;
   gap: var(--_icon-gap);
   justify-content: center;
@@ -142,13 +129,30 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
 
   transition: all 0.2s ease-in-out;
 
+  background-color: var(--theme-btn-bg);
+  border: var(--_border-width) solid var(--theme-btn-border);
+  color: var(--theme-btn-text);
+  outline: 1px solid var(--theme-btn-outline);
+
+  /*
+  * States
+  **/
   &:hover {
-    --_theme-form-text-color: var(--_theme-form-text-color-hover);
+    --theme-btn-bg: var(--theme-btn-bg-hover);
+    --theme-btn-border: var(--theme-btn-border-hover);
+    --theme-btn-text: var(--theme-btn-text-hover);
+    --theme-btn-outline: var(--theme-btn-outline-hover);
+  }
+
+  &:hover {
     cursor: pointer;
   }
 
   &:focus-visible {
-    outline: var(--focus-visible-outline);
+    --theme-btn-bg: var(--theme-btn-bg-focus);
+    --theme-btn-border: var(--theme-btn-border-focus);
+    --theme-btn-text: var(--theme-btn-text-focus);
+    --theme-btn-outline: var(--theme-btn-outline-focus);
     box-shadow: var(--focus-visible-box-shadow);
   }
 
@@ -219,7 +223,6 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
   }
 
   .btn-text {
-    /* color: var(--_theme-form-text-color); */
     &.small {
       font-size: var(--theme-form-button-font-size-small);
     }
@@ -283,91 +286,6 @@ const isIconOnly = computed(() => slots.iconOnly !== undefined);
         width: var(--theme-form-button-icon-size-large);
       }
     }
-  }
-
-  background-color: var(--_theme-form-bg);
-  border: var(--_border-width) solid var(--_theme-form-border);
-  color: var(--_theme-form-text-color);
-  outline: 1px solid var(--_theme-form-outline);
-
-  /*
-  * Themes (alternate)
-  **/
-  &.theme-secondary {
-    --_theme-form-border: var(--theme-form-secondary-border);
-    --_theme-form-border-hover: var(--theme-form-secondary-border-hover);
-    --_theme-form-outline: var(--theme-form-secondary-outline);
-    --_theme-form-outline-hover: var(--theme-form-secondary-outline-hover);
-    --_theme-form-bg: var(--theme-form-secondary-bg);
-    --_theme-form-bg-hover: var(--theme-form-secondary-bg-hover);
-    --_theme-form-text-color: var(--theme-form-secondary-color);
-    --_theme-form-text-color-hover: var(--theme-form-secondary-color-hover);
-  }
-
-  &.theme-tertiary {
-    --_theme-form-border: var(--theme-form-tertiary-border);
-    --_theme-form-border-hover: var(--theme-form-tertiary-border-hover);
-    --_theme-form-outline: var(--theme-form-tertiary-outline);
-    --_theme-form-outline-hover: var(--theme-form-tertiary-outline-hover);
-    --_theme-form-bg: var(--theme-form-tertiary-bg);
-    --_theme-form-bg-hover: var(--theme-form-tertiary-bg-hover);
-    --_theme-form-text-color: var(--theme-form-tertiary-color);
-    --_theme-form-text-color-hover: var(--theme-form-tertiary-color-hover);
-  }
-
-  &.theme-warning {
-    --_theme-form-border: var(--theme-form-warning-border);
-    --_theme-form-border-hover: var(--theme-form-warning-border-hover);
-    --_theme-form-outline: var(--theme-form-warning-outline);
-    --_theme-form-outline-hover: var(--theme-form-warning-outline-hover);
-    --_theme-form-bg: var(--theme-form-warning-bg);
-    --_theme-form-bg-hover: var(--theme-form-warning-bg-hover);
-    --_theme-form-text-color: var(--theme-form-warning-color);
-    --_theme-form-text-color-hover: var(--theme-form-warning-color-hover);
-  }
-
-  &.theme-error {
-    --_theme-form-border: var(--theme-form-error-border);
-    --_theme-form-border-hover: var(--theme-form-error-border-hover);
-    --_theme-form-outline: var(--theme-form-error-outline);
-    --_theme-form-outline-hover: var(--theme-form-error-outline-hover);
-    --_theme-form-bg: var(--theme-form-error-bg);
-    --_theme-form-bg-hover: var(--theme-form-error-bg-hover);
-    --_theme-form-text-color: var(--theme-form-error-color);
-    --_theme-form-text-color-hover: var(--theme-form-error-color-hover);
-  }
-
-  &.theme-success {
-    --_theme-form-border: var(--theme-form-success-border);
-    --_theme-form-border-hover: var(--theme-form-success-border-hover);
-    --_theme-form-outline: var(--theme-form-success-outline);
-    --_theme-form-outline-hover: var(--theme-form-success-outline-hover);
-    --_theme-form-bg: var(--theme-form-success-bg);
-    --_theme-form-bg-hover: var(--theme-form-success-bg-hover);
-    --_theme-form-text-color: var(--theme-form-success-color);
-    --_theme-form-text-color-hover: var(--theme-form-success-color-hover);
-  }
-
-  &.theme-ghost {
-    --_theme-form-border: var(--theme-form-ghost-border);
-    --_theme-form-border-hover: var(--theme-form-ghost-border-hover);
-    --_theme-form-outline: var(--theme-form-ghost-outline);
-    --_theme-form-outline-hover: var(--theme-form-ghost-outline-hover);
-    --_theme-form-bg: var(--theme-form-ghost-bg);
-    --_theme-form-bg-hover: var(--theme-form-ghost-bg-hover);
-    --_theme-form-text-color: var(--theme-form-ghost-color);
-    --_theme-form-text-color-hover: var(--theme-form-ghost-color-hover);
-  }
-
-  /*
-  * States
-  **/
-  &:hover,
-  &:focus-visible {
-    --_theme-form-text-color: var(--_theme-form-text-color-hover);
-    --_theme-form-bg: var(--_theme-form-bg-hover);
-    --_theme-form-border: var(--_theme-form-border-hover);
-    --_theme-form-outline: var(--_theme-form-outline-hover);
   }
 }
 </style>

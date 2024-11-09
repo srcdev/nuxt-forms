@@ -181,16 +181,4 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-input:autofill,
-input:-webkit-autofill-strong-password,
-input:-webkit-autofill-strong-password-viewable,
-input:-webkit-autofill-and-obscured {
-  background-color: var(--theme-form-input-bg) !important;
-  background-image: none !important;
-  color: var(--theme-form-input-text) !important;
-  -webkit-box-shadow: 0 0 0px 1000px var(--theme-form-input-bg) inset;
-  /* -webkit-text-fill-color: black; */
-  transition: background-color 5000s ease-in-out 0s;
-}
 </style>

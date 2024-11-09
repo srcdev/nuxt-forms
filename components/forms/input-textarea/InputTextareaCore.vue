@@ -96,8 +96,6 @@ onMounted(() => {
 
 <style lang="css">
 .input-textarea-wrapper {
-  --_form-theme: var(--theme-form-primary);
-  --_focus-colour: var(--theme-form-primary-focus);
   --_gutter: 12px;
   --_border-width: var(--input-border-width-thin);
   --_outline-width: var(--input-border-width-thin);

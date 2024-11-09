@@ -90,15 +90,10 @@ const modelValue = defineModel();
 
 <style lang="css">
 .input-checkbox-with-label {
-  --_form-theme: var(--theme-form-primary);
   --_white-space: wrap;
 
   display: flex;
   align-items: center;
-
-  &.error {
-    --_form-theme: var(--theme-error);
-  }
 
   &.inline {
     --_white-space: nowrap;
