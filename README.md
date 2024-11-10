@@ -1,41 +1,26 @@
 # Nuxt Forms Layer
 
-Create Nuxt extendable layer with this GitHub template.
+## NOTE: This is personal forms setup and not necessarily intended for widespread use
 
 ## Setup
 
 Make sure to install the dependencies:
 
 ```bash
-pnpm install
+npm install
 ```
-
-## Working on your theme
-
-Your theme is at the root of this repository, it is exactly like a regular Nuxt project, except you can publish it on NPM.
-
-The `.playground` directory should help you on trying your theme during development.
-
-Running `pnpm dev` will prepare and boot `.playground` directory, which imports your theme itself.
 
 ## Distributing your theme
 
 ### Release it
+
 CLI Prompt assisted release and versioning
 
 ```bash
 npm run release
 ```
 
-Your Nuxt layer is shaped exactly the same as any other Nuxt project, except you can publish it on NPM.
-
-To do so, you only have to check if `files` in `package.json` are valid, then run:
-
-```bash
-npm publish --access public
-```
-
-Once done, your users will only have to run:
+## Install Nuxt Forms
 
 ```bash
 npm install --save your-theme
@@ -45,16 +30,16 @@ Then add the dependency to their `extends` in `nuxt.config`:
 
 ```ts
 defineNuxtConfig({
-  extends: 'your-theme'
-})
+  extends: 'your-theme',
+});
 ```
 
 ## Development Server
 
-Start the development server on http://localhost:3000
+Start the development server on <http://localhost:3000>
 
 ```bash
-pnpm dev
+npm dev
 ```
 
 ## Production
@@ -62,19 +47,23 @@ pnpm dev
 Build the application for production:
 
 ```bash
-pnpm build
+npm build
 ```
 
 Or statically generate it with:
 
 ```bash
-pnpm generate
+npm generate
 ```
 
 Locally preview production build:
 
 ```bash
-pnpm preview
+npm preview
 ```
 
-Checkout the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Themes
+
+Styles exist for multiple themes/variants, primary, secondary, tertiary, error etc.
+
+Colour scheme can be updated by modifying the css colour variables
