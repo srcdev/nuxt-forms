@@ -73,7 +73,7 @@ useHead({
     padding: 0;
 
     li {
-      background: #ffffff;
+      background: var(--surface-subtle);
       border-radius: 5px;
       padding: 10px;
       margin-block-end: 20px;

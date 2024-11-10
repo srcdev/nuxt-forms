@@ -1,16 +1,15 @@
 :root {
-  /* color-scheme: light dark; */
+  color-scheme: light dark;
 }
 
 html {
-  background-color: var(--body-background-color);
-  /* background-color: light-dark(var(--light-body-background-color), var(--dark-body-background-color)); */
+  /* background-color: var(--body-background-color); */
+  background-color: var(--page-bg);
 
   font-size: 62.5%;
 }
 body,
 p,
-span,
 pre,
 code,
 div,
@@ -18,6 +17,7 @@ fieldset,
 legend,
 li,
 a {
+  color: var(--grayscale-text-body);
   font-family: var(--font-family);
   font-size: var(--step-1);
 }

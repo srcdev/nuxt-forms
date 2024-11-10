@@ -126,6 +126,7 @@ const modelValue = defineModel<number | readonly number[]>();
   .input-range-container {
     flex-grow: 1;
     .input-range-core {
+      color: var(--theme-form-input-text);
       height: var(--_input-range-height);
       margin: 0;
       width: 100%;

@@ -152,7 +152,7 @@ onMounted(() => {
     border: var(--_border-width) solid var(--theme-form-input-border);
     outline: var(--_outline-width) solid var(--theme-form-input-outline);
 
-    /* color: var(--theme-form-input-text); */
+    color: var(--theme-form-input-text);
     font-family: var(--font-family);
     font-size: var(--theme-form-button-font-size-normal);
     line-height: var(--line-height);
