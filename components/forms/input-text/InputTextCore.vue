@@ -200,14 +200,15 @@ onMounted(() => {
 }
 
 input:autofill,
+input:-internal-autofill-selected,
 input:-webkit-autofill-strong-password,
 input:-webkit-autofill-strong-password-viewable,
 input:-webkit-autofill-and-obscured {
   background-color: var(--theme-form-input-bg) !important;
   background-image: none !important;
-  color: var(--_input-text-color) !important;
+  color: var(--theme-form-input-text) !important;
   -webkit-box-shadow: 0 0 0px 1000px var(--theme-form-input-bg) inset;
-  /* -webkit-text-fill-color: black; */
+  -webkit-text-fill-color: var(--theme-form-input-text);
   transition: background-color 5000s ease-in-out 0s;
 }
 </style>

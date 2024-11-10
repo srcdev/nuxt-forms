@@ -7,7 +7,7 @@
     --theme-form-input-outline: white;
     --theme-form-input-outline-active: var(--blue-6);
     --theme-form-input-outline-focus: var(--blue-6);
-    --theme-form-input-text: light-dark(var(--gray-11), var(--gray-11));
+    --theme-form-input-text: light-dark(var(--gray-10), var(--gray-11));
 
     --theme-form-focus-box-shadow: 1px 1px 8px 1px light-dark(var(--blue-12), var(--blue-2));
 
