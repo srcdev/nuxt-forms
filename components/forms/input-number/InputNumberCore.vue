@@ -110,7 +110,7 @@ onMounted(() => {
 <style lang="css">
 .input-number-wrapper {
   --_gutter: 12px;
-  --_border-width: var(--input-border-width-thin);
+  --_border-width: var(--input-border-width-default);
   --_min-width: v-bind(minLength);
 
   display: flex;

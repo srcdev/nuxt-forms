@@ -137,8 +137,8 @@ onMounted(() => {
 <style lang="css">
 .input-text-wrapper {
   --_gutter: 12px;
-  --_border-width: var(--input-border-width-thin);
-  --_outline-width: var(--input-border-width-thin);
+  --_border-width: var(--input-border-width-default);
+  --_outline-width: var(--input-border-width-default);
 
   display: flex;
   align-items: center;

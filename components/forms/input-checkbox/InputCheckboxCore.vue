@@ -110,7 +110,7 @@ const isChecked = computed(() => {
   --_checkbox-size: initial;
   --_checkbox-border-radius: 4px;
   --_outline-width: var(--input-outline-width-thin);
-  --_border-width: var(--input-border-width-thin); /* --input-border-width-default / 2px */
+  --_border-width: var(--input-border-width-default); /* --input-border-width-default / 2px */
 
   display: grid;
   grid-template-areas: 'element-stack';

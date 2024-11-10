@@ -107,7 +107,7 @@ const modelValue = defineModel<number | readonly number[]>();
 <style lang="css">
 .input-range-wrapper {
   --_gutter: 12px;
-  --_border-width: var(--input-border-width-thin);
+  --_border-width: var(--input-border-width-default);
   --_outline-width: var(--input-outline-width-thin);
 
   --_input-range-height: 24px;

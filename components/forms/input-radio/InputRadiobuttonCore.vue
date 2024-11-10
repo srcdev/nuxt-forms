@@ -111,7 +111,7 @@ const isChecked = computed(() => {
 .input-radiobutton-wrapper {
   --_checkbox-size: initial;
   --_outline-width: var(--input-outline-width-thin);
-  --_border-width: var(--input-border-width-thin);
+  --_border-width: var(--input-border-width-default);
 
   display: grid;
   grid-template-areas: 'element-stack';
