@@ -3,7 +3,7 @@
     <NuxtLayout name="default">
       <template #layout-content>
         <div>
-          <h1 class="header-1">Material UI text fields ({{ compact ? 'compact' : 'default' }})</h1>
+          <h1 class="header-1">Example form</h1>
           <p class="body-normal">Use 'test@test.com' to trigger server errors</p>
         </div>
         <ContentGrid>
@@ -384,8 +384,8 @@
 </template>
 
 <script setup lang="ts">
-import { z, ZodError } from 'zod';
-import type { IFieldsInitialState, TFieldsInitialState, IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
+import { z } from 'zod';
+import type { IFormMultipleOptions } from '../../../../types/types.forms';
 
 definePageMeta({
   layout: false,
@@ -398,11 +398,6 @@ useHead({
     class: '',
   },
 });
-
-const compact = ref(false);
-const swapCompact = (newStyle: boolean) => {
-  compact.value = newStyle;
-};
 
 /*
  * Fetch some sample data
