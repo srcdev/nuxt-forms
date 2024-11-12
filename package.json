@@ -13,9 +13,17 @@
     "postinstall": "nuxt prepare .playground",
     "release": "release-it"
   },
+  "files": [
+    "assets/",
+    "components/",
+    "composables/",
+    "types/",
+    "nuxt.config.ts"
+  ],
   "devDependencies": {
     "@nuxt/eslint-config": "0.6.1",
     "eslint": "9.14.0",
+    "nuxt": "3.14.159",
     "release-it": "17.10.0",
     "typescript": "5.6.3"
   },
@@ -25,7 +33,16 @@
     "@iconify-json/radix-icons": "1.2.1",
     "@iconify-json/ri": "1.2.3",
     "@nuxt/icon": "1.7.2",
-    "nuxt": "3.14.159",
     "zod": "3.23.8"
+  },
+  "release-it": {
+    "$schema": "https://unpkg.com/release-it/schema/release-it.json",
+    "git": {
+      "commitMessage": "chore(release): release v${version}"
+    },
+    "github": {
+      "release": true,
+      "releaseName": "v${version}"
+    }
   }
 }
