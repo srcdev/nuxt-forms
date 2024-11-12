@@ -18,8 +18,7 @@
     "assets/",
     "components/",
     "composables/",
-    "types/",
-    "nuxt.config.ts"
+    "types/"
   ],
   "devDependencies": {
     "@nuxt/eslint-config": "0.6.1",
