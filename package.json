@@ -4,14 +4,14 @@
   "version": "2.0.5",
   "main": "nuxt.config.ts",
   "scripts": {
-    "clean": "rm -rf .nuxt && rm -rf .output && rm -rf .playground/.nuxt && rm -rf .playground/.output",
+    "clean": "rm -rf .nuxt && rm -rf .output",
     "reinstall": "rm -rf node_modules && npm install",
-    "dev": "nuxi dev .playground",
-    "build": "nuxt build .playground",
-    "generate": "nuxt generate .playground",
-    "preview": "nuxt preview .playground",
+    "dev": "nuxi dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
     "lint": "eslint .",
-    "postinstall": "nuxt prepare .playground",
+    "postinstall": "nuxt prepare",
     "release": "release-it"
   },
   "files": [
