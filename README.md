@@ -2,6 +2,10 @@
 
 ## NOTE: This is personal forms setup and not necessarily intended for widespread use
 
+## Layer extended into barebones project
+
+Checkout the repo [SRCDEV Nuxt Forms being extended as layer into another Nuxt project](https://github.com/srcdev/nuxt-extend-nuxt-forms)
+
 ## Setup
 
 Make sure to install the dependencies:
@@ -30,7 +34,7 @@ Then add the dependency to their `extends` in `nuxt.config`:
 
 ```ts
 defineNuxtConfig({
-  extends: 'your-theme',
+  extends: 'srcdev-nuxt-forms',
 });
 ```
 
