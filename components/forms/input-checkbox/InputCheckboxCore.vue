@@ -150,6 +150,8 @@ const isChecked = computed(() => {
     grid-area: element-stack;
     background-color: var(--theme-form-checkbox-bg);
 
+    border-radius: var(--_checkbox-border-radius);
+    transform: translate(-2px, -2px);
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
     place-content: center;
