@@ -23,14 +23,30 @@
       inputmode="numeric"
     >
       <template v-if="hasLeftSlot" #left>
-        <InputButtonCore type="button" @click.stop.prevent="updateValue(-step, Number(modelValue) > min)" :is-pending="false" buttonText="Step down" theme="ghost" size="x-small">
+        <InputButtonCore
+          type="button"
+          @click.stop.prevent="updateValue(-step, Number(modelValue) > min)"
+          :readonly="Number(modelValue) <= min"
+          :is-pending="false"
+          buttonText="Step down"
+          theme="ghost"
+          size="x-small"
+        >
           <template #iconOnly>
             <slot name="left"></slot>
           </template>
         </InputButtonCore>
       </template>
       <template v-if="hasRightSlot" #right>
-        <InputButtonCore type="button" @click.stop.prevent="updateValue(step, Number(modelValue) < max)" :is-pending="false" buttonText="Step up" theme="ghost" size="x-small">
+        <InputButtonCore
+          type="button"
+          @click.stop.prevent="updateValue(step, Number(modelValue) < max)"
+          :readonly="Number(modelValue) >= max"
+          :is-pending="false"
+          buttonText="Step up"
+          theme="ghost"
+          size="x-small"
+        >
           <template #iconOnly>
             <slot name="right"></slot>
           </template>

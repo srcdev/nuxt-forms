@@ -10,7 +10,7 @@
         <InputButtonCore
           type="button"
           @click.stop.prevent="updateValue(-step, Number(modelValue) > min)"
-          :readonly="Number(modelValue) === min"
+          :readonly="Number(modelValue) <= min"
           :is-pending="false"
           buttonText="Step down"
           theme="primary"
@@ -25,7 +25,7 @@
         <InputButtonCore
           type="button"
           @click.stop.prevent="updateValue(step, Number(modelValue) < max)"
-          :readonly="Number(modelValue) === max"
+          :readonly="Number(modelValue) >= max"
           :is-pending="false"
           buttonText="Step up"
           theme="primary"

@@ -27,7 +27,7 @@ npm run release
 ## Install Nuxt Forms
 
 ```bash
-npm install --save your-theme
+npm install --save srcdev-nuxt-forms
 ```
 
 Then add the dependency to their `extends` in `nuxt.config`:

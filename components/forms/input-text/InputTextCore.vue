@@ -153,12 +153,20 @@ onMounted(() => {
     box-shadow: var(--theme-form-focus-box-shadow);
   }
 
-  .slot {
-    display: inline-block;
-    padding-inline: 8px;
+  &:not(:has(.btn)) {
+    .slot {
+      display: inline-block;
+      padding-inline: 8px;
 
-    .icon {
-      color: var(--theme-form-input-text);
+      .icon {
+        color: var(--theme-form-input-text);
+      }
+    }
+  }
+
+  &:has(.btn) {
+    .btn {
+      margin-inline: 6px;
     }
   }
 
