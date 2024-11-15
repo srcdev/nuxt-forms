@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-wrapper" :data-form-theme="formTheme" :class="[size, checkboxAppearance, { error: fieldHasError }]">
+  <div class="input-checkbox-wrapper" :data-form-theme="formTheme" :class="[size, { error: fieldHasError }]">
     <input
       type="checkbox"
       :true-value="trueValue"
@@ -8,20 +8,20 @@
       :name
       :required="required && !multipleOptions"
       :value="trueValue"
-      :class="['input-checkbox-core', size, checkboxAppearance, { error: fieldHasError }]"
+      class="input-checkbox-core"
+      :class="[size, { error: fieldHasError }]"
       v-model="modelValue"
       ref="inputField"
     />
-    <div v-if="checkboxAppearance === 'with-decorator'" :class="['input-checkbox-decorator', size, checkboxStyle]">
-      <Icon name="material-symbols:check" class="icon-check" :class="[{ checked: isChecked }]" />
-      <div v-if="checkboxStyle === 'check' || checkboxStyle === 'cross'" :class="[checkboxStyle, { checked: isChecked }]"></div>
+    <div class="input-checkbox-decorator" :class="[size, stateIcon]">
+      <Icon :name="icon" class="icon" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
-const { id, name, required, trueValue, falseValue, multipleOptions, theme, styleClassPassthrough, size, checkboxAppearance, checkboxStyle, fieldHasError } = defineProps({
+const { id, name, required, trueValue, falseValue, multipleOptions, theme, styleClassPassthrough, size, stateIcon, fieldHasError } = defineProps({
   id: {
     type: String,
     required: true,
@@ -60,18 +60,11 @@ const { id, name, required, trueValue, falseValue, multipleOptions, theme, style
       return propValidators.size.includes(value);
     },
   },
-  checkboxAppearance: {
-    type: String as PropType<string>,
-    default: null,
-    validator(value: string) {
-      return propValidators.checkboxAppearance.includes(value);
-    },
-  },
-  checkboxStyle: {
-    type: String as PropType<string>,
-    default: 'check',
-    validator(value: string) {
-      return propValidators.checkboxStyle.includes(value);
+  stateIcon: {
+    type: Object as PropType<{ checked: string; unchecked: string }>,
+    default: {
+      checked: 'carbon:checkbox-checked',
+      unchecked: 'carbon:checkbox',
     },
   },
   fieldHasError: {
@@ -103,29 +96,27 @@ const isChecked = computed(() => {
     return modelValue.value === trueValue;
   }
 });
+
+const icon = computed(() => {
+  return isChecked.value ? stateIcon.checked : stateIcon.unchecked;
+});
 </script>
 
 <style scoped lang="css">
 .input-checkbox-wrapper {
   --_checkbox-size: initial;
-  --_checkbox-border-radius: 4px;
+  --_wrapper-size: calc(var(--_checkbox-size) - 5px);
   --_outline-width: var(--input-outline-width-thin);
-  --_border-width: var(--input-border-width-default); /* --input-border-width-default / 2px */
+  --_border-width: var(--input-border-width-default);
+  --_box-shadow: none;
 
   display: grid;
   grid-template-areas: 'element-stack';
+  height: var(--_wrapper-size);
+  width: var(--_wrapper-size);
 
-  &.with-decorator {
-    border-radius: var(--_checkbox-border-radius);
-    border: var(--_border-width) solid var(--theme-form-input-border);
-    height: var(--_checkbox-size);
-    width: var(--_checkbox-size);
-
-    &:has(.input-checkbox-core:focus-visible) {
-      border: var(--_border-width) solid var(--theme-form-input-border-focus);
-      outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 50%);
-      box-shadow: var(--theme-form-focus-box-shadow);
-    }
+  &:has(.input-checkbox-core:focus-visible) {
+    --_box-shadow: var(--theme-form-focus-box-shadow);
   }
 
   /* Sizes */
@@ -136,7 +127,7 @@ const isChecked = computed(() => {
     --_checkbox-size: 24px;
   }
   &.normal {
-    --_checkbox-size: 30px;
+    --_checkbox-size: 34px;
   }
   &.medium {
     --_checkbox-size: 40px;
@@ -146,119 +137,35 @@ const isChecked = computed(() => {
   }
 
   .input-checkbox-decorator {
+    --_padding: 5px;
     display: grid;
     grid-area: element-stack;
     background-color: var(--theme-form-checkbox-bg);
-
-    border-radius: var(--_checkbox-border-radius);
-    transform: translate(-2px, -2px);
-    height: var(--_checkbox-size);
-    width: var(--_checkbox-size);
+    border-radius: 2px;
     place-content: center;
     position: relative;
+    height: var(--_wrapper-size);
+    width: var(--_wrapper-size);
     z-index: -1;
 
-    :not(&.check),
-    :not(&.cross) {
-      .icon-check {
-        display: none;
-      }
-    }
-
-    .check {
+    .icon {
       grid-area: stack;
-      width: calc(var(--_checkbox-size) * 0.2);
-      height: calc(var(--_checkbox-size) * 0.45);
-      border-bottom: 3px solid var(--theme-form-checkbox-symbol);
-      border-right: 3px solid var(--theme-form-checkbox-symbol);
-      transform: rotate(45deg) translate(-1px, -1px);
-      opacity: 0;
-      transition: opacity 0.2s ease-in-out;
-
-      &.checked {
-        opacity: 1;
-      }
-    }
-
-    .cross {
-      grid-area: stack;
-      width: calc(var(--_checkbox-size) * 0.65);
-      height: 3px;
-      background-color: var(--theme-form-checkbox-symbol);
-      transform: rotate(45deg);
-      opacity: 0;
-      transition: opacity 0.2s ease-in-out;
-
-      &.checked {
-        opacity: 1;
-
-        &::after {
-          opacity: 1;
-        }
-      }
-
-      &::after {
-        content: '';
-        grid-area: stack;
-        display: block;
-        width: calc(var(--_checkbox-size) * 0.65);
-        height: 3px;
-        background-color: var(--theme-form-checkbox-symbol);
-        transform: rotate(-90deg);
-        opacity: 0;
-        transition: opacity 0.2s ease-in-out;
-      }
-    }
-
-    .icon-check {
-      grid-area: stack;
-      display: block;
+      color: var(--theme-form-radio-symbol);
       height: var(--_checkbox-size);
       width: var(--_checkbox-size);
-      transform: translate(-3px, 0px);
-      zoom: 0.75;
-      margin: 0;
-      opacity: 0;
-      padding: 0;
-      transition: opacity 0.2s ease-in-out;
-
-      &.checked {
-        opacity: 1;
-      }
+      box-shadow: var(--_box-shadow);
     }
   }
 
   .input-checkbox-core {
     grid-area: element-stack;
-    border: var(--_border-width) solid var(--theme-form-input-border);
-    height: var(--_checkbox-size);
-    width: var(--_checkbox-size);
-
-    transition: all 0.2s ease-in-out;
-
-    &.with-decorator {
-      appearance: none;
-      margin: 0;
-      overflow: hidden;
-      opacity: 0;
-    }
+    appearance: none;
+    margin: 0;
+    overflow: hidden;
+    opacity: 0;
 
     &:hover {
       cursor: pointer;
-    }
-
-    &:focus-visible {
-      border: var(--_border-width) solid var(--theme-form-input-border);
-      outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 50%);
-      box-shadow: var(--theme-form-focus-box-shadow);
-    }
-
-    &:checked::after {
-      /* content: '✔'; */
-      display: grid;
-      font-family: var(--font-family);
-      place-content: center;
-      font-size: calc(var(--_checkbox-size) * 0.75);
     }
   }
 }
