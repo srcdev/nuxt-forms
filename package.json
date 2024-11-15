@@ -27,6 +27,7 @@
     "typescript": "5.6.3"
   },
   "dependencies": {
+    "@iconify-json/carbon": "1.2.4",
     "@iconify-json/gridicons": "1.2.1",
     "@iconify-json/material-symbols": "1.2.6",
     "@iconify-json/radix-icons": "1.2.1",
