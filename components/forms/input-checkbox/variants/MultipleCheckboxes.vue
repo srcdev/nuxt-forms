@@ -6,20 +6,7 @@
     </template>
     <div class="multiple-checkboxes-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
-        <InputCheckboxWithLabel
-          :id="item.value"
-          :name
-          :required
-          :label="item.label"
-          :fieldHasError
-          v-model="modelValue"
-          :true-value="item.value"
-          :size
-          :checkboxAppearance
-          :optionsLayout
-          :checkboxStyle
-          :theme
-        />
+        <InputCheckboxWithLabel :id="item.value" :name :required :label="item.label" :fieldHasError v-model="modelValue" :true-value="item.value" :size :stateIcon :optionsLayout :theme />
       </template>
     </div>
     <InputError :errorMessage="errorMessage" :fieldHasError :id="name" :isDetached="true" />
@@ -32,7 +19,7 @@ import type { IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
 
 import type { C12nMultipleCheckboxes, IFormFieldC12, IFormData } from '@/types/types.forms';
 
-const { id, name, legend, label, required, fieldHasError, placeholder, errorMessage, size, optionsLayout, equalCols, checkboxAppearance, checkboxStyle, styleClassPassthrough, theme } = defineProps({
+const { id, name, legend, label, required, fieldHasError, placeholder, errorMessage, size, optionsLayout, equalCols, stateIcon, styleClassPassthrough, theme } = defineProps({
   id: {
     type: String,
     required: true,
@@ -87,18 +74,11 @@ const { id, name, legend, label, required, fieldHasError, placeholder, errorMess
     type: Boolean,
     default: true,
   },
-  checkboxAppearance: {
-    type: String as PropType<string>,
-    default: null,
-    validator(value: string) {
-      return propValidators.checkboxAppearance.includes(value);
-    },
-  },
-  checkboxStyle: {
-    type: String as PropType<string>,
-    default: 'check',
-    validator(value: string) {
-      return propValidators.checkboxStyle.includes(value);
+  stateIcon: {
+    type: Object as PropType<{ checked: string; unchecked: string }>,
+    default: {
+      checked: 'carbon:checkbox-checked',
+      unchecked: 'carbon:checkbox',
     },
   },
   styleClassPassthrough: {

@@ -5,7 +5,7 @@
       <slot name="description"></slot>
     </template>
     <div class="single-checkbox-items" :class="[optionsLayout]">
-      <InputCheckboxWithLabel :id :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :checkboxAppearance :checkboxStyle :theme>
+      <InputCheckboxWithLabel :id :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :stateIcon :theme>
         <template v-if="hasLabelContent" #labelContent>
           <slot name="labelContent"></slot>
         </template>
@@ -19,93 +19,85 @@
 import propValidators from '../../c12/prop-validators';
 import type { IFormMultipleOptions } from '@/types/types.forms';
 
-const { id, name, legend, label, required, fieldHasError, errorMessage, size, optionsLayout, equalCols, trueValue, falseValue, checkboxAppearance, checkboxStyle, styleClassPassthrough, theme } =
-  defineProps({
-    id: {
-      type: String,
-      required: true,
+const { id, name, legend, label, required, fieldHasError, errorMessage, size, optionsLayout, equalCols, trueValue, falseValue, stateIcon, styleClassPassthrough, theme } = defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  legend: {
+    type: String,
+    required: true,
+  },
+  label: {
+    type: String,
+    required: false,
+    default: '',
+  },
+  errorMessage: {
+    type: [Object, String],
+    required: true,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
+  multipleOptions: {
+    type: Boolean,
+    default: false,
+  },
+  size: {
+    type: String as PropType<string>,
+    default: 'medium',
+    validator(value: string) {
+      return propValidators.size.includes(value);
     },
-    name: {
-      type: String,
-      required: true,
+  },
+  trueValue: {
+    type: [String, Number, Boolean],
+    default: true,
+  },
+  falseValue: {
+    type: [String, Number, Boolean],
+    default: false,
+  },
+  optionsLayout: {
+    type: String as PropType<string>,
+    default: 'equal-widths',
+    validator(value: string) {
+      return propValidators.optionsLayout.includes(value);
     },
-    legend: {
-      type: String,
-      required: true,
+  },
+  equalCols: {
+    type: Boolean,
+    default: true,
+  },
+  stateIcon: {
+    type: Object as PropType<{ checked: string; unchecked: string }>,
+    default: {
+      checked: 'carbon:checkbox-checked',
+      unchecked: 'carbon:checkbox',
     },
-    label: {
-      type: String,
-      required: false,
-      default: '',
+  },
+  styleClassPassthrough: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
+  theme: {
+    type: String as PropType<string>,
+    default: 'primary',
+    validator(value: string) {
+      return propValidators.theme.includes(value);
     },
-    errorMessage: {
-      type: [Object, String],
-      required: true,
-    },
-    required: {
-      type: Boolean,
-      default: false,
-    },
-    fieldHasError: {
-      type: Boolean,
-      default: false,
-    },
-    multipleOptions: {
-      type: Boolean,
-      default: false,
-    },
-    size: {
-      type: String as PropType<string>,
-      default: 'medium',
-      validator(value: string) {
-        return propValidators.size.includes(value);
-      },
-    },
-    trueValue: {
-      type: [String, Number, Boolean],
-      default: true,
-    },
-    falseValue: {
-      type: [String, Number, Boolean],
-      default: false,
-    },
-    optionsLayout: {
-      type: String as PropType<string>,
-      default: 'equal-widths',
-      validator(value: string) {
-        return propValidators.optionsLayout.includes(value);
-      },
-    },
-    equalCols: {
-      type: Boolean,
-      default: true,
-    },
-    checkboxAppearance: {
-      type: String as PropType<string>,
-      default: null,
-      validator(value: string) {
-        return propValidators.checkboxAppearance.includes(value);
-      },
-    },
-    checkboxStyle: {
-      type: String as PropType<string>,
-      default: 'check',
-      validator(value: string) {
-        return propValidators.checkboxStyle.includes(value);
-      },
-    },
-    styleClassPassthrough: {
-      type: Array as PropType<string[]>,
-      default: () => [],
-    },
-    theme: {
-      type: String as PropType<string>,
-      default: 'primary',
-      validator(value: string) {
-        return propValidators.theme.includes(value);
-      },
-    },
-  });
+  },
+});
 
 const slots = useSlots();
 const hasDescription = computed(() => slots.description !== undefined);

@@ -1,6 +1,6 @@
 <template>
   <div class="input-checkbox-with-label" :class="[elementClasses, optionsLayout, { error: fieldHasError }]">
-    <InputCheckboxCore :id :name :required v-model="modelValue" :size :trueValue :falseValue :checkboxAppearance :checkboxStyle :fieldHasError :theme />
+    <InputCheckboxCore :id :name :required v-model="modelValue" :size :trueValue :falseValue :stateIcon :fieldHasError :theme />
     <label v-if="hasLabelContent" class="input-checkbox-label body-normal" :for="id">
       <slot name="labelContent"></slot>
     </label>
@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { id, name, label, required, fieldHasError, trueValue, falseValue, size, checkboxAppearance, checkboxStyle, optionsLayout, styleClassPassthrough, theme } = defineProps({
+const { id, name, label, required, fieldHasError, trueValue, falseValue, size, stateIcon, optionsLayout, styleClassPassthrough, theme } = defineProps({
   id: {
     type: String,
     required: true,
@@ -47,18 +47,11 @@ const { id, name, label, required, fieldHasError, trueValue, falseValue, size, c
       return propValidators.size.includes(value);
     },
   },
-  checkboxAppearance: {
-    type: String as PropType<string>,
-    default: null,
-    validator(value: string) {
-      return propValidators.checkboxAppearance.includes(value);
-    },
-  },
-  checkboxStyle: {
-    type: String as PropType<string>,
-    default: 'check',
-    validator(value: string) {
-      return propValidators.checkboxStyle.includes(value);
+  stateIcon: {
+    type: Object as PropType<{ checked: string; unchecked: string }>,
+    default: {
+      checked: 'carbon:checkbox-checked',
+      unchecked: 'carbon:checkbox',
     },
   },
   optionsLayout: {
