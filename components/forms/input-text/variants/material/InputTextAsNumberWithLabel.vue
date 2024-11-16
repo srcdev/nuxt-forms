@@ -29,7 +29,7 @@
           :readonly="Number(modelValue) <= min"
           :is-pending="false"
           buttonText="Step down"
-          theme="ghost"
+          :theme
           size="x-small"
         >
           <template #iconOnly>
@@ -44,7 +44,7 @@
           :readonly="Number(modelValue) >= max"
           :is-pending="false"
           buttonText="Step up"
-          theme="ghost"
+          :theme
           size="x-small"
         >
           <template #iconOnly>

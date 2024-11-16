@@ -1,6 +1,6 @@
 <template>
   <div class="input-radiobutton-wrapper" :data-form-theme="formTheme" :class="[size, { error: fieldHasError }]">
-    <Icon :name="icon" class="input-radiobutton-decorator" />
+    <Icon v-show="isChecked" name="material-symbols:circle" class="input-radiobutton-decorator" />
     <input
       type="radio"
       :true-value="trueValue"
@@ -120,13 +120,22 @@ const useCustomizeIcon = (content: string, name: string, prefix: string, provide
   --_checkbox-size: initial;
   --_outline-width: var(--input-outline-width-thin);
   --_border-width: var(--input-border-width-default);
+  --_border-color: var(--theme-form-radio-border);
+  --_outline-color: var(--theme-form-radio-outline);
   --_box-shadow: none;
 
   display: grid;
   grid-template-areas: 'element-stack';
+  /* place-content: center; */
 
   background-color: var(--theme-form-radio-bg);
   border-radius: 50%;
+  border: var(--_border-width) solid var(--_border-color);
+  outline: 1px solid var(--_outline-color);
+  box-shadow: var(--_box-shadow);
+
+  height: var(--_checkbox-size);
+  width: var(--_checkbox-size);
 
   &:has(.input-radiobutton-core:focus-visible) {
     --_box-shadow: var(--theme-form-focus-box-shadow);
@@ -150,11 +159,14 @@ const useCustomizeIcon = (content: string, name: string, prefix: string, provide
   }
 
   .input-radiobutton-decorator {
+    --_checked-size: calc(var(--_checkbox-size) * 0.65);
     grid-area: element-stack;
+    align-self: center;
+    justify-self: center;
     color: var(--theme-form-radio-symbol);
-    height: var(--_checkbox-size);
-    width: var(--_checkbox-size);
-    box-shadow: var(--_box-shadow);
+    height: var(--_checked-size);
+    width: var(--_checked-size);
+    translate: -2px -2px;
   }
 
   .input-radiobutton-core {
@@ -164,13 +176,15 @@ const useCustomizeIcon = (content: string, name: string, prefix: string, provide
     overflow: hidden;
     opacity: 0;
 
+    height: var(--_checkbox-size);
+    width: var(--_checkbox-size);
+
     &:hover {
       cursor: pointer;
     }
 
-    &:focus {
-      border: var(--_border-width) solid var(--theme-form-input-border);
-      outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline) h s 50%);
+    &:focus-visible {
+      --_box-shadow: var(--theme-form-focus-box-shadow);
     }
   }
 }

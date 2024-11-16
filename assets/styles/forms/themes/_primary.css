@@ -12,14 +12,20 @@
     --theme-form-focus-box-shadow: 1px 1px 8px 1px light-dark(var(--blue-12), var(--blue-2));
 
     --theme-form-checkbox-bg: light-dark(var(--gray-1), var(--gray-4));
+    --theme-form-checkbox-border: light-dark(var(--blue-12), var(--blue-12));
+    --theme-form-checkbox-outline: light-dark(var(--blue-1), var(--blue-1));
     --theme-form-checkbox-shadow: transparent;
     --theme-form-checkbox-shadow-focus: var(--blue-6);
     --theme-form-checkbox-symbol: var(--blue-12);
 
     --theme-form-radio-bg: light-dark(var(--gray-1), var(--gray-4));
+    --theme-form-radio-border: light-dark(var(--blue-12), var(--blue-12));
+    --theme-form-radio-outline: light-dark(var(--blue-1), var(--blue-1));
     --theme-form-radio-shadow: transparent;
     --theme-form-radio-shadow-focus: var(--blue-6);
     --theme-form-radio-symbol: var(--blue-12);
+
+    --theme-form-range-accent-color: light-dark(var(--blue-12), var(--blue-3));
   }
 
   [data-btn-theme='primary'] {

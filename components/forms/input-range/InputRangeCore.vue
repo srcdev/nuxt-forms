@@ -16,7 +16,7 @@
         :list="hasDataList ? name + '-datalist' : ''"
         :class="['input-range-core', `input-range--${size}`, `input-range--${weight}`, styleClassPassthrough]"
         v-model="modelValue"
-        ref="inputField"
+        ref="inputRange"
       />
 
       <template v-if="hasDataList">
@@ -102,6 +102,15 @@ const formTheme = computed(() => {
 });
 
 const modelValue = defineModel<number | readonly number[]>();
+
+// @input="changeBackgroundColor"
+const changeBackgroundColor = () => {
+  console.log('changeBackgroundColor()');
+  const inputRange = ref<HTMLInputElement | null>(null);
+  if (inputRange.value !== null) {
+    inputRange.value.style.accentColor = 'hsl(' + modelValue.value + ', 100%, 50%)';
+  }
+};
 </script>
 
 <style lang="css">
@@ -126,10 +135,40 @@ const modelValue = defineModel<number | readonly number[]>();
   .input-range-container {
     flex-grow: 1;
     .input-range-core {
-      color: var(--theme-form-input-text);
+      accent-color: var(--theme-form-range-accent-color);
       height: var(--_input-range-height);
       margin: 0;
       width: 100%;
+
+      /* For Chrome, Safari, Opera, and Edge */
+      /* &::-webkit-slider-runnable-track {
+        background: var(--theme-form-range-accent-color);
+        height: var(--_input-range-height);
+      } */
+
+      /* For Firefox */
+      /* &::-moz-range-track {
+        background: var(--theme-form-range-accent-color);
+        height: var(--_input-range-height);
+      } */
+
+      /* Stling the thumb */
+      /* &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        background: #5cd5eb;
+        height: 2rem;
+        width: 1rem;
+        border-radius: 10px;
+      } */
+
+      /* For Firefox */
+      /* &::-moz-range-thumb {
+        background: #5cd5eb;
+        height: 2rem;
+        width: 1rem;
+        border-radius: 10px;
+        border: none;
+      } */
 
       &:focus-visible {
         box-shadow: var(--theme-form-focus-box-shadow);
