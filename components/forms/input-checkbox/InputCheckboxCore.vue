@@ -1,5 +1,6 @@
 <template>
   <div class="input-checkbox-wrapper" :data-form-theme="formTheme" :class="[size, { error: fieldHasError }]">
+    <Icon :name="icon" class="input-checkbox-decorator" />
     <input
       type="checkbox"
       :true-value="trueValue"
@@ -13,9 +14,6 @@
       v-model="modelValue"
       ref="inputField"
     />
-    <div class="input-checkbox-decorator" :class="[size, stateIcon]">
-      <Icon :name="icon" class="icon" />
-    </div>
   </div>
 </template>
 
@@ -105,15 +103,15 @@ const icon = computed(() => {
 <style scoped lang="css">
 .input-checkbox-wrapper {
   --_checkbox-size: initial;
-  --_wrapper-size: calc(var(--_checkbox-size) - 5px);
   --_outline-width: var(--input-outline-width-thin);
   --_border-width: var(--input-border-width-default);
   --_box-shadow: none;
 
   display: grid;
   grid-template-areas: 'element-stack';
-  height: var(--_wrapper-size);
-  width: var(--_wrapper-size);
+
+  background-color: var(--theme-form-radio-bg);
+  border-radius: 4px;
 
   &:has(.input-checkbox-core:focus-visible) {
     --_box-shadow: var(--theme-form-focus-box-shadow);
@@ -137,24 +135,11 @@ const icon = computed(() => {
   }
 
   .input-checkbox-decorator {
-    --_padding: 5px;
-    display: grid;
     grid-area: element-stack;
-    background-color: var(--theme-form-checkbox-bg);
-    border-radius: 2px;
-    place-content: center;
-    position: relative;
-    height: var(--_wrapper-size);
-    width: var(--_wrapper-size);
-    z-index: -1;
-
-    .icon {
-      grid-area: stack;
-      color: var(--theme-form-radio-symbol);
-      height: var(--_checkbox-size);
-      width: var(--_checkbox-size);
-      box-shadow: var(--_box-shadow);
-    }
+    color: var(--theme-form-radio-symbol);
+    height: var(--_checkbox-size);
+    width: var(--_checkbox-size);
+    box-shadow: var(--_box-shadow);
   }
 
   .input-checkbox-core {
@@ -166,6 +151,11 @@ const icon = computed(() => {
 
     &:hover {
       cursor: pointer;
+    }
+
+    &:focus {
+      border: var(--_border-width) solid var(--theme-form-input-border);
+      outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline) h s 50%);
     }
   }
 }

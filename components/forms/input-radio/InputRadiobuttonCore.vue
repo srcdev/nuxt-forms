@@ -1,5 +1,6 @@
 <template>
   <div class="input-radiobutton-wrapper" :data-form-theme="formTheme" :class="[size, { error: fieldHasError }]">
+    <Icon :name="icon" class="input-radiobutton-decorator" />
     <input
       type="radio"
       :true-value="trueValue"
@@ -13,9 +14,6 @@
       v-model="modelValue"
       ref="inputField"
     />
-    <div class="input-radiobutton-decorator" :class="[size]">
-      <Icon :name="icon" class="icon" />
-    </div>
   </div>
 </template>
 
@@ -103,6 +101,18 @@ const isChecked = computed(() => {
 const icon = computed(() => {
   return isChecked.value ? stateIcon.checked : stateIcon.unchecked;
 });
+
+const useCustomizeIcon = (content: string, name: string, prefix: string, provider: string) => {
+  console.log('useCustomizeIcon');
+  // if (prefix !== 'carbon') return content; // Ignore Prefix
+
+  return content
+    .replace(/stroke-width="[^"]*"/g, `stroke-width="2"`) // Change stroke width to 2
+    .replace(/stroke="[^"]*"/g, `stroke="#ff0000"`) // Change stroke color to red
+    .replace(/fill="[^"]*"/g, `fill="#00ff00"`) // Change fill color to green
+    .replace(/animation-duration="[^"]*"/g, `animation-duration="1s"`) // Change animation duration to 1s (for animated icons)
+    .replace(/opacity="[^"]*"/g, `opacity="0.8"`); // Change opacity to 0.8
+};
 </script>
 
 <style scoped lang="css">
@@ -114,9 +124,9 @@ const icon = computed(() => {
 
   display: grid;
   grid-template-areas: 'element-stack';
-  height: var(--_checkbox-size);
-  width: var(--_checkbox-size);
-  overflow: hidden;
+
+  background-color: var(--theme-form-radio-bg);
+  border-radius: 50%;
 
   &:has(.input-radiobutton-core:focus-visible) {
     --_box-shadow: var(--theme-form-focus-box-shadow);
@@ -140,25 +150,11 @@ const icon = computed(() => {
   }
 
   .input-radiobutton-decorator {
-    --_padding: 5px;
-    display: grid;
     grid-area: element-stack;
-    background-color: var(--theme-form-checkbox-bg);
-    border-radius: 100%;
-    place-content: center;
-    position: relative;
+    color: var(--theme-form-radio-symbol);
     height: var(--_checkbox-size);
     width: var(--_checkbox-size);
-    z-index: -1;
-
-    .icon {
-      grid-area: stack;
-      color: var(--theme-form-radio-symbol);
-      height: var(--_checkbox-size);
-      width: var(--_checkbox-size);
-      box-shadow: var(--_box-shadow);
-      outline: 1px solid yellow;
-    }
+    box-shadow: var(--_box-shadow);
   }
 
   .input-radiobutton-core {
@@ -175,13 +171,6 @@ const icon = computed(() => {
     &:focus {
       border: var(--_border-width) solid var(--theme-form-input-border);
       outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline) h s 50%);
-    }
-
-    &:checked::after {
-      display: grid;
-      font-family: var(--font-family);
-      place-content: center;
-      font-size: calc(var(--_checkbox-size) * 0.75);
     }
   }
 }

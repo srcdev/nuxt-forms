@@ -215,9 +215,15 @@
                           size="normal"
                           optionsLayout="equal-widths"
                           theme="primary"
+                          :stateIcon="{
+                            checked: 'system-uicons:check-circle',
+                            unchecked: 'system-uicons:circle',
+                          }"
                         >
                           <template #description>
-                            <p class="label-description">This is description: optionsLayout = 'equal-widths/inline'</p>
+                            <p class="label-description">
+                              NOTE: These icons are set in the parent form. See component for default props (`stateIcon`).<br />This is description: optionsLayout = 'equal-widths/inline'
+                            </p>
                           </template>
                         </MultipleRadiobuttons>
                       </template>
@@ -239,9 +245,15 @@
                           size="normal"
                           optionsLayout="inline"
                           theme="primary"
+                          :stateIcon="{
+                            checked: 'system-uicons:checkbox-checked',
+                            unchecked: 'system-uicons:checkbox-empty',
+                          }"
                         >
                           <template #description>
-                            <p class="label-description">This is description: optionsLayout = 'equal-widths'</p>
+                            <p class="label-description">
+                              NOTE: These icons are set in the parent form. See component for default props (`stateIcon`).<br />This is description: optionsLayout = 'equal-widths'
+                            </p>
                           </template>
                         </MultipleCheckboxes>
                       </template>
