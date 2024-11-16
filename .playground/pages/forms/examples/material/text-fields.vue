@@ -229,6 +229,30 @@
                       </template>
                     </FormField>
 
+                    <FormField v-if="titleData !== null" width="wide" :has-gutter="false">
+                      <template #default>
+                        <MultipleRadiobuttons
+                          id="otherTitle"
+                          name="otherTitle"
+                          legend="What is your title"
+                          :required="true"
+                          label="Check one"
+                          placeholder="eg. Type something here"
+                          :errorMessage="formErrors?.otherTitle?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.otherTitle)"
+                          v-model="state.otherTitle"
+                          v-model:fieldData="titleData"
+                          size="normal"
+                          optionsLayout="equal-widths"
+                          theme="primary"
+                        >
+                          <template #description>
+                            <p class="label-description">This is description: optionsLayout = 'equal-widths/inline'</p>
+                          </template>
+                        </MultipleRadiobuttons>
+                      </template>
+                    </FormField>
+
                     <FormField v-if="citiesData !== null" width="wide" :has-gutter="false">
                       <template #default>
                         <MultipleCheckboxes
@@ -466,6 +490,7 @@ const formSchema = reactive(
       cities: z.array(z.string()).min(1, 'Please select at least one city'),
       countries: z.array(z.string()).min(2, 'Please select at least 2 countries').max(5, 'Please select no more than 5 countries'),
       title: z.string().min(1, { message: 'Title is required' }),
+      otherTitle: z.string().min(1, { message: 'Title is required' }),
       agreed: z.boolean().refine((val) => val === true, { message: 'You must tick this box' }),
       agree: z.boolean().refine((val) => val === true, { message: 'You must tick this box' }),
       terms: z.boolean().refine((val) => val === true, { message: 'You must accept our terms' }),
@@ -481,6 +506,7 @@ const formSchema = reactive(
       cities: true,
       countries: true,
       title: true,
+      otherTitle: true,
       agreed: true,
       agree: true,
       terms: true,
@@ -501,6 +527,7 @@ const state = reactive({
   cities: [],
   countries: [],
   title: '',
+  otherTitle: '',
   agreed: false,
   agree: false,
   terms: false,

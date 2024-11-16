@@ -6,7 +6,7 @@
     </template>
     <div class="multiple-radiobuttons-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
-        <InputRadiobuttonWithLabel :id="item.value" :name="item.name" :required :label="item.label" :fieldHasError v-model="modelValue" :true-value="item.value" :size :stateIcon :theme />
+        <InputRadiobuttonWithLabel :id="`${name}-${item.value}`" :name="item.name" :required :label="item.label" :fieldHasError v-model="modelValue" :true-value="item.value" :size :stateIcon :theme />
       </template>
     </div>
     <InputError :errorMessage="errorMessage" :fieldHasError :id="name" :isDetached="true" />

@@ -6,7 +6,7 @@
     </template>
     <div class="multiple-checkboxes-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
-        <InputCheckboxWithLabel :id="item.value" :name :required :label="item.label" :fieldHasError v-model="modelValue" :true-value="item.value" :size :stateIcon :optionsLayout :theme />
+        <InputCheckboxWithLabel :id="`${name}-${item.value}`" :name :required :label="item.label" :fieldHasError v-model="modelValue" :true-value="item.value" :size :stateIcon :optionsLayout :theme />
       </template>
     </div>
     <InputError :errorMessage="errorMessage" :fieldHasError :id="name" :isDetached="true" />
