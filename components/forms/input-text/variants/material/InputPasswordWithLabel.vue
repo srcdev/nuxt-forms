@@ -6,7 +6,7 @@
         @click.stop.prevent="toggleDisplayPassword"
         :is-pending="false"
         :buttonText
-        theme="ghost"
+        :theme
         size="x-small"
         @focusin="updateFocus(name, true)"
         @focusout="updateFocus(name, false)"

@@ -51,6 +51,7 @@ useHead({
 .page-layout {
   display: grid;
   grid-template-rows: auto 1fr auto;
+  margin: 0 20px;
 }
 
 .page-layout-content {
