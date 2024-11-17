@@ -5,7 +5,10 @@
       <slot name="description"></slot>
     </template>
     <div class="single-checkbox-items" :class="[optionsLayout]">
-      <InputCheckboxWithLabel :id :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :stateIcon :theme>
+      <InputCheckboxWithLabel :id :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :theme>
+        <template #checkedIcon>
+          <slot name="checkedIcon"></slot>
+        </template>
         <template v-if="hasLabelContent" #labelContent>
           <slot name="labelContent"></slot>
         </template>
@@ -19,7 +22,7 @@
 import propValidators from '../../c12/prop-validators';
 import type { IFormMultipleOptions } from '@/types/types.forms';
 
-const { id, name, legend, label, required, fieldHasError, errorMessage, size, optionsLayout, equalCols, trueValue, falseValue, stateIcon, styleClassPassthrough, theme } = defineProps({
+const { id, name, legend, label, required, fieldHasError, errorMessage, size, optionsLayout, equalCols, trueValue, falseValue, styleClassPassthrough, theme } = defineProps({
   id: {
     type: String,
     required: true,
@@ -78,13 +81,6 @@ const { id, name, legend, label, required, fieldHasError, errorMessage, size, op
   equalCols: {
     type: Boolean,
     default: true,
-  },
-  stateIcon: {
-    type: Object as PropType<{ checked: string; unchecked: string }>,
-    default: {
-      checked: 'carbon:checkbox-checked',
-      unchecked: 'carbon:checkbox',
-    },
   },
   styleClassPassthrough: {
     type: Array as PropType<string[]>,

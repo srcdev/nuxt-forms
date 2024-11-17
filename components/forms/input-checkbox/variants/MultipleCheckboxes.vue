@@ -6,7 +6,11 @@
     </template>
     <div class="multiple-checkboxes-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
-        <InputCheckboxWithLabel :id="`${name}-${item.value}`" :name :required :label="item.label" :fieldHasError v-model="modelValue" :true-value="item.value" :size :stateIcon :optionsLayout :theme />
+        <InputCheckboxWithLabel :id="`${name}-${item.value}`" :name :required :label="item.label" :fieldHasError v-model="modelValue" :true-value="item.value" :size :optionsLayout :theme>
+          <template #checkedIcon>
+            <slot name="checkedIcon"></slot>
+          </template>
+        </InputCheckboxWithLabel>
       </template>
     </div>
     <InputError :errorMessage="errorMessage" :fieldHasError :id="name" :isDetached="true" />
@@ -19,7 +23,7 @@ import type { IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
 
 import type { C12nMultipleCheckboxes, IFormFieldC12, IFormData } from '@/types/types.forms';
 
-const { id, name, legend, label, required, fieldHasError, placeholder, errorMessage, size, optionsLayout, equalCols, stateIcon, styleClassPassthrough, theme } = defineProps({
+const { id, name, legend, label, required, fieldHasError, placeholder, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme } = defineProps({
   id: {
     type: String,
     required: true,
@@ -73,13 +77,6 @@ const { id, name, legend, label, required, fieldHasError, placeholder, errorMess
   equalCols: {
     type: Boolean,
     default: true,
-  },
-  stateIcon: {
-    type: Object as PropType<{ checked: string; unchecked: string }>,
-    default: {
-      checked: 'carbon:checkbox-checked',
-      unchecked: 'carbon:checkbox',
-    },
   },
   styleClassPassthrough: {
     type: Array as PropType<string[]>,

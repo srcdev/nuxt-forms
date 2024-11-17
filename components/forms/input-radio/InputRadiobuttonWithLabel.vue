@@ -1,6 +1,10 @@
 <template>
   <div class="input-radiobutton-with-label" :class="[elementClasses, { error: fieldHasError }]">
-    <InputRadiobuttonCore :id :name :required v-model="modelValue" :size :trueValue :falseValue :stateIcon :fieldHasError :theme />
+    <InputRadiobuttonCore :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme>
+      <template #checkedIcon>
+        <slot name="checkedIcon"></slot>
+      </template>
+    </InputRadiobuttonCore>
     <label v-if="hasLabelContent" class="input-radiobutton-label body-normal" :for="id">
       <slot name="labelContent"></slot>
     </label>
@@ -11,7 +15,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { id, name, label, required, fieldHasError, trueValue, falseValue, size, stateIcon, styleClassPassthrough, theme } = defineProps({
+const { id, name, label, required, fieldHasError, trueValue, falseValue, size, styleClassPassthrough, theme } = defineProps({
   id: {
     type: String,
     required: true,
@@ -45,13 +49,6 @@ const { id, name, label, required, fieldHasError, trueValue, falseValue, size, s
     default: 'medium',
     validator(value: string) {
       return propValidators.size.includes(value);
-    },
-  },
-  stateIcon: {
-    type: Object as PropType<{ checked: string; unchecked: string }>,
-    default: {
-      checked: 'carbon:radio-button-checked',
-      unchecked: 'carbon:radio-button',
     },
   },
   styleClassPassthrough: {

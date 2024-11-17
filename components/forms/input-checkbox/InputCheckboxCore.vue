@@ -1,6 +1,9 @@
 <template>
   <div class="input-checkbox-wrapper" :data-form-theme="formTheme" :class="[size, { error: fieldHasError }]">
-    <Icon v-show="isChecked" name="material-symbols:check-small" class="input-checkbox-decorator" />
+    <slot name="checkedIcon" v-if="isChecked">
+      <Icon name="material-symbols:check-small" class="input-checked-icon" />
+    </slot>
+
     <input
       type="checkbox"
       :true-value="trueValue"
@@ -19,7 +22,7 @@
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
-const { id, name, required, trueValue, falseValue, multipleOptions, theme, styleClassPassthrough, size, stateIcon, fieldHasError } = defineProps({
+const { id, name, required, trueValue, falseValue, multipleOptions, theme, styleClassPassthrough, size, fieldHasError } = defineProps({
   id: {
     type: String,
     required: true,
@@ -58,13 +61,6 @@ const { id, name, required, trueValue, falseValue, multipleOptions, theme, style
       return propValidators.size.includes(value);
     },
   },
-  stateIcon: {
-    type: Object as PropType<{ checked: string; unchecked: string }>,
-    default: {
-      checked: 'carbon:checkbox-checked',
-      unchecked: 'carbon:checkbox',
-    },
-  },
   fieldHasError: {
     type: Boolean,
     default: false,
@@ -94,13 +90,9 @@ const isChecked = computed(() => {
     return modelValue.value === trueValue;
   }
 });
-
-const icon = computed(() => {
-  return isChecked.value ? stateIcon.checked : stateIcon.unchecked;
-});
 </script>
 
-<style scoped lang="css">
+<style lang="css">
 .input-checkbox-wrapper {
   --_checkbox-size: initial;
   --_outline-width: var(--input-outline-width-thin);
@@ -143,7 +135,7 @@ const icon = computed(() => {
     --_checkbox-size: 44px;
   }
 
-  .input-checkbox-decorator {
+  .input-checked-icon {
     grid-area: element-stack;
     color: var(--theme-form-checkbox-symbol);
     height: var(--_checkbox-size);

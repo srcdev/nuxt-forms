@@ -6,18 +6,11 @@
     </template>
     <div class="multiple-radiobuttons-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
-        <InputRadiobuttonWithLabel
-          :id="`${name}-${item.value}`"
-          :name="`${name}-${item.name}`"
-          :required
-          :label="item.label"
-          :fieldHasError
-          v-model="modelValue"
-          :true-value="item.value"
-          :size
-          :stateIcon
-          :theme
-        />
+        <InputRadiobuttonWithLabel :id="`${name}-${item.value}`" :name="`${name}-${item.name}`" :required :label="item.label" :fieldHasError v-model="modelValue" :true-value="item.value" :size :theme>
+          <template #checkedIcon>
+            <slot name="checkedIcon"></slot>
+          </template>
+        </InputRadiobuttonWithLabel>
       </template>
     </div>
     <InputError :errorMessage="errorMessage" :fieldHasError :id="name" :isDetached="true" />
@@ -26,11 +19,9 @@
 
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
-import type { IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
+import type { IFormMultipleOptions } from '@/types/types.forms';
 
-import type { C12nMultipleCheckboxes, IFormFieldC12, IFormData } from '@/types/types.forms';
-
-const { id, name, legend, label, required, fieldHasError, placeholder, errorMessage, size, optionsLayout, equalCols, stateIcon, styleClassPassthrough, theme } = defineProps({
+const { id, name, legend, label, required, fieldHasError, placeholder, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme } = defineProps({
   id: {
     type: String,
     required: true,
@@ -84,13 +75,6 @@ const { id, name, legend, label, required, fieldHasError, placeholder, errorMess
   equalCols: {
     type: Boolean,
     default: true,
-  },
-  stateIcon: {
-    type: Object as PropType<{ checked: string; unchecked: string }>,
-    default: {
-      checked: 'carbon:radio-button-checked',
-      unchecked: 'carbon:radio-button',
-    },
   },
   styleClassPassthrough: {
     type: Array as PropType<string[]>,
