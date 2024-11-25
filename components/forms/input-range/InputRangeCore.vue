@@ -140,6 +140,38 @@ const changeBackgroundColor = () => {
       margin: 0;
       width: 100%;
 
+      /*
+      &:hover {
+        cursor: -webkit-grab;
+        outline-color: red;
+      }
+      &:active {
+        cursor: -webkit-grabbing;
+        outline-color: blue;
+      }
+      &:focus-visible {
+        outline-offset: 0.25rem;
+        outline-color: transparent;
+      }
+      */
+
+      &::-webkit-slider-thumb {
+        /* appearance: none; */
+        /* -webkit-appearance: none; */
+        accent-color: blue;
+        color: blue;
+        background-color: 1px solid green;
+        outline: 1px solid blue;
+        border-radius: 50%;
+      }
+
+      &::-webkit-slider-runnable-track {
+        appearance: none;
+        -webkit-appearance: none;
+        /* background: hsl(10 80% 50% / 0.5); */
+        /* box-shadow: 1px 1px 1px #fff, 0px 0px 1px #fff; */
+      }
+
       /* For Chrome, Safari, Opera, and Edge */
       /* &::-webkit-slider-runnable-track {
         background: var(--theme-form-range-accent-color);

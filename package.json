@@ -12,7 +12,8 @@
     "preview": "nuxt preview .playground",
     "lint": "eslint .",
     "postinstall": "nuxt prepare .playground",
-    "release": "release-it"
+    "release": "release-it",
+    "test": "vitest"
   },
   "files": [
     "assets/",
@@ -23,9 +24,13 @@
   "devDependencies": {
     "@nuxt/eslint-config": "0.6.1",
     "@nuxt/icon": "1.7.5",
+    "@nuxt/test-utils": "^3.14.4",
+    "@vue/test-utils": "^2.4.6",
     "eslint": "9.15.0",
+    "happy-dom": "^15.11.6",
     "release-it": "17.10.0",
-    "typescript": "5.6.3"
+    "typescript": "5.6.3",
+    "vitest": "^2.1.5"
   },
   "dependencies": {
     "@iconify-json/carbon": "1.2.4",

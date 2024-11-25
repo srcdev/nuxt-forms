@@ -1,5 +1,5 @@
 <template>
-  <div class="input-error-message" :class="[elementClasses, { show: fieldHasError }, { detached: isDetached }, { hide: !fieldHasError }]">
+  <div class="input-error-message" :class="[elementClasses, { show: fieldHasError }, { detached: isDetached }, { hide: !fieldHasError }]" :data-Testid>
     <div class="inner" :class="[{ show: fieldHasError }]">
       <div class="inner-content">
         <div class="inner-icon">
@@ -20,6 +20,10 @@
 
 <script setup lang="ts">
 const props = defineProps({
+  dataTestid: {
+    type: String,
+    default: 'inputError',
+  },
   errorMessage: {
     type: [Array, Object, String],
     required: true,

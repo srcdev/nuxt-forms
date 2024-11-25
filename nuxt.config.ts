@@ -6,7 +6,14 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   // css: [resolve('./assets/styles/main.css')],
   css: ['modern-normalize', './assets/styles/main.css'],
-  modules: ['@nuxt/icon'],
+  modules: ['@nuxt/icon', '@nuxt/test-utils/module'],
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        types: ['vitest/globals'], // TypeScript support for globals
+      },
+    },
+  },
   components: [
     {
       path: './components',
