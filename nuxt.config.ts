@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   // css: [resolve('./assets/styles/main.css')],
   css: ['modern-normalize', './assets/styles/main.css'],
-  modules: ['@nuxt/icon', '@nuxt/test-utils/module'],
+  modules: ['@nuxt/icon', '@nuxt/test-utils/module', '@nuxtjs/storybook'],
   typescript: {
     tsConfig: {
       compilerOptions: {
@@ -20,5 +20,9 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+  storybook: {
+    host: 'http://localhost:6006',
+    port: 6006,
+  },
   compatibilityDate: '2024-07-13',
 });

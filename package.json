@@ -38,6 +38,8 @@
     "@iconify-json/material-symbols": "1.2.6",
     "@iconify-json/radix-icons": "1.2.1",
     "@iconify-json/ri": "1.2.3",
+    "@nuxtjs/storybook": "^8.3.2",
+    "@storybook/addon-essentials": "^8.4.5",
     "modern-normalize": "3.0.1",
     "nuxt": "3.14.159",
     "zod": "3.23.8"
