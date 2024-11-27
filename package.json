@@ -13,6 +13,7 @@
     "lint": "eslint .",
     "postinstall": "nuxt prepare .playground",
     "release": "release-it",
+    "storybook": "storybook dev --port 6006 --config-dir .storybook",
     "test": "vitest"
   },
   "files": [
@@ -25,12 +26,16 @@
     "@nuxt/eslint-config": "0.6.1",
     "@nuxt/icon": "1.7.5",
     "@nuxt/test-utils": "^3.14.4",
+    "@nuxtjs/storybook": "^8.3.2",
+    "@storybook/addon-essentials": "^8.4.5",
     "@vue/test-utils": "^2.4.6",
     "eslint": "9.15.0",
     "happy-dom": "^15.11.6",
+    "nuxt": "^3.14.1592",
     "release-it": "17.10.0",
     "typescript": "5.6.3",
-    "vitest": "^2.1.5"
+    "vitest": "^2.1.5",
+    "vue": "^3.5.13"
   },
   "dependencies": {
     "@iconify-json/carbon": "1.2.4",
@@ -38,10 +43,7 @@
     "@iconify-json/material-symbols": "1.2.6",
     "@iconify-json/radix-icons": "1.2.1",
     "@iconify-json/ri": "1.2.3",
-    "@nuxtjs/storybook": "^8.3.2",
-    "@storybook/addon-essentials": "^8.4.5",
     "modern-normalize": "3.0.1",
-    "nuxt": "3.14.159",
     "zod": "3.23.8"
   },
   "release-it": {
