@@ -1,18 +1,10 @@
 import type { Meta, StoryFn } from '@nuxtjs/storybook';
+// import { Suspense } from 'vue';
 import InputError from '../InputError.vue';
 
 export default {
   title: 'Components/UI/InputError',
   component: InputError,
-  // args: {
-  //   dataTestid: 'inputError',
-  //   errorMessage: 'Hello World',
-  //   fieldHasError: true,
-  //   id: 'testId',
-  //   styleClassPassthrough: ['testClass'],
-  //   compact: false,
-  //   isDetached: false,
-  // },
 } as Meta<typeof InputError>;
 
 const Template: StoryFn<typeof InputError> = (args) => ({
@@ -20,7 +12,16 @@ const Template: StoryFn<typeof InputError> = (args) => ({
   setup() {
     return { args };
   },
-  template: `<InputError v-bind="args"></InputError>`,
+  template: `
+    <Suspense>
+      <template #default>
+        <InputError v-bind="args" />
+      </template>
+      <template #fallback>
+        <div>Loading...</div>
+      </template>
+    </Suspense>
+  `,
 });
 
 export const SingleErrorMessage = Template.bind({});
