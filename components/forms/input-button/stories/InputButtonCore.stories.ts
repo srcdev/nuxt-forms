@@ -1,20 +1,21 @@
 import type { Meta, StoryFn } from '@nuxtjs/storybook';
 import InputButtonCore from '../InputButtonCore.vue';
+import propValidators from '../../c12/prop-validators';
 
 export default {
   title: 'Components/Forms/Buttons/Core',
   component: InputButtonCore,
   argTypes: {
     size: {
-      options: ['x-small', 'small', 'normal', 'medium', 'large'],
+      options: propValidators.size,
       control: { type: 'select' },
     },
     weight: {
-      options: ['wght-100', 'wght-200', 'wght-300', 'wght-400', 'wght-500', 'wght-600', 'wght-700', 'wght-800', 'wght-900'],
+      options: propValidators.weight,
       control: { type: 'select' },
     },
     theme: {
-      options: ['primary', 'secondary', 'tertiary', 'ghost', 'error', 'success', 'warning'],
+      options: propValidators.theme,
       control: { type: 'select' },
       default: 'primary',
     },
