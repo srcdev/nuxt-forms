@@ -30,6 +30,7 @@ export const propValidators = {
   optionsLayout: ['block', 'inline', 'equal-widths'],
   inputTypesButton: ['button', 'cancel', 'reset', 'submit'],
   inputTypesText: ['text', 'email', 'password', 'number', 'tel', 'url'],
+  inputMode: ['text', 'email', 'tel', 'url', 'search', 'numeric', 'none', 'decimal'],
 };
 
 export default propValidators;

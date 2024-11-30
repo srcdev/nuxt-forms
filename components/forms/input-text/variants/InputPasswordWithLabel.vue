@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../../../c12/prop-validators';
+import propValidators from '../../c12/prop-validators';
 
 const { type, maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme } = defineProps({
   type: {

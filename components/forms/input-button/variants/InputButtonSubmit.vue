@@ -1,17 +1,5 @@
 <template>
-  <InputButtonCore
-    type="button"
-    :use-effect="useEffect"
-    :isPending="isPending"
-    :readonly
-    :effect="effect"
-    :data-test-id="dataTestId"
-    :size
-    :weight
-    :button-text="buttonText"
-    :style-class-passthrough="styleClassPassthrough"
-    :theme
-  />
+  <InputButtonCore type="button" :use-effect="useEffect" :isPending="isPending" :readonly :effect="effect" :data-testid :size :weight :button-text :style-class-passthrough :theme />
 </template>
 
 <script setup lang="ts">
@@ -54,13 +42,13 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  dataTestId: {
+  dataTestid: {
     type: String,
     default: '',
   },
   styleClassPassthrough: {
-    type: String,
-    default: '',
+    type: Array as PropType<string[]>,
+    default: () => [],
   },
   isPending: {
     type: Boolean,

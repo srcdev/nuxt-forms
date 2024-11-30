@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../../../c12/prop-validators';
+import propValidators from '../../c12/prop-validators';
 const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, step, min, max } = defineProps({
   maxlength: {
     type: Number,

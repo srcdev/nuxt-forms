@@ -5,11 +5,11 @@
     :isPending="isPending"
     :readonly
     :effect="effect"
-    :data-test-id="dataTestId"
+    :data-testid="dataTestid"
     :size
     :weight
     :button-text="buttonText"
-    :style-class-passthrough="styleClassPassthrough"
+    :style-class-passthrough
     :theme
   >
     <template #left>
@@ -58,13 +58,13 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  dataTestId: {
+  dataTestid: {
     type: String,
     default: '',
   },
   styleClassPassthrough: {
-    type: String,
-    default: '',
+    type: Array as PropType<string[]>,
+    default: () => [],
   },
   isPending: {
     type: Boolean,

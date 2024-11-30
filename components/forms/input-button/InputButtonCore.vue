@@ -3,10 +3,10 @@
     :type
     :readonly
     :aria-disabled="readonly"
-    :data-test-id="dataTestId"
+    :data-testid="dataTestid"
     :data-btn-theme="theme"
     class="input-button-core btn"
-    :class="[`btn-${type}`, size, effectClass, styleClassPassthrough, { 'icon-only': isIconOnly }]"
+    :class="[`btn-${type}`, size, effectClass, elementClasses, { 'icon-only': isIconOnly }]"
   >
     <span v-if="useEffect && effect == 'fancy'" class="fancy"></span>
     <template v-if="hasLeftContent && !isIconOnly">
@@ -64,13 +64,13 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  dataTestId: {
+  dataTestid: {
     type: String,
     default: '',
   },
   styleClassPassthrough: {
-    type: String,
-    default: '',
+    type: Array as PropType<string[]>,
+    default: () => [],
   },
   useEffect: {
     type: Boolean,
@@ -106,6 +106,8 @@ const slots = useSlots();
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
 const isIconOnly = computed(() => slots.iconOnly !== undefined);
+
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
 </script>
 
 <style lang="css">

@@ -37,7 +37,8 @@ import propValidators from '../c12/prop-validators';
 
 const { type, inputmode, maxlength, id, name, placeholder, required, fieldHasError, styleClassPassthrough, theme } = defineProps({
   type: {
-    type: String as PropType<'text' | 'email' | 'password' | 'number' | 'tel' | 'url'>,
+    // type: String as PropType<'text' | 'email' | 'password' | 'number' | 'tel' | 'url'>,
+    type: String,
     default: 'text',
     validator(value: string) {
       return propValidators.inputTypesText.includes(value);
@@ -46,6 +47,9 @@ const { type, inputmode, maxlength, id, name, placeholder, required, fieldHasErr
   inputmode: {
     type: String as PropType<'text' | 'email' | 'tel' | 'url' | 'search' | 'numeric' | 'none' | 'decimal'>,
     default: 'text',
+    validator(value: string) {
+      return propValidators.inputMode.includes(value);
+    },
   },
   maxlength: {
     type: Number,
