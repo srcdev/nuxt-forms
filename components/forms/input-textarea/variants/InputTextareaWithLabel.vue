@@ -10,7 +10,7 @@
         <slot name="right"></slot>
       </template>
     </InputTextareaCore>
-    <InputError :errorMessage :fieldHasError :id :isDetached="false" />
+    <InputError :errorMessage :showError="fieldHasError" :id :isDetached="false" />
   </div>
 </template>
 

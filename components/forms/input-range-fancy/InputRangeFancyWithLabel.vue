@@ -6,7 +6,7 @@
     </template>
 
     <InputRangeFancyCore v-model="modelValue" :id :name :rangeLowLabel :rangeHighLabel :min :max :step :theme :required :size :weight :fieldHasError />
-    <InputError :errorMessage :fieldHasError :id :isDetached="true" :styleClassPassthrough="['mbe-20']" />
+    <InputError :errorMessage :showError="fieldHasError" :id :isDetached="true" :styleClassPassthrough="['mbe-20']" />
   </div>
 </template>
 

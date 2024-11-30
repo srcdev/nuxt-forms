@@ -14,7 +14,7 @@
         </template>
       </InputCheckboxWithLabel>
     </div>
-    <InputError :errorMessage :fieldHasError :id="name" :isDetached="true" :styleClassPassthrough="inputErrorStyles" />
+    <InputError :errorMessage :showError="fieldHasError" :id="name" :isDetached="true" :styleClassPassthrough="inputErrorStyles" />
   </fieldset>
 </template>
 

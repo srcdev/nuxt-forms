@@ -14,6 +14,9 @@
 
   --font-family: futura-pt, Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
 
+  --theme-error-surface: var(--red-12);
+  --theme-error-text: var(--red-0);
+
   --theme-form-button-font-size-x-small: 14px;
   --theme-form-button-font-size-small: 14px;
   --theme-form-button-font-size-normal: 16px;

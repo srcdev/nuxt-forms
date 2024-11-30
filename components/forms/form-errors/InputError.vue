@@ -1,6 +1,6 @@
 <template>
-  <div class="input-error-message" :class="[elementClasses, { show: fieldHasError }, { detached: isDetached }, { hide: !fieldHasError }]" :data-Testid>
-    <div class="inner" :class="[{ show: fieldHasError }]">
+  <div class="input-error-message" :class="[elementClasses, { show: showError }, { detached: isDetached }, { hide: !showError }]" :data-Testid>
+    <div class="inner" :class="[{ show: showError }]">
       <div class="inner-content">
         <div class="inner-icon">
           <Icon name="radix-icons:circle-backslash" class="icon" />
@@ -28,7 +28,7 @@ const props = defineProps({
     type: [Array, Object, String],
     required: true,
   },
-  fieldHasError: {
+  showError: {
     type: Boolean,
     required: true,
   },

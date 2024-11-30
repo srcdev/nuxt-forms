@@ -37,7 +37,7 @@
         </InputButtonCore>
       </template>
     </InputNumberCore>
-    <InputError :errorMessage :fieldHasError :id :isDetached="true" />
+    <InputError :errorMessage :showError="fieldHasError" :id :isDetached="true" />
   </div>
 </template>
 

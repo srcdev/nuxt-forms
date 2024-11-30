@@ -28,7 +28,7 @@ export const SingleErrorMessage = Template.bind({});
 SingleErrorMessage.args = {
   dataTestid: 'inputError',
   errorMessage: 'Hello World',
-  fieldHasError: true,
+  showError: true,
   id: 'testId',
   styleClassPassthrough: ['testClass'],
   compact: false,

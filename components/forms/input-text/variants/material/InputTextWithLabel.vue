@@ -25,7 +25,7 @@
         <slot name="right"></slot>
       </template>
     </InputTextCore>
-    <InputError :errorMessage="errorMessage" :fieldHasError :id :isDetached="false" />
+    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id :isDetached="false" />
   </div>
 </template>
 
