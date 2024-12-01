@@ -156,7 +156,8 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 }
 
 .multiple-checkboxes-items {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px;
   margin-top: 12px;
 

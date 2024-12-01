@@ -9,6 +9,11 @@
       <slot name="labelContent"></slot>
     </label>
     <label v-else class="input-checkbox-radio-button-label body-normal-semibold" :for="id">{{ label }}</label>
+    <div class="item-icon">
+      <slot name="itemIcon">
+        <Icon name="material-symbols:check-circle-outline" class="icon" />
+      </slot>
+    </div>
   </div>
 </template>
 
@@ -99,6 +104,7 @@ const formTheme = computed(() => {
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 4px;
 
   background-color: var(--_background-color);
@@ -114,10 +120,12 @@ const formTheme = computed(() => {
 
   .input-checkbox-radio-button-label {
     display: flex;
+    flex-grow: 1;
     color: var(--_label-color);
     width: 100%;
     height: 100%;
     align-items: center;
+    justify-content: center;
     margin-block: 8px;
     padding-inline: 8px;
     white-space: var(--_white-space);
@@ -125,6 +133,14 @@ const formTheme = computed(() => {
     &:hover {
       cursor: pointer;
     }
+  }
+
+  .item-icon {
+    display: flex;
+    place-content: center;
+    color: var(--_border-color);
+    height: var(--_checkbox-size);
+    width: var(--_checkbox-size);
   }
 }
 </style>
