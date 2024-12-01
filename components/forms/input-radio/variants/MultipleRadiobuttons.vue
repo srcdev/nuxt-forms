@@ -6,7 +6,8 @@
     </template>
     <div class="multiple-radiobuttons-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
-        <InputCheckboxRadioWithLabel
+        <InputCheckboxRadioButton
+          v-if="isButton"
           type="radio"
           :id="`${name}-${item.value}`"
           :name="`${name}-${item.name}`"
@@ -16,6 +17,25 @@
           v-model="modelValue"
           :true-value="item.value"
           :size
+          :optionsLayout
+          :theme
+        >
+          <template #checkedIcon>
+            <slot name="checkedIcon"></slot>
+          </template>
+        </InputCheckboxRadioButton>
+        <InputCheckboxRadioWithLabel
+          v-else
+          type="radio"
+          :id="`${name}-${item.value}`"
+          :name="`${name}-${item.name}`"
+          :required
+          :label="item.label"
+          :fieldHasError
+          v-model="modelValue"
+          :true-value="item.value"
+          :size
+          :optionsLayout
           :theme
         >
           <template #checkedIcon>
@@ -32,7 +52,7 @@
 import propValidators from '../../c12/prop-validators';
 import type { IFormMultipleOptions } from '@/types/types.forms';
 
-const { id, name, legend, label, required, fieldHasError, placeholder, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme } = defineProps({
+const { id, name, legend, label, required, fieldHasError, placeholder, isButton, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme } = defineProps({
   id: {
     type: String,
     required: true,
@@ -52,6 +72,10 @@ const { id, name, legend, label, required, fieldHasError, placeholder, errorMess
   placeholder: {
     type: String,
     default: '',
+  },
+  isButton: {
+    type: Boolean,
+    default: false,
   },
   errorMessage: {
     type: [Object, String],
