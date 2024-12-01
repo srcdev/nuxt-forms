@@ -5,14 +5,14 @@
       <slot name="description"></slot>
     </template>
     <div class="single-checkbox-items" :class="[optionsLayout]">
-      <InputCheckboxWithLabel :id :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :theme>
+      <InputCheckboxRadioWithLabel type="checkbox" :id :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :theme>
         <template #checkedIcon>
           <slot name="checkedIcon"></slot>
         </template>
         <template v-if="hasLabelContent" #labelContent>
           <slot name="labelContent"></slot>
         </template>
-      </InputCheckboxWithLabel>
+      </InputCheckboxRadioWithLabel>
     </div>
     <InputError :errorMessage :showError="fieldHasError" :id="name" :isDetached="true" :styleClassPassthrough="inputErrorStyles" />
   </fieldset>

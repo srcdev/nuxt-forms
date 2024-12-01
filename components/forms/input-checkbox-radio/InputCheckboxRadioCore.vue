@@ -1,17 +1,18 @@
 <template>
-  <div class="input-radiobutton-wrapper" :data-form-theme="formTheme" :class="[size, { error: fieldHasError }]">
+  <div class="input-checkbox-radio-wrapper" :data-form-theme="formTheme" :class="[type, size, elementClasses, { error: fieldHasError }, { button: isButton }]">
     <slot name="checkedIcon" v-if="isChecked">
-      <Icon name="material-symbols:circle" class="input-checked-icon" />
+      <Icon :name="defaultIcon" class="input-checked-icon" />
     </slot>
+
     <input
-      type="radio"
+      :type
       :true-value="trueValue"
       :false-value="falseValue"
       :id
       :name
       :required="required && !multipleOptions"
       :value="trueValue"
-      class="input-radiobutton-core"
+      class="input-checkbox-radio-core"
       :class="[size, { error: fieldHasError }]"
       v-model="modelValue"
       ref="inputField"
@@ -21,7 +22,15 @@
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
-const { id, name, required, trueValue, falseValue, multipleOptions, theme, styleClassPassthrough, size, fieldHasError } = defineProps({
+const { isButton, type, id, name, required, trueValue, falseValue, multipleOptions, theme, styleClassPassthrough, size, fieldHasError } = defineProps({
+  isButton: {
+    type: Boolean,
+    default: false,
+  },
+  type: {
+    type: String as PropType<'checkbox' | 'radio'>,
+    required: true,
+  },
   id: {
     type: String,
     required: true,
@@ -70,9 +79,6 @@ const { id, name, required, trueValue, falseValue, multipleOptions, theme, style
   },
 });
 
-const slots = useSlots();
-const hasLeftContent = computed(() => slots.left !== undefined);
-const hasRightContent = computed(() => slots.right !== undefined);
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 const formTheme = computed(() => {
@@ -82,6 +88,10 @@ const formTheme = computed(() => {
 const modelValue = defineModel<any>();
 
 const inputField = ref<HTMLInputElement | null>(null);
+
+const defaultIcon = computed(() => {
+  return type === 'checkbox' ? 'material-symbols:check-small' : 'material-symbols:circle';
+});
 
 const isArray = Array.isArray(modelValue.value);
 
@@ -95,28 +105,48 @@ const isChecked = computed(() => {
 </script>
 
 <style lang="css">
-.input-radiobutton-wrapper {
+.input-checkbox-radio-wrapper {
   --_checkbox-size: initial;
-  --_outline-width: var(--input-outline-width-thin);
-  --_border-width: var(--input-border-width-default);
-  --_border-color: var(--theme-form-radio-border);
-  --_outline-color: var(--theme-form-radio-outline);
+  --_outline-width: 1px;
+  --_border-width: 1px;
+  --_border-radius: 50%;
+  --_background-color: var(--theme-form-checkbox-bg);
   --_box-shadow: none;
+
+  &:not(.button) {
+    --_outline-width: var(--input-outline-width-thin);
+    --_border-width: var(--input-border-width-default);
+    &.checkbox {
+      --_background-color: var(--theme-form-checkbox-bg);
+      --_border-color: var(--theme-form-checkbox-border);
+      --_border-radius: 4px;
+      --_outline-color: var(--theme-form-checkbox-outline);
+    }
+
+    &.radio {
+      --_background-color: var(--theme-form-radio-bg);
+      --_border-color: var(--theme-form-radio-border);
+      --_border-radius: 50%;
+      --_outline-color: var(--theme-form-radio-outline);
+    }
+  }
 
   display: grid;
   grid-template-areas: 'element-stack';
-  /* place-content: center; */
+  place-content: center;
 
-  background-color: var(--theme-form-radio-bg);
-  border-radius: 50%;
+  background-color: var(--_background-color);
   border: var(--_border-width) solid var(--_border-color);
+  border-radius: var(--_border-radius);
   outline: 1px solid var(--_outline-color);
   box-shadow: var(--_box-shadow);
 
   height: var(--_checkbox-size);
   width: var(--_checkbox-size);
 
-  &:has(.input-radiobutton-core:focus-visible) {
+  transition: all 0.2s ease-in-out;
+
+  &:has(.input-checkbox-radio-core:focus-visible) {
     --_box-shadow: var(--theme-form-focus-box-shadow);
   }
 
@@ -138,17 +168,14 @@ const isChecked = computed(() => {
   }
 
   .input-checked-icon {
-    --_checked-size: calc(var(--_checkbox-size) * 0.65);
     grid-area: element-stack;
-    align-self: center;
-    justify-self: center;
-    color: var(--theme-form-radio-symbol);
-    height: var(--_checked-size);
-    width: var(--_checked-size);
-    translate: -2px -2px;
+    color: var(--theme-form-checkbox-symbol);
+    height: var(--_checkbox-size);
+    width: var(--_checkbox-size);
+    box-shadow: var(--_box-shadow);
   }
 
-  .input-radiobutton-core {
+  .input-checkbox-radio-core {
     grid-area: element-stack;
     appearance: none;
     margin: 0;

@@ -180,6 +180,31 @@
                       </template>
                     </FormField>
 
+                    <FormField v-if="tagsData !== null" width="wide" :has-gutter="false">
+                      <template #default>
+                        <MultipleCheckboxes
+                          id="tags"
+                          name="tags"
+                          legend="Choose tags"
+                          :required="true"
+                          label="Check between 3 and 8 tags"
+                          placeholder="eg. Type something here"
+                          :isButton="true"
+                          :errorMessage="formErrors?.tags?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.tags)"
+                          v-model="state.tags"
+                          v-model:fieldData="tagsData"
+                          size="normal"
+                          optionsLayout="inline"
+                          :theme
+                        >
+                          <template #description>
+                            <p class="label-description">This is description: optionsLayout = 'equal-widths'</p>
+                          </template>
+                        </MultipleCheckboxes>
+                      </template>
+                    </FormField>
+
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
                         <InputRangeDefault
@@ -441,6 +466,7 @@ const swapTheme = (newTheme: string) => {
 const { data: citiesData } = await useFetch<IFormMultipleOptions>('/api/places/list?category=cities');
 const { data: countriesData } = await useFetch<IFormMultipleOptions>('/api/places/list?category=countries');
 const { data: titleData } = await useFetch<IFormMultipleOptions>('/api/utils?category=title');
+const { data: tagsData } = await useFetch<IFormMultipleOptions>('/api/recipes/tags');
 
 /*
  * Setup forms
@@ -501,6 +527,7 @@ const formSchema = reactive(
         .lte(100),
       cities: z.array(z.string()).min(1, 'Please select at least one city'),
       countries: z.array(z.string()).min(2, 'Please select at least 2 countries').max(5, 'Please select no more than 5 countries'),
+      tags: z.array(z.string()).min(3, 'Please select at least 3 tags').max(8, 'Please select no more than 8 tags'),
       title: z.string().min(1, { message: 'Title is required' }),
       otherTitle: z.string().min(1, { message: 'Title is required' }),
       agreed: z.boolean().refine((val) => val === true, { message: 'You must tick this box' }),
@@ -517,6 +544,7 @@ const formSchema = reactive(
       score: true,
       cities: true,
       countries: true,
+      tags: true,
       title: true,
       otherTitle: true,
       agreed: true,
@@ -538,6 +566,7 @@ const state = reactive({
   score: 50,
   cities: [],
   countries: [],
+  tags: [],
   title: '',
   otherTitle: '',
   agreed: false,

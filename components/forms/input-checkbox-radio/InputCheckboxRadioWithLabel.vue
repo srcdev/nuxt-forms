@@ -1,21 +1,25 @@
 <template>
-  <div class="input-radiobutton-with-label" :class="[elementClasses, { error: fieldHasError }]">
-    <InputRadiobuttonCore :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme>
+  <div class="input-checkbox-radio-with-label" :class="[elementClasses, optionsLayout, { error: fieldHasError }]">
+    <InputCheckboxRadioCore :type :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme>
       <template #checkedIcon>
         <slot name="checkedIcon"></slot>
       </template>
-    </InputRadiobuttonCore>
-    <label v-if="hasLabelContent" class="input-radiobutton-label body-normal" :for="id">
+    </InputCheckboxRadioCore>
+    <label v-if="hasLabelContent" class="input-checkbox-radio-label body-normal" :for="id">
       <slot name="labelContent"></slot>
     </label>
-    <label v-else class="input-radiobutton-label body-normal-semibold" :for="id">{{ label }}</label>
+    <label v-else class="input-checkbox-radio-label body-normal-semibold" :for="id">{{ label }}</label>
   </div>
 </template>
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { id, name, label, required, fieldHasError, trueValue, falseValue, size, styleClassPassthrough, theme } = defineProps({
+const { type, id, name, label, required, fieldHasError, trueValue, falseValue, size, optionsLayout, styleClassPassthrough, theme } = defineProps({
+  type: {
+    type: String as PropType<'checkbox' | 'radio'>,
+    required: true,
+  },
   id: {
     type: String,
     required: true,
@@ -51,6 +55,13 @@ const { id, name, label, required, fieldHasError, trueValue, falseValue, size, s
       return propValidators.size.includes(value);
     },
   },
+  optionsLayout: {
+    type: String as PropType<string>,
+    default: 'equal-widths',
+    validator(value: string) {
+      return propValidators.optionsLayout.includes(value);
+    },
+  },
   styleClassPassthrough: {
     type: Array as PropType<string[]>,
     default: () => [],
@@ -72,18 +83,24 @@ const modelValue = defineModel();
 </script>
 
 <style lang="css">
-.input-radiobutton-with-label {
-  display: grid;
-  align-items: center;
-  grid-template-columns: auto 1fr;
+.input-checkbox-radio-with-label {
+  --_white-space: wrap;
 
-  .input-radiobutton-label {
+  display: flex;
+  align-items: center;
+
+  &.inline {
+    --_white-space: nowrap;
+  }
+
+  .input-checkbox-radio-label {
     display: flex;
     width: 100%;
     height: 100%;
     align-items: center;
     margin-block: 8px;
     padding-inline: 8px;
+    white-space: var(--_white-space);
 
     &:hover {
       cursor: pointer;

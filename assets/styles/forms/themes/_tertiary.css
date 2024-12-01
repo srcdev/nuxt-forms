@@ -26,6 +26,20 @@
     --theme-form-radio-symbol: var(--gray-12);
 
     --theme-form-range-accent-color: light-dark(var(--gray-12), var(--gray-3));
+
+    /*
+    * Checkbox as button
+    **/
+
+    --theme-checkbox-radio-button-bg-default: light-dark(var(--green-4), var(--green-4));
+
+    --theme-checkbox-radio-button-border-default: light-dark(var(--green-12), var(--green-12));
+    --theme-checkbox-radio-button-border-width: 1px;
+
+    --theme-checkbox-radio-button-outline-default: light-dark(var(--green-5), var(--green-5));
+    --theme-checkbox-radio-button-outline-width: 1px;
+
+    --theme-checkbox-radio-button-label-default: light-dark(var(--green-12), var(--green-12));
   }
 
   [data-btn-theme='tertiary'] {

@@ -6,11 +6,42 @@
     </template>
     <div class="multiple-checkboxes-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
-        <InputCheckboxWithLabel :id="`${name}-${item.value}`" :name :required :label="item.label" :fieldHasError v-model="modelValue" :true-value="item.value" :size :optionsLayout :theme>
+        <InputCheckboxRadioButton
+          v-if="isButton"
+          type="checkbox"
+          :id="`${name}-${item.value}`"
+          :name
+          :required
+          :label="item.label"
+          :fieldHasError
+          v-model="modelValue"
+          :true-value="item.value"
+          :size
+          :optionsLayout
+          :theme
+        >
           <template #checkedIcon>
             <slot name="checkedIcon"></slot>
           </template>
-        </InputCheckboxWithLabel>
+        </InputCheckboxRadioButton>
+        <InputCheckboxRadioWithLabel
+          v-else
+          type="checkbox"
+          :id="`${name}-${item.value}`"
+          :name
+          :required
+          :label="item.label"
+          :fieldHasError
+          v-model="modelValue"
+          :true-value="item.value"
+          :size
+          :optionsLayout
+          :theme
+        >
+          <template #checkedIcon>
+            <slot name="checkedIcon"></slot>
+          </template>
+        </InputCheckboxRadioWithLabel>
       </template>
     </div>
     <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="name" :isDetached="true" />
@@ -21,9 +52,7 @@
 import propValidators from '../../c12/prop-validators';
 import type { IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
 
-import type { C12nMultipleCheckboxes, IFormFieldC12, IFormData } from '@/types/types.forms';
-
-const { id, name, legend, label, required, fieldHasError, placeholder, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme } = defineProps({
+const { id, name, legend, label, required, fieldHasError, placeholder, isButton, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme } = defineProps({
   id: {
     type: String,
     required: true,
@@ -43,6 +72,10 @@ const { id, name, legend, label, required, fieldHasError, placeholder, errorMess
   placeholder: {
     type: String,
     default: '',
+  },
+  isButton: {
+    type: Boolean,
+    default: false,
   },
   errorMessage: {
     type: [Object, String],

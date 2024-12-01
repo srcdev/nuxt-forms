@@ -6,11 +6,22 @@
     </template>
     <div class="multiple-radiobuttons-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
-        <InputRadiobuttonWithLabel :id="`${name}-${item.value}`" :name="`${name}-${item.name}`" :required :label="item.label" :fieldHasError v-model="modelValue" :true-value="item.value" :size :theme>
+        <InputCheckboxRadioWithLabel
+          type="radio"
+          :id="`${name}-${item.value}`"
+          :name="`${name}-${item.name}`"
+          :required
+          :label="item.label"
+          :fieldHasError
+          v-model="modelValue"
+          :true-value="item.value"
+          :size
+          :theme
+        >
           <template #checkedIcon>
             <slot name="checkedIcon"></slot>
           </template>
-        </InputRadiobuttonWithLabel>
+        </InputCheckboxRadioWithLabel>
       </template>
     </div>
     <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="name" :isDetached="true" />

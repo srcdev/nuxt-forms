@@ -26,6 +26,20 @@
     --theme-form-radio-symbol: var(--orange-12);
 
     --theme-form-range-accent-color: light-dark(var(--orange-12), var(--orange-3));
+
+    /*
+    * Checkbox as button
+    **/
+
+    --theme-checkbox-radio-button-bg-default: light-dark(var(--orange-4), var(--orange-4));
+
+    --theme-checkbox-radio-button-border-default: light-dark(var(--orange-12), var(--orange-12));
+    --theme-checkbox-radio-button-border-width: 1px;
+
+    --theme-checkbox-radio-button-outline-default: light-dark(var(--orange-5), var(--orange-5));
+    --theme-checkbox-radio-button-outline-width: 1px;
+
+    --theme-checkbox-radio-button-label-default: light-dark(var(--orange-12), var(--orange-12));
   }
 
   [data-btn-theme='warning'] {

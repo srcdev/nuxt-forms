@@ -1,21 +1,25 @@
 <template>
-  <div class="input-checkbox-with-label" :class="[elementClasses, optionsLayout, { error: fieldHasError }]">
-    <InputCheckboxCore :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme>
+  <div class="input-checkbox-radio-button-button" :data-form-theme="formTheme" :class="[elementClasses, optionsLayout, { error: fieldHasError }]">
+    <InputCheckboxRadioCore :isButton="true" :type :id :name :required v-model="modelValue" size="small" :trueValue :falseValue :fieldHasError :theme>
       <template #checkedIcon>
         <slot name="checkedIcon"></slot>
       </template>
-    </InputCheckboxCore>
-    <label v-if="hasLabelContent" class="input-checkbox-label body-normal" :for="id">
+    </InputCheckboxRadioCore>
+    <label v-if="hasLabelContent" class="input-checkbox-radio-button-label body-normal" :for="id">
       <slot name="labelContent"></slot>
     </label>
-    <label v-else class="input-checkbox-label body-normal-semibold" :for="id">{{ label }}</label>
+    <label v-else class="input-checkbox-radio-button-label body-normal-semibold" :for="id">{{ label }}</label>
   </div>
 </template>
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { id, name, label, required, fieldHasError, trueValue, falseValue, size, optionsLayout, styleClassPassthrough, theme } = defineProps({
+const { type, id, name, label, required, fieldHasError, trueValue, falseValue, size, optionsLayout, styleClassPassthrough, theme } = defineProps({
+  type: {
+    type: String as PropType<'checkbox' | 'radio'>,
+    required: true,
+  },
   id: {
     type: String,
     required: true,
@@ -76,21 +80,41 @@ const hasLabelContent = computed(() => slots.labelContent !== undefined);
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 const modelValue = defineModel();
+
+const formTheme = computed(() => {
+  return fieldHasError ? 'error' : theme;
+});
 </script>
 
 <style lang="css">
-.input-checkbox-with-label {
+.input-checkbox-radio-button-button {
+  --_checkbox-size: initial;
+  --_background-color: var(--theme-checkbox-radio-button-bg-default);
+  --_outline-width: var(--input-outline-width-thin);
+  --_border-color: var(--theme-checkbox-radio-button-border-default);
+  --_outline-color: var(--theme-checkbox-radio-button-outline-default);
+  --_label-color: var(--theme-checkbox-radio-button-label-default);
+  --_box-shadow: none;
   --_white-space: wrap;
 
   display: flex;
   align-items: center;
+  gap: 4px;
+
+  background-color: var(--_background-color);
+  border-radius: 22px;
+  border: var(--theme-checkbox-radio-button-border-width) solid var(--_border-color);
+  outline: var(--theme-checkbox-radio-button-outline-width) solid var(--_outline-color);
+  box-shadow: var(--_box-shadow);
+  padding-inline: 12px;
 
   &.inline {
     --_white-space: nowrap;
   }
 
-  .input-checkbox-label {
+  .input-checkbox-radio-button-label {
     display: flex;
+    color: var(--_label-color);
     width: 100%;
     height: 100%;
     align-items: center;
