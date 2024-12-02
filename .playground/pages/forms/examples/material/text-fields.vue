@@ -201,6 +201,9 @@
                           <template #description>
                             <p class="label-description">This is description: optionsLayout = 'inline'</p>
                           </template>
+                          <template #itemIcon>
+                            <Icon name="material-symbols:bookmark-add-outline" class="icon" />
+                          </template>
                         </MultipleCheckboxes>
                       </template>
                     </FormField>
@@ -219,9 +222,10 @@
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.tagsRadio)"
                           v-model="state.tagsRadio"
                           v-model:fieldData="tagsData"
-                          size="normal"
+                          size="x-small"
                           optionsLayout="inline"
                           :theme
+                          direction="row-reverse"
                         >
                           <template #description>
                             <p class="label-description">This is description: optionsLayout = 'inline'</p>

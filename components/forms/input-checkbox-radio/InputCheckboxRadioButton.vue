@@ -1,6 +1,6 @@
 <template>
-  <div class="input-checkbox-radio-button-button" :data-form-theme="formTheme" :class="[elementClasses, optionsLayout, { error: fieldHasError }]">
-    <InputCheckboxRadioCore :isButton="true" :type :id :name :required v-model="modelValue" size="small" :trueValue :falseValue :fieldHasError :theme>
+  <div class="input-checkbox-radio-button-button" :data-form-theme="formTheme" :class="[size, elementClasses, optionsLayout, { error: fieldHasError }]">
+    <InputCheckboxRadioCore :isButton="true" :type :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme>
       <template #checkedIcon>
         <slot name="checkedIcon"></slot>
       </template>
@@ -11,7 +11,7 @@
     <label v-else class="input-checkbox-radio-button-label body-normal-semibold" :for="id">{{ label }}</label>
     <div class="item-icon">
       <slot name="itemIcon">
-        <Icon name="material-symbols:check-circle-outline" class="icon" />
+        <Icon name="material-symbols:add-2" class="icon" />
       </slot>
     </div>
   </div>
@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { type, id, name, label, required, fieldHasError, trueValue, falseValue, size, optionsLayout, styleClassPassthrough, theme } = defineProps({
+const { type, id, name, label, required, fieldHasError, trueValue, falseValue, size, optionsLayout, styleClassPassthrough, theme, direction } = defineProps({
   type: {
     type: String as PropType<'checkbox' | 'radio'>,
     required: true,
@@ -78,6 +78,13 @@ const { type, id, name, label, required, fieldHasError, trueValue, falseValue, s
       return propValidators.theme.includes(value);
     },
   },
+  direction: {
+    type: String as PropType<'row' | 'row-reverse'>,
+    default: 'row',
+    validator(value: string) {
+      return ['row', 'row-reverse'].includes(value);
+    },
+  },
 });
 
 const slots = useSlots();
@@ -89,6 +96,8 @@ const modelValue = defineModel();
 const formTheme = computed(() => {
   return fieldHasError ? 'error' : theme;
 });
+
+const flexDirection = ref(direction);
 </script>
 
 <style lang="css">
@@ -101,46 +110,90 @@ const formTheme = computed(() => {
   --_label-color: var(--theme-checkbox-radio-button-label-default);
   --_box-shadow: none;
   --_white-space: wrap;
+  --_gap: 4px;
+  --_border-radius: 22px;
+  --_padding-block: 4px;
+  --_padding-inline: 12px;
 
   display: flex;
+  flex-direction: v-bind(flexDirection);
   align-items: center;
   justify-content: space-between;
-  gap: 4px;
+  gap: var(--_gap);
 
   background-color: var(--_background-color);
-  border-radius: 22px;
+  border-radius: var(--_border-radius);
   border: var(--theme-checkbox-radio-button-border-width) solid var(--_border-color);
   outline: var(--theme-checkbox-radio-button-outline-width) solid var(--_outline-color);
   box-shadow: var(--_box-shadow);
-  padding-inline: 12px;
+  padding-block: var(--_padding-block);
+  padding-inline: var(--_padding-inline);
 
   &.inline {
     --_white-space: nowrap;
   }
 
-  .input-checkbox-radio-button-label {
-    display: flex;
-    flex-grow: 1;
-    color: var(--_label-color);
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-    margin-block: 8px;
-    padding-inline: 8px;
-    white-space: var(--_white-space);
-
-    &:hover {
-      cursor: pointer;
-    }
+  /* Sizes */
+  &.x-small {
+    --_checkbox-size: 20px;
+    --_gap: 10px;
+    --_border-radius: 20px;
+    --_padding-block: 2px;
+    --_padding-inline: 16px;
   }
-
-  .item-icon {
-    display: flex;
-    place-content: center;
-    color: var(--_border-color);
-    height: var(--_checkbox-size);
-    width: var(--_checkbox-size);
+  &.small {
+    --_checkbox-size: 22px;
+    --_gap: 12px;
+    --_border-radius: 18px;
+    --_padding-block: 0px;
+    --_padding-inline: 12px;
   }
+  &.normal {
+    --_checkbox-size: 34px;
+    --_gap: 10px;
+    --_border-radius: 20px;
+    --_padding-block: 4px;
+    --_padding-inline: 12px;
+  }
+  &.medium {
+    --_checkbox-size: 34px;
+    --_gap: 10px;
+    --_border-radius: 20px;
+    --_padding-block: 4px;
+    --_padding-inline: 12px;
+  }
+  &.large {
+    --_checkbox-size: 34px;
+    --_gap: 10px;
+    --_border-radius: 20px;
+    --_padding-block: 4px;
+    --_padding-inline: 12px;
+  }
+}
+
+.input-checkbox-radio-button-label {
+  display: flex;
+  flex-grow: 1;
+  color: var(--_label-color);
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-block: 8px;
+  padding-inline: 8px;
+  white-space: var(--_white-space);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--_border-color);
+  height: var(--_checkbox-size);
+  width: var(--_checkbox-size);
 }
 </style>

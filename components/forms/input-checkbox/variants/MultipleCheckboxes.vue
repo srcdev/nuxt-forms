@@ -19,9 +19,15 @@
           :size
           :optionsLayout
           :theme
+          :direction
         >
           <template #checkedIcon>
             <slot name="checkedIcon"></slot>
+          </template>
+          <template #itemIcon>
+            <slot name="itemIcon">
+              <Icon name="material-symbols:add-2" class="icon" />
+            </slot>
           </template>
         </InputCheckboxRadioButton>
         <InputCheckboxRadioWithLabel
@@ -52,7 +58,7 @@
 import propValidators from '../../c12/prop-validators';
 import type { IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
 
-const { id, name, legend, label, required, fieldHasError, placeholder, isButton, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme } = defineProps({
+const { id, name, legend, label, required, fieldHasError, placeholder, isButton, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme, direction } = defineProps({
   id: {
     type: String,
     required: true,
@@ -120,6 +126,13 @@ const { id, name, legend, label, required, fieldHasError, placeholder, isButton,
     default: 'primary',
     validator(value: string) {
       return propValidators.theme.includes(value);
+    },
+  },
+  direction: {
+    type: String as PropType<'row' | 'row-reverse'>,
+    default: 'row',
+    validator(value: string) {
+      return ['row', 'row-reverse'].includes(value);
     },
   },
 });
