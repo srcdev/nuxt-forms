@@ -31,7 +31,7 @@
     * Checkbox as button
     **/
 
-    --theme-checkbox-radio-button-bg-default: light-dark(var(--orange-4), var(--orange-4));
+    --theme-checkbox-radio-button-bg-default: light-dark(var(--gray-1), var(--gray-4));
 
     --theme-checkbox-radio-button-border-default: light-dark(var(--orange-12), var(--orange-12));
     --theme-checkbox-radio-button-border-width: 1px;
