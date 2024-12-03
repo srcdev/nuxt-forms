@@ -37,6 +37,7 @@
                         <InputTextWithLabel
                           v-model="state.emailAddress"
                           type="email"
+                          inputmode="email"
                           :maxlength="fieldMaxLength('email')"
                           id="emailAddress"
                           name="emailAddress"

@@ -7,6 +7,7 @@
       v-model:isDirty="isDirty"
       v-model:isActive="isActive"
       :type
+      :inputmode
       :maxlength
       :id
       :name
@@ -31,7 +32,7 @@
 
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
-const { type, maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme } = defineProps({
+const { type, inputmode, maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme } = defineProps({
   maxlength: {
     type: Number,
     default: 255,
@@ -39,6 +40,13 @@ const { type, maxlength, id, name, placeholder, label, errorMessage, fieldHasErr
   type: {
     type: String,
     required: true,
+  },
+  inputmode: {
+    type: String as PropType<'text' | 'email' | 'tel' | 'url' | 'search' | 'numeric' | 'none' | 'decimal'>,
+    default: 'text',
+    validator(value: string) {
+      return propValidators.inputMode.includes(value);
+    },
   },
   id: {
     type: String,
