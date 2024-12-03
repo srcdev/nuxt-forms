@@ -108,7 +108,7 @@ const flexDirection = ref(direction);
   --_border-color: var(--theme-checkbox-radio-button-border-default);
   --_outline-color: var(--theme-checkbox-radio-button-outline-default);
   --_label-color: var(--theme-checkbox-radio-button-label-default);
-  --_box-shadow: none;
+  --_box-shadow: var(--theme-checkbox-radio-button-shadow);
   --_white-space: wrap;
   --_gap: 4px;
   --_border-radius: 22px;
@@ -125,12 +125,22 @@ const flexDirection = ref(direction);
   border-radius: var(--_border-radius);
   border: var(--theme-checkbox-radio-button-border-width) solid var(--_border-color);
   outline: var(--theme-checkbox-radio-button-outline-width) solid var(--_outline-color);
-  box-shadow: var(--_box-shadow);
+  box-shadow: 1px 1px 8px 1px var(--_box-shadow);
   padding-block: var(--_padding-block);
   padding-inline: var(--_padding-inline);
 
   &.inline {
     --_white-space: nowrap;
+  }
+
+  /* &:focus-within {
+    --_box-shadow: var(--theme-checkbox-radio-button-shadow-focus);
+    --_outline-color: var(--theme-checkbox-radio-button-outline-focus);
+  } */
+
+  &:has(.input-checkbox-radio-core:focus-visible) {
+    --_box-shadow: var(--theme-checkbox-radio-button-shadow-focus);
+    --_outline-color: var(--theme-checkbox-radio-button-outline-focus);
   }
 
   /* Sizes */

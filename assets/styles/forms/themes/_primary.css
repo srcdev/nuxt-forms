@@ -37,7 +37,11 @@
     --theme-checkbox-radio-button-border-width: 1px;
 
     --theme-checkbox-radio-button-outline-default: light-dark(var(--blue-5), var(--blue-5));
+    --theme-checkbox-radio-button-outline-focus: light-dark(var(--blue-12), var(--blue-12));
     --theme-checkbox-radio-button-outline-width: 1px;
+
+    --theme-checkbox-radio-button-shadow: transparent;
+    --theme-checkbox-radio-button-shadow-focus: light-dark(var(--blue-6), var(--blue-1));
 
     --theme-checkbox-radio-button-label-default: light-dark(var(--blue-12), var(--blue-12));
   }

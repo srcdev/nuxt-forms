@@ -13,7 +13,7 @@
       :required="required && !multipleOptions"
       :value="trueValue"
       class="input-checkbox-radio-core"
-      :class="[size, { error: fieldHasError }]"
+      :class="[size, { error: fieldHasError }, { 'is-button': isButton }]"
       v-model="modelValue"
       ref="inputField"
     />
@@ -146,7 +146,7 @@ const isChecked = computed(() => {
 
   transition: all 0.2s ease-in-out;
 
-  &:has(.input-checkbox-radio-core:focus-visible) {
+  &:not(.button):has(.input-checkbox-radio-core:focus-visible) {
     --_box-shadow: var(--theme-form-focus-box-shadow);
   }
 
@@ -189,8 +189,10 @@ const isChecked = computed(() => {
       cursor: pointer;
     }
 
-    &:focus-visible {
-      --_box-shadow: var(--theme-form-focus-box-shadow);
+    &:not(.is-button) {
+      &:focus-visible {
+        --_box-shadow: var(--theme-form-focus-box-shadow);
+      }
     }
   }
 }

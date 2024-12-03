@@ -194,7 +194,7 @@
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.tags)"
                           v-model="state.tags"
                           v-model:fieldData="tagsData"
-                          size="normal"
+                          size="small"
                           optionsLayout="inline"
                           :theme
                         >
