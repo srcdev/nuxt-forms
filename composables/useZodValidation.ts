@@ -139,7 +139,6 @@ const useZodValidation = (formSchema: any, formRef: Ref<HTMLFormElement | null>)
     pushCustomErrors,
     doZodValidate,
     fieldMaxLength,
-    formRef,
     scrollToFirstError,
     scrollToFormHead,
   };
