@@ -1,5 +1,5 @@
 <template>
-  <fieldset class="multiple-radiobuttons-fieldset" :class="[{ error: fieldHasError }]">
+  <fieldset :aria-required="required" :aria-invalid="fieldHasError" role="radiogroup" class="multiple-radiobuttons-fieldset" :class="[{ error: fieldHasError }]">
     <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
     <template v-if="hasDescription">
       <slot name="description"></slot>

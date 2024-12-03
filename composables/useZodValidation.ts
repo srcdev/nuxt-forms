@@ -1,8 +1,8 @@
 import { ref, reactive, toRaw, type Ref } from 'vue';
 import { z, ZodError } from 'zod';
-import type { IFormFieldStateObj, ApiErrorResponse } from '../types/types.forms';
+import type { ApiErrorResponse } from '../types/types.forms';
 
-const useZodValidation = (formSchema: any) => {
+const useZodValidation = (formSchema: any, formRef: Ref<HTMLFormElement | null>) => {
   const zodFormControl = reactive({
     errorCount: 0,
     displayLoader: false,
@@ -83,6 +83,7 @@ const useZodValidation = (formSchema: any) => {
     zodFormControl.formIsValid = zodFormControl.errorCount === 0;
     zodFormControl.displayLoader = false;
     zodFormControl.submitAttempted = true;
+    scrollToFirstError();
     return zodErrorObj.value;
   };
 
@@ -108,6 +109,29 @@ const useZodValidation = (formSchema: any) => {
     return null;
   };
 
+  const scrollToFirstError = async () => {
+    await nextTick();
+    if (formRef.value) {
+      const firstErrorElement = formRef.value.querySelector('[aria-invalid=true]');
+      window.scrollTo({
+        top: firstErrorElement?.getBoundingClientRect().y,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const scrollToFormHead = () => {
+    if (formRef.value) {
+      const formHead = formRef.value.getBoundingClientRect().top;
+      window.scrollTo({
+        top: formHead,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return {
     initZodForm,
     zodFormControl,
@@ -115,6 +139,9 @@ const useZodValidation = (formSchema: any) => {
     pushCustomErrors,
     doZodValidate,
     fieldMaxLength,
+    formRef,
+    scrollToFirstError,
+    scrollToFormHead,
   };
 };
 

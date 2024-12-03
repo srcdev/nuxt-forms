@@ -16,6 +16,7 @@
       :class="[size, { error: fieldHasError }, { 'is-button': isButton }]"
       v-model="modelValue"
       ref="inputField"
+      :aria-checked="isChecked"
     />
   </div>
 </template>
