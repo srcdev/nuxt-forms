@@ -110,7 +110,6 @@ const useZodValidation = (formSchema: any, formRef: Ref<HTMLFormElement | null>)
   };
 
   const scrollToFirstError = async () => {
-    await nextTick();
     if (formRef.value) {
       const firstErrorElement = formRef.value.querySelector('[aria-invalid=true]');
       window.scrollTo({
