@@ -5,7 +5,7 @@
         <div class="inner-icon">
           <Icon name="radix-icons:circle-backslash" class="icon" />
         </div>
-        <div class="message" :id="`${id}-error-message`">
+        <div class="message" :id>
           <ul v-if="isArray" class="message-list">
             <li v-for="(message, index) in errorMessage" :key="index" class="message-list-item">{{ message }}</li>
           </ul>

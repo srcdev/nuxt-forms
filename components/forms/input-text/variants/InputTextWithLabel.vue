@@ -2,6 +2,10 @@
   <div class="input-text-with-label" :data-form-theme="formTheme" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
     <label :for="id" class="input-text-label body-normal-bold">{{ label }}</label>
 
+    <div v-if="hasDescriptionSlot" :id="`${id}-description`">
+      <slot name="description"></slot>
+    </div>
+
     <InputTextCore
       v-model="modelValue"
       v-model:isDirty="isDirty"
@@ -18,6 +22,7 @@
       :required
       :styleClassPassthrough
       :theme
+      :ariaDescribedby
     >
       <template v-if="hasLeftSlot" #left>
         <slot name="left"></slot>
@@ -26,7 +31,7 @@
         <slot name="right"></slot>
       </template>
     </InputTextCore>
-    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id :isDetached="false" />
+    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="`${id}-error-message`" :isDetached="false" />
   </div>
 </template>
 
@@ -90,11 +95,18 @@ const { type, inputmode, maxlength, id, name, placeholder, label, errorMessage, 
 });
 
 const slots = useSlots();
+const hasDescriptionSlot = computed(() => slots.description !== undefined);
 const hasLeftSlot = computed(() => slots.left !== undefined);
 const hasRightSlot = computed(() => slots.right !== undefined);
 
 const formTheme = computed(() => {
   return fieldHasError ? 'error' : theme;
+});
+
+const errorId = `${id}-error-message`;
+const ariaDescribedby = computed(() => {
+  const ariaDescribedby = hasDescriptionSlot ? `${id}-description` : null;
+  return fieldHasError ? errorId : ariaDescribedby;
 });
 
 const modelValue = defineModel();

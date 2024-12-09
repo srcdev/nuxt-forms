@@ -19,7 +19,7 @@
       v-model="modelValue"
       ref="inputField"
       :aria-invalid="fieldHasError"
-      :aria-describedby="`${id}-error-message`"
+      :ariaDescribedby
       :pattern="inputPattern"
       :inputmode
       @focusin="updateFocus(true)"
@@ -35,7 +35,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { type, inputmode, maxlength, id, name, placeholder, required, fieldHasError, styleClassPassthrough, theme } = defineProps({
+const { type, inputmode, maxlength, id, name, placeholder, required, fieldHasError, styleClassPassthrough, theme, ariaDescribedby } = defineProps({
   type: {
     // type: String as PropType<'text' | 'email' | 'password' | 'number' | 'tel' | 'url'>,
     type: String,
@@ -85,6 +85,10 @@ const { type, inputmode, maxlength, id, name, placeholder, required, fieldHasErr
     validator(value: string) {
       return propValidators.theme.includes(value);
     },
+  },
+  ariaDescribedby: {
+    type: String,
+    default: null,
   },
 });
 

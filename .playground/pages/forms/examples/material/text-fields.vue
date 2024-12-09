@@ -49,6 +49,9 @@
                           :styleClassPassthrough="['style-1', 'style-2']"
                           :theme
                         >
+                          <template #description>
+                            <p class="body-normal">This is a description for username field</p>
+                          </template>
                           <template #left>
                             <Icon name="radix-icons:envelope-closed" class="icon" />
                           </template>
