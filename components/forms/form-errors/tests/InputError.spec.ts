@@ -7,7 +7,7 @@ import ComponentUnderTest from '../InputError.vue';
 let initialPropsData = {
   dataTestid: 'inputError',
   errorMessage: 'Hello World',
-  fieldHasError: true,
+  showError: true,
   id: 'testId',
   styleClassPassthrough: ['testClass'],
   compact: false,
@@ -37,7 +37,7 @@ describe('InputError Component', () => {
 
   it('is not displayed by default', async () => {
     const propData = {
-      fieldHasError: false,
+      showError: false,
     };
     wrapper = await wrapperFactory(propData);
 
@@ -46,7 +46,7 @@ describe('InputError Component', () => {
 
   it('is displays a single error message', async () => {
     const propData = {
-      fieldHasError: true,
+      showError: true,
     };
     wrapper = await wrapperFactory(propData);
 
