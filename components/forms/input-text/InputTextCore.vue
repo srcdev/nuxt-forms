@@ -19,7 +19,7 @@
       v-model="modelValue"
       ref="inputField"
       :aria-invalid="fieldHasError"
-      :ariaDescribedby
+      :aria-describedby
       :pattern="inputPattern"
       :inputmode
       @focusin="updateFocus(true)"

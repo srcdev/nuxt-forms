@@ -130,8 +130,8 @@ const formTheme = computed(() => {
 
 const errorId = `${id}-error-message`;
 const ariaDescribedby = computed(() => {
-  const ariaDescribedby = hasDescriptionSlot ? `${id}-description` : null;
-  return fieldHasError ? errorId : ariaDescribedby;
+  const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : null;
+  return fieldHasError ? errorId : ariaDescribedbyId;
 });
 
 const modelValue = defineModel();
