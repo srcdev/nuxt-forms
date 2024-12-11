@@ -1,11 +1,13 @@
 <template>
   <fieldset class="single-checkbox-fieldset" :class="[{ error: fieldHasError }]">
     <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
-    <template v-if="hasDescription">
+
+    <div v-if="hasDescriptionSlot" :id="`${name}-description`">
       <slot name="description"></slot>
-    </template>
+    </div>
+
     <div class="single-checkbox-items" :class="[optionsLayout]">
-      <InputCheckboxRadioWithLabel type="checkbox" :id :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :theme>
+      <InputCheckboxRadioWithLabel type="checkbox" :id :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :theme :ariaDescribedby>
         <template #checkedIcon>
           <slot name="checkedIcon"></slot>
         </template>
@@ -14,7 +16,7 @@
         </template>
       </InputCheckboxRadioWithLabel>
     </div>
-    <InputError :errorMessage :showError="fieldHasError" :id="name" :isDetached="true" :styleClassPassthrough="inputErrorStyles" />
+    <InputError :errorMessage :showError="fieldHasError" :id="errorId" :isDetached="true" :styleClassPassthrough="inputErrorStyles" />
   </fieldset>
 </template>
 
@@ -96,6 +98,7 @@ const { id, name, legend, label, required, fieldHasError, errorMessage, size, op
 });
 
 const slots = useSlots();
+const hasDescriptionSlot = computed(() => slots.description !== undefined);
 const hasDescription = computed(() => slots.description !== undefined);
 const hasLabelContent = computed(() => slots.labelContent !== undefined);
 
@@ -105,6 +108,12 @@ const modelValue = defineModel();
 const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
 const inputErrorStyles = ref<string[]>(styleClassPassthrough);
+
+const errorId = `${name}-error-message`;
+const ariaDescribedby = computed(() => {
+  const ariaDescribedbyId = hasDescriptionSlot.value ? `${name}-description` : null;
+  return fieldHasError ? errorId : ariaDescribedbyId;
+});
 
 watchEffect(() => {
   if (!hasDescription.value && fieldHasError) {

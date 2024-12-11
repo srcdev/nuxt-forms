@@ -1,11 +1,11 @@
 <template>
-  <div class="input-error-message" :class="[elementClasses, { show: showError }, { detached: isDetached }, { hide: !showError }]" :data-Testid>
+  <div class="input-error-message" :id :class="[elementClasses, { show: showError }, { detached: isDetached }, { hide: !showError }]" :data-Testid>
     <div class="inner" :class="[{ show: showError }]">
       <div class="inner-content">
         <div class="inner-icon">
           <Icon name="radix-icons:circle-backslash" class="icon" />
         </div>
-        <div class="message" :id>
+        <div class="message">
           <ul v-if="isArray" class="message-list">
             <li v-for="(message, index) in errorMessage" :key="index" class="message-list-item">{{ message }}</li>
           </ul>

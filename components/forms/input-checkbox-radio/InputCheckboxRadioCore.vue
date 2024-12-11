@@ -17,13 +17,14 @@
       v-model="modelValue"
       ref="inputField"
       :aria-checked="isChecked"
+      :aria-describedby
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
-const { isButton, type, id, name, required, trueValue, falseValue, multipleOptions, theme, styleClassPassthrough, size, fieldHasError } = defineProps({
+const { isButton, type, id, name, required, trueValue, falseValue, multipleOptions, theme, styleClassPassthrough, size, fieldHasError, ariaDescribedby } = defineProps({
   isButton: {
     type: Boolean,
     default: false,
@@ -77,6 +78,10 @@ const { isButton, type, id, name, required, trueValue, falseValue, multipleOptio
   styleClassPassthrough: {
     type: Array as PropType<string[]>,
     default: () => [],
+  },
+  ariaDescribedby: {
+    type: String,
+    default: null,
   },
 });
 

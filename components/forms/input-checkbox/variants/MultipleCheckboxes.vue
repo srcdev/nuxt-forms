@@ -1,9 +1,11 @@
 <template>
   <fieldset class="multiple-checkboxes-fieldset" :class="[{ error: fieldHasError }]">
     <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
-    <template v-if="hasDescription">
+
+    <div v-if="hasDescriptionSlot" :id="`${id}-description`">
       <slot name="description"></slot>
-    </template>
+    </div>
+
     <div class="multiple-checkboxes-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
         <InputCheckboxRadioButton
@@ -20,6 +22,7 @@
           :optionsLayout
           :theme
           :direction
+          :ariaDescribedby
         >
           <template #checkedIcon>
             <slot name="checkedIcon"></slot>
@@ -43,6 +46,7 @@
           :size
           :optionsLayout
           :theme
+          :ariaDescribedby
         >
           <template #checkedIcon>
             <slot name="checkedIcon"></slot>
@@ -50,7 +54,7 @@
         </InputCheckboxRadioWithLabel>
       </template>
     </div>
-    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="name" :isDetached="true" />
+    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="errorId" :isDetached="true" />
   </fieldset>
 </template>
 
@@ -138,11 +142,18 @@ const { id, name, legend, label, required, fieldHasError, placeholder, isButton,
 });
 
 const slots = useSlots();
+const hasDescriptionSlot = computed(() => slots.description !== undefined);
 const hasDescription = computed(() => slots.description !== undefined);
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 const modelValue = defineModel();
 const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
+
+const errorId = `${name}-error-message`;
+const ariaDescribedby = computed(() => {
+  const ariaDescribedbyId = hasDescriptionSlot.value ? `${name}-description` : null;
+  return fieldHasError ? errorId : ariaDescribedbyId;
+});
 </script>
 
 <style lang="css">

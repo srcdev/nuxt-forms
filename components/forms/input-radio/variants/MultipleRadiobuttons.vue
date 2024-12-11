@@ -1,9 +1,11 @@
 <template>
   <fieldset :aria-required="required" :aria-invalid="fieldHasError" role="radiogroup" class="multiple-radiobuttons-fieldset" :class="[{ error: fieldHasError }]">
-    <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
-    <template v-if="hasDescription">
+    <legend :class="[{ 'has-description': hasDescriptionSlot }]">{{ legend }}</legend>
+
+    <div v-if="hasDescriptionSlot" :id="`${name}-description`">
       <slot name="description"></slot>
-    </template>
+    </div>
+
     <div class="multiple-radiobuttons-items" :class="[optionsLayout]">
       <template v-for="item in fieldData.data" :key="item.id">
         <InputCheckboxRadioButton
@@ -20,6 +22,7 @@
           :optionsLayout
           :theme
           :direction
+          :ariaDescribedby
         >
           <template #checkedIcon>
             <slot name="checkedIcon"></slot>
@@ -43,6 +46,7 @@
           :size
           :optionsLayout
           :theme
+          :ariaDescribedby
         >
           <template #checkedIcon>
             <slot name="checkedIcon"></slot>
@@ -50,7 +54,7 @@
         </InputCheckboxRadioWithLabel>
       </template>
     </div>
-    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="name" :isDetached="true" />
+    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="errorId" :isDetached="true" />
   </fieldset>
 </template>
 
@@ -138,8 +142,14 @@ const { id, name, legend, label, required, fieldHasError, placeholder, isButton,
 });
 
 const slots = useSlots();
-const hasDescription = computed(() => slots.description !== undefined);
+const hasDescriptionSlot = computed(() => slots.description !== undefined);
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+
+const errorId = `${name}-error-message`;
+const ariaDescribedby = computed(() => {
+  const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : null;
+  return fieldHasError ? errorId : ariaDescribedbyId;
+});
 
 const modelValue = defineModel();
 const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;

@@ -1,6 +1,6 @@
 <template>
   <div class="input-checkbox-radio-button-button" :data-form-theme="formTheme" :class="[size, elementClasses, optionsLayout, { error: fieldHasError }]">
-    <InputCheckboxRadioCore :isButton="true" :type :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme>
+    <InputCheckboxRadioCore :isButton="true" :type :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme :ariaDescribedby>
       <template #checkedIcon>
         <slot name="checkedIcon"></slot>
       </template>
@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { type, id, name, label, required, fieldHasError, trueValue, falseValue, size, optionsLayout, styleClassPassthrough, theme, direction } = defineProps({
+const { type, id, name, label, required, fieldHasError, trueValue, falseValue, size, optionsLayout, styleClassPassthrough, theme, direction, ariaDescribedby } = defineProps({
   type: {
     type: String as PropType<'checkbox' | 'radio'>,
     required: true,
@@ -84,6 +84,10 @@ const { type, id, name, label, required, fieldHasError, trueValue, falseValue, s
     validator(value: string) {
       return ['row', 'row-reverse'].includes(value);
     },
+  },
+  ariaDescribedby: {
+    type: String,
+    default: null,
   },
 });
 

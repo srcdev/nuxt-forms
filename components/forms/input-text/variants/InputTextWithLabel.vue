@@ -31,7 +31,7 @@
         <slot name="right"></slot>
       </template>
     </InputTextCore>
-    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="`${id}-error-message`" :isDetached="false" />
+    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="errorId" :isDetached="false" />
   </div>
 </template>
 
