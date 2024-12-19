@@ -2,19 +2,8 @@
 import { describe, it, expect } from 'vitest';
 import { VueWrapper } from '@vue/test-utils';
 import { mountSuspended } from '@nuxt/test-utils/runtime';
-import { defineModel } from 'vue';
 import ComponentUnderTest from '../MultipleCheckboxes.vue';
 import tagsData from './data/tags.json';
-
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-// const modelValue = defineModel<string[]>();
-// const modelValue = <string[]>[];
-// const tagsData = tags.data.map((tag) => ({
-//   value: tag.id,
-//   label: tag.name,
-//   selected: false,
-// }));
 
 let initialPropsData = {
   dataTestid: 'multiple-checkboxes',
@@ -33,9 +22,6 @@ let initialPropsData = {
   styleClassPassthrough: ['testClass'],
   theme: 'primary',
   // 'onUpdate:modelValue': (event: string) => wrapper.setProps({ modelValue: event }),
-  // 'onUpdate:modelValue': (value: string[]) => {
-  //   wrapper.vm.modelValue.splice(0, wrapper.vm.modelValue.length, ...value);
-  // },
 };
 
 const initialSlots = {
@@ -77,7 +63,7 @@ describe('MultipleCheckboxes Component', () => {
     const checkboxElements = wrapper.findAll('input[type="checkbox"]');
 
     /*
-     * Test the first radio button
+     * Test the first checkbox clicked
      **/
     const firstCheckbox = checkboxElements[0];
     expect(firstCheckbox.attributes('aria-checked')).toBe('false');
@@ -96,7 +82,7 @@ describe('MultipleCheckboxes Component', () => {
     expect(firstCheckbox.attributes('aria-checked')).toBe('false');
 
     /*
-     * Test the second radio button
+     * Test the second checkbox clicked
      **/
     const secondCheckbox = checkboxElements[1];
     expect(secondCheckbox.attributes('aria-checked')).toBe('false');
