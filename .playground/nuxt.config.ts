@@ -2,6 +2,8 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   extends: ['..'],
+  css: ['modern-normalize', './assets/styles/main.css'],
+  modules: ['@nuxt/icon', '@nuxt/test-utils/module', '@nuxtjs/storybook'],
   app: {
     head: {
       htmlAttrs: {

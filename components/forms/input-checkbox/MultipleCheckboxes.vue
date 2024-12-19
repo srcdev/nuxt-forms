@@ -1,5 +1,5 @@
 <template>
-  <fieldset class="multiple-checkboxes-fieldset" :class="[{ error: fieldHasError }]">
+  <fieldset class="multiple-checkboxes-fieldset" :class="[elementClasses, { error: fieldHasError }]" :data-testid>
     <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
 
     <div v-if="hasDescriptionSlot" :id="`${id}-description`">
@@ -59,10 +59,14 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../../c12/prop-validators';
+import propValidators from '../c12/prop-validators';
 import type { IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
 
-const { id, name, legend, label, required, fieldHasError, placeholder, isButton, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme, direction } = defineProps({
+const { dataTestid, id, name, legend, label, required, fieldHasError, placeholder, isButton, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme, direction } = defineProps({
+  dataTestid: {
+    type: String,
+    default: 'multiple-checkboxes',
+  },
   id: {
     type: String,
     required: true,

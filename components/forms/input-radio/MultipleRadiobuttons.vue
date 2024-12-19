@@ -1,5 +1,5 @@
 <template>
-  <fieldset :aria-required="required" :aria-invalid="fieldHasError" role="radiogroup" class="multiple-radiobuttons-fieldset" :class="[{ error: fieldHasError }]">
+  <fieldset :aria-required="required" :aria-invalid="fieldHasError" role="radiogroup" class="multiple-radiobuttons-fieldset" :class="[elementClasses, { error: fieldHasError }]" :data-testid>
     <legend :class="[{ 'has-description': hasDescriptionSlot }]">{{ legend }}</legend>
 
     <div v-if="hasDescriptionSlot" :id="`${name}-description`">
@@ -62,7 +62,11 @@
 import propValidators from '../c12/prop-validators';
 import type { IFormMultipleOptions } from '@/types/types.forms';
 
-const { id, name, legend, label, required, fieldHasError, placeholder, isButton, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme, direction } = defineProps({
+const { dataTestid, id, name, legend, label, required, fieldHasError, placeholder, isButton, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme, direction } = defineProps({
+  dataTestid: {
+    type: String,
+    default: 'multiple-radio-buttons',
+  },
   id: {
     type: String,
     required: true,

@@ -6,8 +6,8 @@
 
     <input
       :type
-      :true-value="trueValue"
-      :false-value="falseValue"
+      :true-value
+      :false-value
       :id
       :name
       :required="required && !multipleOptions"
@@ -103,7 +103,7 @@ const isArray = Array.isArray(modelValue.value);
 
 const isChecked = computed(() => {
   if (isArray) {
-    return modelValue.value.indexOf(trueValue) > -1;
+    return modelValue.value.includes(trueValue);
   } else {
     return modelValue.value === trueValue;
   }
