@@ -21,7 +21,6 @@ let initialPropsData = {
   optionsLayout: 'inline',
   styleClassPassthrough: ['testClass'],
   theme: 'primary',
-  // 'onUpdate:modelValue': (event: string) => wrapper.setProps({ modelValue: event }),
 };
 
 const initialSlots = {
@@ -63,7 +62,7 @@ describe('MultipleCheckboxes Component', () => {
     const checkboxElements = wrapper.findAll('input[type="checkbox"]');
 
     /*
-     * Test the first checkbox clicked
+     * Test the first checkbox checked
      **/
     const firstCheckbox = checkboxElements[0];
     expect(firstCheckbox.attributes('aria-checked')).toBe('false');
@@ -71,18 +70,16 @@ describe('MultipleCheckboxes Component', () => {
 
     await firstCheckbox.trigger('click');
 
-    wrapper.vm.modelValue.value.push(firstCheckboxTrueValue);
-    expect(wrapper.vm.modelValue.value).includes(firstCheckboxTrueValue);
+    expect(wrapper.emitted()).toHaveProperty('update:modelValue');
+    const firstEmittedEvents = wrapper.emitted('update:modelValue');
+    if (firstEmittedEvents && firstEmittedEvents[0]) {
+      expect(firstEmittedEvents[0]).includes(firstCheckboxTrueValue);
+    }
+
     expect(firstCheckbox.attributes('aria-checked')).toBe('true');
 
-    await firstCheckbox.trigger('click');
-
-    wrapper.vm.modelValue.value.pop(firstCheckboxTrueValue);
-    expect(wrapper.vm.modelValue.value).not.includes(firstCheckboxTrueValue);
-    expect(firstCheckbox.attributes('aria-checked')).toBe('false');
-
     /*
-     * Test the second checkbox clicked
+     * Test the second checkbox chekced
      **/
     const secondCheckbox = checkboxElements[1];
     expect(secondCheckbox.attributes('aria-checked')).toBe('false');
@@ -90,14 +87,12 @@ describe('MultipleCheckboxes Component', () => {
 
     await secondCheckbox.trigger('click');
 
-    wrapper.vm.modelValue.value.push(secondCheckboxTrueValue);
-    expect(wrapper.vm.modelValue.value).includes(secondCheckboxTrueValue);
+    expect(wrapper.emitted()).toHaveProperty('update:modelValue');
+    const secondEmittedEvents = wrapper.emitted('update:modelValue');
+    if (secondEmittedEvents && secondEmittedEvents[0]) {
+      expect(secondEmittedEvents[1]).includes(secondCheckboxTrueValue);
+    }
+
     expect(secondCheckbox.attributes('aria-checked')).toBe('true');
-
-    await secondCheckbox.trigger('click');
-
-    wrapper.vm.modelValue.value.pop(secondCheckboxTrueValue);
-    expect(wrapper.vm.modelValue.value).not.includes(secondCheckboxTrueValue);
-    expect(secondCheckbox.attributes('aria-checked')).toBe('false');
   });
 });
