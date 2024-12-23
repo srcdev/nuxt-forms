@@ -125,6 +125,22 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
+                        <ToggleSwitchWithLabel v-model="state.darkMode" id="darkMode" name="darkMode" label="Toggle Dark mode" :theme>
+                          <template #description>
+                            <p class="label-description">This is a description of what the user is required to do</p>
+                          </template>
+                          <template #iconOn>
+                            <Icon name="radix-icons:moon" class="icon" />
+                          </template>
+                          <template #iconOff>
+                            <Icon name="radix-icons:sun" class="icon" />
+                          </template>
+                        </ToggleSwitchWithLabel>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
                         <InputTextAsNumberWithLabel
                           v-model.number="state.count2"
                           :maxlength="fieldMaxLength('count2')"
@@ -474,6 +490,7 @@
 <script setup lang="ts">
 import { z } from 'zod';
 import type { IFormMultipleOptions } from '../../../../types/types.forms';
+import type ToggleSwitchCore from '../../../../../components/forms/toggle-switch/ToggleSwitchCore.vue';
 
 definePageMeta({
   layout: false,
@@ -605,6 +622,7 @@ const state = reactive({
   tagsRadio: [],
   title: '',
   otherTitle: '',
+  darkMode: false,
   agreed: false,
   agree: false,
   terms: false,
