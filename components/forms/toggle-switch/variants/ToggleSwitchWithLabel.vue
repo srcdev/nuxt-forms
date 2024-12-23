@@ -4,7 +4,7 @@
     <div v-if="hasDescriptionSlot" :id="`${id}-description`">
       <slot name="description"></slot>
     </div>
-    <ToggleSwitchCore v-model="modelValue" :id :name :required :field-has-error :theme :round :size>
+    <ToggleSwitchCore v-model="modelValue" :id :name :required :field-has-error :true-value :false-value :theme :round :size :ariaDescribedby>
       <template v-if="hasIconOnSlot" #iconOn>
         <slot name="iconOn"></slot>
       </template>
@@ -13,13 +13,14 @@
         <slot name="iconOff"></slot>
       </template>
     </ToggleSwitchCore>
+    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="errorId" :isDetached="true" />
   </div>
 </template>
 
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
 
-const { id, name, label, required, fieldHasError, styleClassPassthrough, theme, round, size } = defineProps({
+const { id, name, label, required, errorMessage, fieldHasError, trueValue, falseValue, styleClassPassthrough, theme, round, size } = defineProps({
   id: {
     type: String,
     required: true,
@@ -36,8 +37,20 @@ const { id, name, label, required, fieldHasError, styleClassPassthrough, theme, 
     type: Boolean,
     default: false,
   },
+  errorMessage: {
+    type: [Object, String],
+    required: true,
+  },
   fieldHasError: {
     type: Boolean,
+    default: false,
+  },
+  trueValue: {
+    type: [String, Number, Boolean],
+    default: true,
+  },
+  falseValue: {
+    type: [String, Number, Boolean],
     default: false,
   },
   styleClassPassthrough: {
@@ -71,6 +84,12 @@ const hasIconOffSlot = computed(() => slots.iconOff !== undefined);
 
 const formTheme = computed(() => {
   return fieldHasError ? 'error' : theme;
+});
+
+const errorId = `${id}-error-message`;
+const ariaDescribedby = computed(() => {
+  const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : null;
+  return fieldHasError ? errorId : ariaDescribedbyId;
 });
 
 const modelValue = defineModel();

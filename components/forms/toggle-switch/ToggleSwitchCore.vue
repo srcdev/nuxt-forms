@@ -1,7 +1,7 @@
 <template>
   <div class="toggle-switch-core" :class="(elementClasses, size)" :data-form-theme="formTheme">
     <label class="toggle-switch-input" :class="[{ round }]" :for="inputId">
-      <input type="checkbox" v-model="modelValue" :id="inputId" :aria-describedby="`${id}-description`" :name :required />
+      <input type="checkbox" v-model="modelValue" :true-value :false-value :id="inputId" :aria-describedby="`${id}-description`" :name :required />
       <div class="symbol-wrapper" :class="[{ round }]">
         <div class="symbol" :class="[{ round }]">
           <div v-if="hasIconOnSlot" class="symbol-icon icon-on">
@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { id, name, required, fieldHasError, styleClassPassthrough, theme, round, size } = defineProps({
+const { id, name, required, fieldHasError, trueValue, falseValue, styleClassPassthrough, theme, round, size, ariaDescribedby } = defineProps({
   id: {
     type: String,
     required: true,
@@ -35,6 +35,14 @@ const { id, name, required, fieldHasError, styleClassPassthrough, theme, round, 
   },
   fieldHasError: {
     type: Boolean,
+    default: false,
+  },
+  trueValue: {
+    type: [String, Number, Boolean],
+    default: true,
+  },
+  falseValue: {
+    type: [String, Number, Boolean],
     default: false,
   },
   styleClassPassthrough: {
@@ -59,10 +67,13 @@ const { id, name, required, fieldHasError, styleClassPassthrough, theme, round, 
       return propValidators.size.includes(value);
     },
   },
+  ariaDescribedby: {
+    type: String,
+    default: null,
+  },
 });
 
 const slots = useSlots();
-const hasDescriptionSlot = computed(() => slots.description !== undefined);
 const hasIconOnSlot = computed(() => slots.iconOn !== undefined);
 const hasIconOffSlot = computed(() => slots.iconOff !== undefined);
 

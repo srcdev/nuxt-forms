@@ -28,6 +28,16 @@
     --theme-form-range-accent-color: light-dark(var(--gray-12), var(--gray-3));
 
     /*
+    * ToggleSwitch
+    **/
+    --theme-form-toggle-bg-off: light-dark(var(--gray-1), var(--gray-4));
+    --theme-form-toggle-bg-on: light-dark(var(--gray-1), var(--gray-6));
+    --theme-form-toggle-border: 1px solid light-dark(var(--gray-12), var(--gray-1));
+    --theme-form-toggle-outline: 1px solid light-dark(var(--gray-12), var(--gray-12));
+    --theme-form-toggle-symbol-off: var(--gray-4);
+    --theme-form-toggle-symbol-on: var(--gray-12);
+
+    /*
     * Checkbox as button
     **/
 

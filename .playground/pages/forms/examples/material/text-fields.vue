@@ -125,15 +125,33 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <ToggleSwitchWithLabel v-model="state.darkMode" id="darkMode" name="darkMode" label="Toggle Dark mode" :theme>
+                        <ToggleSwitchWithLabel v-model="state.darkMode" id="darkMode" name="darkMode" label="Toggle Dark mode" true-value="dark" false-value="light" :theme>
                           <template #description>
-                            <p class="label-description">This is a description of what the user is required to do</p>
+                            <p class="label-description">Light or Dark mode?</p>
                           </template>
                           <template #iconOn>
                             <Icon name="radix-icons:moon" class="icon" />
                           </template>
                           <template #iconOff>
                             <Icon name="radix-icons:sun" class="icon" />
+                          </template>
+                        </ToggleSwitchWithLabel>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <ToggleSwitchWithLabel
+                          v-model="state.toggleBoolean"
+                          :errorMessage="formErrors?.toggleBoolean?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.toggleBoolean)"
+                          id="toggleBoolean"
+                          name="toggleBoolean"
+                          label="Toggle Dark mode"
+                          :theme
+                        >
+                          <template #description>
+                            <p class="label-description">Toggle some value</p>
                           </template>
                         </ToggleSwitchWithLabel>
                       </template>
@@ -579,8 +597,10 @@ const formSchema = reactive(
       countries: z.array(z.string()).min(2, 'Please select at least 2 countries').max(5, 'Please select no more than 5 countries'),
       tags: z.array(z.string()).min(3, 'Please select at least 3 tags').max(8, 'Please select no more than 8 tags'),
       tagsRadio: z.string().min(1, { message: 'Please choose a tag' }),
+      darkMode: z.string().min(1, { message: 'Please choose a mode' }),
       title: z.string().min(1, { message: 'Title is required' }),
       otherTitle: z.string().min(1, { message: 'Title is required' }),
+      toggleBoolean: z.boolean().refine((val) => val === true, { message: 'You must tick this box' }),
       agreed: z.boolean().refine((val) => val === true, { message: 'You must tick this box' }),
       agree: z.boolean().refine((val) => val === true, { message: 'You must tick this box' }),
       terms: z.boolean().refine((val) => val === true, { message: 'You must accept our terms' }),
@@ -599,6 +619,7 @@ const formSchema = reactive(
       tagsRadio: true,
       title: true,
       otherTitle: true,
+      toggleBoolean: true,
       agreed: true,
       agree: true,
       terms: true,
@@ -622,7 +643,8 @@ const state = reactive({
   tagsRadio: [],
   title: '',
   otherTitle: '',
-  darkMode: false,
+  darkMode: 'light',
+  toggleBoolean: false,
   agreed: false,
   agree: false,
   terms: false,
