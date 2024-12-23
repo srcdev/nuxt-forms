@@ -190,21 +190,19 @@ const inputId = computed(() => `toggle-sitch-${id}`);
         }
 
         .symbol-icon {
-          transition: opacity var(--_transition-duration);
+          transition: var(--_transition-duration);
 
           &.icon-on {
+            color: var(--theme-form-toggle-icon-stroke-colour-on);
             opacity: 0;
           }
           &.icon-off {
+            color: var(--theme-form-toggle-icon-stroke-colour-off);
             opacity: 1;
           }
         }
       }
     }
-
-    /* input:checked + .symbol-wrapper .symbol {
-      background-color: var(--theme-form-toggle-bg-on);
-    } */
 
     input:focus-visible + .symbol-wrapper {
       box-shadow: var(--theme-form-focus-box-shadow);

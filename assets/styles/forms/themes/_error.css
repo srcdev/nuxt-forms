@@ -36,6 +36,8 @@
     --theme-form-toggle-outline: 1px solid light-dark(var(--red-12), var(--red-12));
     --theme-form-toggle-symbol-off: var(--orange-12);
     --theme-form-toggle-symbol-on: var(--gray-12);
+    --theme-form-toggle-icon-stroke-colour-off: var(--gray-1);
+    --theme-form-toggle-icon-stroke-colour-on: var(--gray-1);
 
     /*
     * Checkbox as button
