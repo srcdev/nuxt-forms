@@ -108,7 +108,7 @@ const modelValue = defineModel<number | readonly number[]>();
 .input-range-fancy-with-label {
   .input-range-fancy-label {
     display: block;
-    margin-block: 8px;
+    margin-block: 0.8rem;
 
     &:hover {
       cursor: pointer;
@@ -117,8 +117,8 @@ const modelValue = defineModel<number | readonly number[]>();
 
   .label-description {
     font-family: var(--font-family);
-    font-size: 16px;
-    margin-top: 12px;
+    font-size: 1.6rem;
+    margin-top: 1.2rem;
   }
 }
 </style>

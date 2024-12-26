@@ -51,7 +51,7 @@ useHead({
 .page-layout {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  margin: 0 20px;
+  margin: 0 2rem;
 }
 
 .page-layout-content {
@@ -62,8 +62,8 @@ useHead({
   align-items: flex-start;
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
-  margin-bottom: 32px;
+  gap: 2.4rem;
+  margin-bottom: 3.2rem;
 }
 
 ul.flex-group {

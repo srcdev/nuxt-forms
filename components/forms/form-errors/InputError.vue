@@ -67,7 +67,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   --_display-show: block;
   --_display-hide: none;
   --_display: var(--_display-hide);
-  --_gutter: 12px;
+  --_gutter: 1.2rem;
   --_gutter-block: 0;
   --_gutter-inline: var(--_gutter);
   --_transition-duration: 500ms;
@@ -86,7 +86,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
 
   color: var(--theme-error-text);
   background-color: var(--theme-error-surface);
-  border-radius: 0 0 4px 4px;
+  border-radius: 0 0 0.4rem 0.4rem;
 
   transition-property: grid-template-rows;
   transition-duration: var(--_transition-duration);
@@ -95,7 +95,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
 
   &.detached {
     border-radius: var(--input-border-radius);
-    margin-block-start: 20px;
+    margin-block-start: 2rem;
   }
 
   /* &.mbs-12 {
@@ -104,7 +104,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
       margin-block-start: 0;
     }
     &.show {
-      margin-block-start: 12px;
+      margin-block-start: 1.2rem;
     }
   } */
 
@@ -134,7 +134,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
 
       .inner-icon {
         display: inline-block;
-        padding-left: 12px;
+        padding-left: 1.2rem;
 
         .icon {
           color: white;
@@ -146,7 +146,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
         display: inline-block;
         flex-grow: 1;
         font-family: var(--font-family);
-        font-size: 16px;
+        font-size: 1.6rem;
         font-weight: 500;
         padding-block: var(--_padding-message);
         padding-inline: var(--_gutter-inline);
@@ -171,7 +171,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
           }
 
           .message-list-item + .message-list-item {
-            margin-block-start: 6px;
+            margin-block-start: 0.6rem;
           }
         }
       }

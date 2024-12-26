@@ -141,19 +141,19 @@ const inputId = computed(() => `toggle-sitch-${id}`);
 .toggle-switch-core {
   /* Sizes */
   &.x-small {
-    --_symbol-size: 20px;
+    --_symbol-size: 2rem;
   }
   &.small {
-    --_symbol-size: 24px;
+    --_symbol-size: 2.4rem;
   }
   &.normal {
-    --_symbol-size: 34px;
+    --_symbol-size: 3.4rem;
   }
   &.medium {
-    --_symbol-size: 40px;
+    --_symbol-size: 4rem;
   }
   &.large {
-    --_symbol-size: 44px;
+    --_symbol-size: 4.4rem;
   }
 
   .toggle-switch-input {
@@ -174,10 +174,10 @@ const inputId = computed(() => `toggle-sitch-${id}`);
         border-radius: var(--_symbol-size);
       }
       .symbol {
-        height: calc(var(--_symbol-size) - 6px);
-        width: calc(var(--_symbol-size) - 6px);
-        left: 4px;
-        bottom: 4px;
+        height: calc(var(--_symbol-size) - 0.6rem);
+        width: calc(var(--_symbol-size) - 0.6rem);
+        left: 0.4rem;
+        bottom: 0.4rem;
         background-color: var(--theme-form-toggle-symbol-off);
         transition: var(--_transition-duration);
 

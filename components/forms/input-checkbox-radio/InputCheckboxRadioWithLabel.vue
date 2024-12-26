@@ -102,8 +102,8 @@ const modelValue = defineModel();
     width: 100%;
     height: 100%;
     align-items: center;
-    margin-block: 8px;
-    padding-inline: 8px;
+    margin-block: 0.8rem;
+    padding-inline: 0.8rem;
     white-space: var(--_white-space);
 
     &:hover {

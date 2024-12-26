@@ -24,17 +24,17 @@ defineProps({
 
 <style lang="css">
 .form-field {
-  --_gutter-width: 0px;
+  --_gutter-width: 0rem;
   --_max-width: 400px;
 
   margin-inline: auto;
-  margin-bottom: 16px;
+  margin-bottom: 1.6rem;
 
   width: min(100% - calc(2 * var(--_gutter-width)), var(--_max-width));
-  outline: 0px solid var(--gray-5);
+  outline: 0rem solid var(--gray-5);
 
   &.has-gutter {
-    --_gutter-width: 16px;
+    --_gutter-width: 1.6rem;
   }
 
   &.narrow {

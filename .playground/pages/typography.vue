@@ -74,9 +74,9 @@ useHead({
 
     li {
       background: var(--surface-subtle);
-      border-radius: 5px;
-      padding: 10px;
-      margin-block-end: 20px;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-block-end: 2rem;
     }
   }
 }

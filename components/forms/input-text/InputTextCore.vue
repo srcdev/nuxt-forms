@@ -144,7 +144,7 @@ onMounted(() => {
 
 <style lang="css">
 .input-text-wrapper {
-  --_gutter: 12px;
+  --_gutter: 1.2rem;
   --_border-width: var(--input-border-width-default);
   --_outline-width: var(--input-border-width-default);
 
@@ -164,7 +164,7 @@ onMounted(() => {
   &:not(:has(.btn)) {
     .slot {
       display: inline-block;
-      padding-inline: 8px;
+      padding-inline: 0.8rem;
 
       .icon {
         color: var(--theme-form-input-text);
@@ -174,7 +174,7 @@ onMounted(() => {
 
   &:has(.btn) {
     .btn {
-      margin-inline: 6px;
+      margin-inline: 0.6rem;
     }
   }
 
@@ -203,7 +203,7 @@ onMounted(() => {
     font-family: var(--font-family);
     font-size: var(--theme-form-button-font-size-normal);
     line-height: var(--line-height);
-    padding: 8px 12px;
+    padding: 0.8rem 1.2rem;
 
     &::placeholder,
     &::-webkit-input-placeholder {
@@ -223,7 +223,7 @@ input:-webkit-autofill-and-obscured {
   background-color: var(--theme-form-input-bg) !important;
   background-image: none !important;
   color: var(--theme-form-input-text) !important;
-  -webkit-box-shadow: 0 0 0px 1000px var(--theme-form-input-bg) inset;
+  -webkit-box-shadow: 0 0 0rem 1000px var(--theme-form-input-bg) inset;
   -webkit-text-fill-color: var(--theme-form-input-text);
   transition: background-color 5000s ease-in-out 0s;
 }

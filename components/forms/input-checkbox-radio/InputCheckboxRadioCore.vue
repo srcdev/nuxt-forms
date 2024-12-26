@@ -113,8 +113,8 @@ const isChecked = computed(() => {
 <style lang="css">
 .input-checkbox-radio-wrapper {
   --_checkbox-size: initial;
-  --_outline-width: 1px;
-  --_border-width: 1px;
+  --_outline-width: 0.1rem;
+  --_border-width: 0.1rem;
   --_border-radius: 50%;
   --_background-color: var(--theme-form-checkbox-bg);
   --_box-shadow: none;
@@ -125,7 +125,7 @@ const isChecked = computed(() => {
     &.checkbox {
       --_background-color: var(--theme-form-checkbox-bg);
       --_border-color: var(--theme-form-checkbox-border);
-      --_border-radius: 4px;
+      --_border-radius: 0.4rem;
       --_outline-color: var(--theme-form-checkbox-outline);
     }
 
@@ -144,7 +144,7 @@ const isChecked = computed(() => {
   background-color: var(--_background-color);
   border: var(--_border-width) solid var(--_border-color);
   border-radius: var(--_border-radius);
-  outline: 1px solid var(--_outline-color);
+  outline: 0.1rem solid var(--_outline-color);
   box-shadow: var(--_box-shadow);
 
   height: var(--_checkbox-size);
@@ -158,19 +158,19 @@ const isChecked = computed(() => {
 
   /* Sizes */
   &.x-small {
-    --_checkbox-size: 20px;
+    --_checkbox-size: 2rem;
   }
   &.small {
-    --_checkbox-size: 24px;
+    --_checkbox-size: 2.4rem;
   }
   &.normal {
-    --_checkbox-size: 34px;
+    --_checkbox-size: 3.4rem;
   }
   &.medium {
-    --_checkbox-size: 40px;
+    --_checkbox-size: 4rem;
   }
   &.large {
-    --_checkbox-size: 44px;
+    --_checkbox-size: 4.4rem;
   }
 
   .input-checked-icon {

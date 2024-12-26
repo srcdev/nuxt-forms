@@ -139,7 +139,7 @@ watch(
 .input-text-with-label {
   .input-text-label {
     display: block;
-    margin-block: 8px;
+    margin-block: 0.8rem;
   }
 }
 </style>

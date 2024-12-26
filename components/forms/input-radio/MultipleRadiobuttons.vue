@@ -167,7 +167,7 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
   legend {
     font-family: var(--font-family);
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 500;
 
     &.has-description {
@@ -177,15 +177,15 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
   .label-description {
     font-family: var(--font-family);
-    font-size: 16px;
-    margin-top: 12px;
+    font-size: 1.6rem;
+    margin-top: 1.2rem;
   }
 }
 
 .multiple-radiobuttons-items {
   display: flex;
-  gap: 12px;
-  margin-top: 12px;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
 
   &.inline {
     flex-direction: row;

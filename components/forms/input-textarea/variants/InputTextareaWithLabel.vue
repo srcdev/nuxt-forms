@@ -100,7 +100,7 @@ watch(
 .input-textarea-with-label {
   .input-textarea-label {
     display: block;
-    margin-block: 8px;
+    margin-block: 0.8rem;
   }
 }
 </style>

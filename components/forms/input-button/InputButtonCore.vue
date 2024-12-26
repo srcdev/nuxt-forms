@@ -126,6 +126,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   border-radius: var(--input-border-radius);
   font-family: var(--font-family);
 
+  /* line-height: var(--theme-form-button-line-height); */
   padding-inline: var(--_padding-inline);
   padding-block: var(--_padding-block);
 
@@ -134,7 +135,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   background-color: var(--theme-btn-bg);
   border: var(--_border-width) solid var(--theme-btn-border);
   color: var(--theme-btn-text);
-  outline: 1px solid var(--theme-btn-outline);
+  outline: 0.1rem solid var(--theme-btn-outline);
 
   /*
   * States
@@ -241,10 +242,10 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
 
     &.sr-only {
       position: absolute;
-      clip: rect(1px, 1px, 1px, 1px);
+      clip: rect(1px, 0.1rem, 0.1rem, 0.1rem);
       clip-path: inset(50%);
-      height: 1px;
-      width: 1px;
+      height: 0.1rem;
+      width: 0.1rem;
       overflow: hidden;
       white-space: nowrap;
     }

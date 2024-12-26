@@ -114,10 +114,10 @@ const flexDirection = ref(direction);
   --_label-color: var(--theme-checkbox-radio-button-label-default);
   --_box-shadow: var(--theme-checkbox-radio-button-shadow);
   --_white-space: wrap;
-  --_gap: 4px;
-  --_border-radius: 22px;
-  --_padding-block: 4px;
-  --_padding-inline: 12px;
+  --_gap: 0.4rem;
+  --_border-radius: 2.2rem;
+  --_padding-block: 0.4rem;
+  --_padding-inline: 1.2rem;
 
   display: flex;
   flex-direction: v-bind(flexDirection);
@@ -129,7 +129,7 @@ const flexDirection = ref(direction);
   border-radius: var(--_border-radius);
   border: var(--theme-checkbox-radio-button-border-width) solid var(--_border-color);
   outline: var(--theme-checkbox-radio-button-outline-width) solid var(--_outline-color);
-  box-shadow: 1px 1px 8px 1px var(--_box-shadow);
+  box-shadow: 0.1rem 0.1rem 0.8rem 0.1rem var(--_box-shadow);
   padding-block: var(--_padding-block);
   padding-inline: var(--_padding-inline);
 
@@ -149,39 +149,39 @@ const flexDirection = ref(direction);
 
   /* Sizes */
   &.x-small {
-    --_checkbox-size: 20px;
-    --_gap: 10px;
-    --_border-radius: 20px;
-    --_padding-block: 2px;
-    --_padding-inline: 16px;
+    --_checkbox-size: 2rem;
+    --_gap: 1rem;
+    --_border-radius: 2rem;
+    --_padding-block: 0.2rem;
+    --_padding-inline: 1.6rem;
   }
   &.small {
-    --_checkbox-size: 22px;
-    --_gap: 12px;
-    --_border-radius: 18px;
-    --_padding-block: 0px;
-    --_padding-inline: 12px;
+    --_checkbox-size: 2.2rem;
+    --_gap: 1.2rem;
+    --_border-radius: 1.8rem;
+    --_padding-block: 0rem;
+    --_padding-inline: 1.2rem;
   }
   &.normal {
-    --_checkbox-size: 34px;
-    --_gap: 10px;
-    --_border-radius: 20px;
-    --_padding-block: 4px;
-    --_padding-inline: 12px;
+    --_checkbox-size: 3.4rem;
+    --_gap: 1rem;
+    --_border-radius: 2rem;
+    --_padding-block: 0.4rem;
+    --_padding-inline: 1.2rem;
   }
   &.medium {
-    --_checkbox-size: 34px;
-    --_gap: 10px;
-    --_border-radius: 20px;
-    --_padding-block: 4px;
-    --_padding-inline: 12px;
+    --_checkbox-size: 3.4rem;
+    --_gap: 1rem;
+    --_border-radius: 2rem;
+    --_padding-block: 0.4rem;
+    --_padding-inline: 1.2rem;
   }
   &.large {
-    --_checkbox-size: 34px;
-    --_gap: 10px;
-    --_border-radius: 20px;
-    --_padding-block: 4px;
-    --_padding-inline: 12px;
+    --_checkbox-size: 3.4rem;
+    --_gap: 1rem;
+    --_border-radius: 2rem;
+    --_padding-block: 0.4rem;
+    --_padding-inline: 1.2rem;
   }
 }
 
@@ -193,8 +193,8 @@ const flexDirection = ref(direction);
   height: 100%;
   align-items: center;
   justify-content: center;
-  margin-block: 8px;
-  padding-inline: 8px;
+  margin-block: 0.8rem;
+  padding-inline: 0.8rem;
   white-space: var(--_white-space);
 
   &:hover {

@@ -53,8 +53,8 @@ div {
     background: #f3ac3c;
     height: 90px;
     width: 130px;
-    border-radius: 50px;
-    outline: 10px solid #0b2429;
+    border-radius: 5rem;
+    outline: 1rem solid #0b2429;
   }
 }
 </style>

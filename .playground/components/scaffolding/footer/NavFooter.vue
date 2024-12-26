@@ -28,11 +28,11 @@ footer {
   padding: 1rem;
   text-align: center;
   background: white;
-  margin-bottom: 50px;
+  margin-bottom: 5rem;
 
   .footer-list {
     display: inline-grid;
-    gap: 10px;
+    gap: 1rem;
     grid-template-columns: 280px 456px;
     margin-inline: auto;
     padding: 0;
@@ -40,16 +40,16 @@ footer {
 
   .footer-item {
     list-style-type: none;
-    gap: 10px;
+    gap: 1rem;
     display: grid;
-    grid-template-columns: 40px auto;
+    grid-template-columns: 4rem auto;
     align-items: center;
 
     .icon {
       display: block;
-      font-size: 30px;
+      font-size: 3rem;
       text-align: center;
-      min-width: 40px;
+      min-width: 4rem;
     }
     .text {
       font-family: 'Poppins', Sans-serif;

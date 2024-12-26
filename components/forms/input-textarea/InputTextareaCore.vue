@@ -96,7 +96,7 @@ onMounted(() => {
 
 <style lang="css">
 .input-textarea-wrapper {
-  --_gutter: 12px;
+  --_gutter: 1.2rem;
   --_border-width: var(--input-border-width-default);
   --_outline-width: var(--input-border-width-default);
 
@@ -115,7 +115,7 @@ onMounted(() => {
 
   .slot {
     display: inline-block;
-    padding-inline: 8px;
+    padding-inline: 0.8rem;
 
     .icon {
       color: var(--theme-form-input-text);
@@ -147,7 +147,7 @@ onMounted(() => {
     font-family: var(--font-family);
     font-size: var(--theme-form-button-font-size-normal);
     line-height: var(--line-height);
-    padding: 8px 12px;
+    padding: 0.8rem 1.2rem;
 
     &::placeholder,
     &::-webkit-input-placeholder {

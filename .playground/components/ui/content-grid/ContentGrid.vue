@@ -31,7 +31,7 @@ const hasSlot2 = ref(slots.slot2 !== undefined);
   --_margin-inline: 0;
   --_grid-template-columns: repeat(4, 1fr);
   --_grid-template-rows: repeat(2, auto);
-  --_grid-gap: 16px;
+  --_grid-gap: 1.6rem;
 
   display: grid;
   gap: var(--_grid-gap);
@@ -42,7 +42,7 @@ const hasSlot2 = ref(slots.slot2 !== undefined);
   @container content (min-width: 768px) {
     --_margin-inline: 0;
     --_grid-template-columns: repeat(6, 1fr);
-    --_grid-gap: 32px;
+    --_grid-gap: 3.2rem;
   }
 
   @container content (min-width: 1024px) {

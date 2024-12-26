@@ -109,7 +109,7 @@ onMounted(() => {
 
 <style lang="css">
 .input-number-wrapper {
-  --_gutter: 12px;
+  --_gutter: 1.2rem;
   --_border-width: var(--input-border-width-default);
   --_min-width: v-bind(minLength);
 
@@ -120,7 +120,7 @@ onMounted(() => {
 
   .slot {
     display: inline-block;
-    padding-inline: 8px;
+    padding-inline: 0.8rem;
 
     .icon {
       font-weight: 900;
@@ -156,7 +156,7 @@ onMounted(() => {
     font-family: var(--font-family);
     font-size: var(--theme-form-button-font-size-normal);
     line-height: var(--line-height);
-    padding: 4px 16px;
+    padding: 0.4rem 1.6rem;
     text-align: center;
     min-width: var(--_min-width);
 

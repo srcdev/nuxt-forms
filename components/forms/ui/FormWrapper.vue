@@ -16,8 +16,8 @@ defineProps({
 
 <style lang="css">
 .form-wrapper {
-  outline: 0px solid var(--gray-12);
-  padding-bottom: 20px;
+  outline: 0rem solid var(--gray-12);
+  padding-bottom: 2rem;
 
   &.narrow {
     max-width: 400px;

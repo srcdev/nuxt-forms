@@ -156,10 +156,10 @@ onMounted(() => {
 
   .sr-only {
     position: absolute;
-    width: 1px;
-    height: 1px;
+    width: 0.1rem;
+    height: 0.1rem;
     padding: 0;
-    margin: -1px;
+    margin: -0.1rem;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
@@ -174,7 +174,7 @@ onMounted(() => {
   [type='range'] {
     width: 100%;
     opacity: 0;
-    height: 60px;
+    height: 6rem;
   }
 
   [type='range']:hover {
@@ -237,23 +237,23 @@ onMounted(() => {
   [type='range']::-webkit-slider-thumb {
     appearance: none;
     -webkit-appearance: none;
-    height: 60px;
-    width: 40px;
-    margin-top: 0px;
+    height: 6rem;
+    width: 4rem;
+    margin-top: 0rem;
     opacity: 1;
   }
   [type='range']::-webkit-slider-runnable-track {
     -webkit-appearance: none;
-    height: 60px;
+    height: 6rem;
     /* background: hsl(10 80% 50% / 0.5); */
-    margin-top: 0px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    margin-top: 0rem; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    box-shadow: 0.1rem 0.1rem 0.1rem #000000, 0rem 0rem 0.1rem #0d0d0d;
   }
   [type='range']::-moz-range-track {
-    height: 60px;
+    height: 6rem;
     /* background: hsl(10 80% 50% / 0.5); */
-    margin-top: 0px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    margin-top: 0rem; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    box-shadow: 0.1rem 0.1rem 0.1rem #000000, 0rem 0rem 0.1rem #0d0d0d;
   }
 }
 
@@ -276,7 +276,7 @@ onMounted(() => {
     touch-action: none;
     /* extras */
     accent-color: hsl(24 74% calc(24% + (30% * ((100 - var(--value, 0)) / 100)) / 1) / 0.4);
-    outline: 2px dashed #0000;
+    outline: 0.2rem dashed #0000;
     transition-property: outline-color, opacity, translate;
     transition-duration: 0.25s;
   }
@@ -305,12 +305,12 @@ onMounted(() => {
     pointer-events: none;
     transition: height var(--speed) var(--timing);
     z-index: 5;
-    clip-path: inset(0 -0.25rem 0 -0.25rem round 6px);
+    clip-path: inset(0 -0.25rem 0 -0.25rem round 0.6rem);
   }
 
   [data-reveal='true'] .control__track {
     clip-path: unset;
-    outline: 2px dashed white;
+    outline: 0.2rem dashed white;
   }
 
   .control__track-slide {
@@ -324,7 +324,7 @@ onMounted(() => {
     width: 100%;
     height: 100%;
     position: absolute;
-    border-radius: 6px;
+    border-radius: 0.6rem;
 
     &:nth-of-type(1) {
       background: var(--coffee);
@@ -338,8 +338,8 @@ onMounted(() => {
 
   .control__indicator {
     height: 75%;
-    border-radius: 4px;
-    width: 4px;
+    border-radius: 0.4rem;
+    width: 0.4rem;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -431,13 +431,13 @@ onMounted(() => {
       --range: calc((70 - (var(--value) / 100 * 10)) * 1%);
 
       display: flex;
-      gap: 12px;
+      gap: 1.2rem;
       color: hsl(24 74% 54%);
       mask: linear-gradient(90deg, hsl(0 0% 100% / 0.6) var(--range), hsl(0 0% 100% / 1) var(--range));
       left: 0.5rem;
       .low-value {
         display: inline-block;
-        border: 1px solid white;
+        border: 0.1rem solid white;
         height: 2rem;
         width: 5rem;
       }
@@ -447,12 +447,12 @@ onMounted(() => {
       --range: calc((50 - (var(--value) / 100 * 10)) * 1%);
 
       display: flex;
-      gap: 12px;
+      gap: 1.2rem;
       mask: linear-gradient(90deg, hsl(0 0% 100% / 1) var(--range), hsl(0 0% 100% / 0.5) var(--range));
       right: 0.5rem;
       .high-value {
         display: inline-block;
-        border: 1px solid white;
+        border: 0.1rem solid white;
         height: 2rem;
         width: 5rem;
       }

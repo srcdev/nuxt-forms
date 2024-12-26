@@ -115,17 +115,17 @@ const changeBackgroundColor = () => {
 
 <style lang="css">
 .input-range-wrapper {
-  --_gutter: 12px;
+  --_gutter: 1.2rem;
   --_border-width: var(--input-border-width-default);
   --_outline-width: var(--input-outline-width-thin);
 
-  --_input-range-height: 24px;
+  --_input-range-height: 2.4rem;
   --_slot-translate-y: calc(var(--_input-range-height) / 4);
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 1rem;
 
   .slot {
     align-self: flex-start;
@@ -160,8 +160,8 @@ const changeBackgroundColor = () => {
         /* -webkit-appearance: none; */
         accent-color: blue;
         color: blue;
-        background-color: 1px solid green;
-        outline: 1px solid blue;
+        background-color: 0.1rem solid green;
+        outline: 0.1rem solid blue;
         border-radius: 50%;
       }
 
@@ -169,7 +169,7 @@ const changeBackgroundColor = () => {
         appearance: none;
         -webkit-appearance: none;
         /* background: hsl(10 80% 50% / 0.5); */
-        /* box-shadow: 1px 1px 1px #fff, 0px 0px 1px #fff; */
+        /* box-shadow: 0.1rem 0.1rem 0.1rem #fff, 0rem 0rem 0.1rem #fff; */
       }
 
       /* For Chrome, Safari, Opera, and Edge */
@@ -190,7 +190,7 @@ const changeBackgroundColor = () => {
         background: #5cd5eb;
         height: 2rem;
         width: 1rem;
-        border-radius: 10px;
+        border-radius: 1rem;
       } */
 
       /* For Firefox */
@@ -198,7 +198,7 @@ const changeBackgroundColor = () => {
         background: #5cd5eb;
         height: 2rem;
         width: 1rem;
-        border-radius: 10px;
+        border-radius: 1rem;
         border: none;
       } */
 
@@ -211,7 +211,7 @@ const changeBackgroundColor = () => {
       display: flex;
       flex-direction: column;
       font-family: var(--font-family);
-      font-size: 14px;
+      font-size: 1.4rem;
       font-weight: 500;
       justify-content: space-between;
       writing-mode: vertical-lr;
