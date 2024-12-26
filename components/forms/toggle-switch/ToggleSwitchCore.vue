@@ -109,7 +109,6 @@ const inputId = computed(() => `toggle-sitch-${id}`);
       --_icon-off-opacity: 0;
     }
 
-    /* The symbol */
     .symbol-wrapper {
       position: absolute;
       cursor: pointer;
@@ -137,8 +136,8 @@ const inputId = computed(() => `toggle-sitch-${id}`);
 }
 
 /*
-    * ToggleSwitch configurable
-    **/
+* ToggleSwitch configurable
+**/
 .toggle-switch-core {
   /* Sizes */
   &.x-small {
@@ -157,17 +156,14 @@ const inputId = computed(() => `toggle-sitch-${id}`);
     --_symbol-size: 44px;
   }
 
-  /* .toggle-switch-label {
-  } */
-
   .toggle-switch-input {
     border: var(--theme-form-toggle-border);
     outline: var(--theme-form-toggle-outline);
-    width: calc(var(--_symbol-size) * 2 - 4px);
-    height: calc(var(--_symbol-size) + 4px);
+    width: calc(var(--_symbol-size) * 2 - calc(var(--theme-form-toggle-border-width) * 4));
+    height: calc(var(--_symbol-size) + calc(var(--theme-form-toggle-border-width) * 4));
 
     &.round {
-      border-radius: calc(var(--_symbol-size) + 2px);
+      border-radius: calc(var(--_symbol-size) + calc(var(--theme-form-toggle-border-width) * 2));
     }
 
     .symbol-wrapper {
