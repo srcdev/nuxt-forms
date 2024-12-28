@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: {
         lang: 'en',
+        'data-color-scheme': 'auto',
       },
       titleTemplate: '%s - Website name',
       meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }],

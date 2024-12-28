@@ -39,7 +39,8 @@ const { id, name, label, required, errorMessage, fieldHasError, trueValue, false
   },
   errorMessage: {
     type: [Object, String],
-    required: true,
+    default: '',
+    required: false,
   },
   fieldHasError: {
     type: Boolean,
