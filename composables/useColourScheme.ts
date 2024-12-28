@@ -5,7 +5,7 @@ export const useColourScheme = (colourScheme: Ref<'auto' | 'dark' | 'light'> = r
 
   const getSetPrefereredColourScheme = () => {
     if (import.meta.client) {
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !document.documentElement.dataset.colorScheme) {
         colourScheme.value = 'dark';
       } else {
         colourScheme.value = 'light';
