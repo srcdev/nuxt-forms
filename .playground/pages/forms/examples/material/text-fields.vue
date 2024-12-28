@@ -32,7 +32,8 @@
                 <ClientOnly>
                   <form class="form-wrapper" @submit.stop.prevent="submitForm()" ref="formRef">
                     <div aria-live="assertive" id="aria-live-message"></div>
-                    <FormField width="wide" :has-gutter="false">
+
+                    <FormField width="wide" :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress)" :has-gutter="false">
                       <template #default>
                         <InputTextWithLabel
                           v-model="state.emailAddress"
@@ -272,7 +273,7 @@
                       </template>
                     </FormField>
 
-                    <FormField width="wide" :has-gutter="false">
+                    <FormField width="wide" :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.score)" :has-gutter="false">
                       <template #default>
                         <InputRangeDefault
                           id="score"
