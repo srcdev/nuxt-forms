@@ -5,23 +5,24 @@
     :aria-disabled="readonly"
     :data-testid="dataTestid"
     :data-btn-theme="theme"
-    class="input-button-core btn"
-    :class="[`btn-${type}`, size, effectClass, elementClasses, { 'icon-only': isIconOnly }]"
+    :data-size="size"
+    class="input-button-core"
+    :class="[`btn-${type}`, effectClass, elementClasses, { 'icon-only': isIconOnly }]"
   >
     <span v-if="useEffect && effect == 'fancy'" class="fancy"></span>
     <template v-if="hasLeftContent && !isIconOnly">
-      <span class="btn-icon left" :class="[size]">
+      <span class="btn-icon left">
         <slot name="left"></slot>
       </span>
     </template>
-    <span class="btn-text" :class="[size, weight, { 'sr-only': isIconOnly }]">{{ buttonText }}</span>
+    <span class="btn-text" :class="[weight, { 'sr-only': isIconOnly }]">{{ buttonText }}</span>
     <template v-if="hasRightContent && !isIconOnly">
       <span class="btn-icon right">
         <slot name="right"></slot>
       </span>
     </template>
     <template v-if="isIconOnly">
-      <span class="btn-icon icon-only" :class="[size]">
+      <span class="btn-icon icon-only">
         <slot name="iconOnly"></slot>
       </span>
     </template>
@@ -111,31 +112,25 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
 </script>
 
 <style lang="css">
-.btn {
-  --_padding-block: var(--theme-form-button-padding-block-normal);
-  --_padding-inline: var(--theme-form-button-padding-inline-normal);
-  --_icon-gap: var(--theme-form-button-icon-gap-normal);
-  --_border-width: var(--input-border-width-default);
-  --_outline-width: var(--input-outline-width-thin);
-
+.input-button-core {
   align-items: center;
   display: flex;
-  gap: var(--_icon-gap);
+  gap: var(--form-button-icon-gap);
   justify-content: center;
   border: none;
-  border-radius: var(--input-border-radius);
+  border-radius: var(--form-input-border-radius);
   font-family: var(--font-family);
 
-  /* line-height: var(--theme-form-button-line-height); */
-  padding-inline: var(--_padding-inline);
-  padding-block: var(--_padding-block);
+  padding-inline: var(--form-padding-inline);
+  padding-block-start: var(--form-element-padding-block-start);
+  padding-block-end: var(--form-element-padding-block-end);
 
   transition: all 0.2s ease-in-out;
 
   background-color: var(--theme-btn-bg);
-  border: var(--_border-width) solid var(--theme-btn-border);
+  border: var(--form-element-border-width) solid var(--theme-btn-border);
   color: var(--theme-btn-text);
-  outline: 0.1rem solid var(--theme-btn-outline);
+  outline: var(--form-element-outline-width) solid var(--theme-btn-outline);
 
   /*
   * States
@@ -167,78 +162,19 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
     }
   }
 
-  &.x-small {
-    &:not(.icon-only) {
-      --_padding-block: var(--theme-form-button-padding-block-x-small);
-      --_padding-inline: var(--theme-form-button-padding-inline-x-small);
-      --_icon-gap: var(--theme-form-button-icon-gap-x-small);
-    }
-    &.icon-only {
-      --_padding-block: var(--theme-form-button-padding-block-icon-only-x-small);
-      --_padding-inline: var(--theme-form-button-padding-inline-icon-only-x-small);
-    }
-  }
-
-  &.small {
-    &:not(.icon-only) {
-      --_padding-block: var(--theme-form-button-padding-block-x-small);
-      --_padding-inline: var(--theme-form-button-padding-inline-small);
-      --_icon-gap: var(--theme-form-button-icon-gap-small);
-    }
-    &.icon-only {
-      --_padding-block: var(--theme-form-button-padding-block-icon-only-small);
-      --_padding-inline: var(--theme-form-button-padding-inline-icon-only-small);
-    }
-  }
-  &.normal {
-    &:not(.icon-only) {
-      --_padding-block: var(--theme-form-button-padding-block-x-small);
-      --_padding-inline: var(--theme-form-button-padding-inline-normal);
-      --_icon-gap: var(--theme-form-button-icon-gap-normal);
-    }
-    &.icon-only {
-      --_padding-block: var(--theme-form-button-padding-block-icon-only-normal);
-      --_padding-inline: var(--theme-form-button-padding-inline-icon-only-normal);
-    }
-  }
-  &.medium {
-    &:not(.icon-only) {
-      --_padding-block: var(--theme-form-button-padding-block-x-small);
-      --_padding-inline: var(--theme-form-button-padding-inline-medium);
-      --_icon-gap: var(--theme-form-button-icon-gap-medium);
-    }
-    &.icon-only {
-      --_padding-block: var(--theme-form-button-padding-block-icon-only-medium);
-      --_padding-inline: var(--theme-form-button-padding-inline-icon-only-medium);
-    }
-  }
-
-  &.large {
-    &:not(.icon-only) {
-      --_padding-block: var(--theme-form-button-padding-block-x-small);
-      --_padding-inline: var(--theme-form-button-padding-inline-large);
-      --_icon-gap: var(--theme-form-button-icon-gap-large);
-    }
-    &.icon-only {
-      --_padding-block: var(--theme-form-button-padding-block-icon-only-large);
-      --_padding-inline: var(--theme-form-button-padding-inline-icon-only-large);
-    }
+  &.icon-only {
+    aspect-ratio: 1;
+    height: var(--form-icon-only-button-size);
+    width: var(--form-icon-only-button-size);
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .btn-text {
-    &.small {
-      font-size: var(--theme-form-button-font-size-small);
-    }
-    &.normal {
-      font-size: var(--theme-form-button-font-size-normal);
-    }
-    &.medium {
-      font-size: var(--theme-form-button-font-size-medium);
-    }
-
-    &.large {
-      font-size: var(--theme-form-button-font-size-large);
-    }
+    display: inline-block;
+    white-space: nowrap;
+    font-size: var(--form-element-font-size);
+    line-height: var(--form-element-line-height);
 
     &.sr-only {
       position: absolute;
@@ -256,38 +192,8 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
     .icon {
       aspect-ratio: 1;
       display: inline-block;
-    }
-
-    &.x-small {
-      .icon {
-        height: var(--theme-form-button-icon-size-small);
-        width: var(--theme-form-button-icon-size-small);
-      }
-    }
-    &.small {
-      .icon {
-        height: var(--theme-form-button-icon-size-small);
-        width: var(--theme-form-button-icon-size-small);
-      }
-    }
-    &.normal {
-      .icon {
-        height: var(--theme-form-button-icon-size-normal);
-        width: var(--theme-form-button-icon-size-normal);
-      }
-    }
-    &.medium {
-      .icon {
-        height: var(--theme-form-button-icon-size-medium);
-        width: var(--theme-form-button-icon-size-medium);
-      }
-    }
-
-    &.large {
-      .icon {
-        height: var(--theme-form-button-icon-size-large);
-        width: var(--theme-form-button-icon-size-large);
-      }
+      height: var(--form-icon-size);
+      width: var(--form-icon-size);
     }
   }
 }

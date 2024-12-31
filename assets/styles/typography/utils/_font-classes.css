@@ -37,6 +37,12 @@
 /* Body text */
 
 .body-large {
+  font-size: var(--step-3);
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+.body-medium {
   font-size: var(--step-2);
   font-weight: normal;
   line-height: 1.5;
@@ -61,6 +67,12 @@
 }
 
 .body-large-semibold {
+  font-size: var(--step-3);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.body-medium-semibold {
   font-size: var(--step-2);
   font-weight: 500;
   line-height: 1.5;
@@ -85,6 +97,12 @@
 }
 
 .body-large-bold {
+  font-size: var(--step-3);
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.body-medium-bold {
   font-size: var(--step-2);
   font-weight: bold;
   line-height: 1.5;
@@ -111,6 +129,18 @@
 /* Links */
 
 .link-large {
+  color: var(--theme-link-default);
+  font-size: var(--step-3);
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: underline;
+
+  &:visited {
+    color: var(--theme-link-default);
+  }
+}
+
+.link-medium {
   color: var(--theme-link-default);
   font-size: var(--step-2);
   font-weight: 600;

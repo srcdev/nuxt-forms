@@ -120,8 +120,8 @@ const isChecked = computed(() => {
   --_box-shadow: none;
 
   &:not(.button) {
-    --_outline-width: var(--input-outline-width-thin);
-    --_border-width: var(--input-border-width-default);
+    --_outline-width: var(--form-element-outline-width);
+    --_border-width: var(--form-element-border-width);
     &.checkbox {
       --_background-color: var(--theme-form-checkbox-bg);
       --_border-color: var(--theme-form-checkbox-border);

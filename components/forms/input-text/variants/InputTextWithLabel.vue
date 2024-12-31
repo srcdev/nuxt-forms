@@ -23,6 +23,7 @@
       :styleClassPassthrough
       :theme
       :ariaDescribedby
+      :size
     >
       <template v-if="hasLeftSlot" #left>
         <slot name="left"></slot>
@@ -37,7 +38,7 @@
 
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
-const { type, inputmode, maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme } = defineProps({
+const { type, inputmode, maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, size } = defineProps({
   maxlength: {
     type: Number,
     default: 255,
@@ -90,6 +91,13 @@ const { type, inputmode, maxlength, id, name, placeholder, label, errorMessage, 
     default: 'primary',
     validator(value: string) {
       return propValidators.theme.includes(value);
+    },
+  },
+  size: {
+    type: String as PropType<string>,
+    default: 'normal',
+    validator(value: string) {
+      return propValidators.size.includes(value);
     },
   },
 });

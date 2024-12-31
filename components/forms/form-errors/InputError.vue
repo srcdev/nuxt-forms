@@ -94,7 +94,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   transition-behavior: allow-discrete;
 
   &.detached {
-    border-radius: var(--input-border-radius);
+    border-radius: var(--form-input-border-radius);
     margin-block-start: 2rem;
   }
 

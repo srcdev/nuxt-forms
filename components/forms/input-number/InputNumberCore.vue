@@ -110,7 +110,7 @@ onMounted(() => {
 <style lang="css">
 .input-number-wrapper {
   --_gutter: 1.2rem;
-  --_border-width: var(--input-border-width-default);
+  --_border-width: var(--form-element-border-width);
   --_min-width: v-bind(minLength);
 
   display: flex;
@@ -148,7 +148,7 @@ onMounted(() => {
     box-shadow: none;
 
     background-color: var(--theme-form-input-bg);
-    border-radius: var(--input-border-width-default);
+    border-radius: var(--form-element-border-width);
     border: var(--_border-width) solid var(--theme-form-input-border);
     outline: var(--_outline-width) solid var(--theme-form-input-outline);
 

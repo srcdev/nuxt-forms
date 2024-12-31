@@ -27,6 +27,25 @@
               </li>
             </ul>
 
+            <p>Size switcher</p>
+            <ul class="flex-group">
+              <li>
+                <InputButtonSubmit type="button" @click.stop.prevent="swapSize('x-small')" :is-pending="false" button-text="X-Small" theme="primary" size="x-small" />
+              </li>
+              <li>
+                <InputButtonSubmit type="button" @click.stop.prevent="swapSize('small')" :is-pending="false" button-text="Small" theme="primary" size="small" />
+              </li>
+              <li>
+                <InputButtonSubmit type="button" @click.stop.prevent="swapSize('normal')" :is-pending="false" button-text="Normal" theme="primary" size="normal" />
+              </li>
+              <li>
+                <InputButtonSubmit type="button" @click.stop.prevent="swapSize('medium')" :is-pending="false" button-text="Medium" theme="primary" size="medium" />
+              </li>
+              <li>
+                <InputButtonSubmit type="button" @click.stop.prevent="swapSize('large')" :is-pending="false" button-text="Large" theme="primary" size="large" />
+              </li>
+            </ul>
+
             <FormWrapper width="medium">
               <template #default>
                 <ClientOnly>
@@ -49,6 +68,7 @@
                           :required="true"
                           :styleClassPassthrough="['style-1', 'style-2']"
                           :theme
+                          :size
                         >
                           <template #description>
                             <p class="body-normal">This is a description for username field</p>
@@ -75,6 +95,7 @@
                           :required="true"
                           :styleClassPassthrough="['style-1', 'style-2']"
                           :theme
+                          :size
                         >
                           <template #left>
                             <Icon name="radix-icons:person" class="icon" />
@@ -97,6 +118,7 @@
                           :required="true"
                           :styleClassPassthrough="['style-1', 'style-2']"
                           :theme
+                          :size
                         >
                           <template #right>
                             <Icon name="radix-icons:eye-open" class="icon" />
@@ -119,6 +141,7 @@
                           :required="true"
                           :styleClassPassthrough="['style-1', 'style-2']"
                           :theme
+                          :size
                         >
                         </InputTextareaWithLabel>
                       </template>
@@ -126,7 +149,7 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <ToggleSwitchWithLabel v-model="state.darkMode" id="darkMode" name="darkMode" label="Toggle Dark mode" true-value="dark" false-value="light" :theme>
+                        <ToggleSwitchWithLabel v-model="state.darkMode" id="darkMode" name="darkMode" label="Toggle Dark mode" true-value="dark" false-value="light" :theme :size>
                           <template #description>
                             <p class="label-description">Light or Dark mode?</p>
                           </template>
@@ -150,6 +173,7 @@
                           name="toggleBoolean"
                           label="Toggle Dark mode"
                           :theme
+                          :size
                         >
                           <template #description>
                             <p class="label-description">Toggle some value</p>
@@ -175,6 +199,7 @@
                           :required="true"
                           :styleClassPassthrough="['style-1', 'style-2']"
                           :theme
+                          :size
                         >
                           <template #description>
                             <p class="label-description">Input type="text" inputmode="numeric"</p>
@@ -205,6 +230,7 @@
                           :styleClassPassthrough="['count-1', 'count-2']"
                           v-model.number="state.count"
                           :theme
+                          :size
                         >
                           <template #description>
                             <p class="label-description">Input type="number" inputmode="numeric"</p>
@@ -233,9 +259,9 @@
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.tags)"
                           v-model="state.tags"
                           v-model:fieldData="tagsData"
-                          size="small"
                           optionsLayout="inline"
                           :theme
+                          :size
                         >
                           <template #description>
                             <p class="label-description">This is description: optionsLayout = 'inline'</p>
@@ -261,9 +287,9 @@
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.tagsRadio)"
                           v-model="state.tagsRadio"
                           v-model:fieldData="tagsData"
-                          size="x-small"
                           optionsLayout="inline"
                           :theme
+                          :size
                           direction="row-reverse"
                         >
                           <template #description>
@@ -289,6 +315,7 @@
                           :styleClassPassthrough="['style-1', 'style-2']"
                           v-model.number="state.score"
                           :theme
+                          :size
                         >
                           <template #description>
                             <p class="label-description">This is a description of what the user is required to do</p>
@@ -325,9 +352,9 @@
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.title)"
                           v-model="state.title"
                           v-model:fieldData="titleData"
-                          size="normal"
                           optionsLayout="equal-widths"
                           :theme
+                          :size
                         >
                           <template #checkedIcon>
                             <Icon name="material-symbols:check-small" class="input-checked-icon" />
@@ -352,9 +379,9 @@
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.otherTitle)"
                           v-model="state.otherTitle"
                           v-model:fieldData="titleData"
-                          size="normal"
                           optionsLayout="equal-widths"
                           :theme
+                          :size
                         >
                           <template #description>
                             <p class="label-description">This is description: optionsLayout = 'equal-widths/inline'</p>
@@ -376,9 +403,9 @@
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.cities)"
                           v-model="state.cities"
                           v-model:fieldData="citiesData"
-                          size="normal"
                           optionsLayout="inline"
                           :theme
+                          :size
                         >
                           <template #description>
                             <p class="label-description">This is description: optionsLayout = 'equal-widths'</p>
@@ -400,9 +427,9 @@
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.countries)"
                           v-model="state.countries"
                           v-model:fieldData="countriesData"
-                          size="normal"
                           optionsLayout="equal-widths"
                           :theme
+                          :size
                         >
                           <template #checkedIcon>
                             <Icon name="material-symbols:circle" class="input-checked-icon" />
@@ -425,8 +452,8 @@
                           :errorMessage="formErrors?.agreed?._errors[0] ?? ''"
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.agreed)"
                           v-model="state.agreed"
-                          size="normal"
                           :theme
+                          :size
                         >
                           <template #description>
                             <p class="label-description">You must <strong>agree</strong> to continue</p>
@@ -446,8 +473,8 @@
                           :errorMessage="formErrors?.agree?._errors[0] ?? ''"
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.agree)"
                           v-model="state.agree"
-                          size="normal"
                           :theme
+                          :size
                         >
                         </SingleCheckbox>
                       </template>
@@ -463,8 +490,8 @@
                           :errorMessage="formErrors?.terms?._errors[0] ?? ''"
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.terms)"
                           v-model="state.terms"
-                          size="normal"
                           :theme
+                          :size
                         >
                           <template #labelContent>
                             <span class="body-normal">You must agree to our <NuxtLink to="/typography" class="link-normal">terms and conditions</NuxtLink> to continue</span>
@@ -475,7 +502,7 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <InputButtonSubmit type="button" @click.stop.prevent="submitForm()" :is-pending="false" :readonly="zodFormControl.submitDisabled" button-text="Submit" :theme size="medium" />
+                        <InputButtonSubmit type="button" @click.stop.prevent="submitForm()" :is-pending="false" :readonly="zodFormControl.submitDisabled" button-text="Submit" :theme :size />
                       </template>
                     </FormField>
                   </form>
@@ -509,7 +536,6 @@
 <script setup lang="ts">
 import { z } from 'zod';
 import type { IFormMultipleOptions } from '../../../../types/types.forms';
-import type ToggleSwitchCore from '../../../../../components/forms/toggle-switch/ToggleSwitchCore.vue';
 
 definePageMeta({
   layout: false,
@@ -524,9 +550,12 @@ useHead({
 });
 
 const theme = ref('primary');
-
+const size = ref<'x-small' | 'small' | 'normal' | 'medium' | 'large'>('normal');
 const swapTheme = (newTheme: string) => {
   theme.value = newTheme;
+};
+const swapSize = (newSize: 'x-small' | 'small' | 'normal' | 'medium' | 'large') => {
+  size.value = newSize;
 };
 
 /*

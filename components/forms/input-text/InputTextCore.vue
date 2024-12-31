@@ -2,9 +2,9 @@
   <div
     class="input-text-wrapper"
     :data-form-theme="formTheme"
-    :class="[{ dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]"
+    :class="[size, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]"
   >
-    <span v-if="hasLeftSlot" class="slot left-slot">
+    <span v-if="hasLeftSlot" class="slot left-slot" :class="size">
       <slot name="left"></slot>
     </span>
 
@@ -15,7 +15,7 @@
       :name
       :required
       :maxlength
-      :class="['input-text-core', 'text-normal', elementClasses, { dirty: isDirty }, { active: isActive }]"
+      :class="['input-text-core', 'text-normal', elementClasses, size, { dirty: isDirty }, { active: isActive }]"
       v-model="modelValue"
       ref="inputField"
       :aria-invalid="fieldHasError"
@@ -26,7 +26,7 @@
       @focusout="updateFocus(false)"
     />
 
-    <span v-if="hasRightSlot" class="slot right-slot">
+    <span v-if="hasRightSlot" class="slot right-slot" :class="size">
       <slot name="right"></slot>
     </span>
   </div>
@@ -35,7 +35,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { type, inputmode, maxlength, id, name, placeholder, required, fieldHasError, styleClassPassthrough, theme, ariaDescribedby } = defineProps({
+const { type, inputmode, maxlength, id, name, placeholder, required, fieldHasError, styleClassPassthrough, theme, ariaDescribedby, size } = defineProps({
   type: {
     // type: String as PropType<'text' | 'email' | 'password' | 'number' | 'tel' | 'url'>,
     type: String,
@@ -89,6 +89,13 @@ const { type, inputmode, maxlength, id, name, placeholder, required, fieldHasErr
   ariaDescribedby: {
     type: String,
     default: null,
+  },
+  size: {
+    type: String as PropType<string>,
+    default: 'normal',
+    validator(value: string) {
+      return propValidators.size.includes(value);
+    },
   },
 });
 
@@ -145,14 +152,14 @@ onMounted(() => {
 <style lang="css">
 .input-text-wrapper {
   --_gutter: 1.2rem;
-  --_border-width: var(--input-border-width-default);
-  --_outline-width: var(--input-border-width-default);
+  --_border-width: var(--form-element-border-width);
+  --_outline-width: var(--form-element-border-width);
 
   display: flex;
   align-items: center;
 
   background-color: var(--theme-form-input-bg);
-  border-radius: var(--input-border-width-default);
+  border-radius: var(--form-element-border-width);
   border: var(--_border-width) solid var(--theme-form-input-border);
 
   &:focus-within {

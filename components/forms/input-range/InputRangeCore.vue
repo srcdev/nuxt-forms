@@ -116,8 +116,8 @@ const changeBackgroundColor = () => {
 <style lang="css">
 .input-range-wrapper {
   --_gutter: 1.2rem;
-  --_border-width: var(--input-border-width-default);
-  --_outline-width: var(--input-outline-width-thin);
+  --_border-width: var(--form-element-border-width);
+  --_outline-width: var(--form-element-outline-width);
 
   --_input-range-height: 2.4rem;
   --_slot-translate-y: calc(var(--_input-range-height) / 4);

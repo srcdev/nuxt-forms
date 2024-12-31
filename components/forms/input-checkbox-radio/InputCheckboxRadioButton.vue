@@ -108,7 +108,7 @@ const flexDirection = ref(direction);
 .input-checkbox-radio-button-button {
   --_checkbox-size: initial;
   --_background-color: var(--theme-checkbox-radio-button-bg-default);
-  --_outline-width: var(--input-outline-width-thin);
+  --_outline-width: var(--form-element-outline-width);
   --_border-color: var(--theme-checkbox-radio-button-border-default);
   --_outline-color: var(--theme-checkbox-radio-button-outline-default);
   --_label-color: var(--theme-checkbox-radio-button-label-default);

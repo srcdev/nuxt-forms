@@ -97,14 +97,14 @@ onMounted(() => {
 <style lang="css">
 .input-textarea-wrapper {
   --_gutter: 1.2rem;
-  --_border-width: var(--input-border-width-default);
-  --_outline-width: var(--input-border-width-default);
+  --_border-width: var(--form-element-border-width);
+  --_outline-width: var(--form-element-border-width);
 
   display: flex;
   align-items: center;
 
   background-color: var(--theme-form-input-bg);
-  border-radius: var(--input-border-width-default);
+  border-radius: var(--form-element-border-width);
   border: var(--_border-width) solid var(--theme-form-input-border);
 
   &:focus-within {
