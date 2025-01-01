@@ -201,7 +201,7 @@ const inputId = computed(() => `toggle-sitch-${id}`);
     }
 
     input:focus-visible + .symbol-wrapper {
-      box-shadow: var(--theme-form-focus-box-shadow);
+      box-shadow: var(--form-focus-box-shadow);
     }
 
     input:checked + .symbol-wrapper .symbol {

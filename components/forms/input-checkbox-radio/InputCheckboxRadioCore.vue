@@ -153,7 +153,7 @@ const isChecked = computed(() => {
   transition: all 0.2s ease-in-out;
 
   &:not(.button):has(.input-checkbox-radio-core:focus-visible) {
-    --_box-shadow: var(--theme-form-focus-box-shadow);
+    --_box-shadow: var(--form-focus-box-shadow);
   }
 
   /* Sizes */
@@ -197,7 +197,7 @@ const isChecked = computed(() => {
 
     &:not(.is-button) {
       &:focus-visible {
-        --_box-shadow: var(--theme-form-focus-box-shadow);
+        --_box-shadow: var(--form-focus-box-shadow);
       }
     }
   }

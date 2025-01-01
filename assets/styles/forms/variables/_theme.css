@@ -7,5 +7,5 @@
   --theme-error-surface: var(--red-12);
   --theme-error-text: var(--red-0);
 
-  --theme-form-button-font-size-normal: 1.6rem;
+  --theme-form-button-font-size-normal: var(--form-element-font-size);
 }

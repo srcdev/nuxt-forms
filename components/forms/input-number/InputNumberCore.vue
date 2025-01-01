@@ -163,7 +163,7 @@ onMounted(() => {
     &:focus-visible {
       border: var(--_border-width) solid var(--theme-form-input-border);
       outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 50%);
-      box-shadow: var(--theme-form-focus-box-shadow);
+      box-shadow: var(--form-focus-box-shadow);
     }
 
     &::placeholder,

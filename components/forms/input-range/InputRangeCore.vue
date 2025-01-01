@@ -203,7 +203,7 @@ const changeBackgroundColor = () => {
       } */
 
       &:focus-visible {
-        box-shadow: var(--theme-form-focus-box-shadow);
+        box-shadow: var(--form-focus-box-shadow);
       }
     }
 

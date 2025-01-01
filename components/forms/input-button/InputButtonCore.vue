@@ -121,7 +121,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   border-radius: var(--form-input-border-radius);
   font-family: var(--font-family);
 
-  padding-inline: var(--form-padding-inline);
+  padding-inline: var(--form-button-padding-inline);
   padding-block-start: var(--form-element-padding-block-start);
   padding-block-end: var(--form-element-padding-block-end);
 
@@ -151,7 +151,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
     --theme-btn-border: var(--theme-btn-border-focus);
     --theme-btn-text: var(--theme-btn-text-focus);
     --theme-btn-outline: var(--theme-btn-outline-focus);
-    box-shadow: var(--theme-form-focus-box-shadow);
+    box-shadow: var(--form-focus-box-shadow);
   }
 
   &[readonly] {
@@ -175,16 +175,6 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
     white-space: nowrap;
     font-size: var(--form-element-font-size);
     line-height: var(--form-element-line-height);
-
-    &.sr-only {
-      position: absolute;
-      clip: rect(1px, 0.1rem, 0.1rem, 0.1rem);
-      clip-path: inset(50%);
-      height: 0.1rem;
-      width: 0.1rem;
-      overflow: hidden;
-      white-space: nowrap;
-    }
   }
 
   .btn-icon {
