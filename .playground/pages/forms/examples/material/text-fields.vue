@@ -54,6 +54,34 @@
 
                     <FormField width="wide" :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress)" :has-gutter="false">
                       <template #default>
+                        <FormField v-if="tagsData !== null" width="wide" :has-gutter="false">
+                          <template #default>
+                            <MultipleCheckboxes
+                              id="tags"
+                              name="tags"
+                              legend="Choose tags (as checkboxes)"
+                              :required="true"
+                              label="Check between 3 and 8 tags"
+                              placeholder="eg. Type something here"
+                              :isButton="true"
+                              :errorMessage="formErrors?.tags?._errors[0] ?? ''"
+                              :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.tags)"
+                              v-model="state.tags"
+                              v-model:fieldData="tagsData"
+                              optionsLayout="inline"
+                              :theme
+                              :size
+                            >
+                              <template #description>
+                                <p class="label-description">This is description: optionsLayout = 'inline'</p>
+                              </template>
+                              <template #itemIcon>
+                                <Icon name="material-symbols:bookmark-add-outline" class="icon" />
+                              </template>
+                            </MultipleCheckboxes>
+                          </template>
+                        </FormField>
+
                         <InputTextWithLabel
                           v-model="state.emailAddress"
                           type="email"
@@ -242,34 +270,6 @@
                             <Icon name="gridicons:plus-small" class="icon" />
                           </template>
                         </InputNumberDefault>
-                      </template>
-                    </FormField>
-
-                    <FormField v-if="tagsData !== null" width="wide" :has-gutter="false">
-                      <template #default>
-                        <MultipleCheckboxes
-                          id="tags"
-                          name="tags"
-                          legend="Choose tags (as checkboxes)"
-                          :required="true"
-                          label="Check between 3 and 8 tags"
-                          placeholder="eg. Type something here"
-                          :isButton="true"
-                          :errorMessage="formErrors?.tags?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.tags)"
-                          v-model="state.tags"
-                          v-model:fieldData="tagsData"
-                          optionsLayout="inline"
-                          :theme
-                          :size
-                        >
-                          <template #description>
-                            <p class="label-description">This is description: optionsLayout = 'inline'</p>
-                          </template>
-                          <template #itemIcon>
-                            <Icon name="material-symbols:bookmark-add-outline" class="icon" />
-                          </template>
-                        </MultipleCheckboxes>
                       </template>
                     </FormField>
 

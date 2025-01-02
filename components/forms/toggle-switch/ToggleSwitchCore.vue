@@ -1,5 +1,5 @@
 <template>
-  <div class="toggle-switch-core" :class="(elementClasses, size)" :data-form-theme="formTheme">
+  <div class="toggle-switch-core" :class="elementClasses" :data-size="size" :data-form-theme="formTheme">
     <label class="toggle-switch-input" :class="[{ round }]" :for="inputId">
       <input type="checkbox" v-model="modelValue" :true-value :false-value :id="inputId" :aria-describedby="`${id}-description`" :name :required />
       <div class="symbol-wrapper" :class="[{ round }]">
@@ -98,6 +98,8 @@ const inputId = computed(() => `toggle-sitch-${id}`);
   .toggle-switch-input {
     position: relative;
     display: inline-block;
+    height: calc(var(--form-toggle-symbol-size) + calc(var(--form-element-border-width) * 2) + calc(var(--form-element-outline-width) * 2));
+    width: calc(var(--form-toggle-symbol-size) * 2 - calc(var(--form-element-border-width) * 2) + calc(var(--form-element-outline-width) * 2) + var(--form-toggle-switch-width-adjustment));
 
     input {
       opacity: 0;
@@ -139,43 +141,23 @@ const inputId = computed(() => `toggle-sitch-${id}`);
 * ToggleSwitch configurable
 **/
 .toggle-switch-core {
-  /* Sizes */
-  &.x-small {
-    --_symbol-size: 2rem;
-  }
-  &.small {
-    --_symbol-size: 2.4rem;
-  }
-  &.normal {
-    --_symbol-size: 3.4rem;
-  }
-  &.medium {
-    --_symbol-size: 4rem;
-  }
-  &.large {
-    --_symbol-size: 4.4rem;
-  }
-
   .toggle-switch-input {
-    border: var(--theme-form-toggle-border);
-    outline: var(--theme-form-toggle-outline);
-    width: calc(var(--_symbol-size) * 2 - calc(var(--theme-form-toggle-border-width) * 4));
-    height: calc(var(--_symbol-size) + calc(var(--theme-form-toggle-border-width) * 4));
-
     &.round {
-      border-radius: calc(var(--_symbol-size) + calc(var(--theme-form-toggle-border-width) * 2));
+      border-radius: calc(var(--form-toggle-symbol-size) + calc(var(--form-element-border-width) * 2));
     }
 
     .symbol-wrapper {
+      border: var(--theme-form-toggle-border);
       background-color: var(--theme-form-toggle-bg-off);
+      outline: var(--theme-form-toggle-outline);
       transition: 0.4s;
 
       &.round {
-        border-radius: var(--_symbol-size);
+        border-radius: var(--form-toggle-symbol-size);
       }
       .symbol {
-        height: calc(var(--_symbol-size) - 0.6rem);
-        width: calc(var(--_symbol-size) - 0.6rem);
+        height: calc(var(--form-toggle-symbol-size) - 0.6rem);
+        width: calc(var(--form-toggle-symbol-size) - 0.6rem);
         left: 0.4rem;
         bottom: 0.4rem;
         background-color: var(--theme-form-toggle-symbol-off);
@@ -201,12 +183,14 @@ const inputId = computed(() => `toggle-sitch-${id}`);
     }
 
     input:focus-visible + .symbol-wrapper {
-      box-shadow: var(--form-focus-box-shadow);
+      box-shadow: var(--box-shadow-on);
+      outline: var(--form-element-outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 90%);
     }
 
     input:checked + .symbol-wrapper .symbol {
+      --_on-position: calc(var(--form-toggle-symbol-size) * 0.8);
       background-color: var(--theme-form-toggle-symbol-on);
-      transform: translateX(26px);
+      transform: translateX(var(--_on-position));
 
       .symbol-icon {
         &.icon-on {

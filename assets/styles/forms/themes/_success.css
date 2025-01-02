@@ -32,10 +32,10 @@
     **/
     --theme-form-toggle-bg-off: light-dark(var(--gray-1), var(--gray-4));
     --theme-form-toggle-bg-on: light-dark(var(--gray-1), var(--gray-6));
-    --theme-form-toggle-border-width: 0.1rem;
-    --theme-form-toggle-border: var(--theme-form-toggle-border-width) solid light-dark(var(--green-12), var(--green-1));
-    --theme-form-toggle-border-outline: 0.1rem;
-    --theme-form-toggle-outline: var(--theme-form-toggle-border-outline) solid light-dark(var(--green-12), var(--green-12));
+
+    --theme-form-toggle-border: var(--form-element-border-width) solid light-dark(var(--green-12), var(--green-1));
+
+    --theme-form-toggle-outline: var(--form-element-outline-width) solid light-dark(var(--green-12), var(--green-12));
     --theme-form-toggle-symbol-off: var(--green-4);
     --theme-form-toggle-symbol-on: var(--green-12);
     --theme-form-toggle-icon-stroke-colour-off: var(--gray-1);
