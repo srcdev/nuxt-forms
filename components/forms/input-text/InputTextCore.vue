@@ -163,7 +163,7 @@ onMounted(() => {
   outline: var(--form-element-outline-width) solid var(--theme-form-input-outline);
   box-shadow: var(--_focus-box-shadow);
 
-  &:not(:has(.btn)) {
+  &:not(:has(.input-button-core)) {
     .slot {
       display: inline-block;
       padding-inline: 0.8rem;
@@ -179,16 +179,17 @@ onMounted(() => {
     }
   }
 
-  &:has(.btn) {
-    .btn {
+  /* &:has(.input-button-core) {
+    .input-button-core {
       margin-inline: 0.6rem;
     }
-  }
+  } */
 
   &.has-left-slot {
     .left-slot {
       display: flex;
       align-items: center;
+      margin-inline: 0.6rem;
     }
   }
 
@@ -196,6 +197,7 @@ onMounted(() => {
     .right-slot {
       display: flex;
       align-items: center;
+      margin-inline: 0.6rem;
     }
   }
 

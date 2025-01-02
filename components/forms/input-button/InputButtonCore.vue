@@ -127,6 +127,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
 
   transition: all 0.2s ease-in-out;
 
+  box-shadow: var(--box-shadow-off);
   background-color: var(--theme-btn-bg);
   border: var(--form-element-border-width) solid var(--theme-btn-border);
   color: var(--theme-btn-text);
@@ -151,7 +152,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
     --theme-btn-border: var(--theme-btn-border-focus);
     --theme-btn-text: var(--theme-btn-text-focus);
     --theme-btn-outline: var(--theme-btn-outline-focus);
-    box-shadow: var(--form-focus-box-shadow);
+    box-shadow: var(--box-shadow-on);
   }
 
   &[readonly] {
