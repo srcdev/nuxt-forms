@@ -27,7 +27,8 @@
               </li>
             </ul>
 
-            <p>Size switcher</p>
+            <p>Size switcher - current size &raquo; {{ size }}</p>
+            <p><span class="body-normal-semibold">Note:</span> Only small and normal optimized for general usage</p>
             <ul class="flex-group">
               <li>
                 <InputButtonSubmit type="button" @click.stop.prevent="swapSize('x-small')" :is-pending="false" button-text="X-Small" theme="primary" size="x-small" />

@@ -1,14 +1,14 @@
 <template>
-  <div class="input-checkbox-radio-button-button" :data-form-theme="formTheme" :class="[size, elementClasses, optionsLayout, { error: fieldHasError }]">
+  <div class="input-checkbox-radio-button-button" :data-form-theme="formTheme" :data-size="size" :class="[size, elementClasses, optionsLayout, { error: fieldHasError }]">
     <InputCheckboxRadioCore :isButton="true" :type :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme :ariaDescribedby>
       <template #checkedIcon>
         <slot name="checkedIcon"></slot>
       </template>
     </InputCheckboxRadioCore>
-    <label v-if="hasLabelContent" class="input-checkbox-radio-button-label body-normal" :for="id">
+    <label v-if="hasLabelContent" class="input-checkbox-radio-button-label" :for="id">
       <slot name="labelContent"></slot>
     </label>
-    <label v-else class="input-checkbox-radio-button-label body-normal-semibold" :for="id">{{ label }}</label>
+    <label v-else class="input-checkbox-radio-button-label" :for="id">{{ label }}</label>
     <div class="item-icon">
       <slot name="itemIcon">
         <Icon name="material-symbols:add-2" class="icon" />
@@ -106,7 +106,7 @@ const flexDirection = ref(direction);
 
 <style lang="css">
 .input-checkbox-radio-button-button {
-  --_checkbox-size: initial;
+  /* --_checkbox-size: initial; */
   --_background-color: var(--theme-checkbox-radio-button-bg-default);
   --_outline-width: var(--form-element-outline-width);
   --_border-color: var(--theme-checkbox-radio-button-border-default);
@@ -115,7 +115,7 @@ const flexDirection = ref(direction);
   --_box-shadow: var(--theme-checkbox-radio-button-shadow);
   --_white-space: wrap;
   --_gap: 0.4rem;
-  --_border-radius: 2.2rem;
+  /* --_border-radius: 2.2rem; */
   --_padding-block: 0.4rem;
   --_padding-inline: 1.2rem;
 
@@ -126,7 +126,7 @@ const flexDirection = ref(direction);
   gap: var(--_gap);
 
   background-color: var(--_background-color);
-  border-radius: var(--_border-radius);
+  border-radius: calc(var(--form-element-line-height) / 1);
   border: var(--theme-checkbox-radio-button-border-width) solid var(--_border-color);
   outline: var(--theme-checkbox-radio-button-outline-width) solid var(--_outline-color);
   box-shadow: 0.1rem 0.1rem 0.8rem 0.1rem var(--_box-shadow);
@@ -149,37 +149,37 @@ const flexDirection = ref(direction);
 
   /* Sizes */
   &.x-small {
-    --_checkbox-size: 2rem;
+    /* --_checkbox-size: 2rem; */
     --_gap: 1rem;
-    --_border-radius: 2rem;
+    /* --_border-radius: 2rem; */
     --_padding-block: 0.2rem;
     --_padding-inline: 1.6rem;
   }
   &.small {
-    --_checkbox-size: 2.2rem;
+    /* --_checkbox-size: 2.2rem; */
     --_gap: 1.2rem;
-    --_border-radius: 1.8rem;
+    /* --_border-radius: 1.8rem; */
     --_padding-block: 0rem;
     --_padding-inline: 1.2rem;
   }
   &.normal {
-    --_checkbox-size: 3.4rem;
+    /* --_checkbox-size: 3.4rem; */
     --_gap: 1rem;
-    --_border-radius: 2rem;
+    /* --_border-radius: 2rem; */
     --_padding-block: 0.4rem;
     --_padding-inline: 1.2rem;
   }
   &.medium {
-    --_checkbox-size: 3.4rem;
+    /* --_checkbox-size: 3.4rem; */
     --_gap: 1rem;
-    --_border-radius: 2rem;
+    /* --_border-radius: 2rem; */
     --_padding-block: 0.4rem;
     --_padding-inline: 1.2rem;
   }
   &.large {
-    --_checkbox-size: 3.4rem;
+    /* --_checkbox-size: 3.4rem; */
     --_gap: 1rem;
-    --_border-radius: 2rem;
+    /* --_border-radius: 2rem; */
     --_padding-block: 0.4rem;
     --_padding-inline: 1.2rem;
   }
@@ -189,8 +189,9 @@ const flexDirection = ref(direction);
   display: flex;
   flex-grow: 1;
   color: var(--_label-color);
+  font-size: var(--form-element-font-size);
   width: 100%;
-  height: 100%;
+  height: var(--form-element-line-height);
   align-items: center;
   justify-content: center;
   margin-block: 0.8rem;
@@ -207,7 +208,7 @@ const flexDirection = ref(direction);
   align-items: center;
   justify-content: center;
   color: var(--_border-color);
-  height: var(--_checkbox-size);
-  width: var(--_checkbox-size);
+  height: var(--form-input-checkbox-radio-button-size);
+  width: var(--form-input-checkbox-radio-button-size);
 }
 </style>

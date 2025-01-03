@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-radio-wrapper" :data-form-theme="formTheme" :class="[type, size, elementClasses, { error: fieldHasError }, { button: isButton }]">
+  <div class="input-checkbox-radio-wrapper" :data-form-theme="formTheme" :data-theme="size" :class="[type, size, elementClasses, { error: fieldHasError }, { button: isButton }]">
     <slot name="checkedIcon" v-if="isChecked">
       <Icon :name="defaultIcon" class="input-checked-icon" />
     </slot>
@@ -112,14 +112,16 @@ const isChecked = computed(() => {
 
 <style lang="css">
 .input-checkbox-radio-wrapper {
-  --_checkbox-size: initial;
   --_outline-width: 0.1rem;
   --_border-width: 0.1rem;
   --_border-radius: 50%;
   --_background-color: var(--theme-form-checkbox-bg);
   --_box-shadow: none;
 
+  --_icon-size: var(--form-input-checkbox-radio-button-size);
+
   &:not(.button) {
+    --_icon-size: var(--form-toggle-symbol-size);
     --_outline-width: var(--form-element-outline-width);
     --_border-width: var(--form-element-border-width);
     &.checkbox {
@@ -147,8 +149,8 @@ const isChecked = computed(() => {
   outline: 0.1rem solid var(--_outline-color);
   box-shadow: var(--_box-shadow);
 
-  height: var(--_checkbox-size);
-  width: var(--_checkbox-size);
+  height: var(--_icon-size);
+  width: var(--_icon-size);
 
   transition: all 0.2s ease-in-out;
 
@@ -156,28 +158,11 @@ const isChecked = computed(() => {
     --_box-shadow: var(--form-focus-box-shadow);
   }
 
-  /* Sizes */
-  &.x-small {
-    --_checkbox-size: 2rem;
-  }
-  &.small {
-    --_checkbox-size: 2.4rem;
-  }
-  &.normal {
-    --_checkbox-size: 3.4rem;
-  }
-  &.medium {
-    --_checkbox-size: 4rem;
-  }
-  &.large {
-    --_checkbox-size: 4.4rem;
-  }
-
   .input-checked-icon {
     grid-area: element-stack;
     color: var(--theme-form-checkbox-symbol);
-    height: var(--_checkbox-size);
-    width: var(--_checkbox-size);
+    height: var(--_icon-size);
+    width: var(--_icon-size);
     box-shadow: var(--_box-shadow);
   }
 
@@ -188,8 +173,8 @@ const isChecked = computed(() => {
     overflow: hidden;
     opacity: 0;
 
-    height: var(--_checkbox-size);
-    width: var(--_checkbox-size);
+    height: var(--_icon-size);
+    width: var(--_icon-size);
 
     &:hover {
       cursor: pointer;

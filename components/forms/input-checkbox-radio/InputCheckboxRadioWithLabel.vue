@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-radio-with-label" :class="[elementClasses, optionsLayout, { error: fieldHasError }]">
+  <div class="input-checkbox-radio-with-label" :data-size="size" :class="[elementClasses, optionsLayout, { error: fieldHasError }]">
     <InputCheckboxRadioCore :type :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme :ariaDescribedby>
       <template #checkedIcon>
         <slot name="checkedIcon"></slot>
