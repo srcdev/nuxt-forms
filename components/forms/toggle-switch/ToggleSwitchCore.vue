@@ -178,6 +178,12 @@ const inputId = computed(() => `toggle-sitch-${id}`);
             color: var(--theme-form-toggle-icon-stroke-colour-off);
             opacity: 1;
           }
+
+          .icon {
+            --_icon-size: var(--form-icon-size);
+            height: var(--_icon-size);
+            width: var(--_icon-size);
+          }
         }
       }
     }
