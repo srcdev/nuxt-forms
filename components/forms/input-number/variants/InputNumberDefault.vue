@@ -1,5 +1,5 @@
 <template>
-  <div class="input-number-with-label" :data-form-theme="formTheme" :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }]">
+  <div class="input-number-with-label" :data-form-theme="formTheme" :data-size="size" :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }]">
     <label class="input-number-label body-normal-bold" :for="id">{{ label }}</label>
     <template v-if="hasDescription">
       <slot name="description"></slot>
@@ -13,8 +13,8 @@
           :readonly="Number(modelValue) <= min"
           :is-pending="false"
           buttonText="Step down"
-          :theme
-          size="x-small"
+          theme="input-action"
+          :size
         >
           <template #iconOnly>
             <slot name="left"></slot>
@@ -28,8 +28,8 @@
           :readonly="Number(modelValue) >= max"
           :is-pending="false"
           buttonText="Step up"
-          :theme
-          size="x-small"
+          theme="input-action"
+          :size
         >
           <template #iconOnly>
             <slot name="right"></slot>

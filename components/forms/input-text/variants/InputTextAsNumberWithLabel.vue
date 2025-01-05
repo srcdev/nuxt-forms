@@ -23,6 +23,7 @@
       :theme
       inputmode="numeric"
       :ariaDescribedby
+      :size
     >
       <template v-if="hasLeftSlot" #left>
         <InputButtonCore
@@ -31,8 +32,8 @@
           :readonly="Number(modelValue) <= min"
           :is-pending="false"
           buttonText="Step down"
-          :theme
-          size="x-small"
+          theme="input-action"
+          :size
         >
           <template #iconOnly>
             <slot name="left"></slot>
@@ -46,8 +47,8 @@
           :readonly="Number(modelValue) >= max"
           :is-pending="false"
           buttonText="Step up"
-          :theme
-          size="x-small"
+          theme="input-action"
+          :size
         >
           <template #iconOnly>
             <slot name="right"></slot>
@@ -61,7 +62,7 @@
 
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
-const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, step, min, max } = defineProps({
+const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, step, min, max, size } = defineProps({
   maxlength: {
     type: Number,
     default: 255,
@@ -117,6 +118,13 @@ const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, re
     type: Number,
     default: 1,
   },
+  size: {
+    type: String as PropType<string>,
+    default: 'normal',
+    validator(value: string) {
+      return propValidators.size.includes(value);
+    },
+  },
 });
 
 const slots = useSlots();
@@ -156,6 +164,16 @@ onMounted(() => {
 .input-text-as-number {
   .input-text-wrapper {
     width: fit-content;
+
+    &:has(.input-text-as-number) {
+      .left-slot {
+        margin-inline: 0;
+      }
+      .right-slot {
+        margin-inline: 0;
+      }
+    }
+
     .input-text-core.input-text-as-number {
       flex-grow: initial;
       text-align: center;

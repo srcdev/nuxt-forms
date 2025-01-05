@@ -1,5 +1,5 @@
 <template>
-  <div class="input-number-wrapper" :data-form-theme="formTheme" :class="elementClasses">
+  <div class="input-number-wrapper" :data-form-theme="formTheme" :data-size="size" :class="elementClasses">
     <div v-if="hasLeftContent" class="slot left">
       <slot name="left"></slot>
     </div>
@@ -13,7 +13,7 @@
         :min
         :max
         :step
-        :class="['input-number-core', `input-number--${theme}`, `input-number--${size}`, `input-number--${weight}`, styleClassPassthrough]"
+        :class="['input-number-core', `input-number--${theme}`, `input-number--${size}`, `input-number--${weight}`]"
         v-model="modelValue"
         ref="inputField"
         inputmode="numeric"
@@ -109,8 +109,7 @@ onMounted(() => {
 
 <style lang="css">
 .input-number-wrapper {
-  --_gutter: 1.2rem;
-  --_border-width: var(--form-element-border-width);
+  --_focus-box-shadow: var(--box-shadow-off);
   --_min-width: v-bind(minLength);
 
   display: flex;
@@ -118,9 +117,14 @@ onMounted(() => {
 
   width: fit-content;
 
+  background-color: var(--theme-form-input-bg);
+  border-radius: var(--form-element-border-width);
+  border: var(--form-element-border-width) solid var(--theme-form-input-border);
+  outline: var(--form-element-outline-width) solid var(--theme-form-input-outline);
+  box-shadow: var(--_focus-box-shadow);
+
   .slot {
     display: inline-block;
-    padding-inline: 0.8rem;
 
     .icon {
       font-weight: 900;
@@ -148,22 +152,19 @@ onMounted(() => {
     box-shadow: none;
 
     background-color: var(--theme-form-input-bg);
-    border-radius: var(--form-element-border-width);
-    border: var(--_border-width) solid var(--theme-form-input-border);
-    outline: var(--_outline-width) solid var(--theme-form-input-outline);
-
     color: var(--theme-form-input-text);
     font-family: var(--font-family);
-    font-size: var(--theme-form-button-font-size-normal);
-    line-height: var(--line-height);
-    padding: 0.4rem 1.6rem;
+    font-size: var(--form-element-font-size);
+    line-height: var(--form-element-line-height);
+
+    padding-inline: var(--form-text-padding-inline);
+    padding-block-start: var(--form-element-padding-block-start);
+    padding-block-end: var(--form-element-padding-block-end);
     text-align: center;
     min-width: var(--_min-width);
 
     &:focus-visible {
-      border: var(--_border-width) solid var(--theme-form-input-border);
-      outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 50%);
-      box-shadow: var(--form-focus-box-shadow);
+      --_focus-box-shadow: var(--box-shadow-on);
     }
 
     &::placeholder,
