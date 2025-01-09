@@ -28,6 +28,7 @@ export const propValidators = {
   checkboxStyle: ['check', 'cross'],
   radioAppearance: [null, 'with-decorator'],
   optionsLayout: ['block', 'inline', 'equal-widths'],
+  labelWeight: ['normal', 'semi-bold', 'bold'],
   inputTypesButton: ['button', 'cancel', 'reset', 'submit'],
   inputTypesText: ['text', 'email', 'password', 'number', 'tel', 'url'],
   inputMode: ['text', 'email', 'tel', 'url', 'search', 'numeric', 'none', 'decimal'],

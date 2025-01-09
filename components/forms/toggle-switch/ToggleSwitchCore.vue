@@ -1,6 +1,6 @@
 <template>
   <div class="toggle-switch-core" :class="elementClasses" :data-size="size" :data-form-theme="formTheme">
-    <label class="toggle-switch-input" :class="[{ round }]" :for="inputId">
+    <div @click="toggleSwitchValue" class="toggle-switch-input" :class="[{ round }]" :for="inputId">
       <input type="checkbox" v-model="modelValue" :true-value :false-value :id="inputId" :aria-describedby="`${id}-description`" :name :required />
       <div class="symbol-wrapper" :class="[{ round }]">
         <div class="symbol" :class="[{ round }]">
@@ -13,7 +13,7 @@
           </div>
         </div>
       </div>
-    </label>
+    </div>
   </div>
 </template>
 
@@ -85,6 +85,10 @@ const modelValue = defineModel();
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 const inputId = computed(() => `toggle-sitch-${id}`);
+
+const toggleSwitchValue = () => {
+  modelValue.value = modelValue.value === trueValue ? falseValue : trueValue;
+};
 </script>
 
 <style lang="css">

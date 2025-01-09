@@ -1,10 +1,7 @@
 <template>
-  <div class="toggle-switch-with-label" :class="(elementClasses, size)" :data-form-theme="formTheme">
-    <label class="toggle-switch-label input-text-label body-normal-bold" :for="`toggle-sitch-${id}`">{{ label }}</label>
-    <div v-if="hasDescriptionSlot" :id="`${id}-description`">
-      <slot name="description"></slot>
-    </div>
-    <ToggleSwitchCore v-model="modelValue" :id :name :required :field-has-error :true-value :false-value :theme :round :size :ariaDescribedby>
+  <div class="toggle-switch-with-label-inline" :class="(elementClasses, size)" :data-form-theme="theme">
+    <label class="toggle-switch-label input-text-label" :class="labelWeightClass" :for="`toggle-sitch-${id}`">{{ label }}</label>
+    <ToggleSwitchCore v-model="modelValue" :id :name :true-value :false-value :theme :round :size>
       <template v-if="hasIconOnSlot" #iconOn>
         <slot name="iconOn"></slot>
       </template>
@@ -13,14 +10,13 @@
         <slot name="iconOff"></slot>
       </template>
     </ToggleSwitchCore>
-    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="errorId" :isDetached="true" />
   </div>
 </template>
 
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
 
-const { id, name, label, required, errorMessage, fieldHasError, trueValue, falseValue, styleClassPassthrough, theme, round, size } = defineProps({
+const { id, name, label, labelWeight, trueValue, falseValue, styleClassPassthrough, theme, round, size } = defineProps({
   id: {
     type: String,
     required: true,
@@ -33,18 +29,12 @@ const { id, name, label, required, errorMessage, fieldHasError, trueValue, false
     type: String,
     required: true,
   },
-  required: {
-    type: Boolean,
-    default: false,
-  },
-  errorMessage: {
-    type: [Object, String],
-    default: '',
-    required: false,
-  },
-  fieldHasError: {
-    type: Boolean,
-    default: false,
+  labelWeight: {
+    type: String as PropType<string>,
+    default: 'semi-bold',
+    validator(value: string) {
+      return propValidators.labelWeight.includes(value);
+    },
   },
   trueValue: {
     type: [String, Number, Boolean],
@@ -79,18 +69,20 @@ const { id, name, label, required, errorMessage, fieldHasError, trueValue, false
 });
 
 const slots = useSlots();
-const hasDescriptionSlot = computed(() => slots.description !== undefined);
 const hasIconOnSlot = computed(() => slots.iconOn !== undefined);
 const hasIconOffSlot = computed(() => slots.iconOff !== undefined);
 
-const formTheme = computed(() => {
-  return fieldHasError ? 'error' : theme;
-});
-
-const errorId = `${id}-error-message`;
-const ariaDescribedby = computed(() => {
-  const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : null;
-  return fieldHasError ? errorId : ariaDescribedbyId;
+const labelWeightClass = computed(() => {
+  switch (labelWeight) {
+    case 'bold':
+      return 'body-normal-bold';
+    case 'semi-bold':
+      return 'body-normal-semibold';
+    case 'normal':
+      return 'body-normal';
+    default:
+      return 'body-normal-semibold';
+  }
 });
 
 const modelValue = defineModel();
@@ -98,8 +90,11 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleC
 </script>
 
 <style lang="css">
-.toggle-switch-with-label {
+.toggle-switch-with-label-inline {
   --_transition-duration: 0.4s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 
   .toggle-switch-label {
     display: block;

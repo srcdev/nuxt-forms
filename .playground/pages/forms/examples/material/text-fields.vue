@@ -194,6 +194,19 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
+                        <ToggleSwitchWithLabelInline v-model="state.anotherToggle" id="anotherToggle" name="anotherToggle" label="Toggle Dark mode (inline)" :theme size="small">
+                          <template #iconOn>
+                            <Icon name="radix-icons:moon" class="icon" />
+                          </template>
+                          <template #iconOff>
+                            <Icon name="radix-icons:sun" class="icon" />
+                          </template>
+                        </ToggleSwitchWithLabelInline>
+                      </template>
+                    </FormField>
+
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
                         <ToggleSwitchWithLabel
                           v-model="state.toggleBoolean"
                           :errorMessage="formErrors?.toggleBoolean?._errors[0] ?? ''"
@@ -676,6 +689,7 @@ const state = reactive({
   otherTitle: '',
   darkMode: 'light',
   toggleBoolean: false,
+  anotherToggle: false,
   agreed: false,
   agree: false,
   terms: false,
