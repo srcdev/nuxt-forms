@@ -1,12 +1,12 @@
 <template>
-  <ToggleSwitchCore v-model="displayMode" class="dark-mode-switcher" :class="elementClasses" true-value="dark" false-value="light" name="header-dark-mode-switcher" id="header-dark-mode-switcher">
+  <ToggleSwitchWithLabelInline v-model="displayMode" id="dark-mode-switcher" name="dark-mode-switcher" label="Toggle Dark mode (inline)" size="small">
     <template #iconOn>
       <Icon name="radix-icons:moon" class="icon" />
     </template>
     <template #iconOff>
       <Icon name="radix-icons:sun" class="icon" />
     </template>
-  </ToggleSwitchCore>
+  </ToggleSwitchWithLabelInline>
 </template>
 
 <script setup lang="ts">
