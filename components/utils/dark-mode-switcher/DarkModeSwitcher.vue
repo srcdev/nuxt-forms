@@ -1,5 +1,5 @@
 <template>
-  <ToggleSwitchWithLabelInline v-model="displayMode" id="dark-mode-switcher" name="dark-mode-switcher" label="Toggle Dark mode (inline)" size="small">
+  <ToggleSwitchWithLabelInline v-model="displayMode" :id :name :label labelWeight="normal" :size trueValue="dark" falseValue="light">
     <template #iconOn>
       <Icon name="radix-icons:moon" class="icon" />
     </template>
@@ -10,7 +10,35 @@
 </template>
 
 <script setup lang="ts">
+import propValidators from '../../forms/c12/prop-validators';
+
 const { styleClassPassthrough } = defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  label: {
+    type: String,
+    required: true,
+  },
+  labelWeight: {
+    type: String as PropType<string>,
+    default: 'semi-bold',
+    validator(value: string) {
+      return propValidators.labelWeight.includes(value);
+    },
+  },
+  size: {
+    type: String as PropType<string>,
+    default: 'small',
+    validator(value: string) {
+      return propValidators.size.includes(value);
+    },
+  },
   styleClassPassthrough: {
     type: Array as PropType<string[]>,
     default: () => [],
