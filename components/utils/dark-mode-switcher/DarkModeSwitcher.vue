@@ -1,5 +1,5 @@
 <template>
-  <ToggleSwitchWithLabelInline v-model="displayMode" :id :name :label labelWeight="normal" :size trueValue="dark" falseValue="light">
+  <ToggleSwitchWithLabelInline v-model="displayMode" :id :name :label labelWeight="normal" :size trueValue="dark" falseValue="light" :style-class-passthrough>
     <template #iconOn>
       <Icon name="radix-icons:moon" class="icon" />
     </template>

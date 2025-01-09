@@ -98,6 +98,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleC
 
   .toggle-switch-label {
     display: block;
+    white-space: nowrap;
   }
 }
 </style>
