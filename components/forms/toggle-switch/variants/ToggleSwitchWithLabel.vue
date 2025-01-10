@@ -1,5 +1,5 @@
 <template>
-  <div class="toggle-switch-with-label" :class="(elementClasses, size)" :data-form-theme="formTheme">
+  <div class="toggle-switch-with-label" :class="[elementClasses]" :data-form-theme="formTheme">
     <label class="toggle-switch-label input-text-label body-normal-bold" :for="`toggle-sitch-${id}`">{{ label }}</label>
     <div v-if="hasDescriptionSlot" :id="`${id}-description`">
       <slot name="description"></slot>

@@ -46,6 +46,6 @@ const { styleClassPassthrough } = defineProps({
 });
 
 const displayMode = ref<'auto' | 'dark' | 'light'>('auto');
-const { elementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+
 useColourScheme(displayMode);
 </script>
