@@ -5,7 +5,7 @@
       <slot name="description"></slot>
     </template>
 
-    <InputNumberCore v-model="modelValue" :id :name :min :max :step :theme :required :size :weight :fieldHasError>
+    <InputNumberCore v-model="modelValue" :id :name :min :max :step :theme :required :size :weight :fieldHasError :styleClassPassthrough>
       <template v-if="hasLeftContent" #left>
         <InputButtonCore
           type="button"
@@ -129,6 +129,8 @@ const updateValue = (step: number, withinRangeLimit: boolean) => {
     modelValue.value = (Number(modelValue.value) + step) as number;
   }
 };
+
+updateElementClasses(['has-left-button', 'has-right-button']);
 </script>
 
 <style lang="css">

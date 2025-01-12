@@ -155,9 +155,7 @@ const updateValue = (step: number, withinRangeLimit: boolean) => {
   }
 };
 
-onMounted(() => {
-  updateElementClasses(['input-text-as-number']);
-});
+updateElementClasses(['input-text-as-number', 'has-left-button', 'has-right-button']);
 </script>
 
 <style lang="css">

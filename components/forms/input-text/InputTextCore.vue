@@ -145,7 +145,6 @@ const validateInput = () => {
 };
 
 onMounted(() => {
-  updateElementClasses(['deep-bristol', 'deep-london', 'deep-bath']);
   if (inputmode === 'numeric') validateInput();
 });
 </script>
@@ -240,8 +239,30 @@ onMounted(() => {
     /*
     &:focus-visible {
       --_focus-box-shadow: var(--box-shadow-on);
-    }
+   :has(:has( }
     */
+  }
+
+  &:has(.has-left-button),
+  &:has(.has-right-button) {
+    .slot {
+      .input-button-core {
+        border: initial;
+        border-radius: 0;
+        outline: initial;
+        box-shadow: unset;
+      }
+    }
+
+    .left-slot {
+      margin-inline-end: 0;
+      border-right: 2px solid var(--theme-btn-bg-hover);
+    }
+
+    .right-slot {
+      margin-inline-end: 0;
+      border-left: 2px solid var(--theme-btn-bg-hover);
+    }
   }
 }
 

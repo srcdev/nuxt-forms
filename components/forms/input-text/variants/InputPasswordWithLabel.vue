@@ -6,8 +6,8 @@
         @click.stop.prevent="toggleDisplayPassword"
         :is-pending="false"
         :buttonText
-        :theme
-        size="x-small"
+        theme="input-action"
+        :size
         @focusin="updateFocus(name, true)"
         @focusout="updateFocus(name, false)"
       >
@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
 
-const { type, maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme } = defineProps({
+const { type, maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, size } = defineProps({
   type: {
     type: String,
     default: 'password',
@@ -71,6 +71,13 @@ const { type, maxlength, id, name, placeholder, label, errorMessage, fieldHasErr
       return propValidators.theme.includes(value);
     },
   },
+  size: {
+    type: String as PropType<string>,
+    default: 'medium',
+    validator(value: string) {
+      return propValidators.size.includes(value);
+    },
+  },
 });
 
 const formTheme = computed(() => {
@@ -78,6 +85,8 @@ const formTheme = computed(() => {
 });
 
 const modelValue = defineModel();
+
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 const updateFocus = (name: string, isFocused: boolean) => {
   // console.log('updateFocus', name, isFocused);
@@ -94,6 +103,34 @@ const buttonText = computed(() => {
 const toggleDisplayPassword = () => {
   displayPassword.value = !displayPassword.value;
 };
+
+updateElementClasses(['has-right-button']);
 </script>
 
-<style lang="css"></style>
+<style lang="css">
+/* .input-text-with-label {
+  &.has-left-button,
+  &.has-right-button {
+    .input-text-wrapper {
+      .slot {
+        .input-button-core {
+          border: initial;
+          border-radius: 0;
+          outline: initial;
+          box-shadow: unset;
+        }
+      }
+
+      .left-slot {
+        margin-inline-end: 0;
+        border-right: 2px solid var(--theme-btn-bg-hover);
+      }
+
+      .right-slot {
+        margin-inline-end: 0;
+        border-left: 2px solid var(--theme-btn-bg-hover);
+      }
+    }
+  }
+} */
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="input-number-wrapper" :data-form-theme="formTheme" :data-size="size" :class="elementClasses">
+  <div class="input-number-wrapper" :data-form-theme="formTheme" :data-size="size">
     <div v-if="hasLeftContent" class="slot left">
       <slot name="left"></slot>
     </div>
@@ -13,7 +13,7 @@
         :min
         :max
         :step
-        :class="['input-number-core', `input-number--${theme}`, `input-number--${size}`, `input-number--${weight}`]"
+        :class="[elementClasses, 'input-number-core', `input-number--${theme}`, `input-number--${size}`, `input-number--${weight}`]"
         v-model="modelValue"
         ref="inputField"
         inputmode="numeric"
@@ -102,9 +102,7 @@ const modelValue = defineModel<number | readonly number[]>();
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 const minLength = computed(() => `${max.toString().length + 3}ch`);
 
-onMounted(() => {
-  updateElementClasses(['number-1']);
-});
+// updateElementClasses(['number-1']);
 </script>
 
 <style lang="css">
@@ -173,6 +171,28 @@ onMounted(() => {
       font-size: var(--font-size);
       font-style: italic;
       font-weight: 400;
+    }
+  }
+
+  &:has(.has-left-button),
+  &:has(.has-right-button) {
+    .slot {
+      .input-button-core {
+        border: initial;
+        border-radius: 0;
+        outline: initial;
+        box-shadow: unset;
+      }
+    }
+
+    .left-slot {
+      margin-inline-end: 0;
+      border-right: 2px solid var(--theme-btn-bg-hover);
+    }
+
+    .right-slot {
+      margin-inline-end: 0;
+      border-left: 2px solid var(--theme-btn-bg-hover);
     }
   }
 }
