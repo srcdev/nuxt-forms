@@ -2,7 +2,7 @@
   <div class="input-textarea-with-label" :data-form-theme="formTheme" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
     <label :for="id" class="input-textarea-label body-normal-semibold">{{ label }}</label>
 
-    <InputTextareaCore v-model="modelValue" v-model:isDirty="isDirty" v-model:isActive="isActive" :maxlength :id :name :placeholder :label :fieldHasError :required :styleClassPassthrough :theme>
+    <InputTextareaCore v-model="modelValue" v-model:isDirty="isDirty" v-model:isActive="isActive" :maxlength :id :name :placeholder :label :fieldHasError :required :styleClassPassthrough :theme :size>
       <template v-if="hasLeftSlot" #left>
         <slot name="left"></slot>
       </template>
@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
-const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme } = defineProps({
+const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, size } = defineProps({
   maxlength: {
     type: Number,
     default: 255,
@@ -58,6 +58,13 @@ const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, re
     default: 'primary',
     validator(value: string) {
       return propValidators.theme.includes(value);
+    },
+  },
+  size: {
+    type: String as PropType<string>,
+    default: 'normal',
+    validator(value: string) {
+      return propValidators.size.includes(value);
     },
   },
 });

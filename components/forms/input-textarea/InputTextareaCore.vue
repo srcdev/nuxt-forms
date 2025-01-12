@@ -2,6 +2,7 @@
   <div
     class="input-textarea-wrapper"
     :data-form-theme="formTheme"
+    :data-size="size"
     :class="[{ dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]"
   >
     <span v-if="hasLeftSlot" class="slot left-slot">
@@ -14,7 +15,7 @@
       :id
       :name
       :required
-      :class="['input-text-core', 'text-normal', elementClasses, { dirty: isDirty }, { active: isActive }]"
+      :class="['input-textarea-core', elementClasses, { dirty: isDirty }, { active: isActive }]"
       v-model="modelValue"
       ref="inputField"
       :aria-invalid="fieldHasError"
@@ -31,7 +32,7 @@
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
-const { maxlength, id, name, placeholder, fieldHasError, required, styleClassPassthrough, theme } = defineProps({
+const { maxlength, id, name, placeholder, fieldHasError, required, styleClassPassthrough, theme, size } = defineProps({
   maxlength: {
     type: Number,
     default: 255,
@@ -65,6 +66,13 @@ const { maxlength, id, name, placeholder, fieldHasError, required, styleClassPas
     default: 'primary',
     validator(value: string) {
       return propValidators.theme.includes(value);
+    },
+  },
+  size: {
+    type: String as PropType<string>,
+    default: 'normal',
+    validator(value: string) {
+      return propValidators.size.includes(value);
     },
   },
 });
@@ -136,7 +144,7 @@ onMounted(() => {
     }
   }
 
-  .input-text-core {
+  .input-textarea-core {
     background-color: transparent;
     border: none;
     outline: none;
@@ -145,14 +153,17 @@ onMounted(() => {
 
     color: var(--theme-form-input-text);
     font-family: var(--font-family);
-    font-size: var(--theme-form-button-font-size-normal);
-    line-height: var(--line-height);
-    padding: 0.8rem 1.2rem;
+    font-size: var(--form-element-font-size);
+    line-height: var(--form-element-line-height);
+
+    padding-inline: var(--form-text-padding-inline);
+    padding-block-start: var(--form-element-padding-block-start);
+    padding-block-end: var(--form-element-padding-block-end);
 
     &::placeholder,
     &::-webkit-input-placeholder {
       font-family: var(--font-family);
-      font-size: var(--font-size);
+      font-size: var(--form-element-font-size);
       font-style: italic;
       font-weight: 400;
     }
