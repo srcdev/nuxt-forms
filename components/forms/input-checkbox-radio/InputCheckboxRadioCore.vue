@@ -18,6 +18,7 @@
       ref="inputField"
       :aria-checked="isChecked"
       :aria-describedby
+      :aria-invalid="fieldHasError"
     />
   </div>
 </template>
