@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   },
   extends: ['..'],
   css: ['modern-normalize', './assets/styles/main.css'],
-  modules: ['@nuxt/icon', '@nuxt/test-utils/module', '@nuxtjs/storybook'],
+  modules: ['@nuxt/icon', '@nuxt/test-utils/module'],
   app: {
     head: {
       htmlAttrs: {
@@ -31,8 +31,4 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
-  // modules: ['@nuxtjs/storybook'],
-  // vue: {
-  //   runtimeCompiler: true,
-  // },
 });
