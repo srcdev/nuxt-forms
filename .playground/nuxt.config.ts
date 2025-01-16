@@ -1,6 +1,9 @@
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  devServer: {
+    https: true,
+  },
   extends: ['..'],
   css: ['modern-normalize', './assets/styles/main.css'],
   modules: ['@nuxt/icon', '@nuxt/test-utils/module', '@nuxtjs/storybook'],
