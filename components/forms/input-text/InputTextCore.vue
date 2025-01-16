@@ -165,7 +165,6 @@ onMounted(() => {
   &:not(:has(.input-button-core)) {
     .slot {
       display: inline-block;
-      padding-inline: 0.8rem;
 
       .icon {
         color: var(--theme-form-input-text);
@@ -178,17 +177,11 @@ onMounted(() => {
     }
   }
 
-  /* &:has(.input-button-core) {
-    .input-button-core {
-      margin-inline: 0.6rem;
-    }
-  } */
-
   &.has-left-slot {
     .left-slot {
       display: flex;
       align-items: center;
-      margin-inline: 0.6rem;
+      margin-inline-start: 1rem;
     }
   }
 
@@ -196,19 +189,13 @@ onMounted(() => {
     .right-slot {
       display: flex;
       align-items: center;
-      margin-inline: 0.6rem;
+      margin-inline-end: 1rem;
     }
-  }
-
-  &:not(.has-left-slot) {
-    padding-inline-start: var(--form-text-padding-inline);
   }
 
   &:focus-within {
     box-shadow: var(--box-shadow-on);
-    /* --_theme-form-input-outline-focus: hsl(from var(--_theme-form-input-outline-focus) h s 50%); */
     outline: var(--form-element-outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 90%);
-    /* outline: var(--form-element-outline-width) solid white; */
   }
 
   .input-text-core {
