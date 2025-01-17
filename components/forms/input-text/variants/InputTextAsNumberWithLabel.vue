@@ -62,14 +62,10 @@
 
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
-const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, step, min, max, size } = defineProps({
+const { maxlength, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, step, min, max, size } = defineProps({
   maxlength: {
     type: Number,
     default: 255,
-  },
-  id: {
-    type: String,
-    required: true,
   },
   name: {
     type: String,
@@ -136,6 +132,7 @@ const formTheme = computed(() => {
   return fieldHasError ? 'error' : theme;
 });
 
+const id = useId();
 const errorId = `${id}-error-message`;
 const ariaDescribedby = computed(() => {
   const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : null;

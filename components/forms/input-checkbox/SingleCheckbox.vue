@@ -7,7 +7,7 @@
     </div>
 
     <div class="single-checkbox-items" :class="[optionsLayout]">
-      <InputCheckboxRadioWithLabel type="checkbox" :id :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :theme :ariaDescribedby>
+      <InputCheckboxRadioWithLabel type="checkbox" :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :theme :ariaDescribedby>
         <template #checkedIcon>
           <slot name="checkedIcon"></slot>
         </template>
@@ -24,14 +24,10 @@
 import propValidators from '../c12/prop-validators';
 import type { IFormMultipleOptions } from '@/types/types.forms';
 
-const { dataTestid, id, name, legend, label, required, fieldHasError, errorMessage, size, optionsLayout, equalCols, trueValue, falseValue, styleClassPassthrough, theme } = defineProps({
+const { dataTestid, name, legend, label, required, fieldHasError, errorMessage, size, optionsLayout, equalCols, trueValue, falseValue, styleClassPassthrough, theme } = defineProps({
   dataTestid: {
     type: String,
     default: 'multiple-radio-buttons',
-  },
-  id: {
-    type: String,
-    required: true,
   },
   name: {
     type: String,

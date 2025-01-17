@@ -1,5 +1,5 @@
 <template>
-  <InputTextWithLabel v-model="modelValue" :data-form-theme="formTheme" :type="inputType" :maxlength :id :name :placeholder :label :errorMessage :fieldHasError :required :styleClassPassthrough :theme>
+  <InputTextWithLabel v-model="modelValue" :data-form-theme="formTheme" :type="inputType" :maxlength :name :placeholder :label :errorMessage :fieldHasError :required :styleClassPassthrough :theme>
     <template #right>
       <InputButtonCore
         type="button"
@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
 
-const { type, maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, size } = defineProps({
+const { type, maxlength, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, size } = defineProps({
   type: {
     type: String,
     default: 'password',
@@ -31,10 +31,6 @@ const { type, maxlength, id, name, placeholder, label, errorMessage, fieldHasErr
   maxlength: {
     type: Number,
     default: 255,
-  },
-  id: {
-    type: String,
-    required: true,
   },
   name: {
     type: String,

@@ -16,11 +16,7 @@
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
 
-const { id, name, label, labelWeight, trueValue, falseValue, styleClassPassthrough, theme, round, size } = defineProps({
-  id: {
-    type: String,
-    required: true,
-  },
+const { name, label, labelWeight, trueValue, falseValue, styleClassPassthrough, theme, round, size } = defineProps({
   name: {
     type: String,
     required: true,
@@ -71,6 +67,8 @@ const { id, name, label, labelWeight, trueValue, falseValue, styleClassPassthrou
 const slots = useSlots();
 const hasIconOnSlot = computed(() => slots.iconOn !== undefined);
 const hasIconOffSlot = computed(() => slots.iconOff !== undefined);
+
+const id = useId();
 
 const labelWeightClass = computed(() => {
   switch (labelWeight) {

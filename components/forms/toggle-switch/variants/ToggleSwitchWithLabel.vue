@@ -20,11 +20,7 @@
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
 
-const { id, name, label, required, errorMessage, fieldHasError, trueValue, falseValue, styleClassPassthrough, theme, round, size } = defineProps({
-  id: {
-    type: String,
-    required: true,
-  },
+const { name, label, required, errorMessage, fieldHasError, trueValue, falseValue, styleClassPassthrough, theme, round, size } = defineProps({
   name: {
     type: String,
     required: true,
@@ -87,6 +83,7 @@ const formTheme = computed(() => {
   return fieldHasError ? 'error' : theme;
 });
 
+const id = useId();
 const errorId = `${id}-error-message`;
 const ariaDescribedby = computed(() => {
   const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : null;

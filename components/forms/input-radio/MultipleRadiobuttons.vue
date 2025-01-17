@@ -62,14 +62,10 @@
 import propValidators from '../c12/prop-validators';
 import type { IFormMultipleOptions } from '@/types/types.forms';
 
-const { dataTestid, id, name, legend, label, required, fieldHasError, placeholder, isButton, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme, direction } = defineProps({
+const { dataTestid, name, legend, label, required, fieldHasError, placeholder, isButton, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme, direction } = defineProps({
   dataTestid: {
     type: String,
     default: 'multiple-radio-buttons',
-  },
-  id: {
-    type: String,
-    required: true,
   },
   name: {
     type: String,
@@ -149,6 +145,7 @@ const slots = useSlots();
 const hasDescriptionSlot = computed(() => slots.description !== undefined);
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
+const id = useId();
 const errorId = `${name}-error-message`;
 const ariaDescribedby = computed(() => {
   const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : null;

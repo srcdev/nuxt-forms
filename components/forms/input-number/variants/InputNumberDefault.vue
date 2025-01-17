@@ -44,11 +44,7 @@
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
 
-const { id, name, label, required, min, max, step, theme, size, weight, styleClassPassthrough, errorMessage, fieldHasError } = defineProps({
-  id: {
-    type: String,
-    required: true,
-  },
+const { name, label, required, min, max, step, theme, size, weight, styleClassPassthrough, errorMessage, fieldHasError } = defineProps({
   name: {
     type: String,
     required: true,
@@ -118,6 +114,7 @@ const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
+const id = useId();
 const formTheme = computed(() => {
   return fieldHasError ? 'error' : theme;
 });

@@ -62,14 +62,10 @@
 import propValidators from '../c12/prop-validators';
 import type { IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
 
-const { dataTestid, id, name, legend, label, required, fieldHasError, placeholder, isButton, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme, direction } = defineProps({
+const { dataTestid, name, legend, label, required, fieldHasError, placeholder, isButton, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme, direction } = defineProps({
   dataTestid: {
     type: String,
     default: 'multiple-checkboxes',
-  },
-  id: {
-    type: String,
-    required: true,
   },
   name: {
     type: String,
@@ -153,6 +149,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleC
 const modelValue = defineModel();
 const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
+const id = useId();
 const errorId = `${name}-error-message`;
 const ariaDescribedby = computed(() => {
   const ariaDescribedbyId = hasDescriptionSlot.value ? `${name}-description` : null;

@@ -15,13 +15,9 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { type, id, name, label, required, fieldHasError, trueValue, falseValue, size, optionsLayout, styleClassPassthrough, theme, ariaDescribedby } = defineProps({
+const { type, name, label, required, fieldHasError, trueValue, falseValue, size, optionsLayout, styleClassPassthrough, theme, ariaDescribedby } = defineProps({
   type: {
     type: String as PropType<'checkbox' | 'radio'>,
-    required: true,
-  },
-  id: {
-    type: String,
     required: true,
   },
   name: {
@@ -84,6 +80,7 @@ const hasLabelContent = computed(() => slots.labelContent !== undefined);
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
 
 const modelValue = defineModel();
+const id = useId();
 </script>
 
 <style lang="css">

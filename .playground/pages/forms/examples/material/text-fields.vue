@@ -58,7 +58,6 @@
                         <FormField v-if="tagsData !== null" width="wide" :has-gutter="false">
                           <template #default>
                             <MultipleCheckboxes
-                              id="tags"
                               name="tags"
                               legend="Choose tags (as checkboxes)"
                               :required="true"
@@ -161,7 +160,6 @@
                         <InputTextareaWithLabel
                           v-model="state.message"
                           :maxlength="fieldMaxLength('message')"
-                          id="message"
                           name="message"
                           placeholder="Type your message here"
                           label="Your mesage"
@@ -178,7 +176,7 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <ToggleSwitchWithLabel v-model="state.darkMode" id="darkMode" name="darkMode" label="Toggle Dark mode" true-value="dark" false-value="light" :theme :size>
+                        <ToggleSwitchWithLabel v-model="state.darkMode" name="darkMode" label="Toggle Dark mode" true-value="dark" false-value="light" :theme :size>
                           <template #description>
                             <p class="label-description">Light or Dark mode?</p>
                           </template>
@@ -194,7 +192,7 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <ToggleSwitchWithLabelInline v-model="state.anotherToggle" id="anotherToggle" name="anotherToggle" label="Toggle Dark mode (inline)" :theme size="small">
+                        <ToggleSwitchWithLabelInline v-model="state.anotherToggle" name="anotherToggle" label="Toggle Dark mode (inline)" :theme size="small">
                           <template #iconOn>
                             <Icon name="radix-icons:moon" class="icon" />
                           </template>
@@ -211,7 +209,6 @@
                           v-model="state.toggleBoolean"
                           :errorMessage="formErrors?.toggleBoolean?._errors[0] ?? ''"
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.toggleBoolean)"
-                          id="toggleBoolean"
                           name="toggleBoolean"
                           label="Toggle Dark mode"
                           :theme
@@ -232,7 +229,6 @@
                           :min="25"
                           :max="75"
                           :step="5"
-                          id="count2"
                           name="count2"
                           placeholder="eg. 10"
                           label="How many things? Between 25 & 75"
@@ -259,7 +255,6 @@
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
                         <InputNumberDefault
-                          id="count"
                           name="count"
                           label="How many things? Between 25 & 75 , step 5"
                           :min="25"
@@ -290,7 +285,6 @@
                     <FormField v-if="tagsData !== null" width="wide" :has-gutter="false">
                       <template #default>
                         <MultipleRadiobuttons
-                          id="tagsRadio"
                           name="tagsRadio"
                           legend="Choose tags (as radiobuttons)"
                           :required="true"
@@ -316,7 +310,6 @@
                     <FormField width="wide" :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.score)" :has-gutter="false">
                       <template #default>
                         <InputRangeDefault
-                          id="score"
                           name="score"
                           label="Score between 0 & 100"
                           :min="0"
@@ -356,7 +349,6 @@
                     <FormField v-if="titleData !== null" width="wide" :has-gutter="false">
                       <template #default>
                         <MultipleRadiobuttons
-                          id="title"
                           name="title"
                           legend="What is your title"
                           :required="true"
@@ -383,7 +375,6 @@
                     <FormField v-if="titleData !== null" width="wide" :has-gutter="false">
                       <template #default>
                         <MultipleRadiobuttons
-                          id="otherTitle"
                           name="otherTitle"
                           legend="What is your title"
                           :required="true"
@@ -407,7 +398,6 @@
                     <FormField v-if="citiesData !== null" width="wide" :has-gutter="false">
                       <template #default>
                         <MultipleCheckboxes
-                          id="cities"
                           name="cities"
                           legend="Choose a location"
                           :required="true"
@@ -431,7 +421,6 @@
                     <FormField v-if="countriesData !== null" width="wide" :has-gutter="false">
                       <template #default>
                         <MultipleCheckboxes
-                          id="countries"
                           name="countries"
                           legend="Choose a country"
                           :required="true"
@@ -458,7 +447,6 @@
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
                         <SingleCheckbox
-                          id="agreed"
                           name="agreed"
                           legend="I agree (label with description)"
                           label="Click to agree to something"
@@ -479,7 +467,6 @@
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
                         <SingleCheckbox
-                          id="agree"
                           name="agree"
                           legend="I agree (label no description)"
                           label="Click to agree to something"
@@ -497,7 +484,6 @@
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
                         <SingleCheckbox
-                          id="terms"
                           name="terms"
                           legend="Terms and conditions"
                           :required="true"

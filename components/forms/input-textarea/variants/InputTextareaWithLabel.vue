@@ -16,14 +16,10 @@
 
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
-const { maxlength, id, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, size } = defineProps({
+const { maxlength, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, size } = defineProps({
   maxlength: {
     type: Number,
     default: 255,
-  },
-  id: {
-    type: String,
-    required: true,
   },
   name: {
     type: String,
@@ -73,6 +69,7 @@ const slots = useSlots();
 const hasLeftSlot = computed(() => slots.left !== undefined);
 const hasRightSlot = computed(() => slots.right !== undefined);
 
+const id = useId();
 const formTheme = computed(() => {
   return fieldHasError ? 'error' : theme;
 });
