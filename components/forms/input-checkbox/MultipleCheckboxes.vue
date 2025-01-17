@@ -152,7 +152,7 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 const id = useId();
 const errorId = `${name}-error-message`;
 const ariaDescribedby = computed(() => {
-  const ariaDescribedbyId = hasDescriptionSlot.value ? `${name}-description` : null;
+  const ariaDescribedbyId = hasDescriptionSlot.value ? `${name}-description` : undefined;
   return fieldHasError ? errorId : ariaDescribedbyId;
 });
 </script>

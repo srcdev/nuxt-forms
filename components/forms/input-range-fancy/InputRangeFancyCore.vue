@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { id, name, required, min, max, step, rangeLowLabel, rangeHighLabel, theme, size, weight, styleClassPassthrough, fieldHasError } = defineProps({
+const props = defineProps({
   id: {
     type: String,
     required: true,
@@ -115,10 +115,10 @@ const toolTipHighContainerStart = computed(() => {
 });
 
 const lowValue = computed(() => {
-  return Math.floor(Number(max) - Number(highValue.value));
+  return Math.floor(Number(props.max) - Number(highValue.value));
 });
 const highValue = computed(() => {
-  return Math.floor((Number(modelValue.value) / max) * 100);
+  return Math.floor((Number(modelValue.value) / props.max) * 100);
 });
 
 const update = () => {

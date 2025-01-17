@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { id, name, required, fieldHasError, trueValue, falseValue, styleClassPassthrough, theme, round, size, ariaDescribedby } = defineProps({
+const props = defineProps({
   id: {
     type: String,
     required: true,
@@ -78,16 +78,16 @@ const hasIconOnSlot = computed(() => slots.iconOn !== undefined);
 const hasIconOffSlot = computed(() => slots.iconOff !== undefined);
 
 const formTheme = computed(() => {
-  return fieldHasError ? 'error' : theme;
+  return props.fieldHasError ? 'error' : props.theme;
 });
 
 const modelValue = defineModel();
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
 
-const inputId = computed(() => `toggle-sitch-${id}`);
+const inputId = computed(() => `toggle-sitch-${props.id}`);
 
 const toggleSwitchValue = () => {
-  modelValue.value = modelValue.value === trueValue ? falseValue : trueValue;
+  modelValue.value = modelValue.value === props.trueValue ? props.falseValue : props.trueValue;
 };
 </script>
 

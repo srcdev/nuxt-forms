@@ -36,11 +36,10 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-// const props = defineProps({
-const { type, inputmode, maxlength, id, name, placeholder, required, fieldHasError, styleClassPassthrough, theme, ariaDescribedby, size } = defineProps({
+const props = defineProps({
   type: {
-    // type: String as PropType<'text' | 'email' | 'password' | 'number' | 'tel' | 'url'>,
-    type: String,
+    type: String as PropType<'text' | 'email' | 'password' | 'number' | 'tel' | 'url'>,
+    // type: String,
     default: 'text',
     validator(value: string) {
       return propValidators.inputTypesText.includes(value);
@@ -106,7 +105,7 @@ const hasLeftSlot = computed(() => slots.left !== undefined);
 const hasRightSlot = computed(() => slots.right !== undefined);
 
 const formTheme = computed(() => {
-  return fieldHasError ? 'error' : theme;
+  return props.fieldHasError ? 'error' : props.theme;
 });
 
 const modelValue = defineModel();
@@ -114,7 +113,7 @@ const isDirty = defineModel('isDirty');
 const isActive = defineModel('isActive');
 
 const inputPattern = computed(() => {
-  return inputmode === 'numeric' ? '[0-9]+' : undefined;
+  return props.inputmode === 'numeric' ? '[0-9]+' : undefined;
 });
 
 const updateFocus = (isFocused: boolean) => {
@@ -123,7 +122,7 @@ const updateFocus = (isFocused: boolean) => {
 
 const inputField = ref<HTMLInputElement | null>(null);
 
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
 
 // TODO: Move this to a utility function to allow removeEventListener on unmounted
 // Leaving like this could lead to memory leaks
@@ -145,7 +144,7 @@ const validateInput = () => {
 };
 
 onMounted(() => {
-  if (inputmode === 'numeric') validateInput();
+  if (props.inputmode === 'numeric') validateInput();
 });
 </script>
 

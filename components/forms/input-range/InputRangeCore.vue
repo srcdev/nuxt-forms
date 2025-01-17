@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { id, name, required, min, max, step, theme, size, weight, styleClassPassthrough, fieldHasError } = defineProps({
+const props = defineProps({
   id: {
     type: String,
     required: true,
@@ -98,7 +98,7 @@ const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
 
 const formTheme = computed(() => {
-  return fieldHasError ? 'error' : theme;
+  return props.fieldHasError ? 'error' : props.theme;
 });
 
 const modelValue = defineModel<number | readonly number[]>();

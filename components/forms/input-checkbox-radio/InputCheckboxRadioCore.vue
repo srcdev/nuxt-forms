@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
-const { isButton, type, id, name, required, trueValue, falseValue, multipleOptions, theme, styleClassPassthrough, size, fieldHasError, ariaDescribedby } = defineProps({
+const props = defineProps({
   isButton: {
     type: Boolean,
     default: false,
@@ -86,10 +86,10 @@ const { isButton, type, id, name, required, trueValue, falseValue, multipleOptio
   },
 });
 
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
 
 const formTheme = computed(() => {
-  return fieldHasError ? 'error' : theme;
+  return props.fieldHasError ? 'error' : props.theme;
 });
 
 const modelValue = defineModel<any>();
@@ -97,16 +97,16 @@ const modelValue = defineModel<any>();
 const inputField = ref<HTMLInputElement | null>(null);
 
 const defaultIcon = computed(() => {
-  return type === 'checkbox' ? 'material-symbols:check-small' : 'material-symbols:circle';
+  return props.type === 'checkbox' ? 'material-symbols:check-small' : 'material-symbols:circle';
 });
 
 const isArray = Array.isArray(modelValue.value);
 
 const isChecked = computed(() => {
   if (isArray) {
-    return modelValue.value.includes(trueValue);
+    return modelValue.value.includes(props.trueValue);
   } else {
-    return modelValue.value === trueValue;
+    return modelValue.value === props.trueValue;
   }
 });
 </script>

@@ -38,7 +38,7 @@
 
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
-const { type, inputmode, maxlength, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, size } = defineProps({
+const props = defineProps({
   maxlength: {
     type: Number,
     default: 255,
@@ -104,21 +104,21 @@ const hasLeftSlot = computed(() => slots.left !== undefined);
 const hasRightSlot = computed(() => slots.right !== undefined);
 
 const formTheme = computed(() => {
-  return fieldHasError ? 'error' : theme;
+  return props.fieldHasError ? 'error' : props.theme;
 });
 
 const id = useId();
 const errorId = `${id}-error-message`;
 const ariaDescribedby = computed(() => {
-  const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : null;
-  return fieldHasError ? errorId : ariaDescribedbyId;
+  const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : undefined;
+  return props.fieldHasError ? errorId : ariaDescribedbyId;
 });
 
 const modelValue = defineModel();
 const isActive = ref<boolean>(false);
 const isDirty = ref<boolean>(false);
 
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
 
 const testDirty = () => {
   const watchValue = modelValue.value ?? '';

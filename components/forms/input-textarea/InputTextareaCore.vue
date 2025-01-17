@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
-const { maxlength, id, name, placeholder, fieldHasError, required, styleClassPassthrough, theme, size } = defineProps({
+const props = defineProps({
   maxlength: {
     type: Number,
     default: 255,
@@ -82,7 +82,7 @@ const hasLeftSlot = computed(() => slots.left !== undefined);
 const hasRightSlot = computed(() => slots.right !== undefined);
 
 const formTheme = computed(() => {
-  return fieldHasError ? 'error' : theme;
+  return props.fieldHasError ? 'error' : props.theme;
 });
 
 const modelValue = defineModel<string | number | readonly string[] | null | undefined>();
@@ -95,11 +95,7 @@ const updateFocus = (isFocused: boolean) => {
 
 const inputField = ref<HTMLInputElement | null>(null);
 
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
-
-onMounted(() => {
-  updateElementClasses(['deep-bristol', 'deep-london', 'deep-bath']);
-});
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
 </script>
 
 <style lang="css">

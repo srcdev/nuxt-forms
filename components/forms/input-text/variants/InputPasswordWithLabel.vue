@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
 
-const { type, maxlength, name, placeholder, label, errorMessage, fieldHasError, required, styleClassPassthrough, theme, size } = defineProps({
+const props = defineProps({
   type: {
     type: String,
     default: 'password',
@@ -77,19 +77,19 @@ const { type, maxlength, name, placeholder, label, errorMessage, fieldHasError, 
 });
 
 const formTheme = computed(() => {
-  return fieldHasError ? 'error' : theme;
+  return props.fieldHasError ? 'error' : props.theme;
 });
 
 const modelValue = defineModel();
 
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
 
 const updateFocus = (name: string, isFocused: boolean) => {
   // console.log('updateFocus', name, isFocused);
   // modelValue.value.focusedField = isFocused ? name : '';
 };
 
-const inputType = ref(type);
+const inputType = ref(props.type);
 
 const displayPassword = ref(false);
 const buttonText = computed(() => {
@@ -102,31 +102,3 @@ const toggleDisplayPassword = () => {
 
 updateElementClasses(['has-right-button']);
 </script>
-
-<style lang="css">
-/* .input-text-with-label {
-  &.has-left-button,
-  &.has-right-button {
-    .input-text-wrapper {
-      .slot {
-        .input-button-core {
-          border: initial;
-          border-radius: 0;
-          outline: initial;
-          box-shadow: unset;
-        }
-      }
-
-      .left-slot {
-        margin-inline-end: 0;
-        border-right: 2px solid var(--theme-btn-bg-hover);
-      }
-
-      .right-slot {
-        margin-inline-end: 0;
-        border-left: 2px solid var(--theme-btn-bg-hover);
-      }
-    }
-  }
-} */
-</style>

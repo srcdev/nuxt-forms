@@ -3,7 +3,7 @@
     :type
     :readonly
     :aria-disabled="readonly"
-    :data-testid="dataTestid"
+    :data-testid
     :data-btn-theme="theme"
     :data-size="size"
     class="input-button-core"

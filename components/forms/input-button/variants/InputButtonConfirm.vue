@@ -1,17 +1,5 @@
 <template>
-  <InputButtonCore
-    type="button"
-    :use-effect="useEffect"
-    :isPending="isPending"
-    :readonly
-    :effect="effect"
-    :data-testid="dataTestid"
-    :size
-    :weight
-    :button-text="buttonText"
-    :style-class-passthrough
-    :theme
-  >
+  <InputButtonCore type="button" :use-effect :isPending :readonly :effect :data-testid :size :weight :button-text :style-class-passthrough :theme>
     <template #left>
       <Icon name="material-symbols:check-circle-outline" class="icon" />
     </template>
@@ -21,7 +9,7 @@
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
 
-const props = defineProps({
+defineProps({
   size: {
     type: String as PropType<string>,
     default: 'normal',

@@ -13,14 +13,14 @@
         <slot name="iconOff"></slot>
       </template>
     </ToggleSwitchCore>
-    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="errorId" :isDetached="true" />
+    <InputError :errorMessage :showError="fieldHasError" :id="errorId" :isDetached="true" />
   </div>
 </template>
 
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
 
-const { name, label, required, errorMessage, fieldHasError, trueValue, falseValue, styleClassPassthrough, theme, round, size } = defineProps({
+const props = defineProps({
   name: {
     type: String,
     required: true,
@@ -80,18 +80,18 @@ const hasIconOnSlot = computed(() => slots.iconOn !== undefined);
 const hasIconOffSlot = computed(() => slots.iconOff !== undefined);
 
 const formTheme = computed(() => {
-  return fieldHasError ? 'error' : theme;
+  return props.fieldHasError ? 'error' : props.theme;
 });
 
 const id = useId();
 const errorId = `${id}-error-message`;
 const ariaDescribedby = computed(() => {
-  const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : null;
-  return fieldHasError ? errorId : ariaDescribedbyId;
+  const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : undefined;
+  return props.fieldHasError ? errorId : ariaDescribedbyId;
 });
 
 const modelValue = defineModel();
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
 </script>
 
 <style lang="css">

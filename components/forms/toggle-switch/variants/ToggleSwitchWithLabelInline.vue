@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import propValidators from '../../c12/prop-validators';
 
-const { name, label, labelWeight, trueValue, falseValue, styleClassPassthrough, theme, round, size } = defineProps({
+const props = defineProps({
   name: {
     type: String,
     required: true,
@@ -71,7 +71,7 @@ const hasIconOffSlot = computed(() => slots.iconOff !== undefined);
 const id = useId();
 
 const labelWeightClass = computed(() => {
-  switch (labelWeight) {
+  switch (props.labelWeight) {
     case 'bold':
       return 'body-normal-bold';
     case 'semi-bold':
@@ -84,7 +84,7 @@ const labelWeightClass = computed(() => {
 });
 
 const modelValue = defineModel();
-const { elementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
 </script>
 
 <style lang="css">

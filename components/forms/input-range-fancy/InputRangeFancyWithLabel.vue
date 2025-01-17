@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
 
-const { id, name, label, rangeLowLabel, rangeHighLabel, required, min, max, step, theme, size, weight, styleClassPassthrough, errorMessage, fieldHasError } = defineProps({
+const props = defineProps({
   id: {
     type: String,
     required: true,
@@ -95,10 +95,10 @@ const { id, name, label, rangeLowLabel, rangeHighLabel, required, min, max, step
 
 const slots = useSlots();
 const hasDescription = computed(() => slots.description !== undefined);
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
 
 const formTheme = computed(() => {
-  return fieldHasError ? 'error' : theme;
+  return props.fieldHasError ? 'error' : props.theme;
 });
 
 const modelValue = defineModel<number | readonly number[]>();

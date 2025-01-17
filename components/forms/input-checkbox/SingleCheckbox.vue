@@ -24,7 +24,7 @@
 import propValidators from '../c12/prop-validators';
 import type { IFormMultipleOptions } from '@/types/types.forms';
 
-const { dataTestid, name, legend, label, required, fieldHasError, errorMessage, size, optionsLayout, equalCols, trueValue, falseValue, styleClassPassthrough, theme } = defineProps({
+const props = defineProps({
   dataTestid: {
     type: String,
     default: 'multiple-radio-buttons',
@@ -102,21 +102,21 @@ const hasDescriptionSlot = computed(() => slots.description !== undefined);
 const hasDescription = computed(() => slots.description !== undefined);
 const hasLabelContent = computed(() => slots.labelContent !== undefined);
 
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
 
 const modelValue = defineModel();
 const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
-const inputErrorStyles = ref<string[]>(styleClassPassthrough);
+const inputErrorStyles = ref<string[]>(props.styleClassPassthrough);
 
 const errorId = `${name}-error-message`;
 const ariaDescribedby = computed(() => {
-  const ariaDescribedbyId = hasDescriptionSlot.value ? `${name}-description` : null;
-  return fieldHasError ? errorId : ariaDescribedbyId;
+  const ariaDescribedbyId = hasDescriptionSlot.value ? `${name}-description` : undefined;
+  return props.fieldHasError ? errorId : ariaDescribedbyId;
 });
 
 watchEffect(() => {
-  if (!hasDescription.value && fieldHasError) {
+  if (!hasDescription.value && props.fieldHasError) {
     inputErrorStyles.value.push('mbs-12');
   } else {
     inputErrorStyles.value = inputErrorStyles.value.filter((style) => style !== 'mbs-12');
