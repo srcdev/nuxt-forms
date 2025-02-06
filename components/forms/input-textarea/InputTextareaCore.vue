@@ -156,6 +156,8 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
     padding-block-start: var(--form-element-padding-block-start);
     padding-block-end: var(--form-element-padding-block-end);
 
+    min-height: 5em;
+
     field-sizing: content;
 
     &::placeholder,
