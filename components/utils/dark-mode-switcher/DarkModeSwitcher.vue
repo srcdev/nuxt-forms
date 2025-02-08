@@ -1,10 +1,10 @@
 <template>
   <ToggleSwitchWithLabelInline v-model="displayMode" :name :label labelWeight="normal" :size trueValue="dark" falseValue="light" :style-class-passthrough>
     <template #iconOn>
-      <Icon name="radix-icons:moon" class="icon" />
+      <LazyIcon name="radix-icons:moon" class="icon" />
     </template>
     <template #iconOff>
-      <Icon name="radix-icons:sun" class="icon" />
+      <LazyIcon name="radix-icons:sun" class="icon" />
     </template>
   </ToggleSwitchWithLabelInline>
 </template>
