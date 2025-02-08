@@ -104,9 +104,8 @@ const useZodValidation = (formSchema: any, formRef: Ref<HTMLFormElement | null>)
   const fieldMaxLength = (name: string) => {
     const fieldSchema = formSchema.shape[name];
     if (fieldSchema instanceof z.ZodString) {
-      return fieldSchema._def.checks.find((check) => check.kind === 'max')?.value || null;
+      return fieldSchema._def.checks.find((check) => check.kind === 'max')?.value;
     }
-    return null;
   };
 
   const scrollToFirstError = async () => {
