@@ -2,14 +2,7 @@
   <div>
     <NuxtLayout name="default">
       <template #layout-content>
-        <div>
-          <h1>Sample form page pages</h1>
-
-          <p>Example test fields in default material UI</p>
-        </div>
-        <div class="mbs-20">
-          <h2>Colour mode picker as raange icons</h2>
-        </div>
+        <ColourSchemeSelect />
       </template>
     </NuxtLayout>
   </div>
@@ -26,6 +19,12 @@ useHead({
   bodyAttrs: {
     class: '',
   },
+});
+
+const colorModeVal = ref(0);
+
+watch(colorModeVal, (val) => {
+  console.log('colorModeVal', val);
 });
 </script>
 

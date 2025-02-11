@@ -5,6 +5,8 @@
     </div>
 
     <div class="input-range-container">
+      <slot v-if="hasMarkers" name="markers"></slot>
+
       <input
         type="range"
         :id
@@ -14,14 +16,12 @@
         :max
         :step
         :list="hasDataList ? name + '-datalist' : ''"
-        :class="['input-range-core', `input-range--${size}`, `input-range--${weight}`, styleClassPassthrough]"
+        :class="['input-range-core', `input-range--${size}`, `input-range--${weight}`, styleClassPassthrough, { 'has-markers': hasMarkers }]"
         v-model="modelValue"
         ref="inputRange"
       />
 
-      <template v-if="hasDataList">
-        <slot name="datalist"></slot>
-      </template>
+      <slot v-if="hasDataList" name="datalist"></slot>
     </div>
     <div v-if="hasRightContent" class="slot right">
       <slot name="right"></slot>
@@ -87,13 +87,14 @@ const props = defineProps({
     default: false,
   },
   styleClassPassthrough: {
-    type: String,
-    default: '',
+    type: Array as PropType<string[]>,
+    default: () => [],
   },
 });
 
 const slots = useSlots();
 const hasDataList = computed(() => slots.datalist !== undefined);
+const hasMarkers = computed(() => slots.markers !== undefined);
 const hasLeftContent = computed(() => slots.left !== undefined);
 const hasRightContent = computed(() => slots.right !== undefined);
 
@@ -134,7 +135,40 @@ const changeBackgroundColor = () => {
 
   .input-range-container {
     flex-grow: 1;
+
+    display: grid;
+    grid-template-areas: 'element-stack';
+
+    .input-range-markers {
+      grid-area: element-stack;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      z-index: 2;
+
+      .marker {
+        background-color: black;
+        padding: 0.5rem;
+        border-radius: 50%;
+        overflow: hidden;
+        outline: 1px solid gray;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        .marker-icon {
+          font-size: 2rem;
+          display: block;
+          color: var(--theme-form-range-accent-color);
+        }
+      }
+    }
+
     .input-range-core {
+      grid-area: element-stack;
+
       accent-color: var(--theme-form-range-accent-color);
       height: var(--_input-range-height);
       margin: 0;
@@ -204,6 +238,21 @@ const changeBackgroundColor = () => {
 
       &:focus-visible {
         box-shadow: var(--form-focus-box-shadow);
+      }
+
+      &.has-markers {
+        accent-color: var(--theme-form-range-accent-color);
+        height: 2px;
+        z-index: 2;
+        translate: 0 13px;
+
+        &::-webkit-slider-thumb {
+          /* display: none; */
+          opacity: 0;
+          &:hover {
+            cursor: pointer;
+          }
+        }
       }
     }
 

@@ -13,6 +13,9 @@
           <NuxtLink to="/forms/examples/buttons" class="link-normal">Buttons</NuxtLink>
         </li>
         <li>
+          <NuxtLink to="/components/utils/color-mode" class="link-normal">Colour mode</NuxtLink>
+        </li>
+        <li>
           <NuxtLink to="/components/utils/dark-mode-switcher" class="link-normal">Dark mode switcher</NuxtLink>
         </li>
       </ul>
