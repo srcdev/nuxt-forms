@@ -2,24 +2,24 @@
   <div class="colour-scheme-select" :data-size="size" :data-form-theme="theme">
     <p>Color Scheme select</p>
 
-    <form class="colour-scheme-select-form mbe-20">
+    <form class="colour-scheme-select-form mbe-20" ref="colourSchemeWrapper">
       <div class="select-scheme-marker-wrapper">
         <div class="select-scheme-marker"></div>
       </div>
       <div class="select-scheme-group-wrapper">
         <div class="select-scheme-group">
           <LazyIcon name="material-symbols:night-sight-auto-sharp" class="scheme-icon" />
-          <input type="radio" id="auto" name="colour-scheme" class="scheme-input" v-model="colourScheme" value="auto" />
+          <input type="radio" id="auto" name="colour-scheme" class="scheme-input" v-model="currentColourScheme" value="auto" />
           <label for="auto" class="sr-only">Auto</label>
         </div>
         <div class="select-scheme-group">
           <LazyIcon name="radix-icons:sun" class="scheme-icon" />
-          <input type="radio" id="light" name="colour-scheme" class="scheme-input" v-model="colourScheme" value="light" />
+          <input type="radio" id="light" name="colour-scheme" class="scheme-input" v-model="currentColourScheme" value="light" />
           <label for="light" class="sr-only">Light</label>
         </div>
         <div class="select-scheme-group">
           <LazyIcon name="radix-icons:moon" class="scheme-icon" />
-          <input type="radio" id="dark" name="colour-scheme" class="scheme-input" v-model="colourScheme" value="dark" />
+          <input type="radio" id="dark" name="colour-scheme" class="scheme-input" v-model="currentColourScheme" value="dark" />
           <label for="dark" class="sr-only">Dark</label>
         </div>
       </div>
@@ -55,9 +55,49 @@ defineProps({
   },
 });
 
-const colourScheme = ref<'auto' | 'dark' | 'light'>('auto');
+const { currentColourScheme } = useColourScheme();
 
-useColourScheme(colourScheme);
+const colourSchemeWrapper = ref<HTMLFormElement | null>(null);
+const colourSchemeInputElements = ref<HTMLDivElement[]>([]);
+
+// console.log('colourSchemeInputElements');
+// console.log(colourSchemeInputElements);
+
+const findIndexOfInputValueFromCurrentColourScheme = () => {
+  if (currentColourScheme.value === 'auto') return 1;
+  if (currentColourScheme.value === 'light') return 2;
+  if (currentColourScheme.value === 'dark') return 3;
+  return undefined;
+};
+
+// const findLeftOffsetOfInputValueFromCurrentColourScheme = (index: number) => {
+//   const normalisedIndex = index - 1;
+
+//   console.log(`findLeftOffsetOfInputValueFromCurrentColourScheme: ${normalisedIndex}`);
+//   console.log(colourSchemeInputElements.value[normalisedIndex].offsetLeft);
+
+//   return colourSchemeInputElements.value?.[normalisedIndex]?.getBoundingClientRect().left;
+// };
+
+const setColourSchemeAttr = () => {
+  const index = findIndexOfInputValueFromCurrentColourScheme() ?? 0;
+  const wrapperLeftPosition = colourSchemeWrapper.value?.getBoundingClientRect().left ?? 0;
+  colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-position', index !== undefined ? index.toString() : '0');
+  colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-left-offset', colourSchemeInputElements.value?.[index - 1]?.offsetLeft - wrapperLeftPosition + 'px');
+  colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-width', colourSchemeInputElements.value?.[index - 1]?.getBoundingClientRect().width + 'px');
+};
+
+onMounted(() => {
+  colourSchemeInputElements.value = Array.from(colourSchemeWrapper.value?.querySelectorAll('.select-scheme-group') || []) as HTMLInputElement[];
+
+  if (colourSchemeWrapper.value !== null) {
+    setColourSchemeAttr();
+  }
+});
+
+watch(currentColourScheme, () => {
+  setColourSchemeAttr();
+});
 </script>
 
 <style lang="css">
@@ -77,14 +117,14 @@ useColourScheme(colourScheme);
   --_form-items-gap: 1rem;
   --_form-padding: 0.6rem;
 
-  --_select-scheme-marker-position: 1;
+  /* --_select-scheme-marker-position: 1; */
 
   --_select-scheme-group-background-color: red;
   --_select-scheme-group-padding: 0.5rem;
-  --_select-scheme-group-border-width: 0.1rem;
-  --_select-scheme-group-border-colour: var(--theme-form-radio-border);
-  --_select-scheme-group-outline-width: 0.1rem;
-  --_select-scheme-group-outline-colour: var(--theme-form-radio-outline);
+  --_select-scheme-group-border-width: 0.2rem;
+  --_select-scheme-group-border-colour: transparent;
+  --_select-scheme-group-outline-width: 0.2rem;
+  --_select-scheme-group-outline-colour: transparent;
   --_select-scheme-group-width: calc(
     var(--_scheme-icon-font-size) + (var(--_select-scheme-group-padding) * 2) + (var(--_select-scheme-group-border-width) * 2) + (var(--_select-scheme-group-outline-width) * 2)
   );
@@ -101,30 +141,37 @@ useColourScheme(colourScheme);
     border: var(--_form-border-width) solid var(--_form-border-colour);
     outline: var(--_form-outline-width) solid var(--_form-outline-colour);
     border-radius: var(--_form-border-radius);
-    padding: var(--_form-padding);
 
     .select-scheme-marker-wrapper {
       grid-area: select-stack;
-      display: grid;
+      /* display: grid; */
       /* grid-template-columns: repeat(3, 1fr); */
-      grid-template-columns: repeat(3, 1fr);
       z-index: 1;
-      grid-area: select-stack;
-      gap: var(--_form-items-gap);
-      transition: all 200ms;
-      transition-behavior: allow-discrete;
+      /* grid-area: select-stack; */
+      /* gap: var(--_form-items-gap); */
+      /* transition: all 200ms; */
+      /* transition-behavior: allow-discrete; */
 
-      display: none;
+      /* display: none; */
+
+      display: flex;
+      align-items: center;
+      position: relative;
 
       .select-scheme-marker {
-        grid-column: var(--_select-scheme-marker-position);
+        /* grid-column: var(--_select-scheme-marker-position); */
         aspect-ratio: 1;
         /* width: calc(var(--_select-scheme-group-width) + (var(--_form-outline-width) * 2)); */
         /* translate: -1px 0; */
         width: var(--_select-scheme-group-width);
-        transition: all 200ms;
-        transition-behavior: allow-discrete;
-        background-color: purple;
+        /* translate: calc(var(--_select-scheme-marker-left-offset) - var(--_form-items-gap) - (var(--_select-scheme-group-outline-width) * 1) - (var(--_select-scheme-group-border-width) * 1)) 0; */
+        /* translate: calc(var(--_select-scheme-marker-left-offset) - (var(--_select-scheme-group-outline-width) * 1) - (var(--_select-scheme-group-border-width) * 1)) 0; */
+        transition: all 300ms ease-in-out;
+        background-color: var(--theme-form-radio-border);
+        border-radius: 50%;
+
+        position: absolute;
+        left: calc(var(--_select-scheme-marker-left-offset) - var(--_form-border-width) - var(--_form-outline-width) - 1px);
       }
     }
 
@@ -134,6 +181,7 @@ useColourScheme(colourScheme);
       grid-template-columns: repeat(3, 1fr);
       align-items: center;
       width: fit-content;
+      padding: var(--_form-padding);
       z-index: 2;
       gap: var(--_form-items-gap);
 
@@ -141,7 +189,7 @@ useColourScheme(colourScheme);
         aspect-ratio: 1;
         display: grid;
         grid-template-areas: 'icon-stack';
-        width: var(--_select-scheme-group-width);
+        /* width: var(--_select-scheme-marker-width); */
         place-content: center;
         background-color: var(--_select-scheme-group-background-color);
         border: var(--_select-scheme-group-border-width) solid var(--_select-scheme-group-border-colour);
@@ -169,9 +217,9 @@ useColourScheme(colourScheme);
           --_select-scheme-group-background-color: green;
 
           &:has(input[value='auto']:checked) {
-            --_select-scheme-marker-position: 1;
-            --_select-scheme-group-border-colour: var(--theme-form-radio-border);
-            --_select-scheme-group-outline-colour: var(--theme-form-radio-outline);
+            /* --_select-scheme-marker-position: 1; */
+            /* --_select-scheme-group-border-colour: var(--theme-form-radio-border); */
+            /* --_select-scheme-group-outline-colour: var(--theme-form-radio-outline); */
           }
         }
 
@@ -179,9 +227,9 @@ useColourScheme(colourScheme);
           --_select-scheme-group-background-color: orange;
 
           &:has(input[value='light']:checked) {
-            --_select-scheme-marker-position: 2;
-            --_select-scheme-group-border-colour: var(--theme-form-radio-border);
-            --_select-scheme-group-outline-colour: var(--theme-form-radio-outline);
+            /* --_select-scheme-marker-position: 2; */
+            /* --_select-scheme-group-border-colour: var(--theme-form-radio-border); */
+            /* --_select-scheme-group-outline-colour: var(--theme-form-radio-outline); */
           }
         }
 
@@ -189,9 +237,9 @@ useColourScheme(colourScheme);
           --_select-scheme-group-background-color: black;
 
           &:has(input[value='dark']:checked) {
-            --_select-scheme-marker-position: 3;
-            --_select-scheme-group-border-colour: var(--theme-form-radio-border);
-            --_select-scheme-group-outline-colour: var(--theme-form-radio-outline);
+            /* --_select-scheme-marker-position: 3; */
+            /* --_select-scheme-group-border-colour: var(--theme-form-radio-border); */
+            /* --_select-scheme-group-outline-colour: var(--theme-form-radio-outline); */
           }
         }
       }

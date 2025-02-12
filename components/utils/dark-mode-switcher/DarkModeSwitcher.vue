@@ -1,5 +1,5 @@
 <template>
-  <ToggleSwitchWithLabelInline v-model="displayMode" :name :label labelWeight="normal" :size trueValue="dark" falseValue="light" :style-class-passthrough>
+  <ToggleSwitchWithLabelInline v-model="currentColourScheme" :name :label labelWeight="normal" :size trueValue="dark" falseValue="light" :style-class-passthrough>
     <template #iconOn>
       <LazyIcon name="radix-icons:moon" class="icon" />
     </template>
@@ -41,7 +41,7 @@ defineProps({
   },
 });
 
-const displayMode = ref<'auto' | 'dark' | 'light'>('auto');
+// const displayMode = ref<'auto' | 'dark' | 'light'>('auto');
 
-useColourScheme(displayMode);
+const { currentColourScheme } = useColourScheme();
 </script>
