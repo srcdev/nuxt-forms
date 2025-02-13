@@ -4,7 +4,7 @@
 
     <form class="colour-scheme-select-form mbe-20" ref="colourSchemeWrapper">
       <div class="select-scheme-marker-wrapper">
-        <div class="select-scheme-marker"></div>
+        <div class="select-scheme-marker" :class="[{ show: showMarker }]"></div>
       </div>
       <div class="select-scheme-group-wrapper">
         <div class="select-scheme-group">
@@ -59,6 +59,7 @@ const { currentColourScheme } = useColourScheme();
 
 const colourSchemeWrapper = ref<HTMLFormElement | null>(null);
 const colourSchemeInputElements = ref<HTMLDivElement[]>([]);
+const showMarker = ref(false);
 
 // console.log('colourSchemeInputElements');
 // console.log(colourSchemeInputElements);
@@ -82,8 +83,11 @@ const findIndexOfInputValueFromCurrentColourScheme = () => {
 const setColourSchemeAttr = () => {
   const index = findIndexOfInputValueFromCurrentColourScheme() ?? 0;
   const wrapperLeftPosition = colourSchemeWrapper.value?.getBoundingClientRect().left ?? 0;
+  const parentLeftPosition = colourSchemeWrapper.value?.parentElement?.getBoundingClientRect().left ?? 0;
+  const relativeLeftPosition = wrapperLeftPosition - parentLeftPosition;
+
   colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-position', index !== undefined ? index.toString() : '0');
-  colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-left-offset', colourSchemeInputElements.value?.[index - 1]?.offsetLeft - wrapperLeftPosition + 'px');
+  colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-left-offset', colourSchemeInputElements.value?.[index - 1]?.offsetLeft - relativeLeftPosition + 'px');
   colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-width', colourSchemeInputElements.value?.[index - 1]?.getBoundingClientRect().width + 'px');
 };
 
@@ -92,6 +96,9 @@ onMounted(() => {
 
   if (colourSchemeWrapper.value !== null) {
     setColourSchemeAttr();
+    setTimeout(() => {
+      showMarker.value = true;
+    }, 300);
   }
 });
 
@@ -171,7 +178,14 @@ watch(currentColourScheme, () => {
         border-radius: 50%;
 
         position: absolute;
-        left: calc(var(--_select-scheme-marker-left-offset) - var(--_form-border-width) - var(--_form-outline-width) - 1px);
+        /* left: calc(var(--_select-scheme-marker-left-offset) - var(--_form-border-width) - var(--_form-outline-width) - 1px); */
+        left: calc(var(--_select-scheme-marker-left-offset) - calc(var(--_select-scheme-group-border-width) * 1.5) - var(--_scheme-icon-font-size));
+
+        opacity: 0;
+
+        &.show {
+          opacity: 1;
+        }
       }
     }
 
