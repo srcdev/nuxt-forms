@@ -183,7 +183,7 @@ watch(currentColourScheme, () => {
         /* left: calc(var(--_select-scheme-marker-left-offset) - var(--_form-border-width) - var(--_form-outline-width) - 1px); */
         /* left: calc(var(--_select-scheme-marker-left-offset) - calc(var(--_select-scheme-group-border-width) * 1.5) - var(--_scheme-icon-font-size)); */
         /* left: calc(var(--_select-scheme-marker-left-offset) - var(--_form-items-gap) - var(--_scheme-icon-font-size) + var(--_select-scheme-group-border-width) - 1px); */
-        left: calc(var(--_select-scheme-marker-left-offset) - 29px);
+        left: calc(var(--_select-scheme-marker-left-offset) - var(--_select-scheme-group-border-width));
 
         opacity: 0;
 
@@ -202,6 +202,7 @@ watch(currentColourScheme, () => {
       /* padding: var(--_form-padding); */
       z-index: 2;
       gap: var(--_form-items-gap);
+      position: relative;
 
       .select-scheme-group {
         aspect-ratio: 1;
