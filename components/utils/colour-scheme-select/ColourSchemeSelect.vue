@@ -85,6 +85,7 @@ const setColourSchemeAttr = () => {
   const wrapperLeftPosition = colourSchemeWrapper.value?.getBoundingClientRect().left ?? 0;
   const parentLeftPosition = colourSchemeWrapper.value?.parentElement?.getBoundingClientRect().left ?? 0;
   const relativeLeftPosition = wrapperLeftPosition - parentLeftPosition;
+  // const relativeLeftPosition = 0;
 
   colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-position', index !== undefined ? index.toString() : '0');
   colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-left-offset', colourSchemeInputElements.value?.[index - 1]?.offsetLeft - relativeLeftPosition + 'px');
@@ -140,7 +141,7 @@ watch(currentColourScheme, () => {
   --_scheme-icon-colour: white;
 
   .colour-scheme-select-form {
-    display: grid;
+    display: inline-grid;
     grid-template-areas: 'select-stack';
     width: fit-content;
 
@@ -148,6 +149,7 @@ watch(currentColourScheme, () => {
     border: var(--_form-border-width) solid var(--_form-border-colour);
     outline: var(--_form-outline-width) solid var(--_form-outline-colour);
     border-radius: var(--_form-border-radius);
+    padding: var(--_form-padding);
 
     .select-scheme-marker-wrapper {
       grid-area: select-stack;
@@ -179,7 +181,9 @@ watch(currentColourScheme, () => {
 
         position: absolute;
         /* left: calc(var(--_select-scheme-marker-left-offset) - var(--_form-border-width) - var(--_form-outline-width) - 1px); */
-        left: calc(var(--_select-scheme-marker-left-offset) - calc(var(--_select-scheme-group-border-width) * 1.5) - var(--_scheme-icon-font-size));
+        /* left: calc(var(--_select-scheme-marker-left-offset) - calc(var(--_select-scheme-group-border-width) * 1.5) - var(--_scheme-icon-font-size)); */
+        /* left: calc(var(--_select-scheme-marker-left-offset) - var(--_form-items-gap) - var(--_scheme-icon-font-size) + var(--_select-scheme-group-border-width) - 1px); */
+        left: calc(var(--_select-scheme-marker-left-offset) - 29px);
 
         opacity: 0;
 
@@ -195,7 +199,7 @@ watch(currentColourScheme, () => {
       grid-template-columns: repeat(3, 1fr);
       align-items: center;
       width: fit-content;
-      padding: var(--_form-padding);
+      /* padding: var(--_form-padding); */
       z-index: 2;
       gap: var(--_form-items-gap);
 
