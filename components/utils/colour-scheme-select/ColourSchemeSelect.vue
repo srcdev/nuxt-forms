@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import propValidators from '../../forms/c12/prop-validators';
 
-defineProps({
+const props = defineProps({
   name: {
     type: String,
     defaul: 'colour-scheme-select',
@@ -49,20 +49,24 @@ defineProps({
       return propValidators.theme.includes(value);
     },
   },
+  stepAnimationDuration: {
+    type: Number as PropType<number>,
+    default: 100,
+  },
   styleClassPassthrough: {
     type: Array as PropType<string[]>,
     default: () => [],
   },
 });
 
+const duration = ref(props.stepAnimationDuration);
+
 const { currentColourScheme } = useColourScheme();
 
 const colourSchemeWrapper = ref<HTMLFormElement | null>(null);
-const colourSchemeInputElements = ref<HTMLDivElement[]>([]);
+const colourSchemeGroupElements = ref<HTMLDivElement[]>([]);
+const colourSchemeInputElements = ref<HTMLInputElement[]>([]);
 const showMarker = ref(false);
-
-// console.log('colourSchemeInputElements');
-// console.log(colourSchemeInputElements);
 
 const findIndexOfInputValueFromCurrentColourScheme = () => {
   if (currentColourScheme.value === 'auto') return 1;
@@ -71,40 +75,59 @@ const findIndexOfInputValueFromCurrentColourScheme = () => {
   return undefined;
 };
 
-// const findLeftOffsetOfInputValueFromCurrentColourScheme = (index: number) => {
-//   const normalisedIndex = index - 1;
+const findIndexOfCheckedInput = () => {
+  return colourSchemeInputElements.value.findIndex((input) => input.checked);
+};
 
-//   console.log(`findLeftOffsetOfInputValueFromCurrentColourScheme: ${normalisedIndex}`);
-//   console.log(colourSchemeInputElements.value[normalisedIndex].offsetLeft);
+const currentActiveIndex = ref(findIndexOfCheckedInput());
 
-//   return colourSchemeInputElements.value?.[normalisedIndex]?.getBoundingClientRect().left;
-// };
-
-const setColourSchemeAttr = () => {
+const setColourSchemeAttr = async () => {
   const index = findIndexOfInputValueFromCurrentColourScheme() ?? 0;
+
+  await nextTick();
+  currentActiveIndex.value = findIndexOfCheckedInput();
+
   const wrapperLeftPosition = colourSchemeWrapper.value?.getBoundingClientRect().left ?? 0;
   const parentLeftPosition = colourSchemeWrapper.value?.parentElement?.getBoundingClientRect().left ?? 0;
   const relativeLeftPosition = wrapperLeftPosition - parentLeftPosition;
-  // const relativeLeftPosition = 0;
+
+  colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-step-animation-duration', colourSchemeGroupElements.value?.length * duration.value + 'ms');
 
   colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-position', index !== undefined ? index.toString() : '0');
-  colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-left-offset', colourSchemeInputElements.value?.[index - 1]?.offsetLeft - relativeLeftPosition + 'px');
-  colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-width', colourSchemeInputElements.value?.[index - 1]?.getBoundingClientRect().width + 'px');
+  colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-left-offset', colourSchemeGroupElements.value?.[index - 1]?.offsetLeft - relativeLeftPosition + 'px');
+  colourSchemeWrapper.value?.style.setProperty('--_select-scheme-marker-width', colourSchemeGroupElements.value?.[index - 1]?.getBoundingClientRect().width + 'px');
+};
+
+const handleInputActiveClass = () => {
+  console.log(`handleInputActiveClass`, currentActiveIndex.value);
+  colourSchemeInputElements.value.forEach((element) => {
+    element.classList.remove('active');
+  });
+
+  setTimeout(() => {
+    colourSchemeInputElements.value?.[currentActiveIndex.value].classList.add('active');
+  }, duration.value);
 };
 
 onMounted(() => {
-  colourSchemeInputElements.value = Array.from(colourSchemeWrapper.value?.querySelectorAll('.select-scheme-group') || []) as HTMLInputElement[];
+  colourSchemeGroupElements.value = Array.from(colourSchemeWrapper.value?.querySelectorAll('.select-scheme-group') || []) as HTMLInputElement[];
+  colourSchemeInputElements.value = Array.from(colourSchemeWrapper.value?.querySelectorAll('.scheme-input') || []) as HTMLInputElement[];
 
   if (colourSchemeWrapper.value !== null) {
     setColourSchemeAttr();
     setTimeout(() => {
       showMarker.value = true;
-    }, 300);
+      handleInputActiveClass();
+    }, duration.value);
   }
 });
 
 watch(currentColourScheme, () => {
   setColourSchemeAttr();
+});
+
+watch(currentActiveIndex, () => {
+  handleInputActiveClass();
 });
 </script>
 
@@ -125,9 +148,7 @@ watch(currentColourScheme, () => {
   --_form-items-gap: 1rem;
   --_form-padding: 0.6rem;
 
-  /* --_select-scheme-marker-position: 1; */
-
-  --_select-scheme-group-background-color: red;
+  --_select-scheme-group-background-color: var(--theme-form-checkbox-bg);
   --_select-scheme-group-padding: 0.5rem;
   --_select-scheme-group-border-width: 0.2rem;
   --_select-scheme-group-border-colour: transparent;
@@ -138,7 +159,7 @@ watch(currentColourScheme, () => {
   );
 
   --_scheme-icon-font-size: 2rem;
-  --_scheme-icon-colour: white;
+  --_scheme-icon-colour: black;
 
   .colour-scheme-select-form {
     display: inline-grid;
@@ -153,36 +174,19 @@ watch(currentColourScheme, () => {
 
     .select-scheme-marker-wrapper {
       grid-area: select-stack;
-      /* display: grid; */
-      /* grid-template-columns: repeat(3, 1fr); */
       z-index: 1;
-      /* grid-area: select-stack; */
-      /* gap: var(--_form-items-gap); */
-      /* transition: all 200ms; */
-      /* transition-behavior: allow-discrete; */
-
-      /* display: none; */
-
       display: flex;
       align-items: center;
       position: relative;
 
       .select-scheme-marker {
-        /* grid-column: var(--_select-scheme-marker-position); */
         aspect-ratio: 1;
-        /* width: calc(var(--_select-scheme-group-width) + (var(--_form-outline-width) * 2)); */
-        /* translate: -1px 0; */
         width: var(--_select-scheme-group-width);
-        /* translate: calc(var(--_select-scheme-marker-left-offset) - var(--_form-items-gap) - (var(--_select-scheme-group-outline-width) * 1) - (var(--_select-scheme-group-border-width) * 1)) 0; */
-        /* translate: calc(var(--_select-scheme-marker-left-offset) - (var(--_select-scheme-group-outline-width) * 1) - (var(--_select-scheme-group-border-width) * 1)) 0; */
-        transition: all 300ms ease-in-out;
+        transition: all var(--_select-scheme-marker-step-animation-duration) ease-in-out;
         background-color: var(--theme-form-radio-border);
         border-radius: 50%;
 
         position: absolute;
-        /* left: calc(var(--_select-scheme-marker-left-offset) - var(--_form-border-width) - var(--_form-outline-width) - 1px); */
-        /* left: calc(var(--_select-scheme-marker-left-offset) - calc(var(--_select-scheme-group-border-width) * 1.5) - var(--_scheme-icon-font-size)); */
-        /* left: calc(var(--_select-scheme-marker-left-offset) - var(--_form-items-gap) - var(--_scheme-icon-font-size) + var(--_select-scheme-group-border-width) - 1px); */
         left: calc(var(--_select-scheme-marker-left-offset) - var(--_select-scheme-group-border-width));
 
         opacity: 0;
@@ -199,7 +203,6 @@ watch(currentColourScheme, () => {
       grid-template-columns: repeat(3, 1fr);
       align-items: center;
       width: fit-content;
-      /* padding: var(--_form-padding); */
       z-index: 2;
       gap: var(--_form-items-gap);
       position: relative;
@@ -208,19 +211,24 @@ watch(currentColourScheme, () => {
         aspect-ratio: 1;
         display: grid;
         grid-template-areas: 'icon-stack';
-        /* width: var(--_select-scheme-marker-width); */
         place-content: center;
-        background-color: var(--_select-scheme-group-background-color);
+        background: var(--_select-scheme-group-background-color);
         border: var(--_select-scheme-group-border-width) solid var(--_select-scheme-group-border-colour);
         outline: var(--_select-scheme-group-outline-width) solid var(--_select-scheme-group-outline-colour);
         border-radius: 50%;
         padding: var(--_select-scheme-group-padding);
+
+        transition: background calc(var(--_select-scheme-marker-step-animation-duration) / 3);
 
         .scheme-icon {
           grid-area: icon-stack;
           display: block;
           color: var(--_scheme-icon-colour);
           font-size: var(--_scheme-icon-font-size);
+
+          &:hover {
+            cursor: pointer;
+          }
         }
 
         .scheme-input {
@@ -233,32 +241,27 @@ watch(currentColourScheme, () => {
         }
 
         &:has(input[value='auto']) {
-          --_select-scheme-group-background-color: green;
-
-          &:has(input[value='auto']:checked) {
-            /* --_select-scheme-marker-position: 1; */
-            /* --_select-scheme-group-border-colour: var(--theme-form-radio-border); */
-            /* --_select-scheme-group-outline-colour: var(--theme-form-radio-outline); */
+          &:has(.active) {
+            --_select-scheme-group-background-color: green;
+            --_scheme-icon-colour: white;
           }
         }
 
         &:has(input[value='light']) {
-          --_select-scheme-group-background-color: orange;
+          &:has(.active) {
+            /* background: rgb(180, 58, 91);
+            background: linear-gradient(90deg, rgba(180, 58, 91, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%); */
+            --_select-scheme-group-background-color: radial-gradient(circle, rgba(180, 58, 91, 1) 0%, rgba(253, 29, 29, 1) 27%, rgba(252, 176, 69, 1) 100%);
+            /* --_select-scheme-group-background-color: radial-gradient(circle, rgba(63, 94, 251, 1) 70%, rgba(63, 94, 251, 0.5550814075630253) 90%, rgba(255, 255, 255, 0.42622986694677867) 100%); */
 
-          &:has(input[value='light']:checked) {
-            /* --_select-scheme-marker-position: 2; */
-            /* --_select-scheme-group-border-colour: var(--theme-form-radio-border); */
-            /* --_select-scheme-group-outline-colour: var(--theme-form-radio-outline); */
+            --_scheme-icon-colour: white;
           }
         }
 
         &:has(input[value='dark']) {
-          --_select-scheme-group-background-color: black;
-
-          &:has(input[value='dark']:checked) {
-            /* --_select-scheme-marker-position: 3; */
-            /* --_select-scheme-group-border-colour: var(--theme-form-radio-border); */
-            /* --_select-scheme-group-outline-colour: var(--theme-form-radio-outline); */
+          &:has(.active) {
+            --_select-scheme-group-background-color: black;
+            --_scheme-icon-colour: white;
           }
         }
       }
