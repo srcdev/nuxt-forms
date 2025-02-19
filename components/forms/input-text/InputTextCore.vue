@@ -3,7 +3,7 @@
     class="input-text-wrapper"
     :data-form-theme="formTheme"
     :data-size="size"
-    :class="[{ dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]"
+    :class="[{ isMaterial: isMaterial }, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]"
   >
     <span v-if="hasLeftSlot" class="slot left-slot">
       <slot name="left"></slot>
@@ -98,7 +98,13 @@ const props = defineProps({
       return propValidators.size.includes(value);
     },
   },
+  isMaterial: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+console.log('isMaterial: ', props.isMaterial);
 
 const slots = useSlots();
 const hasLeftSlot = computed(() => slots.left !== undefined);
@@ -248,6 +254,23 @@ onMounted(() => {
     .right-slot {
       margin-inline-end: 0;
       border-left: 2px solid var(--theme-btn-bg-hover);
+    }
+  }
+
+  /* Material Design Styles */
+
+  &.isMaterial {
+    background-color: transparent;
+    border-radius: initial;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+    &.active,
+    &.dirty {
+      opacity: 1;
     }
   }
 }

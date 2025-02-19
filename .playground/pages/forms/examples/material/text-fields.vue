@@ -97,6 +97,7 @@
                           :styleClassPassthrough="['style-1', 'style-2']"
                           :theme
                           :size
+                          :isMaterial="true"
                         >
                           <template #description>
                             <p class="body-normal">This is a description for username field</p>

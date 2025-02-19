@@ -24,6 +24,7 @@
       inputmode="numeric"
       :ariaDescribedby
       :size
+      :isMaterial
     >
       <template v-if="hasLeftSlot" #left>
         <InputButtonCore
@@ -120,6 +121,10 @@ const props = defineProps({
     validator(value: string) {
       return propValidators.size.includes(value);
     },
+  },
+  isMaterial: {
+    type: Boolean,
+    default: false,
   },
 });
 

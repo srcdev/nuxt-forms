@@ -1,5 +1,20 @@
 <template>
-  <InputTextWithLabel v-model="modelValue" :data-form-theme="formTheme" :type="inputType" :maxlength :name :placeholder :label :errorMessage :fieldHasError :required :styleClassPassthrough :theme>
+  <InputTextWithLabel
+    v-model="modelValue"
+    :data-form-theme="formTheme"
+    :type="inputType"
+    :maxlength
+    :name
+    :placeholder
+    :label
+    :errorMessage
+    :fieldHasError
+    :required
+    :styleClassPassthrough
+    :theme
+    :size
+    :isMaterial
+  >
     <template #right>
       <InputButtonCore
         type="button"
@@ -25,7 +40,7 @@ import propValidators from '../../c12/prop-validators';
 
 const props = defineProps({
   type: {
-    type: String,
+    type: String as PropType<'text' | 'password'>,
     default: 'password',
   },
   maxlength: {
@@ -74,6 +89,10 @@ const props = defineProps({
       return propValidators.size.includes(value);
     },
   },
+  isMaterial: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const formTheme = computed(() => {
@@ -89,7 +108,7 @@ const updateFocus = (name: string, isFocused: boolean) => {
   // modelValue.value.focusedField = isFocused ? name : '';
 };
 
-const inputType = ref(props.type);
+const inputType = ref<'text' | 'password'>(props.type);
 
 const displayPassword = ref(false);
 const buttonText = computed(() => {
