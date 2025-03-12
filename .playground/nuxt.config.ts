@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   devServer: {
-    https: true,
+    https: false,
   },
   extends: ['..'],
   css: ['modern-normalize', './assets/styles/main.css'],

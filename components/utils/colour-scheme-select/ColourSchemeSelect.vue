@@ -99,7 +99,6 @@ const setColourSchemeAttr = async () => {
 };
 
 const handleInputActiveClass = () => {
-  console.log(`handleInputActiveClass`, currentActiveIndex.value);
   colourSchemeInputElements.value.forEach((element) => {
     element.classList.remove('active');
   });
