@@ -47,6 +47,19 @@
               </li>
             </ul>
 
+            <p>Select type of text input to display</p>
+            <ul class="flex-group">
+              <li>
+                <InputButtonSubmit type="button" @click.stop.prevent="inputVariant = 'normal'" button-text="Normal" theme="primary" size="normal" />
+              </li>
+              <li>
+                <InputButtonSubmit type="button" @click.stop.prevent="inputVariant = 'outlined'" button-text="Outlined" theme="primary" size="normal" />
+              </li>
+              <li>
+                <InputButtonSubmit type="button" @click.stop.prevent="inputVariant = 'underlined'" button-text="Underlined" theme="primary" size="normal" />
+              </li>
+            </ul>
+
             <FormWrapper width="medium">
               <template #default>
                 <ClientOnly>
@@ -55,33 +68,6 @@
 
                     <FormField width="wide" :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress)" :has-gutter="false">
                       <template #default>
-                        <FormField v-if="tagsData !== null" width="wide" :has-gutter="false">
-                          <template #default>
-                            <MultipleCheckboxes
-                              name="tags"
-                              legend="Choose tags (as checkboxes)"
-                              :required="true"
-                              label="Check between 3 and 8 tags"
-                              placeholder="eg. Type something here"
-                              :isButton="true"
-                              :errorMessage="formErrors?.tags?._errors[0] ?? ''"
-                              :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.tags)"
-                              v-model="state.tags"
-                              v-model:fieldData="tagsData"
-                              optionsLayout="inline"
-                              :theme
-                              :size
-                            >
-                              <template #description>
-                                <p class="label-description">This is description: optionsLayout = 'inline'</p>
-                              </template>
-                              <template #itemIcon>
-                                <Icon name="material-symbols:bookmark-add-outline" class="icon" />
-                              </template>
-                            </MultipleCheckboxes>
-                          </template>
-                        </FormField>
-
                         <InputTextWithLabel
                           v-model="state.emailAddress"
                           type="email"
@@ -97,7 +83,7 @@
                           :styleClassPassthrough="['style-1', 'style-2']"
                           :theme
                           :size
-                          :isMaterial="true"
+                          :inputVariant
                         >
                           <template #description>
                             <p class="body-normal">This is a description for username field</p>
@@ -125,6 +111,7 @@
                           :styleClassPassthrough="['style-1', 'style-2']"
                           :theme
                           :size
+                          :inputVariant
                         >
                           <template #left>
                             <Icon name="radix-icons:person" class="icon" />
@@ -148,11 +135,39 @@
                           :styleClassPassthrough="['style-1', 'style-2']"
                           :theme
                           :size
+                          :inputVariant
                         >
                           <template #right>
                             <Icon name="radix-icons:eye-open" class="icon" />
                           </template>
                         </InputPasswordWithLabel>
+                      </template>
+                    </FormField>
+
+                    <FormField v-if="tagsData !== null" width="wide" :has-gutter="false">
+                      <template #default>
+                        <MultipleCheckboxes
+                          name="tags"
+                          legend="Choose tags (as checkboxes)"
+                          :required="true"
+                          label="Check between 3 and 8 tags"
+                          placeholder="eg. Type something here"
+                          :isButton="true"
+                          :errorMessage="formErrors?.tags?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.tags)"
+                          v-model="state.tags"
+                          v-model:fieldData="tagsData"
+                          optionsLayout="inline"
+                          :theme
+                          :size
+                        >
+                          <template #description>
+                            <p class="label-description">This is description: optionsLayout = 'inline'</p>
+                          </template>
+                          <template #itemIcon>
+                            <Icon name="material-symbols:bookmark-add-outline" class="icon" />
+                          </template>
+                        </MultipleCheckboxes>
                       </template>
                     </FormField>
 
@@ -550,6 +565,32 @@ useHead({
   },
 });
 
+const inputVariant = ref('normal');
+const inputVariantData = ref<IFormMultipleOptions>({
+  data: [
+    {
+      id: 'normal',
+      name: 'normal',
+      value: 'normal',
+      label: 'Normal',
+    },
+    {
+      id: 'outlined',
+      name: 'outlined',
+      value: 'outlined',
+      label: 'Material - Outlined',
+    },
+    {
+      id: 'underlined',
+      name: 'underlined',
+      value: 'underlined',
+      label: 'Material - Underlined',
+    },
+  ],
+  total: 3,
+  skip: 0,
+  limit: 3,
+});
 const theme = ref('primary');
 const size = ref<'x-small' | 'small' | 'normal' | 'medium' | 'large'>('normal');
 const swapTheme = (newTheme: string) => {

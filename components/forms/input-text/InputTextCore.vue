@@ -3,7 +3,7 @@
     class="input-text-wrapper"
     :data-form-theme="formTheme"
     :data-size="size"
-    :class="[{ isMaterial: isMaterial }, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]"
+    :class="[inputVariant, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]"
   >
     <span v-if="hasLeftSlot" class="slot left-slot">
       <slot name="left"></slot>
@@ -98,13 +98,14 @@ const props = defineProps({
       return propValidators.size.includes(value);
     },
   },
-  isMaterial: {
-    type: Boolean,
-    default: false,
+  inputVariant: {
+    type: String as PropType<string>,
+    default: 'normal',
+    validator(value: string) {
+      return propValidators.inputVariant.includes(value);
+    },
   },
 });
-
-console.log('isMaterial: ', props.isMaterial);
 
 const slots = useSlots();
 const hasLeftSlot = computed(() => slots.left !== undefined);
@@ -157,22 +158,88 @@ onMounted(() => {
 <style lang="css">
 .input-text-wrapper {
   --_focus-box-shadow: var(--box-shadow-off);
+  --_input-text-core-color: var(--theme-form-input-text-color-normal);
+
+  --_input-text-wrapper-background-color: var(--theme-form-input-bg-normal);
+
+  --_input-text-wrapper-border: var(--form-element-border-width) solid var(--theme-form-input-border);
+  --_input-text-wrapper-border-radius: var(--form-input-border-radius);
+
+  --_input-text-wrapper-outline: var(--form-element-outline-width) solid var(--theme-form-input-outline);
+  --_input-text-wrapper-opacity: 1;
+  --_input-text-wrapper-box-shadow: var(--_focus-box-shadow);
+  --_input-text-wrapper-margin-inline: 0;
+
+  &.underlined {
+    --_input-text-core-color: var(--theme-form-input-text-color-underlined);
+    --_input-text-wrapper-background-color: var(--theme-form-input-bg-underlined);
+  }
+
+  &.outlined {
+    --_input-text-wrapper-margin-inline: 1px;
+    --_input-text-wrapper-background-color: var(--theme-form-input-bg-outlined);
+  }
+
+  &.normal {
+    &:focus-within {
+      --_input-text-wrapper-box-shadow: var(--box-shadow-on);
+      --_input-text-wrapper-outline: var(--form-element-outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 90%);
+    }
+  }
+
+  &:not(.normal) {
+    --_input-text-wrapper-border: none;
+    --_input-text-wrapper-box-shadow: none;
+    --_input-text-wrapper-outline: none;
+    --_input-text-wrapper-opacity: 0;
+
+    &:focus {
+      --_input-text-wrapper-border: none;
+      --_input-text-wrapper-box-shadow: none;
+      --_input-text-wrapper-outline: none;
+      --_input-text-wrapper-background-color: transparent;
+    }
+
+    &:focus-within {
+      --_input-text-wrapper-border: none;
+      --_input-text-wrapper-box-shadow: none;
+      --_input-text-wrapper-outline: none;
+      --_input-text-wrapper-background-color: transparent;
+    }
+
+    &.active,
+    &.dirty {
+      --_input-text-wrapper-border: none;
+      --_input-text-wrapper-box-shadow: none;
+      --_input-text-wrapper-outline: none;
+      --_input-text-wrapper-background-color: transparent;
+
+      --_input-text-wrapper-opacity: 1;
+    }
+  }
 
   display: flex;
   align-items: center;
 
-  background-color: var(--theme-form-input-bg);
-  border-radius: var(--form-element-border-width);
-  border: var(--form-element-border-width) solid var(--theme-form-input-border);
-  outline: var(--form-element-outline-width) solid var(--theme-form-input-outline);
-  box-shadow: var(--_focus-box-shadow);
+  background-color: var(--_input-text-wrapper-background-color);
+  border-radius: var(--_input-text-wrapper-border-radius);
+  border: var(--_input-text-wrapper-border);
+  outline: var(--_input-text-wrapper-outline);
+  box-shadow: var(--_input-text-wrapper-box-shadow);
+  opacity: var(--_input-text-wrapper-opacity);
+
+  margin-inline: var(--_input-text-wrapper-margin-inline);
+
+  &:not(.normal) {
+    transition: opacity 0.2s ease-in-out;
+  }
 
   &:not(:has(.input-button-core)) {
     .slot {
       display: inline-block;
 
       .icon {
-        color: var(--theme-form-input-text);
+        color: var(--_input-text-core-color);
         aspect-ratio: 1;
         height: var(--form-icon-size);
         width: var(--form-icon-size);
@@ -198,11 +265,6 @@ onMounted(() => {
     }
   }
 
-  &:focus-within {
-    box-shadow: var(--box-shadow-on);
-    outline: var(--form-element-outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 90%);
-  }
-
   .input-text-core {
     background-color: transparent;
     border: none;
@@ -210,7 +272,7 @@ onMounted(() => {
     box-shadow: none;
     flex-grow: 1;
 
-    color: var(--theme-form-input-text);
+    color: var(--_input-text-core-color);
     font-family: var(--font-family);
     font-size: var(--form-element-font-size);
     line-height: var(--form-element-line-height);
@@ -226,13 +288,6 @@ onMounted(() => {
       font-style: italic;
       font-weight: 400;
     }
-
-    /* WTH is --_focus-box-shadow undefined when attempting update here?? */
-    /*
-    &:focus-visible {
-      --_focus-box-shadow: var(--box-shadow-on);
-   :has(:has( }
-    */
   }
 
   &:has(.has-left-button),
@@ -256,23 +311,6 @@ onMounted(() => {
       border-left: 2px solid var(--theme-btn-bg-hover);
     }
   }
-
-  /* Material Design Styles */
-
-  &.isMaterial {
-    background-color: transparent;
-    border-radius: initial;
-    border: none;
-    outline: none;
-    box-shadow: none;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
-    &.active,
-    &.dirty {
-      opacity: 1;
-    }
-  }
 }
 
 input:autofill,
@@ -280,11 +318,11 @@ input:-internal-autofill-selected,
 input:-webkit-autofill-strong-password,
 input:-webkit-autofill-strong-password-viewable,
 input:-webkit-autofill-and-obscured {
-  background-color: var(--theme-form-input-bg) !important;
+  background-color: var(--theme-form-input-bg-normal) !important;
   background-image: none !important;
-  color: var(--theme-form-input-text) !important;
-  -webkit-box-shadow: 0 0 0rem 1000px var(--theme-form-input-bg) inset;
-  -webkit-text-fill-color: var(--theme-form-input-text);
+  color: var(--theme-form-input-text-color-normal) !important;
+  -webkit-box-shadow: 0 0 0rem 1000px var(--theme-form-input-bg-normal) inset;
+  -webkit-text-fill-color: var(--theme-form-input-text-color-normal);
   transition: background-color 5000s ease-in-out 0s;
 }
 </style>

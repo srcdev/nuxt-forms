@@ -113,7 +113,7 @@ const minLength = computed(() => `${props.max.toString().length + 1}em`);
 
   width: fit-content;
 
-  background-color: var(--theme-form-input-bg);
+  background-color: var(--theme-form-input-bg-normal);
   border-radius: var(--form-element-border-width);
   border: var(--form-element-border-width) solid var(--theme-form-input-border);
   outline: var(--form-element-outline-width) solid var(--theme-form-input-outline);
@@ -147,8 +147,8 @@ const minLength = computed(() => `${props.max.toString().length + 1}em`);
     outline: none;
     box-shadow: none;
 
-    background-color: var(--theme-form-input-bg);
-    color: var(--theme-form-input-text);
+    background-color: var(--theme-form-input-bg-normal);
+    color: var(--theme-form-input-text-color-normal);
     font-family: var(--font-family);
     font-size: var(--form-element-font-size);
     line-height: var(--form-element-line-height);

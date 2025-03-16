@@ -1,13 +1,21 @@
 :root {
   [data-form-theme='primary'] {
-    --theme-form-input-bg: light-dark(var(--gray-1), var(--gray-4));
+    --theme-form-input-bg-normal: light-dark(var(--gray-1), var(--gray-4));
+    --theme-form-input-bg-outlined: light-dark(var(--gray-1), var(--gray-4));
+    --theme-form-input-bg-underlined: light-dark(var(--gray-0), var(--gray-9));
     --theme-form-input-border: var(--blue-8);
     --theme-form-input-border-active: var(--blue-2);
     --theme-form-input-border-focus: var(--blue-2);
     --theme-form-input-outline: white;
     --theme-form-input-outline-active: var(--blue-6);
     --theme-form-input-outline-focus: var(--blue-6);
-    --theme-form-input-text: light-dark(var(--gray-10), var(--gray-11));
+    --theme-form-input-text-color-normal: light-dark(var(--gray-11), var(--gray-11));
+    --theme-form-input-text-color-outlined: light-dark(var(--gray-10), var(--gray-11));
+    --theme-form-input-text-color-underlined: light-dark(var(--gray-11), var(--gray-1));
+
+    --theme-form-input-text-label-color-normal: light-dark(var(--gray-11), var(--gray-1));
+    --theme-form-input-text-label-color-outlined: light-dark(var(--gray-10), var(--gray-11));
+    --theme-form-input-text-label-color-underlined: light-dark(var(--gray-11), var(--gray-1));
 
     /* --theme-form-focus-box-shadow: light-dark(var(--blue-12), var(--blue-2)); */
     --theme-form-focus-box-shadow: light-dark(red, yellowgreen);
@@ -26,7 +34,7 @@
     --theme-form-radio-shadow-focus: var(--blue-6);
     --theme-form-radio-symbol: var(--blue-12);
 
-    --theme-form-range-accent-color: light-dark(var(--blue-12), var(--blue-));
+    --theme-form-range-accent-color: light-dark(var(--blue-12), var(--blue-1));
 
     /*
     * ToggleSwitch

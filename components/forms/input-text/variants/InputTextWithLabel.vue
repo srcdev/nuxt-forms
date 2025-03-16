@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="input-text-with-label" :data-form-theme="formTheme" :class="[elementClasses, { isMaterial: isMaterial }, { dirty: isDirty }, { active: isActive }]">
+    <div class="input-text-with-label" :data-form-theme="formTheme" :class="[elementClasses, inputVariant, { dirty: isDirty }, { active: isActive }]">
       <label :for="id" class="input-text-label">{{ label }}</label>
 
-      <div v-if="!isMaterial && hasDescriptionSlot" :id="`${id}-description`">
+      <div v-if="inputVariant === 'normal' && hasDescriptionSlot" :id="`${id}-description`">
         <slot name="description"></slot>
       </div>
 
@@ -25,7 +25,7 @@
         :theme
         :ariaDescribedby
         :size
-        :isMaterial
+        :inputVariant
       >
         <template v-if="hasLeftSlot" #left>
           <slot name="left"></slot>
@@ -38,7 +38,7 @@
       <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="errorId" :isDetached="false" />
     </div>
 
-    <div v-if="isMaterial && hasDescriptionSlot" :id="`${id}-description`">
+    <div v-if="inputVariant !== 'normal' && hasDescriptionSlot" :id="`${id}-description`">
       <slot name="description"></slot>
     </div>
   </div>
@@ -104,9 +104,12 @@ const props = defineProps({
       return propValidators.size.includes(value);
     },
   },
-  isMaterial: {
-    type: Boolean,
-    default: false,
+  inputVariant: {
+    type: String as PropType<string>,
+    default: 'normal',
+    validator(value: string) {
+      return propValidators.inputVariant.includes(value);
+    },
   },
 });
 
@@ -154,62 +157,119 @@ watch(
 
 <style lang="css">
 .input-text-with-label {
+  --_input-text-with-label-margin-block-start: 0;
+  --_input-text-with-label-background-color: transparent;
+
+  --_input-text-wrapper-border: var(--form-element-border-width) solid var(--theme-form-input-border);
+  --_input-text-wrapper-border-radius: var(--form-input-border-radius);
+  --_input-text-wrapper-border-underlined: var(--form-element-border-width-underlined) solid var(--theme-form-input-border);
+  --_input-text-wrapper-outline: var(--form-element-outline-width) solid var(--theme-form-input-outline);
+  --_input-text-wrapper-box-shadow: var(--_focus-box-shadow);
+  --_input-text-wrapper-padding-block: 0;
+
   --_focus-box-shadow: var(--box-shadow-off);
 
-  .input-text-label {
-    display: block;
-    margin-block: 0.8rem;
-    font-size: var(--step-1);
-    font-weight: normal;
-    line-height: 1.5;
+  /* Label vars */
+  --_label-text-color: var(--theme-form-input-text-label-color-normal);
+  --_label-text-margin-block: 0.8rem;
+  --_label-text-size: var(--step-1);
+  --_label-text-weight: normal;
+  --_label-text-line-height: 1.5;
+
+  &.underlined {
+    --_label-text-color: var(--theme-form-input-text-label-color-underlined);
+    --_label-offset: 0 0;
+    --_input-text-with-label-background-color: var(--theme-form-input-bg-underlined);
+    --_input-text-wrapper-border-radius: 0;
+
+    &:has(.input-text-wrapper.active),
+    &:has(.input-text-wrapper.dirty) {
+      --_label-offset: 0 -2.8rem;
+      /* font-size: var(--step-1); */
+      /* line-height: 1.5; */
+      /* padding: 0.2rem 1.2rem; */
+    }
   }
 
-  /* Material Design Styles */
+  &.outlined {
+    --_label-text-color: var(--theme-form-input-text-label-color-outlined);
 
-  &.isMaterial {
-    --_label-offset: 0 0;
+    --_label-offset: 1rem 0;
+    --_input-text-with-label-background-color: var(--theme-form-input-bg-normal);
 
+    --_input-text-wrapper-padding-block: 0.4em;
+
+    &:has(.input-text-wrapper.active),
+    &:has(.input-text-wrapper.dirty) {
+      --_label-offset: 1rem -2.8rem;
+      /* font-size: var(--step-1); */
+      /* line-height: 1.5; */
+      /* padding: 0.2rem 1.2rem; */
+    }
+  }
+
+  &:not(.normal) {
+    --_input-text-with-label-margin-block-start: 2em;
+
+    &:has(.input-text-wrapper.active),
+    &:has(.input-text-wrapper.dirty) {
+      /* --_label-offset: 1rem -2.8rem; */
+      /* font-size: var(--step-1); */
+      /* line-height: 1.5; */
+      /* padding: 0.2rem 1.2rem; */
+    }
+
+    &:focus-within {
+      --_input-text-wrapper-box-shadow: var(--box-shadow-on);
+      --_input-text-wrapper-outline: var(--form-element-outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 90%);
+    }
+  }
+
+  /*
+  * Apply generic styles
+  **/
+
+  background-color: var(--_input-text-with-label-background-color);
+  border-radius: var(--_input-text-wrapper-border-radius);
+
+  &.underlined {
+    border-bottom: var(--_input-text-wrapper-border-underlined);
+  }
+
+  &.outlined {
+    border: var(--_input-text-wrapper-border);
+    outline: var(--_input-text-wrapper-outline);
+    box-shadow: var(--_input-text-wrapper-box-shadow);
+    padding-block: var(--_input-text-wrapper-padding-block);
+  }
+
+  &:not(.normal) {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
-    grid-template-areas: 'material-text-stack';
+    grid-template-areas: 'underlined-text-stack';
 
-    background-color: var(--theme-form-input-bg);
-    border-radius: var(--form-element-border-width);
-    border: var(--form-element-border-width) solid var(--theme-form-input-border);
-    outline: var(--form-element-outline-width) solid var(--theme-form-input-outline);
-    box-shadow: var(--_focus-box-shadow);
-
-    padding: 0 0.8rem;
+    margin-block-start: var(--_input-text-with-label-margin-block-start);
 
     .input-text-label {
-      grid-area: material-text-stack;
-
-      display: inline-block;
-      width: fit-content;
-      padding: 0.2rem 1.2rem;
-      background-color: var(--theme-form-input-bg);
-      border-radius: 0.4em;
-      color: var(--theme-form-input-text);
-      translate: var(--_label-offset);
-
-      font-size: var(--step-2);
-      font-weight: normal;
-      line-height: 1.5;
-
-      transition: font-size 0.2s ease-in-out, translate 0.2s ease-in-out;
-
-      &:has(+ .input-text-wrapper.active),
-      &:has(+ .input-text-wrapper.dirty) {
-        --_label-offset: 0 -3rem;
-        /* font-size: var(--step-2); */
-        /* padding: 0.2rem 1.2rem; */
-      }
+      grid-area: underlined-text-stack;
+      z-index: 2;
     }
-
     .input-text-wrapper {
-      grid-area: material-text-stack;
+      grid-area: underlined-text-stack;
+      z-index: 1;
     }
+  }
+
+  .input-text-label {
+    display: block;
+    color: var(--_label-text-color);
+    margin-block: var(--_label-text-margin-block);
+    font-size: var(--_label-text-size);
+    font-weight: var(--_label-text-weight);
+    line-height: var(--_label-text-line-height);
+    translate: var(--_label-offset);
+    transition: font-size 0.2s ease-in-out, translate 0.2s ease-in-out;
   }
 }
 </style>

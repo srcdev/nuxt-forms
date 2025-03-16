@@ -29,6 +29,7 @@ export const propValidators = {
   radioAppearance: [null, 'with-decorator'],
   optionsLayout: ['block', 'inline', 'equal-widths'],
   labelWeight: ['normal', 'semi-bold', 'bold'],
+  inputVariant: ['normal', 'outlined', 'underlined'],
   inputTypesButton: ['button', 'cancel', 'reset', 'submit'],
   inputTypesText: ['text', 'email', 'password', 'number', 'tel', 'url'],
   inputMode: ['text', 'email', 'tel', 'url', 'search', 'numeric', 'none', 'decimal'],

@@ -1,13 +1,21 @@
 :root {
   [data-form-theme='success'] {
-    --theme-form-input-bg: light-dark(var(--gray-1), var(--gray-4));
+    --theme-form-input-bg-normal: light-dark(var(--gray-1), var(--gray-4));
+    --theme-form-input-bg-outlined: light-dark(var(--gray-1), var(--gray-4));
+    --theme-form-input-bg-underlined: light-dark(var(--gray-1), var(--gray-4));
     --theme-form-input-border: var(--green-8);
     --theme-form-input-border-active: var(--green-2);
     --theme-form-input-border-focus: var(--green-2);
     --theme-form-input-outline: white;
     --theme-form-input-outline-active: var(--green-6);
     --theme-form-input-outline-focus: var(--green-6);
-    --theme-form-input-text: light-dark(var(--gray-10), var(--gray-11));
+    --theme-form-input-text-color-normal: light-dark(var(--gray-10), var(--gray-11));
+    --theme-form-input-text-color-outlined: light-dark(var(--gray-10), var(--gray-1));
+    --theme-form-input-text-color-underlined: light-dark(var(--gray-11), var(--gray-1));
+
+    --theme-form-input-text-label-color-normal: light-dark(var(--gray-11), var(--gray-1));
+    --theme-form-input-text-label-color-outlined: light-dark(var(--gray-10), var(--gray-11));
+    --theme-form-input-text-label-color-underlined: light-dark(var(--gray-11), var(--gray-1));
 
     --theme-form-focus-box-shadow: light-dark(var(--green-12), var(--green-2));
 

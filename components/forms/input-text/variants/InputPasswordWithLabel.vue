@@ -13,7 +13,7 @@
     :styleClassPassthrough
     :theme
     :size
-    :isMaterial
+    :inputVariant
   >
     <template #right>
       <InputButtonCore
@@ -89,9 +89,12 @@ const props = defineProps({
       return propValidators.size.includes(value);
     },
   },
-  isMaterial: {
-    type: Boolean,
-    default: false,
+  inputVariant: {
+    type: String as PropType<string>,
+    default: 'normal',
+    validator(value: string) {
+      return propValidators.inputVariant.includes(value);
+    },
   },
 });
 

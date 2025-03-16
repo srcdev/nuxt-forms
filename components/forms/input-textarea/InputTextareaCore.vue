@@ -107,7 +107,7 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
   display: flex;
   align-items: center;
 
-  background-color: var(--theme-form-input-bg);
+  background-color: var(--theme-form-input-bg-normal);
   border-radius: var(--form-element-border-width);
   border: var(--_border-width) solid var(--theme-form-input-border);
 
@@ -122,7 +122,7 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
     padding-inline: 0.8rem;
 
     .icon {
-      color: var(--theme-form-input-text);
+      color: var(--theme-form-input-text-color-normal);
     }
   }
 
@@ -147,7 +147,7 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
     box-shadow: none;
     flex-grow: 1;
 
-    color: var(--theme-form-input-text);
+    color: var(--theme-form-input-text-color-normal);
     font-family: var(--font-family);
     font-size: var(--form-element-font-size);
     line-height: var(--form-element-line-height);
