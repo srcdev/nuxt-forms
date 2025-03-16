@@ -1,5 +1,5 @@
 <template>
-  <div class="input-text-with-label" :data-form-theme="formTheme" :class="[elementClasses, { dirty: isDirty }, { active: isActive }]">
+  <div class="input-text-with-label" :data-form-theme="formTheme" :class="[inputVariant, elementClasses, { dirty: isDirty }, { active: isActive }]">
     <label :for="id" class="input-text-label body-normal-bold">{{ label }}</label>
 
     <div v-if="hasDescriptionSlot" :id="`${id}-description`">

@@ -566,31 +566,31 @@ useHead({
 });
 
 const inputVariant = ref('normal');
-const inputVariantData = ref<IFormMultipleOptions>({
-  data: [
-    {
-      id: 'normal',
-      name: 'normal',
-      value: 'normal',
-      label: 'Normal',
-    },
-    {
-      id: 'outlined',
-      name: 'outlined',
-      value: 'outlined',
-      label: 'Material - Outlined',
-    },
-    {
-      id: 'underlined',
-      name: 'underlined',
-      value: 'underlined',
-      label: 'Material - Underlined',
-    },
-  ],
-  total: 3,
-  skip: 0,
-  limit: 3,
-});
+// const inputVariantData = ref<IFormMultipleOptions>({
+//   data: [
+//     {
+//       id: 'normal',
+//       name: 'normal',
+//       value: 'normal',
+//       label: 'Normal',
+//     },
+//     {
+//       id: 'outlined',
+//       name: 'outlined',
+//       value: 'outlined',
+//       label: 'Material - Outlined',
+//     },
+//     {
+//       id: 'underlined',
+//       name: 'underlined',
+//       value: 'underlined',
+//       label: 'Material - Underlined',
+//     },
+//   ],
+//   total: 3,
+//   skip: 0,
+//   limit: 3,
+// });
 const theme = ref('primary');
 const size = ref<'x-small' | 'small' | 'normal' | 'medium' | 'large'>('normal');
 const swapTheme = (newTheme: string) => {
