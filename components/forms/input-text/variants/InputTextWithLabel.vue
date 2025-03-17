@@ -173,8 +173,9 @@ watch(
   --_label-text-color: var(--theme-form-input-text-label-color-normal);
   --_label-text-margin-block: 0.8rem;
   --_label-text-size: var(--step-1);
-  --_label-text-weight: normal;
+  --_label-text-weight: bolder;
   --_label-text-line-height: 1.5;
+  --_label-text-background-color: var(--_input-text-with-label-background-color);
 
   &.underlined {
     --_label-text-color: var(--theme-form-input-text-label-color-underlined);
@@ -185,6 +186,7 @@ watch(
     &:has(.input-text-wrapper.active),
     &:has(.input-text-wrapper.dirty) {
       --_label-offset: 0 -2.8rem;
+      --_label-text-weight: normal;
       /* font-size: var(--step-1); */
       /* line-height: 1.5; */
       /* padding: 0.2rem 1.2rem; */
@@ -202,6 +204,7 @@ watch(
     &:has(.input-text-wrapper.active),
     &:has(.input-text-wrapper.dirty) {
       --_label-offset: 1rem -2.8rem;
+      --_label-text-weight: normal;
       /* font-size: var(--step-1); */
       /* line-height: 1.5; */
       /* padding: 0.2rem 1.2rem; */
@@ -262,13 +265,15 @@ watch(
   }
 
   .input-text-label {
-    display: block;
+    display: inline-block;
     color: var(--_label-text-color);
+    background-color: var(--_label-text-background-color);
     margin-block: var(--_label-text-margin-block);
     font-size: var(--_label-text-size);
     font-weight: var(--_label-text-weight);
     line-height: var(--_label-text-line-height);
     translate: var(--_label-offset);
+    width: fit-content;
     transition: font-size 0.2s ease-in-out, translate 0.2s ease-in-out;
   }
 }
