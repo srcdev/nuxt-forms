@@ -28,3 +28,9 @@ a {
   font-family: var(--font-family);
   font-size: var(--step-1);
 }
+
+body {
+  &.page-theme-grey {
+    background-color: lightseagreen;
+  }
+}

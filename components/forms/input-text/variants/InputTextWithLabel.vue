@@ -172,22 +172,29 @@ watch(
   /* Label vars */
   --_label-text-color: var(--theme-form-input-text-label-color-normal);
   --_label-text-margin-block: 0.8rem;
-  --_label-text-size: var(--step-1);
-  --_label-text-weight: bolder;
+  --_label-text-size: var(--step-2);
+  --_label-text-weight: normal;
   --_label-text-line-height: 1.5;
   --_label-text-background-color: var(--_input-text-with-label-background-color);
 
   &.underlined {
     --_label-text-color: var(--theme-form-input-text-label-color-underlined);
-    --_label-offset: 0 0;
-    --_input-text-with-label-background-color: var(--theme-form-input-bg-underlined);
-    --_input-text-wrapper-border-radius: 0;
+    --_label-offset: 1rem 0;
+    /* --_input-text-with-label-background-color: var(--theme-form-input-bg-underlined); */
+    --_input-text-with-label-background-color: rgba(255, 255, 255, 0.1);
+
+    --_input-text-wrapper-underlined-border-radius-top-left: 0;
+    --_input-text-wrapper-underlined-border-radius-top-right: 0;
+    --_input-text-wrapper-underlined-border-radius-bottom-left: 4px;
+    --_input-text-wrapper-underlined-border-radius-bottom-right: 4px;
+
+    --_label-text-background-color: transparent;
 
     &:has(.input-text-wrapper.active),
     &:has(.input-text-wrapper.dirty) {
-      --_label-offset: 0 -2.8rem;
-      --_label-text-weight: normal;
-      /* font-size: var(--step-1); */
+      --_label-offset: 0 -4.2rem;
+      --_label-text-weight: bolder;
+      --_label-text-size: var(--step-1);
       /* line-height: 1.5; */
       /* padding: 0.2rem 1.2rem; */
     }
@@ -205,14 +212,14 @@ watch(
     &:has(.input-text-wrapper.dirty) {
       --_label-offset: 1rem -2.8rem;
       --_label-text-weight: normal;
-      /* font-size: var(--step-1); */
+      /* --_label-text-size: var(--step-1); */
       /* line-height: 1.5; */
       /* padding: 0.2rem 1.2rem; */
     }
   }
 
   &:not(.normal) {
-    --_input-text-with-label-margin-block-start: 2em;
+    --_input-text-with-label-margin-block-start: 3em;
 
     &:has(.input-text-wrapper.active),
     &:has(.input-text-wrapper.dirty) {
@@ -234,9 +241,14 @@ watch(
 
   background-color: var(--_input-text-with-label-background-color);
   border-radius: var(--_input-text-wrapper-border-radius);
+  /* overflow: clip; */
 
   &.underlined {
     border-bottom: var(--_input-text-wrapper-border-underlined);
+    border-top-left-radius: var(--_input-text-wrapper-underlined-border-radius-top-left);
+    border-top-right-radius: var(--_input-text-wrapper-underlined-border-radius-top-right);
+    border-bottom-left-radius: var(--_input-text-wrapper-underlined-border-radius-bottom-left);
+    border-bottom-right-radius: var(--_input-text-wrapper-underlined-border-radius-bottom-right);
   }
 
   &.outlined {
@@ -275,6 +287,11 @@ watch(
     translate: var(--_label-offset);
     width: fit-content;
     transition: font-size 0.2s ease-in-out, translate 0.2s ease-in-out;
+
+    &:not(.normal) {
+      display: flex;
+      align-items: center;
+    }
   }
 }
 </style>

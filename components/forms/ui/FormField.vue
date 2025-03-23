@@ -32,10 +32,10 @@ defineProps({
 .form-field {
   --_gutter-width: 0rem;
   --_max-width: 400px;
-  --_background-color: var(--page-bg);
+  --_background-color: transparent;
   --_border-radius: 0.4rem;
 
-  background-color: var(--gray-2);
+  background-color: var(--_background-color);
   border-radius: var(--_border-radius);
   margin-inline: auto;
   margin-block: 1lh;
@@ -45,6 +45,10 @@ defineProps({
 
   &.error {
     background-color: var(--theme-error-surface);
+  }
+
+  &:has(.underline) {
+    --_background-color: var(--theme-form-input-bg-underlined);
   }
 
   .form-field-inner {

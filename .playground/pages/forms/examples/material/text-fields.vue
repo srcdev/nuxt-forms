@@ -561,7 +561,7 @@ useHead({
   title: 'Text Field Example',
   meta: [{ name: 'description', content: 'Homepage' }],
   bodyAttrs: {
-    class: '',
+    class: 'page-theme-grey-XX',
   },
 });
 

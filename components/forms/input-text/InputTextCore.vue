@@ -169,10 +169,13 @@ onMounted(() => {
   --_input-text-wrapper-opacity: 1;
   --_input-text-wrapper-box-shadow: var(--_focus-box-shadow);
   --_input-text-wrapper-margin-inline: 0;
+  --_input-text-wrapper-padding-block: 0;
 
   &.underlined {
     --_input-text-core-color: var(--theme-form-input-text-color-underlined);
-    --_input-text-wrapper-background-color: var(--theme-form-input-bg-underlined);
+    /* --_input-text-wrapper-background-color: var(--theme-form-input-bg-underlined); */
+    --_input-text-wrapper-background-color: transparent;
+    --_input-text-wrapper-padding-block: 0.5rem;
   }
 
   &.outlined {
@@ -229,6 +232,7 @@ onMounted(() => {
   opacity: var(--_input-text-wrapper-opacity);
 
   margin-inline: var(--_input-text-wrapper-margin-inline);
+  padding-block: var(--_input-text-wrapper-padding-block);
 
   &:not(.normal) {
     transition: opacity 0.2s ease-in-out;
