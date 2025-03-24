@@ -86,7 +86,7 @@
                           :inputVariant
                         >
                           <template #description>
-                            <p class="body-normal">This is a description for username field</p>
+                            <p class="body-normal">This is a description for email address field</p>
                           </template>
                           <template #left>
                             <Icon name="radix-icons:envelope-closed" class="icon" />
@@ -144,6 +144,26 @@
                       </template>
                     </FormField>
 
+                    <FormField width="wide" :has-gutter="false">
+                      <template #default>
+                        <InputTextareaWithLabel
+                          v-model="state.message"
+                          :maxlength="fieldMaxLength('message')"
+                          name="message"
+                          placeholder="Type your message here"
+                          label="Your mesage"
+                          :errorMessage="formErrors?.message?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.message)"
+                          :required="true"
+                          :styleClassPassthrough="['style-1', 'style-2']"
+                          :theme
+                          :size
+                          :inputVariant
+                        >
+                        </InputTextareaWithLabel>
+                      </template>
+                    </FormField>
+
                     <FormField v-if="tagsData !== null" width="wide" :has-gutter="false">
                       <template #default>
                         <MultipleCheckboxes
@@ -168,25 +188,6 @@
                             <Icon name="material-symbols:bookmark-add-outline" class="icon" />
                           </template>
                         </MultipleCheckboxes>
-                      </template>
-                    </FormField>
-
-                    <FormField width="wide" :has-gutter="false">
-                      <template #default>
-                        <InputTextareaWithLabel
-                          v-model="state.message"
-                          :maxlength="fieldMaxLength('message')"
-                          name="message"
-                          placeholder="Type your message here"
-                          label="Your mesage"
-                          :errorMessage="formErrors?.message?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.message)"
-                          :required="true"
-                          :styleClassPassthrough="['style-1', 'style-2']"
-                          :theme
-                          :size
-                        >
-                        </InputTextareaWithLabel>
                       </template>
                     </FormField>
 

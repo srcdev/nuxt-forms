@@ -3,7 +3,7 @@
     class="input-textarea-wrapper"
     :data-form-theme="formTheme"
     :data-size="size"
-    :class="[{ dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]"
+    :class="[inputVariant, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]"
   >
     <span v-if="hasLeftSlot" class="slot left-slot">
       <slot name="left"></slot>
@@ -75,6 +75,13 @@ const props = defineProps({
       return propValidators.size.includes(value);
     },
   },
+  inputVariant: {
+    type: String as PropType<string>,
+    default: 'normal',
+    validator(value: string) {
+      return propValidators.inputVariant.includes(value);
+    },
+  },
 });
 
 const slots = useSlots();
@@ -100,36 +107,91 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
 <style lang="css">
 .input-textarea-wrapper {
-  --_gutter: 1.2rem;
-  --_border-width: var(--form-element-border-width);
-  --_outline-width: var(--form-element-border-width);
+  --_focus-box-shadow: var(--box-shadow-off);
+  --_input-textarea-core-color: var(--theme-form-input-text-color-normal);
+
+  --_input-textarea-wrapper-background-color: var(--theme-form-input-bg-normal);
+
+  --_input-textarea-wrapper-border: var(--form-element-border-width) solid var(--theme-form-input-border);
+  --_input-textarea-wrapper-border-radius: var(--form-input-border-radius);
+
+  --_input-textarea-wrapper-outline: var(--form-element-outline-width) solid var(--theme-form-input-outline);
+  --_input-textarea-wrapper-opacity: 1;
+  --_input-textarea-wrapper-box-shadow: var(--_focus-box-shadow);
+  --_input-textarea-wrapper-margin-inline: 0;
+  --_input-textarea-wrapper-padding-block: 0;
+
+  &.underlined {
+    --_input-textarea-core-color: var(--theme-form-input-text-color-underlined);
+    --_input-textarea-wrapper-background-color: transparent;
+    --_input-textarea-wrapper-padding-block: 0.5rem;
+  }
+
+  &.outlined {
+    --_input-textarea-wrapper-margin-inline: 1px;
+    --_input-textarea-wrapper-background-color: var(--theme-form-input-bg-outlined);
+  }
+
+  &.normal {
+    &:focus-within {
+      --_input-textarea-wrapper-box-shadow: var(--box-shadow-on);
+      --_input-textarea-wrapper-outline: var(--form-element-outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 90%);
+    }
+  }
+
+  &:not(.normal) {
+    --_input-textarea-wrapper-border: none;
+    --_input-textarea-wrapper-box-shadow: none;
+    --_input-textarea-wrapper-outline: none;
+    --_input-textarea-wrapper-opacity: 0;
+
+    &:focus {
+      --_input-textarea-wrapper-border: none;
+      --_input-textarea-wrapper-box-shadow: none;
+      --_input-textarea-wrapper-outline: none;
+      --_input-textarea-wrapper-background-color: transparent;
+    }
+
+    &:focus-within {
+      --_input-textarea-wrapper-border: none;
+      --_input-textarea-wrapper-box-shadow: none;
+      --_input-textarea-wrapper-outline: none;
+      --_input-textarea-wrapper-background-color: transparent;
+    }
+
+    &.active,
+    &.dirty {
+      --_input-textarea-wrapper-border: none;
+      --_input-textarea-wrapper-box-shadow: none;
+      --_input-textarea-wrapper-outline: none;
+      --_input-textarea-wrapper-background-color: transparent;
+
+      --_input-textarea-wrapper-opacity: 1;
+    }
+  }
 
   display: flex;
   align-items: center;
 
-  background-color: var(--theme-form-input-bg-normal);
-  border-radius: var(--form-element-border-width);
-  border: var(--_border-width) solid var(--theme-form-input-border);
+  background-color: var(--_input-textarea-wrapper-background-color);
+  border-radius: var(--_input-textarea-wrapper-border-radius);
+  border: var(--_input-textarea-wrapper-border);
+  outline: var(--_input-textarea-wrapper-outline);
+  box-shadow: var(--_input-textarea-wrapper-box-shadow);
+  opacity: var(--_input-textarea-wrapper-opacity);
 
-  &:focus-within {
-    border: var(--_border-width) solid var(--theme-form-input-border-focus);
-    outline: var(--_outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 50%);
-    box-shadow: var(--form-focus-box-shadow);
-  }
+  margin-inline: var(--_input-textarea-wrapper-margin-inline);
+  padding-block: var(--_input-textarea-wrapper-padding-block);
 
-  .slot {
-    display: inline-block;
-    padding-inline: 0.8rem;
-
-    .icon {
-      color: var(--theme-form-input-text-color-normal);
-    }
+  &:not(.normal) {
+    transition: opacity 0.2s ease-in-out;
   }
 
   &.has-left-slot {
     .left-slot {
       display: flex;
       align-items: center;
+      margin-inline-start: 1rem;
     }
   }
 
@@ -137,6 +199,7 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
     .right-slot {
       display: flex;
       align-items: center;
+      margin-inline-end: 1rem;
     }
   }
 
@@ -147,7 +210,10 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
     box-shadow: none;
     flex-grow: 1;
 
-    color: var(--theme-form-input-text-color-normal);
+    min-height: 4lh;
+    field-sizing: content;
+
+    color: var(--_input-textarea-core-color);
     font-family: var(--font-family);
     font-size: var(--form-element-font-size);
     line-height: var(--form-element-line-height);
@@ -155,10 +221,6 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
     padding-inline: var(--form-text-padding-inline);
     padding-block-start: var(--form-element-padding-block-start);
     padding-block-end: var(--form-element-padding-block-end);
-
-    min-height: 5em;
-
-    field-sizing: content;
 
     &::placeholder,
     &::-webkit-input-placeholder {

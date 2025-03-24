@@ -180,8 +180,7 @@ watch(
   &.underlined {
     --_label-text-color: var(--theme-form-input-text-label-color-underlined);
     --_label-offset: 1rem 0;
-    /* --_input-text-with-label-background-color: var(--theme-form-input-bg-underlined); */
-    --_input-text-with-label-background-color: rgba(255, 255, 255, 0.1);
+    --_input-text-with-label-background-color: color-mix(in srgb, currentColor 5%, transparent);
 
     --_input-text-wrapper-underlined-border-radius-top-left: 0;
     --_input-text-wrapper-underlined-border-radius-top-right: 0;
@@ -286,6 +285,7 @@ watch(
     line-height: var(--_label-text-line-height);
     translate: var(--_label-offset);
     width: fit-content;
+    height: fit-content;
     transition: font-size 0.2s ease-in-out, translate 0.2s ease-in-out;
 
     &:not(.normal) {

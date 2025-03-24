@@ -173,7 +173,6 @@ onMounted(() => {
 
   &.underlined {
     --_input-text-core-color: var(--theme-form-input-text-color-underlined);
-    /* --_input-text-wrapper-background-color: var(--theme-form-input-bg-underlined); */
     --_input-text-wrapper-background-color: transparent;
     --_input-text-wrapper-padding-block: 0.5rem;
   }
@@ -324,9 +323,9 @@ input:-webkit-autofill-strong-password-viewable,
 input:-webkit-autofill-and-obscured {
   background-color: var(--theme-form-input-bg-normal) !important;
   background-image: none !important;
-  color: var(--theme-form-input-text-color-normal) !important;
+  color: var(--_input-text-core-color) !important;
   -webkit-box-shadow: 0 0 0rem 1000px var(--theme-form-input-bg-normal) inset;
-  -webkit-text-fill-color: var(--theme-form-input-text-color-normal);
+  -webkit-text-fill-color: var(--_input-text-core-color);
   transition: background-color 5000s ease-in-out 0s;
 }
 </style>
