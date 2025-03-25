@@ -35,7 +35,7 @@
         </template>
       </InputTextCore>
 
-      <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="errorId" :isDetached="false" />
+      <InputError :errorMessage :showError="fieldHasError" :id="errorId" :isDetached="false" :inputVariant />
     </div>
 
     <div v-if="inputVariant !== 'normal' && hasDescriptionSlot" :id="`${id}-description`">
@@ -205,7 +205,7 @@ watch(
     --_label-offset: 1rem 0;
     --_input-text-with-label-background-color: var(--theme-form-input-bg-normal);
 
-    --_input-text-wrapper-padding-block: 0.4em;
+    --_input-text-wrapper-padding-block: 0.4em 0;
 
     &:has(.input-text-wrapper.active),
     &:has(.input-text-wrapper.dirty) {
@@ -240,6 +240,7 @@ watch(
 
   background-color: var(--_input-text-with-label-background-color);
   border-radius: var(--_input-text-wrapper-border-radius);
+
   /* overflow: clip; */
 
   &.underlined {

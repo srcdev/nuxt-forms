@@ -21,7 +21,7 @@
         @click.stop.prevent="toggleDisplayPassword"
         :is-pending="false"
         :buttonText
-        theme="input-action"
+        :theme="buttonTheme"
         :size
         @focusin="updateFocus(name, true)"
         @focusout="updateFocus(name, false)"
@@ -100,6 +100,10 @@ const props = defineProps({
 
 const formTheme = computed(() => {
   return props.fieldHasError ? 'error' : props.theme;
+});
+
+const buttonTheme = computed(() => {
+  return props.inputVariant === 'underlined' ? 'input-action-underlined' : 'input-action';
 });
 
 const modelValue = defineModel();

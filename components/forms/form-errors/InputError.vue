@@ -1,5 +1,5 @@
 <template>
-  <div class="input-error-message" :id :class="[elementClasses, { show: showError }, { detached: isDetached }, { hide: !showError }]" :data-Testid>
+  <div class="input-error-message" :id :class="[inputVariant, elementClasses, { show: showError }, { detached: isDetached }, { hide: !showError }]" :data-Testid>
     <div class="inner" :class="[{ show: showError }]">
       <div class="inner-content">
         <div class="inner-icon">
@@ -19,6 +19,8 @@
 </template>
 
 <script setup lang="ts">
+import propValidators from '../c12/prop-validators';
+
 const props = defineProps({
   dataTestid: {
     type: String,
@@ -48,6 +50,13 @@ const props = defineProps({
     type: Boolean,
     required: true,
   },
+  inputVariant: {
+    type: String as PropType<string>,
+    default: 'normal',
+    validator(value: string) {
+      return propValidators.inputVariant.includes(value);
+    },
+  },
 });
 
 const isArray = computed(() => {
@@ -72,12 +81,14 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   --_gutter-inline: var(--_gutter);
   --_transition-duration: 500ms;
   --_transition-timing-function: linear;
-  --_message-translate-y-hide: calc(var(--_gutter) * -2);
-  --_message-translate-y-show: 0;
-  --_message-translate-y: var(--_message-translate-y-hide);
-  --_padding-message-show: var(--_gutter);
-  --_padding-message-hide: 0;
-  --_padding-message: var(--_padding-message-hide);
+  --_padding-message: 1.2rem 1rem;
+
+  &.show {
+    --_grid-template-rows: 1fr;
+    --_opacity: var(--_opacity-show);
+    --_display: var(--_display-show);
+    --_gutter-block: var(--_gutter);
+  }
 
   grid-row: 2;
   grid-column: 1;
@@ -98,23 +109,10 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
     margin-block-start: 2rem;
   }
 
-  /* &.mbs-12 {
-    transition: margin-block-start var(--_transition-duration) var(--_transition-timing-function);
-    &.hide {
-      margin-block-start: 0;
-    }
-    &.show {
-      margin-block-start: 1.2rem;
-    }
-  } */
+  &.outlined {
+  }
 
-  &.show {
-    --_grid-template-rows: 1fr;
-    --_opacity: var(--_opacity-show);
-    --_display: var(--_display-show);
-    --_message-translate-y: var(--_message-translate-y-show);
-    --_gutter-block: var(--_gutter);
-    --_padding-message: var(--_padding-message-show);
+  &.underlined {
   }
 
   .inner {
@@ -122,11 +120,6 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
 
     overflow: hidden;
     transition: opacity var(--_transition-duration) var(--_transition-timing-function), display var(--_transition-duration) var(--_transition-timing-function) allow-discrete;
-
-    &.show {
-      display: var(--_display-show);
-      opacity: var(--_opacity-show);
-    }
 
     .inner-content {
       display: flex;
@@ -150,11 +143,6 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
         font-weight: 500;
         padding-block: var(--_padding-message);
         padding-inline: var(--_gutter-inline);
-        transform: translateY(var(--_message-translate-y));
-
-        transition-property: transform, padding;
-        transition-duration: var(--_transition-duration);
-        transition-timing-function: linear;
 
         .message-single {
           color: white;
