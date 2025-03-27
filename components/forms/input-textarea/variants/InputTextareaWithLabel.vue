@@ -160,7 +160,7 @@ watch(
 
     &:has(.input-textarea-wrapper.active),
     &:has(.input-textarea-wrapper.dirty) {
-      --_label-offset: 0 -4.2rem;
+      --_label-offset: 0 -3.2rem;
       --_label-textarea-weight: bolder;
       --_label-textarea-size: var(--step-1);
       /* line-height: 1.5; */
@@ -174,7 +174,7 @@ watch(
     --_label-offset: 1rem 0;
     --_input-textarea-with-label-background-color: var(--theme-form-input-bg-normal);
 
-    --_input-textarea-wrapper-padding-block: 0.4em;
+    --_input-textarea-wrapper-padding-block: 0.4em 0;
     --_label-textarea-height: fit-content;
 
     &:has(.input-textarea-wrapper.active),

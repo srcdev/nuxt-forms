@@ -179,7 +179,7 @@ watch(
 
   &.underlined {
     --_label-text-color: var(--theme-form-input-text-label-color-underlined);
-    --_label-offset: 1rem 0;
+    --_label-offset: 1rem 0.2rem;
     --_input-text-with-label-background-color: color-mix(in srgb, currentColor 5%, transparent);
 
     --_input-text-wrapper-underlined-border-radius-top-left: 0;
@@ -191,7 +191,7 @@ watch(
 
     &:has(.input-text-wrapper.active),
     &:has(.input-text-wrapper.dirty) {
-      --_label-offset: 0 -4.2rem;
+      --_label-offset: 0 -3.2rem;
       --_label-text-weight: bolder;
       --_label-text-size: var(--step-1);
       /* line-height: 1.5; */
@@ -202,7 +202,7 @@ watch(
   &.outlined {
     --_label-text-color: var(--theme-form-input-text-label-color-outlined);
 
-    --_label-offset: 1rem 0;
+    --_label-offset: 1rem -0.2rem;
     --_input-text-with-label-background-color: var(--theme-form-input-bg-normal);
 
     --_input-text-wrapper-padding-block: 0.4em 0;

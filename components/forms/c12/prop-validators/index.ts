@@ -23,7 +23,7 @@ export const propValidators = {
     'fvs-wght-800',
     'fvs-wght-900',
   ],
-  theme: ['primary', 'secondary', 'tertiary', 'ghost', 'error', 'success', 'warning', 'input-action'],
+  theme: ['primary', 'secondary', 'tertiary', 'ghost', 'error', 'success', 'warning', 'input-action', 'input-action-underlined'],
   checkboxAppearance: [null, 'with-decorator'],
   checkboxStyle: ['check', 'cross'],
   radioAppearance: [null, 'with-decorator'],
