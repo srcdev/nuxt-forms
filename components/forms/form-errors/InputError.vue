@@ -73,6 +73,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   --_opacity-hide: 0;
   --_opacity: var(--_opacity-hide);
 
+  --_border-radius: 0 0 0.4rem 0.4rem;
   --_display-show: block;
   --_display-hide: none;
   --_display: var(--_display-hide);
@@ -97,7 +98,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
 
   color: var(--theme-error-text);
   background-color: var(--theme-error-surface);
-  border-radius: 0 0 0.4rem 0.4rem;
+  border-radius: var(--_border-radius);
 
   transition-property: grid-template-rows;
   transition-duration: var(--_transition-duration);
@@ -110,9 +111,11 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   }
 
   &.outlined {
+    --_border-radius: 0;
   }
 
   &.underlined {
+    --_border-radius: 0;
   }
 
   .inner {
