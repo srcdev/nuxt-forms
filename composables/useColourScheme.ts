@@ -13,9 +13,15 @@ export const useColourScheme = () => {
 
   watch(currentColourScheme, (newVal) => {
     if (import.meta.client && newVal !== null) {
-      localStorage.setItem('colourScheme', newVal);
-      document.documentElement.dataset.colorScheme = newVal;
-      currentColourScheme.value = newVal;
+      if (newVal === 'auto') {
+        delete document.documentElement.dataset.colorScheme;
+        localStorage.removeItem('colourScheme');
+        currentColourScheme.value = 'auto';
+      } else {
+        localStorage.setItem('colourScheme', newVal);
+        document.documentElement.dataset.colorScheme = newVal;
+        currentColourScheme.value = newVal;
+      }
     }
   });
 
