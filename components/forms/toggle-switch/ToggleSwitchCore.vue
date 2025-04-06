@@ -1,15 +1,19 @@
 <template>
   <div class="toggle-switch-core" :class="elementClasses" :data-size="size" :data-form-theme="formTheme">
-    <div @click="toggleSwitchValue" class="toggle-switch-input" :class="[{ round }]" :for="inputId">
-      <input type="checkbox" v-model="modelValue" :true-value :false-value :aria-invalid="fieldHasError" :id="inputId" :aria-describedby="`${id}-description`" :name :required />
+    <div @click="toggleSwitchValue" class="toggle-switch-wrapper" :class="[{ round }, { 'use-default-icons': useDefaultIcons }]" :for="inputId">
+      <input type="checkbox" v-model="modelValue" :true-value :false-value :aria-invalid="fieldHasError" :id="inputId" :aria-describedby="`${id}-description`" :name :required :checked="isChecked" />
       <div class="symbol-wrapper" :class="[{ round }]">
         <div class="symbol" :class="[{ round }]">
-          <div v-if="hasIconOnSlot" class="symbol-icon icon-on">
-            <slot name="iconOn"></slot>
+          <div class="symbol-icon icon-on">
+            <slot name="iconOn">
+              <Icon name="material-symbols:circle-outline" class="icon" />
+            </slot>
           </div>
 
-          <div v-if="hasIconOffSlot" class="symbol-icon icon-off">
-            <slot name="iconOff"></slot>
+          <div class="symbol-icon icon-off">
+            <slot name="iconOff">
+              <Icon name="material-symbols:circle-outline" class="icon" />
+            </slot>
           </div>
         </div>
       </div>
@@ -76,6 +80,7 @@ const props = defineProps({
 const slots = useSlots();
 const hasIconOnSlot = computed(() => slots.iconOn !== undefined);
 const hasIconOffSlot = computed(() => slots.iconOff !== undefined);
+const useDefaultIcons = computed(() => !hasIconOnSlot.value && !hasIconOffSlot.value);
 
 const formTheme = computed(() => {
   return props.fieldHasError ? 'error' : props.theme;
@@ -86,128 +91,105 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
 const inputId = computed(() => `toggle-sitch-${props.id}`);
 
+const isChecked = computed(() => {
+  return modelValue.value === props.trueValue;
+});
+
 const toggleSwitchValue = () => {
   modelValue.value = modelValue.value === props.trueValue ? props.falseValue : props.trueValue;
+  console.log(`toggleSwitchValue(${modelValue.value})`);
 };
 </script>
 
 <style lang="css">
 .toggle-switch-core {
-  --_transition-duration: 0.4s;
-
   .toggle-switch-label {
     display: block;
   }
 
-  .toggle-switch-input {
-    position: relative;
-    display: inline-block;
-    height: calc(var(--form-toggle-symbol-size) + calc(var(--form-element-border-width) * 2) + calc(var(--form-element-outline-width) * 2));
-    width: calc(var(--form-toggle-symbol-size) * 2 - calc(var(--form-element-border-width) * 2) + calc(var(--form-element-outline-width) * 2) + var(--form-toggle-switch-width-adjustment));
+  .toggle-switch-wrapper {
+    --theme-form-toggle-border-color: var(--blue-12);
+    --theme-form-toggle-border-width: 0.1rem;
+    --theme-form-toggle-outline-color: var(--gray-2);
+    --theme-form-toggle-outline-width: 0.1rem;
+
+    --_transition-duration: 0.4s;
+    --_switch-padding: 0.2rem;
+    --_icon-color: inherit;
+    --_icon-on-opacity: 0;
+    --_icon-off-opacity: 1;
+    --_icon-font-size: 2.4rem;
+    --_symbol-size: 3.4rem;
+    --_symbol-background-color: var(--blue-12);
+    --_symbol-outline-color: transparent;
+    --_symbol-outline-width: 1px;
+    --_symbol-margin-inline-start: 0;
+    --_symbol-checked-offset: calc(var(--_symbol-size) * 0.75);
+
+    &.use-default-icons {
+      --_icon-color: transparent;
+    }
+
+    display: flex;
+    flex-direction: column;
 
     input {
-      opacity: 0;
-      width: 0;
       height: 0;
+      width: 0;
+      visibility: hidden;
     }
-    input:checked {
+
+    &:has(input:checked) {
       --_icon-on-opacity: 1;
       --_icon-off-opacity: 0;
+      --_symbol-margin-inline-start: var(--_symbol-checked-offset);
     }
 
     .symbol-wrapper {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      overflow: clip;
+      /* background: blue; */
+      border: var(--theme-form-toggle-border-width) solid var(--theme-form-toggle-border-color);
+      outline: var(--theme-form-toggle-outline-width) solid var(--theme-form-toggle-outline-color);
+      border-radius: calc(var(--_symbol-size) + calc(var(--theme-form-toggle-border-width) * 2) + calc(var(--_switch-padding) * 2));
+      display: inline-flex;
+      align-items: center;
+      justify-content: start;
+      width: calc(var(--_symbol-size) + var(--_symbol-checked-offset) + calc(var(--theme-form-toggle-border-width) * 2) + calc(var(--_switch-padding) * 2));
+      padding: var(--_switch-padding);
 
       .symbol {
-        display: grid;
-        grid-template-areas: 'icon-stack';
+        display: inline-grid;
+        grid-template-areas: 'icon';
+        place-content: center;
+
+        aspect-ratio: 1/1;
+        /* width: var(--_symbol-size); */
+        padding: calc(calc(var(--_symbol-size) - var(--_icon-font-size)) / 2);
+
+        outline: var(--_symbol-outline-width) solid var(--_symbol-outline-color);
+        border-radius: 50%;
+        margin-inline-start: var(--_symbol-margin-inline-start);
+
+        background-color: var(--_symbol-background-color);
+
         overflow: clip;
-        position: absolute;
+
+        transition: margin var(--_transition-duration);
 
         .symbol-icon {
-          grid-area: icon-stack;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-      }
-    }
-  }
-}
+          display: grid;
+          grid-area: icon;
+          place-content: center;
 
-/*
-* ToggleSwitch configurable
-**/
-.toggle-switch-core {
-  .toggle-switch-input {
-    &.round {
-      border-radius: calc(var(--form-toggle-symbol-size) + calc(var(--form-element-border-width) * 2));
-    }
-
-    .symbol-wrapper {
-      border: var(--theme-form-toggle-border);
-      background-color: var(--theme-form-toggle-bg-off);
-      outline: var(--theme-form-toggle-outline);
-      transition: 0.4s;
-
-      &.round {
-        border-radius: var(--form-toggle-symbol-size);
-      }
-      .symbol {
-        height: calc(var(--form-toggle-symbol-size) - 0.6rem);
-        width: calc(var(--form-toggle-symbol-size) - 0.6rem);
-        left: 0.4rem;
-        bottom: 0.4rem;
-        background-color: var(--theme-form-toggle-symbol-off);
-        transition: var(--_transition-duration);
-
-        &.round {
-          border-radius: 50%;
-        }
-
-        .symbol-icon {
-          transition: var(--_transition-duration);
+          color: var(--_icon-color);
+          font-size: var(--_icon-font-size);
+          transition: opacity var(--_transition-duration);
 
           &.icon-on {
-            color: var(--theme-form-toggle-icon-stroke-colour-on);
-            opacity: 0;
+            opacity: var(--_icon-on-opacity);
           }
           &.icon-off {
-            color: var(--theme-form-toggle-icon-stroke-colour-off);
-            opacity: 1;
+            opacity: var(--_icon-off-opacity);
           }
-
-          .icon {
-            --_icon-size: var(--form-icon-size);
-            height: var(--_icon-size);
-            width: var(--_icon-size);
-          }
-        }
-      }
-    }
-
-    input:focus-visible + .symbol-wrapper {
-      box-shadow: var(--box-shadow-on);
-      outline: var(--form-element-outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 90%);
-    }
-
-    input:checked + .symbol-wrapper .symbol {
-      --_on-position: calc(var(--form-toggle-symbol-size) * 0.8);
-      background-color: var(--theme-form-toggle-symbol-on);
-      transform: translateX(var(--_on-position));
-
-      .symbol-icon {
-        &.icon-on {
-          opacity: 1;
-        }
-        &.icon-off {
-          opacity: 0;
         }
       }
     }

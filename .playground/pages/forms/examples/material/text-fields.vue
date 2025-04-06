@@ -198,10 +198,10 @@
                             <p class="label-description">Light or Dark mode?</p>
                           </template>
                           <template #iconOn>
-                            <Icon name="radix-icons:moon" class="icon" />
+                            <Icon name="radix-icons:sun" class="icon" />
                           </template>
                           <template #iconOff>
-                            <Icon name="radix-icons:sun" class="icon" />
+                            <Icon name="radix-icons:moon" class="icon" />
                           </template>
                         </ToggleSwitchWithLabel>
                       </template>

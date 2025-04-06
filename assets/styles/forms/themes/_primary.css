@@ -42,6 +42,8 @@
     --theme-form-toggle-bg-off: light-dark(var(--gray-1), var(--gray-4));
     --theme-form-toggle-bg-on: light-dark(var(--gray-1), var(--gray-6));
 
+    --theme-form-toggle-border-color: light-dark(var(--blue-12), var(--blue-1));
+    --theme-form-toggle-border-width: 0.2rem;
     --theme-form-toggle-border: var(--form-element-border-width) solid light-dark(var(--blue-12), var(--blue-1));
 
     --theme-form-toggle-outline: var(--form-element-outline-width) solid light-dark(var(--blue-1), var(--blue-1));
