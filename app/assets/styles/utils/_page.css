@@ -35,3 +35,15 @@ body {
     background-color: lightseagreen;
   }
 }
+
+form {
+  input {
+    font: inherit;
+    accent-color: var(--accent-color, red);
+  }
+
+  label {
+    text-box-trim: both;
+    text-box-edge: cap alphabetic;
+  }
+}

@@ -58,7 +58,7 @@
                     </template>
                   </InputButtonCore>
 
-                  <InputButtonCore @click.stop.prevent="submitForm" :is-pending="false" button-text="Submit" :theme size="small">
+                  <InputButtonCore @click.stop.prevent="submitForm" :is-pending="false" button-text="Submit" :theme size="small" :style-class-passthrough="['main-navigation-button']">
                     <template #iconOnly>
                       <Icon name="radix-icons:eye-none" class="icon" />
                     </template>
