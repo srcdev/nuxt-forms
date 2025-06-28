@@ -1,0 +1,254 @@
+<template>
+  <fieldset
+    :aria-required="required"
+    :aria-invalid="fieldHasError"
+    class="input-select-fieldset"
+    :class="[{ dirty: isDirty }, { active: isActive }, { error: fieldHasError }]"
+    :data-testid
+    :data-form-theme="formTheme"
+    :data-size="size"
+  >
+    <legend :class="[{ 'has-description': hasDescriptionSlot }]">{{ legend }}</legend>
+
+    <div v-if="hasDescriptionSlot" :id="`${name}-description`">
+      <slot name="description"></slot>
+    </div>
+
+    <select class="input-select" :class="[inputVariant]" :name>
+      <option v-if="placeholder" :value="null" disabled selected class="input-select-option placeholder">{{ placeholder }}</option>
+      <option v-for="item in fieldData.data" :key="item.id" :value="item.value" class="input-select-option">
+        <Icon :name="item.icon" class="icon" />
+        {{ item.label }}
+      </option>
+    </select>
+
+    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="errorId" :isDetached="true" />
+  </fieldset>
+</template>
+
+<script setup lang="ts">
+import propValidators from '../c12/prop-validators';
+import type { IFormMultipleOptions } from '@/types/types.forms';
+
+const props = defineProps({
+  dataTestid: {
+    type: String,
+    default: 'input-select',
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  legend: {
+    type: String,
+    required: true,
+  },
+  label: {
+    type: String,
+    required: true,
+  },
+  placeholder: {
+    type: String,
+    default: '',
+  },
+  errorMessage: {
+    type: [Object, String],
+    required: true,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  fieldHasError: {
+    type: Boolean,
+    default: false,
+  },
+  size: {
+    type: String as PropType<string>,
+    default: 'medium',
+    validator(value: string) {
+      return propValidators.size.includes(value);
+    },
+  },
+  styleClassPassthrough: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
+  theme: {
+    type: String as PropType<string>,
+    default: 'primary',
+    validator(value: string) {
+      return propValidators.theme.includes(value);
+    },
+  },
+  inputVariant: {
+    type: String as PropType<string>,
+    default: 'normal',
+    validator(value: string) {
+      return propValidators.inputVariant.includes(value);
+    },
+  },
+});
+
+const slots = useSlots();
+const hasDescriptionSlot = computed(() => slots.description !== undefined);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+
+const formTheme = computed(() => {
+  return props.fieldHasError ? 'error' : props.theme;
+});
+
+const id = useId();
+const errorId = `${name}-error-message`;
+const ariaDescribedby = computed(() => {
+  const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : undefined;
+  return props.fieldHasError ? errorId : ariaDescribedbyId;
+});
+
+const modelValue = defineModel({ required: true });
+const isDirty = defineModel('isDirty');
+const isActive = defineModel('isActive');
+const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
+</script>
+
+<style lang="css">
+.input-select-fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  legend {
+    font-family: var(--font-family);
+    font-size: 1.6rem;
+    font-weight: 500;
+
+    &.has-description {
+      margin-bottom: 0;
+    }
+  }
+
+  .label-description {
+    font-family: var(--font-family);
+    font-size: 1.6rem;
+    margin-top: 1.2rem;
+  }
+}
+
+.input-select {
+  &,
+  &::picker(select) {
+    appearance: base-select;
+  }
+
+  &::picker(select) {
+    transition: display allow-discrete 1s, opacity 1s, overlay 1s allow-discrete;
+  }
+
+  &:not(:open)::picker(select) {
+    opacity: 0;
+  }
+
+  &:open::picker(select) {
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+}
+
+.input-select {
+  --_input-select-border: var(--form-element-border-width) solid var(--theme-form-input-border);
+  --_input-select-border-radius: var(--form-input-border-radius);
+
+  --_input-select-text-color: white;
+  --_input-select-text-font-size: var(--step-2);
+  --_input-select-line-height: 1.5;
+
+  --_input-select-background-color: color-mix(in srgb, currentColor 5%, transparent);
+
+  /* Underlined vars */
+  --_input-select-border-underlined: var(--form-element-border-width-underlined) solid var(--theme-form-input-border);
+  --_input-select-underlined-border-radius-top-left: 0;
+  --_input-select-underlined-border-radius-top-right: 0;
+  --_input-select-underlined-border-radius-bottom-left: 4px;
+  --_input-select-underlined-border-radius-bottom-right: 4px;
+
+  background-color: var(--_input-select-background-color);
+
+  border-radius: var(--_input-select-border-radius);
+  border: var(--_input-select-border);
+
+  color: var(--_input-select-text-color);
+  font-size: var(--_input-select-text-font-size);
+  line-height: var(--_input-select-line-height);
+
+  padding-block-start: calc(var(--form-element-padding-block-start) - 4px);
+  padding-block-end: calc(var(--form-element-padding-block-start) - 5px);
+
+  min-width: 100%;
+
+  /* Placeholder vars */
+  --_placeholder-text-color: var(--theme-form-input-text-label-color-normal);
+  --_placeholder-text-margin-block: 0.8rem;
+  --_placeholder-text-size: var(--step-2);
+  --_placeholder-text-weight: normal;
+  --_placeholder-text-line-height: 1.5;
+  --_placeholder-text-background-color: var(--_input-text-with-label-background-color);
+
+  &.underlined {
+    --_input-select-text-color: var(--theme-form-input-text-label-color-underlined);
+    --_input-select-background-color: color-mix(in srgb, currentColor 5%, transparent);
+
+    border-color: transparent;
+    border-bottom: var(--_input-select-border-underlined);
+    border-top-left-radius: var(--_input-select-underlined-border-radius-top-left);
+    border-top-right-radius: var(--_input-select-underlined-border-radius-top-right);
+    border-bottom-left-radius: var(--_input-select-underlined-border-radius-bottom-left);
+    border-bottom-right-radius: var(--_input-select-underlined-border-radius-bottom-right);
+
+    &.active,
+    &.dirty {
+    }
+  }
+
+  &.outlined {
+    &.active,
+    &.dirty {
+    }
+  }
+
+  &:not(.normal) {
+    &.active,
+    &.dirty {
+    }
+    &:focus-within {
+    }
+  }
+
+  /*
+  * Apply generic styles
+  **/
+
+  &.underlined {
+  }
+
+  &.outlined {
+  }
+
+  &:not(.normal) {
+  }
+
+  .input-select-option {
+    color: var(--_placeholder-text-color);
+    margin-block: var(--_placeholder-text-margin-block);
+    font-size: var(--_placeholder-text-size);
+    font-weight: var(--_placeholder-text-weight);
+    line-height: var(--_placeholder-text-line-height);
+
+    &.placeholder {
+      /* background-color: var(--_placeholder-text-background-color); */
+    }
+  }
+}
+</style>

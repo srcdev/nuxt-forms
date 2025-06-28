@@ -66,6 +66,29 @@
                   <form class="form-wrapper" @submit.stop.prevent="submitForm()" ref="formRef">
                     <div aria-live="assertive" id="aria-live-message"></div>
 
+                    <FormField v-if="countriesData !== null" width="wide" :has-gutter="false">
+                      <template #default>
+                        <InputSelect
+                          name="countrySelect"
+                          legend="Choose a country"
+                          :required="true"
+                          label="Please select a country"
+                          placeholder="Where are you from?"
+                          :errorMessage="formErrors?.countrySelect?._errors[0] ?? ''"
+                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.countrySelect)"
+                          v-model="state.countrySelect"
+                          v-model:fieldData="countriesData"
+                          :theme
+                          :size
+                          :inputVariant
+                        >
+                          <template #description>
+                            <p class="label-description">NOTE: Please select a country<br />This is description: optionsLayout = 'inline'</p>
+                          </template>
+                        </InputSelect>
+                      </template>
+                    </FormField>
+
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
                         <InputTextWithLabel
@@ -566,7 +589,7 @@ useHead({
   },
 });
 
-const inputVariant = ref('normal');
+const inputVariant = ref('underlined'); // 'normal' | 'outlined' | 'underlined'
 // const inputVariantData = ref<IFormMultipleOptions>({
 //   data: [
 //     {
@@ -668,6 +691,7 @@ const formSchema = reactive(
         .lte(100),
       cities: z.array(z.string()).min(1, 'Please select at least one city'),
       countries: z.array(z.string()).min(2, 'Please select at least 2 countries').max(5, 'Please select no more than 5 countries'),
+      countrySelect: z.string().min(1, { message: 'Please choose a mode' }),
       tags: z.array(z.string()).min(3, 'Please select at least 3 tags').max(8, 'Please select no more than 8 tags'),
       tagsRadio: z.string().min(1, { message: 'Please choose a tag' }),
       darkMode: z.string().min(1, { message: 'Please choose a mode' }),
@@ -688,6 +712,7 @@ const formSchema = reactive(
       score: true,
       cities: true,
       countries: true,
+      countrySelect: true,
       tags: true,
       tagsRadio: true,
       title: true,
@@ -712,6 +737,7 @@ const state = reactive({
   score: 50,
   cities: [],
   countries: [],
+  countrySelect: '',
   tags: [],
   tagsRadio: [],
   title: '',

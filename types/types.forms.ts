@@ -10,6 +10,7 @@ export interface IOptionsConfig {
   name: string;
   value: string;
   label: string;
+  icon?: string;
 }
 
 export interface IFormMultipleOptions {
