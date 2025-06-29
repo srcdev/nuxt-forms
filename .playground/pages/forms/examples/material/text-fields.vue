@@ -691,7 +691,7 @@ const formSchema = reactive(
         .lte(100),
       cities: z.array(z.string()).min(1, 'Please select at least one city'),
       countries: z.array(z.string()).min(2, 'Please select at least 2 countries').max(5, 'Please select no more than 5 countries'),
-      countrySelect: z.string().min(1, { message: 'Please choose a mode' }),
+      countrySelect: z.string().min(1, { message: 'Please select a country' }),
       tags: z.array(z.string()).min(3, 'Please select at least 3 tags').max(8, 'Please select no more than 8 tags'),
       tagsRadio: z.string().min(1, { message: 'Please choose a tag' }),
       darkMode: z.string().min(1, { message: 'Please choose a mode' }),
