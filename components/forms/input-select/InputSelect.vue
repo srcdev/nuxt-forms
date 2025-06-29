@@ -14,9 +14,9 @@
       <slot name="description"></slot>
     </div>
 
-    <select class="input-select" :class="[inputVariant]" :name>
-      <option v-if="placeholder" :value="null" disabled selected class="input-select-option placeholder">{{ placeholder }}</option>
-      <option v-for="item in fieldData.data" :key="item.id" :value="item.value" class="input-select-option">
+    <select v-model="modelValue" class="input-select" :class="[inputVariant]" :name>
+      <option v-if="placeholder" value="" readonly :selected="!modelValue" class="input-select-option placeholder">{{ placeholder }}</option>
+      <option v-for="item in fieldData.data" :key="item.id" :value="item.value" :selected="item.value === modelValue" class="input-select-option">
         <Icon :name="item.icon" class="icon" />
         {{ item.label }}
       </option>
