@@ -141,7 +141,7 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
   }
 
   &::picker(select) {
-    transition: display allow-discrete 1s, opacity 1s, overlay 1s allow-discrete;
+    transition: display allow-discrete 0.5s, opacity 0.5s, overlay 0.5s allow-discrete;
   }
 
   &:not(:open)::picker(select) {
@@ -160,12 +160,17 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 .input-select {
   --_input-select-border: var(--form-element-border-width) solid var(--theme-form-input-border);
   --_input-select-border-radius: var(--form-input-border-radius);
+  --_input-select-outline-color: var(--theme-form-input-outline);
+  --_input-select-outline: var(--form-element-outline-width) solid var(--_input-select-outline-color);
 
-  --_input-select-text-color: white;
+  --_input-select-box-shadow: var(--_focus-box-shadow);
+  --_focus-box-shadow: var(--box-shadow-off);
+
+  --_input-select-text-color: var(--theme-form-input-text-color-normal);
   --_input-select-text-font-size: var(--step-2);
   --_input-select-line-height: 1.5;
 
-  --_input-select-background-color: color-mix(in srgb, currentColor 5%, transparent);
+  --_input-select-background-color: var(--theme-form-input-bg-normal);
 
   /* Underlined vars */
   --_input-select-border-underlined: var(--form-element-border-width-underlined) solid var(--theme-form-input-border);
@@ -178,27 +183,28 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
   border-radius: var(--_input-select-border-radius);
   border: var(--_input-select-border);
+  outline: var(--_input-select-outline);
 
   color: var(--_input-select-text-color);
   font-size: var(--_input-select-text-font-size);
   line-height: var(--_input-select-line-height);
 
-  padding-block-start: calc(var(--form-element-padding-block-start) - 4px);
-  padding-block-end: calc(var(--form-element-padding-block-start) - 5px);
+  padding-block-start: calc(var(--form-element-padding-block-start) - 2px);
+  padding-block-end: calc(var(--form-element-padding-block-start) - 3px);
 
   min-width: 100%;
 
-  /* Placeholder vars */
-  --_placeholder-text-color: var(--theme-form-input-text-label-color-normal);
-  --_placeholder-text-margin-block: 0.8rem;
-  --_placeholder-text-size: var(--step-2);
-  --_placeholder-text-weight: normal;
-  --_placeholder-text-line-height: 1.5;
-  --_placeholder-text-background-color: var(--_input-text-with-label-background-color);
+  &:focus-visible {
+    --_input-select-box-shadow: var(--box-shadow-on);
+    --_input-select-outline: var(--form-element-outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 90%);
+  }
 
   &.underlined {
     --_input-select-text-color: var(--theme-form-input-text-label-color-underlined);
     --_input-select-background-color: color-mix(in srgb, currentColor 5%, transparent);
+    /* --_input-select-background-color: var(--theme-form-input-bg-underlined); */
+    --_input-select-outline-color: transparent;
+    --_input-select-text-color: var(--_input-text-core-color);
 
     border-color: transparent;
     border-bottom: var(--_input-select-border-underlined);
@@ -237,7 +243,19 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
   }
 
   &:not(.normal) {
+    &:focus-visible {
+      /* --_input-select-box-shadow: var(--box-shadow-on);
+      --_input-select-outline: var(--form-element-outline-width) solid hsl(from var(--theme-form-input-outline-focus) h s 90%); */
+    }
   }
+
+  /* Placeholder vars */
+  --_placeholder-text-color: var(--theme-form-input-text-label-color-normal);
+  --_placeholder-text-margin-block: 0.8rem;
+  --_placeholder-text-size: var(--step-2);
+  --_placeholder-text-weight: normal;
+  --_placeholder-text-line-height: 1.5;
+  --_placeholder-text-background-color: var(--_input-text-with-label-background-color);
 
   .input-select-option {
     color: var(--_placeholder-text-color);
