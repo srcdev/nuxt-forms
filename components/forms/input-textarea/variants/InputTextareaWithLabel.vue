@@ -1,6 +1,8 @@
 <template>
   <div class="input-textarea-with-label" :data-form-theme="formTheme" :class="[elementClasses, inputVariant, { dirty: isDirty }, { active: isActive }]">
-    <label :for="id" class="input-textarea-label body-normal-semibold">{{ label }}</label>
+    <InputLabel :for="id" :id :theme :name :input-variant :field-has-error :style-class-passthrough="['input-textarea-label']">
+      <template #textLabel>{{ label }}</template>
+    </InputLabel>
 
     <InputTextareaCore
       v-model="modelValue"
@@ -25,7 +27,7 @@
         <slot name="right"></slot>
       </template>
     </InputTextareaCore>
-    <InputError :errorMessage :showError="fieldHasError" :id :isDetached="false" />
+    <InputError :errorMessage :showError="fieldHasError" :id :isDetached="false" :inputVariant />
   </div>
 </template>
 
@@ -123,7 +125,7 @@ watch(
 </script>
 
 <style lang="css">
-.input-textarea-with-label {
+.input-textarea-with-label-XXX {
   --_input-textarea-with-label-margin-block-start: 0;
   --_input-textarea-with-label-background-color: transparent;
 
@@ -213,7 +215,7 @@ watch(
   /* overflow: clip; */
 
   &.underlined {
-    border-bottom: var(--_input-textarea-wrapper-border-underlined);
+    /* border-bottom: var(--_input-textarea-wrapper-border-underlined); */
     border-top-left-radius: var(--_input-textarea-wrapper-underlined-border-radius-top-left);
     border-top-right-radius: var(--_input-textarea-wrapper-underlined-border-radius-top-right);
     border-bottom-left-radius: var(--_input-textarea-wrapper-underlined-border-radius-bottom-left);

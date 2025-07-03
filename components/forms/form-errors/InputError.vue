@@ -66,7 +66,7 @@ const isArray = computed(() => {
 const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 .input-error-message {
   --_grid-template-rows: 0fr;
   --_opacity-show: 1;
@@ -96,16 +96,32 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   display: grid;
   grid-template-rows: var(--_grid-template-rows);
 
-  color: var(--theme-error-text);
-  background-color: var(--theme-error-surface);
-  border-radius: var(--_border-radius);
+  color: var(--input-error-color);
+  background-color: var(--input-error-background-color);
+  /* border-radius: var(--_border-radius); */
 
   transition-property: grid-template-rows;
   transition-duration: var(--_transition-duration);
   transition-timing-function: var(--_transition-timing-function);
   transition-behavior: allow-discrete;
 
-  &.detached {
+  border-top-left-radius: var(--input-error-border-top-left-radius);
+  border-top-right-radius: var(--input-error-border-top-right-radius);
+  border-bottom-left-radius: var(--input-error-border-bottom-left-radius);
+  border-bottom-right-radius: var(--input-error-border-bottom-right-radius);
+
+  border-top: var(--input-error-border-top-default);
+  border-right: var(--input-error-border-right-default);
+  border-bottom: var(--input-error-border-bottom-default);
+  border-left: var(--input-error-border-left-default);
+
+  background-clip: padding-box;
+
+  translate: 0 calc(-1 * var(--form-element-border-width));
+
+  margin-block-start: var(--input-error-margin-block-start);
+
+  /* &.detached {
     border-radius: var(--form-input-border-radius);
     margin-block-start: 2rem;
   }
@@ -116,7 +132,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
 
   &.underlined {
     --_border-radius: 0;
-  }
+  } */
 
   .inner {
     align-items: center;

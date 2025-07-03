@@ -1,0 +1,13 @@
+:root {
+  --input-select-animation-duration: 0.2s;
+  --input-select-padding-block: 1.5rem;
+  --input-select-padding-inline: 1rem;
+
+  --input-select-option-padding-block: 1rem;
+  --input-select-option-padding-inline: 1.75rem;
+  --input-select-option-gap: 1.5rem;
+
+  --input-select-option-background-color-hover: hsl(from var(--theme-form-input-border) h s 25%);
+
+  --input-select-option-icon-size: 1.5rem;
+}

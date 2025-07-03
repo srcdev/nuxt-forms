@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="input-text-with-label" :data-form-theme="formTheme" :class="[elementClasses, inputVariant, { dirty: isDirty }, { active: isActive }]">
-      <label :for="id" class="input-text-label">{{ label }}</label>
+      <InputLabel :for="id" :id :theme :name :input-variant :field-has-error :style-class-passthrough="['input-text-label']">
+        <template #textLabel>{{ label }}</template>
+      </InputLabel>
 
       <div v-if="inputVariant === 'normal' && hasDescriptionSlot" :id="`${id}-description`">
         <slot name="description"></slot>
@@ -122,7 +124,7 @@ const formTheme = computed(() => {
   return props.fieldHasError ? 'error' : props.theme;
 });
 
-const id = useId();
+const id = `${props.name}-${useId()}`;
 const errorId = `${id}-error-message`;
 const ariaDescribedby = computed(() => {
   const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : undefined;
@@ -156,7 +158,7 @@ watch(
 </script>
 
 <style lang="css">
-.input-text-with-label {
+.input-text-with-label-XXX {
   --_input-text-with-label-margin-block-start: 0;
   --_input-text-with-label-background-color: transparent;
 
@@ -244,7 +246,7 @@ watch(
   /* overflow: clip; */
 
   &.underlined {
-    border-bottom: var(--_input-text-wrapper-border-underlined);
+    /* border-bottom: var(--_input-text-wrapper-border-underlined); */
     border-top-left-radius: var(--_input-text-wrapper-underlined-border-radius-top-left);
     border-top-right-radius: var(--_input-text-wrapper-underlined-border-radius-top-right);
     border-bottom-left-radius: var(--_input-text-wrapper-underlined-border-radius-bottom-left);
@@ -266,17 +268,17 @@ watch(
 
     margin-block-start: var(--_input-text-with-label-margin-block-start);
 
-    .input-text-label {
+    /* .input-text-label {
       grid-area: underlined-text-stack;
       z-index: 2;
-    }
+    } */
     .input-text-wrapper {
       grid-area: underlined-text-stack;
       z-index: 1;
     }
   }
 
-  .input-text-label {
+  /* .input-text-label {
     display: inline-block;
     color: var(--_label-text-color);
     background-color: var(--_label-text-background-color);
@@ -293,6 +295,6 @@ watch(
       display: flex;
       align-items: center;
     }
-  }
+  } */
 }
 </style>

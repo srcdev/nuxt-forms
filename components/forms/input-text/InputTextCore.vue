@@ -157,6 +157,64 @@ onMounted(() => {
 
 <style lang="css">
 .input-text-wrapper {
+  background-color: var(--element-decorator-background-color);
+  outline: var(--element-decorator-outline-default);
+
+  border-top-left-radius: var(--element-decorator-border-top-left-radius);
+  border-top-right-radius: var(--element-decorator-border-top-right-radius);
+  border-bottom-left-radius: var(--element-decorator-border-bottom-left-radius);
+  border-bottom-right-radius: var(--element-decorator-border-bottom-right-radius);
+
+  border-top: var(--element-decorator-border-top-default);
+  border-right: var(--element-decorator-border-right-default);
+  border-bottom: var(--element-decorator-border-bottom-default);
+  border-left: var(--element-decorator-border-left-default);
+
+  padding-inline: var(--element-decorator-padding-inline);
+
+  &:hover {
+    /* background-color: lab(89.6502 -0.829279 -2.45323 / 0.1); */
+    background-color: hsl(from var(--theme-form-input-border) h s 20%);
+  }
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .slot {
+    display: flex;
+    place-items: center;
+    background-clip: padding-box;
+
+    &.left-slot {
+      /* background-color: green; */
+    }
+    &.right-slot {
+      /* background-color: orange; */
+    }
+  }
+
+  .input-text-core {
+    all: unset;
+    flex-grow: 1;
+
+    font-family: var(--font-family);
+    font-size: var(--form-element-font-size);
+    line-height: var(--form-element-line-height);
+    padding-block: var(--input-select-padding-block);
+    padding-inline: var(--input-select-padding-inline);
+
+    &::placeholder {
+      color: var(--input-placeholder-color);
+      font-size: var(--input-placeholder-font-size);
+      font-style: var(--input-placeholder-font-style);
+      line-height: var(--input-placeholder-line-height);
+      font-weight: var(--input-placeholder-font-weight);
+    }
+  }
+}
+
+.input-text-wrapper-XXX {
   --_focus-box-shadow: var(--box-shadow-off);
   --_input-text-core-color: var(--theme-form-input-text-color-normal);
 

@@ -53,9 +53,6 @@
                 <InputButtonSubmit type="button" @click.stop.prevent="inputVariant = 'normal'" button-text="Normal" theme="primary" size="normal" />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="inputVariant = 'outlined'" button-text="Outlined" theme="primary" size="normal" />
-              </li>
-              <li>
                 <InputButtonSubmit type="button" @click.stop.prevent="inputVariant = 'underlined'" button-text="Underlined" theme="primary" size="normal" />
               </li>
             </ul>
@@ -68,12 +65,11 @@
 
                     <FormField v-if="countriesData !== null" width="wide" :has-gutter="false">
                       <template #default>
-                        <InputSelect
+                        <InputSelectWithLabel
                           name="countrySelect"
-                          legend="Choose a country"
                           :required="true"
-                          label="Please select a country"
-                          placeholder="Where are you from?"
+                          label="Where are you from?"
+                          placeholder="Please select a country"
                           :errorMessage="formErrors?.countrySelect?._errors[0] ?? ''"
                           :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.countrySelect)"
                           v-model="state.countrySelect"
@@ -82,10 +78,7 @@
                           :size
                           :inputVariant
                         >
-                          <template #description>
-                            <p class="label-description">NOTE: Please select a country<br />This is description: optionsLayout = 'inline'</p>
-                          </template>
-                        </InputSelect>
+                        </InputSelectWithLabel>
                       </template>
                     </FormField>
 
@@ -108,10 +101,10 @@
                           :size
                           :inputVariant
                         >
-                          <template #description>
-                            <p class="body-normal">This is a description for email address field</p>
-                          </template>
                           <template #left>
+                            <Icon name="radix-icons:envelope-closed" class="icon" />
+                          </template>
+                          <template #right>
                             <Icon name="radix-icons:envelope-closed" class="icon" />
                           </template>
                         </InputTextWithLabel>
