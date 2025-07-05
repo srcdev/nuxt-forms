@@ -1,5 +1,5 @@
 export const propValidators = {
-  size: ['x-small', 'small', 'normal', 'medium', 'large'],
+  size: ['x-small', 'small', 'default', 'medium', 'large'],
   weight: [
     'wght-100',
     'wght-200',

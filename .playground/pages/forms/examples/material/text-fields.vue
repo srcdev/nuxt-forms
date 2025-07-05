@@ -11,19 +11,19 @@
             <p>Themes switcher</p>
             <ul class="flex-group">
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('primary')" :is-pending="false" button-text="Primary" theme="primary" size="normal" />
+                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('primary')" :is-pending="false" button-text="Primary" theme="primary" size="default" />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('secondary')" :is-pending="false" button-text="Secondary" theme="secondary" size="normal" />
+                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('secondary')" :is-pending="false" button-text="Secondary" theme="secondary" size="default" />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('warning')" :is-pending="false" button-text="Warning" theme="warning" size="normal" />
+                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('warning')" :is-pending="false" button-text="Warning" theme="warning" size="default" />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('success')" :is-pending="false" button-text="Success" theme="success" size="normal" />
+                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('success')" :is-pending="false" button-text="Success" theme="success" size="default" />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('error')" :is-pending="false" button-text="Error" theme="error" size="normal" />
+                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('error')" :is-pending="false" button-text="Error" theme="error" size="default" />
               </li>
             </ul>
 
@@ -37,7 +37,7 @@
                 <InputButtonSubmit type="button" @click.stop.prevent="swapSize('small')" :is-pending="false" button-text="Small" theme="primary" size="small" />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapSize('normal')" :is-pending="false" button-text="Normal" theme="primary" size="normal" />
+                <InputButtonSubmit type="button" @click.stop.prevent="swapSize('default')" :is-pending="false" button-text="Default" theme="primary" size="default" />
               </li>
               <li>
                 <InputButtonSubmit type="button" @click.stop.prevent="swapSize('medium')" :is-pending="false" button-text="Medium" theme="primary" size="medium" />
@@ -50,10 +50,10 @@
             <p>Select type of text input to display</p>
             <ul class="flex-group">
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="inputVariant = 'normal'" button-text="Normal" theme="primary" size="normal" />
+                <InputButtonSubmit type="button" @click.stop.prevent="inputVariant = 'normal'" button-text="Normal" theme="primary" size="default" />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="inputVariant = 'underlined'" button-text="Underlined" theme="primary" size="normal" />
+                <InputButtonSubmit type="button" @click.stop.prevent="inputVariant = 'underlined'" button-text="Underlined" theme="primary" size="default" />
               </li>
             </ul>
 
@@ -609,11 +609,11 @@ const inputVariant = ref('underlined'); // 'normal' | 'outlined' | 'underlined'
 //   limit: 3,
 // });
 const theme = ref('primary');
-const size = ref<'x-small' | 'small' | 'normal' | 'medium' | 'large'>('normal');
+const size = ref<'x-small' | 'small' | 'default' | 'medium' | 'large'>('default');
 const swapTheme = (newTheme: string) => {
   theme.value = newTheme;
 };
-const swapSize = (newSize: 'x-small' | 'small' | 'normal' | 'medium' | 'large') => {
+const swapSize = (newSize: 'x-small' | 'small' | 'default' | 'medium' | 'large') => {
   size.value = newSize;
 };
 

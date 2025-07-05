@@ -35,7 +35,7 @@ import propValidators from '../c12/prop-validators';
 const props = defineProps({
   size: {
     type: String as PropType<string>,
-    default: 'normal',
+    default: 'default',
     validator(value: string) {
       return propValidators.size.includes(value);
     },

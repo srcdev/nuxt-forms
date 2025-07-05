@@ -57,7 +57,7 @@ const props = defineProps({
   },
   size: {
     type: String as PropType<string>,
-    default: 'normal',
+    default: 'default',
     validator(value: string) {
       return propValidators.size.includes(value);
     },

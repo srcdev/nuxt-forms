@@ -8,6 +8,7 @@
     "jkjustjoshing.vscode-text-pastry",
     "willofindie.vscode-cssvar",
     "vitest.explorer",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "formulahendry.auto-rename-tag"
   ]
 }

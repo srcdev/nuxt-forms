@@ -8,7 +8,7 @@ import propValidators from '../../c12/prop-validators';
 defineProps({
   size: {
     type: String as PropType<string>,
-    default: 'normal',
+    default: 'default',
     validator(value: string) {
       return propValidators.size.includes(value);
     },

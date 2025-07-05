@@ -1,4 +1,4 @@
 @import './themes/';
 @import './variants/';
-@import './_sizes';
+@import './sizes/';
 @import './_generic';

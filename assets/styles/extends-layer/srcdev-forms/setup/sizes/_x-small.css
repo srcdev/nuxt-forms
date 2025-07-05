@@ -1,0 +1,13 @@
+:root {
+  [data-size='x-small'] {
+    --form-element-font-size: var(--step-0);
+    --form-placeholder-font-size: calc(var(--step-0) * 0.65);
+    --form-element-line-height: var(--step-0);
+    --form-input-border-radius: 0.4rem;
+    --form-icon-only-button-size: calc(var(--step-1) * 2 + 1px);
+    --form-toggle-symbol-size: calc(var(--step-0) * 1.55);
+    --form-toggle-switch-width-adjustment: 0.5rem;
+
+    --form-input-checkbox-radio-button-size: var(--step-0);
+  }
+}
