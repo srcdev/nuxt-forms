@@ -201,8 +201,8 @@ onMounted(() => {
     font-family: var(--font-family);
     font-size: var(--form-element-font-size);
     line-height: var(--form-element-line-height);
-    padding-block: var(--input-select-padding-block);
-    padding-inline: var(--input-select-padding-inline);
+    padding-block: var(--input-element-padding-block);
+    padding-inline: var(--input-element-padding-inline);
 
     &::placeholder {
       color: var(--input-placeholder-color);

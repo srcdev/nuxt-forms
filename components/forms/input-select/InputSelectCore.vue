@@ -135,6 +135,7 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
       padding-block: var(--input-select-option-padding-block);
       padding-inline: var(--input-select-option-padding-inline);
       gap: var(--input-select-option-gap);
+      transition: var(--input-select-option-transition);
 
       &:hover {
         background-color: var(--input-select-option-background-color-hover);
