@@ -3,6 +3,7 @@
     class="input-text-wrapper"
     :data-form-theme="formTheme"
     :data-size="size"
+    :data-inputmode="inputmode"
     :class="[inputVariant, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]"
   >
     <span v-if="hasLeftSlot" class="slot left-slot">
