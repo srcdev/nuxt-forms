@@ -1,6 +1,6 @@
 <template>
   <div class="input-checkbox-radio-button-button" :data-form-theme="formTheme" :data-size="size" :class="[size, elementClasses, optionsLayout, { error: fieldHasError }]">
-    <InputCheckboxRadioCore :isButton="true" :type :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme :ariaDescribedby>
+    <InputCheckboxRadioCore :isButton="true" :type :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme :ariaDescribedby :displayAsDisc>
       <template #checkedIcon>
         <slot name="checkedIcon"></slot>
       </template>
@@ -88,6 +88,10 @@ const props = defineProps({
   ariaDescribedby: {
     type: String,
     default: null,
+  },
+  displayAsDisc: {
+    type: Boolean,
+    default: false,
   },
 });
 

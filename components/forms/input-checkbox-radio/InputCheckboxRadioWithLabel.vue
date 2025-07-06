@@ -1,6 +1,6 @@
 <template>
   <div class="input-checkbox-radio-with-label" :data-size="size" :class="[elementClasses, optionsLayout, { error: fieldHasError }]">
-    <InputCheckboxRadioCore :type :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme :ariaDescribedby>
+    <InputCheckboxRadioCore :type :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme :ariaDescribedby :displayAsDisc>
       <template #checkedIcon>
         <slot name="checkedIcon"></slot>
       </template>
@@ -72,6 +72,10 @@ const props = defineProps({
   ariaDescribedby: {
     type: String,
     default: null,
+  },
+  displayAsDisc: {
+    type: Boolean,
+    default: false,
   },
 });
 

@@ -1,5 +1,10 @@
 <template>
-  <div class="input-checkbox-radio-wrapper" :data-form-theme="formTheme" :data-theme="size" :class="[type, size, elementClasses, { error: fieldHasError }, { button: isButton }]">
+  <div
+    class="input-checkbox-radio-wrapper"
+    :data-form-theme="formTheme"
+    :data-theme="size"
+    :class="[type, size, elementClasses, { error: fieldHasError }, { button: isButton }, { 'display-as-disc': displayAsDisc }]"
+  >
     <slot name="checkedIcon" v-if="isChecked">
       <Icon :name="defaultIcon" class="input-checked-icon" />
     </slot>
@@ -84,6 +89,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  displayAsDisc: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
@@ -113,58 +122,34 @@ const isChecked = computed(() => {
 
 <style lang="css">
 .input-checkbox-radio-wrapper {
-  --_outline-width: 0.1rem;
-  --_border-width: 0.1rem;
-  --_border-radius: 50%;
-  --_background-color: var(--theme-form-checkbox-bg);
-  --_box-shadow: none;
-
-  --_icon-size: var(--form-input-checkbox-radio-button-size);
-
-  &:not(.button) {
-    --_icon-size: var(--form-toggle-symbol-size);
-    --_outline-width: var(--form-element-outline-width);
-    --_border-width: var(--form-element-border-width);
-    &.checkbox {
-      --_background-color: var(--theme-form-checkbox-bg);
-      --_border-color: var(--theme-form-checkbox-border);
-      --_border-radius: 0.4rem;
-      --_outline-color: var(--theme-form-checkbox-outline);
-    }
-
-    &.radio {
-      --_background-color: var(--theme-form-radio-bg);
-      --_border-color: var(--theme-form-radio-border);
-      --_border-radius: 50%;
-      --_outline-color: var(--theme-form-radio-outline);
-    }
-  }
-
   display: grid;
   grid-template-areas: 'element-stack';
   place-content: center;
 
-  background-color: var(--_background-color);
-  border: var(--_border-width) solid var(--_border-color);
-  border-radius: var(--_border-radius);
-  outline: 0.1rem solid var(--_outline-color);
+  background-color: var(--input-checkbox-radio-wrapper-background-color);
+  border: var(--input-checkbox-radio-wrapper-border);
+  border-radius: var(--input-checkbox-radio-wrapper-border-radius);
+  outline: var(--input-checkbox-radio-wrapper-outline);
   box-shadow: var(--_box-shadow);
 
-  height: var(--_icon-size);
-  width: var(--_icon-size);
+  height: var(--form-input-checkbox-radio-button-symbol-size);
+  width: var(--form-input-checkbox-radio-button-symbol-size);
 
   transition: all 0.2s ease-in-out;
 
   &:not(.button):has(.input-checkbox-radio-core:focus-visible) {
-    --_box-shadow: var(--form-focus-box-shadow);
+    border: var(--input-checkbox-radio-wrapper-border-on);
+    outline: var(--input-checkbox-radio-wrapper-outline-on);
+    box-shadow: var(--input-checkbox-radio-wrapper-box-shadow-on);
   }
 
   .input-checked-icon {
     grid-area: element-stack;
     color: var(--theme-form-checkbox-symbol);
-    height: var(--_icon-size);
-    width: var(--_icon-size);
+    height: var(--form-input-checkbox-radio-button-symbol-size);
+    width: var(--form-input-checkbox-radio-button-symbol-size);
     box-shadow: var(--_box-shadow);
+    color: red;
   }
 
   .input-checkbox-radio-core {
@@ -174,8 +159,8 @@ const isChecked = computed(() => {
     overflow: hidden;
     opacity: 0;
 
-    height: var(--_icon-size);
-    width: var(--_icon-size);
+    height: var(--form-input-checkbox-radio-button-symbol-size);
+    width: var(--form-input-checkbox-radio-button-symbol-size);
 
     &:hover {
       cursor: pointer;
@@ -183,7 +168,9 @@ const isChecked = computed(() => {
 
     &:not(.is-button) {
       &:focus-visible {
-        --_box-shadow: var(--form-focus-box-shadow);
+        border: var(--input-checkbox-radio-wrapper-border-on);
+        outline: var(--input-checkbox-radio-wrapper-outline-on);
+        box-shadow: var(--input-checkbox-radio-wrapper-box-shadow-on);
       }
     }
   }

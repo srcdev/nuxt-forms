@@ -196,6 +196,7 @@
                           optionsLayout="inline"
                           :theme
                           :size
+                          :display-as-disc="true"
                         >
                           <template #description>
                             <p class="label-description">This is description: optionsLayout = 'inline'</p>

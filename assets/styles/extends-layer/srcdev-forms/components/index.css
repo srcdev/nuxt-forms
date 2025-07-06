@@ -3,3 +3,5 @@
 @import './_input-label';
 @import './_input-textarea';
 @import './_input-text-as-number';
+@import './_input-checkbox';
+@import './_input-radio';

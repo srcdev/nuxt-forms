@@ -23,6 +23,7 @@
           :theme
           :direction
           :ariaDescribedby
+          :displayAsDisc
         >
           <template #checkedIcon>
             <slot name="checkedIcon"></slot>
@@ -47,6 +48,7 @@
           :optionsLayout
           :theme
           :ariaDescribedby
+          :displayAsDisc
         >
           <template #checkedIcon>
             <slot name="checkedIcon"></slot>
@@ -138,6 +140,10 @@ const { dataTestid, name, legend, label, required, fieldHasError, placeholder, i
     validator(value: string) {
       return ['row', 'row-reverse'].includes(value);
     },
+  },
+  displayAsDisc: {
+    type: Boolean,
+    default: false,
   },
 });
 

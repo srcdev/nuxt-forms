@@ -8,7 +8,5 @@
     --form-icon-only-button-size: calc(var(--step-1) * 2.5 + 1px);
     --form-toggle-symbol-size: calc(var(--step-2) * 1.72);
     --form-toggle-switch-width-adjustment: 0.2rem;
-
-    --form-input-checkbox-radio-button-size: var(--step-2);
   }
 }
