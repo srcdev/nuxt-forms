@@ -8,4 +8,6 @@
   --theme-error-text: var(--red-0);
 
   --theme-form-button-font-size-normal: var(--form-element-font-size);
+
+  --theme-form-transition-duration: 0.2s;
 }

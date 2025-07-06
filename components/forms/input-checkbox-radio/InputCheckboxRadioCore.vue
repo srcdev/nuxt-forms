@@ -135,7 +135,7 @@ const isChecked = computed(() => {
   height: var(--form-input-checkbox-radio-button-symbol-size);
   width: var(--form-input-checkbox-radio-button-symbol-size);
 
-  transition: all 0.2s ease-in-out;
+  transition: var(--input-checkbox-radio-wrapper-transition);
 
   &:not(.button):has(.input-checkbox-radio-core:focus-visible) {
     border: var(--input-checkbox-radio-wrapper-border-on);
