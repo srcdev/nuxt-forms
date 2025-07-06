@@ -14,7 +14,9 @@
       /* Interactive state */
       --input-checkbox-radio-wrapper-border-on: 0.1rem solid var(--theme-form-input-border);
       --input-checkbox-radio-wrapper-outline-on: 0.1rem solid hsl(from var(--theme-form-input-border) h s 1%);
-      --input-checkbox-radio-wrapper-box-shadow-on: 0.1rem 0.1rem 0.1rem 0.1rem hsl(from var(--theme-form-input-border) h s 95%);
+      --input-checkbox-radio-wrapper-box-shadow-on: 0rem 0rem 0rem 0.3rem hsl(from var(--theme-form-input-border) h s 95%);
+
+      --form-input-checkbox-radio-button-symbol-color: hsl(from var(--theme-form-input-border) h s 25%);
 
       /* Size variants for radio buttons within a button */
       &.x-small {

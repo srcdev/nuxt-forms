@@ -39,7 +39,7 @@ body {
 form {
   input {
     font: inherit;
-    accent-color: var(--accent-color, red);
+    /* accent-color: var(--accent-color, red); */
   }
 
   label {

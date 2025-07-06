@@ -145,11 +145,10 @@ const isChecked = computed(() => {
 
   .input-checked-icon {
     grid-area: element-stack;
-    color: var(--theme-form-checkbox-symbol);
+    color: var(--form-input-checkbox-radio-button-symbol-color);
     height: var(--form-input-checkbox-radio-button-symbol-size);
     width: var(--form-input-checkbox-radio-button-symbol-size);
     box-shadow: var(--_box-shadow);
-    color: red;
   }
 
   .input-checkbox-radio-core {

@@ -1,14 +1,14 @@
 <template>
-  <div class="input-checkbox-radio-button-button" :data-form-theme="formTheme" :data-size="size" :class="[size, elementClasses, optionsLayout, { error: fieldHasError }]">
+  <div class="input-checkbox-radio-options-button" :data-form-theme="formTheme" :data-size="size" :class="[size, elementClasses, optionsLayout, { error: fieldHasError }]">
     <InputCheckboxRadioCore :isButton="true" :type :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme :ariaDescribedby :displayAsDisc>
       <template #checkedIcon>
         <slot name="checkedIcon"></slot>
       </template>
     </InputCheckboxRadioCore>
-    <label v-if="hasLabelContent" class="input-checkbox-radio-button-label" :for="id">
+    <label v-if="hasLabelContent" class="input-checkbox-radio-options-button-label" :for="id">
       <slot name="labelContent"></slot>
     </label>
-    <label v-else class="input-checkbox-radio-button-label" :for="id">{{ label }}</label>
+    <label v-else class="input-checkbox-radio-options-button-label" :for="id">{{ label }}</label>
     <div class="item-icon">
       <slot name="itemIcon">
         <Icon name="material-symbols:add-2" class="icon" />
@@ -109,33 +109,37 @@ const flexDirection = ref(props.direction);
 </script>
 
 <style lang="css">
-.input-checkbox-radio-button-button {
+.input-checkbox-radio-options-button {
   /* --_checkbox-size: initial; */
-  --_background-color: var(--theme-checkbox-radio-button-bg-default);
-  --_outline-width: var(--form-element-outline-width);
-  --_border-color: var(--theme-checkbox-radio-button-border-default);
+
   --_outline-color: var(--theme-checkbox-radio-button-outline-default);
   --_label-color: var(--theme-checkbox-radio-button-label-default);
   --_box-shadow: var(--theme-checkbox-radio-button-shadow);
   --_white-space: wrap;
-  --_gap: 0.4rem;
   /* --_border-radius: 2.2rem; */
-  --_padding-block: 0.4rem;
-  --_padding-inline: 1.2rem;
+  /* --_padding-block: 0.4rem;
+  --_padding-inline: 1.2rem; */
 
   display: flex;
   flex-direction: v-bind(flexDirection);
   align-items: center;
   justify-content: space-between;
-  gap: var(--_gap);
+  gap: var(--input-checkbox-radio-options-button-gap);
 
-  background-color: var(--_background-color);
-  border-radius: calc(var(--form-element-line-height) / 1);
-  border: var(--theme-checkbox-radio-button-border-width) solid var(--_border-color);
-  outline: var(--theme-checkbox-radio-button-outline-width) solid var(--_outline-color);
+  background-color: var(--input-checkbox-radio-options-button-background-color);
+  border-radius: var(--input-checkbox-radio-options-button-border-radius);
+  border: var(--input-checkbox-radio-options-button-border);
+  outline: var(--input-checkbox-radio-options-button-outline);
+
   box-shadow: 0.1rem 0.1rem 0.8rem 0.1rem var(--_box-shadow);
-  padding-block: var(--_padding-block);
-  padding-inline: var(--_padding-inline);
+  padding-block: var(--input-checkbox-radio-options-padding-block);
+  padding-inline: var(--input-checkbox-radio-options-padding-inline);
+
+  &:hover {
+    background-color: var(--input-checkbox-radio-options-button-background-color-active);
+    border: var(--input-checkbox-radio-options-button-border-active);
+    outline: var(--input-checkbox-radio-options-button-outline-active);
+  }
 
   &.inline {
     --_white-space: nowrap;
@@ -154,52 +158,47 @@ const flexDirection = ref(props.direction);
   /* Sizes */
   &.x-small {
     /* --_checkbox-size: 2rem; */
-    --_gap: 1rem;
     /* --_border-radius: 2rem; */
-    --_padding-block: 0.2rem;
-    --_padding-inline: 1.6rem;
+    /* --_padding-block: 0.2rem; */
+    /* --_padding-inline: 1.6rem; */
   }
   &.small {
     /* --_checkbox-size: 2.2rem; */
-    --_gap: 1.2rem;
     /* --_border-radius: 1.8rem; */
-    --_padding-block: 0rem;
-    --_padding-inline: 1.2rem;
+    /* --_padding-block: 0rem; */
+    /* --_padding-inline: 1.2rem; */
   }
   &.normal {
     /* --_checkbox-size: 3.4rem; */
-    --_gap: 1rem;
     /* --_border-radius: 2rem; */
-    --_padding-block: 0.4rem;
-    --_padding-inline: 1.2rem;
+    /* --_padding-block: 0.4rem; */
+    /* --_padding-inline: 1.2rem; */
   }
   &.medium {
     /* --_checkbox-size: 3.4rem; */
-    --_gap: 1rem;
     /* --_border-radius: 2rem; */
-    --_padding-block: 0.4rem;
-    --_padding-inline: 1.2rem;
+    /* --_padding-block: 0.4rem; */
+    /* --_padding-inline: 1.2rem; */
   }
   &.large {
     /* --_checkbox-size: 3.4rem; */
-    --_gap: 1rem;
     /* --_border-radius: 2rem; */
-    --_padding-block: 0.4rem;
-    --_padding-inline: 1.2rem;
+    /* --_padding-block: 0.4rem; */
+    /* --_padding-inline: 1.2rem; */
   }
 }
 
-.input-checkbox-radio-button-label {
+.input-checkbox-radio-options-button-label {
   display: flex;
   flex-grow: 1;
-  color: var(--_label-color);
-  font-size: var(--form-element-font-size);
+  color: var(--input-checkbox-radio-options-button-label-text-color);
+  font-size: var(--input-checkbox-radio-options-button-label-font-size);
   width: 100%;
-  height: var(--form-element-line-height);
+  min-height: var(--input-checkbox-radio-options-button-label-min-height);
   align-items: center;
   justify-content: center;
-  margin-block: 0.8rem;
-  padding-inline: 0.8rem;
+  margin-block: var(--input-checkbox-radio-options-button-label-margin-block);
+  padding-inline: var(--input-checkbox-radio-options-button-label-padding-inline);
   white-space: var(--_white-space);
 
   &:hover {
@@ -211,7 +210,7 @@ const flexDirection = ref(props.direction);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--_border-color);
+  color: var(--input-checkbox-radio-options-button-label-icon-color);
   height: var(--form-input-checkbox-radio-button-size);
   width: var(--form-input-checkbox-radio-button-size);
 }
