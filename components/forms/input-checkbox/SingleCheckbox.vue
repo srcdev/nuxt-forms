@@ -1,23 +1,23 @@
 <template>
-  <fieldset class="single-checkbox-fieldset" :class="[elementClasses, { error: fieldHasError }]" :data-testid>
-    <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
-
-    <div v-if="hasDescriptionSlot" :id="`${name}-description`">
+  <FormFieldset :id :name :legend :fieldHasError :required :data-testid :styleClassPassthrough="['single-checkbox-fieldset']">
+    <template #description>
       <slot name="description"></slot>
-    </div>
+    </template>
 
-    <div class="single-checkbox-items" :class="[optionsLayout]">
-      <InputCheckboxRadioWithLabel type="checkbox" :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :theme :ariaDescribedby>
-        <template #checkedIcon>
-          <slot name="checkedIcon"></slot>
-        </template>
-        <template v-if="hasLabelContent" #labelContent>
-          <slot name="labelContent"></slot>
-        </template>
-      </InputCheckboxRadioWithLabel>
-    </div>
-    <InputError :errorMessage :showError="fieldHasError" :id="errorId" :isDetached="true" :styleClassPassthrough="inputErrorStyles" />
-  </fieldset>
+    <template #content>
+      <div class="single-checkbox-items" :class="[optionsLayout]">
+        <InputCheckboxRadioWithLabel type="checkbox" :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :theme :ariaDescribedby>
+          <template #checkedIcon>
+            <slot name="checkedIcon"></slot>
+          </template>
+          <template v-if="hasLabelContent" #labelContent>
+            <slot name="labelContent"></slot>
+          </template>
+        </InputCheckboxRadioWithLabel>
+      </div>
+      <InputError :errorMessage :showError="fieldHasError" :id="errorId" :isDetached="true" :styleClassPassthrough="inputErrorStyles" />
+    </template>
+  </FormFieldset>
 </template>
 
 <script setup lang="ts">
@@ -109,6 +109,7 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
 const inputErrorStyles = ref<string[]>(props.styleClassPassthrough);
 
+const id = `${props.name}-input-${useId()}`;
 const errorId = `${name}-error-message`;
 const ariaDescribedby = computed(() => {
   const ariaDescribedbyId = hasDescriptionSlot.value ? `${name}-description` : undefined;
@@ -125,28 +126,6 @@ watchEffect(() => {
 </script>
 
 <style lang="css">
-.single-checkbox-fieldset {
-  margin: 0;
-  padding: 0;
-  border: 0;
-
-  legend {
-    font-family: var(--font-family);
-    font-size: 1.6rem;
-    font-weight: 500;
-
-    &.has-description {
-      margin-bottom: 0;
-    }
-  }
-
-  .label-description {
-    font-family: var(--font-family);
-    font-size: 1.6rem;
-    margin-top: 1.2rem;
-  }
-}
-
 .single-checkbox-items {
   display: flex;
   gap: 1.2rem;

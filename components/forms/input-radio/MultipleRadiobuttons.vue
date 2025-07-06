@@ -1,61 +1,61 @@
 <template>
-  <fieldset :aria-required="required" :aria-invalid="fieldHasError" role="radiogroup" class="multiple-radiobuttons-fieldset" :class="[elementClasses, { error: fieldHasError }]" :data-testid>
-    <legend :class="[{ 'has-description': hasDescriptionSlot }]">{{ legend }}</legend>
-
-    <div v-if="hasDescriptionSlot" :id="`${name}-description`">
+  <FormFieldset :id :name :legend :fieldHasError :required :data-testid :styleClassPassthrough="['multiple-radiobuttons-fieldset']">
+    <template #description>
       <slot name="description"></slot>
-    </div>
+    </template>
 
-    <div class="multiple-radiobuttons-items" :class="[optionsLayout]">
-      <template v-for="item in fieldData.data" :key="item.id">
-        <InputCheckboxRadioButton
-          v-if="isButton"
-          type="radio"
-          :id="`${name}-${item.value}`"
-          :name="`${name}-${item.name}`"
-          :required
-          :label="item.label"
-          :fieldHasError
-          v-model="modelValue"
-          :true-value="item.value"
-          :size
-          :optionsLayout
-          :theme
-          :direction
-          :ariaDescribedby
-        >
-          <template #checkedIcon>
-            <slot name="checkedIcon"></slot>
-          </template>
-          <template #itemIcon>
-            <slot name="itemIcon">
-              <Icon name="material-symbols:add-2" class="icon" />
-            </slot>
-          </template>
-        </InputCheckboxRadioButton>
-        <InputCheckboxRadioWithLabel
-          v-else
-          type="radio"
-          :id="`${name}-${item.value}`"
-          :name="`${name}-${item.name}`"
-          :required
-          :label="item.label"
-          :fieldHasError
-          v-model="modelValue"
-          :true-value="item.value"
-          :size
-          :optionsLayout
-          :theme
-          :ariaDescribedby
-        >
-          <template #checkedIcon>
-            <slot name="checkedIcon"></slot>
-          </template>
-        </InputCheckboxRadioWithLabel>
-      </template>
-    </div>
-    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="errorId" :isDetached="true" />
-  </fieldset>
+    <template #content>
+      <div class="multiple-radiobuttons-items" :class="[optionsLayout]">
+        <template v-for="item in fieldData.data" :key="item.id">
+          <InputCheckboxRadioButton
+            v-if="isButton"
+            type="radio"
+            :id="`${name}-${item.value}`"
+            :name="`${name}-${item.name}`"
+            :required
+            :label="item.label"
+            :fieldHasError
+            v-model="modelValue"
+            :true-value="item.value"
+            :size
+            :optionsLayout
+            :theme
+            :direction
+            :ariaDescribedby
+          >
+            <template #checkedIcon>
+              <slot name="checkedIcon"></slot>
+            </template>
+            <template #itemIcon>
+              <slot name="itemIcon">
+                <Icon name="material-symbols:add-2" class="icon" />
+              </slot>
+            </template>
+          </InputCheckboxRadioButton>
+          <InputCheckboxRadioWithLabel
+            v-else
+            type="radio"
+            :id="`${name}-${item.value}`"
+            :name="`${name}-${item.name}`"
+            :required
+            :label="item.label"
+            :fieldHasError
+            v-model="modelValue"
+            :true-value="item.value"
+            :size
+            :optionsLayout
+            :theme
+            :ariaDescribedby
+          >
+            <template #checkedIcon>
+              <slot name="checkedIcon"></slot>
+            </template>
+          </InputCheckboxRadioWithLabel>
+        </template>
+      </div>
+      <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="errorId" :isDetached="true" />
+    </template>
+  </FormFieldset>
 </template>
 
 <script setup lang="ts">
@@ -145,7 +145,7 @@ const slots = useSlots();
 const hasDescriptionSlot = computed(() => slots.description !== undefined);
 const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
 
-const id = useId();
+const id = `${props.name}-input-${useId()}`;
 const errorId = `${name}-error-message`;
 const ariaDescribedby = computed(() => {
   const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : undefined;
@@ -157,28 +157,6 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 </script>
 
 <style lang="css">
-.multiple-radiobuttons-fieldset {
-  margin: 0;
-  padding: 0;
-  border: 0;
-
-  legend {
-    font-family: var(--font-family);
-    font-size: 1.6rem;
-    font-weight: 500;
-
-    &.has-description {
-      margin-bottom: 0;
-    }
-  }
-
-  .label-description {
-    font-family: var(--font-family);
-    font-size: 1.6rem;
-    margin-top: 1.2rem;
-  }
-}
-
 .multiple-radiobuttons-items {
   display: flex;
   gap: 1.2rem;

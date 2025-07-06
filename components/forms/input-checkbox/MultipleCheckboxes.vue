@@ -1,63 +1,63 @@
 <template>
-  <fieldset class="multiple-checkboxes-fieldset" :class="[elementClasses, { error: fieldHasError }]" :data-testid>
-    <legend :class="[{ 'has-description': hasDescription }]">{{ legend }}</legend>
-
-    <div v-if="hasDescriptionSlot" :id="`${id}-description`">
+  <FormFieldset :id :name :legend :fieldHasError :required :data-testid :styleClassPassthrough="['multiple-checkboxes-fieldset']">
+    <template #description>
       <slot name="description"></slot>
-    </div>
+    </template>
 
-    <div class="multiple-checkboxes-items" :class="[optionsLayout]">
-      <template v-for="item in fieldData.data" :key="item.id">
-        <InputCheckboxRadioButton
-          v-if="isButton"
-          type="checkbox"
-          :id="`${name}-${item.value}`"
-          :name
-          :required
-          :label="item.label"
-          :fieldHasError
-          v-model="modelValue"
-          :true-value="item.value"
-          :size
-          :optionsLayout
-          :theme
-          :direction
-          :ariaDescribedby
-          :displayAsDisc
-        >
-          <template #checkedIcon>
-            <slot name="checkedIcon"></slot>
-          </template>
-          <template #itemIcon>
-            <slot name="itemIcon">
-              <Icon name="material-symbols:add-2" class="icon" />
-            </slot>
-          </template>
-        </InputCheckboxRadioButton>
-        <InputCheckboxRadioWithLabel
-          v-else
-          type="checkbox"
-          :id="`${name}-${item.value}`"
-          :name
-          :required
-          :label="item.label"
-          :fieldHasError
-          v-model="modelValue"
-          :true-value="item.value"
-          :size
-          :optionsLayout
-          :theme
-          :ariaDescribedby
-          :displayAsDisc
-        >
-          <template #checkedIcon>
-            <slot name="checkedIcon"></slot>
-          </template>
-        </InputCheckboxRadioWithLabel>
-      </template>
-    </div>
-    <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="errorId" :isDetached="true" />
-  </fieldset>
+    <template #content>
+      <div class="multiple-checkboxes-items" :class="[optionsLayout]">
+        <template v-for="item in fieldData.data" :key="item.id">
+          <InputCheckboxRadioButton
+            v-if="isButton"
+            type="checkbox"
+            :id="`${name}-${item.value}`"
+            :name
+            :required
+            :label="item.label"
+            :fieldHasError
+            v-model="modelValue"
+            :true-value="item.value"
+            :size
+            :optionsLayout
+            :theme
+            :direction
+            :ariaDescribedby
+            :displayAsDisc
+          >
+            <template #checkedIcon>
+              <slot name="checkedIcon"></slot>
+            </template>
+            <template #itemIcon>
+              <slot name="itemIcon">
+                <Icon name="material-symbols:add-2" class="icon" />
+              </slot>
+            </template>
+          </InputCheckboxRadioButton>
+          <InputCheckboxRadioWithLabel
+            v-else
+            type="checkbox"
+            :id="`${name}-${item.value}`"
+            :name
+            :required
+            :label="item.label"
+            :fieldHasError
+            v-model="modelValue"
+            :true-value="item.value"
+            :size
+            :optionsLayout
+            :theme
+            :ariaDescribedby
+            :displayAsDisc
+          >
+            <template #checkedIcon>
+              <slot name="checkedIcon"></slot>
+            </template>
+          </InputCheckboxRadioWithLabel>
+        </template>
+      </div>
+      <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="errorId" :isDetached="true" />
+    </template>
+  </FormFieldset>
 </template>
 
 <script setup lang="ts">
@@ -155,7 +155,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleC
 const modelValue = defineModel();
 const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
-const id = useId();
+const id = `${name}-input-${useId()}`;
 const errorId = `${name}-error-message`;
 const ariaDescribedby = computed(() => {
   const ariaDescribedbyId = hasDescriptionSlot.value ? `${name}-description` : undefined;
@@ -164,28 +164,6 @@ const ariaDescribedby = computed(() => {
 </script>
 
 <style lang="css">
-.multiple-checkboxes-fieldset {
-  margin: 0;
-  padding: 0;
-  border: 0;
-
-  legend {
-    font-family: var(--font-family);
-    font-size: 1.6rem;
-    font-weight: 500;
-
-    &.has-description {
-      margin-bottom: 0;
-    }
-  }
-
-  .label-description {
-    font-family: var(--font-family);
-    font-size: 1.6rem;
-    margin-top: 1.2rem;
-  }
-}
-
 .multiple-checkboxes-items {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

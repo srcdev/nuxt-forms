@@ -184,7 +184,7 @@
                       <template #default>
                         <MultipleCheckboxes
                           name="tags"
-                          legend="Choose tags (as checkboxes)"
+                          legend="Choose tags (MultipleCheckboxes)"
                           :required="true"
                           label="Check between 3 and 8 tags"
                           placeholder="eg. Type something here"
@@ -199,7 +199,7 @@
                           :display-as-disc="true"
                         >
                           <template #description>
-                            <p class="label-description">This is description: optionsLayout = 'inline'</p>
+                            <p class="label-description">MultipleCheckboxes description: optionsLayout = 'inline'</p>
                           </template>
                           <template #itemIcon>
                             <Icon name="material-symbols:bookmark-add-outline" class="icon" />
