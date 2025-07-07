@@ -88,6 +88,18 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
   border-left: var(--element-decorator-border-left-default);
 
   .input-select-core {
+    appearance: none;
+    background-color: transparent;
+
+    /* For legacy support - eg, Safari */
+    /* &::after {
+      content: '';
+      width: 0.8em;
+      height: 0.5em;
+      background-color: var(--theme-form-input-border);
+      clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    } */
+
     /* Start modern Select CSS */
     &,
     &::picker(select) {
