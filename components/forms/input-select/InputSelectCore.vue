@@ -131,7 +131,7 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
     &:hover {
       /* background-color: lab(89.6502 -0.829279 -2.45323 / 0.1); */
-      background-color: hsl(from var(--theme-form-input-border) h s 20%);
+      background-color: var(--form-core-background-color-hover);
     }
 
     /* END modern Select CSS */

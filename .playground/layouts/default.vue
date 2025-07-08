@@ -53,7 +53,7 @@ useHead({
 });
 
 // const { currentColourScheme } = useColourScheme();
-useColourScheme();
+// useColourScheme();
 
 // onBeforeMount(() => {
 //   currentColourScheme;

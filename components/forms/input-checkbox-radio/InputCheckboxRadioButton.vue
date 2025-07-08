@@ -136,7 +136,8 @@ const flexDirection = ref(props.direction);
   padding-inline: var(--input-checkbox-radio-options-padding-inline);
 
   &:hover {
-    background-color: var(--input-checkbox-radio-options-button-background-color-active);
+    /* background-color: var(--input-checkbox-radio-options-button-background-color-active); */
+    background-color: var(--form-core-background-color-hover);
     border: var(--input-checkbox-radio-options-button-border-active);
     outline: var(--input-checkbox-radio-options-button-outline-active);
   }

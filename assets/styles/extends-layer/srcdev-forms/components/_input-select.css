@@ -8,7 +8,9 @@
     --input-select-option-padding-inline: 1.75rem;
     --input-select-option-gap: 1.5rem;
 
-    --input-select-option-background-color-hover: hsl(from var(--theme-form-input-border) h s 25%);
+    /* --input-select-option-background-color-hover: light-dark(hsl(from var(--theme-form-input-border) h s 75%), hsl(from var(--theme-form-input-border) h s 25%)); */
+
+    --input-select-option-background-color-hover: light-dark(hsl(from var(--theme-form-input-border) h s 75%), hsl(from var(--theme-form-input-border) h s 25%));
 
     --input-select-option-icon-size: 1.5rem;
     --input-select-option-transition: all var(--input-select-animation-duration) ease-in-out;

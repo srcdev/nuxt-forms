@@ -126,7 +126,7 @@ const isChecked = computed(() => {
   grid-template-areas: 'element-stack';
   place-content: center;
 
-  background-color: var(--input-checkbox-radio-wrapper-background-color);
+  background-color: var(--input-checkbox-radio-symbol-color-default);
   border: var(--input-checkbox-radio-wrapper-border);
   border-radius: var(--input-checkbox-radio-wrapper-border-radius);
   outline: var(--input-checkbox-radio-wrapper-outline);
@@ -145,7 +145,7 @@ const isChecked = computed(() => {
 
   .input-checked-icon {
     grid-area: element-stack;
-    color: var(--form-input-checkbox-radio-button-symbol-color);
+    color: var(--input-checkbox-radio-symbol-color-active);
     height: var(--form-input-checkbox-radio-button-symbol-size);
     width: var(--form-input-checkbox-radio-button-symbol-size);
     box-shadow: var(--_box-shadow);

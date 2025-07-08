@@ -2,7 +2,7 @@
   .input-checkbox-radio-options-button {
     /* --input-checkbox-radio-options-button-background-color: hsl(from var(--theme-form-input-border) h s 95%); */
     --input-checkbox-radio-options-button-background-color: color-mix(in srgb, currentColor 5%, transparent);
-    --input-checkbox-radio-options-button-background-color-active: hsl(from var(--theme-form-input-border) h s 25%);
+    --input-checkbox-radio-options-button-background-color-active: light-dark(hsl(from var(--theme-form-input-border) h s 75%), hsl(from var(--theme-form-input-border) h s 25%));
 
     --input-checkbox-radio-options-button-border: 0.1rem solid var(--theme-form-input-border);
     --input-checkbox-radio-options-button-border-active: 0.1rem solid var(--theme-form-input-border);

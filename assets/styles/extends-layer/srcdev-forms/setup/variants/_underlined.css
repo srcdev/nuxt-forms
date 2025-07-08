@@ -22,7 +22,7 @@
     --element-decorator-border-bottom-default: var(--form-element-border-width-underlined) solid var(--theme-form-input-border);
     --element-decorator-border-left-default: var(--form-element-border-width) solid transparent;
 
-    --input-placeholder-color: var(--gray-5);
+    --input-placeholder-color: light-dark(var(--gray-7), var(--gray-5));
     --input-placeholder-font-size: var(--step-2);
     --input-placeholder-font-style: italic;
     --input-placeholder-font-weight: normal;
