@@ -25,7 +25,7 @@ fieldset,
 legend,
 li,
 a {
-  color: var(--grayscale-text-body);
+  color: light-dark(var(--gray-12), var(--gray-3));
   font-family: var(--font-family);
   font-size: var(--step-1);
 }
