@@ -22,45 +22,45 @@
 
       /* Size variants for radio buttons within a button */
       &.x-small {
-        --form-input-checkbox-radio-button-symbol-size: var(--step-0);
+        --form-input-checkbox-radio-button-symbol-size: var(--step-3);
       }
 
       &.small {
-        --form-input-checkbox-radio-button-symbol-size: var(--step-1);
-      }
-
-      &.default {
         --form-input-checkbox-radio-button-symbol-size: var(--step-4);
       }
 
+      &.default {
+        --form-input-checkbox-radio-button-symbol-size: var(--step-7);
+      }
+
       &.medium {
-        --form-input-checkbox-radio-button-symbol-size: var(--step-3);
+        --form-input-checkbox-radio-button-symbol-size: var(--step-6);
       }
 
       &.large {
-        --form-input-checkbox-radio-button-symbol-size: var(--step-3);
+        --form-input-checkbox-radio-button-symbol-size: var(--step-6);
       }
 
       /* Size variants for default radio buttons */
       .button {
         &.x-small {
-          --form-input-checkbox-radio-button-symbol-size: var(--step-0);
+          --form-input-checkbox-radio-button-symbol-size: var(--step-3);
         }
 
         &.small {
-          --form-input-checkbox-radio-button-symbol-size: var(--step-1);
+          --form-input-checkbox-radio-button-symbol-size: var(--step-4);
         }
 
         &.default {
-          --form-input-checkbox-radio-button-symbol-size: var(--step-3);
+          --form-input-checkbox-radio-button-symbol-size: var(--step-6);
         }
 
         &.medium {
-          --form-input-checkbox-radio-button-symbol-size: var(--step-3);
+          --form-input-checkbox-radio-button-symbol-size: var(--step-6);
         }
 
         &.large {
-          --form-input-checkbox-radio-button-symbol-size: var(--step-3);
+          --form-input-checkbox-radio-button-symbol-size: var(--step-6);
         }
       }
     }

@@ -3,7 +3,7 @@
   .form-fieldset {
     --form-fieldset-legend-text-color: var(--theme-form-input-text-label-color-normal);
     --form-fieldset-legend-text-margin-block: 0.8rem;
-    --form-fieldset-legend-text-size: var(--step-2);
+    --form-fieldset-legend-text-size: var(--step-5);
     --form-fieldset-legend-text-weight: normal;
     --form-fieldset-legend-text-line-height: 1.5;
 

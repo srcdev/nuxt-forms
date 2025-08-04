@@ -174,7 +174,7 @@ watch(
   /* Label vars */
   --_label-text-color: var(--theme-form-input-text-label-color-normal);
   --_label-text-margin-block: 0.8rem;
-  --_label-text-size: var(--step-2);
+  --_label-text-size: var(--step-5);
   --_label-text-weight: normal;
   --_label-text-line-height: 1.5;
   --_label-text-background-color: var(--_input-text-with-label-background-color);
@@ -195,7 +195,7 @@ watch(
     &:has(.input-text-wrapper.dirty) {
       --_label-offset: 0 -3.2rem;
       --_label-text-weight: bolder;
-      --_label-text-size: var(--step-1);
+      --_label-text-size: var(--step-4);
       /* line-height: 1.5; */
       /* padding: 0.2rem 1.2rem; */
     }
@@ -213,7 +213,7 @@ watch(
     &:has(.input-text-wrapper.dirty) {
       --_label-offset: 1rem -2.8rem;
       --_label-text-weight: normal;
-      /* --_label-text-size: var(--step-1); */
+      /* --_label-text-size: var(--step-4); */
       /* line-height: 1.5; */
       /* padding: 0.2rem 1.2rem; */
     }
@@ -225,7 +225,7 @@ watch(
     &:has(.input-text-wrapper.active),
     &:has(.input-text-wrapper.dirty) {
       /* --_label-offset: 1rem -2.8rem; */
-      /* font-size: var(--step-1); */
+      /* font-size: var(--step-4); */
       /* line-height: 1.5; */
       /* padding: 0.2rem 1.2rem; */
     }

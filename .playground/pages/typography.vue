@@ -5,12 +5,12 @@
         <h1 class="heading-3">Typography</h1>
         <h2 class="heading-4">Headings</h2>
         <ul>
-          <li class="heading-1">Heading 1 (<code>var(--step-5)</code>)</li>
-          <li class="heading-2">Heading 2 (<code>var(--step-4)</code>)</li>
-          <li class="heading-3">Heading 3 (<code>var(--step-3)</code>)</li>
-          <li class="heading-4">Heading 4 (<code>var(--step-2)</code>)</li>
-          <li class="heading-5">Heading 5 (<code>var(--step-1)</code>)</li>
-          <li class="heading-6">Heading 6 (<code>var(--step-0)</code>)</li>
+          <li class="heading-1">Heading 1 (<code>var(--step-8)</code>)</li>
+          <li class="heading-2">Heading 2 (<code>var(--step-7)</code>)</li>
+          <li class="heading-3">Heading 3 (<code>var(--step-6)</code>)</li>
+          <li class="heading-4">Heading 4 (<code>var(--step-5)</code>)</li>
+          <li class="heading-5">Heading 5 (<code>var(--step-4)</code>)</li>
+          <li class="heading-6">Heading 6 (<code>var(--step-3)</code>)</li>
         </ul>
 
         <h2 class="heading-4">Body Regular</h2>

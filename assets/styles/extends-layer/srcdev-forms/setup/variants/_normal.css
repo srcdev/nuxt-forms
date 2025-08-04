@@ -23,7 +23,7 @@
     --element-decorator-border-left-default: var(--form-element-border-width) solid var(--theme-form-input-border);
 
     --input-placeholder-color: light-dark(var(--gray-7), var(--gray-5));
-    --input-placeholder-font-size: var(--step-2);
+    --input-placeholder-font-size: var(--step-5);
     --input-placeholder-font-style: italic;
     --input-placeholder-font-weight: normal;
     --input-placeholder-line-height: 1;
@@ -31,7 +31,7 @@
     /* Label vars */
     --_label-text-color: var(--theme-form-input-text-label-color-underlined);
     --_label-text-margin-block: 0.8rem;
-    --_label-text-size: var(--step-2);
+    --_label-text-size: var(--step-5);
     --_label-text-weight: normal;
     --_label-text-line-height: 1.5;
 

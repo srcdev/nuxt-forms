@@ -141,7 +141,7 @@ watch(
   /* Label vars */
   --_label-textarea-color: var(--theme-form-input-text-label-color-normal);
   --_label-textarea-margin-block: 0.8rem;
-  --_label-textarea-size: var(--step-2);
+  --_label-textarea-size: var(--step-5);
   --_label-textarea-weight: normal;
   --_label-textarea-height: auto;
   --_label-textarea-line-height: 1.5;
@@ -164,7 +164,7 @@ watch(
     &:has(.input-textarea-wrapper.dirty) {
       --_label-offset: 0 -3.2rem;
       --_label-textarea-weight: bolder;
-      --_label-textarea-size: var(--step-1);
+      --_label-textarea-size: var(--step-4);
       /* line-height: 1.5; */
       /* padding: 0.2rem 1.2rem; */
     }
@@ -183,7 +183,7 @@ watch(
     &:has(.input-textarea-wrapper.dirty) {
       --_label-offset: 1rem -2.8rem;
       --_label-textarea-weight: normal;
-      /* --_label-textarea-size: var(--step-1); */
+      /* --_label-textarea-size: var(--step-4); */
       /* line-height: 1.5; */
       /* padding: 0.2rem 1.2rem; */
     }
@@ -195,7 +195,7 @@ watch(
     &:has(.input-textarea-wrapper.active),
     &:has(.input-textarea-wrapper.dirty) {
       /* --_label-offset: 1rem -2.8rem; */
-      /* font-size: var(--step-1); */
+      /* font-size: var(--step-4); */
       /* line-height: 1.5; */
       /* padding: 0.2rem 1.2rem; */
     }
