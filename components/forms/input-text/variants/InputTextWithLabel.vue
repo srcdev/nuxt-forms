@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="input-text-with-label" :data-form-theme="formTheme" :class="[elementClasses, inputVariant, { dirty: isDirty }, { active: isActive }]">
+    <div class="input-text-with-label" :data-theme="formTheme" :class="[elementClasses, inputVariant, { dirty: isDirty }, { active: isActive }]">
       <InputLabel :for="id" :id :theme :name :input-variant :field-has-error :style-class-passthrough="['input-text-label']">
         <template #textLabel>{{ label }}</template>
       </InputLabel>
@@ -162,9 +162,9 @@ watch(
   --_input-text-with-label-margin-block-start: 0;
   --_input-text-with-label-background-color: transparent;
 
-  --_input-text-wrapper-border: var(--form-element-border-width) solid var(--theme-form-input-border);
+  --_input-text-wrapper-border: var(--form-element-border-width) solid var(--theme-input-border);
   --_input-text-wrapper-border-radius: var(--form-input-border-radius);
-  --_input-text-wrapper-border-underlined: var(--form-element-border-width-underlined) solid var(--theme-form-input-border);
+  --_input-text-wrapper-border-underlined: var(--form-element-border-width-underlined) solid var(--theme-input-border);
   --_input-text-wrapper-outline: var(--form-element-outline-width) solid var(--theme-form-input-outline);
   --_input-text-wrapper-box-shadow: var(--_focus-box-shadow);
   --_input-text-wrapper-padding-block: 0;
@@ -205,7 +205,7 @@ watch(
     --_label-text-color: var(--theme-form-input-text-label-color-outlined);
 
     --_label-offset: 1rem -0.2rem;
-    --_input-text-with-label-background-color: var(--theme-form-input-bg-normal);
+    --_input-text-with-label-background-color: var(--theme-button-surface);
 
     --_input-text-wrapper-padding-block: 0.4em 0;
 

@@ -4,7 +4,7 @@
     :readonly
     :aria-disabled="readonly"
     :data-testid
-    :data-btn-theme="theme"
+    :data-theme="theme"
     :data-size="size"
     class="input-button-core"
     :class="[`btn-${type}`, effectClass, elementClasses, { 'icon-only': isIconOnly }]"
@@ -128,19 +128,21 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   transition: all 0.2s ease-in-out;
 
   box-shadow: var(--box-shadow-off);
-  background-color: var(--theme-btn-bg);
-  border: var(--form-element-border-width) solid var(--theme-btn-border);
-  color: var(--theme-btn-text);
-  outline: var(--form-element-outline-width) solid var(--theme-btn-outline);
+  background-color: var(--theme-button-surface);
+  border: var(--form-element-border-width) solid var(--theme-button-border);
+  color: var(--theme-button-text);
+  outline: var(--form-element-outline-width) solid var(--theme-button-outline);
+  outline-offset: 0rem;
 
   /*
   * States
   **/
   &:hover {
-    --theme-btn-bg: var(--theme-btn-bg-hover);
-    --theme-btn-border: var(--theme-btn-border-hover);
-    --theme-btn-text: var(--theme-btn-text-hover);
-    --theme-btn-outline: var(--theme-btn-outline-hover);
+    background-color: var(--theme-button-surface-hover);
+    border-color: var(--theme-input-border-hover);
+    color: var(--theme-button-text-hover);
+    outline-color: var(--theme-button-outline-hover);
+    outline-offset: 0.2rem;
   }
 
   &:hover {
@@ -148,11 +150,12 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   }
 
   &:focus-visible {
-    --theme-btn-bg: var(--theme-btn-bg-focus);
-    --theme-btn-border: var(--theme-btn-border-focus);
-    --theme-btn-text: var(--theme-btn-text-focus);
-    --theme-btn-outline: var(--theme-btn-outline-focus);
+    background-color: var(--theme-button-surface-hover);
+    border-color: var(--theme-button-border-focus);
+    color: var(--theme-button-text-focus);
+    outline-color: var(--theme-button-outline-focus);
     box-shadow: var(--box-shadow-on);
+    outline-offset: 0.2rem;
   }
 
   &[readonly] {

@@ -1,5 +1,5 @@
 <template>
-  <div class="toggle-switch-with-label-inline" :class="[elementClasses]" :data-form-theme="theme">
+  <div class="toggle-switch-with-label-inline" :class="[elementClasses]" :data-theme="theme">
     <label class="toggle-switch-label input-text-label" :class="labelWeightClass" :for="`toggle-sitch-${id}`">{{ label }}</label>
     <ToggleSwitchCore v-model="modelValue" :id :name :true-value :false-value :theme :round :size>
       <template v-if="hasIconOnSlot" #iconOn>

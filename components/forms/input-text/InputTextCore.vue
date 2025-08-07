@@ -1,7 +1,7 @@
 <template>
   <div
     class="input-text-wrapper"
-    :data-form-theme="formTheme"
+    :data-theme="formTheme"
     :data-size="size"
     :data-inputmode="inputmode"
     :class="[inputVariant, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]"
@@ -158,7 +158,7 @@ onMounted(() => {
 
 <style lang="css">
 .input-text-wrapper {
-  background-color: var(--element-decorator-background-color);
+  background-color: var(--theme-input-surface);
   outline: var(--element-decorator-outline-default);
 
   border-top-left-radius: var(--element-decorator-border-top-left-radius);
@@ -175,7 +175,7 @@ onMounted(() => {
 
   &:hover {
     /* background-color: lab(89.6502 -0.829279 -2.45323 / 0.1); */
-    background-color: var(--form-core-background-color-hover);
+    background-color: var(--theme-input-surface-hover);
   }
 
   display: flex;
@@ -219,9 +219,9 @@ onMounted(() => {
   --_focus-box-shadow: var(--box-shadow-off);
   --_input-text-core-color: var(--theme-form-input-text-color-normal);
 
-  --_input-text-wrapper-background-color: var(--theme-form-input-bg-normal);
+  --_input-text-wrapper-background-color: var(--theme-button-surface);
 
-  --_input-text-wrapper-border: var(--form-element-border-width) solid var(--theme-form-input-border);
+  --_input-text-wrapper-border: var(--form-element-border-width) solid var(--theme-input-border);
   --_input-text-wrapper-border-radius: var(--form-input-border-radius);
 
   --_input-text-wrapper-outline: var(--form-element-outline-width) solid var(--theme-form-input-outline);
@@ -365,12 +365,12 @@ onMounted(() => {
 
     .left-slot {
       margin-inline-end: 0;
-      border-right: 2px solid var(--theme-btn-bg-hover);
+      border-right: 2px solid var(--theme-button-surface-hover);
     }
 
     .right-slot {
       margin-inline-end: 0;
-      border-left: 2px solid var(--theme-btn-bg-hover);
+      border-left: 2px solid var(--theme-button-surface-hover);
     }
   }
 }
@@ -380,10 +380,10 @@ input:-internal-autofill-selected,
 input:-webkit-autofill-strong-password,
 input:-webkit-autofill-strong-password-viewable,
 input:-webkit-autofill-and-obscured {
-  background-color: var(--theme-form-input-bg-normal) !important;
+  background-color: var(--theme-button-surface) !important;
   background-image: none !important;
   color: var(--_input-text-core-color) !important;
-  -webkit-box-shadow: 0 0 0rem 1000px var(--theme-form-input-bg-normal) inset;
+  -webkit-box-shadow: 0 0 0rem 1000px var(--theme-button-surface) inset;
   -webkit-text-fill-color: var(--_input-text-core-color);
   transition: background-color 5000s ease-in-out 0s;
 }

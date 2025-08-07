@@ -1,8 +1,8 @@
 <template>
   <div
     class="input-checkbox-radio-wrapper"
-    :data-form-theme="formTheme"
-    :data-theme="size"
+    :data-theme="formTheme"
+    :data-size="size"
     :class="[type, size, elementClasses, { error: fieldHasError }, { button: isButton }, { 'display-as-disc': displayAsDisc }]"
   >
     <slot name="checkedIcon" v-if="isChecked">

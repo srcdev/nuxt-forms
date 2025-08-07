@@ -1,5 +1,5 @@
 <template>
-  <div class="input-textarea-with-label" :data-form-theme="formTheme" :class="[elementClasses, inputVariant, { dirty: isDirty }, { active: isActive }]">
+  <div class="input-textarea-with-label" :data-theme="formTheme" :class="[elementClasses, inputVariant, { dirty: isDirty }, { active: isActive }]">
     <InputLabel :for="id" :id :theme :name :input-variant :field-has-error :style-class-passthrough="['input-textarea-label']">
       <template #textLabel>{{ label }}</template>
     </InputLabel>
@@ -129,9 +129,9 @@ watch(
   --_input-textarea-with-label-margin-block-start: 0;
   --_input-textarea-with-label-background-color: transparent;
 
-  --_input-textarea-wrapper-border: var(--form-element-border-width) solid var(--theme-form-input-border);
+  --_input-textarea-wrapper-border: var(--form-element-border-width) solid var(--theme-input-border);
   --_input-textarea-wrapper-border-radius: var(--form-input-border-radius);
-  --_input-textarea-wrapper-border-underlined: var(--form-element-border-width-underlined) solid var(--theme-form-input-border);
+  --_input-textarea-wrapper-border-underlined: var(--form-element-border-width-underlined) solid var(--theme-input-border);
   --_input-textarea-wrapper-outline: var(--form-element-outline-width) solid var(--theme-form-input-outline);
   --_input-textarea-wrapper-box-shadow: var(--_focus-box-shadow);
   --_input-textarea-wrapper-padding-block: 0;
@@ -174,7 +174,7 @@ watch(
     --_label-textarea-color: var(--theme-form-input-text-label-color-outlined);
 
     --_label-offset: 1rem 0;
-    --_input-textarea-with-label-background-color: var(--theme-form-input-bg-normal);
+    --_input-textarea-with-label-background-color: var(--theme-button-surface);
 
     --_input-textarea-wrapper-padding-block: 0.4em 0;
     --_label-textarea-height: fit-content;

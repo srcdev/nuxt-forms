@@ -1,7 +1,7 @@
 <template>
   <div
     class="input-textarea-wrapper"
-    :data-form-theme="formTheme"
+    :data-theme="formTheme"
     :data-size="size"
     :class="[inputVariant, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]"
   >
@@ -124,7 +124,7 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
   &:hover {
     /* background-color: lab(89.6502 -0.829279 -2.45323 / 0.1); */
-    background-color: var(--form-core-background-color-hover);
+    background-color: var(--theme-input-surface-hover);
   }
 
   display: flex;
@@ -171,9 +171,9 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
   --_focus-box-shadow: var(--box-shadow-off);
   --_input-textarea-core-color: var(--theme-form-input-text-color-normal);
 
-  --_input-textarea-wrapper-background-color: var(--theme-form-input-bg-normal);
+  --_input-textarea-wrapper-background-color: var(--theme-button-surface);
 
-  --_input-textarea-wrapper-border: var(--form-element-border-width) solid var(--theme-form-input-border);
+  --_input-textarea-wrapper-border: var(--form-element-border-width) solid var(--theme-input-border);
   --_input-textarea-wrapper-border-radius: var(--form-input-border-radius);
 
   --_input-textarea-wrapper-outline: var(--form-element-outline-width) solid var(--theme-form-input-outline);

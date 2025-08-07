@@ -1,5 +1,5 @@
 <template>
-  <div class="input-select-wrapper" :data-form-theme="formTheme" :data-size="size" :class="[inputVariant, size, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }]">
+  <div class="input-select-wrapper" :data-theme="formTheme" :data-size="size" :class="[inputVariant, size, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }]">
     <select v-model="modelValue" class="input-select-core" :name :id>
       <option v-if="placeholder" value="" readonly :selected="!modelValue" class="input-select-core-option placeholder">{{ placeholder }}</option>
       <option v-for="item in fieldData.data" :key="item.id" :value="item.value" :selected="item.value === modelValue" class="input-select-core-option">
@@ -96,7 +96,7 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
       content: '';
       width: 0.8em;
       height: 0.5em;
-      background-color: var(--theme-form-input-border);
+      background-color: var(--theme-input-border);
       clip-path: polygon(100% 0%, 0 0%, 50% 100%);
     } */
 
@@ -116,7 +116,7 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
     &:open::picker(select) {
       opacity: 1;
-      border: var(--form-element-border-width) solid var(--theme-form-input-border);
+      border: var(--form-element-border-width) solid var(--theme-input-border);
       outline: var(--form-element-outline-width) solid var(--_input-select-outline-color);
 
       @starting-style {
@@ -131,7 +131,7 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
     &:hover {
       /* background-color: lab(89.6502 -0.829279 -2.45323 / 0.1); */
-      background-color: var(--form-core-background-color-hover);
+      background-color: var(--theme-input-surface-hover);
     }
 
     /* END modern Select CSS */

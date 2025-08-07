@@ -1,5 +1,5 @@
 <template>
-  <div class="input-number-with-label" :data-form-theme="formTheme" :data-size="size" :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }]">
+  <div class="input-number-with-label" :data-theme="formTheme" :data-size="size" :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }]">
     <label class="input-number-label body-normal-bold" :for="id">{{ label }}</label>
     <template v-if="hasDescription">
       <slot name="description"></slot>
