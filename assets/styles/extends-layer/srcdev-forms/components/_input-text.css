@@ -95,25 +95,6 @@
         }
       }
       /* Component type modifiers end */
-
-      .input-text-core {
-        all: unset;
-        flex-grow: 1;
-
-        font-family: var(--font-family);
-        font-size: var(--form-element-font-size);
-        line-height: var(--form-element-line-height);
-        padding-block: var(--input-element-padding-block);
-        padding-inline: 1rem;
-
-        &::placeholder {
-          color: var(--theme-input-placeholder);
-          font-size: var(--theme-input-placeholder-font-size);
-          font-style: italic;
-          line-height: 1;
-          font-weight: normal;
-        }
-      }
     }
 
     &.underlined {
@@ -180,6 +161,25 @@
             }
           }
         }
+      }
+    }
+
+    .input-text-core {
+      all: unset;
+      flex-grow: 1;
+
+      font-family: var(--font-family);
+      font-size: var(--form-element-font-size);
+      line-height: var(--form-element-line-height);
+      padding-block: var(--input-element-padding-block);
+      padding-inline: 1rem;
+
+      &::placeholder {
+        color: var(--theme-input-placeholder);
+        font-size: var(--theme-input-placeholder-font-size);
+        font-style: italic;
+        line-height: 1;
+        font-weight: normal;
       }
     }
   }
