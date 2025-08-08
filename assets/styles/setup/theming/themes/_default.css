@@ -45,6 +45,7 @@
   --theme-input-text: var(--gray-0);
   --theme-input-text-hover: var(--gray-0);
   --theme-input-text-focus: var(--gray-0);
+  --theme-input-placeholder: light-dark(var(--gray-7), var(--gray-5));
 
   /* Checkboxes */
   --theme-checkbox-label-text-color: light-dark(var(--gray-11), var(--gray-1));

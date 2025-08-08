@@ -170,8 +170,8 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
     aspect-ratio: 1;
     height: var(--form-icon-only-button-size);
     width: var(--form-icon-only-button-size);
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0;
+    padding: 0;
   }
 
   .btn-text {

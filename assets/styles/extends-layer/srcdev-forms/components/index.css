@@ -2,7 +2,7 @@
 @import './_input-select';
 @import './_input-label';
 @import './_input-textarea';
-@import './_input-text-as-number';
+@import './_input-text';
 @import './_input-checkbox';
 @import './_input-radio';
 @import './_input-checkbox-radio-options-button';
