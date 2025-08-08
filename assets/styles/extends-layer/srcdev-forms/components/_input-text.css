@@ -7,7 +7,7 @@
     /* background-color: green; */
 
     &.normal {
-      outline: 1px solid color-mix(in srgb, var(--theme-input-border) 5%, transparent);
+      outline: var(--element-decorator-outline-default);
 
       border-top-left-radius: var(--form-input-border-radius);
       border-top-right-radius: var(--form-input-border-radius);
@@ -20,6 +20,10 @@
       border-left: var(--form-element-border-width) solid var(--theme-input-border);
 
       padding-inline: 1rem;
+
+      &.error {
+        border-color: var(--theme-error-surface);
+      }
 
       &:hover {
         background-color: var(--theme-input-surface-hover);
@@ -104,7 +108,7 @@
 
         &::placeholder {
           color: var(--theme-input-placeholder);
-          font-size: var(--step-5);
+          font-size: var(--theme-input-placeholder-font-size);
           font-style: italic;
           line-height: 1;
           font-weight: normal;
@@ -126,6 +130,16 @@
       border-right: var(--form-element-border-width) solid transparent;
       border-bottom: var(--form-element-border-width-underlined) solid var(--theme-input-border);
       border-left: var(--form-element-border-width) solid transparent;
+
+      &.error {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+
+        border-top: var(--form-element-border-width) solid var(--theme-error-surface);
+        border-right: var(--form-element-border-width) solid var(--theme-error-surface);
+        border-bottom: var(--form-element-border-width) solid var(--theme-error-surface);
+        border-left: var(--form-element-border-width) solid var(--theme-error-surface);
+      }
 
       .slot {
         display: flex;

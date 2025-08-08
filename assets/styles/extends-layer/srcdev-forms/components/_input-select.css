@@ -1,17 +1,51 @@
 .your-site-class {
   .input-select-wrapper {
     background-color: var(--theme-input-surface);
-    outline: var(--element-decorator-outline-default);
 
-    border-top-left-radius: var(--element-decorator-border-top-left-radius);
-    border-top-right-radius: var(--element-decorator-border-top-right-radius);
-    border-bottom-left-radius: var(--element-decorator-border-bottom-left-radius);
-    border-bottom-right-radius: var(--element-decorator-border-bottom-right-radius);
+    &.normal {
+      outline: var(--element-decorator-outline-default);
 
-    border-top: var(--element-decorator-border-top-default);
-    border-right: var(--element-decorator-border-right-default);
-    border-bottom: var(--element-decorator-border-bottom-default);
-    border-left: var(--element-decorator-border-left-default);
+      border-top-left-radius: var(--form-input-border-radius);
+      border-top-right-radius: var(--form-input-border-radius);
+      border-bottom-left-radius: var(--form-input-border-radius);
+      border-bottom-right-radius: var(--form-input-border-radius);
+
+      border-top: var(--form-element-border-width) solid var(--theme-input-border);
+      border-right: var(--form-element-border-width) solid var(--theme-input-border);
+      border-bottom: var(--form-element-border-width) solid var(--theme-input-border);
+      border-left: var(--form-element-border-width) solid var(--theme-input-border);
+
+      /* padding-inline: 1rem; */
+
+      &.error {
+        border-color: var(--theme-error-surface);
+      }
+    }
+
+    &.underlined {
+      margin-block-start: 0;
+      padding-block: 0;
+
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: var(--form-input-border-radius);
+      border-bottom-right-radius: var(--form-input-border-radius);
+
+      border-top: var(--form-element-border-width) solid transparent;
+      border-right: var(--form-element-border-width) solid transparent;
+      border-bottom: var(--form-element-border-width-underlined) solid var(--theme-input-border);
+      border-left: var(--form-element-border-width) solid transparent;
+
+      &.error {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+
+        border-top: var(--form-element-border-width) solid var(--theme-error-surface);
+        border-right: var(--form-element-border-width) solid var(--theme-error-surface);
+        border-bottom: var(--form-element-border-width) solid var(--theme-error-surface);
+        border-left: var(--form-element-border-width) solid var(--theme-error-surface);
+      }
+    }
 
     .input-select-core {
       appearance: none;
