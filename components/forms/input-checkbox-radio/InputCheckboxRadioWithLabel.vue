@@ -5,6 +5,7 @@
         <slot name="checkedIcon"></slot>
       </template>
     </InputCheckboxRadioCore>
+
     <label v-if="hasLabelContent" class="input-checkbox-radio-label body-normal" :for="id">
       <slot name="labelContent"></slot>
     </label>

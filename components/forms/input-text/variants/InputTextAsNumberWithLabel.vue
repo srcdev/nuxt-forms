@@ -1,6 +1,8 @@
 <template>
   <div class="input-text-with-label" :data-theme="formTheme" :class="[inputVariant, elementClasses, { dirty: isDirty }, { active: isActive }]">
-    <label :for="id" class="input-text-label body-normal-bold">{{ label }}</label>
+    <InputLabel :for="id" :id :theme :name :input-variant :field-has-error :style-class-passthrough="['input-text-label', 'body-normal-bold']">
+      <template #textLabel>{{ label }}</template>
+    </InputLabel>
 
     <div v-if="hasDescriptionSlot" :id="`${id}-description`">
       <slot name="description"></slot>

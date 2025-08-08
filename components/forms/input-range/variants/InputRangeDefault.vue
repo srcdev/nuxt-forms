@@ -1,6 +1,9 @@
 <template>
   <div class="input-range-with-label" :data-theme="formTheme" :class="[elementClasses, { error: fieldHasError }]">
-    <label class="input-range-label body-normal-bold" :for="id">{{ label }}</label>
+    <InputLabel :for="id" :id :theme :name input-variant="normal" :field-has-error :style-class-passthrough="['input-number-label', 'body-normal-bold']">
+      <template #textLabel>{{ label }}</template>
+    </InputLabel>
+
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>

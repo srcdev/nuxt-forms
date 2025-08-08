@@ -17,8 +17,9 @@
   /* Generic */
   --theme-box-shadow: var(--colour-theme-12);
 
-  /* Fieldset */
+  /* Fieldset & Label */
   --form-fieldset-legend-color: light-dark(var(--gray-12), var(--gray-1));
+  --form-label-color: light-dark(var(--gray-12), var(--gray-1));
 
   /* Buttons */
   --theme-button-surface: light-dark(var(--gray-5), var(--gray-4));
