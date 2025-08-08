@@ -1,5 +1,5 @@
 <template>
-  <div class="input-error-message" :id :class="[inputVariant, elementClasses, { show: showError }, { detached: isDetached }, { hide: !showError }]" :data-Testid>
+  <div class="input-error-message" data-theme="error" :id :class="[inputVariant, elementClasses, { show: showError }, { detached: isDetached }]" :data-testid :aria-hidden="!showError">
     <div class="inner" :class="[{ show: showError }]">
       <div class="inner-content">
         <div class="inner-icon">
@@ -68,52 +68,24 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
 
 <style lang="css">
 .input-error-message {
-  --_grid-template-rows: 0fr;
-  --_opacity-show: 1;
-  --_opacity-hide: 0;
-  --_opacity: var(--_opacity-hide);
-
-  --_border-radius: 0 0 0.4rem 0.4rem;
-  --_display-show: block;
-  --_display-hide: none;
-  --_display: var(--_display-hide);
-  --_gutter: 1.2rem;
-  --_gutter-block: 0;
-  --_gutter-inline: var(--_gutter);
-  --_transition-duration: 500ms;
-  --_transition-timing-function: linear;
-  --_padding-message: 1.2rem 1rem;
-
-  &.show {
-    --_grid-template-rows: 1fr;
-    --_opacity: var(--_opacity-show);
-    --_display: var(--_display-show);
-    --_gutter-block: var(--_gutter);
-  }
-
   grid-row: 2;
   grid-column: 1;
   display: grid;
-  grid-template-rows: var(--_grid-template-rows);
+  grid-template-rows: 0fr;
 
   color: var(--input-error-color);
-  background-color: var(--input-error-background-color);
-  /* border-radius: var(--_border-radius); */
+  background-color: var(--theme-error-surface);
 
-  transition-property: grid-template-rows;
-  transition-duration: var(--_transition-duration);
-  transition-timing-function: var(--_transition-timing-function);
+  transition: grid-template-rows var(--theme-form-transition-duration) linear;
   transition-behavior: allow-discrete;
 
-  border-top-left-radius: var(--input-error-border-top-left-radius);
-  border-top-right-radius: var(--input-error-border-top-right-radius);
-  border-bottom-left-radius: var(--input-error-border-bottom-left-radius);
-  border-bottom-right-radius: var(--input-error-border-bottom-right-radius);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: var(--form-input-border-radius);
+  border-bottom-right-radius: var(--form-input-border-radius);
 
-  border-top: var(--input-error-border-top-default);
-  border-right: var(--input-error-border-right-default);
-  border-bottom: var(--input-error-border-bottom-default);
-  border-left: var(--input-error-border-left-default);
+  border: var(--form-element-border-width) solid transparent;
+  border-radius: 0;
 
   background-clip: padding-box;
 
@@ -121,24 +93,35 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
 
   margin-block-start: var(--input-error-margin-block-start);
 
-  /* &.detached {
-    border-radius: var(--form-input-border-radius);
+  &.detached {
     margin-block-start: 2rem;
   }
 
-  &.outlined {
-    --_border-radius: 0;
-  }
+  &.show {
+    grid-template-rows: 1fr;
+    display: grid;
 
-  &.underlined {
-    --_border-radius: 0;
-  } */
+    border: var(--form-element-border-width) solid var(--theme-error-surface);
+    border-bottom-left-radius: var(--form-input-border-radius);
+    border-bottom-right-radius: var(--form-input-border-radius);
+
+    &.detached {
+      margin-block-start: 2rem;
+
+      border-top: var(--form-element-border-width) solid var(--theme-error-surface);
+      border-right: var(--form-element-border-width) solid var(--theme-error-surface);
+      border-bottom: var(--form-element-border-width) solid var(--red-8);
+      border-left: var(--form-element-border-width) solid var(--theme-error-surface);
+
+      border-radius: var(--form-input-border-radius);
+    }
+  }
 
   .inner {
     align-items: center;
 
     overflow: hidden;
-    transition: opacity var(--_transition-duration) var(--_transition-timing-function), display var(--_transition-duration) var(--_transition-timing-function) allow-discrete;
+    transition: opacity var(--theme-form-transition-duration) linear, display var(--theme-form-transition-duration) linear allow-discrete;
 
     .inner-content {
       display: flex;
@@ -160,8 +143,8 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
         font-family: var(--font-family);
         font-size: 1.6rem;
         font-weight: 500;
-        padding-block: var(--_padding-message);
-        padding-inline: var(--_gutter-inline);
+        padding-block: 1.2rem 1rem;
+        padding-inline: 1.2rem;
 
         .message-single {
           color: white;

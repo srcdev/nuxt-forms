@@ -100,7 +100,7 @@
     &.underlined {
       margin-block-start: 0;
       padding-block: 0;
-      padding-inline: 0.6rem;
+      padding-inline: 1rem;
 
       border-top-left-radius: 0;
       border-top-right-radius: 0;

@@ -19,6 +19,8 @@
 
       &.error {
         border-color: var(--theme-error-surface);
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
       }
     }
 
