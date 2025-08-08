@@ -12,8 +12,6 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en',
         'data-color-scheme': 'auto',
-      },
-      bodyAttrs: {
         class: 'your-site-class',
       },
       titleTemplate: '%s - Website name',
