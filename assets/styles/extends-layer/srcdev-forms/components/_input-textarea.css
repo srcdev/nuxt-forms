@@ -1,5 +1,28 @@
-:root {
-  .input-textarea-core {
-    --input-textarea-min-height: 4em;
+.your-site-class {
+  .input-textarea-wrapper {
+    /* Custom placeholder styles */
+
+    &:hover {
+      /* Custom placeholder styles */
+    }
+
+    .slot {
+      /* Custom placeholder styles */
+
+      &.left-slot {
+        /* Custom placeholder styles */
+      }
+      &.right-slot {
+        /* Custom placeholder styles */
+      }
+    }
+
+    .input-textarea-core {
+      min-height: 4rem;
+
+      &::placeholder {
+        /* Custom placeholder styles */
+      }
+    }
   }
 }
