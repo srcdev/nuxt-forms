@@ -191,7 +191,7 @@ const flexDirection = ref(props.direction);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--theme-checkbox-symbol-color);
+    color: var(--theme-checkbox-decorator-color);
 
     .icon {
       height: var(--theme-checkbox-decorator-icon-size);
