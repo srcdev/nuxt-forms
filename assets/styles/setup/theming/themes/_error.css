@@ -47,16 +47,16 @@
   --theme-focus-visible-outline: var(--colour-theme-12);
 
   /* Buttons */
-  --theme-button-surface: light-dark(var(--red-5), var(--red-4));
-  --theme-button-surface-hover: light-dark(var(--red-6), var(--red-5));
+  --theme-button-surface: light-dark(var(--red-5), var(--red-10));
+  --theme-button-surface-hover: light-dark(var(--red-6), var(--red-12));
 
   --theme-button-border: light-dark(var(--red-9), var(--red-4));
   --theme-button-border-hover: light-dark(var(--red-10), var(--red-5));
   --theme-button-border-focus: light-dark(var(--red-10), var(--red-5));
 
   --theme-button-outline: transparent;
-  --theme-button-outline-hover: light-dark(var(--red-10), var(--red-5));
-  --theme-button-outline-focus: light-dark(var(--red-10), var(--red-5));
+  --theme-button-outline-hover: light-dark(var(--red-10), var(--red-7));
+  --theme-button-outline-focus: light-dark(var(--red-10), var(--red-7));
 
   --theme-button-text: var(--red-0);
   --theme-button-text-hover: var(--red-0);
