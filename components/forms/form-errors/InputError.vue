@@ -79,10 +79,9 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   transition: grid-template-rows var(--theme-form-transition-duration) linear;
   transition-behavior: allow-discrete;
 
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: var(--form-input-border-radius);
-  border-bottom-right-radius: var(--form-input-border-radius);
+  outline: var(--form-element-outline-width) solid transparent;
+
+  border-radius: 0;
 
   border: var(--form-element-border-width) solid transparent;
   border-radius: 0;
@@ -102,8 +101,9 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
     display: grid;
 
     border: var(--form-element-border-width) solid var(--theme-error-surface);
-    border-bottom-left-radius: var(--form-input-border-radius);
-    border-bottom-right-radius: var(--form-input-border-radius);
+    border-bottom-left-radius: var(--form-input-border-radius-underlined);
+    border-bottom-right-radius: var(--form-input-border-radius-underlined);
+    outline: var(--form-element-outline-width) solid var(--theme-error-surface);
 
     &.detached {
       margin-block-start: 2rem;

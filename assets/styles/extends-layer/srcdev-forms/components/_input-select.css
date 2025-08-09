@@ -3,7 +3,7 @@
     background-color: var(--theme-input-surface);
 
     &.normal {
-      outline: var(--element-decorator-outline-default);
+      outline: var(--form-element-outline-width) solid var(--theme-input-outline);
 
       border-top-left-radius: var(--form-input-border-radius);
       border-top-right-radius: var(--form-input-border-radius);
@@ -26,10 +26,12 @@
       margin-block-start: 0;
       padding-block: 0;
 
+      outline: var(--form-element-outline-width) solid transparent;
+
       border-top-left-radius: 0;
       border-top-right-radius: 0;
-      border-bottom-left-radius: var(--form-input-border-radius);
-      border-bottom-right-radius: var(--form-input-border-radius);
+      border-bottom-left-radius: var(--form-input-border-radius-underlined);
+      border-bottom-right-radius: var(--form-input-border-radius-underlined);
 
       border-top: var(--form-element-border-width) solid transparent;
       border-right: var(--form-element-border-width) solid transparent;
@@ -37,6 +39,7 @@
       border-left: var(--form-element-border-width) solid transparent;
 
       &.error {
+        outline-color: var(--theme-error-surface);
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
 

@@ -5,8 +5,8 @@
 
     &.show {
       border: var(--form-element-border-width) solid var(--theme-error-surface);
-      border-bottom-left-radius: var(--form-input-border-radius);
-      border-bottom-right-radius: var(--form-input-border-radius);
+      border-bottom-left-radius: var(--form-input-border-radius-underlined);
+      border-bottom-right-radius: var(--form-input-border-radius-underlined);
 
       &.detached {
         border-top: var(--form-element-border-width) solid var(--theme-error-surface);

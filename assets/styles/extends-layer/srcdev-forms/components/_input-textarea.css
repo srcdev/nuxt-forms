@@ -3,7 +3,7 @@
     /* Custom placeholder styles */
 
     &.normal {
-      outline: var(--element-decorator-outline-default);
+      outline: var(--form-element-outline-width) solid var(--theme-input-outline);
 
       border-top-left-radius: var(--form-input-border-radius);
       border-top-right-radius: var(--form-input-border-radius);

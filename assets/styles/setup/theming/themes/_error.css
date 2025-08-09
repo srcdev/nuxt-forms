@@ -13,6 +13,39 @@
   --colour-theme-11: var(--red-11);
   --colour-theme-12: var(--red-12);
 
+  /* Generic */
+  --theme-box-shadow: var(--colour-theme-12);
+
+  /* Fieldset & Label */
+  --form-fieldset-legend-color: light-dark(var(--gray-12), var(--gray-1));
+  --form-label-color: light-dark(var(--gray-12), var(--gray-1));
+
+  /* Input Elements */
+  /* --theme-input-surface: light-dark(var(--red-1), var(--red-2)); */
+  /* --theme-input-surface-hover: light-dark(var(--red-1), var(--red-5)); */
+  --theme-input-border: light-dark(var(--gray-9), var(--red-12));
+  --theme-input-border-hover: light-dark(var(--gray-10), var(--gray-5));
+  --theme-input-border-focus: light-dark(var(--gray-10), var(--gray-5));
+
+  --theme-input-outline: var(--theme-error-surface);
+  --theme-input-outline-hover: light-dark(var(--gray-10), var(--gray-5));
+  --theme-input-outline-focus: light-dark(var(--gray-10), var(--gray-5));
+
+  --theme-input-text: var(--gray-0);
+  --theme-input-text-hover: var(--gray-0);
+  --theme-input-text-focus: var(--gray-0);
+  --theme-input-placeholder: light-dark(var(--gray-7), var(--gray-5));
+
+  /* Checkboxes & Radio buttons */
+  --theme-checkbox-label-text-color: light-dark(var(--gray-11), var(--gray-1));
+  --theme-checkbox-decorator-color: light-dark(var(--gray-11), var(--gray-1));
+  --theme-checkbox-symbol-surface: var(--colour-theme-2);
+  --theme-checkbox-symbol-color: light-dark(var(--gray-11), var(--gray-1));
+
+  /* a11y */
+  --theme-focus-visible-shadow: var(--colour-theme-12);
+  --theme-focus-visible-outline: var(--colour-theme-12);
+
   /* Buttons */
   --theme-button-surface: light-dark(var(--red-5), var(--red-4));
   --theme-button-surface-hover: light-dark(var(--red-6), var(--red-5));

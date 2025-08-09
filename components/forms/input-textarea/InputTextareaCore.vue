@@ -108,7 +108,7 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 <style lang="css">
 .input-textarea-wrapper {
   background-color: var(--theme-input-surface);
-  outline: var(--element-decorator-outline-default);
+  outline: var(--form-element-outline-width) solid var(--theme-input-outline);
 
   border-top-left-radius: var(--element-decorator-border-top-left-radius);
   border-top-right-radius: var(--element-decorator-border-top-right-radius);

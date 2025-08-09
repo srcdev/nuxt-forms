@@ -75,7 +75,7 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 <style lang="css">
 .input-select-wrapper {
   background-color: var(--theme-input-surface);
-  outline: var(--element-decorator-outline-default);
+  outline: var(--form-element-outline-width) solid var(--theme-input-outline);
 
   border-top-left-radius: var(--element-decorator-border-top-left-radius);
   border-top-right-radius: var(--element-decorator-border-top-right-radius);

@@ -4,15 +4,21 @@
     align-items: center;
     gap: 12px;
     background-color: var(--theme-input-surface);
-    /* background-color: green; */
+
+    &:hover {
+      background-color: var(--theme-input-surface-hover);
+    }
+
+    &:focus-within {
+      background-color: var(--theme-input-surface-hover);
+      outline: var(--theme-focus-visible-outline);
+      box-shadow: var(--theme-focus-visible-shadow);
+    }
 
     &.normal {
-      outline: var(--element-decorator-outline-default);
+      outline: var(--form-element-outline-width) solid var(--theme-input-outline);
 
-      border-top-left-radius: var(--form-input-border-radius);
-      border-top-right-radius: var(--form-input-border-radius);
-      border-bottom-left-radius: var(--form-input-border-radius);
-      border-bottom-right-radius: var(--form-input-border-radius);
+      border-radius: var(--form-input-border-radius);
 
       border-top: var(--form-element-border-width) solid var(--theme-input-border);
       border-right: var(--form-element-border-width) solid var(--theme-input-border);
@@ -23,16 +29,7 @@
 
       &.error {
         border-color: var(--theme-error-surface);
-      }
-
-      &:hover {
-        background-color: var(--theme-input-surface-hover);
-      }
-
-      &:focus-within {
-        background-color: var(--theme-input-surface-hover);
-        outline: var(--theme-focus-visible-outline);
-        box-shadow: var(--theme-focus-visible-shadow);
+        outline-color: var(--theme-error-surface);
       }
 
       .slot {
@@ -76,7 +73,6 @@
         }
       }
 
-      /* Component type modifiers start */
       &[data-inputmode='numeric'] {
         padding-block: 0rem;
         padding-inline: 0.75rem;
@@ -94,7 +90,6 @@
           }
         }
       }
-      /* Component type modifiers end */
     }
 
     &.underlined {
@@ -102,19 +97,22 @@
       padding-block: 0;
       padding-inline: 1rem;
 
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      border-bottom-left-radius: var(--form-input-border-radius);
-      border-bottom-right-radius: var(--form-input-border-radius);
+      outline: var(--form-element-outline-width) solid transparent;
 
-      border-top: var(--form-element-border-width) solid transparent;
-      border-right: var(--form-element-border-width) solid transparent;
+      border-bottom-left-radius: var(--form-input-border-radius-underlined);
+      border-bottom-right-radius: var(--form-input-border-radius-underlined);
+
+      border-top: none;
+      border-right: none;
       border-bottom: var(--form-element-border-width-underlined) solid var(--theme-input-border);
-      border-left: var(--form-element-border-width) solid transparent;
+      border-left: none;
+
+      overflow: hidden;
 
       &.error {
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
+        outline-color: var(--theme-error-surface);
+        border-bottom-right-radius: var(--form-input-border-radius-underlined);
+        border-bottom-left-radius: var(--form-input-border-radius-underlined);
 
         border-top: var(--form-element-border-width) solid var(--theme-error-surface);
         border-right: var(--form-element-border-width) solid var(--theme-error-surface);

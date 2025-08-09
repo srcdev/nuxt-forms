@@ -15,6 +15,7 @@
   --form-button-padding-inline: 1.25em;
   --form-button-icon-gap: 1em;
   --form-input-border-radius: 0.4rem;
+  --form-input-border-radius-underlined: 0;
 
   --input-element-padding-block: 1.25rem;
   --input-element-padding-inline: 1rem;
