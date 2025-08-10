@@ -1,25 +1,29 @@
 .your-site-class {
   .input-checkbox-radio-options-button {
     gap: 1rem;
-    background-color: color-mix(in srgb, currentColor 5%, transparent);
     border-radius: 1lh;
-    border: 0.1rem solid var(--theme-input-border);
-    outline: 0.1rem solid hsl(from var(--theme-input-border) h s 55%);
+
+    /* &.inline {} */
+
+    background-color: var(--theme-input-surface);
+    border: var(--form-element-border-width) solid var(--theme-input-border);
+    outline: var(--form-element-outline-width) solid var(--theme-input-outline);
+
     box-shadow: 0.1rem 0.1rem 0.8rem 0.1rem transparent;
     padding-block: var(--input-checkbox-radio-options-padding-block);
     padding-inline: var(--input-checkbox-radio-options-padding-inline);
 
     &:hover {
       background-color: var(--theme-input-surface-hover);
-      border: 0.1rem solid var(--theme-input-border);
-      outline: 0.1rem solid hsl(from var(--theme-input-border) h s 5%);
+      border-color: var(--theme-input-border);
+      outline-color: var(--theme-input-outline-hover);
+      outline-offset: var(--form-element-outline-offset-focus);
     }
 
-    /* &.inline {} */
-
     &:has(.input-checkbox-radio-core:focus-visible) {
-      box-shadow: var(--theme-focus-visible-shadow-medium);
-      outline: var(--theme-focus-visible-outline);
+      background-color: var(--theme-input-surface-focus);
+      outline-color: var(--theme-input-outline-focus);
+      outline-offset: var(--form-element-outline-offset-focus);
     }
 
     /* Sizes */
@@ -53,7 +57,7 @@
       color: var(--theme-checkbox-label-text-color);
       font-size: var(--form-element-font-size);
       min-height: var(--form-element-line-height);
-      margin-block: 0.8rem;
+      padding-block: 0.8rem;
       padding-inline: 0.8rem;
 
       &:hover {

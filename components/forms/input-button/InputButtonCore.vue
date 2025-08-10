@@ -142,7 +142,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
     border-color: var(--theme-input-border-hover);
     color: var(--theme-button-text-hover);
     outline-color: var(--theme-button-outline-hover);
-    outline-offset: 0.2rem;
+    outline-offset: var(--form-element-outline-offset-focus);
   }
 
   &:hover {
@@ -155,7 +155,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
     color: var(--theme-button-text-focus);
     outline-color: var(--theme-button-outline-focus);
     box-shadow: var(--box-shadow-on);
-    outline-offset: 0.2rem;
+    outline-offset: var(--form-element-outline-offset-focus);
   }
 
   &[readonly] {

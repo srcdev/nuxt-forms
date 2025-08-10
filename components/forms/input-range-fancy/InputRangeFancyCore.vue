@@ -173,7 +173,7 @@ onMounted(() => {
   }
 
   [type='range']:focus-visible {
-    outline-offset: 0.25rem;
+    outline-offset: var(--form-element-outline-offset-focus);
     outline-color: transparent;
   }
 

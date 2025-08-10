@@ -117,11 +117,15 @@ const flexDirection = ref(props.direction);
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-
-  background-color: color-mix(in srgb, currentColor 5%, transparent);
   border-radius: 1lh;
-  border: 0.1rem solid var(--theme-input-border);
-  outline: 0.1rem solid hsl(from var(--theme-input-border) h s 55%);
+  transition: all 0.2s ease-in-out;
+
+  &.inline {
+    --_white-space: nowrap;
+  }
+  background-color: var(--theme-input-surface);
+  border: var(--form-element-border-width) solid var(--theme-input-border);
+  outline: var(--form-element-outline-width) solid var(--theme-input-outline);
 
   box-shadow: 0.1rem 0.1rem 0.8rem 0.1rem transparent;
   padding-block: var(--input-checkbox-radio-options-padding-block);
@@ -129,17 +133,15 @@ const flexDirection = ref(props.direction);
 
   &:hover {
     background-color: var(--theme-input-surface-hover);
-    border: 0.1rem solid var(--theme-input-border);
-    outline: 0.1rem solid hsl(from var(--theme-input-border) h s 5%);
-  }
-
-  &.inline {
-    --_white-space: nowrap;
+    border-color: var(--theme-input-border);
+    outline-color: var(--theme-input-outline-hover);
+    outline-offset: var(--form-element-outline-offset-focus);
   }
 
   &:has(.input-checkbox-radio-core:focus-visible) {
-    box-shadow: var(--theme-focus-visible-shadow-medium);
-    outline: var(--theme-focus-visible-outline);
+    background-color: var(--theme-input-surface-focus);
+    outline-color: var(--theme-input-outline-focus);
+    outline-offset: var(--form-element-outline-offset-focus);
   }
 
   /* Sizes */
@@ -178,7 +180,7 @@ const flexDirection = ref(props.direction);
     min-height: var(--form-element-line-height);
     align-items: center;
     justify-content: center;
-    margin-block: 0.8rem;
+    padding-block: 0.8rem;
     padding-inline: 0.8rem;
     white-space: var(--_white-space);
 
