@@ -39,10 +39,10 @@
   --theme-input-placeholder: light-dark(var(--gray-7), var(--gray-5));
 
   /* Checkboxes & Radio buttons */
-  --theme-checkbox-label-text-color: light-dark(var(--gray-11), var(--gray-1));
-  --theme-checkbox-decorator-color: light-dark(var(--gray-11), var(--gray-1));
-  --theme-checkbox-symbol-surface: var(--colour-theme-12);
-  --theme-checkbox-symbol-color: light-dark(var(--gray-11), var(--gray-1));
+  /* --theme-checkbox-label-text-color: light-dark(var(--gray-11), var(--gray-1)); */
+  /* --theme-checkbox-decorator-color: light-dark(var(--gray-11), var(--gray-1)); */
+  /* --theme-checkbox-symbol-surface: var(--colour-theme-12); */
+  /* --theme-checkbox-symbol-color: light-dark(var(--gray-11), var(--gray-1)); */
 
   /* a11y */
   --theme-focus-visible-shadow: var(--colour-theme-1);

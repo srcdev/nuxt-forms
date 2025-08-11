@@ -11,7 +11,7 @@
     <label v-else class="input-checkbox-radio-options-button-label" :for="id">{{ label }}</label>
     <div class="decorator-icon">
       <slot name="itemIcon">
-        <Icon name="material-symbols:add-2" class="icon" />
+        <Icon name="material-symbols:add-2" class="icon" aria-hidden="true" focusable="false" />
       </slot>
     </div>
   </div>

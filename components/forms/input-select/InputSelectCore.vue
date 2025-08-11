@@ -3,7 +3,7 @@
     <select v-model="modelValue" class="input-select-core" :name :id>
       <option v-if="placeholder" value="" readonly :selected="!modelValue" class="input-select-core-option placeholder">{{ placeholder }}</option>
       <option v-for="item in fieldData.data" :key="item.id" :value="item.value" :selected="item.value === modelValue" class="input-select-core-option">
-        <Icon :name="item.icon" class="input-select-core-option-decorator-icon" />
+        <Icon v-if="item.icon" :name="item.icon" class="input-select-core-option-decorator-icon" aria-hidden="true" focusable="false" />
         {{ item.label }}
       </option>
     </select>

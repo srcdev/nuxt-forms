@@ -1,7 +1,7 @@
 <template>
   <InputButtonCore type="button" :use-effect :isPending :readonly :effect :data-testid :size :weight :button-text :style-class-passthrough :theme>
     <template #left>
-      <Icon name="material-symbols:check-circle-outline" class="icon" />
+      <Icon name="material-symbols:check-circle-outline" class="icon" aria-hidden="true" focusable="false" />
     </template>
   </InputButtonCore>
 </template>
