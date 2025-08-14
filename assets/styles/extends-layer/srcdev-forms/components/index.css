@@ -4,6 +4,6 @@
 @import './_input-textarea';
 @import './_input-text';
 @import './_input-checkbox-radio-core';
-/* @import './_input-radio'; */
+@import './_input-button';
 @import './_input-checkbox-radio-options-button';
 @import './_form-fieldset';

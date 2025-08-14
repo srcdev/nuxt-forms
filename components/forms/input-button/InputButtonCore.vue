@@ -117,7 +117,6 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   display: flex;
   gap: var(--form-button-icon-gap);
   justify-content: center;
-  border: none;
   border-radius: var(--form-input-border-radius);
   font-family: var(--font-family);
 
@@ -125,7 +124,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   padding-block-start: var(--form-element-padding-block-start);
   padding-block-end: var(--form-element-padding-block-end);
 
-  transition: all 0.2s ease-in-out;
+  transition: all var(--theme-form-transition-duration) ease-in-out;
 
   box-shadow: var(--box-shadow-off);
   background-color: var(--theme-button-surface);
@@ -154,7 +153,6 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
     border-color: var(--theme-button-border-focus);
     color: var(--theme-button-text-focus);
     outline-color: var(--theme-button-outline-focus);
-    box-shadow: var(--box-shadow-on);
     outline-offset: var(--form-element-outline-offset-focus);
   }
 
