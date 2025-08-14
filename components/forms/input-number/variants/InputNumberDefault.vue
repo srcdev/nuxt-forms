@@ -135,10 +135,6 @@ updateElementClasses(['has-left-button', 'has-right-button']);
 
 <style lang="css">
 .input-number-with-label {
-  --_border-width: var(--form-element-border-width);
-  --_outline-width: var(--form-element-outline-width);
-  --_label-padding-inline: 1rem;
-
   .input-number-label {
     display: block;
     margin-block: 0.8rem;

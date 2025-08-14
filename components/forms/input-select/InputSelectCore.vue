@@ -1,6 +1,6 @@
 <template>
   <div class="input-select-wrapper" :data-theme="formTheme" :data-size="size" :class="[inputVariant, size, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }]">
-    <select v-model="modelValue" class="input-select-core" :name :id>
+    <select v-model="modelValue" class="input-select-core" :name :id title="Please select an option">
       <option v-if="placeholder" value="" readonly :selected="!modelValue" class="input-select-core-option placeholder">{{ placeholder }}</option>
       <option v-for="item in fieldData.data" :key="item.id" :value="item.value" :selected="item.value === modelValue" class="input-select-core-option">
         <Icon v-if="item.icon" :name="item.icon" class="input-select-core-option-decorator-icon" aria-hidden="true" focusable="false" />

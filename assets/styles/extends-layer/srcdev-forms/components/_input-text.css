@@ -4,6 +4,7 @@
     align-items: center;
     gap: 12px;
     background-color: var(--theme-input-surface);
+    transition: all var(--theme-form-transition-duration) ease-in-out;
 
     &:hover {
       background-color: var(--theme-input-surface-hover);
@@ -26,6 +27,11 @@
       border-left: var(--form-element-border-width) solid var(--theme-input-border);
 
       padding-inline: 1rem;
+
+      &:focus-within {
+        outline-color: var(--theme-input-outline-focus);
+        outline-offset: var(--form-element-outline-offset-focus);
+      }
 
       &.error {
         border-color: var(--theme-error-surface);
