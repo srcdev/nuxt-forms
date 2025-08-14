@@ -1,9 +1,9 @@
 <template>
-  <div class="input-select-wrapper" :data-form-theme="formTheme" :data-size="size" :class="[inputVariant, size, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }]">
-    <select v-model="modelValue" class="input-select-core" :name :id>
+  <div class="input-select-wrapper" :data-theme="formTheme" :data-size="size" :class="[inputVariant, size, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }]">
+    <select v-model="modelValue" class="input-select-core" :name :id :title>
       <option v-if="placeholder" value="" readonly :selected="!modelValue" class="input-select-core-option placeholder">{{ placeholder }}</option>
       <option v-for="item in fieldData.data" :key="item.id" :value="item.value" :selected="item.value === modelValue" class="input-select-core-option">
-        <Icon :name="item.icon" class="input-select-core-option-icon" />
+        <Icon v-if="item.icon" :name="item.icon" class="input-select-core-option-decorator-icon" aria-hidden="true" focusable="false" />
         {{ item.label }}
       </option>
     </select>
@@ -26,6 +26,10 @@ const props = defineProps({
   placeholder: {
     type: String,
     default: '',
+  },
+  title: {
+    type: String,
+    default: 'Please select an option',
   },
   required: {
     type: Boolean,
@@ -74,8 +78,8 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
 <style lang="css">
 .input-select-wrapper {
-  background-color: var(--element-decorator-background-color);
-  outline: var(--element-decorator-outline-default);
+  background-color: var(--theme-input-surface);
+  outline: var(--form-element-outline-width) solid var(--theme-input-outline);
 
   border-top-left-radius: var(--element-decorator-border-top-left-radius);
   border-top-right-radius: var(--element-decorator-border-top-right-radius);
@@ -96,7 +100,7 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
       content: '';
       width: 0.8em;
       height: 0.5em;
-      background-color: var(--theme-form-input-border);
+      background-color: var(--theme-input-border);
       clip-path: polygon(100% 0%, 0 0%, 50% 100%);
     } */
 
@@ -107,7 +111,7 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
     }
 
     &::picker(select) {
-      transition: display allow-discrete var(--input-select-animation-duration), opacity var(--input-select-animation-duration), overlay var(--input-select-animation-duration) allow-discrete;
+      transition: display allow-discrete var(--theme-form-transition-duration), opacity var(--theme-form-transition-duration), overlay var(--theme-form-transition-duration) allow-discrete;
     }
 
     &:not(:open)::picker(select) {
@@ -116,7 +120,7 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
 
     &:open::picker(select) {
       opacity: 1;
-      border: var(--form-element-border-width) solid var(--theme-form-input-border);
+      border: var(--form-element-border-width) solid var(--theme-input-border);
       outline: var(--form-element-outline-width) solid var(--_input-select-outline-color);
 
       @starting-style {
@@ -130,33 +134,31 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
     width: 100%;
 
     &:hover {
-      /* background-color: lab(89.6502 -0.829279 -2.45323 / 0.1); */
-      background-color: var(--form-core-background-color-hover);
+      background-color: var(--theme-input-surface-hover);
     }
 
     /* END modern Select CSS */
 
-    /* color: var(--_input-text-core-color); */
     font-family: var(--font-family);
     font-size: var(--form-element-font-size);
     line-height: var(--form-element-line-height);
-    padding-block: var(--input-select-padding-block);
-    padding-inline: var(--input-select-padding-inline);
+    padding-block: 1.5rem;
+    padding-inline: 1rem;
 
     .input-select-core-option {
-      padding-block: var(--input-select-option-padding-block);
-      padding-inline: var(--input-select-option-padding-inline);
-      gap: var(--input-select-option-gap);
-      transition: var(--input-select-option-transition);
+      padding-block: 1rem;
+      padding-inline: 1.75rem;
+      gap: 1.5rem;
+      transition: all var(--theme-form-transition-duration) ease-in-out;
 
       &:hover {
-        background-color: var(--input-select-option-background-color-hover);
+        background-color: var(--theme-input-surface-hover);
       }
 
-      .input-select-core-option-icon {
+      .input-select-core-option-decorator-icon {
         display: inline-block;
-        width: var(--input-select-option-icon-size);
-        height: var(--input-select-option-icon-size);
+        width: 1.5rem;
+        height: 1.5rem;
       }
     }
   }

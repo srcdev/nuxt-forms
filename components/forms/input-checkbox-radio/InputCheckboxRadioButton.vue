@@ -1,5 +1,5 @@
 <template>
-  <div class="input-checkbox-radio-options-button" :data-form-theme="formTheme" :data-size="size" :class="[size, elementClasses, optionsLayout, { error: fieldHasError }]">
+  <div class="input-checkbox-radio-options-button" :data-theme="formTheme" :data-size="size" :class="[size, elementClasses, optionsLayout, { error: fieldHasError }]">
     <InputCheckboxRadioCore :isButton="true" :type :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme :ariaDescribedby :displayAsDisc>
       <template #checkedIcon>
         <slot name="checkedIcon"></slot>
@@ -9,9 +9,9 @@
       <slot name="labelContent"></slot>
     </label>
     <label v-else class="input-checkbox-radio-options-button-label" :for="id">{{ label }}</label>
-    <div class="item-icon">
+    <div class="decorator-icon">
       <slot name="itemIcon">
-        <Icon name="material-symbols:add-2" class="icon" />
+        <Icon name="material-symbols:add-2" class="icon" aria-hidden="true" focusable="false" />
       </slot>
     </div>
   </div>
@@ -110,109 +110,95 @@ const flexDirection = ref(props.direction);
 
 <style lang="css">
 .input-checkbox-radio-options-button {
-  /* --_checkbox-size: initial; */
-
-  --_outline-color: var(--theme-checkbox-radio-button-outline-default);
-  --_label-color: var(--theme-checkbox-radio-button-label-default);
-  --_box-shadow: var(--theme-checkbox-radio-button-shadow);
   --_white-space: wrap;
-  /* --_border-radius: 2.2rem; */
-  /* --_padding-block: 0.4rem;
-  --_padding-inline: 1.2rem; */
 
   display: flex;
   flex-direction: v-bind(flexDirection);
   align-items: center;
   justify-content: space-between;
-  gap: var(--input-checkbox-radio-options-button-gap);
-
-  background-color: var(--input-checkbox-radio-options-button-background-color);
-  border-radius: var(--input-checkbox-radio-options-button-border-radius);
-  border: var(--input-checkbox-radio-options-button-border);
-  outline: var(--input-checkbox-radio-options-button-outline);
-
-  box-shadow: 0.1rem 0.1rem 0.8rem 0.1rem var(--_box-shadow);
-  padding-block: var(--input-checkbox-radio-options-padding-block);
-  padding-inline: var(--input-checkbox-radio-options-padding-inline);
-
-  &:hover {
-    /* background-color: var(--input-checkbox-radio-options-button-background-color-active); */
-    background-color: var(--form-core-background-color-hover);
-    border: var(--input-checkbox-radio-options-button-border-active);
-    outline: var(--input-checkbox-radio-options-button-outline-active);
-  }
+  gap: 1rem;
+  border-radius: 1lh;
+  transition: all 0.2s ease-in-out;
 
   &.inline {
     --_white-space: nowrap;
   }
+  background-color: var(--theme-input-surface);
+  border: var(--form-element-border-width) solid var(--theme-input-border);
+  outline: var(--form-element-outline-width) solid var(--theme-input-outline);
 
-  /* &:focus-within {
-    --_box-shadow: var(--theme-checkbox-radio-button-shadow-focus);
-    --_outline-color: var(--theme-checkbox-radio-button-outline-focus);
-  } */
+  box-shadow: 0.1rem 0.1rem 0.8rem 0.1rem transparent;
+  padding-block: var(--input-checkbox-radio-options-padding-block);
+  padding-inline: var(--input-checkbox-radio-options-padding-inline);
+
+  &:hover {
+    background-color: var(--theme-input-surface-hover);
+    border-color: var(--theme-input-border);
+    outline-color: var(--theme-input-outline-hover);
+    outline-offset: var(--form-element-outline-offset-focus);
+  }
 
   &:has(.input-checkbox-radio-core:focus-visible) {
-    --_box-shadow: var(--theme-checkbox-radio-button-shadow-focus);
-    --_outline-color: var(--theme-checkbox-radio-button-outline-focus);
+    background-color: var(--theme-input-surface-focus);
+    outline-color: var(--theme-input-outline-focus);
+    outline-offset: var(--form-element-outline-offset-focus);
   }
 
   /* Sizes */
   &.x-small {
-    /* --_checkbox-size: 2rem; */
-    /* --_border-radius: 2rem; */
-    /* --_padding-block: 0.2rem; */
-    /* --_padding-inline: 1.6rem; */
+    padding-block: 0.2rem;
+    padding-inline: 1.6rem;
+    gap: 1rem;
   }
   &.small {
-    /* --_checkbox-size: 2.2rem; */
-    /* --_border-radius: 1.8rem; */
-    /* --_padding-block: 0rem; */
-    /* --_padding-inline: 1.2rem; */
+    padding-block: 0.2rem;
+    padding-inline: 1.6rem;
+    gap: 1rem;
   }
-  &.normal {
-    /* --_checkbox-size: 3.4rem; */
-    /* --_border-radius: 2rem; */
-    /* --_padding-block: 0.4rem; */
-    /* --_padding-inline: 1.2rem; */
+  &.default {
+    padding-block: 0.4rem;
+    padding-inline: 1.2rem;
+    gap: 1rem;
   }
   &.medium {
-    /* --_checkbox-size: 3.4rem; */
-    /* --_border-radius: 2rem; */
-    /* --_padding-block: 0.4rem; */
-    /* --_padding-inline: 1.2rem; */
+    padding-block: 0.4rem;
+    padding-inline: 1.2rem;
+    gap: 1rem;
   }
   &.large {
-    /* --_checkbox-size: 3.4rem; */
-    /* --_border-radius: 2rem; */
-    /* --_padding-block: 0.4rem; */
-    /* --_padding-inline: 1.2rem; */
+    padding-block: 0.4rem;
+    padding-inline: 1.2rem;
+    gap: 1rem;
   }
-}
 
-.input-checkbox-radio-options-button-label {
-  display: flex;
-  flex-grow: 1;
-  color: var(--input-checkbox-radio-options-button-label-text-color);
-  font-size: var(--input-checkbox-radio-options-button-label-font-size);
-  width: 100%;
-  min-height: var(--input-checkbox-radio-options-button-label-min-height);
-  align-items: center;
-  justify-content: center;
-  margin-block: var(--input-checkbox-radio-options-button-label-margin-block);
-  padding-inline: var(--input-checkbox-radio-options-button-label-padding-inline);
-  white-space: var(--_white-space);
+  .input-checkbox-radio-options-button-label {
+    display: flex;
+    flex-grow: 1;
+    color: var(--theme-checkbox-label-text-color);
+    font-size: var(--form-element-font-size);
+    width: 100%;
+    min-height: var(--form-element-line-height);
+    align-items: center;
+    justify-content: center;
+    padding-block: 0.8rem;
+    padding-inline: 0.8rem;
+    white-space: var(--_white-space);
 
-  &:hover {
-    cursor: pointer;
+    &:hover {
+      cursor: pointer;
+    }
   }
-}
 
-.item-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--input-checkbox-radio-options-button-label-icon-color);
-  height: var(--form-input-checkbox-radio-button-size);
-  width: var(--form-input-checkbox-radio-button-size);
+  .decorator-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme-checkbox-decorator-color);
+
+    .icon {
+      height: var(--theme-checkbox-decorator-icon-size);
+      width: var(--theme-checkbox-decorator-icon-size);
+    }
+  }
 }
 </style>

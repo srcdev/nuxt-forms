@@ -1,6 +1,9 @@
 <template>
-  <div class="input-number-with-label" :data-form-theme="formTheme" :data-size="size" :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }]">
-    <label class="input-number-label body-normal-bold" :for="id">{{ label }}</label>
+  <div class="input-number-with-label" :data-theme="formTheme" :data-size="size" :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }]">
+    <InputLabel :for="id" :id :theme :name input-variant="normal" :field-has-error :style-class-passthrough="['input-number-label', 'body-normal-bold']">
+      <template #textLabel>{{ label }}</template>
+    </InputLabel>
+
     <template v-if="hasDescription">
       <slot name="description"></slot>
     </template>
@@ -132,10 +135,6 @@ updateElementClasses(['has-left-button', 'has-right-button']);
 
 <style lang="css">
 .input-number-with-label {
-  --_border-width: var(--form-element-border-width);
-  --_outline-width: var(--form-element-outline-width);
-  --_label-padding-inline: 1rem;
-
   .input-number-label {
     display: block;
     margin-block: 0.8rem;

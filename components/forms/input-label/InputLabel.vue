@@ -1,5 +1,5 @@
 <template>
-  <label :for="id" class="input-label" :class="[elementClasses]">
+  <label :for="id" class="input-label" :class="[elementClasses, inputVariant]">
     <slot v-if="hasHtmlLabel" name="htmlLabel"></slot>
     <slot v-if="hasTextLabel" name="textLabel"></slot>
   </label>
@@ -34,7 +34,7 @@ const props = defineProps({
   },
   inputVariant: {
     type: String as PropType<string>,
-    default: 'normal',
+    default: 'default',
     validator(value: string) {
       return propValidators.inputVariant.includes(value);
     },
@@ -50,11 +50,29 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
 <style lang="css">
 .input-label {
-  color: var(--input-label-text-color);
-  margin-block: var(--input-label-text-margin-block);
-  font-size: var(--input-label-text-size);
-  font-weight: var(--input-label-text-weight);
-  line-height: var(--input-label-text-line-height);
+  color: var(--form-label-color);
+  margin-block: 0.8rem;
+  font-size: var(--step-5);
+  font-weight: normal;
+  line-height: 1.5;
   display: block;
+
+  &.normal {
+    color: var(--form-label-color);
+    margin-block: 0.8rem;
+    font-size: var(--step-5);
+    font-weight: normal;
+    line-height: 1.5;
+    display: block;
+  }
+
+  &.underlined {
+    color: var(--form-label-color);
+    margin-block: 0.8rem;
+    font-size: var(--step-5);
+    font-weight: normal;
+    line-height: 1.5;
+    display: block;
+  }
 }
 </style>

@@ -1,6 +1,9 @@
 <template>
-  <div class="toggle-switch-with-label" :class="[elementClasses]" :data-form-theme="formTheme">
-    <label class="toggle-switch-label input-text-label body-normal-bold" :for="`toggle-sitch-${id}`">{{ label }}</label>
+  <div class="toggle-switch-with-label" :class="[elementClasses]" :data-theme="formTheme">
+    <InputLabel :for="`toggle-sitch-${id}`" :id :theme :name input-variant="normal" :field-has-error :style-class-passthrough="['input-switch-label', 'input-text-label', 'body-normal-bold']">
+      <template #textLabel>{{ label }}</template>
+    </InputLabel>
+
     <div v-if="hasDescriptionSlot" :id="`${id}-description`">
       <slot name="description"></slot>
     </div>

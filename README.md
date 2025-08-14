@@ -82,3 +82,19 @@ npm preview
 Styles exist for multiple themes/variants, primary, secondary, tertiary, error etc.
 
 Colour scheme can be updated by modifying the css colour variables
+
+## Thing to note
+
+Must add modifier class within nuxt config to enable local css overrides:
+
+```bash
+  app: {
+    head: {
+      htmlAttrs: {
+        class: 'your-site-class',
+      },
+    },
+  },
+```
+
+This class must be added to css files located at `~/assets/styles/extends-layer/srcdev-forms/components`

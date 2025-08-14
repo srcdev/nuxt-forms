@@ -1,5 +1,5 @@
 <template>
-  <div class="input-range-wrapper" :data-form-theme="formTheme">
+  <div class="input-range-wrapper" :data-theme="formTheme">
     <div v-if="hasLeftContent" class="slot left">
       <slot name="left"></slot>
     </div>

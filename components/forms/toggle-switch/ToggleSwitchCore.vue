@@ -1,5 +1,5 @@
 <template>
-  <div class="toggle-switch-core" :class="elementClasses" :data-size="size" :data-form-theme="formTheme">
+  <div class="toggle-switch-core" :class="elementClasses" :data-size="size" :data-theme="formTheme">
     <div @click="toggleSwitchValue" class="toggle-switch-wrapper" :class="[{ round }, { 'use-default-icons': useDefaultIcons }]" :for="inputId">
       <input type="checkbox" v-model="modelValue" :true-value :false-value :aria-invalid="fieldHasError" :id="inputId" :aria-describedby="`${id}-description`" :name :required :checked="isChecked" />
       <div class="symbol-wrapper" :class="[{ round }]">

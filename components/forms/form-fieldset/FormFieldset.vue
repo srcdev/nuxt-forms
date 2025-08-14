@@ -70,11 +70,11 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   }
 
   .form-fieldset-legend {
-    color: var(--form-fieldset-legend-text-color);
-    margin-block: var(--form-fieldset-legend-text-margin-block);
-    font-size: var(--form-fieldset-legend-text-size);
-    font-weight: var(--form-fieldset-legend-text-weight);
-    line-height: var(--form-fieldset-legend-text-line-height);
+    color: var(--form-fieldset-legend-color);
+    margin-block: 0.8rem;
+    font-size: var(--step-5);
+    font-weight: normal;
+    line-height: 1.5;
 
     &.has-description {
       margin-bottom: 0;
@@ -82,13 +82,13 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
   }
 
   .form-fieldset-description {
-    font-size: var(--form-fieldset-description-font-size);
-    margin-top: var(--form-fieldset-description-margin-top);
+    font-size: 1.6rem;
+    margin-top: 1.2rem;
   }
 
   .form-fieldset-content {
-    margin-block-start: var(--form-fieldset-content-margin-block-start);
-    margin-block-end: var(--form-fieldset-content-padding-block-start);
+    margin-block-start: 0;
+    margin-block-end: 0;
   }
 }
 </style>

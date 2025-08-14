@@ -1,5 +1,5 @@
 <template>
-  <div class="input-number-wrapper" :data-form-theme="formTheme" :data-size="size">
+  <div class="input-number-wrapper" :data-theme="formTheme" :data-size="size">
     <div v-if="hasLeftContent" class="slot left">
       <slot name="left"></slot>
     </div>
@@ -113,9 +113,9 @@ const minLength = computed(() => `${props.max.toString().length + 1}em`);
 
   width: fit-content;
 
-  background-color: var(--theme-form-input-bg-normal);
+  background-color: var(--theme-button-surface);
   border-radius: var(--form-element-border-width);
-  border: var(--form-element-border-width) solid var(--theme-form-input-border);
+  border: var(--form-element-border-width) solid var(--theme-input-border);
   outline: var(--form-element-outline-width) solid var(--theme-form-input-outline);
   box-shadow: var(--_focus-box-shadow);
 
@@ -147,7 +147,7 @@ const minLength = computed(() => `${props.max.toString().length + 1}em`);
     outline: none;
     box-shadow: none;
 
-    background-color: var(--theme-form-input-bg-normal);
+    background-color: var(--theme-input-surface);
     color: var(--theme-form-input-text-color-normal);
     font-family: var(--font-family);
     font-size: var(--form-element-font-size);
@@ -185,12 +185,12 @@ const minLength = computed(() => `${props.max.toString().length + 1}em`);
 
     .left-slot {
       margin-inline-end: 0;
-      border-right: 2px solid var(--theme-btn-bg-hover);
+      border-right: 2px solid var(--theme-button-surface-hover);
     }
 
     .right-slot {
       margin-inline-end: 0;
-      border-left: 2px solid var(--theme-btn-bg-hover);
+      border-left: 2px solid var(--theme-button-surface-hover);
     }
   }
 }

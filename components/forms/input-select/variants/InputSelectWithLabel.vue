@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="input-select-with-label" :class="[inputVariant, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }]" :data-testid :data-form-theme="formTheme" :data-size="size">
+    <div class="input-select-with-label" :class="[inputVariant, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }]" :data-testid :data-theme="formTheme" :data-size="size">
       <InputLabel :for="id" :id :theme :name :input-variant :field-has-error :style-class-passthrough="['input-select-label']">
         <template #textLabel>{{ label }}</template>
       </InputLabel>

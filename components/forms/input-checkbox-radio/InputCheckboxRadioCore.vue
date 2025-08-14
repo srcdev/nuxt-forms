@@ -1,8 +1,8 @@
 <template>
   <div
     class="input-checkbox-radio-wrapper"
-    :data-form-theme="formTheme"
-    :data-theme="size"
+    :data-theme="formTheme"
+    :data-size="size"
     :class="[type, size, elementClasses, { error: fieldHasError }, { button: isButton }, { 'display-as-disc': displayAsDisc }]"
   >
     <slot name="checkedIcon" v-if="isChecked">
@@ -126,28 +126,39 @@ const isChecked = computed(() => {
   grid-template-areas: 'element-stack';
   place-content: center;
 
-  background-color: var(--input-checkbox-radio-symbol-color-default);
-  border: var(--input-checkbox-radio-wrapper-border);
-  border-radius: var(--input-checkbox-radio-wrapper-border-radius);
-  outline: var(--input-checkbox-radio-wrapper-outline);
+  background-color: var(--theme-checkbox-symbol-surface);
+  border: 0.1rem solid var(--theme-input-border);
+  outline: var(--form-element-outline-width) solid var(--theme-input-outline);
   box-shadow: var(--_box-shadow);
 
-  height: var(--form-input-checkbox-radio-button-symbol-size);
-  width: var(--form-input-checkbox-radio-button-symbol-size);
+  height: var(--input-symbol-size);
+  width: var(--input-symbol-size);
 
-  transition: var(--input-checkbox-radio-wrapper-transition);
+  transition: all var(--theme-form-transition-duration) ease-in-out;
 
+  &.checkbox {
+    border-radius: var(--form-input-border-radius);
+    &.button {
+      &.display-as-disc {
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &.radio {
+    border-radius: 50%;
+  }
+
+  /* focus-visible */
   &:not(.button):has(.input-checkbox-radio-core:focus-visible) {
-    border: var(--input-checkbox-radio-wrapper-border-on);
-    outline: var(--input-checkbox-radio-wrapper-outline-on);
-    box-shadow: var(--input-checkbox-radio-wrapper-box-shadow-on);
+    outline: var(--theme-focus-visible-outline);
   }
 
   .input-checked-icon {
     grid-area: element-stack;
-    color: var(--input-checkbox-radio-symbol-color-active);
-    height: var(--form-input-checkbox-radio-button-symbol-size);
-    width: var(--form-input-checkbox-radio-button-symbol-size);
+    color: var(--theme-checkbox-symbol-color);
+    height: var(--input-symbol-size);
+    width: var(--input-symbol-size);
     box-shadow: var(--_box-shadow);
   }
 
@@ -158,8 +169,8 @@ const isChecked = computed(() => {
     overflow: hidden;
     opacity: 0;
 
-    height: var(--form-input-checkbox-radio-button-symbol-size);
-    width: var(--form-input-checkbox-radio-button-symbol-size);
+    height: var(--input-symbol-size);
+    width: var(--input-symbol-size);
 
     &:hover {
       cursor: pointer;

@@ -1,5 +1,5 @@
 <template>
-  <div class="colour-scheme-select" :data-size="size" :data-form-theme="theme">
+  <div class="colour-scheme-select" :data-size="size" :data-theme="theme">
     <p>Color Scheme select</p>
 
     <form class="colour-scheme-select-form mbe-20">
