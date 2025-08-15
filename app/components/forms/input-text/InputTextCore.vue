@@ -320,6 +320,7 @@ onMounted(() => {
 
   .input-text-core {
     all: unset;
+    touch-action: manipulation;
     flex-grow: 1;
 
     font-family: var(--font-family);

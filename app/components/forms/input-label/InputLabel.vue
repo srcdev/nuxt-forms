@@ -50,6 +50,7 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
 <style lang="css">
 .input-label {
+  touch-action: manipulation;
   color: var(--form-label-color);
   margin-block: 0.8rem;
   font-size: var(--step-5);

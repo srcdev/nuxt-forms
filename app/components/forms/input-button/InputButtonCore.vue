@@ -113,6 +113,7 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
 
 <style lang="css">
 .input-button-core {
+  touch-action: manipulation;
   align-items: center;
   display: flex;
   gap: var(--form-button-icon-gap);

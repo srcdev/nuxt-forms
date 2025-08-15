@@ -2,7 +2,7 @@
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  css: ['modern-normalize', './assets/styles/main.css'],
+  css: ['modern-normalize', './app/assets/styles/main.css'],
   modules: ['@nuxt/icon', '@nuxt/test-utils/module'],
   typescript: {
     tsConfig: {
@@ -30,5 +30,8 @@ export default defineNuxtConfig({
   vue: {
     runtimeCompiler: true,
   },
-  compatibilityDate: '2024-07-13',
+  compatibilityDate: '2024-12-01',
+  // future: {
+  //   compatibilityVersion: 4,
+  // },
 });

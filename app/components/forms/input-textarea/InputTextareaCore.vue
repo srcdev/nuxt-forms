@@ -150,6 +150,7 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
   .input-textarea-core {
     all: unset;
+    touch-action: manipulation;
     flex-grow: 1;
     field-sizing: content;
 

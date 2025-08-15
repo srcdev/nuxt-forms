@@ -142,6 +142,7 @@ const minLength = computed(() => `${props.max.toString().length + 1}em`);
   }
 
   .input-number-core {
+    touch-action: manipulation;
     background-color: transparent;
     border: none;
     outline: none;

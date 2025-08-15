@@ -163,6 +163,7 @@ const isChecked = computed(() => {
   }
 
   .input-checkbox-radio-core {
+    touch-action: manipulation;
     grid-area: element-stack;
     appearance: none;
     margin: 0;

@@ -5,7 +5,6 @@ export default defineNuxtConfig({
     https: false,
   },
   extends: ['..'],
-  css: ['modern-normalize', './assets/styles/main.css'],
   modules: ['@nuxt/icon', '@nuxt/test-utils/module'],
   app: {
     head: {
