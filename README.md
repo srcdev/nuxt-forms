@@ -83,18 +83,58 @@ Styles exist for multiple themes/variants, primary, secondary, tertiary, error e
 
 Colour scheme can be updated by modifying the css colour variables
 
-## Thing to note
+## Styles Architecture
 
-Must add modifier class within nuxt config to enable local css overrides:
+The `/app/assets/styles` folder contains the CSS architecture for this Nuxt layer, organized into two main directories:
 
-```bash
+### `/app/assets/styles/setup/`
+
+This directory contains the foundational styles that will be mirrored in any app that extends this layer. It includes:
+
+- **`index.css`** - Main setup file that imports all setup modules
+- **`_head.css`** - Head-level styles and document setup
+- **`a11y/`** - Accessibility utilities and variables
+- **`theming/`** - Theme definitions, color schemes, and theme variants
+- **`typography/`** - Typography setup, font definitions, and text utility classes
+- **`utility-classes/`** - General utility classes including fluid spacing and animations
+
+These styles form the base layer and will be automatically available in any app that extends this layer.
+
+### `/app/assets/styles/extends-layer/srcdev-forms/`
+
+This directory contains override styles specifically for apps that extend this layer. It includes:
+
+- **`index.css`** - Main override file
+- **`components/`** - Component-specific overrides
+- **`setup/`** - Setup overrides for extended apps
+
+This folder structure will also be present in the extending app's assets directory, allowing for easy customization and theming.
+
+### Layer Override Namespace
+
+To enable proper CSS override functionality, the extending app must include the `srcdev-forms-extended` class namespace:
+
+```ts
+// nuxt.config.ts in the extending app
+export default defineNuxtConfig({
+  extends: 'srcdev-nuxt-forms',
   app: {
     head: {
       htmlAttrs: {
-        class: 'your-site-class',
+        class: 'srcdev-forms-extended',
       },
     },
   },
+});
 ```
 
-This class must be added to css files located at `~/assets/styles/extends-layer/srcdev-forms/components`
+**Important:** All override CSS files in the extending app's `~/assets/styles/extends-layer/srcdev-forms/` directory must use the `.srcdev-forms-extended` class as a namespace prefix to ensure proper specificity and override behavior.
+
+Example override structure in the extending app:
+
+```css
+/* ~/assets/styles/extends-layer/srcdev-forms/components/button.css */
+.srcdev-forms-extended .btn-primary {
+  /* Your custom button styles */
+}
+```
