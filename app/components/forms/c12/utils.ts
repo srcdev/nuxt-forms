@@ -1,4 +1,4 @@
-import type { InpuTextC12, IFormFieldC12, IFormData } from '@/types/types.forms';
+import type { InpuTextC12, IFormFieldC12, IFormData } from '../../../../shared/types/types.forms';
 
 const formFieldC12 = <IFormFieldC12>{
   label: '',

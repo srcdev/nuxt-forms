@@ -5,6 +5,9 @@ export default defineNuxtConfig({
     https: false,
   },
   extends: ['..'],
+  alias: {
+    '@/shared': '../shared',
+  },
   modules: ['@nuxt/icon', '@nuxt/test-utils/module'],
   app: {
     head: {

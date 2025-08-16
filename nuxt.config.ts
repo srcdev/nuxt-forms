@@ -4,6 +4,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['modern-normalize', './app/assets/styles/main.css'],
   modules: ['@nuxt/icon', '@nuxt/test-utils/module'],
+  alias: {
+    '#shared': './shared',
+  },
   typescript: {
     tsConfig: {
       compilerOptions: {
@@ -31,7 +34,7 @@ export default defineNuxtConfig({
     runtimeCompiler: true,
   },
   compatibilityDate: '2024-12-01',
-  // future: {
-  //   compatibilityVersion: 4,
-  // },
+  future: {
+    compatibilityVersion: 4,
+  },
 });

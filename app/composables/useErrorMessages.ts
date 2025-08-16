@@ -1,4 +1,4 @@
-import type { IFormData } from '@/types/types.forms';
+import type { IFormData } from '../../shared/types/types.forms';
 
 export function useErrorMessage(name: string, formData: Ref<IFormData>) {
   const defaultError = ref('');
@@ -12,7 +12,7 @@ export function useErrorMessage(name: string, formData: Ref<IFormData>) {
     console.log(`errorMessage()`);
     if (hasCustomError()) {
       console.log(`errorMessage() | IF`);
-      return errorMessages.value[name].message;
+      return errorMessages.value[name]?.message;
     } else {
       return defaultError.value;
     }

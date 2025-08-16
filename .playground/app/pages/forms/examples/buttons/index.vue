@@ -92,7 +92,7 @@
 </template>
 
 <script setup lang="ts">
-import type { IFieldsInitialState, IOptionsConfig } from '@/types/types.forms';
+import type { IFieldsInitialState, IOptionsConfig } from '../../../../../../shared/types/types.forms';
 
 definePageMeta({
   layout: false,

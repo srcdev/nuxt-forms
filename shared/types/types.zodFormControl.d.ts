@@ -1,4 +1,4 @@
-import type { IFieldsInitialState, IFormFieldsState, IFormFieldsC12, IFormFieldC12, IApiErrorMessages, ICustomErrorMessage, IErrorMessagesArr } from '@/types/types.forms';
+import type { IFieldsInitialState, IFormFieldsState, IFormFieldsC12, IFormFieldC12, IApiErrorMessages, ICustomErrorMessage, IErrorMessagesArr } from './types.forms';
 
 export interface IZodeFormControl {
   [x: string]: string | boolean | number | URL | object;

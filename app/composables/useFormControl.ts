@@ -1,5 +1,5 @@
-import type { IFormData, IFieldsInitialState, IFormFieldC12, IApiErrorMessages, ICustomErrorMessage, IErrorMessagesArr } from '@/types/types.forms';
-import { formFieldC12 } from '@/components/forms/c12/utils';
+import type { IFormData, IFieldsInitialState, IFormFieldC12, IApiErrorMessages, ICustomErrorMessage, IErrorMessagesArr } from '../../shared/types/types.forms';
+// import { formFieldC12 } from '@/components/forms/c12/utils';
 
 // export function useFormControl(name: string = '') {
 export function useFormControl(name: string = '') {
@@ -50,7 +50,13 @@ export function useFormControl(name: string = '') {
     console.log(`useFormControl | updatePreviousValues`);
 
     Object.keys(formData.value.data).forEach((key) => {
-      formData.value.formFieldsC12[key].previousValue = formData.value.data[key];
+      if (formData.value.formFieldsC12[key]) {
+        const currentValue = formData.value.data[key];
+        // Filter out undefined values and IOptionsValueArr[] which are not supported by previousValue
+        if (currentValue !== undefined && !Array.isArray(currentValue)) {
+          formData.value.formFieldsC12[key].previousValue = currentValue;
+        }
+      }
     });
   };
 
@@ -86,7 +92,7 @@ export function useFormControl(name: string = '') {
     let count = 0;
 
     for (const key in obj) {
-      if (obj.hasOwnProperty(key) && obj[key].useCustomError === true) {
+      if (obj.hasOwnProperty(key) && obj[key]?.useCustomError === true) {
         count++;
       }
     }
@@ -108,11 +114,11 @@ export function useFormControl(name: string = '') {
    */
   const updateErrorMessages = async (name: string, message: string = '', valid: boolean = false) => {
     if (!valid) {
-      // formData.value.validityState[name] = valid;
-      // formData.value.errorMessages[name] = {
-      //   useCustomError: true,
-      //   message,
-      // };
+      // Ensure the form field exists before updating it
+      if (!formData.value.formFieldsC12[name]) {
+        console.warn(`Form field "${name}" not found in formFieldsC12`);
+        return;
+      }
 
       formData.value.formFieldsC12[name].useCustomError = true;
 

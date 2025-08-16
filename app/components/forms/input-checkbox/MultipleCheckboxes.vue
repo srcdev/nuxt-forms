@@ -62,7 +62,7 @@
 
 <script setup lang="ts">
 import propValidators from '../c12/prop-validators';
-import type { IOptionsConfig, IFormMultipleOptions } from '@/types/types.forms';
+import type { IOptionsConfig, IFormMultipleOptions } from '../../../../shared/types/types.forms';
 
 const { dataTestid, name, legend, label, required, fieldHasError, placeholder, isButton, errorMessage, size, optionsLayout, equalCols, styleClassPassthrough, theme, direction } = defineProps({
   dataTestid: {

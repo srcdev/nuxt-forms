@@ -1,6 +1,6 @@
 import { ref, reactive, toRaw, type Ref } from 'vue';
 import { z, ZodError } from 'zod';
-import type { ApiErrorResponse } from '../types/types.forms';
+import type { ApiErrorResponse } from '../../shared/types/types.forms';
 
 const useZodValidation = (formSchema: any, formRef: Ref<HTMLFormElement | null>) => {
   const zodFormControl = reactive({
