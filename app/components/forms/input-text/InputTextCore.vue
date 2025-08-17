@@ -4,7 +4,14 @@
     :data-theme="formTheme"
     :data-size="size"
     :data-inputmode="inputmode"
-    :class="[inputVariant, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]"
+    :class="[
+      inputVariant,
+      { dirty: isDirty },
+      { active: isActive },
+      { error: fieldHasError },
+      { 'has-left-slot': hasLeftSlot },
+      { 'has-right-slot': hasRightSlot },
+    ]"
   >
     <span v-if="hasLeftSlot" class="slot left-slot">
       <slot name="left"></slot>
@@ -35,22 +42,21 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
+import propValidators from "../c12/prop-validators"
 
 const props = defineProps({
   type: {
-    type: String as PropType<'text' | 'email' | 'password' | 'number' | 'tel' | 'url'>,
-    // type: String,
-    default: 'text',
+    type: String as PropType<"text" | "email" | "password" | "number" | "tel" | "url">,
+    default: "text",
     validator(value: string) {
-      return propValidators.inputTypesText.includes(value);
+      return propValidators.inputTypesText.includes(value)
     },
   },
   inputmode: {
-    type: String as PropType<'text' | 'email' | 'tel' | 'url' | 'search' | 'numeric' | 'none' | 'decimal'>,
-    default: 'text',
+    type: String as PropType<"text" | "email" | "tel" | "url" | "search" | "numeric" | "none" | "decimal">,
+    default: "text",
     validator(value: string) {
-      return propValidators.inputMode.includes(value);
+      return propValidators.inputMode.includes(value)
     },
   },
   maxlength: {
@@ -71,7 +77,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   fieldHasError: {
     type: Boolean,
@@ -83,9 +89,9 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   ariaDescribedby: {
@@ -94,66 +100,66 @@ const props = defineProps({
   },
   size: {
     type: String as PropType<string>,
-    default: 'default',
+    default: "default",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   inputVariant: {
     type: String as PropType<string>,
-    default: 'normal',
+    default: "normal",
     validator(value: string) {
-      return propValidators.inputVariant.includes(value);
+      return propValidators.inputVariant.includes(value)
     },
   },
-});
+})
 
-const slots = useSlots();
-const hasLeftSlot = computed(() => slots.left !== undefined);
-const hasRightSlot = computed(() => slots.right !== undefined);
+const slots = useSlots()
+const hasLeftSlot = computed(() => slots.left !== undefined)
+const hasRightSlot = computed(() => slots.right !== undefined)
 
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const modelValue = defineModel();
-const isDirty = defineModel('isDirty');
-const isActive = defineModel('isActive');
+const modelValue = defineModel()
+const isDirty = defineModel("isDirty")
+const isActive = defineModel("isActive")
 
 const inputPattern = computed(() => {
-  return props.inputmode === 'numeric' ? '[0-9]+' : undefined;
-});
+  return props.inputmode === "numeric" ? "[0-9]+" : undefined
+})
 
 const updateFocus = (isFocused: boolean) => {
-  isActive.value = isFocused;
-};
+  isActive.value = isFocused
+}
 
-const inputField = ref<HTMLInputElement | null>(null);
+const inputField = ref<HTMLInputElement | null>(null)
 
-const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
 // TODO: Move this to a utility function to allow removeEventListener on unmounted
 // Leaving like this could lead to memory leaks
 const validateInput = () => {
   if (inputField.value !== null) {
-    inputField.value.addEventListener('beforeinput', (event: any) => {
-      let beforeValue = modelValue.value;
+    inputField.value.addEventListener("beforeinput", (event: any) => {
+      let beforeValue = modelValue.value
       event.target.addEventListener(
-        'input',
+        "input",
         () => {
           if (inputField.value !== null && inputField.value.validity.patternMismatch) {
-            inputField.value.value = beforeValue as string;
+            inputField.value.value = beforeValue as string
           }
         },
         { once: true }
-      );
-    });
+      )
+    })
   }
-};
+}
 
 onMounted(() => {
-  if (props.inputmode === 'numeric') validateInput();
-});
+  if (props.inputmode === "numeric") validateInput()
+})
 </script>
 
 <style lang="css">
@@ -197,13 +203,13 @@ onMounted(() => {
       place-items: center;
       background-clip: padding-box;
 
-      &.left-slot:not([data-theme='input-action']) {
+      &.left-slot:not([data-theme="input-action"]) {
         .icon {
           width: 2.2rem;
           height: 2.2rem;
         }
 
-        [data-theme='input-action'] {
+        [data-theme="input-action"] {
           width: initial;
           height: initial;
           padding: 0.5rem;
@@ -214,13 +220,13 @@ onMounted(() => {
           }
         }
       }
-      &.right-slot:not([data-theme='input-action']) {
+      &.right-slot:not([data-theme="input-action"]) {
         .icon {
           width: 2.2rem;
           height: 2.2rem;
         }
 
-        [data-theme='input-action'] {
+        [data-theme="input-action"] {
           width: initial;
           height: initial;
           padding: 0.5rem;
@@ -233,12 +239,12 @@ onMounted(() => {
       }
     }
 
-    &[data-inputmode='numeric'] {
+    &[data-inputmode="numeric"] {
       padding-block: 0rem;
       padding-inline: 0.75rem;
 
       .slot {
-        [data-theme='input-action'] {
+        [data-theme="input-action"] {
           width: initial;
           height: initial;
           padding: 0.5rem;
@@ -281,13 +287,13 @@ onMounted(() => {
       place-items: center;
       background-clip: padding-box;
 
-      &.left-slot:not([data-theme='input-action-underlined']) {
+      &.left-slot:not([data-theme="input-action-underlined"]) {
         .icon {
           width: 2.2rem;
           height: 2.2rem;
         }
 
-        [data-theme='input-action-underlined'] {
+        [data-theme="input-action-underlined"] {
           width: initial;
           height: initial;
           padding: 0.5rem;
@@ -298,13 +304,13 @@ onMounted(() => {
           }
         }
       }
-      &.right-slot:not([data-theme='input-action-underlined']) {
+      &.right-slot:not([data-theme="input-action-underlined"]) {
         .icon {
           width: 2.2rem;
           height: 2.2rem;
         }
 
-        [data-theme='input-action-underlined'] {
+        [data-theme="input-action-underlined"] {
           width: initial;
           height: initial;
           padding: 0.5rem;

@@ -2,39 +2,39 @@
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  css: ['modern-normalize', './app/assets/styles/main.css'],
-  modules: ['@nuxt/icon', '@nuxt/test-utils/module'],
+  css: ["modern-normalize", "./app/assets/styles/main.css"],
+  modules: ["@nuxt/eslint", "@nuxt/icon", "@nuxt/test-utils/module"],
   alias: {
-    '#shared': './shared',
+    "#shared": "./shared",
   },
   typescript: {
     tsConfig: {
       compilerOptions: {
-        types: ['vitest/globals'], // TypeScript support for globals
+        types: ["vitest/globals"], // TypeScript support for globals
       },
     },
   },
   app: {
     head: {
       htmlAttrs: {
-        lang: 'en',
-        'data-color-scheme': 'auto',
+        lang: "en",
+        "data-color-scheme": "auto",
       },
-      titleTemplate: '%s - Website name',
-      meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }],
+      titleTemplate: "%s - Website name",
+      meta: [{ charset: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1" }],
     },
   },
   components: [
     {
-      path: './components',
+      path: "./components",
       pathPrefix: false,
     },
   ],
   vue: {
     runtimeCompiler: true,
   },
-  compatibilityDate: '2024-12-01',
+  compatibilityDate: "2024-12-01",
   future: {
     compatibilityVersion: 4,
   },
-});
+})

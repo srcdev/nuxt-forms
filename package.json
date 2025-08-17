@@ -26,7 +26,7 @@
     "@iconify-json/carbon": "1.2.10",
     "@iconify-json/material-symbols": "1.2.29",
     "@iconify-json/material-symbols-light": "1.2.29",
-    "@nuxt/eslint-config": "1.8.0",
+    "@nuxt/eslint": "1.8.0",
     "@nuxt/icon": "1.15.0",
     "@nuxt/test-utils": "3.19.2",
     "@vue/test-utils": "2.4.6",
