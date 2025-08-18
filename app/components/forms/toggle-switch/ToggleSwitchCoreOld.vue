@@ -1,14 +1,24 @@
 <template>
   <div class="toggle-switch-core" :class="elementClasses" :data-size="size" :data-theme="formTheme">
     <div @click="toggleSwitchValue" class="toggle-switch-input" :class="[{ round }]" :for="inputId">
-      <input type="checkbox" v-model="modelValue" :true-value :false-value :aria-invalid="fieldHasError" :id="inputId" :aria-describedby="`${id}-description`" :name :required />
+      <input
+        type="checkbox"
+        v-model="modelValue"
+        :true-value
+        :false-value
+        :aria-invalid="fieldHasError"
+        :id="inputId"
+        :aria-describedby="`${id}-description`"
+        :name
+        :required
+      />
       <div class="symbol-wrapper" :class="[{ round }]">
         <div class="symbol" :class="[{ round }]">
-          <div v-if="hasIconOnSlot" class="symbol-icon icon-on">
+          <div v-if="slots.iconOn" class="symbol-icon icon-on">
             <slot name="iconOn"></slot>
           </div>
 
-          <div v-if="hasIconOffSlot" class="symbol-icon icon-off">
+          <div v-if="slots.iconOff" class="symbol-icon icon-off">
             <slot name="iconOff"></slot>
           </div>
         </div>
@@ -18,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
+import propValidators from "../c12/prop-validators"
 
 const props = defineProps({
   id: {
@@ -51,9 +61,9 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   round: {
@@ -62,33 +72,31 @@ const props = defineProps({
   },
   size: {
     type: String as PropType<string>,
-    default: 'default',
+    default: "default",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   ariaDescribedby: {
     type: String,
     default: null,
   },
-});
+})
 
-const slots = useSlots();
-const hasIconOnSlot = computed(() => slots.iconOn !== undefined);
-const hasIconOffSlot = computed(() => slots.iconOff !== undefined);
+const slots = useSlots()
 
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const modelValue = defineModel();
-const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const modelValue = defineModel()
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
-const inputId = computed(() => `toggle-sitch-${props.id}`);
+const inputId = computed(() => `toggle-sitch-${props.id}`)
 
 const toggleSwitchValue = () => {
-  modelValue.value = modelValue.value === props.trueValue ? props.falseValue : props.trueValue;
-};
+  modelValue.value = modelValue.value === props.trueValue ? props.falseValue : props.trueValue
+}
 </script>
 
 <style lang="css">
@@ -102,8 +110,14 @@ const toggleSwitchValue = () => {
   .toggle-switch-input {
     position: relative;
     display: inline-block;
-    height: calc(var(--form-toggle-symbol-size) + calc(var(--form-element-border-width) * 2) + calc(var(--form-element-outline-width) * 2));
-    width: calc(var(--form-toggle-symbol-size) * 2 - calc(var(--form-element-border-width) * 2) + calc(var(--form-element-outline-width) * 2) + var(--form-toggle-switch-width-adjustment));
+    height: calc(
+      var(--form-toggle-symbol-size) + calc(var(--form-element-border-width) * 2) +
+        calc(var(--form-element-outline-width) * 2)
+    );
+    width: calc(
+      var(--form-toggle-symbol-size) * 2 - calc(var(--form-element-border-width) * 2) +
+        calc(var(--form-element-outline-width) * 2) + var(--form-toggle-switch-width-adjustment)
+    );
 
     input {
       opacity: 0;
@@ -126,7 +140,7 @@ const toggleSwitchValue = () => {
 
       .symbol {
         display: grid;
-        grid-template-areas: 'icon-stack';
+        grid-template-areas: "icon-stack";
         overflow: clip;
         position: absolute;
 

@@ -1,11 +1,11 @@
 <template>
   <div class="input-range-wrapper" :data-theme="formTheme">
-    <div v-if="hasLeftContent" class="slot left">
+    <div v-if="slots.left" class="slot left">
       <slot name="left"></slot>
     </div>
 
     <div class="input-range-container">
-      <slot v-if="hasMarkers" name="markers"></slot>
+      <slot v-if="slots.markers" name="markers"></slot>
 
       <input
         type="range"
@@ -15,22 +15,28 @@
         :min
         :max
         :step
-        :list="hasDataList ? name + '-datalist' : ''"
-        :class="['input-range-core', `input-range--${size}`, `input-range--${weight}`, styleClassPassthrough, { 'has-markers': hasMarkers }]"
+        :list="slots.datalist ? name + '-datalist' : ''"
+        :class="[
+          'input-range-core',
+          `input-range--${size}`,
+          `input-range--${weight}`,
+          styleClassPassthrough,
+          { 'has-markers': slots.markers },
+        ]"
         v-model="modelValue"
         ref="inputRange"
       />
 
-      <slot v-if="hasDataList" name="datalist"></slot>
+      <slot v-if="slots.datalist" name="datalist"></slot>
     </div>
-    <div v-if="hasRightContent" class="slot right">
+    <div v-if="slots.right" class="slot right">
       <slot name="right"></slot>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
+import propValidators from "../c12/prop-validators"
 
 const props = defineProps({
   id: {
@@ -55,7 +61,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   required: {
     type: Boolean,
@@ -63,23 +69,23 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   size: {
     type: String as PropType<string>,
-    default: 'medium',
+    default: "medium",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   weight: {
     type: String as PropType<string>,
-    default: 'wght-400',
+    default: "wght-400",
     validator(value: string) {
-      return propValidators.weight.includes(value);
+      return propValidators.weight.includes(value)
     },
   },
   fieldHasError: {
@@ -90,28 +96,24 @@ const props = defineProps({
     type: Array as PropType<string[]>,
     default: () => [],
   },
-});
+})
 
-const slots = useSlots();
-const hasDataList = computed(() => slots.datalist !== undefined);
-const hasMarkers = computed(() => slots.markers !== undefined);
-const hasLeftContent = computed(() => slots.left !== undefined);
-const hasRightContent = computed(() => slots.right !== undefined);
+const slots = useSlots()
 
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const modelValue = defineModel<number | readonly number[]>();
+const modelValue = defineModel<number | readonly number[]>()
 
 // @input="changeBackgroundColor"
 const changeBackgroundColor = () => {
-  console.log('changeBackgroundColor()');
-  const inputRange = ref<HTMLInputElement | null>(null);
+  console.log("changeBackgroundColor()")
+  const inputRange = ref<HTMLInputElement | null>(null)
   if (inputRange.value !== null) {
-    inputRange.value.style.accentColor = 'hsl(' + modelValue.value + ', 100%, 50%)';
+    inputRange.value.style.accentColor = "hsl(" + modelValue.value + ", 100%, 50%)"
   }
-};
+}
 </script>
 
 <style lang="css">
@@ -137,7 +139,7 @@ const changeBackgroundColor = () => {
     flex-grow: 1;
 
     display: grid;
-    grid-template-areas: 'element-stack';
+    grid-template-areas: "element-stack";
 
     .input-range-markers {
       grid-area: element-stack;

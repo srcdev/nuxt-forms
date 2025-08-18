@@ -1,10 +1,22 @@
 <template>
-  <div class="input-text-with-label" :data-theme="formTheme" :class="[inputVariant, elementClasses, { dirty: isDirty }, { active: isActive }]">
-    <InputLabel :for="id" :id :theme :name :input-variant :field-has-error :style-class-passthrough="['input-text-label', 'body-normal-bold']">
+  <div
+    class="input-text-with-label"
+    :data-theme="formTheme"
+    :class="[inputVariant, elementClasses, { dirty: isDirty }, { active: isActive }]"
+  >
+    <InputLabel
+      :for="id"
+      :id
+      :theme
+      :name
+      :input-variant
+      :field-has-error
+      :style-class-passthrough="['input-text-label', 'body-normal-bold']"
+    >
       <template #textLabel>{{ label }}</template>
     </InputLabel>
 
-    <div v-if="hasDescriptionSlot" :id="`${id}-description`">
+    <div v-if="slots.description" :id="`${id}-description`">
       <slot name="description"></slot>
     </div>
 
@@ -28,7 +40,7 @@
       :size
       :inputVariant
     >
-      <template v-if="hasLeftSlot" #left>
+      <template v-if="slots.left" #left>
         <InputButtonCore
           type="button"
           @click.stop.prevent="updateValue(-step, Number(modelValue) > min)"
@@ -43,7 +55,7 @@
           </template>
         </InputButtonCore>
       </template>
-      <template v-if="hasRightSlot" #right>
+      <template v-if="slots.right" #right>
         <InputButtonCore
           type="button"
           @click.stop.prevent="updateValue(step, Number(modelValue) < max)"
@@ -64,7 +76,7 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../../c12/prop-validators';
+import propValidators from "../../c12/prop-validators"
 const props = defineProps({
   maxlength: {
     type: Number,
@@ -76,7 +88,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   label: {
     type: String,
@@ -100,9 +112,9 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   min: {
@@ -119,50 +131,47 @@ const props = defineProps({
   },
   size: {
     type: String as PropType<string>,
-    default: 'default',
+    default: "default",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   inputVariant: {
     type: String as PropType<string>,
-    default: 'normal',
+    default: "normal",
     validator(value: string) {
-      return propValidators.inputVariant.includes(value);
+      return propValidators.inputVariant.includes(value)
     },
   },
-});
+})
 
-const slots = useSlots();
-const hasDescriptionSlot = computed(() => slots.description !== undefined);
-const hasLeftSlot = computed(() => slots.left !== undefined);
-const hasRightSlot = computed(() => slots.right !== undefined);
+const slots = useSlots()
 
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const id = useId();
-const errorId = `${id}-error-message`;
+const id = useId()
+const errorId = `${id}-error-message`
 const ariaDescribedby = computed(() => {
-  const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : undefined;
-  return props.fieldHasError ? errorId : ariaDescribedbyId;
-});
+  const ariaDescribedbyId = slots.description ? `${id}-description` : undefined
+  return props.fieldHasError ? errorId : ariaDescribedbyId
+})
 
-const modelValue = defineModel();
-const isActive = ref<boolean>(false);
-const isDirty = ref<boolean>(false);
+const modelValue = defineModel()
+const isActive = ref<boolean>(false)
+const isDirty = ref<boolean>(false)
 
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
-const minLength = computed(() => `${props.max.toString().length + 1}em`);
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
+const minLength = computed(() => `${props.max.toString().length + 1}em`)
 
 const updateValue = (step: number, withinRangeLimit: boolean) => {
   if (withinRangeLimit) {
-    modelValue.value = (Number(modelValue.value) + step) as number;
+    modelValue.value = (Number(modelValue.value) + step) as number
   }
-};
+}
 
-updateElementClasses(['input-text-as-number', 'has-left-button', 'has-right-button']);
+updateElementClasses(["input-text-as-number", "has-left-button", "has-right-button"])
 </script>
 
 <style lang="css">

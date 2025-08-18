@@ -1,11 +1,23 @@
 <template>
   <div>
-    <div class="input-text-with-label" :data-theme="formTheme" :class="[elementClasses, inputVariant, { dirty: isDirty }, { active: isActive }]">
-      <InputLabel :for="id" :id :theme :name :input-variant :field-has-error :style-class-passthrough="['input-text-label']">
+    <div
+      class="input-text-with-label"
+      :data-theme="formTheme"
+      :class="[elementClasses, inputVariant, { dirty: isDirty }, { active: isActive }]"
+    >
+      <InputLabel
+        :for="id"
+        :id
+        :theme
+        :name
+        :input-variant
+        :field-has-error
+        :style-class-passthrough="['input-text-label']"
+      >
         <template #textLabel>{{ label }}</template>
       </InputLabel>
 
-      <div v-if="inputVariant === 'normal' && hasDescriptionSlot" :id="`${id}-description`">
+      <div v-if="inputVariant === 'normal' && slots.description" :id="`${id}-description`">
         <slot name="description"></slot>
       </div>
 
@@ -29,10 +41,10 @@
         :size
         :inputVariant
       >
-        <template v-if="hasLeftSlot" #left>
+        <template v-if="slots.left" #left>
           <slot name="left"></slot>
         </template>
-        <template v-if="hasRightSlot" #right>
+        <template v-if="slots.right" #right>
           <slot name="right"></slot>
         </template>
       </InputTextCore>
@@ -40,28 +52,28 @@
       <InputError :errorMessage :showError="fieldHasError" :id="errorId" :isDetached="false" :inputVariant />
     </div>
 
-    <div v-if="inputVariant !== 'normal' && hasDescriptionSlot" :id="`${id}-description`">
+    <div v-if="inputVariant !== 'normal' && slots.description" :id="`${id}-description`">
       <slot name="description"></slot>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import propValidators from '../../c12/prop-validators';
+import propValidators from "../../c12/prop-validators"
 const props = defineProps({
   maxlength: {
     type: Number,
     default: 255,
   },
   type: {
-    type: String as PropType<'text' | 'email' | 'password' | 'number' | 'tel' | 'url'>,
+    type: String as PropType<"text" | "email" | "password" | "number" | "tel" | "url">,
     required: true,
   },
   inputmode: {
-    type: String as PropType<'text' | 'email' | 'tel' | 'url' | 'search' | 'numeric' | 'none' | 'decimal'>,
-    default: 'text',
+    type: String as PropType<"text" | "email" | "tel" | "url" | "search" | "numeric" | "none" | "decimal">,
+    default: "text",
     validator(value: string) {
-      return propValidators.inputMode.includes(value);
+      return propValidators.inputMode.includes(value)
     },
   },
   name: {
@@ -70,7 +82,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   label: {
     type: String,
@@ -94,65 +106,62 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   size: {
     type: String as PropType<string>,
-    default: 'default',
+    default: "default",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   inputVariant: {
     type: String as PropType<string>,
-    default: 'normal',
+    default: "normal",
     validator(value: string) {
-      return propValidators.inputVariant.includes(value);
+      return propValidators.inputVariant.includes(value)
     },
   },
-});
+})
 
-const slots = useSlots();
-const hasDescriptionSlot = computed(() => slots.description !== undefined);
-const hasLeftSlot = computed(() => slots.left !== undefined);
-const hasRightSlot = computed(() => slots.right !== undefined);
+const slots = useSlots()
 
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const id = `${props.name}-${useId()}`;
-const errorId = `${id}-error-message`;
+const id = `${props.name}-${useId()}`
+const errorId = `${id}-error-message`
 const ariaDescribedby = computed(() => {
-  const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : undefined;
-  return props.fieldHasError ? errorId : ariaDescribedbyId;
-});
+  const ariaDescribedbyId = slots.description ? `${id}-description` : undefined
+  return props.fieldHasError ? errorId : ariaDescribedbyId
+})
 
-const modelValue = defineModel();
-const isActive = ref<boolean>(false);
-const isDirty = ref<boolean>(false);
+const modelValue = defineModel()
+const isActive = ref<boolean>(false)
+const isDirty = ref<boolean>(false)
 
-const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
 const testDirty = () => {
-  const watchValue = modelValue.value ?? '';
+  const watchValue = modelValue.value ?? ""
 
-  if (!isDirty.value && typeof watchValue === 'string' && watchValue.length > 0) {
-    isDirty.value = true;
+  if (!isDirty.value && typeof watchValue === "string" && watchValue.length > 0) {
+    isDirty.value = true
   }
-};
+}
 
 onMounted(() => {
-  testDirty();
-});
+  testDirty()
+})
 
 watch(
   () => modelValue.value,
   () => {
-    testDirty();
+    testDirty()
   }
-);
+)
 </script>

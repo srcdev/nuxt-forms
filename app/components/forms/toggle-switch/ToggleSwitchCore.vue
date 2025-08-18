@@ -1,7 +1,23 @@
 <template>
   <div class="toggle-switch-core" :class="elementClasses" :data-size="size" :data-theme="formTheme">
-    <div @click="toggleSwitchValue" class="toggle-switch-wrapper" :class="[{ round }, { 'use-default-icons': useDefaultIcons }]" :for="inputId">
-      <input type="checkbox" v-model="modelValue" :true-value :false-value :aria-invalid="fieldHasError" :id="inputId" :aria-describedby="`${id}-description`" :name :required :checked="isChecked" />
+    <div
+      @click="toggleSwitchValue"
+      class="toggle-switch-wrapper"
+      :class="[{ round }, { 'use-default-icons': useDefaultIcons }]"
+      :for="inputId"
+    >
+      <input
+        type="checkbox"
+        v-model="modelValue"
+        :true-value
+        :false-value
+        :aria-invalid="fieldHasError"
+        :id="inputId"
+        :aria-describedby="`${id}-description`"
+        :name
+        :required
+        :checked="isChecked"
+      />
       <div class="symbol-wrapper" :class="[{ round }]">
         <div class="symbol" :class="[{ round }]">
           <div class="symbol-icon icon-on">
@@ -22,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
+import propValidators from "../c12/prop-validators"
 
 const props = defineProps({
   id: {
@@ -55,9 +71,9 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   round: {
@@ -66,39 +82,36 @@ const props = defineProps({
   },
   size: {
     type: String as PropType<string>,
-    default: 'default',
+    default: "default",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   ariaDescribedby: {
     type: String,
     default: null,
   },
-});
+})
 
-const slots = useSlots();
-const hasIconOnSlot = computed(() => slots.iconOn !== undefined);
-const hasIconOffSlot = computed(() => slots.iconOff !== undefined);
-const useDefaultIcons = computed(() => !hasIconOnSlot.value && !hasIconOffSlot.value);
+const slots = useSlots()
+const useDefaultIcons = computed(() => !slots.iconOn && !slots.iconOff)
 
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const modelValue = defineModel();
-const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const modelValue = defineModel()
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
-const inputId = computed(() => `toggle-sitch-${props.id}`);
+const inputId = computed(() => `toggle-sitch-${props.id}`)
 
 const isChecked = computed(() => {
-  return modelValue.value === props.trueValue;
-});
+  return modelValue.value === props.trueValue
+})
 
 const toggleSwitchValue = () => {
-  modelValue.value = modelValue.value === props.trueValue ? props.falseValue : props.trueValue;
-  console.log(`toggleSwitchValue(${modelValue.value})`);
-};
+  modelValue.value = modelValue.value === props.trueValue ? props.falseValue : props.trueValue
+}
 </script>
 
 <style lang="css">
@@ -149,16 +162,21 @@ const toggleSwitchValue = () => {
       /* background: blue; */
       border: var(--theme-form-toggle-border-width) solid var(--theme-form-toggle-border-color);
       outline: var(--theme-form-toggle-outline-width) solid var(--theme-form-toggle-outline-color);
-      border-radius: calc(var(--_symbol-size) + calc(var(--theme-form-toggle-border-width) * 2) + calc(var(--_switch-padding) * 2));
+      border-radius: calc(
+        var(--_symbol-size) + calc(var(--theme-form-toggle-border-width) * 2) + calc(var(--_switch-padding) * 2)
+      );
       display: inline-flex;
       align-items: center;
       justify-content: start;
-      width: calc(var(--_symbol-size) + var(--_symbol-checked-offset) + calc(var(--theme-form-toggle-border-width) * 2) + calc(var(--_switch-padding) * 2));
+      width: calc(
+        var(--_symbol-size) + var(--_symbol-checked-offset) + calc(var(--theme-form-toggle-border-width) * 2) +
+          calc(var(--_switch-padding) * 2)
+      );
       padding: var(--_switch-padding);
 
       .symbol {
         display: inline-grid;
-        grid-template-areas: 'icon';
+        grid-template-areas: "icon";
         place-content: center;
 
         aspect-ratio: 1/1;

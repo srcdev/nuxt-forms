@@ -1,18 +1,38 @@
 <template>
   <div class="toggle-switch-with-label" :class="[elementClasses]" :data-theme="formTheme">
-    <InputLabel :for="`toggle-sitch-${id}`" :id :theme :name input-variant="normal" :field-has-error :style-class-passthrough="['input-switch-label', 'input-text-label', 'body-normal-bold']">
+    <InputLabel
+      :for="`toggle-sitch-${id}`"
+      :id
+      :theme
+      :name
+      input-variant="normal"
+      :field-has-error
+      :style-class-passthrough="['input-switch-label', 'input-text-label', 'body-normal-bold']"
+    >
       <template #textLabel>{{ label }}</template>
     </InputLabel>
 
-    <div v-if="hasDescriptionSlot" :id="`${id}-description`">
+    <div v-if="slots.description" :id="`${id}-description`">
       <slot name="description"></slot>
     </div>
-    <ToggleSwitchCore v-model="modelValue" :id :name :required :field-has-error :true-value :false-value :theme :round :size :ariaDescribedby>
-      <template v-if="hasIconOnSlot" #iconOn>
+    <ToggleSwitchCore
+      v-model="modelValue"
+      :id
+      :name
+      :required
+      :field-has-error
+      :true-value
+      :false-value
+      :theme
+      :round
+      :size
+      :ariaDescribedby
+    >
+      <template v-if="slots.iconOn" #iconOn>
         <slot name="iconOn"></slot>
       </template>
 
-      <template v-if="hasIconOffSlot" #iconOff>
+      <template v-if="slots.iconOff" #iconOff>
         <slot name="iconOff"></slot>
       </template>
     </ToggleSwitchCore>
@@ -21,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../../c12/prop-validators';
+import propValidators from "../../c12/prop-validators"
 
 const props = defineProps({
   name: {
@@ -38,7 +58,7 @@ const props = defineProps({
   },
   errorMessage: {
     type: [Object, String],
-    default: '',
+    default: "",
     required: false,
   },
   fieldHasError: {
@@ -59,9 +79,9 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   round: {
@@ -70,31 +90,28 @@ const props = defineProps({
   },
   size: {
     type: String as PropType<string>,
-    default: 'default',
+    default: "default",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
-});
+})
 
-const slots = useSlots();
-const hasDescriptionSlot = computed(() => slots.description !== undefined);
-const hasIconOnSlot = computed(() => slots.iconOn !== undefined);
-const hasIconOffSlot = computed(() => slots.iconOff !== undefined);
+const slots = useSlots()
 
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const id = useId();
-const errorId = `${id}-error-message`;
+const id = useId()
+const errorId = `${id}-error-message`
 const ariaDescribedby = computed(() => {
-  const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : undefined;
-  return props.fieldHasError ? errorId : ariaDescribedbyId;
-});
+  const ariaDescribedbyId = slots.description ? `${id}-description` : undefined
+  return props.fieldHasError ? errorId : ariaDescribedbyId
+})
 
-const modelValue = defineModel();
-const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const modelValue = defineModel()
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 </script>
 
 <style lang="css">

@@ -1,15 +1,41 @@
 <template>
-  <div class="input-number-with-label" :data-theme="formTheme" :data-size="size" :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }]">
-    <InputLabel :for="id" :id :theme :name input-variant="normal" :field-has-error :style-class-passthrough="['input-number-label', 'body-normal-bold']">
+  <div
+    class="input-number-with-label"
+    :data-theme="formTheme"
+    :data-size="size"
+    :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }]"
+  >
+    <InputLabel
+      :for="id"
+      :id
+      :theme
+      :name
+      input-variant="normal"
+      :field-has-error
+      :style-class-passthrough="['input-number-label', 'body-normal-bold']"
+    >
       <template #textLabel>{{ label }}</template>
     </InputLabel>
 
-    <template v-if="hasDescription">
+    <template v-if="slots.description">
       <slot name="description"></slot>
     </template>
 
-    <InputNumberCore v-model="modelValue" :id :name :min :max :step :theme :required :size :weight :fieldHasError :styleClassPassthrough>
-      <template v-if="hasLeftContent" #left>
+    <InputNumberCore
+      v-model="modelValue"
+      :id
+      :name
+      :min
+      :max
+      :step
+      :theme
+      :required
+      :size
+      :weight
+      :fieldHasError
+      :styleClassPassthrough
+    >
+      <template v-if="slots.left" #left>
         <InputButtonCore
           type="button"
           @click.stop.prevent="updateValue(-step, Number(modelValue) > min)"
@@ -24,7 +50,7 @@
           </template>
         </InputButtonCore>
       </template>
-      <template v-if="hasRightContent" #right>
+      <template v-if="slots.right" #right>
         <InputButtonCore
           type="button"
           @click.stop.prevent="updateValue(step, Number(modelValue) < max)"
@@ -45,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../../c12/prop-validators';
+import propValidators from "../../c12/prop-validators"
 
 const props = defineProps({
   name: {
@@ -70,7 +96,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   errorMessage: {
     type: [Object, String],
@@ -86,51 +112,48 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   size: {
     type: String as PropType<string>,
-    default: 'medium',
+    default: "medium",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   weight: {
     type: String as PropType<string>,
-    default: 'wght-400',
+    default: "wght-400",
     validator(value: string) {
-      return propValidators.weight.includes(value);
+      return propValidators.weight.includes(value)
     },
   },
   styleClassPassthrough: {
     type: Array as PropType<string[]>,
     default: () => [],
   },
-});
+})
 
-const slots = useSlots();
-const hasDescription = computed(() => slots.description !== undefined);
-const hasLeftContent = computed(() => slots.left !== undefined);
-const hasRightContent = computed(() => slots.right !== undefined);
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const slots = useSlots()
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
-const id = useId();
+const id = useId()
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const modelValue = defineModel<number | readonly number[]>();
+const modelValue = defineModel<number | readonly number[]>()
 
 const updateValue = (step: number, withinRangeLimit: boolean) => {
   if (withinRangeLimit) {
-    modelValue.value = (Number(modelValue.value) + step) as number;
+    modelValue.value = (Number(modelValue.value) + step) as number
   }
-};
+}
 
-updateElementClasses(['has-left-button', 'has-right-button']);
+updateElementClasses(["has-left-button", "has-right-button"])
 </script>
 
 <style lang="css">

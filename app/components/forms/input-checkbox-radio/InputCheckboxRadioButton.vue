@@ -1,11 +1,30 @@
 <template>
-  <div class="input-checkbox-radio-options-button" :data-theme="formTheme" :data-size="size" :class="[size, elementClasses, optionsLayout, { error: fieldHasError }]">
-    <InputCheckboxRadioCore :isButton="true" :type :id :name :required v-model="modelValue" :size :trueValue :falseValue :fieldHasError :theme :ariaDescribedby :displayAsDisc>
+  <div
+    class="input-checkbox-radio-options-button"
+    :data-theme="formTheme"
+    :data-size="size"
+    :class="[size, elementClasses, optionsLayout, { error: fieldHasError }]"
+  >
+    <InputCheckboxRadioCore
+      :isButton="true"
+      :type
+      :id
+      :name
+      :required
+      v-model="modelValue"
+      :size
+      :trueValue
+      :falseValue
+      :fieldHasError
+      :theme
+      :ariaDescribedby
+      :displayAsDisc
+    >
       <template #checkedIcon>
         <slot name="checkedIcon"></slot>
       </template>
     </InputCheckboxRadioCore>
-    <label v-if="hasLabelContent" class="input-checkbox-radio-options-button-label" :for="id">
+    <label v-if="slots.labelContent" class="input-checkbox-radio-options-button-label" :for="id">
       <slot name="labelContent"></slot>
     </label>
     <label v-else class="input-checkbox-radio-options-button-label" :for="id">{{ label }}</label>
@@ -18,11 +37,11 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
+import propValidators from "../c12/prop-validators"
 
 const props = defineProps({
   type: {
-    type: String as PropType<'checkbox' | 'radio'>,
+    type: String as PropType<"checkbox" | "radio">,
     required: true,
   },
   id: {
@@ -55,16 +74,16 @@ const props = defineProps({
   },
   size: {
     type: String as PropType<string>,
-    default: 'medium',
+    default: "medium",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   optionsLayout: {
     type: String as PropType<string>,
-    default: 'equal-widths',
+    default: "equal-widths",
     validator(value: string) {
-      return propValidators.optionsLayout.includes(value);
+      return propValidators.optionsLayout.includes(value)
     },
   },
   styleClassPassthrough: {
@@ -73,16 +92,16 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   direction: {
-    type: String as PropType<'row' | 'row-reverse'>,
-    default: 'row',
+    type: String as PropType<"row" | "row-reverse">,
+    default: "row",
     validator(value: string) {
-      return ['row', 'row-reverse'].includes(value);
+      return ["row", "row-reverse"].includes(value)
     },
   },
   ariaDescribedby: {
@@ -93,19 +112,18 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-});
+})
 
-const slots = useSlots();
-const hasLabelContent = computed(() => slots.labelContent !== undefined);
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const slots = useSlots()
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
-const modelValue = defineModel();
+const modelValue = defineModel()
 
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const flexDirection = ref(props.direction);
+const flexDirection = ref(props.direction)
 </script>
 
 <style lang="css">

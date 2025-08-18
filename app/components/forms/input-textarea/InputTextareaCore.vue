@@ -3,9 +3,16 @@
     class="input-textarea-wrapper"
     :data-theme="formTheme"
     :data-size="size"
-    :class="[inputVariant, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }, { 'has-left-slot': hasLeftSlot }, { 'has-right-slot': hasRightSlot }]"
+    :class="[
+      inputVariant,
+      { dirty: isDirty },
+      { active: isActive },
+      { error: fieldHasError },
+      { 'has-left-slot': slots.left },
+      { 'has-right-slot': slots.right },
+    ]"
   >
-    <span v-if="hasLeftSlot" class="slot left-slot">
+    <span v-if="slots.left" class="slot left-slot">
       <slot name="left"></slot>
     </span>
 
@@ -24,14 +31,14 @@
       @focusout="updateFocus(false)"
     ></textarea>
 
-    <span v-if="hasRightSlot" class="slot right-slot">
+    <span v-if="slots.right" class="slot right-slot">
       <slot name="right"></slot>
     </span>
   </div>
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
+import propValidators from "../c12/prop-validators"
 const props = defineProps({
   maxlength: {
     type: Number,
@@ -47,7 +54,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   fieldHasError: {
     type: Boolean,
@@ -63,46 +70,44 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   size: {
     type: String as PropType<string>,
-    default: 'default',
+    default: "default",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   inputVariant: {
     type: String as PropType<string>,
-    default: 'normal',
+    default: "normal",
     validator(value: string) {
-      return propValidators.inputVariant.includes(value);
+      return propValidators.inputVariant.includes(value)
     },
   },
-});
+})
 
-const slots = useSlots();
-const hasLeftSlot = computed(() => slots.left !== undefined);
-const hasRightSlot = computed(() => slots.right !== undefined);
+const slots = useSlots()
 
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const modelValue = defineModel<string | number | readonly string[] | null | undefined>();
-const isDirty = defineModel('isDirty');
-const isActive = defineModel('isActive');
+const modelValue = defineModel<string | number | readonly string[] | null | undefined>()
+const isDirty = defineModel("isDirty")
+const isActive = defineModel("isActive")
 
 const updateFocus = (isFocused: boolean) => {
-  isActive.value = isFocused;
-};
+  isActive.value = isFocused
+}
 
-const inputField = ref<HTMLInputElement | null>(null);
+const inputField = ref<HTMLInputElement | null>(null)
 
-const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 </script>
 
 <style lang="css">

@@ -1,18 +1,26 @@
 <template>
   <div class="input-range-with-label" :data-theme="formTheme" :class="[elementClasses, { error: fieldHasError }]">
-    <InputLabel :for="id" :id :theme :name input-variant="normal" :field-has-error :style-class-passthrough="['input-number-label', 'body-normal-bold']">
+    <InputLabel
+      :for="id"
+      :id
+      :theme
+      :name
+      input-variant="normal"
+      :field-has-error
+      :style-class-passthrough="['input-number-label', 'body-normal-bold']"
+    >
       <template #textLabel>{{ label }}</template>
     </InputLabel>
 
-    <template v-if="hasDescription">
+    <template v-if="slots.description">
       <slot name="description"></slot>
     </template>
 
     <InputRangeCore v-model="modelValue" :id :name :min :max :step :theme :required :size :weight :fieldHasError>
-      <template v-if="hasDataList" #datalist>
+      <template v-if="slots.datalist" #datalist>
         <slot name="datalist"></slot>
       </template>
-      <template v-if="hasLeftContent" #left>
+      <template v-if="slots.left" #left>
         <InputButtonCore
           type="button"
           @click.stop.prevent="updateRange(-step, Number(modelValue) > min)"
@@ -27,7 +35,7 @@
           </template>
         </InputButtonCore>
       </template>
-      <template v-if="hasRightContent" #right>
+      <template v-if="slots.right" #right>
         <InputButtonCore
           type="button"
           @click.stop.prevent="updateRange(step, Number(modelValue) < max)"
@@ -48,9 +56,22 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../../c12/prop-validators';
+import propValidators from "../../c12/prop-validators"
 
-const { name, label, required, min, max, step, theme, size, weight, styleClassPassthrough, errorMessage, fieldHasError } = defineProps({
+const {
+  name,
+  label,
+  required,
+  min,
+  max,
+  step,
+  theme,
+  size,
+  weight,
+  styleClassPassthrough,
+  errorMessage,
+  fieldHasError,
+} = defineProps({
   name: {
     type: String,
     required: true,
@@ -73,7 +94,7 @@ const { name, label, required, min, max, step, theme, size, weight, styleClassPa
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   errorMessage: {
     type: [Object, String],
@@ -89,23 +110,23 @@ const { name, label, required, min, max, step, theme, size, weight, styleClassPa
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   size: {
     type: String as PropType<string>,
-    default: 'medium',
+    default: "medium",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   weight: {
     type: String as PropType<string>,
-    default: 'wght-400',
+    default: "wght-400",
     validator(value: string) {
-      return propValidators.weight.includes(value);
+      return propValidators.weight.includes(value)
     },
   },
   styleClassPassthrough: {
@@ -114,29 +135,25 @@ const { name, label, required, min, max, step, theme, size, weight, styleClassPa
   },
   deepCssClassPassthrough: {
     type: String,
-    default: '',
+    default: "",
   },
-});
+})
 
-const slots = useSlots();
-const hasDescription = computed(() => slots.description !== undefined);
-const hasDataList = computed(() => slots.datalist !== undefined);
-const hasLeftContent = computed(() => slots.left !== undefined);
-const hasRightContent = computed(() => slots.right !== undefined);
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(styleClassPassthrough);
+const slots = useSlots()
+const { elementClasses } = useStyleClassPassthrough(styleClassPassthrough)
 
-const id = useId();
+const id = useId()
 const formTheme = computed(() => {
-  return fieldHasError ? 'error' : theme;
-});
+  return fieldHasError ? "error" : theme
+})
 
-const modelValue = defineModel<number | readonly number[]>();
+const modelValue = defineModel<number | readonly number[]>()
 
 const updateRange = (step: number, withinRangeLimit: boolean) => {
   if (withinRangeLimit) {
-    modelValue.value = (Number(modelValue.value) + step) as number;
+    modelValue.value = (Number(modelValue.value) + step) as number
   }
-};
+}
 </script>
 
 <style lang="css">

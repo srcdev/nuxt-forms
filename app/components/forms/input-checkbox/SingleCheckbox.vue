@@ -1,33 +1,58 @@
 <template>
-  <FormFieldset :id :name :legend :fieldHasError :required :data-testid :styleClassPassthrough="['single-checkbox-fieldset']">
+  <FormFieldset
+    :id
+    :name
+    :legend
+    :fieldHasError
+    :required
+    :data-testid
+    :styleClassPassthrough="['single-checkbox-fieldset']"
+  >
     <template #description>
       <slot name="description"></slot>
     </template>
 
     <template #content>
       <div class="single-checkbox-items" :class="[optionsLayout]">
-        <InputCheckboxRadioWithLabel type="checkbox" :name :required :label :fieldHasError v-model="modelValue" :trueValue :falseValue :size :theme :ariaDescribedby>
+        <InputCheckboxRadioWithLabel
+          type="checkbox"
+          :name
+          :required
+          :label
+          :fieldHasError
+          v-model="modelValue"
+          :trueValue
+          :falseValue
+          :size
+          :theme
+          :ariaDescribedby
+        >
           <template #checkedIcon>
             <slot name="checkedIcon"></slot>
           </template>
-          <template v-if="hasLabelContent" #labelContent>
+          <template v-if="slots.labelContent" #labelContent>
             <slot name="labelContent"></slot>
           </template>
         </InputCheckboxRadioWithLabel>
       </div>
-      <InputError :errorMessage :showError="fieldHasError" :id="errorId" :isDetached="true" :styleClassPassthrough="inputErrorStyles" />
+      <InputError
+        :errorMessage
+        :showError="fieldHasError"
+        :id="errorId"
+        :isDetached="true"
+        :styleClassPassthrough="inputErrorStyles"
+      />
     </template>
   </FormFieldset>
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
-import type { IFormMultipleOptions } from '../../../../shared/types/types.forms';
+import propValidators from "../c12/prop-validators"
 
 const props = defineProps({
   dataTestid: {
     type: String,
-    default: 'multiple-radio-buttons',
+    default: "multiple-radio-buttons",
   },
   name: {
     type: String,
@@ -40,7 +65,7 @@ const props = defineProps({
   label: {
     type: String,
     required: false,
-    default: '',
+    default: "",
   },
   errorMessage: {
     type: [Object, String],
@@ -60,9 +85,9 @@ const props = defineProps({
   },
   size: {
     type: String as PropType<string>,
-    default: 'medium',
+    default: "medium",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   trueValue: {
@@ -75,9 +100,9 @@ const props = defineProps({
   },
   optionsLayout: {
     type: String as PropType<string>,
-    default: 'equal-widths',
+    default: "equal-widths",
     validator(value: string) {
-      return propValidators.optionsLayout.includes(value);
+      return propValidators.optionsLayout.includes(value)
     },
   },
   equalCols: {
@@ -90,39 +115,33 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
-});
+})
 
-const slots = useSlots();
-const hasDescriptionSlot = computed(() => slots.description !== undefined);
-const hasDescription = computed(() => slots.description !== undefined);
-const hasLabelContent = computed(() => slots.labelContent !== undefined);
+const slots = useSlots()
 
-const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const modelValue = defineModel()
 
-const modelValue = defineModel();
-const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
+const inputErrorStyles = ref<string[]>(props.styleClassPassthrough)
 
-const inputErrorStyles = ref<string[]>(props.styleClassPassthrough);
-
-const id = `${props.name}-input-${useId()}`;
-const errorId = `${name}-error-message`;
+const id = `${props.name}-input-${useId()}`
+const errorId = `${name}-error-message`
 const ariaDescribedby = computed(() => {
-  const ariaDescribedbyId = hasDescriptionSlot.value ? `${name}-description` : undefined;
-  return props.fieldHasError ? errorId : ariaDescribedbyId;
-});
+  const ariaDescribedbyId = slots.description ? `${name}-description` : undefined
+  return props.fieldHasError ? errorId : ariaDescribedbyId
+})
 
 watchEffect(() => {
-  if (!hasDescription.value && props.fieldHasError) {
-    inputErrorStyles.value.push('mbs-12');
+  if (!slots.description && props.fieldHasError) {
+    inputErrorStyles.value.push("mbs-12")
   } else {
-    inputErrorStyles.value = inputErrorStyles.value.filter((style) => style !== 'mbs-12');
+    inputErrorStyles.value = inputErrorStyles.value.filter((style) => style !== "mbs-12")
   }
-});
+})
 </script>
 
 <style lang="css">

@@ -7,21 +7,21 @@
     :data-theme="theme"
     :data-size="size"
     class="input-button-core"
-    :class="[`btn-${type}`, effectClass, elementClasses, { 'icon-only': isIconOnly }]"
+    :class="[`btn-${type}`, effectClass, elementClasses, { 'icon-only': slots.iconOnly }]"
   >
     <span v-if="useEffect && effect == 'fancy'" class="fancy"></span>
-    <template v-if="hasLeftContent && !isIconOnly">
+    <template v-if="slots.left && !slots.iconOnly">
       <span class="btn-icon left">
         <slot name="left"></slot>
       </span>
     </template>
-    <span class="btn-text" :class="[weight, { 'sr-only': isIconOnly }]">{{ buttonText }}</span>
-    <template v-if="hasRightContent && !isIconOnly">
+    <span class="btn-text" :class="[weight, { 'sr-only': slots.iconOnly }]">{{ buttonText }}</span>
+    <template v-if="slots.right && !slots.iconOnly">
       <span class="btn-icon right">
         <slot name="right"></slot>
       </span>
     </template>
-    <template v-if="isIconOnly">
+    <template v-if="slots.iconOnly">
       <span class="btn-icon icon-only">
         <slot name="iconOnly"></slot>
       </span>
@@ -30,35 +30,35 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
+import propValidators from "../c12/prop-validators"
 
 const props = defineProps({
   size: {
     type: String as PropType<string>,
-    default: 'default',
+    default: "default",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   weight: {
     type: String as PropType<string>,
-    default: 'wght-400',
+    default: "wght-400",
     validator(value: string) {
-      return propValidators.weight.includes(value);
+      return propValidators.weight.includes(value)
     },
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   type: {
-    type: String as PropType<'submit' | 'button' | 'reset'>,
-    default: 'button',
+    type: String as PropType<"submit" | "button" | "reset">,
+    default: "button",
     validator(value: string) {
-      return propValidators.inputTypesButton.includes(value);
+      return propValidators.inputTypesButton.includes(value)
     },
   },
   buttonText: {
@@ -67,7 +67,7 @@ const props = defineProps({
   },
   dataTestid: {
     type: String,
-    default: '',
+    default: "",
   },
   styleClassPassthrough: {
     type: Array as PropType<string[]>,
@@ -79,9 +79,9 @@ const props = defineProps({
   },
   effect: {
     type: String as PropType<string>,
-    default: 'fancy',
+    default: "fancy",
     validator(value: string) {
-      return ['fancy', 'pulse'].includes(value);
+      return ["fancy", "pulse"].includes(value)
     },
   },
   isPending: {
@@ -92,23 +92,20 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-});
+})
 
-const type = toRef(() => props.type);
+const type = toRef(() => props.type)
 const effectClass = computed(() => {
   if (props.useEffect) {
-    return props.effect === 'fancy' ? '' : props.effect;
+    return props.effect === "fancy" ? "" : props.effect
   } else {
-    return '';
+    return ""
   }
-});
+})
 
-const slots = useSlots();
-const hasLeftContent = computed(() => slots.left !== undefined);
-const hasRightContent = computed(() => slots.right !== undefined);
-const isIconOnly = computed(() => slots.iconOnly !== undefined);
+const slots = useSlots()
 
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 </script>
 
 <style lang="css">

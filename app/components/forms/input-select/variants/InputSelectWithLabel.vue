@@ -1,11 +1,25 @@
 <template>
   <div>
-    <div class="input-select-with-label" :class="[inputVariant, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }]" :data-testid :data-theme="formTheme" :data-size="size">
-      <InputLabel :for="id" :id :theme :name :input-variant :field-has-error :style-class-passthrough="['input-select-label']">
+    <div
+      class="input-select-with-label"
+      :class="[inputVariant, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }]"
+      :data-testid
+      :data-theme="formTheme"
+      :data-size="size"
+    >
+      <InputLabel
+        :for="id"
+        :id
+        :theme
+        :name
+        :input-variant
+        :field-has-error
+        :style-class-passthrough="['input-select-label']"
+      >
         <template #textLabel>{{ label }}</template>
       </InputLabel>
 
-      <div v-if="inputVariant === 'normal' && hasDescriptionSlot" :id="`${id}-description`">
+      <div v-if="inputVariant === 'normal' && slots.description" :id="`${id}-description`">
         <slot name="description"></slot>
       </div>
 
@@ -26,22 +40,28 @@
         :inputVariant
       />
 
-      <InputError :errorMessage="errorMessage" :showError="fieldHasError" :id="errorId" :isDetached="false" :inputVariant />
+      <InputError
+        :errorMessage="errorMessage"
+        :showError="fieldHasError"
+        :id="errorId"
+        :isDetached="false"
+        :inputVariant
+      />
     </div>
-    <div v-if="inputVariant !== 'normal' && hasDescriptionSlot" :id="`${id}-description`">
+    <div v-if="inputVariant !== 'normal' && slots.description" :id="`${id}-description`">
       <slot name="description"></slot>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import propValidators from '../../c12/prop-validators';
-import type { IFormMultipleOptions } from '../../../../../shared/types/types.forms';
+import propValidators from "../../c12/prop-validators"
+import type { IFormMultipleOptions } from "../../../../../shared/types/types.forms"
 
 const props = defineProps({
   dataTestid: {
     type: String,
-    default: 'input-select-with-label',
+    default: "input-select-with-label",
   },
   name: {
     type: String,
@@ -53,7 +73,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   errorMessage: {
     type: [Object, String],
@@ -69,9 +89,9 @@ const props = defineProps({
   },
   size: {
     type: String as PropType<string>,
-    default: 'medium',
+    default: "medium",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   styleClassPassthrough: {
@@ -80,44 +100,35 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   inputVariant: {
     type: String as PropType<string>,
-    default: 'normal',
+    default: "normal",
     validator(value: string) {
-      return propValidators.inputVariant.includes(value);
+      return propValidators.inputVariant.includes(value)
     },
   },
-});
+})
 
-const slots = useSlots();
-const hasDescriptionSlot = computed(() => slots.description !== undefined);
-const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const slots = useSlots()
 
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const id = `${props.name}-${useId()}`;
-const errorId = `${name}-error-message`;
+const id = `${props.name}-${useId()}`
+const errorId = `${name}-error-message`
 const ariaDescribedby = computed(() => {
-  const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : undefined;
-  return props.fieldHasError ? errorId : ariaDescribedbyId;
-});
+  const ariaDescribedbyId = slots.description ? `${id}-description` : undefined
+  return props.fieldHasError ? errorId : ariaDescribedbyId
+})
 
-const modelValue = defineModel({ required: true });
-const isDirty = defineModel('isDirty');
-const isActive = defineModel('isActive');
-const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
+const modelValue = defineModel({ required: true })
+const isDirty = defineModel("isDirty")
+const isActive = defineModel("isActive")
+const fieldData = defineModel("fieldData") as Ref<IFormMultipleOptions>
 </script>
-
-<style lang="css">
-.input-select-with-label {
-  .input-select-label {
-  }
-}
-</style>

@@ -1,10 +1,19 @@
 <template>
-  <fieldset :aria-required="required" :aria-invalid="fieldHasError" role="radiogroup" :id :name class="form-fieldset" :class="[elementClasses, { error: fieldHasError }]" :data-testid="dataTestid">
-    <legend v-if="legend" class="form-fieldset-legend" :class="[{ 'has-description': hasDescription }]">
+  <fieldset
+    :aria-required="required"
+    :aria-invalid="fieldHasError"
+    role="radiogroup"
+    :id
+    :name
+    class="form-fieldset"
+    :class="[elementClasses, { error: fieldHasError }]"
+    :data-testid="dataTestid"
+  >
+    <legend v-if="legend" class="form-fieldset-legend" :class="[{ 'has-description': slots.description }]">
       <slot name="legend">{{ legend }}</slot>
     </legend>
 
-    <div v-if="hasDescriptionSlot" class="form-fieldset-description" :id="`${id}-description`">
+    <div v-if="slots.description" class="form-fieldset-description" :id="`${id}-description`">
       <slot name="description"></slot>
     </div>
 
@@ -28,7 +37,7 @@ const props = defineProps({
   },
   legend: {
     type: String,
-    default: '',
+    default: "",
   },
   required: {
     type: Boolean,
@@ -40,18 +49,18 @@ const props = defineProps({
   },
   dataTestid: {
     type: String,
-    default: '',
+    default: "",
   },
   styleClassPassthrough: {
     type: Array as PropType<string[]>,
     default: () => [],
   },
-});
+})
 
-const slots = useSlots();
-const hasDescriptionSlot = computed(() => slots.description !== undefined);
-const hasDescription = computed(() => slots.description !== undefined);
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const slots = useSlots()
+// const hasDescriptionSlot = computed(() => slots.description !== undefined);
+const hasDescription = computed(() => slots.description !== undefined)
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 </script>
 
 <style lang="css">

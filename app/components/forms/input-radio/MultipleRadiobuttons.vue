@@ -1,5 +1,13 @@
 <template>
-  <FormFieldset :id :name :legend :fieldHasError :required :data-testid :styleClassPassthrough="['multiple-radiobuttons-fieldset']">
+  <FormFieldset
+    :id
+    :name
+    :legend
+    :fieldHasError
+    :required
+    :data-testid
+    :styleClassPassthrough="['multiple-radiobuttons-fieldset']"
+  >
     <template #description>
       <slot name="description"></slot>
     </template>
@@ -59,13 +67,13 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
-import type { IFormMultipleOptions } from '../../../../shared/types/types.forms';
+import propValidators from "../c12/prop-validators"
+import type { IFormMultipleOptions } from "../../../../shared/types/types.forms"
 
 const props = defineProps({
   dataTestid: {
     type: String,
-    default: 'multiple-radio-buttons',
+    default: "multiple-radio-buttons",
   },
   name: {
     type: String,
@@ -81,7 +89,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   isButton: {
     type: Boolean,
@@ -105,16 +113,16 @@ const props = defineProps({
   },
   size: {
     type: String as PropType<string>,
-    default: 'medium',
+    default: "medium",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   optionsLayout: {
     type: String as PropType<string>,
-    default: 'equal-widths',
+    default: "equal-widths",
     validator(value: string) {
-      return propValidators.optionsLayout.includes(value);
+      return propValidators.optionsLayout.includes(value)
     },
   },
   equalCols: {
@@ -127,33 +135,31 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   direction: {
-    type: String as PropType<'row' | 'row-reverse'>,
-    default: 'row',
+    type: String as PropType<"row" | "row-reverse">,
+    default: "row",
     validator(value: string) {
-      return ['row', 'row-reverse'].includes(value);
+      return ["row", "row-reverse"].includes(value)
     },
   },
-});
+})
 
-const slots = useSlots();
-const hasDescriptionSlot = computed(() => slots.description !== undefined);
-const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const slots = useSlots()
 
-const id = `${props.name}-input-${useId()}`;
-const errorId = `${name}-error-message`;
+const id = `${props.name}-input-${useId()}`
+const errorId = `${name}-error-message`
 const ariaDescribedby = computed(() => {
-  const ariaDescribedbyId = hasDescriptionSlot.value ? `${id}-description` : undefined;
-  return props.fieldHasError ? errorId : ariaDescribedbyId;
-});
+  const ariaDescribedbyId = slots.description ? `${id}-description` : undefined
+  return props.fieldHasError ? errorId : ariaDescribedbyId
+})
 
-const modelValue = defineModel();
-const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
+const modelValue = defineModel()
+const fieldData = defineModel("fieldData") as Ref<IFormMultipleOptions>
 </script>
 
 <style lang="css">

@@ -1,12 +1,12 @@
 <template>
   <label :for="id" class="input-label" :class="[elementClasses, inputVariant]">
-    <slot v-if="hasHtmlLabel" name="htmlLabel"></slot>
-    <slot v-if="hasTextLabel" name="textLabel"></slot>
+    <slot v-if="slots.htmlLabel" name="htmlLabel"></slot>
+    <slot v-if="slots.textLabel" name="textLabel"></slot>
   </label>
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
+import propValidators from "../c12/prop-validators"
 
 const props = defineProps({
   id: {
@@ -27,25 +27,23 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   inputVariant: {
     type: String as PropType<string>,
-    default: 'default',
+    default: "default",
     validator(value: string) {
-      return propValidators.inputVariant.includes(value);
+      return propValidators.inputVariant.includes(value)
     },
   },
-});
+})
 
-const slots = useSlots();
-const hasHtmlLabel = computed(() => slots.htmlLabel !== undefined);
-const hasTextLabel = computed(() => slots.textLabel !== undefined);
+const slots = useSlots()
 
-const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 </script>
 
 <style lang="css">

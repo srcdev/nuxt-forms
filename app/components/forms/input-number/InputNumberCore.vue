@@ -1,6 +1,6 @@
 <template>
   <div class="input-number-wrapper" :data-theme="formTheme" :data-size="size">
-    <div v-if="hasLeftContent" class="slot left">
+    <div v-if="slots.left" class="slot left">
       <slot name="left"></slot>
     </div>
 
@@ -13,21 +13,27 @@
         :min
         :max
         :step
-        :class="[elementClasses, 'input-number-core', `input-number--${theme}`, `input-number--${size}`, `input-number--${weight}`]"
+        :class="[
+          elementClasses,
+          'input-number-core',
+          `input-number--${theme}`,
+          `input-number--${size}`,
+          `input-number--${weight}`,
+        ]"
         v-model="modelValue"
         ref="inputField"
         inputmode="numeric"
         pattern="[0-9]+"
       />
     </div>
-    <div v-if="hasRightContent" class="slot right">
+    <div v-if="slots.right" class="slot right">
       <slot name="right"></slot>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
+import propValidators from "../c12/prop-validators"
 
 const props = defineProps({
   id: {
@@ -52,7 +58,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   required: {
     type: Boolean,
@@ -60,23 +66,23 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   size: {
     type: String as PropType<string>,
-    default: 'medium',
+    default: "medium",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   weight: {
     type: String as PropType<string>,
-    default: 'wght-400',
+    default: "wght-400",
     validator(value: string) {
-      return propValidators.weight.includes(value);
+      return propValidators.weight.includes(value)
     },
   },
   fieldHasError: {
@@ -87,20 +93,18 @@ const props = defineProps({
     type: Array as PropType<string[]>,
     default: () => [],
   },
-});
+})
 
-const slots = useSlots();
-const hasLeftContent = computed(() => slots.left !== undefined);
-const hasRightContent = computed(() => slots.right !== undefined);
+const slots = useSlots()
 
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const modelValue = defineModel<number | readonly number[]>();
+const modelValue = defineModel<number | readonly number[]>()
 
-const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
-const minLength = computed(() => `${props.max.toString().length + 1}em`);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
+const minLength = computed(() => `${props.max.toString().length + 1}em`)
 </script>
 
 <style lang="css">
@@ -196,8 +200,8 @@ const minLength = computed(() => `${props.max.toString().length + 1}em`);
   }
 }
 
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }

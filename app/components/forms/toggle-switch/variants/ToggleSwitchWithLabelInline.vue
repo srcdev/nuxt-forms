@@ -1,15 +1,22 @@
 <template>
   <div class="toggle-switch-with-label-inline" :class="[elementClasses]" :data-theme="theme">
-    <InputLabel :for="`toggle-sitch-${id}`" :id :theme :name input-variant="normal" :style-class-passthrough="['input-switch-label', 'input-text-label', labelWeightClass]">
+    <InputLabel
+      :for="`toggle-sitch-${id}`"
+      :id
+      :theme
+      :name
+      input-variant="normal"
+      :style-class-passthrough="['input-switch-label', 'input-text-label', labelWeightClass]"
+    >
       <template #textLabel>{{ label }}</template>
     </InputLabel>
 
     <ToggleSwitchCore v-model="modelValue" :id :name :true-value :false-value :theme :round :size>
-      <template v-if="hasIconOnSlot" #iconOn>
+      <template v-if="slots.iconOn" #iconOn>
         <slot name="iconOn"></slot>
       </template>
 
-      <template v-if="hasIconOffSlot" #iconOff>
+      <template v-if="slots.iconOff" #iconOff>
         <slot name="iconOff"></slot>
       </template>
     </ToggleSwitchCore>
@@ -17,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../../c12/prop-validators';
+import propValidators from "../../c12/prop-validators"
 
 const props = defineProps({
   name: {
@@ -30,9 +37,9 @@ const props = defineProps({
   },
   labelWeight: {
     type: String as PropType<string>,
-    default: 'semi-bold',
+    default: "semi-bold",
     validator(value: string) {
-      return propValidators.labelWeight.includes(value);
+      return propValidators.labelWeight.includes(value)
     },
   },
   trueValue: {
@@ -49,9 +56,9 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   round: {
@@ -60,34 +67,31 @@ const props = defineProps({
   },
   size: {
     type: String as PropType<string>,
-    default: 'default',
+    default: "default",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
-});
+})
 
-const slots = useSlots();
-const hasIconOnSlot = computed(() => slots.iconOn !== undefined);
-const hasIconOffSlot = computed(() => slots.iconOff !== undefined);
-
-const id = useId();
+const slots = useSlots()
+const id = useId()
 
 const labelWeightClass = computed(() => {
   switch (props.labelWeight) {
-    case 'bold':
-      return 'body-normal-bold';
-    case 'semi-bold':
-      return 'body-normal-semibold';
-    case 'normal':
-      return 'body-normal';
+    case "bold":
+      return "body-normal-bold"
+    case "semi-bold":
+      return "body-normal-semibold"
+    case "normal":
+      return "body-normal"
     default:
-      return 'body-normal-semibold';
+      return "body-normal-semibold"
   }
-});
+})
 
-const modelValue = defineModel();
-const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const modelValue = defineModel()
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 </script>
 
 <style lang="css">

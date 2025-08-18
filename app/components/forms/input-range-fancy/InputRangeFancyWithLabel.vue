@@ -1,17 +1,31 @@
 <template>
   <div class="input-range-fancy-with-label" :data-theme="formTheme" :class="[elementClasses, { error: fieldHasError }]">
     <label class="input-range-fancy-label body-normal-bold" :for="id">{{ label }}</label>
-    <template v-if="hasDescription">
+    <template v-if="slots.description">
       <slot name="description"></slot>
     </template>
 
-    <InputRangeFancyCore v-model="modelValue" :id :name :rangeLowLabel :rangeHighLabel :min :max :step :theme :required :size :weight :fieldHasError />
+    <InputRangeFancyCore
+      v-model="modelValue"
+      :id
+      :name
+      :rangeLowLabel
+      :rangeHighLabel
+      :min
+      :max
+      :step
+      :theme
+      :required
+      :size
+      :weight
+      :fieldHasError
+    />
     <InputError :errorMessage :showError="fieldHasError" :id :isDetached="true" :styleClassPassthrough="['mbe-20']" />
   </div>
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
+import propValidators from "../c12/prop-validators"
 
 const props = defineProps({
   id: {
@@ -48,7 +62,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   errorMessage: {
     type: [Object, String],
@@ -64,23 +78,23 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   size: {
     type: String as PropType<string>,
-    default: 'medium',
+    default: "medium",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   weight: {
     type: String as PropType<string>,
-    default: 'wght-400',
+    default: "wght-400",
     validator(value: string) {
-      return propValidators.weight.includes(value);
+      return propValidators.weight.includes(value)
     },
   },
   styleClassPassthrough: {
@@ -89,19 +103,18 @@ const props = defineProps({
   },
   deepCssClassPassthrough: {
     type: String,
-    default: '',
+    default: "",
   },
-});
+})
 
-const slots = useSlots();
-const hasDescription = computed(() => slots.description !== undefined);
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const slots = useSlots()
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const modelValue = defineModel<number | readonly number[]>();
+const modelValue = defineModel<number | readonly number[]>()
 </script>
 
 <style lang="css">

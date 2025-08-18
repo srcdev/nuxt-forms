@@ -9,11 +9,11 @@
       { dirty: isDirty },
       { active: isActive },
       { error: fieldHasError },
-      { 'has-left-slot': hasLeftSlot },
-      { 'has-right-slot': hasRightSlot },
+      { 'has-left-slot': slots.left },
+      { 'has-right-slot': slots.right },
     ]"
   >
-    <span v-if="hasLeftSlot" class="slot left-slot">
+    <span v-if="slots.left" class="slot left-slot">
       <slot name="left"></slot>
     </span>
 
@@ -35,7 +35,7 @@
       @focusout="updateFocus(false)"
     />
 
-    <span v-if="hasRightSlot" class="slot right-slot">
+    <span v-if="slots.right" class="slot right-slot">
       <slot name="right"></slot>
     </span>
   </div>
@@ -115,8 +115,6 @@ const props = defineProps({
 })
 
 const slots = useSlots()
-const hasLeftSlot = computed(() => slots.left !== undefined)
-const hasRightSlot = computed(() => slots.right !== undefined)
 
 const formTheme = computed(() => {
   return props.fieldHasError ? "error" : props.theme
