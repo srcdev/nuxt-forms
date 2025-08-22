@@ -45,13 +45,13 @@
         :placeholder
         :label
         :errorMessage
-        :fieldHasError
+        :field-has-error
         :required
-        :styleClassPassthrough
+        :style-class-passthrough
         :theme
-        :ariaDescribedby
+        :aria-describedby
         :size
-        :inputVariant
+        :input-variant
       >
         <template v-if="slots.left" #left>
           <slot name="left"></slot>

@@ -42,12 +42,12 @@
         :name
         :placeholder
         :label
-        :fieldHasError
+        :field-has-error
         :required
-        :styleClassPassthrough
+        :style-class-passthrough
         :theme
         :size
-        :inputVariant
+        :input-variant
       >
         <template v-if="slots.left" #left>
           <slot name="left"></slot>

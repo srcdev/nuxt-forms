@@ -155,14 +155,16 @@
                           :required="true"
                           label="Where are you from?"
                           placeholder="Please select a country"
-                          :errorMessage="formErrors?.countrySelect?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.countrySelect)"
+                          :error-message="formErrors?.countrySelect?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.countrySelect)"
                           v-model="state.countrySelect"
                           v-model:fieldData="countriesData"
                           :theme
                           :size
-                          :inputVariant
-                        ></InputSelectWithLabel>
+                          :input-variant
+                        >
+                          <template #descriptionText>This is a descriptionText for the message input.</template>
+                        </InputSelectWithLabel>
                       </template>
                     </FormField>
 
@@ -177,13 +179,13 @@
                           name="emailAddress"
                           placeholder="eg. name@domain.com"
                           label="Email address"
-                          :errorMessage="formErrors?.emailAddress?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress)"
+                          :error-message="formErrors?.emailAddress?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.emailAddress)"
                           :required="true"
-                          :styleClassPassthrough="['style-1', 'style-2']"
+                          :style-class-passthrough="['style-1', 'style-2']"
                           :theme
                           :size
-                          :inputVariant
+                          :input-variant
                         >
                           <template #descriptionText>This is a descriptionText for the email input.</template>
                           <template #left>
@@ -206,13 +208,13 @@
                           name="username"
                           placeholder="eg. JoeBloggs1"
                           label="Username"
-                          :errorMessage="formErrors?.username?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.username)"
+                          :error-message="formErrors?.username?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.username)"
                           :required="true"
-                          :styleClassPassthrough="['style-1', 'style-2']"
+                          :style-class-passthrough="['style-1', 'style-2']"
                           :theme
                           :size
-                          :inputVariant
+                          :input-variant
                         >
                           <template #descriptionHtml>
                             <p class="mbs-4 mbe-8" style="font-weight: 900">
@@ -235,13 +237,13 @@
                           name="password"
                           placeholder="eg. a mixure of numbers and letters"
                           label="Password"
-                          :errorMessage="formErrors?.password?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.password)"
+                          :error-message="formErrors?.password?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.password)"
                           :required="true"
-                          :styleClassPassthrough="['style-1', 'style-2']"
+                          :style-class-passthrough="['style-1', 'style-2']"
                           :theme
                           :size
-                          :inputVariant
+                          :input-variant
                         >
                           <template #right>
                             <Icon name="radix-icons:eye-open" class="icon" />
@@ -257,14 +259,14 @@
                           :maxlength="fieldMaxLength('message')"
                           name="message"
                           placeholder="Type your message here"
-                          label="Your mesage"
-                          :errorMessage="formErrors?.message?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.message)"
+                          label="Your message"
+                          :error-message="formErrors?.message?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.message)"
                           :required="true"
-                          :styleClassPassthrough="['style-1', 'style-2']"
+                          :style-class-passthrough="['style-1', 'style-2']"
                           :theme
                           :size
-                          :inputVariant
+                          :input-variant
                         >
                           <template #descriptionText>This is a descriptionText for the message input.</template>
                         </InputTextareaWithLabel>
@@ -280,18 +282,16 @@
                           label="Check between 3 and 8 tags"
                           placeholder="eg. Type something here"
                           :isButton="true"
-                          :errorMessage="formErrors?.tags?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.tags)"
+                          :error-message="formErrors?.tags?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.tags)"
                           v-model="state.tags"
                           v-model:fieldData="tagsData"
-                          optionsLayout="inline"
+                          options-layout="inline"
                           :theme
                           :size
                           :display-as-disc="true"
                         >
-                          <template #description>
-                            <p class="label-description">MultipleCheckboxes description: optionsLayout = 'inline'</p>
-                          </template>
+                          <template #descriptionText>MultipleCheckboxes description: optionsLayout = 'inline'</template>
                           <template #itemIcon>
                             <Icon name="material-symbols:bookmark-add-outline" class="icon" />
                           </template>
@@ -346,8 +346,8 @@
                       <template #default>
                         <ToggleSwitchWithLabel
                           v-model="state.toggleBoolean"
-                          :errorMessage="formErrors?.toggleBoolean?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.toggleBoolean)"
+                          :error-message="formErrors?.toggleBoolean?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.toggleBoolean)"
                           name="toggleBoolean"
                           label="Toggle Dark mode"
                           :theme
@@ -371,10 +371,10 @@
                           name="count2"
                           placeholder="eg. 10"
                           label="How many things? Between 25 & 75"
-                          :errorMessage="formErrors?.count2?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.count2)"
+                          :error-message="formErrors?.count2?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.count2)"
                           :required="true"
-                          :styleClassPassthrough="['style-1', 'style-2']"
+                          :style-class-passthrough="['style-1', 'style-2']"
                           :theme
                           :size
                         >
@@ -400,10 +400,10 @@
                           :max="75"
                           :step="5"
                           placeholder="eg. What\'s your count?"
-                          :errorMessage="formErrors?.count?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.count)"
+                          :error-message="formErrors?.count?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.count)"
                           :required="true"
-                          :styleClassPassthrough="['count-1', 'count-2']"
+                          :style-class-passthrough="['count-1', 'count-2']"
                           v-model.number="state.count"
                           :theme
                           :size
@@ -430,11 +430,11 @@
                           label="Check between 3 and 8 tags"
                           placeholder="eg. Type something here"
                           :isButton="true"
-                          :errorMessage="formErrors?.tagsRadio?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.tagsRadio)"
+                          :error-message="formErrors?.tagsRadio?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.tagsRadio)"
                           v-model="state.tagsRadio"
                           v-model:fieldData="tagsData"
-                          optionsLayout="inline"
+                          options-layout="inline"
                           :theme
                           :size
                           direction="row-reverse"
@@ -459,10 +459,10 @@
                           :max="100"
                           :step="10"
                           placeholder="eg. What\'s your score?"
-                          :errorMessage="formErrors?.score?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.score)"
+                          :error-message="formErrors?.score?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.score)"
                           :required="true"
-                          :styleClassPassthrough="['style-1', 'style-2']"
+                          :style-class-passthrough="['style-1', 'style-2']"
                           v-model.number="state.score"
                           :theme
                           :size
@@ -497,11 +497,11 @@
                           :required="true"
                           label="Check one"
                           placeholder="eg. Type something here"
-                          :errorMessage="formErrors?.title?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.title)"
+                          :error-message="formErrors?.title?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.title)"
                           v-model="state.title"
                           v-model:fieldData="titleData"
-                          optionsLayout="equal-widths"
+                          options-layout="equal-widths"
                           :theme
                           :size
                         >
@@ -527,11 +527,11 @@
                           :required="true"
                           label="Check one"
                           placeholder="eg. Type something here"
-                          :errorMessage="formErrors?.otherTitle?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.otherTitle)"
+                          :error-message="formErrors?.otherTitle?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.otherTitle)"
                           v-model="state.otherTitle"
                           v-model:fieldData="titleData"
-                          optionsLayout="equal-widths"
+                          options-layout="equal-widths"
                           :theme
                           :size
                         >
@@ -550,11 +550,11 @@
                           :required="true"
                           label="Check all Cities you like"
                           placeholder="eg. Type something here"
-                          :errorMessage="formErrors?.cities?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.cities)"
+                          :error-message="formErrors?.cities?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.cities)"
                           v-model="state.cities"
                           v-model:fieldData="citiesData"
-                          optionsLayout="inline"
+                          options-layout="inline"
                           :theme
                           :size
                         >
@@ -573,11 +573,11 @@
                           :required="true"
                           label="Check all Countries you like"
                           placeholder="eg. Type something here"
-                          :errorMessage="formErrors?.countries?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.countries)"
+                          :error-message="formErrors?.countries?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.countries)"
                           v-model="state.countries"
                           v-model:fieldData="countriesData"
-                          optionsLayout="equal-widths"
+                          options-layout="equal-widths"
                           :theme
                           :size
                         >
@@ -602,8 +602,8 @@
                           legend="I agree (label with description)"
                           label="Click to agree to something"
                           :required="true"
-                          :errorMessage="formErrors?.agreed?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.agreed)"
+                          :error-message="formErrors?.agreed?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.agreed)"
                           v-model="state.agreed"
                           :theme
                           :size
@@ -626,8 +626,8 @@
                           legend="I agree (label no description)"
                           label="Click to agree to something"
                           :required="true"
-                          :errorMessage="formErrors?.agree?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.agree)"
+                          :error-message="formErrors?.agree?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.agree)"
                           v-model="state.agree"
                           :theme
                           :size
@@ -641,8 +641,8 @@
                           name="terms"
                           legend="Terms and conditions"
                           :required="true"
-                          :errorMessage="formErrors?.terms?._errors[0] ?? ''"
-                          :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.terms)"
+                          :error-message="formErrors?.terms?._errors[0] ?? ''"
+                          :field-has-error="Boolean(zodFormControl.submitAttempted && formErrors?.terms)"
                           v-model="state.terms"
                           :theme
                           :size

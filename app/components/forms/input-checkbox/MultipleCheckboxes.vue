@@ -8,9 +8,14 @@
     :data-testid
     :styleClassPassthrough="['multiple-checkboxes-fieldset']"
   >
-    <template #description>
-      <slot name="description"></slot>
-    </template>
+    <InputDescription :id :name :field-has-error="fieldHasError" :style-class-passthrough="['input-text-description']">
+      <template v-if="slots.descriptionHtml" #descriptionHtml>
+        <slot name="descriptionHtml"></slot>
+      </template>
+      <template v-if="slots.descriptionText" #descriptionText>
+        <slot name="descriptionText"></slot>
+      </template>
+    </InputDescription>
 
     <template #content>
       <div class="multiple-checkboxes-items" :class="[optionsLayout]">
@@ -22,15 +27,15 @@
             :name
             :required
             :label="item.label"
-            :fieldHasError
+            :field-has-error
             v-model="modelValue"
             :true-value="item.value"
             :size
-            :optionsLayout
+            :options-layout
             :theme
             :direction
-            :ariaDescribedby
-            :displayAsDisc
+            :aria-describedby
+            :display-as-disc
           >
             <template #checkedIcon>
               <slot name="checkedIcon"></slot>
@@ -48,14 +53,14 @@
             :name
             :required
             :label="item.label"
-            :fieldHasError
+            :field-has-error
             v-model="modelValue"
             :true-value="item.value"
             :size
-            :optionsLayout
+            :options-layout
             :theme
-            :ariaDescribedby
-            :displayAsDisc
+            :aria-describedby
+            :display-as-disc
           >
             <template #checkedIcon>
               <slot name="checkedIcon"></slot>
@@ -72,23 +77,7 @@
 import propValidators from "../c12/prop-validators"
 import type { IOptionsConfig, IFormMultipleOptions } from "../../../../shared/types/types.forms"
 
-const {
-  dataTestid,
-  name,
-  legend,
-  label,
-  required,
-  fieldHasError,
-  placeholder,
-  isButton,
-  errorMessage,
-  size,
-  optionsLayout,
-  equalCols,
-  styleClassPassthrough,
-  theme,
-  direction,
-} = defineProps({
+const props = defineProps({
   dataTestid: {
     type: String,
     default: "multiple-checkboxes",
@@ -176,11 +165,11 @@ const slots = useSlots()
 const modelValue = defineModel()
 const fieldData = defineModel("fieldData") as Ref<IFormMultipleOptions>
 
-const id = `${name}-input-${useId()}`
-const errorId = `${name}-error-message`
+const id = `${props.name}-${useId()}`
+const errorId = `${id}-error-message`
 const ariaDescribedby = computed(() => {
-  const ariaDescribedbyId = slots.description ? `${name}-description` : undefined
-  return fieldHasError ? errorId : ariaDescribedbyId
+  const ariaDescribedbyId = slots.descriptionText || slots.descriptionHtml ? `${id}-description` : undefined
+  return props.fieldHasError ? errorId : ariaDescribedbyId
 })
 </script>
 
