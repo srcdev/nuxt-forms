@@ -1,45 +1,79 @@
 <template>
-  <div
-    class="input-textarea-with-label"
-    :data-theme="formTheme"
-    :class="[elementClasses, inputVariant, { dirty: isDirty }, { active: isActive }]"
-  >
-    <InputLabel
-      :for="id"
+  <div>
+    <div
+      class="input-textarea-with-label"
+      :data-theme="formTheme"
+      :class="[elementClasses, inputVariant, { dirty: isDirty }, { active: isActive }]"
+    >
+      <InputLabel
+        :for="id"
+        :id
+        :theme
+        :name
+        :input-variant
+        :field-has-error
+        :style-class-passthrough="['input-textarea-label']"
+      >
+        <template #textLabel>{{ label }}</template>
+      </InputLabel>
+
+      <InputDescription
+        v-if="inputVariant !== 'outlined'"
+        :id
+        :name
+        :input-variant
+        :field-has-error="fieldHasError"
+        :style-class-passthrough="['input-text-description']"
+      >
+        <template v-if="slots.descriptionHtml" #descriptionHtml>
+          <slot name="descriptionHtml"></slot>
+        </template>
+        <template v-if="slots.descriptionText" #descriptionText>
+          <slot name="descriptionText"></slot>
+        </template>
+      </InputDescription>
+
+      <InputTextareaCore
+        v-model="modelValue"
+        v-model:isDirty="isDirty"
+        v-model:isActive="isActive"
+        :maxlength
+        :id
+        :name
+        :placeholder
+        :label
+        :fieldHasError
+        :required
+        :styleClassPassthrough
+        :theme
+        :size
+        :inputVariant
+      >
+        <template v-if="slots.left" #left>
+          <slot name="left"></slot>
+        </template>
+        <template v-if="slots.right" #right>
+          <slot name="right"></slot>
+        </template>
+      </InputTextareaCore>
+      <InputError :errorMessage :showError="fieldHasError" :id :isDetached="false" :inputVariant />
+    </div>
+
+    <InputDescription
+      v-if="inputVariant === 'outlined'"
       :id
-      :theme
       :name
       :input-variant
-      :field-has-error
-      :style-class-passthrough="['input-textarea-label']"
+      :field-has-error="fieldHasError"
+      :style-class-passthrough="['input-text-description']"
     >
-      <template #textLabel>{{ label }}</template>
-    </InputLabel>
-
-    <InputTextareaCore
-      v-model="modelValue"
-      v-model:isDirty="isDirty"
-      v-model:isActive="isActive"
-      :maxlength
-      :id
-      :name
-      :placeholder
-      :label
-      :fieldHasError
-      :required
-      :styleClassPassthrough
-      :theme
-      :size
-      :inputVariant
-    >
-      <template v-if="slots.left" #left>
-        <slot name="left"></slot>
+      <template v-if="slots.descriptionHtml" #descriptionHtml>
+        <slot name="descriptionHtml"></slot>
       </template>
-      <template v-if="slots.right" #right>
-        <slot name="right"></slot>
+      <template v-if="slots.descriptionText" #descriptionText>
+        <slot name="descriptionText"></slot>
       </template>
-    </InputTextareaCore>
-    <InputError :errorMessage :showError="fieldHasError" :id :isDetached="false" :inputVariant />
+    </InputDescription>
   </div>
 </template>
 
@@ -103,9 +137,15 @@ const props = defineProps({
 
 const slots = useSlots()
 
-const id = useId()
 const formTheme = computed(() => {
   return props.fieldHasError ? "error" : props.theme
+})
+
+const id = `${props.name}-${useId()}`
+const errorId = `${id}-error-message`
+const ariaDescribedby = computed(() => {
+  const ariaDescribedbyId = slots.descriptionText || slots.descriptionHtml ? `${id}-description` : undefined
+  return props.fieldHasError ? errorId : ariaDescribedbyId
 })
 
 const modelValue = defineModel<string | number | readonly string[] | null | undefined>()

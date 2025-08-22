@@ -17,9 +17,21 @@
         <template #textLabel>{{ label }}</template>
       </InputLabel>
 
-      <div v-if="inputVariant === 'normal' && slots.description" :id="`${id}-description`">
-        <slot name="description"></slot>
-      </div>
+      <InputDescription
+        v-if="inputVariant !== 'outlined'"
+        :id
+        :name
+        :input-variant
+        :field-has-error="fieldHasError"
+        :style-class-passthrough="['input-text-description']"
+      >
+        <template v-if="slots.descriptionHtml" #descriptionHtml>
+          <slot name="descriptionHtml"></slot>
+        </template>
+        <template v-if="slots.descriptionText" #descriptionText>
+          <slot name="descriptionText"></slot>
+        </template>
+      </InputDescription>
 
       <InputTextCore
         v-model="modelValue"
@@ -52,9 +64,21 @@
       <InputError :errorMessage :showError="fieldHasError" :id="errorId" :isDetached="false" :inputVariant />
     </div>
 
-    <div v-if="inputVariant !== 'normal' && slots.description" :id="`${id}-description`">
-      <slot name="description"></slot>
-    </div>
+    <InputDescription
+      v-if="inputVariant === 'outlined'"
+      :id
+      :name
+      :input-variant
+      :field-has-error="fieldHasError"
+      :style-class-passthrough="['input-text-description']"
+    >
+      <template v-if="slots.descriptionHtml" #descriptionHtml>
+        <slot name="descriptionHtml"></slot>
+      </template>
+      <template v-if="slots.descriptionText" #descriptionText>
+        <slot name="descriptionText"></slot>
+      </template>
+    </InputDescription>
   </div>
 </template>
 
@@ -136,7 +160,7 @@ const formTheme = computed(() => {
 const id = `${props.name}-${useId()}`
 const errorId = `${id}-error-message`
 const ariaDescribedby = computed(() => {
-  const ariaDescribedbyId = slots.description ? `${id}-description` : undefined
+  const ariaDescribedbyId = slots.descriptionText || slots.descriptionHtml ? `${id}-description` : undefined
   return props.fieldHasError ? errorId : ariaDescribedbyId
 })
 

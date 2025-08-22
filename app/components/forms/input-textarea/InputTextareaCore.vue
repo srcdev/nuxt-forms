@@ -26,7 +26,7 @@
       v-model="modelValue"
       ref="inputField"
       :aria-invalid="fieldHasError"
-      :aria-describedby="`${id}-error-message`"
+      :aria-describedby
       @focusin="updateFocus(true)"
       @focusout="updateFocus(false)"
     ></textarea>
@@ -53,6 +53,10 @@ const props = defineProps({
     required: true,
   },
   placeholder: {
+    type: String,
+    default: "",
+  },
+  ariaDescribedby: {
     type: String,
     default: "",
   },

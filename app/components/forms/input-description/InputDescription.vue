@@ -1,8 +1,17 @@
 <template>
-  <label :for="id" class="input-label" :class="[elementClasses, inputVariant]">
-    <slot v-if="slots.htmlLabel" name="htmlLabel"></slot>
-    <slot v-if="slots.textLabel" name="textLabel"></slot>
-  </label>
+  <div
+    v-if="slots.descriptionText || slots.descriptionHtml"
+    class="input-description"
+    :class="[elementClasses]"
+    :id="descriptionId"
+  >
+    <div v-if="slots.descriptionHtml" class="input-description-html">
+      <slot name="descriptionHtml"></slot>
+    </div>
+    <p v-if="slots.descriptionText" class="input-description-text">
+      <slot name="descriptionText"></slot>
+    </p>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -43,39 +52,20 @@ const props = defineProps({
 
 const slots = useSlots()
 
+const descriptionId = `${props.id}-description`
+
 const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 </script>
-
 <style lang="css">
-.input-label {
-  touch-action: manipulation;
-  color: var(--form-label-color);
-  margin-block: 0.8rem;
-  font-size: var(--step-5);
-  font-weight: normal;
-  line-height: 1.5;
-  display: block;
-
-  &.normal {
-    color: var(--form-label-color);
-    margin-block: 0.8rem;
-    font-size: var(--step-5);
-    font-weight: normal;
-    line-height: 1.5;
-    display: block;
+.input-description {
+  .input-description-html {
+    margin-block: 0.4rem 0.8rem;
   }
-
-  &.underlined {
-    color: var(--form-label-color);
-    margin-block: 0.8rem;
-    font-size: var(--step-5);
-    font-weight: normal;
-    line-height: 1.5;
-    display: block;
-  }
-
-  & + .input-description {
-    margin-block-end: 0.2rem;
+  .input-description-text {
+    color: var(--form-description-color);
+    font-size: var(--step-4);
+    margin-block: 0.4rem 0.8rem;
+    line-height: var(--step-4);
   }
 }
 </style>

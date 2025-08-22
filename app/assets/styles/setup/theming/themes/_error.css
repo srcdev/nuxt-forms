@@ -1,4 +1,4 @@
-[data-theme='error'] {
+[data-theme="error"] {
   --colour-theme-0: var(--red-0);
   --colour-theme-1: var(--red-1);
   --colour-theme-2: var(--red-2);
@@ -19,6 +19,9 @@
   /* Fieldset & Label */
   --form-fieldset-legend-color: light-dark(var(--gray-12), var(--gray-1));
   --form-label-color: light-dark(var(--gray-12), var(--gray-1));
+
+  /* Description */
+  --form-description-color: light-dark(var(--gray-12), var(--gray-1));
 
   /* Input Elements */
   --theme-input-surface: light-dark(var(--gray-1), var(--gray-8));

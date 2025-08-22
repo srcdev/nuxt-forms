@@ -11,49 +11,134 @@
             <p>Themes switcher</p>
             <ul class="flex-group">
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('primary')" :is-pending="false" button-text="Primary" theme="primary" size="default" />
+                <InputButtonSubmit
+                  type="button"
+                  @click.stop.prevent="swapTheme('primary')"
+                  :is-pending="false"
+                  button-text="Primary"
+                  theme="primary"
+                  size="default"
+                />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('secondary')" :is-pending="false" button-text="Secondary" theme="secondary" size="default" />
+                <InputButtonSubmit
+                  type="button"
+                  @click.stop.prevent="swapTheme('secondary')"
+                  :is-pending="false"
+                  button-text="Secondary"
+                  theme="secondary"
+                  size="default"
+                />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('warning')" :is-pending="false" button-text="Warning" theme="warning" size="default" />
+                <InputButtonSubmit
+                  type="button"
+                  @click.stop.prevent="swapTheme('warning')"
+                  :is-pending="false"
+                  button-text="Warning"
+                  theme="warning"
+                  size="default"
+                />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('success')" :is-pending="false" button-text="Success" theme="success" size="default" />
+                <InputButtonSubmit
+                  type="button"
+                  @click.stop.prevent="swapTheme('success')"
+                  :is-pending="false"
+                  button-text="Success"
+                  theme="success"
+                  size="default"
+                />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapTheme('error')" :is-pending="false" button-text="Error" theme="error" size="default" />
+                <InputButtonSubmit
+                  type="button"
+                  @click.stop.prevent="swapTheme('error')"
+                  :is-pending="false"
+                  button-text="Error"
+                  theme="error"
+                  size="default"
+                />
               </li>
             </ul>
 
             <p>Size switcher - current size &raquo; {{ size }}</p>
-            <p><span class="body-normal-semibold">Note:</span> Only small and normal optimized for general usage</p>
+            <p>
+              <span class="body-normal-semibold">Note:</span>
+              Only small and normal optimized for general usage
+            </p>
             <ul class="flex-group">
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapSize('x-small')" :is-pending="false" button-text="X-Small" theme="primary" size="x-small" />
+                <InputButtonSubmit
+                  type="button"
+                  @click.stop.prevent="swapSize('x-small')"
+                  :is-pending="false"
+                  button-text="X-Small"
+                  theme="primary"
+                  size="x-small"
+                />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapSize('small')" :is-pending="false" button-text="Small" theme="primary" size="small" />
+                <InputButtonSubmit
+                  type="button"
+                  @click.stop.prevent="swapSize('small')"
+                  :is-pending="false"
+                  button-text="Small"
+                  theme="primary"
+                  size="small"
+                />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapSize('default')" :is-pending="false" button-text="Default" theme="primary" size="default" />
+                <InputButtonSubmit
+                  type="button"
+                  @click.stop.prevent="swapSize('default')"
+                  :is-pending="false"
+                  button-text="Default"
+                  theme="primary"
+                  size="default"
+                />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapSize('medium')" :is-pending="false" button-text="Medium" theme="primary" size="medium" />
+                <InputButtonSubmit
+                  type="button"
+                  @click.stop.prevent="swapSize('medium')"
+                  :is-pending="false"
+                  button-text="Medium"
+                  theme="primary"
+                  size="medium"
+                />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="swapSize('large')" :is-pending="false" button-text="Large" theme="primary" size="large" />
+                <InputButtonSubmit
+                  type="button"
+                  @click.stop.prevent="swapSize('large')"
+                  :is-pending="false"
+                  button-text="Large"
+                  theme="primary"
+                  size="large"
+                />
               </li>
             </ul>
 
             <p>Select type of text input to display</p>
             <ul class="flex-group">
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="inputVariant = 'normal'" button-text="Normal" theme="primary" size="default" />
+                <InputButtonSubmit
+                  type="button"
+                  @click.stop.prevent="inputVariant = 'normal'"
+                  button-text="Normal"
+                  theme="primary"
+                  size="default"
+                />
               </li>
               <li>
-                <InputButtonSubmit type="button" @click.stop.prevent="inputVariant = 'underlined'" button-text="Underlined" theme="primary" size="default" />
+                <InputButtonSubmit
+                  type="button"
+                  @click.stop.prevent="inputVariant = 'underlined'"
+                  button-text="Underlined"
+                  theme="primary"
+                  size="default"
+                />
               </li>
             </ul>
 
@@ -77,8 +162,7 @@
                           :theme
                           :size
                           :inputVariant
-                        >
-                        </InputSelectWithLabel>
+                        ></InputSelectWithLabel>
                       </template>
                     </FormField>
 
@@ -101,6 +185,7 @@
                           :size
                           :inputVariant
                         >
+                          <template #descriptionText>This is a descriptionText for the email input.</template>
                           <template #left>
                             <Icon name="radix-icons:envelope-closed" class="icon" />
                           </template>
@@ -129,6 +214,11 @@
                           :size
                           :inputVariant
                         >
+                          <template #descriptionHtml>
+                            <p class="mbs-4 mbe-8" style="font-weight: 900">
+                              This is a descriptionHtml for the email input.
+                            </p>
+                          </template>
                           <template #left>
                             <Icon name="radix-icons:person" class="icon" />
                           </template>
@@ -176,6 +266,7 @@
                           :size
                           :inputVariant
                         >
+                          <template #descriptionText>This is a descriptionText for the message input.</template>
                         </InputTextareaWithLabel>
                       </template>
                     </FormField>
@@ -210,7 +301,15 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <ToggleSwitchWithLabel v-model="state.darkMode" name="darkMode" label="Toggle Dark mode" true-value="dark" false-value="light" :theme :size>
+                        <ToggleSwitchWithLabel
+                          v-model="state.darkMode"
+                          name="darkMode"
+                          label="Toggle Dark mode"
+                          true-value="dark"
+                          false-value="light"
+                          :theme
+                          :size
+                        >
                           <template #description>
                             <p class="label-description">Light or Dark mode?</p>
                           </template>
@@ -226,7 +325,13 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <ToggleSwitchWithLabelInline v-model="state.anotherToggle" name="anotherToggle" label="Toggle Dark mode (inline)" :theme size="small">
+                        <ToggleSwitchWithLabelInline
+                          v-model="state.anotherToggle"
+                          name="anotherToggle"
+                          label="Toggle Dark mode (inline)"
+                          :theme
+                          size="small"
+                        >
                           <template #iconOn>
                             <Icon name="radix-icons:moon" class="icon" />
                           </template>
@@ -341,7 +446,11 @@
                       </template>
                     </FormField>
 
-                    <FormField width="wide" :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.score)" :has-gutter="false">
+                    <FormField
+                      width="wide"
+                      :fieldHasError="Boolean(zodFormControl.submitAttempted && formErrors?.score)"
+                      :has-gutter="false"
+                    >
                       <template #default>
                         <InputRangeDefault
                           name="score"
@@ -400,7 +509,11 @@
                             <Icon name="material-symbols:check-small" class="input-checked-icon" />
                           </template>
                           <template #description>
-                            <p class="label-description">NOTE: Custom chefck icon set via slot<br />This is description: optionsLayout = 'equal-widths/inline'</p>
+                            <p class="label-description">
+                              NOTE: Custom chefck icon set via slot
+                              <br />
+                              This is description: optionsLayout = 'equal-widths/inline'
+                            </p>
                           </template>
                         </MultipleRadiobuttons>
                       </template>
@@ -472,7 +585,11 @@
                             <Icon name="material-symbols:circle" class="input-checked-icon" />
                           </template>
                           <template #description>
-                            <p class="label-description">NOTE: Custom chefck icon set via slot<br />This is description: optionsLayout = 'inline'</p>
+                            <p class="label-description">
+                              NOTE: Custom chefck icon set via slot
+                              <br />
+                              This is description: optionsLayout = 'inline'
+                            </p>
                           </template>
                         </MultipleCheckboxes>
                       </template>
@@ -492,7 +609,11 @@
                           :size
                         >
                           <template #description>
-                            <p class="label-description">You must <strong>agree</strong> to continue</p>
+                            <p class="label-description">
+                              You must
+                              <strong>agree</strong>
+                              to continue
+                            </p>
                           </template>
                         </SingleCheckbox>
                       </template>
@@ -510,8 +631,7 @@
                           v-model="state.agree"
                           :theme
                           :size
-                        >
-                        </SingleCheckbox>
+                        ></SingleCheckbox>
                       </template>
                     </FormField>
 
@@ -528,7 +648,11 @@
                           :size
                         >
                           <template #labelContent>
-                            <span class="body-normal">You must agree to our <NuxtLink to="/typography" class="link-normal">terms and conditions</NuxtLink> to continue</span>
+                            <span class="body-normal">
+                              You must agree to our
+                              <NuxtLink to="/typography" class="link-normal">terms and conditions</NuxtLink>
+                              to continue
+                            </span>
                           </template>
                         </SingleCheckbox>
                       </template>
@@ -536,7 +660,15 @@
 
                     <FormField width="wide" :has-gutter="false">
                       <template #default>
-                        <InputButtonSubmit type="button" @click.stop.prevent="submitForm()" :is-pending="false" :readonly="zodFormControl.submitDisabled" button-text="Submit" :theme :size />
+                        <InputButtonSubmit
+                          type="button"
+                          @click.stop.prevent="submitForm()"
+                          :is-pending="false"
+                          :readonly="zodFormControl.submitDisabled"
+                          button-text="Submit"
+                          :theme
+                          :size
+                        />
                       </template>
                     </FormField>
                   </form>
@@ -568,23 +700,23 @@
 </template>
 
 <script setup lang="ts">
-import { z } from 'zod';
+import { z } from "zod"
 // import type { IFormMultipleOptions } from '../../../../types/types.forms';
-import type { IFormMultipleOptions } from '../../../../../../shared/types/types.forms';
+import type { IFormMultipleOptions } from "../../../../../../shared/types/types.forms"
 
 definePageMeta({
   layout: false,
-});
+})
 
 useHead({
-  title: 'Text Field Example',
-  meta: [{ name: 'description', content: 'Homepage' }],
+  title: "Text Field Example",
+  meta: [{ name: "description", content: "Homepage" }],
   bodyAttrs: {
-    class: 'page-theme-grey-XX',
+    class: "page-theme-grey-XX",
   },
-});
+})
 
-const inputVariant = ref('underlined'); // 'normal' | 'outlined' | 'underlined'
+const inputVariant = ref("underlined") // 'normal' | 'outlined' | 'underlined'
 // const inputVariantData = ref<IFormMultipleOptions>({
 //   data: [
 //     {
@@ -610,22 +742,22 @@ const inputVariant = ref('underlined'); // 'normal' | 'outlined' | 'underlined'
 //   skip: 0,
 //   limit: 3,
 // });
-const theme = ref('primary');
-const size = ref<'x-small' | 'small' | 'default' | 'medium' | 'large'>('default');
+const theme = ref("primary")
+const size = ref<"x-small" | "small" | "default" | "medium" | "large">("default")
 const swapTheme = (newTheme: string) => {
-  theme.value = newTheme;
-};
-const swapSize = (newSize: 'x-small' | 'small' | 'default' | 'medium' | 'large') => {
-  size.value = newSize;
-};
+  theme.value = newTheme
+}
+const swapSize = (newSize: "x-small" | "small" | "default" | "medium" | "large") => {
+  size.value = newSize
+}
 
 /*
  * Fetch some sample data
  **/
-const { data: citiesData } = await useFetch<IFormMultipleOptions>('/api/places/list?category=cities');
-const { data: countriesData } = await useFetch<IFormMultipleOptions>('/api/places/list?category=countries');
-const { data: titleData } = await useFetch<IFormMultipleOptions>('/api/utils?category=title');
-const { data: tagsData } = await useFetch<IFormMultipleOptions>('/api/recipes/tags');
+const { data: citiesData } = await useFetch<IFormMultipleOptions>("/api/places/list?category=cities")
+const { data: countriesData } = await useFetch<IFormMultipleOptions>("/api/places/list?category=countries")
+const { data: titleData } = await useFetch<IFormMultipleOptions>("/api/utils?category=title")
+const { data: tagsData } = await useFetch<IFormMultipleOptions>("/api/recipes/tags")
 
 /*
  * Setup forms
@@ -635,64 +767,68 @@ const formSchema = reactive(
     .object({
       emailAddress: z
         .string({
-          error: (issue) => (issue.input === undefined ? 'Email address is required' : 'Email address must be a string'),
+          error: (issue) =>
+            issue.input === undefined ? "Email address is required" : "Email address must be a string",
         })
-        .email({ error: 'Invalid email address' })
+        .email({ error: "Invalid email address" })
         .refine((email) => email !== zodFormControl.previousState.emailAddress.value, {
-          error: 'This email address has already been used',
+          error: "This email address has already been used",
         }),
       username: z
         .string({
-          error: (issue) => (issue.input === undefined ? 'Username is required' : 'Username must be a string'),
+          error: (issue) => (issue.input === undefined ? "Username is required" : "Username must be a string"),
         })
         .trim()
-        .min(2, 'Username is too short')
-        .max(25, 'Username is too long')
+        .min(2, "Username is too short")
+        .max(25, "Username is too long")
         .refine((email) => email !== zodFormControl.previousState.username.value, {
-          error: 'This username has already been used',
+          error: "This username has already been used",
         }),
       password: z
         .string()
         .trim()
-        .min(8, 'Password is too short')
-        .max(25, 'Password is too long')
+        .min(8, "Password is too short")
+        .max(25, "Password is too long")
         .refine((email) => email !== zodFormControl.previousState.password.value, {
           error: "You've already used this password",
         }),
-      message: z.string().trim().min(2, 'Message is too short').max(255, 'Message is too long'),
+      message: z.string().trim().min(2, "Message is too short").max(255, "Message is too long"),
       count: z
         .number({
-          error: (issue) => (issue.input === undefined ? 'Count is required' : 'Count must be a number'),
+          error: (issue) => (issue.input === undefined ? "Count is required" : "Count must be a number"),
         })
-        .int({ error: 'Count must be a whole number' })
-        .gte(25, 'Count must be between 25 and 75')
-        .lte(75, 'Count must be between 25 and 75')
-        .multipleOf(5, 'Count must be a multiple of 5'),
+        .int({ error: "Count must be a whole number" })
+        .gte(25, "Count must be between 25 and 75")
+        .lte(75, "Count must be between 25 and 75")
+        .multipleOf(5, "Count must be a multiple of 5"),
       count2: z
         .number({
-          error: (issue) => (issue.input === undefined ? 'Count is required' : 'Count must be a number'),
+          error: (issue) => (issue.input === undefined ? "Count is required" : "Count must be a number"),
         })
-        .int({ error: 'Count must be a whole number' })
-        .gte(25, 'Count must be between 25 and 75')
-        .lte(75, 'Count must be between 25 and 75'),
+        .int({ error: "Count must be a whole number" })
+        .gte(25, "Count must be between 25 and 75")
+        .lte(75, "Count must be between 25 and 75"),
       score: z
         .number({
-          error: (issue) => (issue.input === undefined ? 'Score is required' : 'Score must be a number'),
+          error: (issue) => (issue.input === undefined ? "Score is required" : "Score must be a number"),
         })
         .gte(0)
         .lte(100),
-      cities: z.array(z.string()).min(1, 'Please select at least one city'),
-      countries: z.array(z.string()).min(2, 'Please select at least 2 countries').max(5, 'Please select no more than 5 countries'),
-      countrySelect: z.string().min(1, { error: 'Please select a country' }),
-      tags: z.array(z.string()).min(3, 'Please select at least 3 tags').max(8, 'Please select no more than 8 tags'),
-      tagsRadio: z.string().min(1, { error: 'Please choose a tag' }),
-      darkMode: z.string().min(1, { error: 'Please choose a mode' }),
-      title: z.string().min(1, { error: 'Title is required' }),
-      otherTitle: z.string().min(1, { error: 'Title is required' }),
-      toggleBoolean: z.boolean().refine((val) => val === true, { error: 'You must tick this box' }),
-      agreed: z.boolean().refine((val) => val === true, { error: 'You must tick this box' }),
-      agree: z.boolean().refine((val) => val === true, { error: 'You must tick this box' }),
-      terms: z.boolean().refine((val) => val === true, { error: 'You must accept our terms' }),
+      cities: z.array(z.string()).min(1, "Please select at least one city"),
+      countries: z
+        .array(z.string())
+        .min(2, "Please select at least 2 countries")
+        .max(5, "Please select no more than 5 countries"),
+      countrySelect: z.string().min(1, { error: "Please select a country" }),
+      tags: z.array(z.string()).min(3, "Please select at least 3 tags").max(8, "Please select no more than 8 tags"),
+      tagsRadio: z.string().min(1, { error: "Please choose a tag" }),
+      darkMode: z.string().min(1, { error: "Please choose a mode" }),
+      title: z.string().min(1, { error: "Title is required" }),
+      otherTitle: z.string().min(1, { error: "Title is required" }),
+      toggleBoolean: z.boolean().refine((val) => val === true, { error: "You must tick this box" }),
+      agreed: z.boolean().refine((val) => val === true, { error: "You must tick this box" }),
+      agree: z.boolean().refine((val) => val === true, { error: "You must tick this box" }),
+      terms: z.boolean().refine((val) => val === true, { error: "You must accept our terms" }),
     })
     .required({
       emailAddress: true,
@@ -714,35 +850,35 @@ const formSchema = reactive(
       agree: true,
       terms: true,
     })
-);
+)
 
-type formSchema = z.infer<typeof formSchema>;
-const formErrors = computed<z.ZodFormattedError<formSchema> | null>(() => zodErrorObj.value);
+type formSchema = z.infer<typeof formSchema>
+const formErrors = computed<z.ZodFormattedError<formSchema> | null>(() => zodErrorObj.value)
 
 const state = reactive({
-  emailAddress: '',
-  username: '',
-  password: '',
-  message: '',
+  emailAddress: "",
+  username: "",
+  password: "",
+  message: "",
   count: 25,
   count2: 25,
   score: 50,
   cities: [],
   countries: [],
-  countrySelect: '',
+  countrySelect: "",
   tags: [],
   tagsRadio: [],
-  title: '',
-  otherTitle: '',
-  darkMode: 'light',
+  title: "",
+  otherTitle: "",
+  darkMode: "light",
   toggleBoolean: false,
   anotherToggle: false,
   agreed: false,
   agree: false,
   terms: false,
-});
+})
 
-const formRef = ref<HTMLFormElement | null>(null);
+const formRef = ref<HTMLFormElement | null>(null)
 
 const {
   initZodForm,
@@ -754,26 +890,26 @@ const {
   fieldMaxLength,
   scrollToFirstError,
   scrollToFormHead,
-} = useZodValidation(formSchema, formRef);
+} = useZodValidation(formSchema, formRef)
 
-initZodForm();
+initZodForm()
 
 const submitForm = async () => {
-  zodFormControl.submitAttempted = true;
+  zodFormControl.submitAttempted = true
   if (!(await doZodValidate(state))) {
-    scrollToFirstError();
-    return;
+    scrollToFirstError()
+    return
   }
-  zodFormControl.displayLoader = true;
+  zodFormControl.displayLoader = true
   try {
-    console.log('Form valid - post it');
-    const data = await $fetch('/api/textFields', {
-      method: 'post',
+    console.log("Form valid - post it")
+    const data = await $fetch("/api/textFields", {
+      method: "post",
       body: state,
       async onResponse({ response }) {
         if (response.status === 400) {
-          console.log('onResponse', response);
-          console.log(response.status);
+          console.log("onResponse", response)
+          console.log(response.status)
 
           // useApiErrors(response._data.data.errors);
           // for (const [key, message] of Object.entries(response._data.data.errors)) {
@@ -782,33 +918,33 @@ const submitForm = async () => {
           // }
 
           // if (error instanceof Error) {
-          await pushCustomErrors(response._data, state);
+          await pushCustomErrors(response._data, state)
           // zodFormControl.formIsValid = false;
           // }
           // zodFormControl.submitAttempted = false;
         }
         if (response.status === 200) {
-          zodFormControl.submitSuccessful = true;
+          zodFormControl.submitSuccessful = true
         }
       },
-    });
-    console.log('3: Finished data', data);
+    })
+    console.log("3: Finished data", data)
     // return data;
   } catch (error) {
-    console.warn('2: An error occured posting form data', error);
+    console.warn("2: An error occured posting form data", error)
   } finally {
-    zodFormControl.displayLoader = false;
+    zodFormControl.displayLoader = false
   }
-};
+}
 
 watch(
   () => state,
   () => {
     // console.log('Watching state');
-    doZodValidate(state);
+    doZodValidate(state)
   },
   { deep: true }
-);
+)
 </script>
 
 <style lang="css">

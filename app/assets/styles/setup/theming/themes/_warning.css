@@ -1,5 +1,5 @@
 :root {
-  [data-theme='warning'] {
+  [data-theme="warning"] {
     --colour-theme-0: var(--orange-0);
     --colour-theme-1: var(--orange-1);
     --colour-theme-2: var(--orange-2);
@@ -20,6 +20,9 @@
     /* Fieldset & Label */
     --form-fieldset-legend-color: light-dark(var(--gray-12), var(--gray-1));
     --form-label-color: light-dark(var(--gray-12), var(--gray-1));
+
+    /* Description */
+    --form-description-color: light-dark(var(--gray-12), var(--gray-1));
 
     /* Input Elements */
     --theme-input-surface: light-dark(var(--gray-1), var(--gray-8));
