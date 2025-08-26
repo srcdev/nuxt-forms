@@ -1,6 +1,7 @@
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  css: ["./assets/styles/main.css"],
   devServer: {
     https: false,
   },
