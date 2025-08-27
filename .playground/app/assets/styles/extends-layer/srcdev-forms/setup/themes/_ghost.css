@@ -1,5 +1,5 @@
 :root {
-  [data-theme-old='ghost'] {
+  [data-theme-old="ghost"] {
     --theme-button-surface: light-dark(var(--gray-1), var(--gray-4));
     --theme-form-input-bg-outlined: light-dark(var(--gray-1), var(--gray-4));
     --theme-form-input-bg-underlined: light-dark(var(--gray-1), var(--gray-4));
@@ -64,7 +64,7 @@
     --theme-checkbox-radio-button-label-default: light-dark(var(--gray-12), var(--gray-12));
   }
 
-  [data-theme='ghost'] {
+  [data-theme="ghost"] {
     --theme-button-surface: transparent;
     --theme-input-border: var(--gray-0);
     --theme-btn-outline: var(--gray-12);
