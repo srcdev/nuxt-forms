@@ -136,22 +136,22 @@ const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
   **/
   &:hover {
     background-color: var(--theme-button-surface-hover);
-    border-color: var(--theme-input-border-hover);
+    border-color: var(--theme-button-border-hover);
     color: var(--theme-button-text-hover);
     outline-color: var(--theme-button-outline-hover);
     outline-offset: var(--form-element-outline-offset-focus);
   }
 
-  &:hover {
-    cursor: pointer;
-  }
-
   &:focus-visible {
     background-color: var(--theme-button-surface-hover);
-    border-color: var(--theme-button-border-focus);
+    border-color: var(--theme-button-border-hover);
     color: var(--theme-button-text-focus);
     outline-color: var(--theme-button-outline-focus);
     outline-offset: var(--form-element-outline-offset-focus);
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 
   &[readonly] {
