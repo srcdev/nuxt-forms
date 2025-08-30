@@ -29,7 +29,7 @@
   /* Checkboxes & Radio buttons */
   --theme-checkbox-label-text-color: light-dark(var(--gray-11), var(--gray-1));
   --theme-checkbox-decorator-color: light-dark(var(--gray-11), var(--gray-1));
-  --theme-checkbox-symbol-surface: var(--colour-theme-2);
+  --theme-checkbox-symbol-surface: light-dark(var(--gray-1), var(--gray-2));
   --theme-checkbox-symbol-color: light-dark(var(--gray-11), var(--gray-1));
 
   /* a11y */
