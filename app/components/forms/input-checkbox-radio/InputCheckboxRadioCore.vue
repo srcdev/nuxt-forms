@@ -3,11 +3,20 @@
     class="input-checkbox-radio-wrapper"
     :data-theme="formTheme"
     :data-size="size"
-    :class="[type, size, elementClasses, { error: fieldHasError }, { button: isButton }, { 'display-as-disc': displayAsDisc }]"
+    :class="[
+      type,
+      size,
+      elementClasses,
+      { error: fieldHasError },
+      { button: isButton },
+      { 'display-as-disc': displayAsDisc },
+    ]"
   >
-    <slot name="checkedIcon" v-if="isChecked">
-      <Icon :name="defaultIcon" class="input-checked-icon" />
-    </slot>
+    <div class="input-checked-icon-slot">
+      <slot name="checkedIcon">
+        <Icon :name="defaultIcon" class="input-checked-icon-checked" />
+      </slot>
+    </div>
 
     <input
       :type
@@ -29,14 +38,14 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
+import propValidators from "../c12/prop-validators"
 const props = defineProps({
   isButton: {
     type: Boolean,
     default: false,
   },
   type: {
-    type: String as PropType<'checkbox' | 'radio'>,
+    type: String as PropType<"checkbox" | "radio">,
     required: true,
   },
   id: {
@@ -65,16 +74,16 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   size: {
     type: String as PropType<string>,
-    default: 'medium',
+    default: "medium",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   fieldHasError: {
@@ -93,37 +102,37 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-});
+})
 
-const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const modelValue = defineModel<any>();
+const modelValue = defineModel<any>()
 
-const inputField = ref<HTMLInputElement | null>(null);
+const inputField = ref<HTMLInputElement | null>(null)
 
 const defaultIcon = computed(() => {
-  return props.type === 'checkbox' ? 'material-symbols:check-small' : 'material-symbols:circle';
-});
+  return props.type === "checkbox" ? "material-symbols:check-small" : "material-symbols:circle"
+})
 
-const isArray = Array.isArray(modelValue.value);
+const isArray = Array.isArray(modelValue.value)
 
 const isChecked = computed(() => {
   if (isArray) {
-    return modelValue.value.includes(props.trueValue);
+    return modelValue.value.includes(props.trueValue)
   } else {
-    return modelValue.value === props.trueValue;
+    return modelValue.value === props.trueValue
   }
-});
+})
 </script>
 
 <style lang="css">
 .input-checkbox-radio-wrapper {
   display: grid;
-  grid-template-areas: 'element-stack';
+  grid-template-areas: "element-stack";
   place-content: center;
 
   background-color: var(--theme-checkbox-symbol-surface);
@@ -149,17 +158,34 @@ const isChecked = computed(() => {
     border-radius: 50%;
   }
 
+  &:has(.input-checkbox-radio-core:checked) {
+    .input-checked-icon-slot {
+      opacity: 1;
+
+      .input-checked-icon-checked {
+        color: var(--theme-checkbox-symbol-color);
+      }
+    }
+  }
+
   /* focus-visible */
   &:not(.button):has(.input-checkbox-radio-core:focus-visible) {
     outline: var(--theme-focus-visible-outline);
   }
 
-  .input-checked-icon {
+  .input-checked-icon-slot {
     grid-area: element-stack;
-    color: var(--theme-checkbox-symbol-color);
-    height: var(--input-symbol-size);
-    width: var(--input-symbol-size);
-    box-shadow: var(--_box-shadow);
+    display: grid;
+    place-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+    .input-checked-icon-checked {
+      color: var(--theme-checkbox-symbol-color);
+      height: var(--input-symbol-size);
+      width: var(--input-symbol-size);
+      box-shadow: var(--_box-shadow);
+    }
   }
 
   .input-checkbox-radio-core {
