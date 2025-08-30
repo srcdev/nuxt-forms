@@ -1,5 +1,6 @@
 <template>
-  <div
+  <label
+    :for="id"
     class="input-checkbox-radio-with-label"
     :data-size="size"
     :class="[elementClasses, optionsLayout, { error: fieldHasError }]"
@@ -23,11 +24,11 @@
       </template>
     </InputCheckboxRadioCore>
 
-    <label v-if="slots.labelContent" class="input-checkbox-radio-label body-normal" :for="id">
+    <div v-if="slots.labelContent" class="input-checkbox-radio-label body-normal">
       <slot name="labelContent"></slot>
-    </label>
-    <label v-else class="input-checkbox-radio-label body-normal-semibold" :for="id">{{ label }}</label>
-  </div>
+    </div>
+    <div v-else class="input-checkbox-radio-label body-normal-semibold">{{ label }}</div>
+  </label>
 </template>
 
 <script setup lang="ts">

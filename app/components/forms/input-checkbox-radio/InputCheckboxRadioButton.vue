@@ -1,5 +1,6 @@
 <template>
-  <div
+  <label
+    :for="id"
     class="input-checkbox-radio-options-button"
     :data-theme="formTheme"
     :data-size="size"
@@ -24,16 +25,16 @@
         <slot name="checkedIcon"></slot>
       </template>
     </InputCheckboxRadioCore>
-    <label v-if="slots.labelContent" class="input-checkbox-radio-options-button-label" :for="id">
+    <div v-if="slots.labelContent" class="input-checkbox-radio-options-button-label">
       <slot name="labelContent"></slot>
-    </label>
-    <label v-else class="input-checkbox-radio-options-button-label" :for="id">{{ label }}</label>
+    </div>
+    <div v-else class="input-checkbox-radio-options-button-label">{{ label }}</div>
     <div class="decorator-icon">
       <slot name="itemIcon">
         <Icon name="material-symbols:add-2" class="icon" aria-hidden="true" focusable="false" />
       </slot>
     </div>
-  </div>
+  </label>
 </template>
 
 <script setup lang="ts">
@@ -154,6 +155,7 @@ const flexDirection = ref(props.direction)
     border-color: var(--theme-input-border);
     outline-color: var(--theme-input-outline-hover);
     outline-offset: var(--form-element-outline-offset-focus);
+    cursor: pointer;
   }
 
   &:has(.input-checkbox-radio-core:focus-visible) {
