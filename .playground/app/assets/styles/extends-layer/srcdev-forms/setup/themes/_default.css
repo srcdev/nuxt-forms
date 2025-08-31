@@ -32,6 +32,10 @@
   --theme-checkbox-symbol-surface: light-dark(var(--gray-1), var(--gray-2));
   --theme-checkbox-symbol-color: light-dark(var(--gray-11), var(--gray-1));
 
+  /* Toggle Switch */
+  --theme-toggle-symbol-border-color: var(--gray-0);
+  --theme-toggle-symbol-outline-color: var(--gray-2);
+
   /* a11y */
   --theme-focus-visible-shadow: var(--colour-theme-12);
   --theme-focus-visible-outline: var(--colour-theme-12);

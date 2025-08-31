@@ -16,6 +16,12 @@
     --theme-button-text-hover: var(--blue-0);
     --theme-button-text-focus: var(--blue-0);
 
+    /* Toggle Switch */
+    --theme-toggle-symbol-surface-color: var(--blue-11);
+    --theme-toggle-symbol-border-color: var(--gray-11);
+    --theme-toggle-symbol-outline-color: transparent;
+    --theme-toggle-symbol-icon-color: var(--gray-0);
+
     /* Input Elements */
     --theme-input-surface: light-dark(var(--gray-1), var(--gray-8));
     --theme-input-surface-hover: light-dark(var(--gray-1), var(--gray-10));

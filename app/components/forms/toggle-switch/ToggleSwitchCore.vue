@@ -19,14 +19,14 @@
         :checked="isChecked"
       />
       <div class="symbol-wrapper" :class="[{ round }]">
-        <div class="symbol" :class="[{ round }]">
-          <div class="symbol-icon icon-on">
+        <div class="symbol" :class="[{ round }, { checked: isChecked }]">
+          <div class="symbol-icon icon-on" :class="{ active: isChecked }">
             <slot name="iconOn">
               <Icon name="material-symbols:circle-outline" class="icon" />
             </slot>
           </div>
 
-          <div class="symbol-icon icon-off">
+          <div class="symbol-icon icon-off" :class="{ active: !isChecked }">
             <slot name="iconOff">
               <Icon name="material-symbols:circle-outline" class="icon" />
             </slot>
@@ -121,28 +121,6 @@ const toggleSwitchValue = () => {
   }
 
   .toggle-switch-wrapper {
-    --theme-form-toggle-border-color: var(--blue-12);
-    --theme-form-toggle-border-width: 0.1rem;
-    --theme-form-toggle-outline-color: var(--gray-2);
-    --theme-form-toggle-outline-width: 0.1rem;
-
-    --_transition-duration: 0.4s;
-    --_switch-padding: 0.2rem;
-    --_icon-color: inherit;
-    --_icon-on-opacity: 0;
-    --_icon-off-opacity: 1;
-    --_icon-font-size: 2.4rem;
-    --_symbol-size: 3.4rem;
-    --_symbol-background-color: var(--blue-12);
-    --_symbol-outline-color: transparent;
-    --_symbol-outline-width: 1px;
-    --_symbol-margin-inline-start: 0;
-    --_symbol-checked-offset: calc(var(--_symbol-size) * 0.75);
-
-    &.use-default-icons {
-      --_icon-color: transparent;
-    }
-
     display: flex;
     flex-direction: column;
 
@@ -152,61 +130,34 @@ const toggleSwitchValue = () => {
       visibility: hidden;
     }
 
-    &:has(input:checked) {
-      --_icon-on-opacity: 1;
-      --_icon-off-opacity: 0;
-      --_symbol-margin-inline-start: var(--_symbol-checked-offset);
-    }
-
     .symbol-wrapper {
-      /* background: blue; */
-      border: var(--theme-form-toggle-border-width) solid var(--theme-form-toggle-border-color);
-      outline: var(--theme-form-toggle-outline-width) solid var(--theme-form-toggle-outline-color);
-      border-radius: calc(
-        var(--_symbol-size) + calc(var(--theme-form-toggle-border-width) * 2) + calc(var(--_switch-padding) * 2)
-      );
       display: inline-flex;
       align-items: center;
       justify-content: start;
-      width: calc(
-        var(--_symbol-size) + var(--_symbol-checked-offset) + calc(var(--theme-form-toggle-border-width) * 2) +
-          calc(var(--_switch-padding) * 2)
-      );
-      padding: var(--_switch-padding);
+      position: relative;
 
       .symbol {
         display: inline-grid;
         grid-template-areas: "icon";
         place-content: center;
+        position: absolute;
+        overflow: hidden;
+        left: var(--_switch-padding);
 
         aspect-ratio: 1/1;
-        /* width: var(--_symbol-size); */
-        padding: calc(calc(var(--_symbol-size) - var(--_icon-font-size)) / 2);
 
-        outline: var(--_symbol-outline-width) solid var(--_symbol-outline-color);
-        border-radius: 50%;
-        margin-inline-start: var(--_symbol-margin-inline-start);
-
-        background-color: var(--_symbol-background-color);
-
-        overflow: clip;
-
-        transition: margin var(--_transition-duration);
+        &.checked {
+          left: calc(100% - var(--_symbol-size) - var(--_switch-padding) - (2 * var(--_toggle-symbol-border-width)));
+        }
 
         .symbol-icon {
           display: grid;
           grid-area: icon;
           place-content: center;
+          opacity: 0;
 
-          color: var(--_icon-color);
-          font-size: var(--_icon-font-size);
-          transition: opacity var(--_transition-duration);
-
-          &.icon-on {
-            opacity: var(--_icon-on-opacity);
-          }
-          &.icon-off {
-            opacity: var(--_icon-off-opacity);
+          &.active {
+            opacity: 1;
           }
         }
       }
