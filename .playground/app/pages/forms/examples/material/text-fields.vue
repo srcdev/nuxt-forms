@@ -289,7 +289,7 @@
                           options-layout="inline"
                           :theme
                           :size
-                          :display-as-disc="true"
+                          :display-as-disc="false"
                         >
                           <template #descriptionText>MultipleCheckboxes description: optionsLayout = 'inline'</template>
                           <template #itemIcon>

@@ -135,6 +135,11 @@ const toggleSwitchValue = () => {
       align-items: center;
       justify-content: start;
       position: relative;
+      transition: background-color var(--theme-form-transition-duration);
+
+      &:hover {
+        cursor: pointer;
+      }
 
       .symbol {
         display: inline-grid;
