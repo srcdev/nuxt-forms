@@ -9,7 +9,10 @@ export default defineNuxtConfig({
   alias: {
     "@/shared": "../shared",
   },
-  modules: ["@nuxt/eslint", "@nuxt/icon", "@nuxt/test-utils/module"],
+  modules: ["@nuxt/eslint", "@nuxt/icon", "@pinia/nuxt", "pinia-plugin-persistedstate/nuxt", "@nuxt/test-utils/module"],
+  imports: {
+    dirs: ["./stores"],
+  },
   app: {
     head: {
       htmlAttrs: {

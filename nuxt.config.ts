@@ -3,6 +3,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/eslint", "@nuxt/icon", "@pinia/nuxt", "pinia-plugin-persistedstate/nuxt", "@nuxt/test-utils/module"],
+  imports: {
+    dirs: ["./stores"],
+  },
   alias: {
     "#shared": "./shared",
   },

@@ -1,5 +1,14 @@
 <template>
-  <ToggleSwitchWithLabelInline v-model="currentColourScheme" :name :label labelWeight="normal" :size trueValue="dark" falseValue="light" :style-class-passthrough>
+  <ToggleSwitchWithLabelInline
+    v-model="colourMode"
+    :name
+    :label
+    labelWeight="normal"
+    :size
+    trueValue="dark"
+    falseValue="light"
+    :style-class-passthrough
+  >
     <template #iconOn>
       <LazyIcon name="radix-icons:moon" class="icon" />
     </template>
@@ -10,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../../forms/c12/prop-validators';
+import propValidators from "../../forms/c12/prop-validators"
 
 defineProps({
   name: {
@@ -23,25 +32,32 @@ defineProps({
   },
   labelWeight: {
     type: String as PropType<string>,
-    default: 'semi-bold',
+    default: "semi-bold",
     validator(value: string) {
-      return propValidators.labelWeight.includes(value);
+      return propValidators.labelWeight.includes(value)
     },
   },
   size: {
     type: String as PropType<string>,
-    default: 'small',
+    default: "small",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   styleClassPassthrough: {
     type: Array as PropType<string[]>,
     default: () => [],
   },
-});
+})
 
 // const displayMode = ref<'auto' | 'dark' | 'light'>('auto');
 
-const { currentColourScheme } = useColourScheme();
+const colourMode = ref<"light" | "dark" | "auto">("dark")
+
+const { currentColourScheme, setColourScheme } = useSettingsStore()
+
+watch(colourMode, (newVal) => {
+  console.log("Colour mode changed:", newVal)
+  setColourScheme(newVal)
+})
 </script>

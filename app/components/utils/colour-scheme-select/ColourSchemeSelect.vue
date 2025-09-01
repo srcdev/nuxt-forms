@@ -7,38 +7,17 @@
       <div class="select-scheme-group-wrapper">
         <div class="select-scheme-group">
           <LazyIcon name="material-symbols:night-sight-auto-sharp" class="scheme-icon" />
-          <input
-            type="radio"
-            id="auto"
-            name="colour-scheme"
-            class="scheme-input"
-            v-model="currentColourScheme"
-            value="auto"
-          />
+          <input type="radio" id="auto" name="colour-scheme" class="scheme-input" v-model="colourMode" value="auto" />
           <label for="auto" class="sr-only">{{ labels.auto }}</label>
         </div>
         <div class="select-scheme-group">
           <LazyIcon name="radix-icons:sun" class="scheme-icon" />
-          <input
-            type="radio"
-            id="light"
-            name="colour-scheme"
-            class="scheme-input"
-            v-model="currentColourScheme"
-            value="light"
-          />
+          <input type="radio" id="light" name="colour-scheme" class="scheme-input" v-model="colourMode" value="light" />
           <label for="light" class="sr-only">{{ labels.light }}</label>
         </div>
         <div class="select-scheme-group">
           <LazyIcon name="radix-icons:moon" class="scheme-icon" />
-          <input
-            type="radio"
-            id="dark"
-            name="colour-scheme"
-            class="scheme-input"
-            v-model="currentColourScheme"
-            value="dark"
-          />
+          <input type="radio" id="dark" name="colour-scheme" class="scheme-input" v-model="colourMode" value="dark" />
           <label for="dark" class="sr-only">{{ labels.dark }}</label>
         </div>
       </div>
@@ -88,7 +67,8 @@ const props = defineProps({
 
 const duration = ref(props.stepAnimationDuration)
 
-const { currentColourScheme } = useColourScheme()
+const colourMode = ref<"light" | "dark" | "auto">("dark")
+const { setColourScheme } = useSettingsStore()
 
 const colourSchemeWrapper = ref<HTMLFormElement | null>(null)
 const colourSchemeGroupElements = ref<HTMLDivElement[]>([])
@@ -96,9 +76,9 @@ const colourSchemeInputElements = ref<HTMLInputElement[]>([])
 const showMarker = ref(false)
 
 const findIndexOfInputValueFromCurrentColourScheme = () => {
-  if (currentColourScheme.value === "auto") return 1
-  if (currentColourScheme.value === "light") return 2
-  if (currentColourScheme.value === "dark") return 3
+  if (colourMode.value === "auto") return 1
+  if (colourMode.value === "light") return 2
+  if (colourMode.value === "dark") return 3
   return undefined
 }
 
@@ -165,8 +145,9 @@ onMounted(() => {
   }
 })
 
-watch(currentColourScheme, () => {
-  setColourSchemeAttr()
+watch(colourMode, (newVal) => {
+  console.log("Colour mode changed:", newVal)
+  setColourScheme(newVal)
 })
 
 watch(currentActiveIndex, () => {
