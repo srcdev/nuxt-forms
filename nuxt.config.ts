@@ -2,7 +2,7 @@
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxt/eslint", "@nuxt/icon", "@nuxt/test-utils/module"],
+  modules: ["@nuxt/eslint", "@nuxt/icon", "@pinia/nuxt", "pinia-plugin-persistedstate/nuxt", "@nuxt/test-utils/module"],
   alias: {
     "#shared": "./shared",
   },
