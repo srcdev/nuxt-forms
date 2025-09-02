@@ -54,10 +54,10 @@ defineProps({
 
 const colourMode = ref<"light" | "dark" | "auto">("dark")
 
-const { currentColourScheme, setColourScheme } = useSettingsStore()
+// const { currentColourScheme, setColourScheme } = useSettingsStore()
 
 watch(colourMode, (newVal) => {
-  console.log("Colour mode changed:", newVal)
-  setColourScheme(newVal)
+  // console.log("Colour mode changed:", newVal)
+  // setColourScheme(newVal)
 })
 </script>
