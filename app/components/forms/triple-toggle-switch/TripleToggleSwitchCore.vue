@@ -1,5 +1,5 @@
 <template>
-  <div class="triple-toggle-switch" :data-size="size" :data-theme="theme">
+  <div class="triple-toggle-switch" :class="[elementClasses]" :data-size="size" :data-theme="theme">
     <div class="triple-toggle-switch-wrapper">
       <div class="selected-option-marker-wrapper">
         <div class="selected-option-marker" :class="[{ show: showMarker }]"></div>
@@ -35,7 +35,7 @@ import propValidators from "../../forms/c12/prop-validators"
 const props = defineProps({
   name: {
     type: String,
-    defaul: "triple-toggle-switch",
+    default: "triple-toggle-switch",
   },
   size: {
     type: String as PropType<string>,
@@ -62,6 +62,7 @@ const props = defineProps({
 })
 
 const modelValue = defineModel()
+const { elementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 
 const fieldData = defineModel("fieldData") as Ref<IFormMultipleOptions>
 
@@ -200,7 +201,7 @@ onMounted(() => {
         grid-template-areas: "icon-stack";
         place-content: center;
         background: transparent;
-        border: var(--form-element-border-width) solid #ffffff50;
+        border: var(--form-element-border-width) solid light-dark(#00000025, #ffffff50);
         outline: var(--form-element-outline-width) solid transparent;
         border-radius: 50%;
         padding: var(--_select-scheme-group-padding);
