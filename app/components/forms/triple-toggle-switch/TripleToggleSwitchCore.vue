@@ -5,7 +5,14 @@
         <div class="selected-option-marker" :class="[{ show: showMarker }]"></div>
       </div>
       <div class="option-group-wrapper">
-        <div v-for="(option, index) in fieldData.data" :key="option.id" class="option-group" ref="optionGroup">
+        <label
+          v-for="(option, index) in fieldData.data"
+          :key="option.id"
+          :for="option.id"
+          class="option-group"
+          ref="optionGroup"
+        >
+          <span class="sr-only">{{ option.label }}</span>
           <Icon v-if="option.icon" :name="option.icon" class="option-icon" ref="optionIcons" />
           <input
             type="radio"
@@ -14,9 +21,9 @@
             class="option-input"
             v-model="modelValue"
             :value="option.value"
+            :aria-selected="modelValue === option.value"
           />
-          <label :for="option.id" class="sr-only">{{ option.label }}</label>
-        </div>
+        </label>
       </div>
     </div>
   </div>
