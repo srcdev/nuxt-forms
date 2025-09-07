@@ -7,9 +7,6 @@
 
           <p>Example test fields in default material UI</p>
         </div>
-        <div class="mbs-20">
-          <h2>Colour mode picker as raange icons</h2>
-        </div>
       </template>
     </NuxtLayout>
   </div>
@@ -18,15 +15,15 @@
 <script setup lang="ts">
 definePageMeta({
   layout: false,
-});
+})
 
 useHead({
-  title: 'Homepage',
-  meta: [{ name: 'description', content: 'Homepage' }],
+  title: "Homepage",
+  meta: [{ name: "description", content: "Homepage" }],
   bodyAttrs: {
-    class: '',
+    class: "",
   },
-});
+})
 </script>
 
 <style lang="css">

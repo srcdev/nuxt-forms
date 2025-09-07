@@ -52,8 +52,8 @@ const props = defineProps({
     },
   },
   stepAnimationDuration: {
-    type: Number as PropType<number>,
-    default: 100,
+    type: String as PropType<string>,
+    default: "250ms",
   },
   styleClassPassthrough: {
     type: Array as PropType<string[]>,
@@ -75,10 +75,13 @@ const selectedOptionIndex = computed(() => {
   return fieldData.value.data.findIndex((option) => option.value === modelValue.value)
 })
 
-const setupDefaults = () => {
+const setupDefaults = async () => {
   if (Array.isArray(optionGroupRefs.value) && optionGroupRefs.value[0]) {
     iconWidth.value = optionGroupRefs.value[0].getBoundingClientRect().width + "px"
   }
+
+  await useSleep(250)
+  showMarker.value = true
 }
 
 onMounted(() => {
@@ -165,7 +168,7 @@ onMounted(() => {
       .selected-option-marker {
         aspect-ratio: 1;
         width: v-bind(iconWidth);
-        transition: all 400ms ease-in-out;
+        transition: all v-bind(stepAnimationDuration) ease-in-out;
         background-color: var(--_select-scheme-group-background-color);
         background-image: var(--_select-scheme-group-background-image);
         border: var(--form-element-border-width) solid light-dark(var(--gray-12), var(--gray-0));
@@ -177,7 +180,7 @@ onMounted(() => {
           v-bind(selectedOptionIndex) * v-bind(iconWidth) + (var(--_form-items-gap) * v-bind(selectedOptionIndex))
         );
 
-        opacity: 1;
+        opacity: 0;
 
         &.show {
           opacity: 1;
