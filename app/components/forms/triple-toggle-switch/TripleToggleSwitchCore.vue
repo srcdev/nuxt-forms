@@ -13,7 +13,13 @@
           ref="optionGroup"
         >
           <span class="sr-only">{{ option.label }}</span>
-          <Icon v-if="option.icon" :name="option.icon" class="option-icon" ref="optionIcons" />
+          <Icon
+            v-if="option.icon"
+            :name="option.icon"
+            class="option-icon"
+            :class="[option.id, { active: modelValue === option.value }]"
+            ref="optionIcons"
+          />
           <input
             type="radio"
             :id="option.id"
@@ -108,7 +114,7 @@ onMounted(() => {
   --_select-scheme-group-background-image: none;
   --_select-scheme-group-padding: 0.5rem;
   --_scheme-icon-font-size: 2rem;
-  --_scheme-icon-colour: black;
+  /* --_scheme-icon-colour: black; */
 
   &:has(input[value="auto"]:checked) {
     --_select-scheme-group-background-color: transparent;
@@ -223,11 +229,30 @@ onMounted(() => {
         .option-icon {
           grid-area: icon-stack;
           display: block;
-          color: light-dark(var(--gray-12), var(--gray-0));
           font-size: var(--_scheme-icon-font-size);
 
-          .icon {
-            background-color: transparent;
+          &.auto {
+            color: light-dark(var(--gray-12), var(--gray-3));
+
+            &.active {
+              color: var(--gray-0);
+            }
+          }
+
+          &.light {
+            color: light-dark(var(--gray-12), var(--gray-3));
+
+            &.active {
+              color: var(--gray-0);
+            }
+          }
+
+          &.dark {
+            color: light-dark(var(--gray-12), var(--gray-3));
+
+            &.active {
+              color: var(--gray-0);
+            }
           }
 
           &:hover {
@@ -245,7 +270,7 @@ onMounted(() => {
           }
         }
 
-        &:has(input[value="auto"]:checked) {
+        /* &:has(input[value="auto"]:checked) {
           --_scheme-icon-colour: white;
         }
 
@@ -255,7 +280,7 @@ onMounted(() => {
 
         &:has(input[value="dark"]:checked) {
           --_scheme-icon-colour: white;
-        }
+        } */
       }
     }
   }
