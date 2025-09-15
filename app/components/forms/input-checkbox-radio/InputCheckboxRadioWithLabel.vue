@@ -112,6 +112,8 @@ const id = useId()
   display: flex;
   align-items: center;
 
+  transition: all var(--theme-form-transition-duration) ease-in-out;
+
   &.inline {
     --_white-space: nowrap;
   }
