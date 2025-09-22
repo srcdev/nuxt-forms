@@ -2,13 +2,26 @@
   <div class="control" ref="control">
     <div aria-hidden="true" class="tooltip" ref="toolTip">
       <div class="range-label range-low-label" ref="toolTipLow">
-        {{ rangeLowLabel }}<span class="value">{{ lowValue }} %</span>
+        {{ rangeLowLabel }}
+        <span class="value">{{ lowValue }} %</span>
       </div>
       <div class="range-label range-high-label" ref="toolTipHigh">
-        <span class="value">{{ highValue }} %</span>{{ rangeHighLabel }}
+        <span class="value">{{ highValue }} %</span>
+        {{ rangeHighLabel }}
       </div>
     </div>
-    <input type="range" v-model="modelValue" ref="inputRef" @input="update()" @pointerdown="update()" :id :name :min :max :step />
+    <input
+      type="range"
+      v-model="modelValue"
+      ref="inputRef"
+      @input="update()"
+      @pointerdown="update()"
+      :id
+      :name
+      :min
+      :max
+      :step
+    />
 
     <div class="control__track" ref="controlTrack">
       <div class="control__track-slide">
@@ -21,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
+import propValidators from "../c12/prop-validators"
 
 const props = defineProps({
   id: {
@@ -54,7 +67,7 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   required: {
     type: Boolean,
@@ -62,23 +75,23 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   size: {
     type: String as PropType<string>,
-    default: 'medium',
+    default: "medium",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   weight: {
     type: String as PropType<string>,
-    default: 'wght-400',
+    default: "wght-400",
     validator(value: string) {
-      return propValidators.weight.includes(value);
+      return propValidators.weight.includes(value)
     },
   },
   fieldHasError: {
@@ -86,63 +99,63 @@ const props = defineProps({
     default: false,
   },
   styleClassPassthrough: {
-    type: Array as PropType<string[]>,
+    type: [String, Array] as PropType<string | string[]>,
     default: () => [],
   },
-});
+})
 
-const modelValue = defineModel<number | readonly number[]>();
+const modelValue = defineModel<number | readonly number[]>()
 
-const control = ref<HTMLDivElement | null>(null);
-const controlTrack = ref<HTMLDivElement | null>(null);
-const toolTip = ref<HTMLDivElement | null>(null);
-const toolTipLow = ref<HTMLDivElement | null>(null);
-const toolTipHigh = ref<HTMLDivElement | null>(null);
-const inputRef = ref<HTMLInputElement | null>(null);
+const control = ref<HTMLDivElement | null>(null)
+const controlTrack = ref<HTMLDivElement | null>(null)
+const toolTip = ref<HTMLDivElement | null>(null)
+const toolTipLow = ref<HTMLDivElement | null>(null)
+const toolTipHigh = ref<HTMLDivElement | null>(null)
+const inputRef = ref<HTMLInputElement | null>(null)
 
 // Box sizes
-const toolTipWidth = ref(0);
-const toolTipLowWidth = ref(0);
-const toolTipHighWidth = ref(0);
-const toolTipMargin = 20;
+const toolTipWidth = ref(0)
+const toolTipLowWidth = ref(0)
+const toolTipHighWidth = ref(0)
+const toolTipMargin = 20
 
 const toolTipLowContainerEnd = computed(() => {
-  return Math.floor(((toolTipHighWidth.value + toolTipMargin) / toolTipWidth.value) * 100) + '%';
-});
+  return Math.floor(((toolTipHighWidth.value + toolTipMargin) / toolTipWidth.value) * 100) + "%"
+})
 
 const toolTipHighContainerStart = computed(() => {
-  return Math.floor(((toolTipWidth.value - (toolTipHighWidth.value + toolTipMargin)) / toolTipWidth.value) * 100) + '%';
-});
+  return Math.floor(((toolTipWidth.value - (toolTipHighWidth.value + toolTipMargin)) / toolTipWidth.value) * 100) + "%"
+})
 
 const lowValue = computed(() => {
-  return Math.floor(Number(props.max) - Number(highValue.value));
-});
+  return Math.floor(Number(props.max) - Number(highValue.value))
+})
 const highValue = computed(() => {
-  return Math.floor((Number(modelValue.value) / props.max) * 100);
-});
+  return Math.floor((Number(modelValue.value) / props.max) * 100)
+})
 
 const update = () => {
-  control.value?.style.setProperty('--value', String(modelValue.value));
-  const value = typeof modelValue.value === 'number' ? modelValue.value : 0;
-  controlTrack.value?.style.setProperty('--shift', value > 40 && value < 68 ? '1' : '0');
-  toolTip.value?.style.setProperty('--shift', value > 40 && value < 68 ? '1' : '0');
-};
+  control.value?.style.setProperty("--value", String(modelValue.value))
+  const value = typeof modelValue.value === "number" ? modelValue.value : 0
+  controlTrack.value?.style.setProperty("--shift", value > 40 && value < 68 ? "1" : "0")
+  toolTip.value?.style.setProperty("--shift", value > 40 && value < 68 ? "1" : "0")
+}
 
 const updateBoxSizes = () => {
-  toolTipWidth.value = toolTip.value?.offsetWidth || 0;
-  toolTipLowWidth.value = toolTipLow.value?.offsetWidth || 0;
-  toolTipHighWidth.value = toolTipHigh.value?.offsetWidth || 0;
-  console.log('toolTipWidth', toolTipWidth.value);
-  console.log('toolTipLowContainerEnd', toolTipLowContainerEnd.value);
-  console.log('toolTipHighContainerStart', toolTipHighContainerStart.value);
-};
+  toolTipWidth.value = toolTip.value?.offsetWidth || 0
+  toolTipLowWidth.value = toolTipLow.value?.offsetWidth || 0
+  toolTipHighWidth.value = toolTipHigh.value?.offsetWidth || 0
+  console.log("toolTipWidth", toolTipWidth.value)
+  console.log("toolTipLowContainerEnd", toolTipLowContainerEnd.value)
+  console.log("toolTipHighContainerStart", toolTipHighContainerStart.value)
+}
 
 onMounted(() => {
-  updateBoxSizes();
-  if (!CSS.supports('animation-timeline: scroll()')) {
-    update();
+  updateBoxSizes()
+  if (!CSS.supports("animation-timeline: scroll()")) {
+    update()
   }
-});
+})
 </script>
 
 <style lang="css">
@@ -159,20 +172,20 @@ onMounted(() => {
     --active: 1;
   }
 
-  [type='range'] {
+  [type="range"] {
     width: 100%;
     opacity: 0;
     height: 6rem;
   }
 
-  [type='range']:hover {
+  [type="range"]:hover {
     cursor: -webkit-grab;
   }
-  [type='range']:active {
+  [type="range"]:active {
     cursor: -webkit-grabbing;
   }
 
-  [type='range']:focus-visible {
+  [type="range"]:focus-visible {
     outline-offset: var(--form-element-outline-offset-focus);
     outline-color: transparent;
   }
@@ -180,7 +193,7 @@ onMounted(() => {
   @property --shift {
     initial-value: 0;
     inherits: true;
-    syntax: '<integer>';
+    syntax: "<integer>";
   }
 
   .tooltip {
@@ -222,7 +235,7 @@ onMounted(() => {
     font-family: monospace;
   }
 
-  [type='range']::-webkit-slider-thumb {
+  [type="range"]::-webkit-slider-thumb {
     appearance: none;
     -webkit-appearance: none;
     height: 6rem;
@@ -230,14 +243,14 @@ onMounted(() => {
     margin-top: 0rem;
     opacity: 1;
   }
-  [type='range']::-webkit-slider-runnable-track {
+  [type="range"]::-webkit-slider-runnable-track {
     -webkit-appearance: none;
     height: 6rem;
     /* background: hsl(10 80% 50% / 0.5); */
     margin-top: 0rem; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
     box-shadow: 0.1rem 0.1rem 0.1rem #000000, 0rem 0rem 0.1rem #0d0d0d;
   }
-  [type='range']::-moz-range-track {
+  [type="range"]::-moz-range-track {
     height: 6rem;
     /* background: hsl(10 80% 50% / 0.5); */
     margin-top: 0rem; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
@@ -248,7 +261,7 @@ onMounted(() => {
 @layer scrolls {
   @property --value {
     initial-value: 0;
-    syntax: '<integer>';
+    syntax: "<integer>";
     inherits: true;
   }
 
@@ -258,7 +271,7 @@ onMounted(() => {
     }
   }
 
-  [type='range'] {
+  [type="range"] {
     overflow: hidden;
     opacity: 0;
     touch-action: none;
@@ -269,7 +282,7 @@ onMounted(() => {
     transition-duration: 0.25s;
   }
 
-  [data-reveal='true'] [type='range'] {
+  [data-reveal="true"] [type="range"] {
     opacity: 1;
     translate: 0 -150%;
     outline-color: white;
@@ -296,7 +309,7 @@ onMounted(() => {
     clip-path: inset(0 -0.25rem 0 -0.25rem round 0.6rem);
   }
 
-  [data-reveal='true'] .control__track {
+  [data-reveal="true"] .control__track {
     clip-path: unset;
     outline: 0.2rem dashed white;
   }
@@ -389,7 +402,7 @@ onMounted(() => {
       timeline-scope: --thumb;
     }
 
-    [type='range']::-webkit-slider-thumb {
+    [type="range"]::-webkit-slider-thumb {
       view-timeline-name: --thumb;
       view-timeline-axis: inline;
     }

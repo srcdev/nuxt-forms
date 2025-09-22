@@ -1,9 +1,28 @@
 <template>
-  <div class="input-select-wrapper" :data-theme="formTheme" :data-size="size" :class="[inputVariant, size, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }]">
+  <div
+    class="input-select-wrapper"
+    :data-theme="formTheme"
+    :data-size="size"
+    :class="[inputVariant, size, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }]"
+  >
     <select v-model="modelValue" class="input-select-core" :name :id :title>
-      <option v-if="placeholder" value="" readonly :selected="!modelValue" class="input-select-core-option placeholder">{{ placeholder }}</option>
-      <option v-for="item in fieldData.data" :key="item.id" :value="item.value" :selected="item.value === modelValue" class="input-select-core-option">
-        <Icon v-if="item.icon" :name="item.icon" class="input-select-core-option-decorator-icon" aria-hidden="true" focusable="false" />
+      <option v-if="placeholder" value="" readonly :selected="!modelValue" class="input-select-core-option placeholder">
+        {{ placeholder }}
+      </option>
+      <option
+        v-for="item in fieldData.data"
+        :key="item.id"
+        :value="item.value"
+        :selected="item.value === modelValue"
+        class="input-select-core-option"
+      >
+        <Icon
+          v-if="item.icon"
+          :name="item.icon"
+          class="input-select-core-option-decorator-icon"
+          aria-hidden="true"
+          focusable="false"
+        />
         {{ item.label }}
       </option>
     </select>
@@ -11,8 +30,8 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
-import type { IFormMultipleOptions } from '../../../../shared/types/types.forms';
+import propValidators from "../c12/prop-validators"
+import type { IFormMultipleOptions } from "../../../../shared/types/types.forms"
 
 const props = defineProps({
   id: {
@@ -25,11 +44,11 @@ const props = defineProps({
   },
   placeholder: {
     type: String,
-    default: '',
+    default: "",
   },
   title: {
     type: String,
-    default: 'Please select an option',
+    default: "Please select an option",
   },
   required: {
     type: Boolean,
@@ -41,39 +60,39 @@ const props = defineProps({
   },
   size: {
     type: String as PropType<string>,
-    default: 'medium',
+    default: "medium",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   styleClassPassthrough: {
-    type: Array as PropType<string[]>,
+    type: [String, Array] as PropType<string | string[]>,
     default: () => [],
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   inputVariant: {
     type: String as PropType<string>,
-    default: 'normal',
+    default: "normal",
     validator(value: string) {
-      return propValidators.inputVariant.includes(value);
+      return propValidators.inputVariant.includes(value)
     },
   },
-});
+})
 
 const formTheme = computed(() => {
-  return props.fieldHasError ? 'error' : props.theme;
-});
+  return props.fieldHasError ? "error" : props.theme
+})
 
-const modelValue = defineModel({ required: true });
-const isDirty = defineModel('isDirty');
-const isActive = defineModel('isActive');
-const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
+const modelValue = defineModel({ required: true })
+const isDirty = defineModel("isDirty")
+const isActive = defineModel("isActive")
+const fieldData = defineModel("fieldData") as Ref<IFormMultipleOptions>
 </script>
 
 <style lang="css">
@@ -111,7 +130,8 @@ const fieldData = defineModel('fieldData') as Ref<IFormMultipleOptions>;
     }
 
     &::picker(select) {
-      transition: display allow-discrete var(--theme-form-transition-duration), opacity var(--theme-form-transition-duration), overlay var(--theme-form-transition-duration) allow-discrete;
+      transition: display allow-discrete var(--theme-form-transition-duration),
+        opacity var(--theme-form-transition-duration), overlay var(--theme-form-transition-duration) allow-discrete;
     }
 
     &:not(:open)::picker(select) {

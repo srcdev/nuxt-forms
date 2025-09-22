@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../../forms/c12/prop-validators';
+import propValidators from "../../forms/c12/prop-validators"
 
 defineProps({
   name: {
@@ -47,27 +47,27 @@ defineProps({
   },
   size: {
     type: String as PropType<string>,
-    default: 'medium',
+    default: "medium",
     validator(value: string) {
-      return propValidators.size.includes(value);
+      return propValidators.size.includes(value)
     },
   },
   theme: {
     type: String as PropType<string>,
-    default: 'primary',
+    default: "primary",
     validator(value: string) {
-      return propValidators.theme.includes(value);
+      return propValidators.theme.includes(value)
     },
   },
   styleClassPassthrough: {
-    type: Array as PropType<string[]>,
+    type: [String, Array] as PropType<string | string[]>,
     default: () => [],
   },
-});
+})
 
-const colourScheme = ref<'auto' | 'dark' | 'light'>('auto');
+const colourScheme = ref<"auto" | "dark" | "light">("auto")
 
-useColourScheme(colourScheme);
+useColourScheme(colourScheme)
 </script>
 
 <style lang="css">
@@ -92,13 +92,16 @@ useColourScheme(colourScheme);
 
   .colour-scheme-select-form {
     display: grid;
-    grid-template-areas: 'element-stack';
+    grid-template-areas: "element-stack";
     align-items: center;
 
     background-color: var(--theme-form-radio-bg);
     border: var(--_border-width) solid var(--_border-color);
 
-    border-radius: calc((var(--_icon-size) / 2) + var(--_form-padding) + var(--_border-width) + var(--_outline-width) + var(--_form-input-outline-width));
+    border-radius: calc(
+      (var(--_icon-size) / 2) + var(--_form-padding) + var(--_border-width) + var(--_outline-width) +
+        var(--_form-input-outline-width)
+    );
 
     outline: var(--_outline-width) solid var(--_outline-color);
     box-shadow: var(--_box-shadow);
@@ -177,37 +180,37 @@ useColourScheme(colourScheme);
         outline: var(--_form-input-outline-width) solid gray;
         opacity: 0.75;
 
-        &:has(input[value='auto']) {
+        &:has(input[value="auto"]) {
           background-color: green;
 
-          &:has(input[value='auto']:checked) {
+          &:has(input[value="auto"]:checked) {
             --_scheme-marker-position: start;
             outline: var(--_form-input-outline-width) solid var(--_border-color);
             opacity: 1;
           }
         }
 
-        &:has(input[value='light']) {
+        &:has(input[value="light"]) {
           background-color: orange;
 
-          &:has(input[value='light']:checked) {
+          &:has(input[value="light"]:checked) {
             --_scheme-marker-position: center;
             outline: var(--_form-input-outline-width) solid var(--_border-color);
             opacity: 1;
           }
         }
 
-        &:has(input[value='dark']) {
+        &:has(input[value="dark"]) {
           background-color: black;
 
-          &:has(input[value='dark']:checked) {
+          &:has(input[value="dark"]:checked) {
             --_scheme-marker-position: end;
             outline: var(--_form-input-outline-width) solid var(--_border-color);
             opacity: 1;
           }
         }
 
-        input[type='radio'] {
+        input[type="radio"] {
           opacity: 0;
           height: var(--_icon-size);
           width: var(--_icon-size);

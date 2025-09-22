@@ -137,7 +137,7 @@ const props = defineProps({
     default: true,
   },
   styleClassPassthrough: {
-    type: Array as PropType<string[]>,
+    type: [String, Array] as PropType<string | string[]>,
     default: () => [],
   },
   theme: {

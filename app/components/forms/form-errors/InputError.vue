@@ -1,5 +1,12 @@
 <template>
-  <div class="input-error-message" data-theme="error" :id :class="[inputVariant, elementClasses, { show: showError }, { detached: isDetached }]" :data-testid :aria-hidden="!showError">
+  <div
+    class="input-error-message"
+    data-theme="error"
+    :id
+    :class="[inputVariant, elementClasses, { show: showError }, { detached: isDetached }]"
+    :data-testid
+    :aria-hidden="!showError"
+  >
     <div class="inner" :class="[{ show: showError }]">
       <div class="inner-content">
         <div class="inner-icon">
@@ -19,12 +26,12 @@
 </template>
 
 <script setup lang="ts">
-import propValidators from '../c12/prop-validators';
+import propValidators from "../c12/prop-validators"
 
 const props = defineProps({
   dataTestid: {
     type: String,
-    default: 'inputError',
+    default: "inputError",
   },
   errorMessage: {
     type: [Array, Object, String],
@@ -39,7 +46,7 @@ const props = defineProps({
     required: true,
   },
   styleClassPassthrough: {
-    type: Array as PropType<string[]>,
+    type: [String, Array] as PropType<string | string[]>,
     default: () => [],
   },
   compact: {
@@ -52,18 +59,18 @@ const props = defineProps({
   },
   inputVariant: {
     type: String as PropType<string>,
-    default: 'normal',
+    default: "normal",
     validator(value: string) {
-      return propValidators.inputVariant.includes(value);
+      return propValidators.inputVariant.includes(value)
     },
   },
-});
+})
 
 const isArray = computed(() => {
-  return Array.isArray(props.errorMessage);
-});
+  return Array.isArray(props.errorMessage)
+})
 
-const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough);
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
 </script>
 
 <style lang="css">
@@ -121,7 +128,8 @@ const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.
     align-items: center;
 
     overflow: hidden;
-    transition: opacity var(--theme-form-transition-duration) linear, display var(--theme-form-transition-duration) linear allow-discrete;
+    transition: opacity var(--theme-form-transition-duration) linear,
+      display var(--theme-form-transition-duration) linear allow-discrete;
 
     .inner-content {
       display: flex;
