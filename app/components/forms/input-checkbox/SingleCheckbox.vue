@@ -40,7 +40,7 @@
         :showError="fieldHasError"
         :id="errorId"
         :isDetached="true"
-        :styleClassPassthrough="inputErrorStyles"
+        :styleClassPassthrough="elementClasses"
       />
     </template>
   </FormFieldset>
@@ -126,7 +126,9 @@ const slots = useSlots()
 
 const modelValue = defineModel()
 
-const inputErrorStyles = ref<string[]>(props.styleClassPassthrough)
+const { elementClasses, updateElementClasses } = useStyleClassPassthrough(props.styleClassPassthrough)
+
+// const inputErrorStyles = ref(styleClassPassthroughRef.value)
 
 const id = `${props.name}-input-${useId()}`
 const errorId = `${name}-error-message`
@@ -137,9 +139,7 @@ const ariaDescribedby = computed(() => {
 
 watchEffect(() => {
   if (!slots.description && props.fieldHasError) {
-    inputErrorStyles.value.push("mbs-12")
-  } else {
-    inputErrorStyles.value = inputErrorStyles.value.filter((style) => style !== "mbs-12")
+    updateElementClasses(["mbs-12"])
   }
 })
 </script>
