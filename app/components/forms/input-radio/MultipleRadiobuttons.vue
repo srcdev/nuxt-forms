@@ -30,6 +30,7 @@
             :theme
             :direction
             :ariaDescribedby
+            :display-as-lozenge
           >
             <template #checkedIcon>
               <slot name="checkedIcon"></slot>
@@ -146,6 +147,10 @@ const props = defineProps({
     validator(value: string) {
       return ["row", "row-reverse"].includes(value)
     },
+  },
+  displayAsLozenge: {
+    type: Boolean,
+    default: false,
   },
 })
 

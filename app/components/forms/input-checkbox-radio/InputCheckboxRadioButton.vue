@@ -4,7 +4,7 @@
     class="input-checkbox-radio-options-button"
     :data-theme="formTheme"
     :data-size="size"
-    :class="[size, elementClasses, optionsLayout, { error: fieldHasError }]"
+    :class="[size, elementClasses, optionsLayout, { error: fieldHasError }, { lozenge: displayAsLozenge }]"
   >
     <InputCheckboxRadioCore
       :isButton="true"
@@ -113,6 +113,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  displayAsLozenge: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const slots = useSlots()
@@ -136,8 +140,12 @@ const flexDirection = ref(props.direction)
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border-radius: 1lh;
+  border-radius: 0.4rem;
   transition: all 0.2s ease-in-out;
+
+  &.lozenge {
+    border-radius: 100vw;
+  }
 
   &.inline {
     --_white-space: nowrap;
@@ -147,8 +155,6 @@ const flexDirection = ref(props.direction)
   outline: var(--form-element-outline-width) solid var(--theme-input-outline);
 
   box-shadow: 0.1rem 0.1rem 0.8rem 0.1rem transparent;
-  padding-block: var(--input-checkbox-radio-options-padding-block);
-  padding-inline: var(--input-checkbox-radio-options-padding-inline);
 
   &:hover {
     background-color: var(--theme-input-surface-hover);

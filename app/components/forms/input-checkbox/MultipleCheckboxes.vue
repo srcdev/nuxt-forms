@@ -36,6 +36,7 @@
             :direction
             :aria-describedby
             :display-as-disc
+            :display-as-lozenge
           >
             <template #checkedIcon>
               <slot name="checkedIcon"></slot>
@@ -155,6 +156,10 @@ const props = defineProps({
     },
   },
   displayAsDisc: {
+    type: Boolean,
+    default: false,
+  },
+  displayAsLozenge: {
     type: Boolean,
     default: false,
   },

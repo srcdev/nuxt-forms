@@ -140,8 +140,8 @@ const isChecked = computed(() => {
   outline: var(--form-element-outline-width) solid var(--theme-input-outline);
   box-shadow: var(--_box-shadow);
 
-  height: var(--input-symbol-size);
-  width: var(--input-symbol-size);
+  height: var(--input-checked-element-size);
+  width: var(--input-checked-element-size);
 
   transition: all var(--theme-form-transition-duration) ease-in-out;
 
@@ -162,7 +162,8 @@ const isChecked = computed(() => {
     .input-checked-icon-slot {
       opacity: 1;
 
-      .input-checked-icon-checked {
+      .input-checked-icon-checked,
+      .icon {
         color: var(--theme-checkbox-symbol-color);
       }
     }
@@ -180,10 +181,11 @@ const isChecked = computed(() => {
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
 
-    .input-checked-icon-checked {
+    .input-checked-icon-checked,
+    .icon {
       color: var(--theme-checkbox-symbol-color);
-      height: var(--input-symbol-size);
-      width: var(--input-symbol-size);
+      height: var(--input-checked-icon-size);
+      width: var(--input-checked-icon-size);
       box-shadow: var(--_box-shadow);
     }
   }
@@ -196,8 +198,8 @@ const isChecked = computed(() => {
     overflow: hidden;
     opacity: 0;
 
-    height: var(--input-symbol-size);
-    width: var(--input-symbol-size);
+    height: var(--input-checked-element-size);
+    width: var(--input-checked-element-size);
 
     &:hover {
       cursor: pointer;

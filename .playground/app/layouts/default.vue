@@ -10,13 +10,15 @@
           <NuxtLink to="/forms/examples/material/text-fields" class="link-normal">Material UI text fields</NuxtLink>
         </li>
         <li>
+          <NuxtLink to="/forms/examples/material/checkbox-radio-panels" class="link-normal">
+            Checkbox/Radio panels
+          </NuxtLink>
+        </li>
+        <li>
           <NuxtLink to="/forms/examples/buttons" class="link-normal">Buttons</NuxtLink>
         </li>
         <li>
           <NuxtLink to="/components/utils/color-mode" class="link-normal">Colour mode</NuxtLink>
-        </li>
-        <li>
-          <NuxtLink to="/components/utils/dark-mode-switcher" class="link-normal">Dark mode switcher</NuxtLink>
         </li>
       </ul>
     </div>
@@ -32,10 +34,10 @@
 <script setup lang="ts">
 useHead({
   bodyAttrs: {
-    class: 'body-default',
-    id: 'body',
+    class: "body-default",
+    id: "body",
   },
-});
+})
 
 // const { currentColourScheme } = useColourScheme();
 // useColourScheme();
