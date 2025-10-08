@@ -351,7 +351,7 @@ onMounted(() => {
     /* transition: left var(--update); */
   }
 
-  :root {
+  :where(html) {
     --speed: 0.65s;
     --update: 0s;
     --timing: linear(
@@ -377,7 +377,7 @@ onMounted(() => {
   }
 
   @supports (animation-timeline: scroll()) {
-    :root {
+    :where(html) {
       --speed: 0.65s;
       --update: 0.1s;
       --timing: linear(

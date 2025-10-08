@@ -4,7 +4,7 @@
 @import './_medium';
 @import './_large';
 
-:root {
+:where(html) {
   --form-element-padding-block-start: 0.4lh;
   --form-element-padding-block-end: 0.4lh;
   --form-element-border-width: 0.2rem;
