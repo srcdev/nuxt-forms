@@ -25,20 +25,20 @@
   "devDependencies": {
     "@iconify-json/carbon": "1.2.13",
     "@iconify-json/gridicons": "1.2.4",
-    "@iconify-json/material-symbols": "1.2.37",
-    "@iconify-json/material-symbols-light": "1.2.37",
+    "@iconify-json/material-symbols": "1.2.40",
+    "@iconify-json/material-symbols-light": "1.2.40",
     "@iconify-json/radix-icons": "1.2.5",
     "@nuxt/eslint": "1.9.0",
     "@nuxt/icon": "2.0.0",
     "@nuxt/test-utils": "3.19.2",
     "@vue/test-utils": "2.4.6",
-    "eslint": "9.36.0",
+    "eslint": "9.37.0",
     "happy-dom": "18.0.1",
     "nuxt": "4.1.2",
     "release-it": "19.0.5",
-    "typescript": "5.9.2",
+    "typescript": "5.9.3",
     "vitest": "3.2.4",
-    "zod": "4.1.11"
+    "zod": "4.1.12"
   },
   "dependencies": {
     "@iconify-json/ph": "1.2.2",
