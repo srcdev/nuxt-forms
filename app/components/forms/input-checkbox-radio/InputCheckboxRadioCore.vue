@@ -1,8 +1,6 @@
 <template>
   <div
     class="input-checkbox-radio-wrapper"
-    :data-theme="formTheme"
-    :data-size="size"
     :class="[
       type,
       size,
@@ -10,6 +8,7 @@
       { error: fieldHasError },
       { button: isButton },
       { 'display-as-disc': displayAsDisc },
+      formTheme,
     ]"
   >
     <div class="input-checked-icon-slot">

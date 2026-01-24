@@ -2,9 +2,8 @@
   <label
     :for="id"
     class="input-checkbox-radio-options-button"
-    :data-theme="formTheme"
     :data-size="size"
-    :class="[size, elementClasses, optionsLayout, { error: fieldHasError }, { lozenge: displayAsLozenge }]"
+    :class="[size, elementClasses, optionsLayout, { error: fieldHasError }, { lozenge: displayAsLozenge }, formTheme]"
   >
     <InputCheckboxRadioCore
       :isButton="true"

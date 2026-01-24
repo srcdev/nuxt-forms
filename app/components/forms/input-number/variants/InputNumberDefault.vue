@@ -1,9 +1,8 @@
 <template>
   <div
     class="input-number-with-label"
-    :data-theme="formTheme"
     :data-size="size"
-    :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }]"
+    :class="[elementClasses, `theme-${theme}`, { error: fieldHasError }, formTheme]"
   >
     <InputLabel
       :for="id"

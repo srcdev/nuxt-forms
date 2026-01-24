@@ -1,11 +1,11 @@
 <template>
   <div
     class="input-text-wrapper"
-    :data-theme="formTheme"
-    :data-size="size"
     :data-inputmode="inputmode"
     :class="[
       inputVariant,
+      formTheme,
+      size,
       { dirty: isDirty },
       { active: isActive },
       { error: fieldHasError },

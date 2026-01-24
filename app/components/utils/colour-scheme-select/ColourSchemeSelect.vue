@@ -1,5 +1,5 @@
 <template>
-  <div class="colour-scheme-select" :data-size="size" :data-theme="theme">
+  <div class="colour-scheme-select" :class="[theme, size]">
     <form class="colour-scheme-select-form mbe-20" ref="colourSchemeWrapper">
       <div class="select-scheme-marker-wrapper">
         <div class="select-scheme-marker" :class="[{ show: showMarker }]"></div>
@@ -165,8 +165,8 @@ watch(currentActiveIndex, () => {
   --_form-outline-colour: var(--theme-form-radio-outline);
 
   --_form-border-radius: calc(
-    (var(--_scheme-icon-font-size) / 2) + var(--_form-border-width) + var(--_form-outline-width) + var(--_form-padding) +
-      var(--_select-scheme-group-padding) + var(--_select-scheme-group-border-width) +
+    (var(--_scheme-icon-font-size) / 2) + var(--_form-border-width) + var(--_form-outline-width) +
+      var(--_form-padding) + var(--_select-scheme-group-padding) + var(--_select-scheme-group-border-width) +
       var(--_select-scheme-group-outline-width)
   );
 

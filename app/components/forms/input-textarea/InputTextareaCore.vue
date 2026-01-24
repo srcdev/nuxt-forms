@@ -1,10 +1,10 @@
 <template>
   <div
     class="input-textarea-wrapper"
-    :data-theme="formTheme"
-    :data-size="size"
     :class="[
       inputVariant,
+      formTheme,
+      size,
       { dirty: isDirty },
       { active: isActive },
       { error: fieldHasError },

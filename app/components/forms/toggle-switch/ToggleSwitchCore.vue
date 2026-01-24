@@ -1,5 +1,5 @@
 <template>
-  <div class="toggle-switch-core" :class="elementClasses" :data-size="size" :data-theme="formTheme">
+  <div class="toggle-switch-core" :class="[elementClasses, formTheme, size]">
     <div
       @click="toggleSwitchValue"
       class="toggle-switch-wrapper"

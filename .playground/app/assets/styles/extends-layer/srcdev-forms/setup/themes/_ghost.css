@@ -1,5 +1,5 @@
 :where(html) {
-  [data-theme="ghost"] {
+  .ghost {
     /* Generic */
     --theme-box-shadow: var(--colour-theme-12);
 

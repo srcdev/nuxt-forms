@@ -1,5 +1,5 @@
 <template>
-  <div class="toggle-switch-with-label-inline" :class="[elementClasses]" :data-theme="theme">
+  <div class="toggle-switch-with-label-inline" :class="[elementClasses, theme]">
     <InputLabel
       :for="`toggle-sitch-${id}`"
       :id

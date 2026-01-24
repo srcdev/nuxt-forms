@@ -4,10 +4,9 @@
     :readonly
     :aria-disabled="readonly"
     :data-testid
-    :data-theme="theme"
     :data-size="size"
     class="input-button-core"
-    :class="[`btn-${type}`, effectClass, elementClasses, { 'icon-only': slots.iconOnly }]"
+    :class="[`btn-${type}`, effectClass, elementClasses, { 'icon-only': slots.iconOnly }, theme]"
   >
     <span v-if="useEffect && effect == 'fancy'" class="fancy"></span>
     <template v-if="slots.left && !slots.iconOnly">

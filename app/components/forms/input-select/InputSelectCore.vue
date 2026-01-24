@@ -1,9 +1,8 @@
 <template>
   <div
     class="input-select-wrapper"
-    :data-theme="formTheme"
     :data-size="size"
-    :class="[inputVariant, size, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }]"
+    :class="[inputVariant, size, { dirty: isDirty }, { active: isActive }, formTheme, { error: fieldHasError }]"
   >
     <select v-model="modelValue" class="input-select-core" :name :id :title>
       <option v-if="placeholder" value="" readonly :selected="!modelValue" class="input-select-core-option placeholder">
@@ -130,8 +129,10 @@ const fieldData = defineModel("fieldData") as Ref<IFormMultipleOptions>
     }
 
     &::picker(select) {
-      transition: display allow-discrete var(--theme-form-transition-duration),
-        opacity var(--theme-form-transition-duration), overlay var(--theme-form-transition-duration) allow-discrete;
+      transition:
+        display allow-discrete var(--theme-form-transition-duration),
+        opacity var(--theme-form-transition-duration),
+        overlay var(--theme-form-transition-duration) allow-discrete;
     }
 
     &:not(:open)::picker(select) {

@@ -2,8 +2,7 @@
   <div>
     <div
       class="input-text-with-label"
-      :data-theme="formTheme"
-      :class="[elementClasses, inputVariant, { dirty: isDirty }, { active: isActive }]"
+      :class="[elementClasses, inputVariant, formTheme, { dirty: isDirty }, { active: isActive }]"
     >
       <InputLabel
         :for="id"

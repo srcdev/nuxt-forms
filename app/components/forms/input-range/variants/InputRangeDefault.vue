@@ -1,5 +1,5 @@
 <template>
-  <div class="input-range-with-label" :data-theme="formTheme" :class="[elementClasses, { error: fieldHasError }]">
+  <div class="input-range-with-label" :class="[elementClasses, formTheme, { error: fieldHasError }]">
     <InputLabel
       :for="id"
       :id

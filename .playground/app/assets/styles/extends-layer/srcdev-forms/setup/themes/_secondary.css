@@ -1,5 +1,5 @@
 :where(html) {
-  [data-theme="secondary"] {
+  .secondary {
     /* Generic */
     --theme-box-shadow: var(--colour-theme-12);
 

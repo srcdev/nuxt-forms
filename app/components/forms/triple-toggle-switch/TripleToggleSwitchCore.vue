@@ -1,5 +1,5 @@
 <template>
-  <div class="triple-toggle-switch" :class="[elementClasses]" :data-size="size" :data-theme="theme">
+  <div class="triple-toggle-switch" :class="[elementClasses, size, theme]">
     <div class="triple-toggle-switch-wrapper">
       <div class="selected-option-marker-wrapper">
         <div class="selected-option-marker" :class="[{ show: showMarker }]"></div>

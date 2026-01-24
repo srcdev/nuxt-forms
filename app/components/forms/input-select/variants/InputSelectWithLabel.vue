@@ -2,10 +2,8 @@
   <div>
     <div
       class="input-select-with-label"
-      :class="[inputVariant, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }]"
+      :class="[inputVariant, formTheme, size, { dirty: isDirty }, { active: isActive }, { error: fieldHasError }]"
       :data-testid
-      :data-theme="formTheme"
-      :data-size="size"
     >
       <InputLabel
         :for="id"

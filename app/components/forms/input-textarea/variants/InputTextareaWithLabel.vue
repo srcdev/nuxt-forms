@@ -2,8 +2,7 @@
   <div>
     <div
       class="input-textarea-with-label"
-      :data-theme="formTheme"
-      :class="[elementClasses, inputVariant, { dirty: isDirty }, { active: isActive }]"
+      :class="[elementClasses, formTheme, inputVariant, { dirty: isDirty }, { active: isActive }]"
     >
       <InputLabel
         :for="id"
