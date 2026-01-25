@@ -2,8 +2,5 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".playground/.output/public",
   "installCommand": "npm install",
-  "framework": null,
-  "buildSettings": {
-    "rootDirectory": null
-  }
+  "framework": null
 }
