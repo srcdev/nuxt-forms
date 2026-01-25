@@ -20,7 +20,7 @@ export default defineNuxtConfig({
         "data-color-scheme": "auto",
         class: "srcdev-forms-extended",
       },
-      titleTemplate: "%s - Website name",
+      titleTemplate: "%s - Your Website name",
       meta: [{ charset: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1" }],
     },
     pageTransition: {
