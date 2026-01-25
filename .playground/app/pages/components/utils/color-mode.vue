@@ -21,7 +21,7 @@ useHead({
   },
 })
 
-const sampleFieldData = <IFormMultipleOptions>{
+const sampleFieldData = reactive<IFormMultipleOptions>({
   data: [
     {
       id: "auto",
@@ -48,7 +48,7 @@ const sampleFieldData = <IFormMultipleOptions>{
   total: 3,
   skip: 0,
   limit: 3,
-}
+})
 
 const colorModeVal = ref("auto")
 watch(colorModeVal, (val) => {
