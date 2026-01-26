@@ -1,7 +1,6 @@
 <template>
   <InputTextWithLabel
     v-model="modelValue"
-    :data-theme="formTheme"
     :type="inputType"
     :maxlength
     :name
