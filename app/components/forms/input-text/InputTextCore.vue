@@ -1,6 +1,7 @@
 <template>
   <div
     class="input-text-wrapper"
+    data-testid="input-text-wrapper"
     :data-theme="formTheme"
     :data-size="size"
     :data-inputmode="inputmode"
